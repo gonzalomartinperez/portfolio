@@ -4,6 +4,8 @@ export {
   coursework,
   credentialNote,
   credentials,
+  curriculum,
+  curriculumNote,
   degree,
   languageNote,
   professionalPractice,

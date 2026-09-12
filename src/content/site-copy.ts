@@ -141,6 +141,8 @@ export type SiteCopy = {
     eyebrow: string;
     title: string;
     intro: string;
+    curriculumEyebrow: string;
+    curriculumHeading: string;
     courseworkEyebrow: string;
     courseworkHeading: string;
     contextEyebrow: string;

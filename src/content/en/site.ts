@@ -207,6 +207,8 @@ export const siteCopy: SiteCopy = {
     intro:
       "A five-year accredited engineering degree, completed in full, with the record published " +
       "for anyone who wants to check it.",
+    curriculumEyebrow: "Curriculum",
+    curriculumHeading: "The whole programme, all 34 subjects",
     courseworkEyebrow: "Coursework",
     courseworkHeading: "Relevant subjects",
     contextEyebrow: "Institutional context",

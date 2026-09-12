@@ -213,6 +213,8 @@ export const siteCopy: SiteCopy = {
     intro:
       "Una carrera de ingeniería acreditada de cinco años, completada por entero, con el " +
       "registro publicado para quien quiera verificarlo.",
+    curriculumEyebrow: "Plan de estudios",
+    curriculumHeading: "El plan completo, las 34 materias",
     courseworkEyebrow: "Materias",
     courseworkHeading: "Materias relevantes",
     contextEyebrow: "Contexto institucional",
