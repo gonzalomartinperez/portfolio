@@ -71,11 +71,43 @@ file validation alone cannot demonstrate that an installed host loaded a skill.
 These are instruction workflows, not sandbox controls. No permissions are relaxed,
 no MCP servers are installed, and no publish hooks run automatically.
 
-If parallel agents are explicitly requested later, assign disjoint file ownership
-and separate registered worktrees. The integrator owns shared configuration and the
-lockfile. Each handoff includes objective, base commit, allowed files, checks,
-result, and remaining risks. Preserve other contributors' edits and remove only
-integrated, clean worktrees. A single coordinator is sufficient for this initial app.
+## Parallel agents and worktrees
+
+Prefer parallel execution when at least two substantial tasks can proceed
+independently. Do not split trivial fixes or tightly coupled changes just to use
+more agents. Stay within host limits and use one coordinator with a small number
+of bounded lanes; if delegation is unavailable, follow the same plan serially.
+
+1. Inspect Git status, current remotes, and registered worktrees. Fetch develop
+   before assigning work. Define shared interfaces and dependencies first.
+2. Assign each writing agent a dedicated registered worktree and a standard task
+   branch based on develop. Keep worktrees outside the canonical checkout and
+   validate their resolved paths and common Git directory. Do not make independent
+   clones, reuse active paths, or check out one branch in multiple worktrees.
+3. Give each lane an objective, base commit, allowed files, acceptance criteria,
+   commands, and known dependencies. State that other agents are working and their
+   changes must be preserved. One owner per file; the coordinator owns shared
+   interfaces, manifests, lockfiles, workflow files, and cross-cutting configuration.
+4. Install dependencies per worktree using its pinned Node version. Do not share
+   node_modules, generated types, or build output between worktrees. Assign distinct
+   local ports to concurrent servers and stop only processes started by that lane.
+5. Serialize integration through task PRs into develop in dependency order. Rebase or merge the
+   latest develop into an unpublished task branch as appropriate; prefer merging
+   once a branch is shared to avoid force-pushes. Rerun affected checks after
+   integration changes. Only develop may open the release PR into main.
+6. Handoffs record objective, worktree, branch, base and result commits, changed
+   files, dependencies, checks and results, spec coverage, and remaining risks. Detached registered worktrees may
+   be used for read-only reviews without creating a writing branch.
+7. After integration, verify the remote PR is merged and the local worktree is
+   clean, including untracked files, and its agent is no longer active. Remove the worktree through Git, not recursive filesystem deletion;
+   prune stale remote refs and delete the integrated local task branch without
+   force. Preserve unmerged commits, dependencies needed by active work, and QA
+   artifacts until reviewed. Keep main, develop, and the canonical checkout.
+
+Do not nest delegation without an independent task and available capacity. A lane
+blocked on another lane should report its dependency rather than edit the other's
+files. The coordinator alone handles protected-branch PR promotion and confirms
+the complete integrated release, not just individual lane results.
 
 ## Commit convention
 
