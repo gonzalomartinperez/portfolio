@@ -1,7 +1,7 @@
 .hero {
   overflow: hidden;
-  padding-block: clamp(var(--space-6), 6vw, var(--space-8))
-    clamp(var(--space-6), 5vw, var(--space-7));
+  padding-block: clamp(var(--space-5), 4vw, var(--space-7))
+    clamp(var(--space-5), 3vw, var(--space-6));
   position: relative;
 }
 
@@ -38,7 +38,7 @@
 /* The field and the mark share one stacking context so the mark sits at the sphere's core. */
 .visual {
   display: grid;
-  margin-block: clamp(var(--space-5), 3vw, var(--space-6));
+  margin-block: clamp(var(--space-4), 2vw, var(--space-5));
   place-items: center;
   width: 100%;
 }
@@ -64,7 +64,7 @@
   font-size: var(--text-label);
   gap: var(--space-3);
   letter-spacing: 0.05em;
-  margin-top: var(--space-5);
+  margin-top: var(--space-4);
   text-transform: uppercase;
 }
 
@@ -84,7 +84,7 @@
   display: grid;
   gap: var(--space-5);
   grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
-  margin-top: clamp(var(--space-6), 5vw, var(--space-8));
+  margin-top: clamp(var(--space-5), 4vw, var(--space-6));
   padding-top: var(--space-5);
 }
 

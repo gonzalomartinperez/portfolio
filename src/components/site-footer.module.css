@@ -47,8 +47,11 @@
 }
 
 .link {
+  align-items: center;
   color: var(--text-secondary);
+  display: inline-flex;
   font-size: var(--text-small);
+  min-block-size: 1.75rem;
   text-decoration: none;
 }
 

@@ -25,7 +25,6 @@ export const techMarks: { icon: string; name: string }[] = [
 
   { icon: "langchain", name: "LangChain" },
   { icon: "anthropic", name: "Claude API" },
-  { icon: "openai", name: "LLM integration" },
 
   { icon: "postgresql", name: "PostgreSQL" },
   { icon: "mysql", name: "MySQL" },

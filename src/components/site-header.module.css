@@ -52,6 +52,9 @@
   align-items: center;
   display: flex;
   gap: var(--space-3);
+}
+
+.nav {
   margin-left: auto;
 }
 
@@ -93,13 +96,14 @@
 
   /* Keep the language and theme controls beside the brand, and give the navigation its own
      row, so the header is two rows rather than three. */
+  /* Brand and controls share the first row; the navigation takes the second on its own, so
+     neither group is forced wider than the viewport. */
   .controls {
-    margin-left: 0;
     order: 1;
   }
 
   .nav {
-    /* Without min-width the scroll container refuses to shrink and the page overflows. */
+    margin-left: 0;
     min-width: 0;
     order: 2;
     width: 100%;
