@@ -75,11 +75,16 @@ export function AboutView({ locale }: { locale: Locale }) {
           <h2>{copy.about.principlesHeading}</h2>
         </div>
 
-        <div className="card-grid flow">
-          {copy.about.principles.map((principle) => (
-            <article className="card" key={principle.title}>
-              <h3>{principle.title}</h3>
-              <p className="flow-tight">{principle.body}</p>
+        <div className={styles.principles}>
+          {copy.about.principles.map((principle, index) => (
+            <article className={styles.principle} key={principle.title}>
+              <span className={styles.number} aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3>{principle.title}</h3>
+                <p className="flow-tight">{principle.body}</p>
+              </div>
             </article>
           ))}
         </div>

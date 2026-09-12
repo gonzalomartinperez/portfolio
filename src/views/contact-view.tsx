@@ -34,13 +34,6 @@ export function ContactView({ locale }: { locale: Locale }) {
           </div>
 
           <aside className={styles.panel}>
-            <h2 className={styles.panelTitle}>{copy.contact.openToHeading}</h2>
-            <ul className={styles.openTo}>
-              {openTo.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-
             <h2 className={styles.panelTitle}>{copy.contact.resumeHeading}</h2>
             <div className={styles.downloads}>
               {resumeLinks.map((link) => (
@@ -50,6 +43,12 @@ export function ContactView({ locale }: { locale: Locale }) {
               ))}
             </div>
             <p className="muted">{copy.contact.resumeNote}</p>
+            <h2 className={styles.panelTitle}>{copy.contact.openToHeading}</h2>
+            <ul className={styles.openTo}>
+              {openTo.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </aside>
         </div>
       </section>
