@@ -1,29 +1,26 @@
+"use client";
+
 import Link from "next/link";
-import { type Locale, localePath } from "@/content/locales";
-import type { SiteCopy } from "@/content/site-copy";
-import type { EvidenceLink } from "@/content/types";
+import { usePathname } from "next/navigation";
+import { chrome } from "@/content/chrome";
+import { contactChannels, contactLinks, profile } from "@/content/en/profile";
+import { defaultLocale, type Locale, localePath } from "@/content/locales";
+import { ContactIcons } from "./contact-links";
 import { Mark } from "./mark";
 import styles from "./site-footer.module.css";
 
-type FooterProfile = {
-  name: string;
-  role: string;
-  location: string;
-  arrangement: string;
-  timezone: string;
-};
+function localeFromPath(pathname: string): Locale {
+  return pathname === "/es" || pathname.startsWith("/es/") ? "es" : defaultLocale;
+}
 
-export function SiteFooter({
-  locale,
-  copy,
-  profile,
-  contactLinks,
-}: {
-  locale: Locale;
-  copy: SiteCopy;
-  profile: FooterProfile;
-  contactLinks: readonly EvidenceLink[];
-}) {
+/**
+ * Shares one layout tree with the header, for the same reason: a language switch stays a
+ * client-side navigation. Contact links and the identity line are language-independent.
+ */
+export function SiteFooter() {
+  const locale = localeFromPath(usePathname());
+  const copy = chrome[locale];
+
   const routes = [
     { path: "/about", label: copy.nav.about },
     { path: "/work", label: copy.nav.work },
@@ -42,12 +39,13 @@ export function SiteFooter({
             <span className={styles.name}>{profile.name}</span>
           </span>
           <p className="muted">
-            {profile.role} · {profile.location} · {profile.arrangement} ({profile.timezone})
+            {copy.roleSubtitle} · {profile.location} · {profile.timezone}
           </p>
+          <ContactIcons channels={contactChannels} />
         </div>
 
-        <nav aria-label={copy.chrome.footerNavLabel}>
-          <h2 className={styles.groupTitle}>{copy.chrome.footerSite}</h2>
+        <nav aria-label={copy.footerNavLabel}>
+          <h2 className={styles.groupTitle}>{copy.footerSite}</h2>
           <ul className={styles.list}>
             {routes.map((route) => (
               <li key={route.path}>
@@ -60,7 +58,7 @@ export function SiteFooter({
         </nav>
 
         <div>
-          <h2 className={styles.groupTitle}>{copy.chrome.footerElsewhere}</h2>
+          <h2 className={styles.groupTitle}>{copy.footerElsewhere}</h2>
           <ul className={styles.list}>
             {contactLinks.map((link) => (
               <li key={link.href}>
@@ -74,10 +72,8 @@ export function SiteFooter({
       </div>
 
       <div className={`frame ${styles.colophon}`}>
-        <span>
-          © {new Date().getFullYear()} {profile.name}
-        </span>
-        <span className="mono">{copy.chrome.colophon}</span>
+        <span>© 2026 {profile.name}</span>
+        <span className="mono">{copy.colophon}</span>
       </div>
     </footer>
   );

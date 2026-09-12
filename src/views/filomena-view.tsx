@@ -1,12 +1,20 @@
 import Link from "next/link";
+import { GalleryCarousel } from "@/components/gallery-carousel";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
 import { getContent } from "@/content";
+import { filomenaGallery } from "@/content/filomena-gallery";
 import { type Locale, localePath } from "@/content/locales";
 import styles from "./filomena.module.css";
 
 export function FilomenaView({ locale }: { locale: Locale }) {
-  const { filomena, filomenaCaseStudy: study, siteCopy: copy } = getContent(locale);
+  const { filomena, filomenaCaseStudy: study, galleryAlt, siteCopy: copy } = getContent(locale);
+
+  const slides = filomenaGallery.map((id) => ({
+    id,
+    src: `/filomena/filomena-${id}.webp`,
+    alt: galleryAlt[id],
+  }));
 
   const prose = (paragraphs: readonly string[]) => (
     <div className="prose">
@@ -69,6 +77,20 @@ export function FilomenaView({ locale }: { locale: Locale }) {
               </li>
             ))}
           </ol>
+        </section>
+
+        <section className={styles.block}>
+          <h2>{copy.filomena.galleryHeading}</h2>
+          <p className="muted">{copy.filomena.galleryCaption}</p>
+          <GalleryCarousel
+            label={copy.filomena.galleryLabel}
+            nextLabel={copy.filomena.galleryNext}
+            slideLabels={slides.map((_, position) =>
+              copy.filomena.galleryPosition(position + 1, slides.length),
+            )}
+            previousLabel={copy.filomena.galleryPrevious}
+            slides={slides}
+          />
         </section>
 
         <section className={styles.block}>

@@ -17,13 +17,14 @@ export const profile = {
     "Soy AI Software Engineer. Trabajo en todo el recorrido que va de la interfaz al dato — " +
     "interfaces de producto, BFFs, microservicios event-driven — y construyo sistemas de " +
     "recuperación y agénticos con la misma disciplina de ingeniería: contratos, tests, " +
-    "guardrails, observabilidad.",
+    "guardrails, observabilidad. Si buscás a alguien que pueda hacerse cargo de un problema de " +
+    "punta a punta, esa es la parte que más disfruto.",
 
   summary:
     "La mayor parte de mi trabajo fue convertir dominios complejos en software que aguanta en " +
     "producción: una plataforma de promociones a escala fintech, un backoffice de permisos que " +
     "abarca los sistemas internos de una empresa, y una plataforma de exámenes que hoy usan " +
-    "cinco universidades. La IA aplicada es donde estoy profundizando deliberadamente, y ya " +
+    "cinco instituciones. La IA aplicada es donde estoy profundizando deliberadamente, y ya " +
     "forma parte de ese trabajo en lugar de ser una vía aparte.",
 
   /** Etiqueta canónica exacta. Nunca Senior, Tech Lead, Architect ni Staff. */
@@ -73,4 +74,32 @@ export const openTo = [
   "Ingeniería de software, backend y full-stack",
   "AI engineering: agentes, RAG, integración de LLMs",
   "Product engineering con responsabilidad de punta a punta",
+];
+
+/** Contact channels with their brand glyph, for the icon links. */
+export const contactChannels = [
+  {
+    icon: "gmail",
+    name: "Email",
+    detail: email,
+    href: `mailto:${email}`,
+    external: false,
+    newTabHint: "se abre en una pestaña nueva",
+  },
+  {
+    icon: "linkedin",
+    name: "LinkedIn",
+    detail: "in/gonzalo-martin-perez",
+    href: externalLinks.linkedin,
+    external: true,
+    newTabHint: "se abre en una pestaña nueva",
+  },
+  {
+    icon: "github",
+    name: "GitHub",
+    detail: "gonzalomartinperez",
+    href: externalLinks.github,
+    external: true,
+    newTabHint: "se abre en una pestaña nueva",
+  },
 ];

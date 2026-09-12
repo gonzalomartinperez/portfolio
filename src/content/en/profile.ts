@@ -14,15 +14,16 @@ export const profile = {
   headline: "I build production systems, and the AI that runs inside them.",
 
   intro:
-    "I am an AI Software Engineer. I work across the whole path from interface to data — " +
+    "I'm an AI Software Engineer. I work across the whole path from interface to data — " +
     "product interfaces, BFFs, event-driven microservices — and I build retrieval and agentic " +
-    "systems with the same engineering discipline: contracts, tests, guardrails, observability.",
+    "systems with the same engineering discipline: contracts, tests, guardrails, observability. " +
+    "If you're looking for someone who can own a problem end to end, that's the part I enjoy most.",
 
   summary:
     "Most of my work has been turning complicated domains into software that holds up in " +
     "production: a promotions platform at fintech scale, a permissions back office spanning an " +
     "enterprise's internal systems, and an exam platform that five institutions now run on. " +
-    "Applied AI is where I am deliberately going deeper, and it is already part of that work " +
+    "Applied AI is where I'm deliberately going deeper, and it's already part of that work " +
     "rather than a separate track.",
 
   /** Kept exactly at the canonical label. Never Senior, Tech Lead, Architect or Staff. */
@@ -57,7 +58,7 @@ export const contactLinks: EvidenceLink[] = [
 
 export const resumeLinks: EvidenceLink[] = [
   {
-    label: "Résumé — English (PDF)",
+    label: "Resume — English (PDF)",
     href: resumeFiles.en,
     description: "Three pages, updated September 2026",
   },
@@ -72,4 +73,32 @@ export const openTo = [
   "Software, backend and full-stack engineering",
   "AI engineering: agents, RAG, LLM integration",
   "Product engineering with end-to-end ownership",
+];
+
+/** Contact channels with their brand glyph, for the icon links. */
+export const contactChannels = [
+  {
+    icon: "gmail",
+    name: "Email",
+    detail: email,
+    href: `mailto:${email}`,
+    external: false,
+    newTabHint: "opens in a new tab",
+  },
+  {
+    icon: "linkedin",
+    name: "LinkedIn",
+    detail: "in/gonzalo-martin-perez",
+    href: externalLinks.linkedin,
+    external: true,
+    newTabHint: "opens in a new tab",
+  },
+  {
+    icon: "github",
+    name: "GitHub",
+    detail: "gonzalomartinperez",
+    href: externalLinks.github,
+    external: true,
+    newTabHint: "opens in a new tab",
+  },
 ];

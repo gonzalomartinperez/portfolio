@@ -1,0 +1,7 @@
+/*
+ * `currentColor` inside an externally referenced sprite does not resolve against the host
+ * document in every engine, so the fill is set here on the element that owns the shadow tree.
+ */
+.mark {
+  fill: currentColor;
+}

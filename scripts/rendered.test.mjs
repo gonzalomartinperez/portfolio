@@ -88,12 +88,22 @@ test("an unknown path returns 404 with the site shell", async () => {
   assert.match(missing.body, /<main[\s>]/);
 });
 
-test("each page declares one h1 and the correct language", () => {
+test("each page declares exactly one h1", () => {
   for (const [route, page] of pages) {
     const h1s = page.body.match(/<h1[\s>]/g) ?? [];
     assert.equal(h1s.length, 1, `${route} has ${h1s.length} h1 elements`);
-    const expected = route.startsWith("/es") ? "es" : "en";
-    assert.match(page.body, new RegExp(`<html[^>]*lang="${expected}"`), `${route} lang`);
+  }
+});
+
+test("each page marks the language of its own content", () => {
+  // Both languages share one root layout so a switch stays a client-side navigation, which
+  // means `<html lang>` is the default locale in the server HTML. Spanish routes therefore
+  // have to mark their own subtree, which is what assistive technology reads.
+  for (const [route, page] of pages) {
+    assert.match(page.body, /<html[^>]*lang="en"/, `${route}: root language`);
+    if (route.startsWith("/es")) {
+      assert.match(page.body, /lang="es"/, `${route}: Spanish content is not marked`);
+    }
   }
 });
 
@@ -192,6 +202,26 @@ test("published documents and assets are reachable", async () => {
   ]) {
     const response = await fetch(origin + asset, { signal: AbortSignal.timeout(15_000) });
     assert.equal(response.status, 200, `${asset} returned ${response.status}`);
+  }
+});
+
+test("security headers are present on every route", () => {
+  // Production was verified to send none of these before they were added here, so the check
+  // exists to stop them regressing silently.
+  const required = {
+    "strict-transport-security": /max-age=\d{7,}/,
+    "x-content-type-options": /nosniff/,
+    "x-frame-options": /DENY/i,
+    "referrer-policy": /strict-origin-when-cross-origin/,
+    "permissions-policy": /camera=\(\)/,
+    "content-security-policy": /frame-ancestors 'none'/,
+  };
+  for (const [route, page] of pages) {
+    for (const [header, pattern] of Object.entries(required)) {
+      const value = page.headers.get(header);
+      assert.ok(value, `${route} is missing ${header}`);
+      assert.match(value, pattern, `${route}: ${header} is ${value}`);
+    }
   }
 });
 

@@ -11,28 +11,18 @@
   }
 }
 
-/* Portrait: desaturated and edge-faded so a green outdoor background sits inside a
-   near-black palette without recolouring the subject. */
+/* The portrait dissolves into the page rather than sitting in a frame: an elliptical mask
+   fades every edge to transparent, so the background reads straight through it. */
 .portrait {
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
   position: relative;
 }
 
 .portrait img {
   filter: var(--portrait-filter);
   height: auto;
+  -webkit-mask-image: radial-gradient(ellipse 74% 68% at 50% 40%, #000 52%, transparent 100%);
+  mask-image: radial-gradient(ellipse 74% 68% at 50% 40%, #000 52%, transparent 100%);
   width: 100%;
-}
-
-.portrait::after {
-  background:
-    linear-gradient(180deg, transparent 42%, var(--portrait-veil) 100%),
-    linear-gradient(140deg, var(--accent-wash) 0%, transparent 55%);
-  content: "";
-  inset: 0;
-  position: absolute;
 }
 
 .facts {

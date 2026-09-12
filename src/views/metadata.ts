@@ -5,10 +5,7 @@ import { siteUrl } from "@/content/site-config";
 
 export const sharedViewport: Viewport = {
   colorScheme: "dark light",
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-    { media: "(prefers-color-scheme: light)", color: "#fafafb" },
-  ],
+  themeColor: "#08090c",
 };
 
 /**

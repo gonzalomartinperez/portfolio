@@ -165,11 +165,11 @@ export const filomenaCaseStudy = {
 
   decisions: [
     {
-      heading: "El anonimato como propiedad del modelo de datos",
+      heading: "La seudonimia como propiedad del modelo de datos",
       body: [
         "Los estudiantes son seudónimos para los evaluadores. Eso se aplica en el modelo de " +
-          "datos y en la API, y no se esconde en la interfaz, porque un anonimato implementado " +
-          "en una vista es un anonimato que se filtra la primera vez que alguien agrega un " +
+          "datos y en la API, y no se esconde en la interfaz, porque una regla de privacidad implementada " +
+          "en una vista es una regla que se filtra la primera vez que alguien agrega un " +
           "endpoint.",
       ],
     },

@@ -1,10 +1,10 @@
 /* Design tokens and shared primitives. See docs/design.md for rationale and contrast figures. */
 
 /*
- * Dark is the designed default and lives on bare :root, so the site is correct with no
- * JavaScript. Light arrives two ways: the system preference, and an explicit choice stored
- * by the theme toggle. Both blocks set the same tokens; the [data-theme] rule comes last so
- * a deliberate choice beats the system preference in either direction.
+ * Dark is the default for every visitor, regardless of the system preference, because the
+ * identity is built around luminous points on a near-black ground. Light is opt-in: it applies
+ * only when the toggle has stored an explicit choice, which the inline script in the root
+ * layout replays before first paint.
  */
 
 :root {
@@ -31,7 +31,7 @@
   --field-far: #4a6b86;
   --field-additive: 1;
 
-  --portrait-filter: grayscale(0.42) contrast(1.05) brightness(0.94);
+  --portrait-filter: contrast(1.03) saturate(1.02);
   --portrait-veil: rgb(8 9 12 / 62%);
   --header-veil: rgb(8 9 12 / 78%);
   --toggle-veil: rgb(18 21 27 / 90%);
@@ -70,37 +70,6 @@
   --duration-transition: 320ms;
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    color-scheme: light;
-
-    --surface-void: #fafafb;
-    --surface-base: #f1f4f8;
-    --surface-raised: #ffffff;
-
-    --line-subtle: #e6e9ee;
-    --line-strong: #d5dae2;
-    --line-control: #7f8a99;
-
-    --text-primary: #0f141b;
-    --text-secondary: #48546a;
-    --text-muted: #5c687b;
-
-    --accent: #0a6e9b;
-    --accent-deep: #075271;
-    --accent-wash: rgb(10 110 155 / 10%);
-
-    --field-near: #0a6e9b;
-    --field-far: #aab5c4;
-    --field-additive: 0;
-
-    --portrait-filter: grayscale(0.3) contrast(1.02);
-    --portrait-veil: rgb(250 250 251 / 34%);
-    --header-veil: rgb(250 250 251 / 85%);
-    --toggle-veil: rgb(255 255 255 / 90%);
-  }
-}
-
 :root[data-theme="light"] {
   color-scheme: light;
 
@@ -124,7 +93,7 @@
   --field-far: #aab5c4;
   --field-additive: 0;
 
-  --portrait-filter: grayscale(0.3) contrast(1.02);
+  --portrait-filter: contrast(1.02);
   --portrait-veil: rgb(250 250 251 / 34%);
   --header-veil: rgb(250 250 251 / 85%);
   --toggle-veil: rgb(255 255 255 / 90%);

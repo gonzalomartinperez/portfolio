@@ -11,6 +11,8 @@ export function EducationView({ locale }: { locale: Locale }) {
     academicEvidence,
     academicResults,
     coursework,
+    curriculum,
+    curriculumNote,
     credentialNote,
     credentials,
     degree,
@@ -48,6 +50,26 @@ export function EducationView({ locale }: { locale: Locale }) {
         <div className="flow">
           <MetricList metrics={academicResults} />
         </div>
+      </section>
+
+      <section className="section-tight frame">
+        <div className="section-head">
+          <p className="eyebrow">{copy.education.curriculumEyebrow}</p>
+          <h2>{copy.education.curriculumHeading}</h2>
+          <p>{curriculumNote}</p>
+        </div>
+        <ol className={`${styles.curriculum} flow`}>
+          {curriculum.map((year) => (
+            <li className={styles.year} key={year.year}>
+              <h3 className={styles.yearName}>{year.year}</h3>
+              <ul className={styles.subjects}>
+                {year.subjects.map((subject) => (
+                  <li key={subject}>{subject}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section className="section-tight frame">

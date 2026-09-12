@@ -37,11 +37,17 @@ void main() {
   float angle = uTime * 0.11;
   float c = cos(angle);
   float s = sin(angle);
-  vec3 p = vec3(
+  vec3 spun = vec3(
     aPosition.x * c + aPosition.z * s,
     aPosition.y,
     -aPosition.x * s + aPosition.z * c
   );
+
+  // A slow tilt on the other axis: a sphere rotating on one axis alone reads as a flat disc.
+  float tilt = sin(uTime * 0.07) * 0.28;
+  float ct = cos(tilt);
+  float st = sin(tilt);
+  vec3 p = vec3(spun.x, spun.y * ct - spun.z * st, spun.y * st + spun.z * ct);
 
   // A small per-point drift so the cloud breathes instead of rotating rigidly.
   p.y += sin(uTime * 0.35 + aSeed * 6.2831) * 0.022;
@@ -237,7 +243,7 @@ function createEngine(canvas: HTMLCanvasElement, gl: WebGL2RenderingContext): Fi
   function resize() {
     const rect = canvas.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return;
-    const cap = rect.width < 640 ? 1.5 : 2;
+    const cap = 2;
     const ratio = Math.min(window.devicePixelRatio || 1, cap);
     const width = Math.max(1, Math.round(rect.width * ratio));
     const height = Math.max(1, Math.round(rect.height * ratio));
@@ -253,7 +259,9 @@ function createEngine(canvas: HTMLCanvasElement, gl: WebGL2RenderingContext): Fi
     resize();
 
     const aspect = canvas.width / Math.max(canvas.height, 1);
-    const ratio = Math.min(window.devicePixelRatio || 1, canvas.width < 900 ? 1.5 : 2);
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    // Relative to canvas size, so density reads the same on a phone as on a desktop.
+    const pointScale = (canvas.width / 640) * 3.4 * ratio;
 
     gl.blendFunc(gl.SRC_ALPHA, palette.additive ? gl.ONE : gl.ONE_MINUS_SRC_ALPHA);
     gl.clear(gl.COLOR_BUFFER_BIT);
@@ -265,7 +273,7 @@ function createEngine(canvas: HTMLCanvasElement, gl: WebGL2RenderingContext): Fi
     gl.uniform2f(uniforms.uPointer ?? null, pointer.x, pointer.y);
     gl.uniform1f(uniforms.uPointerStrength ?? null, pointerStrength);
     gl.uniform1f(uniforms.uAspect ?? null, aspect);
-    gl.uniform1f(uniforms.uPointScale ?? null, 3.4 * ratio);
+    gl.uniform1f(uniforms.uPointScale ?? null, Math.max(1.6, pointScale));
     gl.uniform1f(uniforms.uInfluenceRadius ?? null, 0.42);
     gl.uniform3fv(uniforms.uFarColor ?? null, palette.far);
     gl.uniform3fv(uniforms.uNearColor ?? null, palette.near);
