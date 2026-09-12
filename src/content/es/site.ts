@@ -34,7 +34,7 @@ export const siteCopy: SiteCopy = {
     allContact: "Todas las formas de contacto",
     backToWork: "Volver a todo el trabajo",
     sourceOnGithub: "Código en GitHub",
-    goHome: "Ir a la portada",
+    goHome: "Llevame a la portada",
   },
   hero: {
     openToRemote: "Abierto a trabajo remoto",
@@ -50,11 +50,12 @@ export const siteCopy: SiteCopy = {
   },
   home: {
     whoEyebrow: "Quién soy",
-    whoHeading: "Ingeniería que tiene que aguantar después de la demo",
+    whoHeading: "Ingeniería que aguanta después de la demo",
     whoParagraph:
       "Me importan las partes que deciden si el software sobrevive al contacto con el uso " +
       "real: contratos claros entre servicios, modelos de datos que siguen siendo correctos " +
-      "bajo concurrencia, y suficiente observabilidad para saber qué pasó sin adivinar.",
+      "bajo concurrencia, y suficiente observabilidad para saber qué pasó sin adivinar. Es menos " +
+      "vistoso que una demo, y es lo que marca la diferencia seis meses después.",
     factCurrently: "Actualmente",
     factExperience: "Experiencia",
     factBasedIn: "Radicado en",
@@ -77,8 +78,9 @@ export const siteCopy: SiteCopy = {
       "8,67/10 en 34 de 34 materias obligatorias, y un proyecto final calificado 10/10.",
     closingHeading: "Hablemos",
     closingBody:
-      "Estoy abierto a roles remotos en ingeniería de software, backend e IA, y disponible de " +
-      "inmediato. La vía más rápida es el email.",
+      "Estoy abierto a roles remotos en ingeniería de software, backend e IA, y puedo empezar de " +
+      "inmediato. Si algo de esto se parece al problema que estás buscando resolver, me encantaría " +
+      "que me lo cuentes — el email es la vía más rápida, y lo respondo.",
   },
   about: {
     metaTitle: "Sobre mí",
@@ -89,7 +91,7 @@ export const siteCopy: SiteCopy = {
     title: "Convierto dominios complejos en software que la gente puede operar de verdad",
     paragraphs: [
       "Mi camino de entrada fue una carrera de ingeniería de cinco años en la Universidad Nacional del Sur, en paralelo con trabajo independiente para clientes que empezó en 2024 y no se detuvo. El hilo conductor es el product engineering: me gusta hacerme cargo de algo desde la interfaz hasta la cola que lo hace funcionar.",
-      "Desde entonces trabajé en una plataforma de promociones a escala fintech, un backoffice de permisos que abarca los sistemas internos de una empresa, y una plataforma de exámenes de la que dependen cinco universidades. La IA aplicada atraviesa el trabajo reciente en lugar de quedar al costado: un asistente de recuperación dentro de un producto para comercios, pipelines de agentes para clientes, y los entornos agénticos de ingeniería que construyo para hacer el trabajo en sí.",
+      "Desde entonces trabajé en una plataforma de promociones a escala fintech, un backoffice de permisos que abarca los sistemas internos de una empresa, y una plataforma de exámenes de la que dependen cinco instituciones. La IA aplicada atraviesa el trabajo reciente en lugar de quedar al costado: un asistente de recuperación dentro de un producto para comercios, pipelines de agentes para clientes, y los entornos agénticos de ingeniería que construyo para hacer el trabajo en sí.",
       "Actualmente soy AI Engineer en Rampy, y esa es la dirección en la que estoy profundizando deliberadamente: agentes, recuperación, y la disciplina de ingeniería que los vuelve confiables en lugar de impresionantes una sola vez.",
     ],
     asideCurrently: "Actualmente",
@@ -120,11 +122,9 @@ export const siteCopy: SiteCopy = {
     lookingEyebrow: "Qué estoy buscando",
     lookingHeading: "Trabajo remoto donde se encuentran ingeniería y producto",
     lookingBody:
-      "Soy más útil donde el problema técnico y el problema de producto son el mismo problema " +
-      "— y estoy disponible de inmediato. Si eso se parece a tu equipo, el trabajo está a un " +
-      "clic, y mi bandeja de entrada también.",
-    pixelLabel: "Retrato en píxeles de Gonzalo Martin Perez",
-    pixelCaption: "La misma cara, con menos píxeles.",
+      "Soy más útil donde el problema técnico y el problema de producto son el mismo problema, y " +
+      "puedo empezar de inmediato. Si eso se parece a tu equipo, el trabajo está a un clic — y mi " +
+      "bandeja de entrada también.",
   },
   work: {
     metaTitle: "Trabajo",
@@ -166,6 +166,15 @@ export const siteCopy: SiteCopy = {
       "Los repositorios son instantáneas publicadas que se conservan como evidencia de " +
       "portfolio. No son el historial de commits del desarrollo original, y no los presento " +
       "como prueba de quién escribió cada línea.",
+    galleryHeading: "El producto en sí",
+    galleryCaption:
+      "Un recorrido por la interfaz, desde el inicio de sesión hasta la operación de un examen " +
+      "en curso. Son capturas de una instancia de demostración, no de datos reales de ninguna " +
+      "institución.",
+    galleryLabel: "Recorrido por la interfaz de Filomena",
+    galleryPrevious: "Pantalla anterior",
+    galleryNext: "Pantalla siguiente",
+    galleryPosition: (current, total) => `Pantalla ${current} de ${total}`,
   },
   stack: {
     metaTitle: "Stack",
@@ -230,7 +239,8 @@ export const siteCopy: SiteCopy = {
     basedIn: (location, arrangement, timezone) =>
       `Vivo en ${location}, trabajo ${arrangement} en ${timezone}, y puedo empezar de ` +
       "inmediato — la fecha exacta es fácil de coordinar durante el proceso.",
-    hiringHint: "Si estás contratando, la forma más rápida de evaluar si encajo es el",
+    hiringHint:
+      "Si estás contratando y preferís juzgar el trabajo antes que las palabras, empezá por el",
     hiringLinkText: "caso de estudio de Filomena",
     openToHeading: "Abierto a",
     resumeHeading: "Currículum",

@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import portrait from "@/assets/portrait.webp";
 import { PageHeader } from "@/components/page-header";
-import { PixelPortrait } from "@/components/pixel-portrait";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import styles from "./about.module.css";
@@ -70,10 +69,6 @@ export function AboutView({ locale }: { locale: Locale }) {
                 </dd>
               </div>
             </dl>
-            <div className={styles.pixel}>
-              <PixelPortrait label={copy.about.pixelLabel} size={84} />
-              <p className="muted">{copy.about.pixelCaption}</p>
-            </div>
           </aside>
         </div>
       </section>

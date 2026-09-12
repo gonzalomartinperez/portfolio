@@ -34,7 +34,7 @@ export const siteCopy: SiteCopy = {
     allContact: "All contact options",
     backToWork: "Back to all work",
     sourceOnGithub: "Source on GitHub",
-    goHome: "Go to the homepage",
+    goHome: "Take me home",
   },
   hero: {
     openToRemote: "Open to remote work",
@@ -50,11 +50,12 @@ export const siteCopy: SiteCopy = {
   },
   home: {
     whoEyebrow: "Who I am",
-    whoHeading: "Engineering that has to hold up after the demo",
+    whoHeading: "Engineering that holds up after the demo",
     whoParagraph:
       "I care about the parts that decide whether software survives contact with real use: " +
       "clear contracts between services, data models that stay correct under concurrency, and " +
-      "enough observability to know what happened without guessing.",
+      "enough observability to know what happened without guessing. It's less glamorous than a " +
+      "demo, and it's what makes the difference six months in.",
     factCurrently: "Currently",
     factExperience: "Experience",
     factBasedIn: "Based in",
@@ -74,10 +75,11 @@ export const siteCopy: SiteCopy = {
     educationBody:
       "Graduated from Universidad Nacional del Sur in October 2025 with an 8.67/10 average " +
       "across 34 of 34 required courses, and a final year project graded 10/10.",
-    closingHeading: "Let us talk",
+    closingHeading: "Let's talk",
     closingBody:
-      "I am open to remote roles in software, backend and AI engineering, and available " +
-      "immediately. The quickest route is email.",
+      "I'm open to remote roles in software, backend and AI engineering, and I can start right " +
+      "away. If any of this looks like the problem you're hiring for, I'd genuinely like to " +
+      "hear about it — email is the quickest route, and I answer.",
   },
   about: {
     metaTitle: "About",
@@ -119,11 +121,9 @@ export const siteCopy: SiteCopy = {
     lookingEyebrow: "What I am looking for",
     lookingHeading: "Remote work where engineering and product meet",
     lookingBody:
-      "I am most useful where the technical problem and the product problem are the same " +
-      "problem — and I am available immediately. If that sounds like your team, the work is " +
-      "one click away, and so is my inbox.",
-    pixelLabel: "Pixel portrait of Gonzalo Martin Perez",
-    pixelCaption: "Same face, fewer pixels.",
+      "I'm most useful where the technical problem and the product problem are the same problem, " +
+      "and I can start immediately. If that sounds like your team, the work is one click away — " +
+      "and so is my inbox.",
   },
   work: {
     metaTitle: "Work",
@@ -139,9 +139,9 @@ export const siteCopy: SiteCopy = {
     projectsEyebrow: "Selected projects",
     projectsHeading: "Work with public evidence",
     projectsBody:
-      "One project is published in full. The systems I built at Cooperativa Obrera and " +
-      "Teamcubation administer internal company data, so they have no public links — the " +
-      "experience above is the record.",
+      "One project is published in full, with its source. The systems I built at Cooperativa " +
+      "Obrera and Teamcubation administer internal company data, so they have no public links — " +
+      "the experience above is the record, and I'm happy to walk through either in a conversation.",
   },
   filomena: {
     metaTitle: "Filomena — production exam platform",
@@ -162,6 +162,14 @@ export const siteCopy: SiteCopy = {
       "The repositories are published snapshots kept as portfolio evidence. They are not a " +
       "commit history of the original development, and I do not present them as proof of who " +
       "wrote which line.",
+    galleryHeading: "The product itself",
+    galleryCaption:
+      "A walkthrough of the interface, from signing in to operating a running exam. These are " +
+      "captures from a demonstration instance, not from any institution's live data.",
+    galleryLabel: "Filomena interface walkthrough",
+    galleryPrevious: "Previous screen",
+    galleryNext: "Next screen",
+    galleryPosition: (current, total) => `Screen ${current} of ${total}`,
   },
   stack: {
     metaTitle: "Stack",
@@ -219,13 +227,14 @@ export const siteCopy: SiteCopy = {
       "Get in touch with Gonzalo Martin Perez — AI Software Engineer, available immediately for " +
       "remote roles. Email, LinkedIn and GitHub.",
     eyebrow: "Contact",
-    title: "Let us talk",
+    title: "Let's talk",
     intro:
-      "Email is the most direct route and I answer it. No form, no newsletter, no scheduling funnel.",
+      "Email is the most direct route, and I answer it personally. No form, no newsletter, no " +
+      "scheduling funnel — just a reply from me.",
     basedIn: (location, arrangement, timezone) =>
       `I am based in ${location}, work ${arrangement} on ${timezone}, and can start immediately — ` +
       "the exact date is easy to coordinate during the process.",
-    hiringHint: "If you are hiring, the fastest way to assess whether I fit is the",
+    hiringHint: "If you're hiring and want to judge the work rather than the words, start with the",
     hiringLinkText: "Filomena case study",
     openToHeading: "Open to",
     resumeHeading: "Résumé",
@@ -236,7 +245,7 @@ export const siteCopy: SiteCopy = {
     eyebrow: "Error 404",
     title: "This page does not exist",
     body:
-      "The link may be out of date, or the address may have a typo. Everything on the site is " +
-      "reachable from the navigation above.",
+      "The link may be out of date, or the address may have a typo. No harm done — everything on " +
+      "the site is reachable from the navigation above.",
   },
 };

@@ -195,6 +195,26 @@ test("published documents and assets are reachable", async () => {
   }
 });
 
+test("security headers are present on every route", () => {
+  // Production was verified to send none of these before they were added here, so the check
+  // exists to stop them regressing silently.
+  const required = {
+    "strict-transport-security": /max-age=\d{7,}/,
+    "x-content-type-options": /nosniff/,
+    "x-frame-options": /DENY/i,
+    "referrer-policy": /strict-origin-when-cross-origin/,
+    "permissions-policy": /camera=\(\)/,
+    "content-security-policy": /frame-ancestors 'none'/,
+  };
+  for (const [route, page] of pages) {
+    for (const [header, pattern] of Object.entries(required)) {
+      const value = page.headers.get(header);
+      assert.ok(value, `${route} is missing ${header}`);
+      assert.match(value, pattern, `${route}: ${header} is ${value}`);
+    }
+  }
+});
+
 test("the server does not advertise its framework", () => {
   for (const [route, page] of pages) {
     assert.equal(page.headers.get("x-powered-by"), null, `${route} sends x-powered-by`);

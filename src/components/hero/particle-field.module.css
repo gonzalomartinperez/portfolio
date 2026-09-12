@@ -3,7 +3,7 @@
   /* Reserved before anything mounts, so the canvas cannot shift layout when it arrives. */
   contain: layout paint;
   margin-inline: auto;
-  max-width: min(40rem, 82vw);
+  max-width: min(40rem, 94vw);
   position: relative;
   width: 100%;
 }

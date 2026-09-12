@@ -5,5 +5,9 @@ import { StackView } from "@/views/stack-view";
 export const metadata: Metadata = pageMetadata("es", "/stack");
 
 export default function Page() {
-  return <StackView locale="es" />;
+  return (
+    <div lang="es">
+      <StackView locale="es" />
+    </div>
+  );
 }

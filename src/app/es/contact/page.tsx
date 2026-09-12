@@ -5,5 +5,9 @@ import { pageMetadata } from "@/views/metadata";
 export const metadata: Metadata = pageMetadata("es", "/contact");
 
 export default function Page() {
-  return <ContactView locale="es" />;
+  return (
+    <div lang="es">
+      <ContactView locale="es" />
+    </div>
+  );
 }

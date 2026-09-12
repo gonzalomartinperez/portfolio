@@ -5,5 +5,9 @@ import { pageMetadata } from "@/views/metadata";
 export const metadata: Metadata = pageMetadata("es", "/work/filomena");
 
 export default function Page() {
-  return <FilomenaView locale="es" />;
+  return (
+    <div lang="es">
+      <FilomenaView locale="es" />
+    </div>
+  );
 }

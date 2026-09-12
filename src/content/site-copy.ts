@@ -89,8 +89,6 @@ export type SiteCopy = {
     lookingEyebrow: string;
     lookingHeading: string;
     lookingBody: string;
-    pixelLabel: string;
-    pixelCaption: string;
   };
   work: {
     metaTitle: string;
@@ -117,6 +115,12 @@ export type SiteCopy = {
     columnAfter: string;
     evidenceHeading: string;
     evidenceNote: string;
+    galleryHeading: string;
+    galleryCaption: string;
+    galleryLabel: string;
+    galleryPrevious: string;
+    galleryNext: string;
+    galleryPosition: (current: number, total: number) => string;
   };
   stack: {
     metaTitle: string;

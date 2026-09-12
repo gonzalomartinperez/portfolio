@@ -17,13 +17,14 @@ export const profile = {
     "Soy AI Software Engineer. Trabajo en todo el recorrido que va de la interfaz al dato — " +
     "interfaces de producto, BFFs, microservicios event-driven — y construyo sistemas de " +
     "recuperación y agénticos con la misma disciplina de ingeniería: contratos, tests, " +
-    "guardrails, observabilidad.",
+    "guardrails, observabilidad. Si buscás a alguien que pueda hacerse cargo de un problema de " +
+    "punta a punta, esa es la parte que más disfruto.",
 
   summary:
     "La mayor parte de mi trabajo fue convertir dominios complejos en software que aguanta en " +
     "producción: una plataforma de promociones a escala fintech, un backoffice de permisos que " +
     "abarca los sistemas internos de una empresa, y una plataforma de exámenes que hoy usan " +
-    "cinco universidades. La IA aplicada es donde estoy profundizando deliberadamente, y ya " +
+    "cinco instituciones. La IA aplicada es donde estoy profundizando deliberadamente, y ya " +
     "forma parte de ese trabajo en lugar de ser una vía aparte.",
 
   /** Etiqueta canónica exacta. Nunca Senior, Tech Lead, Architect ni Staff. */
