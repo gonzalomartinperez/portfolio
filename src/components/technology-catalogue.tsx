@@ -2,8 +2,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { Technology } from "@/content/technologies";
-import { BrandMark } from "./brand-mark";
 import styles from "./technology-catalogue.module.css";
+import { TechnologyMark } from "./technology-mark";
 export type CatalogueGroup = {
   id: string;
   name: string;
@@ -112,7 +112,7 @@ export function TechnologyCatalogue({
               {group.technologies.map((technology) => (
                 <li key={technology.id} id={`tech-${technology.id}`} className={styles.item}>
                   <div className={styles.name}>
-                    {technology.icon && <BrandMark name={technology.icon} size={32} />}
+                    <TechnologyMark technology={technology} size={32} />
                     <h3>{technology.name}</h3>
                   </div>
                   {technology.status === "developing" && (
