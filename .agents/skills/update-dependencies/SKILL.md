@@ -9,6 +9,6 @@ description: Evaluate or apply requested dependency upgrades using supported sta
 2. Check official support policies, release notes, security advisories, engines, and peer dependency ranges for the proposed versions.
 3. Prefer Node and Next supported LTS lines. Read README.md for the validated TypeScript baseline and integration caveats; recommend major migrations separately with evidence. Check compiler-API consumers and native optional packages when evaluating TypeScript changes.
 4. Other libraries may have no LTS policy. Select compatible stable releases, not prereleases or a latest tag blindly.
-5. For authorized changes, pin direct versions, update the lockfile with pnpm, and keep changes scoped. Never use force, legacy-peer-deps, or ignored errors to hide incompatibility.
-6. Verify pnpm install --frozen-lockfile, pnpm list --depth Infinity, pnpm audit, pnpm run check, and relevant production behavior. Explain advisories that remain; do not apply forced audit fixes.
+5. For authorized changes, pin direct versions, update the lockfile with npm, and keep changes scoped. Never use force, legacy-peer-deps, or ignored errors to hide incompatibility.
+6. Verify npm ci, npm ls --all, npm audit, npm run check, and relevant production behavior. Explain advisories that remain; do not apply forced audit fixes.
 7. Document why a major is adopted or deferred, checks performed, and maintenance implications. Do not modify the machine-wide Node default or merge automated update PRs without authority.
