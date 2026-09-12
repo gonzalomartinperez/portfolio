@@ -55,7 +55,7 @@ On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 
 | Command | Purpose |
 | --- | --- |
-| `npm run build` | Run the quality gate and compile for production, including on Hostinger |
+| `npm run build` | Compile Next.js for production, including on Hostinger; no Biome invocation |
 | `npm run check` | Validate formatting, lint, types, and the production build |
 | `npm run test:smoke` | After `build`, check the production server responds correctly |
 | `npm run format` | Apply formatting and safe Biome fixes |
