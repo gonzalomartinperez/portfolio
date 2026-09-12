@@ -11,15 +11,18 @@ depth-layered technology marks and an accessible settled catalogue. Do not reuse
 
 ## Acceptance criteria
 
-- AC-1: An original face-only pixel-art SVG identity has 48, 32 and 16-unit sources and is used in
-  navigation, favicon and hero. Retain the real portrait elsewhere; raster compatibility icons
-  are derived from the vectors.
+- AC-1 (owner revision, 2026-09-12): Use the owner's selected transparent face caricature for
+  navigation, favicon and hero. Preserve its appearance with smooth PNG size variants and an ICO;
+  strip metadata from the approved public source. This supersedes the initial pixel-art SVG
+  requirement. Use the owner's approved black-sweater portrait elsewhere and keep unselected
+  alternatives private. Both selected public images are sanitized raster illustrations.
 - AC-2: A circular perspective particle shell appears below, not behind, the main heading.
   Pointer displacement settles smoothly; native scroll drives the reversible four-phase reveal.
 - AC-3: Three.js Points/shaders and GSAP ScrollTrigger load only with the hero. No React state
   updates per frame. Stop offscreen/hidden; clean up on unmount and handle context loss.
 - AC-4: All verified technologies share stable catalogue IDs, evidence links and original-colour
-  local logos where available. Concepts have text labels. Search/category filtering retains a
+  local logos where available. Concepts and tools without official assets have descriptive
+  original icons alongside text labels, not invented brand logos. Search/category filtering retains a
   complete server-rendered default and clear empty/reset states.
 - AC-5: English and Spanish copy is direct, specific and evidence-led across all routes. Retain
   metric qualifiers, team attribution and the approved scope of each role.
