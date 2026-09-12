@@ -29,16 +29,6 @@
   display: none;
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) .sun {
-    display: none;
-  }
-
-  :root:not([data-theme="dark"]) .moon {
-    display: block;
-  }
-}
-
 :root[data-theme="light"] .sun {
   display: none;
 }

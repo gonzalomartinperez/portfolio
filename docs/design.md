@@ -41,11 +41,11 @@ JetBrains Mono. This is inspiration from a public reference, not reuse of its as
 
 ## Surfaces and colour
 
-Both themes ship. Dark is the designed default and lives on bare `:root`, so the site is correct
-with no JavaScript at all. Light arrives two ways: `@media (prefers-color-scheme: light)` scoped
-to `:root:not([data-theme="dark"])`, and an explicit `:root[data-theme="light"]` rule placed last
-so a deliberate choice wins in either direction. Each theme declares its own `color-scheme`, so
-form controls and scrollbars follow.
+Both themes ship. Dark is the default for every visitor regardless of the system preference,
+because the identity is built on luminous points against a near-black ground and a light
+first impression is not the site the design is for. Light is opt-in: `:root[data-theme="light"]`
+applies only once the toggle has stored an explicit choice. Each theme declares its own
+`color-scheme`, so form controls and scrollbars follow.
 
 A small inline script in the root layout — one layout shared by both language trees — applies a
 stored choice before first paint, so a visitor who picked the non-default theme never sees the

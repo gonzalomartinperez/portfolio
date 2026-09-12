@@ -29,7 +29,8 @@ export function ThemeToggle({
       setTheme(stored);
       return;
     }
-    setTheme(window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    // No stored choice means dark: the site does not follow the system preference.
+    setTheme("dark");
   }, []);
 
   const toggle = () => {

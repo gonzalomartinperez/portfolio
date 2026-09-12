@@ -108,9 +108,8 @@ export function ParticleField({
     };
     reducedMotion.addEventListener("change", handleMotionChange);
 
-    // The theme changes either by system preference or by the toggle writing data-theme.
-    const colorScheme = window.matchMedia("(prefers-color-scheme: light)");
-    colorScheme.addEventListener("change", applyPalette);
+    // The theme only changes when the toggle writes data-theme; the system preference is
+    // deliberately not followed.
     const themeObserver = new MutationObserver(applyPalette);
     themeObserver.observe(document.documentElement, {
       attributeFilter: ["data-theme"],
@@ -119,7 +118,6 @@ export function ParticleField({
     return () => {
       observer.disconnect();
       themeObserver.disconnect();
-      colorScheme.removeEventListener("change", applyPalette);
       document.removeEventListener("visibilitychange", handleVisibility);
       stage.removeEventListener("pointermove", handlePointerMove);
       stage.removeEventListener("pointerleave", releasePointer);
