@@ -5,9 +5,9 @@
   "description": "A minimal personal portfolio built with Next.js and TypeScript.",
   "license": "UNLICENSED",
   "engines": {
-    "node": ">=24.21.0 <25"
+    "node": ">=24.6.0 <25"
   },
-  "packageManager": "pnpm@12.4.1",
+  "packageManager": "pnpm@10.34.5",
   "scripts": {
     "dev": "next dev",
     "build": "pnpm run lint && pnpm run typecheck && next build",
