@@ -47,7 +47,7 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
       - name: Run quality checks
-        run: npm run build
+        run: npm run check
       - name: Smoke-test the production server
         run: npm run test:smoke
       - name: Verify tracked sources remain unchanged

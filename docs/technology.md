@@ -58,14 +58,17 @@ does not provide that same policy. Review release dates and advisories in depend
 PRs, run `npm audit`, and do not force audit fixes. Exact versions and integrity
 hashes improve repeatability; they do not establish that a dependency is safe.
 
-CI uses SHA-pinned actions, read-only permissions, a two-runtime matrix, bundled
+CI uses SHA-pinned actions, read-only permissions, a two-runtime matrix,
 the npm bundled with each Node version, and an npm download cache keyed by the lockfile.
 The development lane reads `.nvmrc`; the hosting lane pins the observed Node 24.6.0.
 Corepack is not invoked. The required `Quality checks`
 gate fails if either runtime fails or is skipped/cancelled. CI never caches
 `node_modules` or shares build output across operating systems. Obsolete runs are
-cancelled and each run has a timeout. The production build is the shared quality
-gate; `check` is an alias, not a second compilation. A production smoke test checks
+cancelled and each run has a timeout. `check` runs lint, explicit type checking,
+and one production build; it is the CI quality gate. `build` invokes only Next.js,
+so Hostinger does not need to execute Biome's incompatible native binary. Next.js
+type validation remains enabled. Matching Node versions in CI does not reproduce
+Hostinger's GLIBC or prove native binary compatibility there. A production smoke test checks
 HTTP responses, HTML landmarks, and 404 handling. A final diff check detects
 changes to tracked sources. Dependabot monitors the npm ecosystem.
 

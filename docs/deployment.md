@@ -22,11 +22,23 @@ or a custom server. Next.js reads the hosting platform's `PORT` environment vari
 (3000 locally). Connect this repository and enable automatic deployment from `main`.
 
 GitHub Actions provides CI; Hostinger's native integration provides CD. They can
-start independently on a push. The standard `npm run build` command runs lint,
-type checks, and then the production compilation in both environments. Install
-development dependencies during the build because these checks require them.
+start independently on a push. Hostinger runs `npm run build` (Next.js compilation)
+without invoking Biome. GitHub Actions runs `npm run check` (lint, explicit type
+checking, and build), followed by the production smoke test. Protected PRs require
+these checks before code reaches `main`; do not bypass that release gate. Keep
+development dependencies installed during compilation because Next.js needs TypeScript.
 If hPanel asks for a package script name rather than a shell command, choose `build`.
 No API token or VPS deployment action is needed for this managed-hosting workflow.
+
+### Native library compatibility
+
+The hosting log reported missing `GLIBC_2.29` and `GLIBC_2.30` when starting Biome.
+Linting now runs in the development/CI environment, not in the hosting build.
+Biome remains a required quality tool; no lint errors or TypeScript errors are
+ignored. Next.js retains its built-in type validation during `next build`.
+The Linux CI jobs match Node versions, not Hostinger's complete operating system
+or GLIBC. Next.js and TypeScript also use native binaries, so their compatibility
+on the actual hosting server still needs confirmation from a successful build.
 
 Check the installation log for npm and Node versions satisfying `engines`.
 Node 24.6.0 ships npm 11.5.1, the compatibility baseline tested in CI; the actual
