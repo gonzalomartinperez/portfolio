@@ -44,6 +44,7 @@ export function TechnologyCatalogue({
           [
             technology.name,
             technology.id,
+            ...(technology.aliases ?? []),
             group.name,
             ...technology.evidence.map((item) => item.label),
           ].join(" "),

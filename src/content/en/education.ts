@@ -148,7 +148,7 @@ export const curriculum: { year: string; subjects: string[] }[] = [
       "Business Economics",
       "Computer Networks",
       "Systems Auditing",
-      "Artificial Intelligent Systems",
+      "Artificial Intelligence Systems",
       "Physics II",
       "Final Year Project",
     ],

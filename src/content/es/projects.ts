@@ -96,10 +96,7 @@ export const filomenaCaseStudy = {
         "se degradaba bajo carga concurrente, la toma de exámenes era secuencial, el control de " +
         "acceso se aplicaba de forma inconsistente y sumar una institución implicaba escribir " +
         "código.",
-      "No había monitoreo, así que los problemas aparecían como reportes de personas que " +
-        "estaban rindiendo un examen. Para una aplicación donde una respuesta lenta durante una " +
-        "evaluación cronometrada es un problema académico y no solo técnico, esa era la " +
-        "restricción que más pesaba.",
+      "La plataforma original carecía de monitoreo proactivo. La reconstrucción incorporó visibilidad sobre el rendimiento de la aplicación y los servicios que sostienen los exámenes.",
     ],
   } satisfies CaseStudySection,
 
@@ -154,10 +151,7 @@ export const filomenaCaseStudy = {
     {
       heading: "La seudonimia como propiedad del modelo de datos",
       body: [
-        "Los estudiantes son seudónimos para los evaluadores. Eso se aplica en el modelo de " +
-          "datos y en la API, y no se esconde en la interfaz, porque una regla de privacidad implementada " +
-          "en una vista es una regla que se filtra la primera vez que alguien agrega un " +
-          "endpoint.",
+        "Los estudiantes son seudónimos para los evaluadores. El modelo de datos y la API aplican esa separación, manteniendo la identidad del estudiante fuera del flujo de corrección del evaluador.",
       ],
     },
     {
@@ -177,11 +171,9 @@ export const filomenaCaseStudy = {
       ],
     },
     {
-      heading: "Monitoreo antes de necesitarlo",
+      heading: "Visibilidad sobre producción",
       body: [
-        "Prometheus y Grafana entraron junto con la reconstrucción y no después del primer " +
-          "incidente, cubriendo la base de datos, Redis, las colas y los workers, con logging " +
-          "estructurado y health checks.",
+        "Prometheus y Grafana brindan visibilidad sobre el comportamiento productivo de la base de datos, Redis, las colas y los workers, con logging estructurado y health checks.",
       ],
     },
   ] satisfies CaseStudySection[],
