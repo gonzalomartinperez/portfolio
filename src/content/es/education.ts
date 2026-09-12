@@ -69,8 +69,7 @@ export const rankings: Ranking[] = [
 ];
 
 export const rankingCaveat =
-  "Describen a la institución, en la edición indicada. No son una medida de mi desempeño " +
-  "individual — eso lo son el título, las notas y el proyecto.";
+  "Las posiciones institucionales se presentan con su ranking y edición.";
 
 export const credentials: Credential[] = [
   { title: "Fundamentos de Docker", issuer: "Universidad Nacional del Sur", date: "Mar 2024" },
@@ -78,8 +77,7 @@ export const credentials: Credential[] = [
 ];
 
 export const credentialNote =
-  "Solo certificaciones completadas. Estoy estudiando para otras y las listaré cuando estén " +
-  "terminadas, no antes.";
+  "Formación completada en fundamentos de contenedores y habilidades profesionales.";
 
 export const academicEvidence: EvidenceLink[] = [
   {
@@ -90,8 +88,7 @@ export const academicEvidence: EvidenceLink[] = [
 ];
 
 export const languageNote =
-  "La carrera exigió dos exámenes universitarios de inglés para graduarse. No modifican mi " +
-  "nivel declarado, que es B2.";
+  "Inglés: comunicación profesional general (B2). La carrera incluyó además dos evaluaciones universitarias de inglés.";
 
 /**
  * The complete degree programme, taken from the university's published plan. It is the
@@ -160,5 +157,4 @@ export const curriculum: { year: string; subjects: string[] }[] = [
 ];
 
 export const curriculumNote =
-  "El Plan 2012 de Ingeniería en Sistemas de Información de la Universidad Nacional del Sur, " +
-  "completo. Las 34 fueron aprobadas.";
+  "El Plan 2012 de la universidad describe la estructura del programa. Las materias aprobadas y las calificaciones individuales se documentan por separado en el registro académico verificado.";

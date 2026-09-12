@@ -198,7 +198,7 @@ test("published documents and assets are reachable", async () => {
   for (const asset of [
     "/gonzalo-martin-perez-ai-software-engineer-en.pdf",
     "/gonzalo-martin-perez-ai-software-engineer-es.pdf",
-    "/icon.svg",
+    "/icon.png",
   ]) {
     const response = await fetch(origin + asset, { signal: AbortSignal.timeout(15_000) });
     assert.equal(response.status, 200, `${asset} returned ${response.status}`);

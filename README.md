@@ -27,9 +27,8 @@ Hostinger's managed Node.js hosting, with the domain registered through Cloudfla
 
 English is served unprefixed and Spanish under `/es`, with the same path segments in
 both, so switching language adds or removes the prefix and nothing else. Dark is the
-default and needs no JavaScript; light follows the system preference, and an explicit
-choice from the header toggle overrides either.
-[The specification](docs/specs/portfolio-initial-release.md) holds the scope and
+default and needs no JavaScript; light is an explicit choice from the header toggle.
+[The redesign specification](docs/specs/portfolio-redesign.md) holds the current scope and
 acceptance criteria.
 
 ## Engineering at a glance
@@ -39,9 +38,10 @@ acceptance criteria.
 | Application | Next.js App Router, React, and Server Components by default |
 | Type safety | TypeScript 7.0.2 with strict checking |
 | Runtime | Node.js 24 LTS and Next.js 16 Active LTS |
-| Interface | Plain CSS with design tokens; client JavaScript only for the theme toggle and the hero |
+| Interface | Plain CSS with design tokens; focused client boundaries for theme, scene, search and gallery |
 | Languages | English and Spanish from one typed copy contract, so a missing translation fails the build |
-| Hero identity | Hand-written WebGL2 point cloud, no 3D dependency, over a server-rendered still |
+| Hero identity | Owner-selected caricature, lazy Three.js particle scene and GSAP native-scroll choreography |
+| Technology catalogue | Shared typed inventory, original-colour local marks and linked experience context |
 | Code quality | Biome linting and formatting, locked dependency installation |
 | Delivery | Protected pull requests, GitHub Actions CI, native Hostinger CD from `main` |
 | AI-assisted development | Shared Claude Code and Codex guidance, specifications, isolated worktrees |
@@ -64,12 +64,12 @@ the compatibility decision and fallback.
 - **Structured AI collaboration:** six focused skills share one source of instructions,
   with clear ownership, review, and integration boundaries.
 
-These are repository practices, not claims about completed client projects or
-application AI features. The current checks do not establish security, accessibility,
-or deployment success. `next lint` was removed in Next.js 16, so the `jsx-a11y` rules
-no longer run; contrast, keyboard access, and both themes belong to review and browser
-testing instead. Results are recorded in
-[the verification log](docs/verification/portfolio-initial-release.md).
+These are repository practices, not claims about completed client projects or application AI
+features. Playwright and axe check production routes, both themes, keyboard journeys and failure
+fallbacks. Automated tests complement visual review; they do not certify accessibility, security
+or deployment success. The [initial verification log](docs/verification/portfolio-initial-release.md)
+retains the historical baseline; the [redesign verification](docs/verification/portfolio-redesign.md)
+records the new checks, measurements and remaining real-device verification limits.
 
 ## Run locally
 
@@ -93,6 +93,9 @@ On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 | `npm run typecheck` | Fast standalone type validation without a production build |
 | `npm run test:repository` | Check UTF-8, local links, skill adapters, and compiler version alignment |
 | `npm run test:smoke` | After `build`, check the production server responds correctly |
+| `npm run test:browser` | After `build`, exercise desktop/mobile routes, axe and scene fallbacks |
+| `npm run test:identity` | Verify favicon and PNG outputs match the approved avatar source |
+| `npm run identity:build` | Regenerate compatibility icons after an approved avatar change |
 | `npm run format` | Apply formatting and safe Biome fixes |
 | `npm run start` | Serve the previously built production app |
 

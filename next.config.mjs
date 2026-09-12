@@ -1,5 +1,7 @@
 // @ts-check
 
+import { SceneBudgetPlugin } from "./scripts/scene-budget-plugin.mjs";
+
 /**
  * Response headers.
  *
@@ -39,6 +41,10 @@ const securityHeaders = [
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
+  webpack(config, { dev, isServer }) {
+    if (!dev && !isServer) config.plugins.push(new SceneBudgetPlugin());
+    return config;
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

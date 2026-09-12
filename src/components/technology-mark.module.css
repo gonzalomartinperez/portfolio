@@ -1,0 +1,9 @@
+.illustration {
+  flex: none;
+  color: var(--accent);
+  background: var(--accent-wash);
+  border: 1px dashed var(--line-control);
+  border-radius: 8px;
+  padding: 5px;
+  box-sizing: content-box;
+}

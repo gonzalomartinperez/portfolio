@@ -4,6 +4,26 @@
   grid-template-columns: 1fr;
 }
 
+.principles {
+  margin-top: var(--space-6);
+}
+.principle {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: var(--space-5);
+  border-bottom: 1px solid var(--line-subtle);
+  padding-block: var(--space-6);
+}
+.principle p {
+  color: var(--text-secondary);
+  max-width: var(--measure-text);
+}
+.number {
+  font-family: var(--font-mono), monospace;
+  font-size: var(--text-small);
+  color: var(--accent);
+}
+
 @media (width >= 52rem) {
   .split {
     align-items: start;

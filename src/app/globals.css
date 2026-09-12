@@ -10,7 +10,7 @@
 :root {
   color-scheme: dark;
 
-  --surface-void: #08090c;
+  --surface-void: #000000;
   --surface-base: #0d0f14;
   --surface-raised: #12151b;
 
@@ -20,7 +20,7 @@
 
   --text-primary: #e8edf4;
   --text-secondary: #9aa6b8;
-  --text-muted: #78849a;
+  --text-muted: #8a95a8;
 
   --accent: #4cd6ff;
   --accent-deep: #2ba8cc;
@@ -47,7 +47,7 @@
   --space-9: 6rem;
   --space-10: 8rem;
 
-  --measure-wide: 72rem;
+  --measure-wide: 80rem;
   --measure-text: 44rem;
   --measure-narrow: 34rem;
   --gutter: clamp(1.25rem, 5vw, 4rem);
@@ -110,6 +110,7 @@
 }
 
 html {
+  scrollbar-gutter: stable;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -156,6 +157,7 @@ h3 {
 }
 
 p {
+  overflow-wrap: anywhere;
   text-wrap: pretty;
 }
 
@@ -201,7 +203,7 @@ ol {
 }
 
 .section-tight {
-  padding-block: clamp(var(--space-6), 5vw, var(--space-8));
+  padding-block: clamp(var(--space-7), 6vw, var(--space-9));
 }
 
 .prose {
@@ -277,7 +279,7 @@ ol {
 .button {
   align-items: center;
   border: 1px solid transparent;
-  border-radius: var(--radius-sm);
+  border-radius: 999px;
   display: inline-flex;
   font-size: var(--text-small);
   font-weight: 550;
@@ -297,7 +299,8 @@ ol {
 }
 
 .button-primary:hover {
-  background: var(--accent-deep);
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-wash);
 }
 
 .button-secondary {
@@ -359,7 +362,7 @@ ol {
   margin-top: var(--space-2);
 }
 
-/* Tag lists: technology names as text, never as vendor marks. */
+/* Compact technology references within narrative sections. */
 
 .tags {
   display: flex;

@@ -14,12 +14,11 @@
 }
 
 .eyebrow {
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-3);
 }
 
 .name {
-  font-size: var(--text-display);
-  /* Light weight at display size: the size carries the emphasis, not the stroke. */
+  font-size: clamp(2.25rem, 4.3vw, 4.5rem);
   font-weight: 400;
   letter-spacing: -0.025em;
   line-height: 1.02;
@@ -31,7 +30,7 @@
   font-size: clamp(1.0625rem, 0.95rem + 0.7vw, 1.5rem);
   font-weight: 400;
   line-height: 1.45;
-  margin-top: var(--space-4);
+  margin-top: var(--space-3);
   max-width: 44ch;
   text-wrap: balance;
 }
@@ -42,6 +41,7 @@
 
 .actions {
   justify-content: center;
+  margin-top: 1.25rem;
 }
 
 .availability {
@@ -49,7 +49,7 @@
   color: var(--text-muted);
   display: flex;
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: var(--text-label);
+  font-size: 0.65rem;
   gap: var(--space-3);
   letter-spacing: 0.05em;
   margin-top: var(--space-4);

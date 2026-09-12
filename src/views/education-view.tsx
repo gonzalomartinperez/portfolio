@@ -30,7 +30,25 @@ export function EducationView({ locale }: { locale: Locale }) {
         eyebrow={copy.education.eyebrow}
         intro={copy.education.intro}
         title={copy.education.title}
-      />
+      >
+        <nav
+          className="actions flow-tight"
+          aria-label={locale === "es" ? "Registro académico" : "Academic record"}
+        >
+          <a className="button button-secondary" href="#results">
+            {copy.education.title}
+          </a>
+          <a className="button button-secondary" href="#curriculum">
+            {copy.education.curriculumHeading}
+          </a>
+          <a className="button button-secondary" href="#credentials">
+            {copy.education.certificationsHeading}
+          </a>
+          <a className="button button-secondary" href="#evidence">
+            {copy.education.evidenceHeading}
+          </a>
+        </nav>
+      </PageHeader>
 
       <section className="section-tight frame">
         <article className={styles.degree}>
@@ -47,7 +65,7 @@ export function EducationView({ locale }: { locale: Locale }) {
           <p>{degree.programme}</p>
         </article>
 
-        <div className="flow">
+        <div className="flow" id="results">
           <MetricList metrics={academicResults} />
         </div>
       </section>
@@ -55,7 +73,7 @@ export function EducationView({ locale }: { locale: Locale }) {
       <section className="section-tight frame">
         <div className="section-head">
           <p className="eyebrow">{copy.education.curriculumEyebrow}</p>
-          <h2>{copy.education.curriculumHeading}</h2>
+          <h2 id="curriculum">{copy.education.curriculumHeading}</h2>
           <p>{curriculumNote}</p>
         </div>
         <ol className={`${styles.curriculum} flow`}>
@@ -130,7 +148,7 @@ export function EducationView({ locale }: { locale: Locale }) {
           <div>
             <div className="section-head">
               <p className="eyebrow">{copy.education.certificationsEyebrow}</p>
-              <h2>{copy.education.certificationsHeading}</h2>
+              <h2 id="credentials">{copy.education.certificationsHeading}</h2>
             </div>
             <ul className="flow-tight">
               {credentials.map((credential) => (
@@ -166,7 +184,7 @@ export function EducationView({ locale }: { locale: Locale }) {
       <section className="section-tight frame">
         <div className="section-head">
           <p className="eyebrow">{copy.education.evidenceEyebrow}</p>
-          <h2>{copy.education.evidenceHeading}</h2>
+          <h2 id="evidence">{copy.education.evidenceHeading}</h2>
           <p>{copy.education.evidenceBody}</p>
         </div>
         <div className="actions flow">
