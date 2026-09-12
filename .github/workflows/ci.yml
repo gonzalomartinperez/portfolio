@@ -76,6 +76,10 @@ jobs:
         with:
           node-version: 24.6.0
           package-manager-cache: false
+      - name: Validate the container checkout
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git rev-parse --show-toplevel
       - name: Verify compatibility baseline
         run: |
           test "$(getconf GNU_LIBC_VERSION)" = "glibc 2.28"
