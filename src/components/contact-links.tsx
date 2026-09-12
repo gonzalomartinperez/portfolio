@@ -36,7 +36,9 @@ export function ContactLinks({ channels }: { channels: readonly ContactChannel[]
             rel={channel.external ? "noopener noreferrer me" : undefined}
             target={channel.external ? "_blank" : undefined}
           >
-            <BrandMark name={channel.icon} size={22} />
+            <span className={styles.chip}>
+              <BrandMark name={channel.icon} size={20} />
+            </span>
             <span className={styles.label}>
               <span className={styles.name}>{channel.name}</span>
               <span className={styles.detail}>{channel.detail}</span>
@@ -61,7 +63,9 @@ export function ContactIcons({ channels }: { channels: readonly ContactChannel[]
             rel={channel.external ? "noopener noreferrer me" : undefined}
             target={channel.external ? "_blank" : undefined}
           >
-            <BrandMark name={channel.icon} size={18} />
+            <span className={styles.chip}>
+              <BrandMark name={channel.icon} size={16} />
+            </span>
           </a>
         </li>
       ))}

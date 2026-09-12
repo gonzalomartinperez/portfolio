@@ -174,9 +174,13 @@ export function HeroStage({
         <canvas aria-hidden="true" className={styles.canvas} ref={canvasRef} />
         <div className={styles.core}>{core}</div>
         {mode !== "static" && (
-          <button className={styles.toggle} onClick={toggle} type="button">
+          <button
+            aria-label={mode === "paused" ? playLabel : pauseLabel}
+            className={styles.toggle}
+            onClick={toggle}
+            type="button"
+          >
             <span aria-hidden="true" className={styles.toggleIcon} />
-            {mode === "paused" ? playLabel : pauseLabel}
           </button>
         )}
       </div>

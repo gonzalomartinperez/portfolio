@@ -4,6 +4,14 @@
   gap: var(--space-3);
 }
 
+.chip {
+  background: #f4f6f9;
+  border-radius: 50%;
+  display: grid;
+  padding: 0.35rem;
+  place-items: center;
+}
+
 .link {
   align-items: center;
   background: var(--surface-raised);
