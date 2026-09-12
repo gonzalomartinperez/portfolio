@@ -10,4 +10,4 @@ description: Reproduce and diagnose a portfolio defect, then fix it only when re
 3. Separate symptoms from hypotheses. Use the smallest read-only experiment that distinguishes competing causes; do not change unrelated dependencies or kill unrelated processes.
 4. For an authorized fix, add a focused regression check that exposes the defect, change the underlying cause, and verify the check now passes.
 5. For rendering bugs, distinguish server output, hydration, and client behavior. For dependency bugs, verify declared compatibility and the lockfile rather than forcing installation.
-6. Run relevant checks and pnpm run check after changes. Report the cause, evidence, correction if authorized, and unresolved uncertainty. Stop when further action needs a new account, destructive reset, or expanded scope.
+6. Run relevant checks and npm run check after changes. Report the cause, evidence, correction if authorized, and unresolved uncertainty. Stop when further action needs a new account, destructive reset, or expanded scope.

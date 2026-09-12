@@ -3,13 +3,13 @@
 This is a public personal portfolio, not a store for private career information.
 
 - Use English for code, documentation, interface text, and commit messages.
-- Use the Node.js LTS version in `.nvmrc` and restore dependencies with `pnpm install --frozen-lockfile`.
+- Use the Node.js LTS version in `.nvmrc` and restore dependencies with `npm ci`.
 - Keep Next.js on a supported LTS line. Avoid canary releases and experimental flags.
 - Use the App Router, strict TypeScript, Server Components by default, and plain CSS.
 - Add dependencies only when the feature justifies them; commit the lockfile.
 - Keep changes focused. Do not add personal claims, metrics, or employer materials without approval.
 - Never commit credentials, private documents, `.env` files, caches, or builds.
-- Run `pnpm run check` and review the diff before committing.
+- Run `npm run check` and review the diff before committing.
 - Use Conventional Commits in English. Do not change hosting, DNS, or repository visibility without an explicit request.
 
 ## Working agreement
