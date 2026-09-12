@@ -2,7 +2,12 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
-  "description": "A minimal personal portfolio built with Next.js and TypeScript.",
+  "description": "Software engineering and applied AI portfolio built with Next.js, deployed on Hostinger.",
+  "homepage": "https://gonzalomartinperez.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gonzalomartinperez/portfolio.git"
+  },
   "license": "UNLICENSED",
   "engines": {
     "node": ">=24.6.0 <25",
@@ -16,7 +21,8 @@
     "lint": "biome check .",
     "format": "biome check --write .",
     "typecheck": "next typegen && tsc --noEmit",
-    "check": "npm run lint && npm run typecheck && npm run build",
+    "check": "npm run test:repository && npm run lint && npm run build",
+    "test:repository": "node --test scripts/repository.test.mjs",
     "test:smoke": "node scripts/smoke-test.mjs"
   },
   "dependencies": {

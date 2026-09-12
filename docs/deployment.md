@@ -2,8 +2,11 @@
 
 [Back to overview](../README.md)
 
-In a Hostinger plan that supports Node.js web apps, import this GitHub repository
-and review the detected settings:
+The portfolio is live at [gonzalomartinperez.com](https://gonzalomartinperez.com).
+The owner confirmed a successful deployment from `main` on 2026-09-12.
+Hostinger runs the application on managed Node.js hosting; the domain is registered
+through Cloudflare. This is not a Cloudflare Pages or Workers deployment.
+Preserve the working hosting and DNS settings:
 
 | Setting | Value |
 | --- | --- |
@@ -45,8 +48,8 @@ then failed while loading `next.config.ts`. Do not create the random generated
   so loading configuration does not require SWC to transpile TypeScript.
 - `next build --webpack`: the documented production alternative to Turbopack,
   whose native bindings cannot use the WebAssembly fallback.
-- An exact `@next/swc-wasm-nodejs` development dependency matching Next.js,
-  available for automatic fallback without an unpinned build-time download.
+- An exact `@next/swc-wasm-nodejs` development dependency matching Next.js.
+  Its presence does not prove the loader uses the installed copy; see below.
 
 Keep selecting **npm run build** in hPanel; the Webpack flag lives in the script.
 Do not omit development or optional dependencies during installation. Do not enable
@@ -67,7 +70,28 @@ Node 24.6.0 ships npm 11.5.1, the compatibility baseline tested in CI; the actua
 hosting npm version must still be confirmed from its log. Do not install npm
 through Corepack or add a package-manager bootstrap command.
 
-### Switching the existing hPanel application to npm
+### Build messages
+
+The GLIBC and missing-musl warnings describe failed native loading attempts, not a
+failed deployment when WASM compilation, type validation and runtime checks succeed.
+Do not force-install musl packages on a GLIBC host. The skipped `.next/lock` message
+is a WASM limitation: do not build concurrently in one checkout. npm's funding
+notice is informational, not a vulnerability or compiler warning.
+
+Inspection of Next.js 16.3.5's `loadWasmRawBindings` found that the initial WASM
+lookup converts the package name to a file URL instead of resolving the package.
+Observed builds therefore use Next.js's download/cache fallback despite the direct
+dependency. Keep its version aligned for future loader fixes and verify actual
+resolution on upgrades. CI proves WASM use, not offline reproducibility or which
+copy was loaded. Evidence: `node_modules/next/dist/build/swc/index.js`.
+
+No stable, verified warning-free configuration was found for this combination.
+Do not suppress stderr, patch Next.js, use internal `NEXT_TEST_*` variables or add
+experimental flags merely to hide the messages. Revisit when Hostinger provides
+compatible native libraries or Next.js ships a supported fix. Preserve full logs
+and investigate any nonzero build exit or failed runtime check.
+
+### Troubleshooting an old pnpm configuration
 
 The earlier deployment selected pnpm through Corepack and failed before installing
 the application. Repository changes alone do not reset saved hPanel settings.
@@ -78,10 +102,9 @@ If the new log still invokes pnpm or Corepack, verify the saved package-manager
 selection and source commit, then ask Hostinger support to reset the builder's
 stored selection. Clearing a CDN cache does not fix package installation.
 
-The repository contains CI configuration, but hPanel connection, auto-deployment,
-build settings, and the domain must be activated in your account. A green GitHub
-check does not prove a successful Hostinger deployment: verify its deployment log
-and preview URL. For later feature work, require the `Quality checks` status on PRs
+The hPanel connection, auto-deployment and domain are now active. For each new
+release, verify its source commit and result in hPanel, then check the live URL.
+HTTP success alone cannot prove which commit is deployed. Require the `Quality checks` status on PRs
 before merging into `main`; this repository does not bypass those protections.
 The required flow is task branch -> PR into `develop` -> release PR into `main`.
 Direct pushes and merges outside PRs are prohibited on both long-lived branches.
@@ -89,9 +112,15 @@ Only same-repository `develop` may target `main`; see the development workflow
 for the branch-policy check and protection settings.
 
 See [Hostinger's deployment guide](https://www.hostinger.com/support/how-to-deploy-a-nodejs-website-in-hostinger/).
-After the app works on its preview URL, connect the custom domain using the DNS
-records provided by Hostinger. Keep domain management in Cloudflare; never guess
-an IP address or commit account credentials. This repository does not configure DNS.
+Keep domain management in Cloudflare; do not alter DNS records, proxy mode or SSL
+settings during routine code changes. Never guess IP addresses or commit account
+credentials. This repository does not configure DNS.
+
+CI runs on PRs and published `main` commits, not also on `develop` pushes; this
+avoids duplicate runs when opening a release PR. Manual dispatch remains available
+for integration-branch diagnosis. Hostinger's native integration is the only CD
+pipeline: no extra API tokens or deployment Actions are needed. If a release
+regresses, use a focused fix or revert PR through the protected flow, not a reset.
 
 See the [development guide](development.md) for branch conventions and the
 [technology guide](technology.md) for compiler compatibility and native packages.
