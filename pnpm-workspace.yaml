@@ -1,0 +1,5 @@
+# Single-package configuration; sibling repositories and worktrees are not workspaces.
+saveExact: true
+ignoreScripts: true
+strictPeerDependencies: true
+verifyDepsBeforeRun: error

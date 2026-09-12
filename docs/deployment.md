@@ -11,21 +11,28 @@ and review the detected settings:
 | Framework | Next.js |
 | Root directory | Repository root (`./`) |
 | Node.js | 24.x LTS |
-| Install command, if requested | `npm ci` |
-| Build command | `npm run check` |
+| Package manager | pnpm (version pinned in `package.json`) |
+| Install command, if requested | `pnpm install --frozen-lockfile` |
+| Build command | `pnpm run build` |
 | Build output, if requested | `.next` |
-| Start command, if requested | `npm start` |
+| Start command, if requested | `pnpm run start` |
 
 Keep the normal Next.js server deployment; this project does not use static export
 or a custom server. Next.js reads the hosting platform's `PORT` environment variable
 (3000 locally). Connect this repository and enable automatic deployment from `main`.
 
 GitHub Actions provides CI; Hostinger's native integration provides CD. They can
-start independently on a push, so Hostinger must use `npm run check`, not just
-`npm run build`, to run lint, type checks, and the build before deployment. Install
+start independently on a push. The standard `pnpm run build` command runs lint,
+type checks, and then the production compilation in both environments. Install
 development dependencies during the build because these checks require them.
-If hPanel asks for a package script name rather than a shell command, choose `check`.
+If hPanel asks for a package script name rather than a shell command, choose `build`.
 No API token or VPS deployment action is needed for this managed-hosting workflow.
+
+Check the installation log for the exact pnpm version in `package.json` and a
+successful locked install. Hostinger supporting pnpm does not guarantee its
+bootstrap version honors that field. If it reports an incompatible lockfile,
+configure the pinned version with Hostinger support; do not delete or regenerate
+the lockfile on the server. Confirm the actual Node patch satisfies `engines` too.
 
 The repository contains CI configuration, but hPanel connection, auto-deployment,
 build settings, and the domain must be activated in your account. A green GitHub

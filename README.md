@@ -40,21 +40,26 @@ the current checks do not establish security, accessibility, or deployment succe
 
 ## Run locally
 
-Use the Node.js version in [.nvmrc](.nvmrc) and npm 11.
+Use the Node.js version in [.nvmrc](.nvmrc) and the exact pnpm version in `package.json`.
+
+Install that version following the [pnpm installation guide](https://pnpm.io/installation),
+then confirm `pnpm --version` matches `packageManager` before installing dependencies.
 
 ```sh
-npm ci
-npm run dev
+pnpm install --frozen-lockfile
+pnpm run dev
 ```
 
 Open `http://localhost:3000`. No database, credentials, or external services are required.
-On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
+On Windows PowerShell, use `pnpm.cmd` if execution policy blocks `pnpm`.
 
 | Command | Purpose |
 | --- | --- |
-| `npm run check` | Validate formatting, lint, types, and the production build |
-| `npm run format` | Apply formatting and safe Biome fixes |
-| `npm start` | Serve the previously built production app |
+| `pnpm run build` | Run the quality gate and compile for production, including on Hostinger |
+| `pnpm run check` | Validate formatting, lint, types, and the production build |
+| `pnpm run test:smoke` | After `build`, check the production server responds correctly |
+| `pnpm run format` | Apply formatting and safe Biome fixes |
+| `pnpm run start` | Serve the previously built production app |
 
 ## Find your way around
 
