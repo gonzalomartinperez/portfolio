@@ -1248,6 +1248,7 @@ export const technologyCatalog: Technology[] = [
     name: "Slack",
     category: "delivery",
     kind: "brand",
+    icon: "slack",
     status: "applied",
     evidence: [
       {

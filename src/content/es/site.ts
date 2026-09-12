@@ -45,17 +45,14 @@ export const siteCopy: SiteCopy = {
       { value: "1.000+", label: "usuarios simultáneos de la plataforma" },
       { value: "10+", label: "sistemas empresariales integrados" },
     ],
-    proofNote: "Las cifras describen los productos.",
-    proofNoteLink: "Lo que hice se detalla por separado.",
+    proofNote: "Resultados observados en producción.",
+    proofNoteLink: "Explorá el contexto y mi contribución.",
   },
   home: {
     whoEyebrow: "Quién soy",
-    whoHeading: "Ingeniería que aguanta después de la demo",
+    whoHeading: "De sistemas complejos a productos útiles",
     whoParagraph:
-      "Me importan las partes que deciden si el software sobrevive al contacto con el uso " +
-      "real: contratos claros entre servicios, modelos de datos que siguen siendo correctos " +
-      "bajo concurrencia, y suficiente observabilidad para saber qué pasó sin adivinar. Es menos " +
-      "vistoso que una demo, y es lo que marca la diferencia seis meses después.",
+      "Conecto interfaces, servicios y datos para construir software que se usa todos los días. Mi trabajo abarca integraciones fintech, backoffices empresariales e IA aplicada: asistentes con recuperación de contexto, flujos agénticos y herramientas de ingeniería.",
     factCurrently: "Actualmente",
     factExperience: "Experiencia",
     factBasedIn: "Radicado en",
@@ -63,14 +60,13 @@ export const siteCopy: SiteCopy = {
     languagesValue: "Español (nativo) · Inglés (B2)",
     experienceSince: (length, since) => `${length}, desde ${since}`,
     workEyebrow: "Trabajo seleccionado",
-    workHeading: "El proyecto que mostraría primero",
+    workHeading: "Filomena: de proyecto universitario a producción",
     experienceEyebrow: "Experiencia",
-    experienceHeading: "Dónde construí cosas",
+    experienceHeading: "Productos, equipos y contribuciones",
     stackEyebrow: "Stack",
-    stackHeading: "Con qué trabajo",
+    stackHeading: "Un conjunto de herramientas para todo el producto",
     stackIntro:
-      "Agrupado por para qué sirve, no por lenguaje. Cada grupo se respalda en el trabajo " +
-      "listado más arriba.",
+      "Explorá los lenguajes, frameworks y prácticas detrás de mi trabajo, con enlaces a los proyectos y experiencias donde los apliqué.",
     educationEyebrow: "Educación",
     educationHeading: "Ingeniero en Sistemas de Información, UNS",
     educationBody:
@@ -78,9 +74,7 @@ export const siteCopy: SiteCopy = {
       "8,67/10 en 34 de 34 materias obligatorias, y un proyecto final calificado 10/10.",
     closingHeading: "Hablemos",
     closingBody:
-      "Estoy abierto a roles remotos en ingeniería de software, backend e IA, y puedo empezar de " +
-      "inmediato. Si algo de esto se parece al problema que estás buscando resolver, me encantaría " +
-      "que me lo cuentes — el email es la vía más rápida, y lo respondo.",
+      "¿Buscás alguien que conecte ingeniería de software con IA aplicada? Estoy disponible para oportunidades 100% remotas, con incorporación inmediata a coordinar.",
   },
   about: {
     metaTitle: "Sobre mí",
@@ -88,42 +82,40 @@ export const siteCopy: SiteCopy = {
       "Gonzalo Martin Perez — AI Software Engineer. Trayectoria, cómo encaro el trabajo de " +
       "ingeniería y qué estoy buscando.",
     eyebrow: "Sobre mí",
-    title: "Me hago cargo de sistemas completos, de la interfaz hasta la cola de procesamiento",
+    title: "Ingeniería de software con IA aplicada",
     paragraphs: [
-      "Mi camino de entrada fue una carrera de ingeniería de cinco años en la Universidad Nacional del Sur, en paralelo con trabajo independiente para clientes que empezó en 2024 y no se detuvo. El hilo conductor es el product engineering: me gusta hacerme cargo de algo desde la interfaz hasta la cola que lo hace funcionar.",
-      "Desde entonces trabajé en una plataforma de promociones a escala fintech, un backoffice de permisos que abarca los sistemas internos de una empresa, y una plataforma de exámenes de la que dependen cinco instituciones. La IA aplicada atraviesa el trabajo reciente en lugar de quedar al costado: un asistente de recuperación dentro de un producto para comercios, pipelines de agentes para clientes, y los entornos agénticos de ingeniería que construyo para hacer el trabajo en sí.",
-      "Actualmente soy AI Engineer en Rampy, y esa es la dirección en la que estoy profundizando deliberadamente: agentes, recuperación, y la disciplina de ingeniería que los vuelve confiables en lugar de impresionantes una sola vez.",
+      "Soy Gonzalo, Ingeniero en Sistemas de Información por la Universidad Nacional del Sur y AI Software Engineer. Desde 2024 combino proyectos independientes con roles de ingeniería en software empresarial y fintech.",
+      "Construí experiencias para comercios, integraciones entre servicios y un backoffice de permisos. Como contribuidor principal de un equipo de tres personas, también participé en la evolución de Filomena hacia una plataforma de exámenes usada por cinco instituciones.",
+      "Actualmente soy AI Engineer en Rampy. Mi enfoque une interfaces, servicios y datos con RAG, agentes y entornos de desarrollo que preservan contexto.",
     ],
     asideCurrently: "Actualmente",
     asideArrangement: "Modalidad de trabajo",
     asideLanguages: "Idiomas",
     asideAvailability: "Disponibilidad",
     principlesEyebrow: "Cómo trabajo",
-    principlesHeading: "Cuatro cosas sobre las que tengo posición tomada",
+    principlesHeading: "Cómo convierto requisitos en sistemas funcionales",
     principles: [
       {
-        title: "Contratos antes que código",
-        body: "La interfaz entre dos sistemas es lo que sobrevive a ambos. Prefiero dedicar un día a la forma de una API que una semana a lo que pasa cuando dos servicios no se ponen de acuerdo sobre ella.",
+        title: "Límites claros entre integraciones",
+        body: "En Cooperativa Obrera, un contrato de API común conectó sistemas independientes a un backoffice. Uso contratos para separar las interfaces de la lógica propia de cada servicio.",
       },
       {
-        title: "Correcto bajo concurrencia, no solo en la demo",
-        body: "Casi todo lo que construí tiene usuarios simultáneos reales: exámenes que se rinden, promociones que se ingieren, permisos que se verifican. La concurrencia es una propiedad del modelo de datos, así que ahí es donde pongo el esfuerzo.",
+        title: "Rendimiento con cargas reales",
+        body: "Las cargas de promociones, las consultas de permisos y los exámenes concurrentes guiaron mi trabajo con datos: tuning de consultas, índices, caché y herramientas de carga aisladas.",
       },
       {
-        title: "Medir antes de afirmar",
-        body: "Cada cifra de este sitio lleva cómo fue observada, o dice con claridad que es una estimación. Un número sin condiciones es decoración, y trato de no publicar decoración.",
+        title: "Responsabilidad sobre el producto",
+        body: "Filomena conectó arquitectura, implementación y despliegue con las necesidades de instituciones, evaluadores y estudiantes. Me interesa trabajar a lo largo de todo ese recorrido.",
       },
       {
-        title: "IA con el mismo estándar",
-        body: "La recuperación y los agentes son software. Reciben el mismo tratamiento que todo lo demás: límites tipados, guardrails, tests en los caminos que importan, y observabilidad para que una respuesta mala se pueda rastrear en vez de adivinar.",
+        title: "IA integrada a la aplicación",
+        body: "En las consultas de comercios, la recuperación incorporaba promociones relevantes a la conversación. LangChain, LangGraph y pgvector sustentaron el asistente, con guardrails para controlar su alcance.",
       },
     ],
     lookingEyebrow: "Qué estoy buscando",
     lookingHeading: "Trabajo remoto donde se encuentran ingeniería y producto",
     lookingBody:
-      "Soy más útil donde el problema técnico y el problema de producto son el mismo problema, y " +
-      "puedo empezar de inmediato. Si eso se parece a tu equipo, el trabajo está a un clic — y mi " +
-      "bandeja de entrada también.",
+      "Busco roles 100% remotos de ingeniería de software e IA con responsabilidad sobre el producto. Puedo empezar de inmediato y coordinar la fecha exacta durante el proceso.",
   },
   work: {
     metaTitle: "Trabajo",
@@ -134,15 +126,12 @@ export const siteCopy: SiteCopy = {
     eyebrow: "Trabajo",
     title: "Experiencia y proyectos seleccionados",
     intro: (length, asOf) =>
-      `${length} de ingeniería profesional, a ${asOf}. Las cifras de escala describen los ` +
-      "productos; lo que hice se detalla por separado debajo.",
+      `${length} de experiencia profesional a ${asOf}, construyendo productos en fintech, sistemas empresariales e IA aplicada.`,
     experienceHeading: "Experiencia profesional",
     projectsEyebrow: "Proyectos seleccionados",
-    projectsHeading: "Trabajo con evidencia pública",
+    projectsHeading: "Explorá el producto en detalle",
     projectsBody:
-      "Un proyecto está publicado por completo. Los sistemas que construí en Cooperativa " +
-      "Obrera y Teamcubation administran datos internos de esas empresas, así que no tienen " +
-      "enlaces públicos — la experiencia de arriba es el registro.",
+      "Filomena reúne el recorrido del producto, las decisiones de arquitectura y las versiones públicas del código. Las experiencias empresariales describen mi contribución y el contexto de operación.",
   },
   filomena: {
     metaTitle: "Filomena — plataforma productiva de exámenes",
@@ -162,14 +151,10 @@ export const siteCopy: SiteCopy = {
     columnAfter: "Después",
     evidenceHeading: "Evidencia",
     evidenceNote:
-      "Los repositorios son instantáneas publicadas que se conservan como evidencia de " +
-      "portfolio. No son el historial de commits del desarrollo original, y no los presento " +
-      "como prueba de quién escribió cada línea.",
-    galleryHeading: "El producto en sí",
+      "Explorá las versiones públicas del código y el recorrido completo del producto. Estas versiones documentan la implementación, no el historial original de desarrollo.",
+    galleryHeading: "Explorá la aplicación",
     galleryCaption:
-      "Un recorrido por la interfaz, desde el inicio de sesión hasta la operación de un examen " +
-      "en curso. Son capturas de una instancia de demostración, no de datos reales de ninguna " +
-      "institución.",
+      "Un recorrido de demostración por acceso, administración y exámenes. Las pantallas están agrupadas por flujo de trabajo.",
     galleryLabel: "Recorrido por la interfaz de Filomena",
     galleryPrevious: "Pantalla anterior",
     galleryNext: "Pantalla siguiente",
@@ -181,25 +166,18 @@ export const siteCopy: SiteCopy = {
       "Tecnología agrupada por capacidad — IA aplicada y sistemas agénticos, backend y APIs, " +
       "datos y arquitectura, cloud y delivery — con el trabajo que respalda cada grupo.",
     eyebrow: "Stack",
-    title: "Con qué trabajo, y dónde lo usé",
+    title: "La tecnología detrás del trabajo",
     intro:
-      "Agrupado por para qué sirve y no por lenguaje, y cada grupo indica dónde lo usé. Una " +
-      "lista de tecnologías sin ese contexto es apenas una lista.",
-    fieldHeading: "Todo lo que uso",
+      "Desde interfaces y contratos de servicios hasta recuperación de contexto y flujos agénticos. Explorá el conjunto completo por capacidad y accedé al contexto profesional de cada entrada.",
+    fieldHeading: "Herramientas de ingeniería conectadas",
     fieldIntro:
-      "Las herramientas detrás del trabajo. Las marcas identifican cada tecnología y no implican " +
-      "ningún respaldo; la página de stack las agrupa por su propósito, con el trabajo que las respalda.",
+      "Lenguajes, frameworks y herramientas que uso en desarrollo de productos e IA aplicada.",
     fieldLabel: "Tecnologías",
-    noteHeading: "Una nota sobre cómo está escrita esta lista",
+    noteHeading: "Experiencia aplicada y conocimientos en desarrollo",
     noteScope:
-      "Las entradas de cloud y contenedores describen desarrollo de aplicaciones: construir " +
-      "servicios, integrar servicios gestionados, configurar y diagnosticar workloads. No " +
-      "reclaman administración de clústeres, aprovisionamiento de infraestructura ni " +
-      "responsabilidad sobre la plataforma, porque ese no fue mi rol.",
+      "La experiencia cloud comprende integración de aplicaciones con servicios AWS y desarrollo, configuración y diagnóstico de servicios contenerizados.",
     noteLogos:
-      "Los nombres aparecen como texto y no como logos de proveedores. Redistribuir marcas de " +
-      "terceros en un sitio personal está restringido por las políticas de marca de varios de " +
-      "esos proveedores, y un logo no diría nada que el nombre no diga.",
+      "Las marcas conservan sus colores e identifican cada tecnología, sin implicar patrocinio. Los conceptos de blockchain se distinguen como conocimientos en consolidación.",
   },
   education: {
     metaTitle: "Educación",
@@ -210,14 +188,13 @@ export const siteCopy: SiteCopy = {
     eyebrow: "Educación",
     title: "Ingeniería en Sistemas de Información",
     intro:
-      "Una carrera de ingeniería acreditada de cinco años, completada por entero, con el " +
-      "registro publicado para quien quiera verificarlo.",
+      "Una carrera de ingeniería acreditada de cinco años que combina arquitectura de software, matemática, sistemas y proyectos aplicados.",
     curriculumEyebrow: "Plan de estudios",
-    curriculumHeading: "El plan completo, las 34 materias",
+    curriculumHeading: "El programa de cinco años",
     courseworkEyebrow: "Materias",
     courseworkHeading: "Materias relevantes",
     contextEyebrow: "Contexto institucional",
-    contextHeading: "De dónde viene el título",
+    contextHeading: "Universidad Nacional del Sur",
     projectEyebrow: "Proyecto final",
     projectHeading: "Filomena, calificado 10/10",
     projectBody:
@@ -229,7 +206,7 @@ export const siteCopy: SiteCopy = {
     languagesEyebrow: "Idiomas",
     languagesHeading: "Español e inglés",
     evidenceEyebrow: "Evidencia",
-    evidenceHeading: "Verifica el registro",
+    evidenceHeading: "Registro académico y verificación",
     evidenceBody:
       "El registro académico completo está publicado con verificación oficial de la universidad.",
   },
@@ -241,16 +218,16 @@ export const siteCopy: SiteCopy = {
     eyebrow: "Contacto",
     title: "Hablemos",
     intro:
-      "El email es la vía más directa y lo respondo. Sin formularios, sin newsletter, sin embudo de agenda.",
+      "Contame sobre tu equipo, el producto y los desafíos de ingeniería que vienen. El email es la forma más directa de contactarme.",
     basedIn: (location, arrangement, timezone) =>
       `Vivo en ${location}, trabajo ${arrangement} en ${timezone}, y puedo empezar de ` +
       "inmediato — la fecha exacta es fácil de coordinar durante el proceso.",
-    hiringHint:
-      "Si estás contratando y preferís juzgar el trabajo antes que las palabras, empezá por el",
+    hiringHint: "Para conocer mi trabajo de producto e ingeniería, explorá el",
     hiringLinkText: "caso de estudio de Filomena",
     openToHeading: "Abierto a",
     resumeHeading: "Currículum",
-    resumeNote: "Ambos incluyen un teléfono; el sitio no publica ninguno.",
+    resumeNote:
+      "Descargá el CV en inglés o español con experiencia, habilidades y datos de contacto.",
   },
   notFound: {
     metaTitle: "Página no encontrada",

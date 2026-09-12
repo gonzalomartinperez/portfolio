@@ -1,3 +1,4 @@
+import { technologyNames } from "../technologies";
 import type { EvidenceLink, Metric, Project } from "../types";
 
 export const filomena: Project = {
@@ -35,7 +36,7 @@ export const filomena: Project = {
       qualifier: "Graded at Universidad Nacional del Sur.",
     },
   ],
-  stack: [
+  stack: technologyNames([
     "PHP",
     "Laravel",
     "React",
@@ -47,7 +48,7 @@ export const filomena: Project = {
     "GitHub Actions",
     "Prometheus",
     "Grafana",
-  ],
+  ]),
   links: [
     {
       label: "Case study",
@@ -113,29 +114,18 @@ export const filomenaCaseStudy = {
   } satisfies CaseStudySection,
 
   role: {
-    heading: "My role",
+    heading: "My contribution",
     body: [
-      "Filomena was built by a three-person team as our final year project at Universidad " +
-        "Nacional del Sur, and the product is a team achievement. I was the principal author " +
-        "and contributor: architecture, backend, frontend, infrastructure, security, " +
-        "observability, and coordinating the work.",
-      "I say principal contributor rather than sole author deliberately. The public " +
-        "repositories are a snapshot published as portfolio evidence — they are not a commit " +
-        "history that proves who wrote which line, and I would not present them as one.",
+      "I was the principal author and contributor in a three-person final-project team at Universidad Nacional del Sur. My work covered architecture, backend, frontend, infrastructure, security, observability and coordination.",
+      "We delivered iteratively with Agile practices and Trello, bringing together institutional requirements and the implementation of a working product.",
     ],
   } satisfies CaseStudySection,
 
   approach: {
-    heading: "The approach",
+    heading: "From monolith to API-first product",
     body: [
-      "Rather than refactor inside the monolith, we separated it into a Laravel REST API and a " +
-        "Next.js, React and TypeScript frontend. The decisive reason was not modernity: it was " +
-        "that a single API contract let us make the multi-institution model configuration " +
-        "rather than code, and gave concurrency a single place to be correct.",
-      "Performance work was concentrated where exams actually touch the system — question " +
-        "retrieval, session state, result submission. SQL tuning and index design came first, " +
-        "Redis caching second, and anything that did not need to happen during the request, " +
-        "such as generating result reports, was pushed onto a queue.",
+      "We separated the CakePHP and jQuery monolith into a Laravel REST API and a Next.js, React and TypeScript frontend. The API provided a common contract for the interface and multi-institution workflows.",
+      "SQL tuning, indexes, Redis caching and queues supported concurrent exam workflows. Prometheus and Grafana made production behaviour visible across the application and its supporting services.",
     ],
   } satisfies CaseStudySection,
 
@@ -220,42 +210,26 @@ export const filomenaCaseStudy = {
   ] satisfies Change[],
 
   delivery: {
-    heading: "How we worked",
+    heading: "Delivery and operation",
     body: [
-      "Agile practices with Trello, from requirements through to production. Three people, an " +
-        "academic deadline, and real institutions already depending on the previous version — " +
-        "so the work was ordered by what would break first, not by what was most interesting.",
-      "Deployments ran on Docker images built through GitHub Actions, observed at under fifteen " +
-        "minutes end to end. The public repositories are published snapshots and do not include " +
-        "that pipeline configuration.",
+      "Our three-person team used Agile practices and Trello to coordinate requirements, implementation and release.",
+      "Docker and GitHub Actions supported production deployments observed at under fifteen minutes end to end. The public code repositories are snapshots and do not include the original deployment pipeline.",
     ],
   } satisfies CaseStudySection,
 
   outcomes: {
-    heading: "Where it stands",
+    heading: "Production results",
     body: [
-      "Filomena is active at five Argentine national institutions: UNS, UNRN, UNC, UNVM and " +
-        "FAMFyG. It handled 1,000+ simultaneous users in production with complete data " +
-        "consistency, and kept critical endpoints below 300 ms on average.",
-      "These figures come from deployed operation, not from a benchmark harness in the " +
-        "repository. The project was graded 10/10 as a final year project at Universidad " +
-        "Nacional del Sur, and received interviews, university coverage and mentions from " +
-        "academic authorities — editorial recognition rather than a formally named award.",
+      "Filomena is active at UNS, UNRN, UNC, UNVM and FAMFyG. Production operation showed 1,000+ simultaneous users with complete data consistency and critical endpoints below 300 ms on average, monitored through Prometheus and Grafana.",
+      "The final project received 10/10 at Universidad Nacional del Sur, alongside university interviews, coverage and mentions from academic authorities.",
     ],
   } satisfies CaseStudySection,
 
   lessons: {
-    heading: "What I would do differently",
+    heading: "Next engineering priorities",
     body: [
-      "The test suite is the honest weak point. We validated behaviour through deployed " +
-        "operation and load validation, and the public snapshots ship framework smoke tests " +
-        "rather than a real suite. On a system where a defect interrupts an exam in progress, " +
-        "the concurrency and permission paths deserved automated coverage, and building it " +
-        "under an academic deadline was the wrong tradeoff to make twice.",
-      "I would also have written down the measurement conditions at the time. The performance " +
-        "numbers are real, but reconstructing exactly how each was observed, months later, is " +
-        "harder than it should have been — and a figure you cannot qualify is a figure you " +
-        "should be careful about repeating.",
+      "The next iteration would prioritise automated regression coverage for concurrent exams and permission boundaries. The public snapshots currently contain framework smoke tests.",
+      "I would also preserve repeatable performance scenarios alongside each release, so future changes can be compared with the production behaviour already observed.",
     ],
   } satisfies CaseStudySection,
 };

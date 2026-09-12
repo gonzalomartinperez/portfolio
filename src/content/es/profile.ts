@@ -11,20 +11,13 @@ export const profile = {
   availability: "Abierto a roles remotos, disponible de inmediato",
 
   /** El mensaje de cinco segundos. Una idea por frase. */
-  headline: "Construyo sistemas productivos, y la IA que corre dentro de ellos.",
+  headline: "Construyo software que conecta productos, sistemas e IA.",
 
   intro:
-    "Soy AI Software Engineer. Trabajo en todo el recorrido que va de la interfaz al dato — " +
-    "interfaces de producto, BFFs, microservicios event-driven — y construyo sistemas de " +
-    "recuperación y agénticos con el mismo estándar: contratos, tests, guardrails, " +
-    "observabilidad. Dame la parte del sistema que nadie quiere tocar; es la que mejor hago.",
+    "Desde interfaces y servicios backend hasta recuperación de contexto y agentes, convierto requisitos complejos en aplicaciones funcionales.",
 
   summary:
-    "La mayor parte de mi trabajo fue convertir dominios complejos en software que aguanta en " +
-    "producción: una plataforma de promociones a escala fintech, un backoffice de permisos que " +
-    "abarca los sistemas internos de una empresa, y una plataforma de exámenes que hoy usan " +
-    "cinco instituciones. La IA aplicada es donde estoy profundizando deliberadamente, y ya " +
-    "forma parte de ese trabajo en lugar de ser una vía aparte.",
+    "Mi trabajo conecta plataformas fintech, sistemas empresariales e IA aplicada. Construyo interfaces, BFFs, microservicios y flujos de datos, con experiencia en un asistente RAG para comercios y una plataforma de exámenes usada por cinco instituciones.",
 
   /** Etiqueta canónica exacta. Nunca Senior, Tech Lead, Architect ni Staff. */
   seniority: "Semi-senior",
