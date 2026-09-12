@@ -1,10 +1,11 @@
-/*
- * No fill is set here on purpose. Each symbol in the sprite carries its own colour: the owner's
- * official brand colour where that is legible on our surfaces, and the owner's permitted
- * reversed form where it is not. Several brand policies — PostgreSQL, the Linux Foundation and
- * Docker among them — specifically forbid recolouring a mark to a house colour, which is what
- * tinting these to the text colour would be.
- */
 .mark {
   flex: none;
+}
+.original {
+  flex: none;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 4px;
+  padding: 3px;
+  box-sizing: content-box;
 }
