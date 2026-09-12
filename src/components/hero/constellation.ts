@@ -105,4 +105,4 @@ export function projectConstellation(
 export const POINT_COUNT_DESKTOP = 11000;
 export const POINT_COUNT_COMPACT = 7000;
 /** The still is inlined into the HTML, so its count is a payload decision, not a visual one. */
-export const POINT_COUNT_STATIC = 400;
+export const POINT_COUNT_STATIC = 1000;
