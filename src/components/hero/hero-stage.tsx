@@ -32,6 +32,7 @@ export function HeroStage({
     const canvas = canvasRef.current;
     if (!stage || !canvas) return;
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
+    const shortViewport = matchMedia("(max-height: 649px)");
     let cancelled = false;
     let generation = 0;
     const clear = () => {
@@ -43,7 +44,7 @@ export function HeroStage({
     const initialize = async () => {
       const token = ++generation;
       clear();
-      if (motion.matches) return;
+      if (motion.matches || shortViewport.matches) return;
       try {
         const { mountScene } = await import("./scene-runtime");
         if (cancelled || token !== generation) return;
@@ -65,6 +66,7 @@ export function HeroStage({
     canvas.addEventListener("webglcontextlost", lost);
     canvas.addEventListener("webglcontextrestored", restored);
     motion.addEventListener("change", restored);
+    shortViewport.addEventListener("change", restored);
     void initialize();
     return () => {
       cancelled = true;
@@ -74,6 +76,7 @@ export function HeroStage({
       canvas.removeEventListener("webglcontextlost", lost);
       canvas.removeEventListener("webglcontextrestored", restored);
       motion.removeEventListener("change", restored);
+      shortViewport.removeEventListener("change", restored);
     };
   }, []);
 

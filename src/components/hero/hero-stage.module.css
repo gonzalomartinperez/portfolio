@@ -47,7 +47,7 @@
   padding-block: 4rem;
 }
 .toggle {
-  position: absolute;
+  position: fixed;
   bottom: 1.5rem;
   right: max(1.5rem, calc((100vw - 1280px) / 2));
   display: flex;
@@ -66,6 +66,9 @@
 .toggle:hover {
   border-color: var(--accent);
   color: var(--text-primary);
+}
+.stage[data-scene-visible="false"] .toggle {
+  display: none;
 }
 .scrollCue {
   position: absolute;
@@ -135,7 +138,7 @@
   width: 38px;
   height: 38px;
 }
-.logoCloud :global(.scene-logo) span span {
+.logoCloud :global(.scene-logo) [data-scene-label] {
   font-size: 0.65rem;
   color: var(--text-secondary);
 }
@@ -189,7 +192,7 @@
     width: 24px;
     height: 24px;
   }
-  .logoCloud :global(.scene-logo) span span {
+  .logoCloud :global(.scene-logo) [data-scene-label] {
     display: none;
   }
 }

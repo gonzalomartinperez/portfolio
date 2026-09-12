@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BrandMark } from "@/components/brand-mark";
+import { TechnologyMark } from "@/components/technology-mark";
 import { type Locale, localePath } from "@/content/locales";
 import { technologyCatalog, technologyGroups } from "@/content/technologies";
 import styles from "./tech-constellation.module.css";
@@ -42,18 +42,26 @@ export function TechConstellation({
                 .filter((item) => item.category === group.id)
                 .map((item) => (
                   <li key={item.id}>
-                    <Link className={styles.mark} href={localePath(locale, `/stack#${item.id}`)}>
+                    <Link
+                      className={styles.mark}
+                      href={localePath(locale, `/stack#tech-${item.id}`)}
+                    >
                       <span
                         className={styles.identity}
                         data-tech-icon={item.icon ? item.id : undefined}
                       >
-                        {item.icon && (
-                          <span className={styles.glyph}>
-                            <BrandMark name={item.icon} size={22} />
-                          </span>
-                        )}
-                        <span className={styles.name}>{item.name}</span>
+                        <span className={styles.glyph}>
+                          <TechnologyMark technology={item} size={22} />
+                        </span>
+                        <span className={styles.name} data-scene-label>
+                          {item.name}
+                        </span>
                       </span>
+                      {item.status === "developing" && (
+                        <span className={styles.status}>
+                          {locale === "es" ? "En consolidación" : "In development"}
+                        </span>
+                      )}
                     </Link>
                   </li>
                 ))}

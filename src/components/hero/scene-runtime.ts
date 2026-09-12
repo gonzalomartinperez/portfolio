@@ -84,6 +84,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   const pointerLeave = () => engine.setPointer(null);
   const observer = new IntersectionObserver(([entry]) => {
     onScreen = entry.isIntersecting;
+    stage.dataset.sceneVisible = String(onScreen);
     sync();
   });
   observer.observe(canvas);
@@ -105,6 +106,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       sync();
     },
     dispose() {
+      stage.removeAttribute("data-scene-visible");
       cancelAnimationFrame(refreshFrame);
       observer.disconnect();
       themeObserver.disconnect();
