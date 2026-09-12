@@ -35,10 +35,10 @@ grant permission to publish, spend money, access accounts, or change infrastruct
 
 ## Verification
 
-Run `pnpm install --frozen-lockfile` after dependency changes, then `pnpm run check` and `git diff --check`.
+Run `npm ci` after dependency changes, then `npm run check` and `git diff --check`.
 `check` covers lint, formatting of Biome-supported files, type checking, and build;
 it does not provide a security audit or visual accessibility QA. After building,
-`pnpm run test:smoke` checks the production server, HTML landmarks, and 404 handling;
+`npm run test:smoke` checks the production server, HTML landmarks, and 404 handling;
 CI runs it too. It uses port 3100 by default; set `SMOKE_TEST_PORT` for parallel runs.
 For user-facing changes, check production behavior, keyboard access, mobile and
 desktop layouts, and relevant error/empty/loading states. Add regression tests for

@@ -5,17 +5,18 @@
   "description": "A minimal personal portfolio built with Next.js and TypeScript.",
   "license": "UNLICENSED",
   "engines": {
-    "node": ">=24.6.0 <25"
+    "node": ">=24.6.0 <25",
+    "npm": ">=11.5.1 <12"
   },
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "npm@11.5.1",
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm run lint && pnpm run typecheck && next build",
+    "build": "npm run lint && npm run typecheck && next build",
     "start": "next start",
     "lint": "biome check .",
     "format": "biome check --write .",
     "typecheck": "next typegen && tsc --noEmit",
-    "check": "pnpm run build",
+    "check": "npm run build",
     "test:smoke": "node scripts/smoke-test.mjs"
   },
   "dependencies": {

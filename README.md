@@ -40,28 +40,26 @@ the current checks do not establish security, accessibility, or deployment succe
 
 ## Run locally
 
-Use the Node.js version in [.nvmrc](.nvmrc) and the exact pnpm version in `package.json`.
-
-Install that version following the [pnpm 10 installation guide](https://pnpm.io/10.x/installation),
-then confirm `pnpm --version` matches `packageManager` before installing dependencies.
-pnpm 10 is intentional: the managed Hostinger Corepack launcher is incompatible
-with pnpm 12. CI checks both the local Node baseline and the hosting runtime.
+Use the Node.js version in [.nvmrc](.nvmrc) and its bundled npm 11.
+The hosting compatibility baseline is Node 24.6.0 with npm 11.5.1; CI also tests
+the newer local baseline. No Corepack setup or separate package-manager download
+is required. See [technology decisions](docs/technology.md) for the version policy.
 
 ```sh
-pnpm install --frozen-lockfile
-pnpm run dev
+npm ci
+npm run dev
 ```
 
 Open `http://localhost:3000`. No database, credentials, or external services are required.
-On Windows PowerShell, use `pnpm.cmd` if execution policy blocks `pnpm`.
+On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 
 | Command | Purpose |
 | --- | --- |
-| `pnpm run build` | Run the quality gate and compile for production, including on Hostinger |
-| `pnpm run check` | Validate formatting, lint, types, and the production build |
-| `pnpm run test:smoke` | After `build`, check the production server responds correctly |
-| `pnpm run format` | Apply formatting and safe Biome fixes |
-| `pnpm run start` | Serve the previously built production app |
+| `npm run build` | Run the quality gate and compile for production, including on Hostinger |
+| `npm run check` | Validate formatting, lint, types, and the production build |
+| `npm run test:smoke` | After `build`, check the production server responds correctly |
+| `npm run format` | Apply formatting and safe Biome fixes |
+| `npm run start` | Serve the previously built production app |
 
 ## Find your way around
 
