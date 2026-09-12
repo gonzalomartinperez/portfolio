@@ -9,6 +9,7 @@ export type Technology = {
   status: "applied" | "developing";
   evidence: { label: string; href: string }[];
   icon?: string;
+  aliases?: string[];
 };
 
 export const technologyCatalog: Technology[] = [
@@ -69,6 +70,7 @@ export const technologyCatalog: Technology[] = [
   {
     id: "model-context-protocol",
     name: "Model Context Protocol",
+    aliases: ["MCP"],
     category: "applied-ai",
     kind: "brand",
     status: "applied",

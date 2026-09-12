@@ -95,9 +95,7 @@ export const filomenaCaseStudy = {
         "institution, and it was showing every symptom of that: it degraded under concurrent " +
         "load, exam delivery was sequential, access control was enforced inconsistently, and " +
         "adding an institution meant writing code.",
-      "There was no monitoring, so problems surfaced as reports from people sitting an exam. " +
-        "For an application where a slow response during a timed assessment is an academic " +
-        "problem and not just a technical one, that was the constraint that mattered most.",
+      "The original platform lacked proactive monitoring. The rebuild added visibility into application performance and the services supporting exam delivery.",
     ],
   } satisfies CaseStudySection,
 
@@ -148,10 +146,7 @@ export const filomenaCaseStudy = {
     {
       heading: "Pseudonymity as a data-model property",
       body: [
-        "Students are pseudonymous to evaluators — the mapping exists, it is simply not theirs " +
-          "to see. That is enforced in the data model and the API rather than hidden in the " +
-          "interface, because a privacy rule implemented in a view is a privacy rule that leaks " +
-          "the first time someone adds an endpoint.",
+        "Students are pseudonymous to evaluators. The data model and API enforce that boundary, keeping student identity separate from the evaluator's assessment workflow.",
       ],
     },
     {
@@ -171,11 +166,9 @@ export const filomenaCaseStudy = {
       ],
     },
     {
-      heading: "Monitoring before it was needed",
+      heading: "Visibility into production",
       body: [
-        "Prometheus and Grafana went in alongside the rebuild rather than after the first " +
-          "incident, covering the database, Redis, queues and workers, with structured logging " +
-          "and health checks.",
+        "Prometheus and Grafana provide visibility into production behaviour across the database, Redis, queues and workers, supported by structured logging and health checks.",
       ],
     },
   ] satisfies CaseStudySection[],
