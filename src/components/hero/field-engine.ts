@@ -30,6 +30,7 @@ uniform float uPointerStrength;
 uniform float uAspect;
 uniform float uPointScale;
 uniform float uInfluenceRadius;
+uniform float uExpansion;
 
 out float vDepth;
 
@@ -42,6 +43,10 @@ void main() {
     aPosition.y,
     -aPosition.x * s + aPosition.z * c
   );
+
+  // Expansion pushes each point out along its own radius, with per-point variance so the
+  // shell dissolves unevenly instead of inflating like a balloon.
+  spun *= 1.0 + uExpansion * (1.1 + aSeed * 2.4);
 
   // A slow tilt on the other axis: a sphere rotating on one axis alone reads as a flat disc.
   float tilt = sin(uTime * 0.07) * 0.28;
@@ -66,7 +71,7 @@ void main() {
   corrected += direction * falloff * uPointerStrength * 0.38 * variation;
 
   gl_Position = vec4(corrected.x, corrected.y * uAspect, 0.0, 1.0);
-  gl_PointSize = uPointScale * scale * (0.6 + aSeed * 0.7);
+  gl_PointSize = uPointScale * scale * (0.6 + aSeed * 0.7) * (1.0 - uExpansion * 0.35);
   vDepth = clamp((p.z + 1.0) * 0.5, 0.0, 1.0);
 }
 `;
@@ -79,6 +84,7 @@ out vec4 fragColor;
 
 uniform vec3 uFarColor;
 uniform vec3 uNearColor;
+uniform float uExpansion;
 
 void main() {
   vec2 offset = gl_PointCoord * 2.0 - 1.0;
@@ -87,7 +93,7 @@ void main() {
 
   float edge = smoothstep(1.0, 0.25, radial);
   vec3 color = mix(uFarColor, uNearColor, vDepth);
-  fragColor = vec4(color, edge * (0.30 + vDepth * 0.48));
+  fragColor = vec4(color, edge * (0.30 + vDepth * 0.48) * (1.0 - uExpansion * 0.55));
 }
 `;
 
@@ -113,6 +119,8 @@ export type FieldEngine = {
   stop: () => void;
   setPointer: (point: { x: number; y: number } | null) => void;
   setPalette: (palette: FieldPalette) => void;
+  /** 0 keeps the shell intact; 1 disperses it into a field. */
+  setExpansion: (value: number) => void;
   dispose: () => void;
 };
 
@@ -185,6 +193,8 @@ function createEngine(canvas: HTMLCanvasElement, gl: WebGL2RenderingContext): Fi
   const pointer = { x: 0, y: 0 };
   const pointerTarget = { x: 0, y: 0, active: false };
   let pointerStrength = 0;
+  let expansion = 0;
+  let expansionTarget = 0;
 
   function buildResources() {
     program = link(gl);
@@ -217,6 +227,7 @@ function createEngine(canvas: HTMLCanvasElement, gl: WebGL2RenderingContext): Fi
       "uAspect",
       "uPointScale",
       "uInfluenceRadius",
+      "uExpansion",
       "uFarColor",
       "uNearColor",
     ]) {
@@ -275,6 +286,7 @@ function createEngine(canvas: HTMLCanvasElement, gl: WebGL2RenderingContext): Fi
     gl.uniform1f(uniforms.uAspect ?? null, aspect);
     gl.uniform1f(uniforms.uPointScale ?? null, Math.max(1.6, pointScale));
     gl.uniform1f(uniforms.uInfluenceRadius ?? null, 0.42);
+    gl.uniform1f(uniforms.uExpansion ?? null, expansion);
     gl.uniform3fv(uniforms.uFarColor ?? null, palette.far);
     gl.uniform3fv(uniforms.uNearColor ?? null, palette.near);
 
@@ -294,6 +306,7 @@ function createEngine(canvas: HTMLCanvasElement, gl: WebGL2RenderingContext): Fi
     const target = pointerTarget.active ? 1 : 0;
     const rate = pointerTarget.active ? POINTER_ENGAGE_RATE : POINTER_RELEASE_RATE;
     pointerStrength += (target - pointerStrength) * Math.min(1, delta * rate);
+    expansion += (expansionTarget - expansion) * Math.min(1, delta * 6);
     pointer.x += (pointerTarget.x - pointer.x) * Math.min(1, delta * 8);
     pointer.y += (pointerTarget.y - pointer.y) * Math.min(1, delta * 8);
 
@@ -347,6 +360,10 @@ function createEngine(canvas: HTMLCanvasElement, gl: WebGL2RenderingContext): Fi
   return {
     start,
     stop,
+    setExpansion(value) {
+      expansionTarget = Math.max(0, Math.min(1, value));
+      if (!running) render(elapsed);
+    },
     setPalette(next) {
       palette = next;
       if (!running) render(elapsed);
