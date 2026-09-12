@@ -17,6 +17,9 @@ grant permission to publish, spend money, access accounts, or change infrastruct
 
 ## Design and implementation
 
+Use [Readable code and useful documentation](code-quality.md) for design,
+comments, JSDoc and the final clarity review. It is shared by both agent hosts.
+
 - Keep routes in `src/app/`. Colocate feature code first; extract shared components
   or utilities when actual reuse or a meaningful boundary justifies it.
 - Prefer focused functions, explicit inputs, descriptive names, composition, and

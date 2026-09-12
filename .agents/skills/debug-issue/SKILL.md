@@ -13,5 +13,8 @@ description: Reproduce and diagnose a portfolio defect, then fix it only when re
    compilation is not the same as a failed native compiler with no fallback.
 3. Separate symptoms from hypotheses. Use the smallest read-only experiment that distinguishes competing causes; do not change unrelated dependencies or kill unrelated processes.
 4. For an authorized fix, add a focused regression check that exposes the defect, change the underlying cause, and verify the check now passes.
+   Follow [the shared code-quality standard](../../../docs/code-quality.md) for
+   fixes and workaround comments; keep only verified rationale and a useful removal
+   condition, not a transcript of the debugging session.
 5. For rendering bugs, distinguish server output, hydration, and client behavior. For dependency bugs, verify declared compatibility and the lockfile rather than forcing installation.
 6. Use the verification and warning policy in docs/development.md. Report the cause, evidence, correction if authorized, and unresolved uncertainty. Stop when further action needs a new account, destructive reset, or expanded scope.
