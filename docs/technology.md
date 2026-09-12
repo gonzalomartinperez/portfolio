@@ -43,6 +43,12 @@ Review script requirements explicitly when adding dependencies. Strict peers
 reject incompatible combinations, and running commands never silently reinstalls
 dependencies. Restore them explicitly with `pnpm install --frozen-lockfile`.
 
+New releases have a 24-hour supply-chain cooldown. The exact Next.js 16.3.5
+packages already reviewed and installed before this migration are exempted:
+their release on September 11 was less than 24 hours old at the first Linux CI
+run. No application package versions changed during import. These exact-version
+exceptions do not allow later releases early; remove them on the next Next update.
+
 CI uses SHA-pinned actions, read-only permissions, the pinned Node and pnpm
 versions, and a pnpm store cache keyed by the lockfile. It never caches
 `node_modules` or shares build output across operating systems. Obsolete runs are
