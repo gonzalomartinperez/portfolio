@@ -84,23 +84,51 @@
   color: var(--accent);
 }
 
-@media (width < 44rem) {
+@media (width < 52rem) {
   .inner {
+    column-gap: var(--space-3);
     justify-content: space-between;
+    row-gap: var(--space-1);
   }
 
+  /* Keep the language and theme controls beside the brand, and give the navigation its own
+     row, so the header is two rows rather than three. */
   .controls {
-    flex-wrap: wrap;
-    justify-content: center;
     margin-left: 0;
-    width: 100%;
+    order: 1;
   }
 
   .nav {
-    flex: 1 1 auto;
+    /* Without min-width the scroll container refuses to shrink and the page overflows. */
+    min-width: 0;
+    order: 2;
+    width: 100%;
   }
 
+  /* One row that scrolls if it must, rather than an uneven wrap. */
   .list {
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .link {
+    padding-inline: var(--space-2);
+    white-space: nowrap;
+  }
+
+  .brandRole {
+    display: none;
+  }
+}
+
+@media (width < 26rem) {
+  .link {
+    font-size: var(--text-label);
   }
 }

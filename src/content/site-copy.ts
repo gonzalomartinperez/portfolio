@@ -128,6 +128,9 @@ export type SiteCopy = {
     eyebrow: string;
     title: string;
     intro: string;
+    fieldHeading: string;
+    fieldIntro: string;
+    fieldLabel: string;
     noteHeading: string;
     noteScope: string;
     noteLogos: string;

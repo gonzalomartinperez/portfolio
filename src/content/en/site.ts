@@ -181,6 +181,11 @@ export const siteCopy: SiteCopy = {
     intro:
       "Grouped by what it is for rather than by language, and each group names where I used it. " +
       "A list of technologies without that context is just a list.",
+    fieldHeading: "Everything I work with",
+    fieldIntro:
+      "The tools behind the work above. Marks identify the technology and imply no endorsement; " +
+      "the grouped listing below is the authoritative one.",
+    fieldLabel: "Technologies",
     noteHeading: "A note on how this list is written",
     noteScope:
       "Cloud and container entries describe application development: building services, " +
@@ -237,7 +242,7 @@ export const siteCopy: SiteCopy = {
     hiringHint: "If you're hiring and want to judge the work rather than the words, start with the",
     hiringLinkText: "Filomena case study",
     openToHeading: "Open to",
-    resumeHeading: "Résumé",
+    resumeHeading: "Resume",
     resumeNote: "Both include a phone number; the site itself does not publish one.",
   },
   notFound: {

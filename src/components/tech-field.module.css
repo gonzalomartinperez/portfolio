@@ -1,0 +1,103 @@
+.field {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+}
+
+.tile {
+  align-items: center;
+  background: var(--surface-raised);
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  justify-content: center;
+  min-block-size: 6rem;
+  padding: var(--space-4) var(--space-2);
+  text-align: center;
+  transition:
+    border-color var(--duration-micro) var(--ease-standard),
+    color var(--duration-micro) var(--ease-standard);
+  will-change: transform;
+}
+
+.tile:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.glyph {
+  color: var(--text-primary);
+  display: grid;
+  place-items: center;
+  transition: color var(--duration-micro) var(--ease-standard);
+}
+
+.tile:hover .glyph {
+  color: var(--accent);
+}
+
+.name {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--text-label);
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+/*
+ * Scroll-driven parallax. `view()` ties the animation to the element's own progress through
+ * the viewport, so each lane drifts at its own rate with no script. Browsers without scroll
+ * timelines ignore the whole block and the tiles stay where they are.
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .tile {
+      animation: drift linear both;
+      animation-range: entry 0% cover 60%;
+      animation-timeline: view();
+    }
+
+    .tile[data-depth="1"] {
+      animation-name: drift-mid;
+    }
+
+    .tile[data-depth="2"] {
+      animation-name: drift-far;
+    }
+  }
+}
+
+@keyframes drift {
+  from {
+    opacity: 0.25;
+    transform: translateY(2.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift-mid {
+  from {
+    opacity: 0.25;
+    transform: translateY(4rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift-far {
+  from {
+    opacity: 0.25;
+    transform: translateY(5.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

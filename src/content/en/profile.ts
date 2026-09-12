@@ -58,7 +58,7 @@ export const contactLinks: EvidenceLink[] = [
 
 export const resumeLinks: EvidenceLink[] = [
   {
-    label: "Résumé — English (PDF)",
+    label: "Resume — English (PDF)",
     href: resumeFiles.en,
     description: "Three pages, updated September 2026",
   },
@@ -73,4 +73,32 @@ export const openTo = [
   "Software, backend and full-stack engineering",
   "AI engineering: agents, RAG, LLM integration",
   "Product engineering with end-to-end ownership",
+];
+
+/** Contact channels with their brand glyph, for the icon links. */
+export const contactChannels = [
+  {
+    icon: "gmail",
+    name: "Email",
+    detail: email,
+    href: `mailto:${email}`,
+    external: false,
+    newTabHint: "opens in a new tab",
+  },
+  {
+    icon: "linkedin",
+    name: "LinkedIn",
+    detail: "in/gonzalo-martin-perez",
+    href: externalLinks.linkedin,
+    external: true,
+    newTabHint: "opens in a new tab",
+  },
+  {
+    icon: "github",
+    name: "GitHub",
+    detail: "gonzalomartinperez",
+    href: externalLinks.github,
+    external: true,
+    newTabHint: "opens in a new tab",
+  },
 ];

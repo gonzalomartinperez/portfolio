@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { chrome } from "@/content/chrome";
-import { contactLinks, profile } from "@/content/en/profile";
+import { contactChannels, contactLinks, profile } from "@/content/en/profile";
 import { defaultLocale, type Locale, localePath } from "@/content/locales";
+import { ContactIcons } from "./contact-links";
 import { Mark } from "./mark";
 import styles from "./site-footer.module.css";
 
@@ -40,6 +41,7 @@ export function SiteFooter() {
           <p className="muted">
             {copy.roleSubtitle} · {profile.location} · {profile.timezone}
           </p>
+          <ContactIcons channels={contactChannels} />
         </div>
 
         <nav aria-label={copy.footerNavLabel}>

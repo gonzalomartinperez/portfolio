@@ -75,3 +75,31 @@ export const openTo = [
   "AI engineering: agentes, RAG, integración de LLMs",
   "Product engineering con responsabilidad de punta a punta",
 ];
+
+/** Contact channels with their brand glyph, for the icon links. */
+export const contactChannels = [
+  {
+    icon: "gmail",
+    name: "Email",
+    detail: email,
+    href: `mailto:${email}`,
+    external: false,
+    newTabHint: "se abre en una pestaña nueva",
+  },
+  {
+    icon: "linkedin",
+    name: "LinkedIn",
+    detail: "in/gonzalo-martin-perez",
+    href: externalLinks.linkedin,
+    external: true,
+    newTabHint: "se abre en una pestaña nueva",
+  },
+  {
+    icon: "github",
+    name: "GitHub",
+    detail: "gonzalomartinperez",
+    href: externalLinks.github,
+    external: true,
+    newTabHint: "se abre en una pestaña nueva",
+  },
+];

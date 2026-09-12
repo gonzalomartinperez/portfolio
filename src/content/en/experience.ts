@@ -1,7 +1,7 @@
 import type { Role } from "../types";
 
 /**
- * Ordered as in the reviewed résumé. Product-scale figures live in `context`; `contributions`
+ * Ordered as in the reviewed resume. Product-scale figures live in `context`; `contributions`
  * describe personal work only. `attribution` exists wherever a reader could otherwise mistake
  * a team or platform outcome for an individual one.
  */

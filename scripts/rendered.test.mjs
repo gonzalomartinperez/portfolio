@@ -88,12 +88,22 @@ test("an unknown path returns 404 with the site shell", async () => {
   assert.match(missing.body, /<main[\s>]/);
 });
 
-test("each page declares one h1 and the correct language", () => {
+test("each page declares exactly one h1", () => {
   for (const [route, page] of pages) {
     const h1s = page.body.match(/<h1[\s>]/g) ?? [];
     assert.equal(h1s.length, 1, `${route} has ${h1s.length} h1 elements`);
-    const expected = route.startsWith("/es") ? "es" : "en";
-    assert.match(page.body, new RegExp(`<html[^>]*lang="${expected}"`), `${route} lang`);
+  }
+});
+
+test("each page marks the language of its own content", () => {
+  // Both languages share one root layout so a switch stays a client-side navigation, which
+  // means `<html lang>` is the default locale in the server HTML. Spanish routes therefore
+  // have to mark their own subtree, which is what assistive technology reads.
+  for (const [route, page] of pages) {
+    assert.match(page.body, /<html[^>]*lang="en"/, `${route}: root language`);
+    if (route.startsWith("/es")) {
+      assert.match(page.body, /lang="es"/, `${route}: Spanish content is not marked`);
+    }
   }
 });
 
