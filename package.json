@@ -2,6 +2,7 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "Software engineering and applied AI portfolio built with Next.js, deployed on Hostinger.",
   "homepage": "https://gonzalomartinperez.com",
   "repository": {
@@ -21,13 +22,15 @@
     "lint": "biome check .",
     "format": "biome check --write .",
     "typecheck": "next typegen && tsc --noEmit",
-    "check": "npm run test:repository && npm run test:content && npm run lint && npm run build && npm run test:budget",
+    "check": "npm run test:repository && npm run test:content && npm run test:identity && npm run lint && npm run build && npm run test:budget",
     "test:repository": "node --test scripts/repository.test.mjs scripts/scene-budget.test.mjs",
-    "test:content": "node --test scripts/content.test.mjs",
+    "test:content": "node --test scripts/content.test.mjs scripts/catalogue.test.mjs",
     "test:budget": "node --test scripts/budget.test.mjs",
     "test:rendered": "node --test scripts/rendered.test.mjs",
     "test:smoke": "node scripts/smoke-test.mjs",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "test:identity": "node scripts/generate-identity.mjs --check",
+    "identity:build": "node scripts/generate-identity.mjs --write"
   },
   "dependencies": {
     "gsap": "3.15.0",

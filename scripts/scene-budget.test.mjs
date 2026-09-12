@@ -36,7 +36,7 @@ test("scene budget includes extracted vendors and nested asynchronous chunks", (
         chunks: [scene],
         chunkGraph: {
           getChunkModulesIterable: () => [
-            { identifier: () => "C:/src/components/hero/scene-runtime.ts" },
+            { identifier: () => "C:/src/components/hero/scene-runtime.ts|app-pages-browser" },
           ],
         },
       },

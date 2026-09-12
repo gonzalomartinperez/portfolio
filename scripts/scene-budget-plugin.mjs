@@ -2,7 +2,7 @@ import { writeFileSync } from "node:fs";
 import path from "node:path";
 
 function containsSceneEntry(module) {
-  if (/[/\\]hero[/\\]scene-runtime\.ts(?:\?|$)/.test(module.identifier())) return true;
+  if (/[/\\]hero[/\\]scene-runtime\.ts(?:[?|]|$)/.test(module.identifier())) return true;
   return module.modules ? [...module.modules].some(containsSceneEntry) : false;
 }
 

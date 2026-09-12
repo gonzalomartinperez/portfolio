@@ -46,14 +46,15 @@ test("keyboard users can skip navigation", async ({ page }) => {
 });
 
 test("the portrait identity and icon endpoints are available", async ({ request }) => {
-  const svg = await request.get("/icon.svg");
-  expect(svg.ok()).toBe(true);
-  expect(await svg.text()).not.toMatch(/<image|data:image/);
+  const icon = await request.get("/icon.png");
+  expect(icon.ok()).toBe(true);
+  expect(icon.headers()["content-type"]).toContain("image/png");
+  expect((await icon.body()).subarray(1, 4).toString()).toBe("PNG");
   expect((await request.get("/favicon.ico")).ok()).toBe(true);
 });
 
-test("content and the full catalogue work without JavaScript", async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false });
+test("content and the full catalogue work without JavaScript", async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
   try {
     const page = await context.newPage();
     await page.goto("/stack");
