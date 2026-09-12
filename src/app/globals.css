@@ -31,7 +31,7 @@
   --field-far: #4a6b86;
   --field-additive: 1;
 
-  --portrait-filter: grayscale(0.42) contrast(1.05) brightness(0.94);
+  --portrait-filter: contrast(1.03) saturate(1.02);
   --portrait-veil: rgb(8 9 12 / 62%);
   --header-veil: rgb(8 9 12 / 78%);
   --toggle-veil: rgb(18 21 27 / 90%);
@@ -94,7 +94,7 @@
     --field-far: #aab5c4;
     --field-additive: 0;
 
-    --portrait-filter: grayscale(0.3) contrast(1.02);
+    --portrait-filter: contrast(1.02);
     --portrait-veil: rgb(250 250 251 / 34%);
     --header-veil: rgb(250 250 251 / 85%);
     --toggle-veil: rgb(255 255 255 / 90%);
@@ -124,7 +124,7 @@
   --field-far: #aab5c4;
   --field-additive: 0;
 
-  --portrait-filter: grayscale(0.3) contrast(1.02);
+  --portrait-filter: contrast(1.02);
   --portrait-veil: rgb(250 250 251 / 34%);
   --header-veil: rgb(250 250 251 / 85%);
   --toggle-veil: rgb(255 255 255 / 90%);

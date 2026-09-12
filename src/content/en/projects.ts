@@ -156,11 +156,12 @@ export const filomenaCaseStudy = {
 
   decisions: [
     {
-      heading: "Anonymity as a data-model property",
+      heading: "Pseudonymity as a data-model property",
       body: [
-        "Students are pseudonymous to evaluators. That is enforced in the data model and the " +
-          "API rather than hidden in the interface, because anonymity implemented in a view is " +
-          "anonymity that leaks the first time someone adds an endpoint.",
+        "Students are pseudonymous to evaluators — the mapping exists, it is simply not theirs " +
+          "to see. That is enforced in the data model and the API rather than hidden in the " +
+          "interface, because a privacy rule implemented in a view is a privacy rule that leaks " +
+          "the first time someone adds an endpoint.",
       ],
     },
     {

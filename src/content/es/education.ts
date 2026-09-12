@@ -89,3 +89,73 @@ export const academicEvidence: EvidenceLink[] = [
 export const languageNote =
   "La carrera exigió dos exámenes universitarios de inglés para graduarse. No modifican mi " +
   "nivel declarado, que es B2.";
+
+/**
+ * The complete degree programme, taken from the university's published plan. It is the
+ * curriculum, not a transcript: no grades appear here, and none are implied.
+ */
+export const curriculum: { year: string; subjects: string[] }[] = [
+  {
+    year: "Primer año",
+    subjects: [
+      "Resolución de Problemas y Algoritmos",
+      "Elementos de Álgebra y de Geometría",
+      "Análisis Matemático I",
+      "Introducción a la Programación Orientada a Objetos",
+      "Lenguajes Formales y Autómatas",
+      "Introducción a la Ingeniería de Software",
+    ],
+  },
+  {
+    year: "Segundo año",
+    subjects: [
+      "Análisis Matemático II",
+      "Estructuras de Datos",
+      "Teoría de la Computabilidad",
+      "Tecnología de Programación",
+      "Organización de Computadoras",
+      "Modelos de Software",
+    ],
+  },
+  {
+    year: "Tercer año",
+    subjects: [
+      "Modelos Estadísticos para Ciencias de la Computación",
+      "Lógica para Ciencias de la Computación",
+      "Requerimientos de Sistemas",
+      "Arquitectura de Computadoras",
+      "Métodos Formales para Ingeniería de Software",
+      "Química",
+      "Sistemas Operativos",
+    ],
+  },
+  {
+    year: "Cuarto año",
+    subjects: [
+      "Bases de Datos",
+      "Ingeniería de Aplicaciones Web",
+      "Arquitectura y Diseño de Sistemas",
+      "Algoritmos y Complejidad",
+      "Proyectos de Sistemas de Software",
+      "Verificación y Validación de Software",
+      "Física I",
+    ],
+  },
+  {
+    year: "Quinto año",
+    subjects: [
+      "Gestión de Calidad en el Software",
+      "Práctica Profesional Supervisada",
+      "Economía de la Empresa",
+      "Redes de Computadoras",
+      "Auditoría de Sistemas",
+      "Sistemas Inteligentes Artificiales",
+      "Física II",
+      "Proyecto Final",
+    ],
+  },
+];
+
+export const curriculumNote =
+  "El Plan 2012 de Ingeniería en Sistemas de Información de la Universidad Nacional del Sur, " +
+  "completo. Las 34 fueron aprobadas.";

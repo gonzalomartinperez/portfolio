@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
+import { TechField } from "@/components/tech-field";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import styles from "./stack.module.css";
@@ -10,6 +11,16 @@ export function StackView({ locale }: { locale: Locale }) {
   return (
     <>
       <PageHeader eyebrow={copy.stack.eyebrow} intro={copy.stack.intro} title={copy.stack.title} />
+
+      <section className="section-tight frame">
+        <div className="section-head">
+          <h2>{copy.stack.fieldHeading}</h2>
+          <p>{copy.stack.fieldIntro}</p>
+        </div>
+        <div className="flow">
+          <TechField label={copy.stack.fieldLabel} />
+        </div>
+      </section>
 
       <section className="section-tight frame">
         <div className={styles.groups}>

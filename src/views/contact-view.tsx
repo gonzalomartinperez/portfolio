@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { ContactLinks } from "@/components/contact-links";
 import { PageHeader } from "@/components/page-header";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import styles from "./contact.module.css";
 
 export function ContactView({ locale }: { locale: Locale }) {
-  const { profile, contactLinks, openTo, resumeLinks, siteCopy: copy } = getContent(locale);
+  const { profile, contactChannels, openTo, resumeLinks, siteCopy: copy } = getContent(locale);
 
   return (
     <>
@@ -18,16 +19,7 @@ export function ContactView({ locale }: { locale: Locale }) {
       <section className="section-tight frame">
         <div className={styles.columns}>
           <div>
-            <ul className={styles.channels}>
-              {contactLinks.map((link) => (
-                <li key={link.href}>
-                  <a className={styles.channel} href={link.href}>
-                    <span className={styles.channelLabel}>{link.label}</span>
-                    <span className={styles.channelDescription}>{link.description}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <ContactLinks channels={contactChannels} />
 
             <div className="prose flow">
               <p>{copy.contact.basedIn(profile.location, profile.arrangement, profile.timezone)}</p>

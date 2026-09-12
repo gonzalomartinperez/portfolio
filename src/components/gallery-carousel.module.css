@@ -1,0 +1,94 @@
+.carousel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.track {
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.rail {
+  display: grid;
+  gap: var(--space-4);
+  grid-auto-columns: 100%;
+  grid-auto-flow: column;
+}
+
+.track:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.slide {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  scroll-snap-align: center;
+}
+
+.image {
+  background: var(--surface-raised);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  height: auto;
+  width: 100%;
+}
+
+.caption {
+  color: var(--text-muted);
+  font-size: var(--text-small);
+  line-height: 1.5;
+  min-height: 3em;
+}
+
+.controls {
+  align-items: center;
+  display: flex;
+  gap: var(--space-4);
+}
+
+.button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--line-control);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1rem;
+  justify-content: center;
+  min-block-size: 2.5rem;
+  min-inline-size: 2.75rem;
+  transition:
+    border-color var(--duration-micro) var(--ease-standard),
+    color var(--duration-micro) var(--ease-standard);
+}
+
+.button:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.button:disabled {
+  color: var(--text-muted);
+  cursor: default;
+  opacity: 0.45;
+}
+
+.counter {
+  color: var(--text-muted);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--text-label);
+  letter-spacing: 0.06em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    scroll-behavior: auto;
+  }
+}
