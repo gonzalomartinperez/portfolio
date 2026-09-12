@@ -1,10 +1,6 @@
+import { technologyNames } from "../technologies";
 import type { Role } from "../types";
 
-/**
- * Ordered as in the reviewed resume. Product-scale figures live in `context`; `contributions`
- * describe personal work only. `attribution` exists wherever a reader could otherwise mistake
- * a team or platform outcome for an individual one.
- */
 export const roles: Role[] = [
   {
     slug: "rampy",
@@ -19,9 +15,8 @@ export const roles: Role[] = [
     contributions: [
       "Set up an agentic engineering workspace that preserves context and enables coordinated parallel work.",
     ],
-    attribution:
-      "Recently started. Only work that is finished and cleared for publication appears here.",
-    stack: ["Applied AI", "Agentic systems"],
+    attribution: "Agentic engineering and coordinated parallel work.",
+    stack: technologyNames(["Applied AI", "Agentic systems"]),
   },
   {
     slug: "teamcubation",
@@ -41,11 +36,13 @@ export const roles: Role[] = [
       "Built Java/Spring Boot and TypeScript/Node.js/NestJS microservices to ingest, normalise and process promotions from merchants, financial entities and providers, adapting contracts per integration.",
       "Implemented an event-driven, serverless flow with Amazon S3, SQS and a Python/FastAPI Lambda using ordered processing strategies.",
       "Designed an in-product RAG and agentic assistant for merchant owners with Python, LangChain, LangGraph, PostgreSQL/pgvector and guardrails, retrieving the banking promotions tied to each merchant to ground the model's answers.",
+      "Built a project-specific agentic engineering environment to preserve context across integration repositories and support consistent feature delivery.",
+      "Applied hexagonal architecture in selected microservices and layered architecture in other components.",
       "Built Python and Node.js tooling to replay bulk loads safely against isolated local databases, reconcile results and surface failed promotions and edge cases before release.",
     ],
     attribution:
-      "A key engineering team member with substantial ownership of these components, not their sole author. Worked on containerised services in Docker and Kubernetes environments as a developer — configuration, observability and diagnosis — not as cluster administrator or infrastructure owner.",
-    stack: [
+      "Key engineering contributor with substantial component ownership within the team. Application development, configuration, observability and diagnostics in Docker and Kubernetes environments.",
+    stack: technologyNames([
       "Java",
       "Spring Boot",
       "Spring WebFlux",
@@ -68,7 +65,7 @@ export const roles: Role[] = [
       "Kubernetes",
       "OpenTelemetry",
       "GitLab CI/CD",
-    ],
+    ]),
     metrics: [
       {
         value: "20M+",
@@ -78,7 +75,7 @@ export const roles: Role[] = [
       },
       {
         value: "~90,000/s",
-        label: "peak throughput",
+        label: "processing throughput",
         qualifier: "Measured during production execution with real data across the full 20M+ load.",
       },
       {
@@ -104,9 +101,8 @@ export const roles: Role[] = [
       "Built MCP-, Claude- and LLM-powered pipelines and agents that research, generate and publish content end to end.",
       "Developed online stores, WordPress solutions, APIs and custom full-stack integrations, with Python and Node.js tooling for automation, bulk processing and data analysis under spec-driven development.",
     ],
-    attribution:
-      "Client count and client names are not published, because that history was never reconstructed precisely enough to state.",
-    stack: [
+    attribution: "Independent delivery for individual client projects.",
+    stack: technologyNames([
       "Python",
       "Node.js",
       "TypeScript",
@@ -114,7 +110,7 @@ export const roles: Role[] = [
       "Model Context Protocol",
       "REST APIs",
       "WordPress",
-    ],
+    ]),
     metrics: [
       {
         value: "USD 10,000+",
@@ -145,12 +141,13 @@ export const roles: Role[] = [
       "Held a principal design, architecture and implementation role with product-engineering scope.",
       "Built a responsive Next.js and TypeScript frontend whose only interface was a Python/FastAPI BFF, which defined the shared contract and decoupled the web experience from every downstream service.",
       "Personally integrated the 10+ systems within SGA's scope through Java/Spring Boot or TypeScript/Node.js/NestJS microservices, each conforming to that contract and encapsulating its own internal logic; legacy PHP applications were brought in through dedicated integrations.",
+      "Built a personal cross-system agentic engineering environment to preserve context and work in parallel across independent integration repositories.",
       "Standardised onboarding for new systems with reusable structures and filters.",
       "Automated bulk loads and data validation with Python, and implemented LDAP authentication and a complete audit trail with exportable reports.",
     ],
     attribution:
-      "No public links exist: SGA administers back offices, personal data and internal company processes.",
-    stack: [
+      "Principal design and implementation responsibility across the integrations delivered for SGA.",
+    stack: technologyNames([
       "Python",
       "FastAPI",
       "Next.js",
@@ -166,7 +163,7 @@ export const roles: Role[] = [
       "Prometheus",
       "Grafana",
       "GitLab CI/CD",
-    ],
+    ]),
     metrics: [
       {
         value: "10+",

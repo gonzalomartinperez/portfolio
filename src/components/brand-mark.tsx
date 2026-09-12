@@ -36,6 +36,13 @@ const localMarks = new Set([
   "langgraph",
   "modelcontextprotocol",
   "openapi",
+  "python",
+  "typescript",
+  "nodedotjs",
+  "springboot",
+  "slack",
+  "discord",
+  "testinglibrary",
 ]);
 
 export function BrandMark({ name, size = 20 }: { name: string; size?: number }) {

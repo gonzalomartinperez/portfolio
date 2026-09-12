@@ -2,7 +2,7 @@
 
 Selected original SVGs from [Devicon](https://github.com/devicons/devicon), revision `7330accdbc47e2dc0c19789a48533c4a3c50fe58`, are stored in this directory. Individual trademarks belong to their respective owners; they identify technologies used in the portfolio and do not imply endorsement. Original artwork, colours and proportions are retained. The white backing is part of the portfolio layout, not an alteration to the mark.
 
-LangGraph, Model Context Protocol and OpenAPI glyphs come from [Simple Icons](https://github.com/simple-icons/simple-icons), downloaded 2026-09-12. Simple Icons is CC0; individual brand rights remain with the owners. See its [disclaimer](https://github.com/simple-icons/simple-icons#disclaimer). Existing sprite sources and policies remain recorded in the repository's brand documentation.
+LangGraph, Model Context Protocol, OpenAPI, Discord and Testing Library glyphs come from [Simple Icons](https://github.com/simple-icons/simple-icons), downloaded 2026-09-12. Simple Icons is CC0; individual brand rights remain with the owners. See its [disclaimer](https://github.com/simple-icons/simple-icons#disclaimer). The older `/brands.svg` sprite is retained from the initial portfolio implementation. Its exact source revision was not recorded; this inventory does not claim to establish provenance for those legacy paths. Brand-policy research is recorded separately in the repository and is not a substitute for asset provenance.
 
 ## Devicon license
 
@@ -52,4 +52,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - `langgraph.svg`: [source](https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/langgraph.svg)
 - `modelcontextprotocol.svg`: [source](https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/modelcontextprotocol.svg)
 - `openapi.svg`: [source](https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/openapiinitiative.svg)
-
+- `python.svg`: [source](https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/python/python-original.svg)
+- `typescript.svg`: [source](https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/typescript/typescript-original.svg)
+- `nodedotjs.svg`: [source](https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/nodejs/nodejs-original.svg)
+- `springboot.svg`: [source](https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/spring/spring-original.svg)
+- `slack.svg`: [source](https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/slack/slack-original.svg)
+- `discord.svg`: [source](https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/discord.svg)
+- `testinglibrary.svg`: [source](https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/testinglibrary.svg)

@@ -11,21 +11,13 @@ export const profile = {
   availability: "Open to remote roles, available immediately",
 
   /** The five-second message. Kept to one clause per idea. */
-  headline: "I build production systems, and the AI that runs inside them.",
+  headline: "I build software that connects products, systems and AI.",
 
   intro:
-    "I'm an AI Software Engineer. I take a problem from the interface down to the data and own " +
-    "the whole path — product interfaces, BFFs, event-driven microservices — and I build " +
-    "retrieval and agentic systems to the same standard: contracts, tests, guardrails, " +
-    "observability. Give me the part of the system nobody wants to touch; that is the part I " +
-    "do best.",
+    "From product interfaces and backend services to retrieval and agents, I turn complex requirements into working applications.",
 
   summary:
-    "I have spent my career turning complicated domains into software that holds up in " +
-    "production: a promotions platform at fintech scale, a permissions back office spanning an " +
-    "enterprise's internal systems, and an exam platform five institutions now depend on. In " +
-    "each one I was trusted with the architecture, not just the tickets. Applied AI runs " +
-    "through that work rather than sitting beside it.",
+    "My work connects fintech platforms, enterprise systems and applied AI. I build interfaces, BFFs, microservices and data workflows, with experience delivering a merchant RAG assistant and a production exam platform used by five institutions.",
 
   /**
    * Retained because structured forms elsewhere ask for it, and deliberately not published:

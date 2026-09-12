@@ -1,5 +1,9 @@
 .mark {
   flex: none;
+  background: #fff;
+  border-radius: 4px;
+  padding: 3px;
+  box-sizing: content-box;
 }
 .original {
   flex: none;
