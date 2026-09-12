@@ -52,6 +52,10 @@ unmerged work. Dependabot's own standard branch names are reserved for its bot P
 
 ## Code review rules
 
+For code changes and reviews, read [the code-quality standard](docs/code-quality.md).
+Prefer self-explanatory code and necessary comments; preserve meaningful API docs,
+compatibility rationale, type annotations and tool directives.
+
 Flag behavior that violates acceptance criteria, exposes server-only data to the
 client, adds unneeded client-side JavaScript, or makes keyboard interactions unusable.
 Require reproducible evidence for defects; separate blockers from suggestions.
