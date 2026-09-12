@@ -1,0 +1,52 @@
+.split {
+  display: grid;
+  gap: clamp(var(--space-6), 5vw, var(--space-8));
+  grid-template-columns: 1fr;
+}
+
+@media (width >= 52rem) {
+  .split {
+    align-items: start;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 18rem);
+  }
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.portrait {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+.portrait img {
+  filter: var(--portrait-filter);
+  height: auto;
+  width: 100%;
+}
+
+.portrait::after {
+  background:
+    linear-gradient(180deg, transparent 48%, var(--portrait-veil) 100%),
+    linear-gradient(140deg, var(--accent-wash) 0%, transparent 55%);
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.facts dd {
+  color: var(--text-primary);
+  font-size: var(--text-small);
+  margin: var(--space-1) 0 0;
+}
