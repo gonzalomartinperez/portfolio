@@ -1,0 +1,107 @@
+.degree {
+  background: var(--surface-raised);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: clamp(var(--space-5), 4vw, var(--space-7));
+}
+
+.degreeTop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: space-between;
+}
+
+.status {
+  align-items: center;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  display: inline-flex;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--text-label);
+  height: fit-content;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.75rem;
+  text-transform: uppercase;
+}
+
+.columns {
+  display: grid;
+  gap: clamp(var(--space-6), 5vw, var(--space-8));
+  grid-template-columns: 1fr;
+}
+
+@media (width >= 52rem) {
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.courses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.course {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: var(--text-small);
+  padding: var(--space-2) var(--space-3);
+}
+
+.rankings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ranking {
+  border-left: 2px solid var(--line-strong);
+  padding-left: var(--space-4);
+}
+
+.rankingPosition {
+  color: var(--text-primary);
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.rankingSource {
+  color: var(--text-secondary);
+  display: block;
+  font-size: var(--text-small);
+  margin-top: var(--space-1);
+}
+
+.rankingEdition {
+  color: var(--text-muted);
+  display: block;
+  font-size: var(--text-small);
+}
+
+.credential {
+  border-bottom: 1px solid var(--line-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  justify-content: space-between;
+  padding-block: var(--space-4);
+}
+
+.credentialTitle {
+  color: var(--text-primary);
+  font-weight: 550;
+}
+
+.credentialIssuer {
+  color: var(--text-muted);
+  display: block;
+  font-size: var(--text-small);
+}

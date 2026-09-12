@@ -2,14 +2,35 @@
 
 [![CI](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml)
 
-The foundation for a personal portfolio focused on software engineering and applied AI.
+A personal portfolio focused on software engineering and applied AI: seven routes,
+two languages, and two themes.
 
-**Live:** [gonzalomartinperez.com](https://gonzalomartinperez.com) — deployed on
+**Live:** [gonzalomartinperez.com](https://gonzalomartinperez.com) — served from
 Hostinger's managed Node.js hosting, with the domain registered through Cloudflare.
-The starter landing page is online; project case studies and professional content
-will be added separately.
+`main` is the branch connected to hosting; see the
+[deployment guide](docs/deployment.md) for the CI/CD boundary.
 
-[Explore the source](src/app/) · [Technology decisions](docs/technology.md) · [Development workflow](docs/development.md)
+[Explore the source](src/app/) · [Design system](docs/design.md) ·
+[Technology decisions](docs/technology.md) · [Development workflow](docs/development.md)
+
+## What the site contains
+
+| Route | Contents |
+| --- | --- |
+| `/` | Positioning, the hero identity, portrait, selected evidence |
+| `/about` | Professional narrative, how he works, languages, availability |
+| `/work` | Experience and selected projects in one chronology |
+| `/work/filomena` | The flagship product-engineering case study |
+| `/stack` | Technology expertise organised by capability |
+| `/education` | Degree, academic results, and approved public evidence |
+| `/contact` | Contact routes and what he is open to |
+
+English is served unprefixed and Spanish under `/es`, with the same path segments in
+both, so switching language adds or removes the prefix and nothing else. Dark is the
+default and needs no JavaScript; light follows the system preference, and an explicit
+choice from the header toggle overrides either.
+[The specification](docs/specs/portfolio-initial-release.md) holds the scope and
+acceptance criteria.
 
 ## Engineering at a glance
 
@@ -18,6 +39,9 @@ will be added separately.
 | Application | Next.js App Router, React, and Server Components by default |
 | Type safety | TypeScript 7.0.2 with strict checking |
 | Runtime | Node.js 24 LTS and Next.js 16 Active LTS |
+| Interface | Plain CSS with design tokens; client JavaScript only for the theme toggle and the hero |
+| Languages | English and Spanish from one typed copy contract, so a missing translation fails the build |
+| Hero identity | Hand-written WebGL2 point cloud, no 3D dependency, over a server-rendered still |
 | Code quality | Biome linting and formatting, locked dependency installation |
 | Delivery | Protected pull requests, GitHub Actions CI, native Hostinger CD from `main` |
 | AI-assisted development | Shared Claude Code and Codex guidance, specifications, isolated worktrees |
@@ -28,7 +52,12 @@ the compatibility decision and fallback.
 
 ## What this repository demonstrates
 
-- **Deliberate scope:** a small foundation without unused services or speculative layers.
+- **Deliberate scope:** no CMS, database, analytics, or speculative layers — static routes,
+  typed content, and client boundaries only where interaction actually requires them.
+- **Decisions written down:** the [design system](docs/design.md),
+  [specification](docs/specs/portfolio-initial-release.md), and
+  [research note](docs/research/portfolio-2026-09-12.md) record what was chosen,
+  what was rejected, and where the evidence is weak.
 - **Traceable changes:** task branches integrate into `develop`; only `develop` can promote to `main`.
 - **Verifiable quality:** [CI runs](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml)
   expose lint, type-check, and production-build results.
@@ -36,8 +65,11 @@ the compatibility decision and fallback.
   with clear ownership, review, and integration boundaries.
 
 These are repository practices, not claims about completed client projects or
-application AI features. Behavioral tests will accompany future functionality;
-the current checks do not establish security, accessibility, or deployment success.
+application AI features. The current checks do not establish security, accessibility,
+or deployment success. `next lint` was removed in Next.js 16, so the `jsx-a11y` rules
+no longer run; contrast, keyboard access, and both themes belong to review and browser
+testing instead. Results are recorded in
+[the verification log](docs/verification/portfolio-initial-release.md).
 
 ## Run locally
 
@@ -68,17 +100,22 @@ On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 
 | Location | Contents |
 | --- | --- |
-| [src/app](src/app/) | Homepage, layout, metadata, and styles |
+| [src/app](src/app/) | Routes, layouts, metadata, and global styles |
+| [src/components](src/components/) | Shell, identity mark, theme toggle, language switcher, hero |
+| [src/content](src/content/) | Typed per-locale content and the shared interface-copy contract |
+| [Design system](docs/design.md) | Direction, tokens for both themes, typography, motion, the hero field |
+| [Initial release spec](docs/specs/portfolio-initial-release.md) | Scope, acceptance criteria, and decisions |
+| [Research note](docs/research/portfolio-2026-09-12.md) | Sources behind those decisions, including the weak ones |
 | [Development guide](docs/development.md) | Code conventions, SDD, branches, agents, and review |
 | [Code-quality standard](docs/code-quality.md) | Readable code, necessary comments, useful API documentation |
 | [Technology guide](docs/technology.md) | Version policy, compatibility, and maintenance |
 | [Deployment guide](docs/deployment.md) | Hostinger setup and the CI/CD boundary |
-| [Specification template](docs/specs/template.md) | Scope, acceptance criteria, decisions, and verification |
 | [AGENTS.md](AGENTS.md) / [CLAUDE.md](CLAUDE.md) | Shared agent contract and Claude entrypoint |
 
-Code, documentation, interface text, and commits use English. Task branches follow
-`type/kebab-case-description` naming and are deleted after integration; `main`
-and `develop` remain protected. See the development guide before contributing.
+Code, documentation, and commit messages are English; the published interface ships in
+English and Spanish. Task branches follow `type/kebab-case-description` naming and are
+deleted after integration; `main` and `develop` remain protected. See the development
+guide before contributing.
 
 ## Rights
 
