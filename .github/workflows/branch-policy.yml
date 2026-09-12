@@ -1,0 +1,38 @@
+name: Branch policy
+
+on:
+  pull_request_target:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    name: Branch policy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      # Trusted base-branch workflow only. Never check out or run PR source here.
+      - name: Validate pull request route
+        env:
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
+          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          node <<'NODE'
+          const { BASE_BRANCH, HEAD_BRANCH, HEAD_REPOSITORY, REPOSITORY, PR_AUTHOR } = process.env;
+          const release = BASE_BRANCH === 'main' && HEAD_BRANCH === 'develop'
+            && HEAD_REPOSITORY === REPOSITORY;
+          const standard = /^(feat|fix|chore|docs|refactor|perf|test|ci|build|revert)\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(HEAD_BRANCH ?? '');
+          const dependabot = PR_AUTHOR === 'dependabot[bot]' && HEAD_REPOSITORY === REPOSITORY
+            && /^dependabot\/(npm_and_yarn|github_actions)\/[a-zA-Z0-9._/-]+$/.test(HEAD_BRANCH ?? '');
+          const task = BASE_BRANCH === 'develop' && (standard || dependabot);
+          if (!release && !task) {
+            throw new Error('Use a standard type/kebab-case task PR into develop, then same-repository develop into main.');
+          }
+          console.log('Pull request route accepted.');
+          NODE
