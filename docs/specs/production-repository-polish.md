@@ -1,6 +1,6 @@
 # Production repository polish
 
-Status: in-progress
+Status: done
 
 ## Outcome and scope
 
@@ -33,4 +33,10 @@ configuration unchanged: no stable warning-free route was verified on this host.
 Local `npm run check`, production smoke, all six skill validations, YAML parsing
 and independent diff review passed. The existing live URL returned HTTP 200 with
 Hostinger and Cloudflare headers; that does not establish deployment of this change.
-Protected CI integration remains pending before marking the specification done.
+All required jobs passed on implementation commit `7fde671` in
+[CI run 34675997664](https://github.com/gonzalomartinperez/portfolio/actions/runs/34675997664),
+including the four repository tests and the GLIBC 2.28 build and smoke test.
+AC-1 through AC-5 are covered by the documented live check, workflow review,
+repository tests, skill validation and inspected loader behavior. Expected fallback
+warnings remain visible by design; removing them safely is an upstream/host follow-up.
+Protected checks must also pass for this verification record before promotion.
