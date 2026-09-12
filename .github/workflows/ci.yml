@@ -39,6 +39,10 @@ jobs:
         run: npm run test:smoke
       - name: Test the rendered site
         run: npm run test:rendered
+      - name: Install browser test runtime
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Verify interactions and accessibility
+        run: npm run test:browser
       - name: Verify tracked sources remain unchanged
         run: git diff --exit-code
 
