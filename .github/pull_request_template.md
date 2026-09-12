@@ -10,6 +10,7 @@ Describe the change and why it is needed.
 - [ ] Production smoke test passes for application, dependency, or build changes.
 - [ ] UI changes were checked on mobile and desktop, or this is not a UI change.
 - [ ] No secrets, private documents, or generated builds are included.
+- [ ] Code and documentation follow `docs/code-quality.md`; comments add necessary context.
 
 ## Evidence and limits
 

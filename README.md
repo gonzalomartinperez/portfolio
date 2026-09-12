@@ -70,6 +70,7 @@ On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 | --- | --- |
 | [src/app](src/app/) | Homepage, layout, metadata, and styles |
 | [Development guide](docs/development.md) | Code conventions, SDD, branches, agents, and review |
+| [Code-quality standard](docs/code-quality.md) | Readable code, necessary comments, useful API documentation |
 | [Technology guide](docs/technology.md) | Version policy, compatibility, and maintenance |
 | [Deployment guide](docs/deployment.md) | Hostinger setup and the CI/CD boundary |
 | [Specification template](docs/specs/template.md) | Scope, acceptance criteria, decisions, and verification |
