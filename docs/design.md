@@ -2,251 +2,102 @@
 
 [Back to overview](../README.md)
 
-Dark-first, editorial, technical. Established 2026-09-12 for
-[the initial release](specs/portfolio-initial-release.md).
+An editorial portfolio with one immersive interaction: a personal particle identity that opens
+into the technology catalogue. The [redesign specification](specs/portfolio-redesign.md) supersedes
+the original release's Vertex identity and hand-written WebGL engine.
 
 ## Direction
 
-Three directions were explored before committing.
+The owner's Morpho reference informs the fine square grain, circular shell, generous black space
+and camera-led expansion. Code, portrait mark, typography and professional content are original;
+no Morpho branding or implementation is reused. Fidelity is reviewed at agreed scroll states,
+not claimed as pixel equality between two continuously animated scenes.
 
-| Direction | Idea | Why not |
+The page must explain what Gonzalo builds before asking visitors to explore motion. The hero text
+and calls to action sit above the compact sphere. Native scrolling reveals depth-layered marks,
+then returns to ordinary document flow. The complete catalogue remains available independently
+of the animation.
+
+## Colour and typography
+
+The editable token authority is [globals.css](../src/app/globals.css). Dark is the default;
+light is an explicit, persistent choice applied before first paint when storage is available.
+Blocked storage does not prevent changing the current theme.
+
+| Role | Dark | Light |
 | --- | --- | --- |
-| **Instrument** | Telemetry aesthetic: dense readouts, thin rules, monospace throughout | Reads as a dashboard; makes a person look like a status page |
-| **Blueprint** | Grid paper, isometric system maps, diagram-led | Expensive to execute well, and slides into looking like a deck |
-| **Constellation** | Black canvas, editorial type, generous space, one central particle identity, restrained cyan | **Selected** |
+| Page | `#000000` | `#fafafb` |
+| Main text | `#e8edf4` | `#0f141b` |
+| Supporting text | `#9aa6b8` | `#48546a` |
+| Muted text | `#8a95a8` | `#5c687b` |
+| Accent | `#4cd6ff` | `#0a6e9b` |
+| Control border | `#586775` | `#7f8a99` |
 
-**Constellation** was selected because the portfolio must carry two messages at once: product
-judgement and engineering depth. Editorial composition and a single confident visual anchor do
-that better than either ornament or density. Blueprint's diagramming discipline is retained, but
-only inside the Filomena case study where an architecture drawing genuinely earns its place.
-
-The result should feel deliberate and quiet, with one moment of motion — not a template with
-gradients and cards.
-
-## Reference and influence
-
-The owner named [morpho.org](https://morpho.org) as the reference for how the page should feel.
-What was taken from it are qualities, reached by this repository's own implementation:
-
-- a near-black ground rather than the earlier lighter one — lifted to `#08090c` rather than pure black, because the reference itself sits at `#121212` and long-form case-study text reads better off an absolute black;
-- a centred hero composition instead of a split one;
-- light-weight display type — headings at 500, the hero name at 400;
-- a dense, rim-lit particle **shell** rather than a diffuse volume;
-- the identity mark at the core of the sphere;
-- an evidence strip closing the hero.
-
-Deliberately not adopted: Morpho's logo, wording, colour, typeface and implementation. The mark
-is the original **Vertex** glyph, the accent is cyan, and the type is Inter Tight / Inter /
-JetBrains Mono. This is inspiration from a public reference, not reuse of its assets.
-
-## Surfaces and colour
-
-Both themes ship. Dark is the default for every visitor regardless of the system preference,
-because the identity is built on luminous points against a near-black ground and a light
-first impression is not the site the design is for. Light is opt-in: `:root[data-theme="light"]`
-applies only once the toggle has stored an explicit choice. Each theme declares its own
-`color-scheme`, so form controls and scrollbars follow.
-
-A small inline script in the root layout — one layout shared by both language trees — applies a
-stored choice before first paint, so a visitor who picked the non-default theme never sees the
-other one flash. It writes nothing when there is
-no stored choice, because the media query already handles that visitor correctly. The choice
-persists in `localStorage` under `theme`, inside a `try`/`catch`: blocked storage costs only
-persistence, never the theme itself.
-
-| Token | Dark | Light | Use |
-| --- | --- | --- | --- |
-| `--surface-void` | `#08090c` | `#fafafb` | Page background |
-| `--surface-base` | `#0d0f14` | `#f1f4f8` | Sections that need separation from the void |
-| `--surface-raised` | `#12151b` | `#ffffff` | Cards, quotes, code surfaces |
-| `--line-subtle` | `#1b2430` | `#e6e9ee` | Decorative rules and dividers |
-| `--line-strong` | `#2a3542` | `#d5dae2` | Card and section borders |
-| `--line-control` | `#586775` | `#7f8a99` | Borders that identify an interactive control |
-| `--text-primary` | `#e8edf4` | `#0f141b` | Headings and body |
-| `--text-secondary` | `#9aa6b8` | `#48546a` | Supporting prose |
-| `--text-muted` | `#78849a` | `#5c687b` | Labels, metadata, captions |
-| `--accent` | `#4cd6ff` | `#0a6e9b` | Links, focus, the identity mark, particle highlights |
-| `--accent-deep` | `#2ba8cc` | `#075271` | Hover states |
-| `--accent-wash` | accent at 12% | accent at 10% | Tinted backgrounds behind accent content |
-| `--field-near` | `#a5ecff` | `#0a6e9b` | Near points of the hero field |
-| `--field-far` | `#4a6b86` | `#aab5c4` | Far points of the hero field |
-| `--field-additive` | `1` | `0` | Selects additive or alpha blending in the field |
-
-A short group of tokens carries the per-theme treatment of images and translucent chrome:
-`--portrait-filter`, `--portrait-veil`, `--header-veil` and `--toggle-veil`.
-
-Measured light-theme contrast on `--surface-void` `#fafafb`: primary 17.7:1, secondary 7.3:1,
-muted 5.4:1, accent 5.4:1; white on the accent button 5.7:1; `--line-control` about 3.0:1.
-Measured dark-theme contrast on `#000000`: primary 17.1:1 or better, secondary 8.2:1,
-muted 5.4:1, accent 11.9:1.
-
-`--line-control` is the only border that identifies a control and is held to the 3:1 non-text
-minimum in both themes. `--line-subtle` and `--line-strong` are decorative and are never the sole
-indicator of a control. Accent is never the only carrier of meaning — links are underlined in prose.
-
-## Typography
-
-Two variable families, self-hosted by `next/font`, Latin subset only.
-
-| Role | Family | Treatment |
-| --- | --- | --- |
-| Display and headings | Inter Tight | Weight 500, `-0.03em` tracking, 1.05–1.15 line height |
-| Body and interface | Inter | 1.6 line height, max 68 characters per line |
-| Labels, metrics, metadata | JetBrains Mono | `0.08em` tracking, uppercase for eyebrows |
-
-Headings sit at 500 and the hero name at 400. Light display weights are what keep a large type
-scale from shouting, and weight is not what has to carry the technical register.
-
-The monospace face does that instead: eyebrows, figures and metadata. That is what makes the page
-read as engineering without resorting to ornament, and it keeps display type clean.
-
-Scale, fluid between 360 px and 1440 px viewports:
-
-| Step | Size |
-| --- | --- |
-| `--text-display` | `clamp(2.75rem, 1.6rem + 5vw, 5.5rem)` |
-| `--text-h1` | `clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem)` |
-| `--text-h2` | `clamp(1.625rem, 1.2rem + 1.8vw, 2.375rem)` |
-| `--text-h3` | `clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem)` |
-| `--text-body` | `1.0625rem` |
-| `--text-small` | `0.9375rem` |
-| `--text-label` | `0.75rem` |
-
-## Space and grid
-
-A 4 px base: `--space-1` 0.25rem through `--space-10` 8rem, with the common steps at
-0.5/0.75/1/1.5/2/3/4/6/8rem.
-
-Content width is `--measure-wide` 72rem for page frames, `--measure-text` 44rem for prose, and
-`--measure-narrow` 34rem for intros. Gutters are `clamp(1.25rem, 5vw, 4rem)`.
-
-Breakpoints: 640 px (two-column lists), 960 px (navigation expands), 1280 px (maximum gutters).
-Layouts are CSS Grid with `minmax` and `auto-fit`; no layout depends on a media query alone.
-
-## Components and states
-
-Every interactive element defines rest, hover, focus-visible, active and disabled. Focus is a
-2 px `--accent` outline at 3 px offset, never removed and never replaced by colour alone.
-Minimum pointer target is 24×24 px, with 44×44 px in the mobile navigation.
-
-- **Button, primary** — accent fill, void text, 1 px transparent border.
-- **Button, secondary** — transparent fill, `--line-control` border, primary text.
-- **Link, prose** — accent text with a 1 px underline at `0.2em` offset; underline thickens on hover.
-- **Card** — `--surface-raised`, 1 px `--line-strong`, 12 px radius. Whole-card links keep the
-  heading as the accessible name and do not nest interactive elements.
-- **Eyebrow** — monospace, uppercase, `--text-muted`, `0.08em` tracking.
-- **Metric** — display figure in primary, unit and qualifier in muted beneath it. A qualifier is
-  mandatory whenever the figure is an estimate or has measurement conditions.
-- **Theme toggle** — a real button with an accessible name that states what pressing it will do.
-  The resolved theme is unknown during server rendering, so the name starts neutral and becomes
-  specific after mount; the markup is identical on both sides of hydration.
-- **Language switcher** — real links, one per language, with `hreflang`, `lang` and `aria-current`
-  on the active one. Links rather than a control, so switching works without JavaScript and each
-  language stays shareable and crawlable.
+Inter Tight carries headings, Inter carries prose, and JetBrains Mono carries short labels.
+Fonts are self-hosted through Next.js. Fluid sizing, an 80rem page frame, 44rem prose measure,
+and wrapping grids support smaller screens and enlarged text. Meaning never depends on colour
+alone. Brand marks keep their own colours and receive a suitable backing when necessary.
 
 ## Identity
 
-An original mark, not a borrowed one. There is no universal AI logo, and no vendor mark is used
-or implied.
+A face-only caricature replaces Vertex in navigation, the favicon and the sphere. During review,
+the owner supplied alternatives and explicitly selected this image instead of the initial
+hand-drawn pixel-art proposal. It is a transparent raster illustration, not a vector graphic.
+The sanitized source lives in `src/assets/avatar.png`; smooth PNG variants and multi-resolution
+ICO outputs are generated reproducibly. Unselected alternatives remain outside this public
+repository. The owner's approved transparent black-sweater portrait appears in the introduction;
+it is an illustrated presentation image, not described as an unaltered photograph.
 
-**Vertex** is a node-graph glyph: five nodes on a 32×32 grid traced by two edges, arranged so the
-path reads as a **G** while remaining a legible graph. It carries the two ideas the positioning
-needs — connected systems and a personal initial — in one form, and it survives to 16 px because
-the outer nodes merge into the stroke rather than disappearing.
+Evaluate the mark at 16, 32, 48 and 96 CSS pixels on both themes: hair silhouette, brows, eyes,
+moustache and chin hair should read without relying on enlarged detail. Resemblance is a visual
+judgement, not something an automated asset test can certify.
 
-- **Static mark** — inline SVG, `currentColor`, used in the header, the footer and `icon.svg`.
-- **Hero treatment** — the same node language expanded into a particle shell, with the mark held
-  at its core.
-- **Still fallback** — one rendered frame of the same geometry, shown when WebGL2, JavaScript or
-  motion is unavailable. It is composed, not degraded: a finished image on its own.
+## Scene architecture and motion
 
-## Pixel portrait
+Three.js `Points`, `BufferGeometry` and custom shaders render one particle cloud. GSAP
+ScrollTrigger coordinates native-scroll progress. A single deferred runtime contains the 3D
+dependencies; other pages do not need them. React handles modes, not per-particle or per-frame
+updates. There is no synthetic scrolling, React Three Fiber or second animation engine.
 
-A 24x30 sprite drawn by hand from the reference photograph, used on the About page beside the
-real portrait and on the 404 page. Colours were sampled from the photograph; the features were
-drawn rather than downsampled, because resampling a photograph at sprite resolution produces
-noise instead of readable pixel art — the blurred background bleeds straight through the hair.
+| Progress | Composition |
+| --- | --- |
+| 0–20% | Compact circular sphere; introductory text leaves gradually |
+| 20–55% | Camera approaches and shell expands beyond the frame; avatar fades |
+| 55–80% | Original-colour technology marks appear at different depths |
+| 80–100% | Marks settle and the complete grouped catalogue becomes the focus |
 
-Runs of identical pixels are merged, so the sprite is 96 rectangles rather than 720 squares. The
-idle bob and the blink are CSS animations on two groups, and both stop under reduced motion. It
-is decorative unless given a label, in which case it becomes an image with an accessible name.
+The reverse scroll retraces the same progression. Pointer displacement eases back with elapsed
+time, not a fixed per-frame step. Mobile uses fewer particles and a shorter scroll interval.
+Pause, reduced motion, unavailable WebGL and context loss preserve readable content. Rendering
+stops when offscreen or hidden and resources are released on navigation.
 
-## Motion
+The deferred scene closure has a **250 KiB gzip** budget, measured from Webpack's actual chunk
+graph, including extracted shared chunks. This is a transfer budget, not an FPS or Web Vitals
+claim. Deterministic visual inspection uses `?sceneProgress=0..1&sceneTime=0`.
 
-Motion explains change; it never announces itself.
+## Content and catalogue
 
-| Class | Duration | Easing |
-| --- | --- | --- |
-| Micro — hover, focus, colour | 140 ms | `cubic-bezier(0.4, 0, 0.2, 1)` |
-| Transition — reveal, expand | 320 ms | `cubic-bezier(0.16, 1, 0.3, 1)` |
-| Ambient — the particle field | continuous | frame-rate independent |
+The typed technology catalogue is the single editable inventory. Stable IDs connect names,
+categories, approved experience references and local logo resources. Concepts such as RAG and
+hexagonal architecture have descriptive original illustrations and text labels, not invented
+brand logos. The same visual fallback covers tools without a supplied official mark. Applied experience and developing
+knowledge are distinguished without subjective proficiency percentages.
 
-Entrances move at most 12 px and never delay content past first paint. Nothing animates
-`width`, `height`, `top` or `left`; transform and opacity only.
+English and Spanish explain contributions and outcomes naturally while preserving dates,
+attribution and metric conditions. An internal project does not require a public repository to
+be discussed, but private documents, employer internals and unsupported ownership claims do not
+belong in public copy.
 
-Under `prefers-reduced-motion: reduce`, transitions collapse to 1 ms and the particle field is not
-mounted at all: the server-rendered still stays as it is, and no WebGL context is ever created.
-Reduced motion means no motion here, not slower motion.
+## Interaction and accessibility
 
-## Particle field specification
+- Real links preserve navigation, language switching and image access without JavaScript.
+- Visible keyboard focus and a skip link support navigation; mobile navigation wraps.
+- The decorative canvas does not enter the accessibility tree. Pause is a labelled button.
+- Search and category filters retain a complete server-rendered default and a reset state.
+- Filomena's gallery groups screens by user flow. A native dialog supports Escape, arrow keys
+  and focus restoration; images retain their aspect ratio.
+- Metric qualifiers remain adjacent to their numbers. Disclosure sections do not remove
+  contributions from the server-rendered document.
 
-One hero element, one route. Hand-written WebGL2, no dependency. The fallback is the
-server-rendered still, not a second animation.
-
-**Composition.** Points sit on a thin spherical shell — radius jittered between 0.965 and 1.0 —
-placed by a Fibonacci distribution and projected with perspective. The rim is geometric rather
-than painted: an even surface distribution projects densest at the silhouette, so the shell reads
-as a rim-lit sphere with no brightness trick. Alpha therefore carries only a gentle depth term and
-is deliberately kept near-uniform: driving brightness hard by depth would light the centre of the
-disc, where the near face projects, instead of the rim. The radius jitter breaks up the moiré a
-mathematically perfect shell would show.
-The field rotates slowly on one axis, with a small per-point drift so it breathes rather than
-turning rigidly. The identity mark sits at the core of the sphere.
-
-**Counts.** 9,000 points on desktop and 3,500 below 40 rem. The server-rendered still draws 400,
-which is a payload decision rather than a visual one, because that SVG is inlined into the HTML.
-
-**Theme.** The field follows the active theme. Colours come from `--field-near` and `--field-far`,
-read from computed style and re-read whenever the theme changes — by system preference or by the
-toggle writing `data-theme`. Blending follows `--field-additive`: additive on dark, where points
-accumulate into a glow, and ordinary alpha blending on light, where additive would wash out
-against the pale ground.
-
-**Interaction.** Pointer proximity displaces points along the vector away from the cursor. The
-displacement is computed in aspect-corrected clip space so the falloff stays circular, with an
-influence radius of 0.42 of that space. The CPU eases two uniforms rather than per-point data —
-engagement faster than release — so the field settles instead of snapping and pointer interaction
-costs nothing per point. Touch taps produce the same displacement briefly and then recover; the
-field is never required to read the page.
-
-**Budget and conduct.**
-
-- Under 30 KB gzipped of added client JavaScript.
-- The stage reserves a 1/1 box before anything mounts, so a late canvas cannot shift layout.
-- One `drawArrays` call per frame; the live field creates no DOM nodes.
-- Device pixel ratio capped at 2, and at 1.5 below 640 px.
-- Driven by `requestAnimationFrame` with a clamped delta; never by React state. React state changes
-  only when the mode changes.
-- Paused by `IntersectionObserver` when off-screen and by `visibilitychange` when the tab hides.
-- `webglcontextlost` calls `preventDefault()` — normative for restoration — and
-  `webglcontextrestored` rebuilds GPU resources.
-- A null context, a failed shader link or a `prefers-reduced-motion` preference leaves the still in
-  place without an error in the console.
-- Unmount deletes buffers, programs and the vertex array, cancels the frame, removes every listener
-  and releases the context.
-
-**Still fallback.** The server-rendered SVG is built from the same geometry as the live field, so
-it is a still of the real thing rather than a different picture. Generation is deterministic, so
-server and client agree exactly. Each point mixes the two field colours in CSS, so the still
-follows the theme as well. It is the visible layer until the field has produced a frame, and it
-stays visible when WebGL2 is unavailable, when the program fails to build, and under reduced
-motion. The two layers cross-fade once, and pausing afterwards freezes the canvas on its last
-frame rather than swapping the still back in.
-
-**Accessibility.** The canvas is `aria-hidden` with no `tabindex`, because it conveys nothing a
-sighted visitor gets. A visible, keyboard-operable pause control sits beside it: WCAG 2.2
-SC 2.2.2 names animation as moving content and grants no decorative exemption, and
-`prefers-reduced-motion` is not a documented technique for that criterion. The control is a real
-button, labelled, with its state exposed, and it is only rendered when there is motion to pause.
-
-Rationale and sources: [the research note](research/portfolio-2026-09-12.md).
+Browser/axe checks complement, rather than replace, visual and keyboard review. Record measured
+results and any gaps in the redesign verification report before declaring acceptance complete.

@@ -19,6 +19,7 @@
 }
 
 .brand {
+  min-width: 0;
   align-items: center;
   color: var(--accent);
   display: inline-flex;
@@ -27,6 +28,7 @@
 }
 
 .brandText {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   line-height: 1.15;
@@ -69,7 +71,7 @@
   color: var(--text-secondary);
   display: inline-flex;
   font-size: var(--text-small);
-  min-height: 2.25rem;
+  min-height: 2.75rem;
   padding: var(--space-2) var(--space-3);
   place-items: center;
   text-decoration: none;
@@ -94,10 +96,6 @@
     row-gap: var(--space-1);
   }
 
-  /* Keep the language and theme controls beside the brand, and give the navigation its own
-     row, so the header is two rows rather than three. */
-  /* Brand and controls share the first row; the navigation takes the second on its own, so
-     neither group is forced wider than the viewport. */
   .controls {
     order: 1;
   }
@@ -109,16 +107,9 @@
     width: 100%;
   }
 
-  /* One row that scrolls if it must, rather than an uneven wrap. */
   .list {
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .list::-webkit-scrollbar {
-    display: none;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   .link {
@@ -132,7 +123,19 @@
 }
 
 @media (width < 26rem) {
+  .brand {
+    flex: 1 1 10rem;
+  }
+  .brandName {
+    font-size: 0.8125rem;
+  }
+  .controls {
+    gap: var(--space-2);
+  }
+  .header {
+    position: relative;
+  }
   .link {
-    font-size: var(--text-label);
+    font-size: 0.8125rem;
   }
 }

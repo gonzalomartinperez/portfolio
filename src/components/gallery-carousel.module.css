@@ -1,94 +1,122 @@
-.carousel {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.track {
-  border-radius: var(--radius-md);
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-}
-
-.rail {
+.gallery {
   display: grid;
   gap: var(--space-4);
-  grid-auto-columns: 100%;
-  grid-auto-flow: column;
 }
-
-.track:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-}
-
-.slide {
+.filters {
+  border: 0;
+  padding: 0;
+  min-width: 0;
   display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  scroll-snap-align: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
 }
-
-.image {
-  background: var(--surface-raised);
+.filter,
+.control {
+  font: inherit;
+  font-size: var(--text-small);
+  color: var(--text-primary);
+  background: var(--surface-base);
+  border: 1px solid var(--line-control);
+  border-radius: 999px;
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+}
+.filter[aria-pressed="true"] {
+  color: var(--surface-void);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.filter:hover,
+.control:hover {
+  border-color: var(--accent);
+}
+.count {
+  font-size: var(--text-label);
+  font-family: var(--font-mono), monospace;
+  color: var(--text-muted);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6) var(--space-5);
+}
+.figure {
+  margin: 0;
+}
+.enlarge {
+  display: block;
+  position: relative;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-md);
-  height: auto;
+  overflow: hidden;
+}
+.image {
   width: 100%;
+  height: auto;
+  transition: transform var(--duration-transition) var(--ease-out);
 }
-
-.caption {
-  color: var(--text-muted);
-  font-size: var(--text-small);
-  line-height: 1.5;
-  min-height: 3em;
+.enlarge:hover .image {
+  transform: scale(1.02);
 }
-
-.controls {
-  align-items: center;
-  display: flex;
-  gap: var(--space-4);
-}
-
-.button {
-  align-items: center;
-  background: transparent;
-  border: 1px solid var(--line-control);
-  border-radius: var(--radius-sm);
+.enlargeHint {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--surface-void);
   color: var(--text-primary);
-  cursor: pointer;
-  display: inline-flex;
-  font-size: 1rem;
-  justify-content: center;
-  min-block-size: 2.5rem;
-  min-inline-size: 2.75rem;
-  transition:
-    border-color var(--duration-micro) var(--ease-standard),
-    color var(--duration-micro) var(--ease-standard);
 }
-
-.button:hover:not(:disabled) {
-  border-color: var(--accent);
-  color: var(--accent);
+.caption {
+  margin-top: var(--space-3);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
-
-.button:disabled {
-  color: var(--text-muted);
-  cursor: default;
-  opacity: 0.45;
+.dialog {
+  margin: auto;
+  padding: clamp(1rem, 3vw, 2rem);
+  background: var(--surface-void);
+  color: var(--text-primary);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  width: min(96vw, 100rem);
+  max-height: 94svh;
 }
-
-.counter {
-  color: var(--text-muted);
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: var(--text-label);
-  letter-spacing: 0.06em;
+.dialog::backdrop {
+  background: rgb(0 0 0 / 88%);
+  backdrop-filter: blur(8px);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .track {
-    scroll-behavior: auto;
+.toolbar,
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.toolbar {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-small);
+}
+.navigation {
+  margin-top: var(--space-5);
+}
+.fullFigure {
+  margin: 0;
+}
+.fullImage {
+  width: 100%;
+  height: auto;
+  max-height: 65svh;
+  object-fit: contain;
+}
+@media (width < 42rem) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

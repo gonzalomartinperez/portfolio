@@ -1,3 +1,4 @@
+import { technologyNames } from "../technologies";
 import type { EvidenceLink, Metric, Project } from "../types";
 
 export const filomena: Project = {
@@ -35,7 +36,7 @@ export const filomena: Project = {
       qualifier: "Calificado en la Universidad Nacional del Sur.",
     },
   ],
-  stack: [
+  stack: technologyNames([
     "PHP",
     "Laravel",
     "React",
@@ -47,7 +48,7 @@ export const filomena: Project = {
     "GitHub Actions",
     "Prometheus",
     "Grafana",
-  ],
+  ]),
   links: [
     {
       label: "Caso de estudio",
@@ -95,10 +96,7 @@ export const filomenaCaseStudy = {
         "se degradaba bajo carga concurrente, la toma de exámenes era secuencial, el control de " +
         "acceso se aplicaba de forma inconsistente y sumar una institución implicaba escribir " +
         "código.",
-      "No había monitoreo, así que los problemas aparecían como reportes de personas que " +
-        "estaban rindiendo un examen. Para una aplicación donde una respuesta lenta durante una " +
-        "evaluación cronometrada es un problema académico y no solo técnico, esa era la " +
-        "restricción que más pesaba.",
+      "La plataforma original carecía de monitoreo proactivo. La reconstrucción incorporó visibilidad sobre el rendimiento de la aplicación y los servicios que sostienen los exámenes.",
     ],
   } satisfies CaseStudySection,
 
@@ -116,32 +114,18 @@ export const filomenaCaseStudy = {
   } satisfies CaseStudySection,
 
   role: {
-    heading: "Mi rol",
+    heading: "Mi contribución",
     body: [
-      "Filomena fue desarrollada por un equipo de tres personas como nuestro proyecto final en " +
-        "la Universidad Nacional del Sur, y el producto es un logro del equipo. Fui el autor y " +
-        "contribuidor principal: arquitectura, backend, frontend, infraestructura, seguridad, " +
-        "observabilidad y coordinación del trabajo.",
-      "Digo contribuidor principal y no autor único de forma deliberada. Los repositorios " +
-        "públicos son una instantánea publicada como evidencia de portfolio — no son un " +
-        "historial de commits que pruebe quién escribió cada línea, y no los presentaría como " +
-        "tal.",
+      "Fui el autor y contribuidor principal de un equipo de tres personas para el proyecto final de la Universidad Nacional del Sur. Mi trabajo abarcó arquitectura, backend, frontend, infraestructura, seguridad, observabilidad y coordinación.",
+      "Trabajamos de forma iterativa con prácticas Agile y Trello, conectando los requisitos institucionales con la implementación de un producto funcional.",
     ],
   } satisfies CaseStudySection,
 
   approach: {
-    heading: "El enfoque",
+    heading: "De monolito a producto API-first",
     body: [
-      "En lugar de refactorizar dentro del monolito, lo separamos en una API REST Laravel y un " +
-        "frontend Next.js, React y TypeScript. La razón decisiva no fue la modernidad: fue que " +
-        "un único contrato de API nos permitió convertir el modelo multi-institución en " +
-        "configuración en vez de código, y le dio a la concurrencia un solo lugar donde ser " +
-        "correcta.",
-      "El trabajo de performance se concentró donde los exámenes realmente tocan el sistema — " +
-        "recuperación de preguntas, estado de la sesión, envío de resultados. Primero vinieron " +
-        "el SQL tuning y el diseño de índices, después la caché Redis, y todo lo que no " +
-        "necesitaba ocurrir durante el request, como generar reportes de resultados, se movió a " +
-        "una cola.",
+      "Separamos el monolito CakePHP y jQuery en una API REST Laravel y un frontend Next.js, React y TypeScript. La API estableció un contrato común para la interfaz y los flujos multi-institución.",
+      "El tuning SQL, los índices, la caché Redis y las colas sostuvieron los flujos de exámenes concurrentes. Prometheus y Grafana permitieron observar el comportamiento de la aplicación y sus servicios en producción.",
     ],
   } satisfies CaseStudySection,
 
@@ -167,10 +151,7 @@ export const filomenaCaseStudy = {
     {
       heading: "La seudonimia como propiedad del modelo de datos",
       body: [
-        "Los estudiantes son seudónimos para los evaluadores. Eso se aplica en el modelo de " +
-          "datos y en la API, y no se esconde en la interfaz, porque una regla de privacidad implementada " +
-          "en una vista es una regla que se filtra la primera vez que alguien agrega un " +
-          "endpoint.",
+        "Los estudiantes son seudónimos para los evaluadores. El modelo de datos y la API aplican esa separación, manteniendo la identidad del estudiante fuera del flujo de corrección del evaluador.",
       ],
     },
     {
@@ -190,11 +171,9 @@ export const filomenaCaseStudy = {
       ],
     },
     {
-      heading: "Monitoreo antes de necesitarlo",
+      heading: "Visibilidad sobre producción",
       body: [
-        "Prometheus y Grafana entraron junto con la reconstrucción y no después del primer " +
-          "incidente, cubriendo la base de datos, Redis, las colas y los workers, con logging " +
-          "estructurado y health checks.",
+        "Prometheus y Grafana brindan visibilidad sobre el comportamiento productivo de la base de datos, Redis, las colas y los workers, con logging estructurado y health checks.",
       ],
     },
   ] satisfies CaseStudySection[],
@@ -229,44 +208,26 @@ export const filomenaCaseStudy = {
   ] satisfies Change[],
 
   delivery: {
-    heading: "Cómo trabajamos",
+    heading: "Entrega y operación",
     body: [
-      "Prácticas ágiles con Trello, desde los requisitos hasta producción. Tres personas, una " +
-        "fecha límite académica e instituciones reales que ya dependían de la versión anterior " +
-        "— así que el trabajo se ordenó por lo que se rompería primero, no por lo que resultaba " +
-        "más interesante.",
-      "Los despliegues corrían sobre imágenes Docker construidas con GitHub Actions, observados " +
-        "por debajo de quince minutos de punta a punta. Los repositorios públicos son " +
-        "instantáneas publicadas y no incluyen la configuración de ese pipeline.",
+      "El equipo de tres personas utilizó prácticas Agile y Trello para coordinar requisitos, implementación y releases.",
+      "Docker y GitHub Actions sostuvieron despliegues productivos observados por debajo de quince minutos de punta a punta. Los repositorios públicos son versiones del código y no incluyen el pipeline original de despliegue.",
     ],
   } satisfies CaseStudySection,
 
   outcomes: {
-    heading: "Dónde está hoy",
+    heading: "Resultados en producción",
     body: [
-      "Filomena está activa en cinco instituciones nacionales argentinas: UNS, UNRN, UNC, UNVM " +
-        "y FAMFyG. Soportó 1.000+ usuarios simultáneos en producción con consistencia completa " +
-        "de datos, y mantuvo los endpoints críticos por debajo de 300 ms en promedio.",
-      "Estas cifras provienen de la operación desplegada, no de un banco de pruebas en el " +
-        "repositorio. El proyecto fue calificado 10/10 como proyecto final en la Universidad " +
-        "Nacional del Sur, y recibió entrevistas, cobertura universitaria y menciones de " +
-        "autoridades académicas — reconocimiento editorial, no un premio formalmente instituido.",
+      "Filomena está activa en UNS, UNRN, UNC, UNVM y FAMFyG. La operación productiva mostró 1.000+ usuarios simultáneos con consistencia completa de datos y endpoints críticos por debajo de 300 ms en promedio, monitoreados con Prometheus y Grafana.",
+      "El proyecto final recibió 10/10 en la Universidad Nacional del Sur, además de entrevistas, cobertura universitaria y menciones de autoridades académicas.",
     ],
   } satisfies CaseStudySection,
 
   lessons: {
-    heading: "Qué haría distinto",
+    heading: "Próximas prioridades de ingeniería",
     body: [
-      "La suite de tests es el punto débil honesto. Validamos el comportamiento mediante la " +
-        "operación desplegada y validación de carga, y las instantáneas públicas incluyen tests " +
-        "de humo del framework en lugar de una suite real. En un sistema donde un defecto " +
-        "interrumpe un examen en curso, los caminos de concurrencia y permisos merecían " +
-        "cobertura automatizada, y construirla bajo una fecha límite académica fue el " +
-        "compromiso equivocado para repetir.",
-      "También habría anotado las condiciones de medición en su momento. Los números de " +
-        "performance son reales, pero reconstruir meses después cómo se observó exactamente " +
-        "cada uno es más difícil de lo que debería — y una cifra que no se puede calificar es " +
-        "una cifra que conviene repetir con cuidado.",
+      "En una próxima iteración priorizaría la cobertura automatizada de regresión para exámenes concurrentes y límites de permisos. Las versiones públicas contienen actualmente tests de humo del framework.",
+      "También conservaría escenarios repetibles de rendimiento junto a cada release para comparar cambios futuros con el comportamiento ya observado en producción.",
     ],
   } satisfies CaseStudySection,
 };

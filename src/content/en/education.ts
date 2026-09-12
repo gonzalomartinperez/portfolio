@@ -68,9 +68,7 @@ export const rankings: Ranking[] = [
   },
 ];
 
-export const rankingCaveat =
-  "These describe the institution, in the edition named. They are not a measure of my " +
-  "individual performance — the degree, the grades and the project are.";
+export const rankingCaveat = "Institutional positions are shown with their ranking and edition.";
 
 export const credentials: Credential[] = [
   { title: "Docker Fundamentals", issuer: "Universidad Nacional del Sur", date: "Mar 2024" },
@@ -78,8 +76,7 @@ export const credentials: Credential[] = [
 ];
 
 export const credentialNote =
-  "Completed certifications only. I am studying toward others and will list them when they " +
-  "are finished, not before.";
+  "Completed training in container fundamentals and professional collaboration.";
 
 export const academicEvidence: EvidenceLink[] = [
   {
@@ -90,8 +87,7 @@ export const academicEvidence: EvidenceLink[] = [
 ];
 
 export const languageNote =
-  "Two university English examinations were required to graduate. They do not change my " +
-  "declared level, which is B2.";
+  "English: professional working proficiency (B2). The degree also included two university English examinations.";
 
 /**
  * The complete degree programme, taken from the university's published plan. It is the
@@ -152,7 +148,7 @@ export const curriculum: { year: string; subjects: string[] }[] = [
       "Business Economics",
       "Computer Networks",
       "Systems Auditing",
-      "Artificial Intelligent Systems",
+      "Artificial Intelligence Systems",
       "Physics II",
       "Final Year Project",
     ],
@@ -160,5 +156,4 @@ export const curriculum: { year: string; subjects: string[] }[] = [
 ];
 
 export const curriculumNote =
-  "Plan 2012 of the Information Systems Engineering degree at Universidad Nacional del Sur, " +
-  "in full. All 34 were passed.";
+  "The university’s Plan 2012 describes the programme structure below. Course completion and individual grades are documented separately in the verified academic record.";

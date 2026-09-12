@@ -35,15 +35,13 @@ test("the build output exists", () => {
   );
 });
 
-test("the hero ships under 30 KB of gzipped JavaScript", () => {
-  // The hero is the only client-side feature with a real budget; everything else is static.
-  const heroChunks = walk(staticDir, ".js").filter((file) => {
-    const source = readFileSync(file, "utf8");
-    return source.includes("uPointerStrength") || source.includes("webglcontextlost");
-  });
-  assert.ok(heroChunks.length > 0, "no chunk contains the hero engine");
-  const size = totalGzippedKb(heroChunks);
-  assert.ok(size < 30, `hero chunks are ${size.toFixed(1)} KB gzipped, budget is 30 KB`);
+test("the deferred scene and its transitive chunks stay under 250 KiB gzip", () => {
+  const report = JSON.parse(readFileSync(path.join(root, ".next/scene-budget.json"), "utf8"));
+  assert.ok(report.roots > 0, "the scene entry is missing from the compilation graph");
+  assert.equal(report.initial, false, "scene libraries must not enter the initial client bundle");
+  assert.ok(report.files.length > 0);
+  const size = totalGzippedKb(report.files.map((file) => path.join(root, ".next", file)));
+  assert.ok(size <= 250, `scene dependency closure is ${size.toFixed(1)} KiB gzip (budget 250)`);
 });
 
 test("stylesheets stay under 16 KB gzipped in total", () => {
@@ -57,8 +55,11 @@ test("the portrait stays under 80 KB", () => {
   assert.ok(size < 80, `portrait is ${size.toFixed(1)} KB, budget is 80 KB`);
 });
 
-test("no single client chunk exceeds 80 KB gzipped", () => {
+test("non-scene client chunks stay under 80 KiB gzip", () => {
+  const report = JSON.parse(readFileSync(path.join(root, ".next/scene-budget.json"), "utf8"));
+  const sceneFiles = new Set(report.files.map((file) => path.resolve(root, ".next", file)));
   for (const file of walk(staticDir, ".js")) {
+    if (sceneFiles.has(file)) continue;
     const size = gzippedKb(file);
     assert.ok(size < 80, `${path.basename(file)} is ${size.toFixed(1)} KB gzipped`);
   }

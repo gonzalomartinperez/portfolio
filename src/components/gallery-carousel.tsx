@@ -1,124 +1,185 @@
 "use client";
-
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./gallery-carousel.module.css";
 
-export type GallerySlide = {
-  id: string;
-  src: string;
-  alt: string;
-};
+export type GallerySlide = { id: string; src: string; alt: string };
+const flows = [
+  { id: "access", en: "Access", es: "Acceso", shots: ["001", "004", "015"] },
+  {
+    id: "preparation",
+    en: "Exam preparation",
+    es: "Preparación",
+    shots: ["026", "029", "033", "017"],
+  },
+  { id: "delivery", en: "Exam delivery", es: "Examen", shots: ["040", "057", "059", "066"] },
+  {
+    id: "results",
+    en: "Monitoring & results",
+    es: "Monitoreo y resultados",
+    shots: ["043", "045", "077", "051", "091"],
+  },
+];
 
-/**
- * A scroll-snapping gallery.
- *
- * The track is a real scroll container, so touch, trackpad, arrow keys and screen-reader
- * navigation all work before any of this component's JavaScript runs. The buttons and the
- * counter are conveniences layered on top, and the current slide is derived from scroll
- * position rather than driving it — the browser stays the source of truth.
- *
- * There is no autoplay, which is what keeps it clear of WCAG 2.2 SC 2.2.2 entirely.
- */
 export function GalleryCarousel({
   slides,
   label,
   previousLabel,
   nextLabel,
   slideLabels,
+  locale = "en",
 }: {
   slides: readonly GallerySlide[];
   label: string;
   previousLabel: string;
   nextLabel: string;
-  /** One formatted label per slide, resolved on the server: functions cannot cross this boundary. */
   slideLabels: readonly string[];
+  locale?: "en" | "es";
 }) {
-  const trackRef = useRef<HTMLElement>(null);
-  const [index, setIndex] = useState(0);
-
-  const syncIndex = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    const slideWidth = track.scrollWidth / slides.length;
-    setIndex(Math.min(slides.length - 1, Math.round(track.scrollLeft / slideWidth)));
-  }, [slides.length]);
+  const [filter, setFilter] = useState("all");
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const triggerRef = useRef<HTMLAnchorElement | null>(null);
+  const activeSlide = activeIndex === null ? undefined : slides[activeIndex];
+  const selectedFlow = flows.find((flow) => flow.id === filter);
+  const visibleSlides = selectedFlow
+    ? slides.filter((slide) => selectedFlow.shots.includes(slide.id))
+    : slides;
+  const closeLabel = locale === "es" ? "Cerrar galería" : "Close gallery";
+  const enlargeLabel = locale === "es" ? "Ampliar" : "Enlarge";
 
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    let frame = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(syncIndex);
-    };
-    track.addEventListener("scroll", onScroll, { passive: true });
+    if (activeIndex === null) return;
+    const dialog = dialogRef.current;
+    if (!dialog?.open) dialog?.showModal();
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     return () => {
-      cancelAnimationFrame(frame);
-      track.removeEventListener("scroll", onScroll);
+      document.body.style.overflow = previousOverflow;
     };
-  }, [syncIndex]);
+  }, [activeIndex]);
 
-  const go = (delta: number) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const target = Math.min(slides.length - 1, Math.max(0, index + delta));
-    track.scrollTo({ left: (track.scrollWidth / slides.length) * target, behavior: "smooth" });
-  };
+  function finishClose() {
+    setActiveIndex(null);
+    triggerRef.current?.focus();
+  }
+  function navigate(delta: number) {
+    setActiveIndex((index) =>
+      index === null ? null : (index + delta + slides.length) % slides.length,
+    );
+  }
 
   return (
-    <section aria-roledescription="carousel" aria-label={label} className={styles.carousel}>
-      {/* A focusable, labelled scroll region: the browser then handles arrow keys, touch and
-          trackpad for free, and the list keeps its own semantics inside. */}
-      {/* biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region must be reachable by keyboard (WCAG 2.1.1), and a labelled region with tabindex is the documented way; the rule does not model scroll containers. */}
-      <section aria-label={label} className={styles.track} ref={trackRef} tabIndex={0}>
-        <ul className={styles.rail}>
-          {slides.map((slide, position) => (
-            <li
-              aria-label={slideLabels[position]}
-              aria-roledescription="slide"
-              className={styles.slide}
-              key={slide.id}
-            >
-              <Image
-                alt={slide.alt}
-                className={styles.image}
-                height={720}
-                loading={position < 2 ? "eager" : "lazy"}
-                sizes="(min-width: 60rem) 56rem, 92vw"
-                src={slide.src}
-                unoptimized
-                width={1600}
-              />
-              <p className={styles.caption}>{slide.alt}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <div className={styles.controls}>
-        <button
-          aria-label={previousLabel}
-          className={styles.button}
-          disabled={index === 0}
-          onClick={() => go(-1)}
-          type="button"
-        >
-          <span aria-hidden="true">←</span>
-        </button>
-        <p aria-live="polite" className={styles.counter}>
-          {slideLabels[index]}
-        </p>
-        <button
-          aria-label={nextLabel}
-          className={styles.button}
-          disabled={index === slides.length - 1}
-          onClick={() => go(1)}
-          type="button"
-        >
-          <span aria-hidden="true">→</span>
-        </button>
-      </div>
+    <section aria-label={label} className={styles.gallery}>
+      <fieldset
+        className={styles.filters}
+        aria-label={locale === "es" ? "Filtrar pantallas" : "Filter screens"}
+      >
+        {[{ id: "all", en: "All screens", es: "Todas las pantallas" }, ...flows].map((flow) => (
+          <button
+            type="button"
+            key={flow.id}
+            aria-pressed={filter === flow.id}
+            onClick={() => setFilter(flow.id)}
+            className={styles.filter}
+          >
+            {flow[locale]}
+          </button>
+        ))}
+      </fieldset>
+      <p aria-live="polite" className={styles.count}>
+        {visibleSlides.length} / {slides.length}
+      </p>
+      <ul className={styles.grid}>
+        {visibleSlides.map((slide) => (
+          <li key={slide.id}>
+            <figure className={styles.figure}>
+              <a
+                className={styles.enlarge}
+                href={slide.src}
+                aria-label={`${enlargeLabel}: ${slide.alt}`}
+                onClick={(event) => {
+                  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                  event.preventDefault();
+                  triggerRef.current = event.currentTarget;
+                  setActiveIndex(slides.indexOf(slide));
+                }}
+              >
+                <Image
+                  alt={slide.alt}
+                  src={slide.src}
+                  width={1600}
+                  height={720}
+                  sizes="(min-width: 52rem) 32rem, 92vw"
+                  unoptimized
+                  className={styles.image}
+                />
+                <span className={styles.enlargeHint} aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+              <figcaption className={styles.caption}>{slide.alt}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+      <dialog
+        ref={dialogRef}
+        className={styles.dialog}
+        aria-label={label}
+        onClose={finishClose}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+            event.preventDefault();
+            navigate(event.key === "ArrowRight" ? 1 : -1);
+          }
+        }}
+      >
+        <div className={styles.toolbar}>
+          <p aria-live="polite">{activeIndex === null ? "" : slideLabels[activeIndex]}</p>
+          <button
+            type="button"
+            className={styles.control}
+            onClick={() => dialogRef.current?.close()}
+          >
+            {closeLabel} <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        {activeSlide && (
+          <figure className={styles.fullFigure}>
+            <Image
+              alt={activeSlide.alt}
+              src={activeSlide.src}
+              width={1600}
+              height={720}
+              sizes="96vw"
+              unoptimized
+              className={styles.fullImage}
+            />
+            <figcaption aria-live="polite" className={styles.caption}>
+              {activeSlide.alt}
+            </figcaption>
+          </figure>
+        )}
+        <div className={styles.navigation}>
+          <button
+            type="button"
+            className={styles.control}
+            aria-label={previousLabel}
+            onClick={() => navigate(-1)}
+          >
+            ← {previousLabel}
+          </button>
+          <button
+            type="button"
+            className={styles.control}
+            aria-label={nextLabel}
+            onClick={() => navigate(1)}
+          >
+            {nextLabel} →
+          </button>
+        </div>
+      </dialog>
     </section>
   );
 }
