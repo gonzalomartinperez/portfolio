@@ -16,15 +16,7 @@ concurrency:
 
 jobs:
   validate:
-    name: Build (${{ matrix.runtime }})
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - runtime: development
-            node-file: .nvmrc
-          - runtime: hostinger
-            node-version: 24.6.0
+    name: Quality (development)
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
@@ -37,24 +29,21 @@ jobs:
       - name: Set up Node.js LTS
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version-file: ${{ matrix.node-file }}
-          node-version: ${{ matrix.node-version }}
+          node-version-file: .nvmrc
           cache: npm
-      - name: Report toolchain versions
-        run: |
-          node --version
-          npm --version
       - name: Install locked dependencies
         run: npm ci
-      - name: Run quality checks
-        run: npm run check
+      - name: Check formatting and lint
+        run: npm run lint
+      - name: Build and validate TypeScript
+        run: npm run build
       - name: Smoke-test the production server
         run: npm run test:smoke
       - name: Verify tracked sources remain unchanged
         run: git diff --exit-code
 
   legacy-linux:
-    name: Build (GLIBC 2.28)
+    name: Compatibility (Hostinger / GLIBC 2.28)
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     container:
@@ -75,7 +64,7 @@ jobs:
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24.6.0
-          package-manager-cache: false
+          cache: npm
       - name: Validate the container checkout
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -89,7 +78,7 @@ jobs:
         run: npm ci
       - name: Require automatic SWC WebAssembly fallback
         run: node -e 'require("next/dist/build/swc").loadBindings().then(b => { if (!b.isWasm) throw new Error("Expected SWC WASM on GLIBC 2.28"); })'
-      - name: Build without modern native tool requirements
+      - name: Build and validate TypeScript with WebAssembly
         run: npm run build
       - name: Smoke-test the production server
         run: npm run test:smoke

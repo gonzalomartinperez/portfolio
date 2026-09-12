@@ -23,8 +23,8 @@ or a custom server. Next.js reads the hosting platform's `PORT` environment vari
 
 GitHub Actions provides CI; Hostinger's native integration provides CD. They can
 start independently on a push. Hostinger runs `npm run build` (Next.js compilation)
-without invoking Biome. GitHub Actions runs `npm run check` (lint, explicit type
-checking, and build), followed by the production smoke test. Protected PRs require
+without invoking Biome. GitHub Actions runs lint and a production build with
+built-in TypeScript validation, followed by the production smoke test. Protected PRs require
 these checks before code reaches `main`; do not bypass that release gate. Keep
 development dependencies installed during compilation because Next.js needs TypeScript.
 If hPanel asks for a package script name rather than a shell command, choose `build`.

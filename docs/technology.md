@@ -58,14 +58,15 @@ does not provide that same policy. Review release dates and advisories in depend
 PRs, run `npm audit`, and do not force audit fixes. Exact versions and integrity
 hashes improve repeatability; they do not establish that a dependency is safe.
 
-CI uses SHA-pinned actions, read-only permissions, a two-runtime matrix,
+CI uses SHA-pinned actions, read-only permissions, two complementary jobs,
 the npm bundled with each Node version, and an npm download cache keyed by the lockfile.
 The development lane reads `.nvmrc`; the hosting lane pins the observed Node 24.6.0.
 Corepack is not invoked. The required `Quality checks`
-gate fails if either runtime or the GLIBC compatibility job fails or is skipped/cancelled. CI never caches
+gate fails if either job fails or is skipped/cancelled. CI never caches
 `node_modules` or shares build output across operating systems. Obsolete runs are
-cancelled and each run has a timeout. `check` runs lint, explicit type checking,
-and one production build; it is the CI quality gate. `build` invokes only Next.js,
+cancelled and each run has a timeout. Local `check` runs lint, explicit type checking,
+and one production build. CI runs lint and build directly: the build's mandatory
+TypeScript validation avoids running the compiler twice. `build` invokes only Next.js,
 so Hostinger does not need to execute Biome's incompatible native binary. Next.js
 type validation remains enabled. Production uses the supported Webpack build option;
 development retains Turbopack. The JavaScript module `next.config.mjs` retains
@@ -74,9 +75,11 @@ JSDoc type checking without requiring SWC configuration transpilation.
 The pinned `@next/swc-wasm-nodejs` package must match the exact Next.js version.
 Review and update both together. It supplies the automatic fallback when native
 SWC cannot load; Webpack supports this fallback, unlike Turbopack. A separate,
-required Rocky Linux 8 container job checks GLIBC 2.28, asserts the WASM fallback,
+required hosting job uses a Rocky Linux 8 container, checks GLIBC 2.28, asserts the WASM fallback,
 then builds and starts the app using Node 24.6.0. Biome remains in the modern Linux
-jobs, not this hosting compatibility lane. The container is digest-pinned and
+quality job, not this hosting compatibility lane. There is no redundant modern-Linux
+hosting job: this lane covers both its Node version and the older system library.
+The container is digest-pinned and
 installs its basic checkout prerequisites; review its digest during maintenance.
 This checks the observed library constraint, not complete Hostinger environment
 parity or actual deployment success. A production smoke test checks
