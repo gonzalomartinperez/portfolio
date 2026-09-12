@@ -3,7 +3,8 @@
   /* Reserved before anything mounts, so the canvas cannot shift layout when it arrives. */
   contain: layout paint;
   margin-inline: auto;
-  max-width: min(40rem, 94vw);
+  /* Bounded by height too, so the evidence strip below stays near the fold. */
+  max-width: min(34rem, 94vw, 40vh);
   position: relative;
   width: 100%;
 }

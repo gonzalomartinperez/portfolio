@@ -45,26 +45,27 @@ export function SiteHeader() {
           </span>
         </Link>
 
+        <nav aria-label={copy.mainNavLabel} className={styles.nav}>
+          <ul className={styles.list}>
+            {routes.map((route) => {
+              const href = localePath(locale, route.path);
+              const active = pathname === href || pathname.startsWith(`${href}/`);
+              return (
+                <li key={route.path}>
+                  <Link
+                    aria-current={active ? "page" : undefined}
+                    className={styles.link}
+                    href={href}
+                  >
+                    {route.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
         <div className={styles.controls}>
-          <nav aria-label={copy.mainNavLabel} className={styles.nav}>
-            <ul className={styles.list}>
-              {routes.map((route) => {
-                const href = localePath(locale, route.path);
-                const active = pathname === href || pathname.startsWith(`${href}/`);
-                return (
-                  <li key={route.path}>
-                    <Link
-                      aria-current={active ? "page" : undefined}
-                      className={styles.link}
-                      href={href}
-                    >
-                      {route.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
           <LocaleSwitcher label={copy.languageLabel} locale={locale} />
           <ThemeToggle
             neutralLabel={copy.themeToggleNeutral}

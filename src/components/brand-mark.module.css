@@ -1,7 +1,10 @@
 /*
- * `currentColor` inside an externally referenced sprite does not resolve against the host
- * document in every engine, so the fill is set here on the element that owns the shadow tree.
+ * No fill is set here on purpose. Each symbol in the sprite carries its own colour: the owner's
+ * official brand colour where that is legible on our surfaces, and the owner's permitted
+ * reversed form where it is not. Several brand policies — PostgreSQL, the Linux Foundation and
+ * Docker among them — specifically forbid recolouring a mark to a house colour, which is what
+ * tinting these to the text colour would be.
  */
 .mark {
-  fill: currentColor;
+  flex: none;
 }

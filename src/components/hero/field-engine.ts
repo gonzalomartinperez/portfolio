@@ -157,7 +157,7 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine | null
     alpha: true,
     antialias: false,
     depth: false,
-    powerPreference: "low-power",
+    powerPreference: "default",
     premultipliedAlpha: false,
   });
   return context ? createEngine(canvas, context) : null;
