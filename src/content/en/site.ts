@@ -122,6 +122,8 @@ export const siteCopy: SiteCopy = {
       "I am most useful where the technical problem and the product problem are the same " +
       "problem — and I am available immediately. If that sounds like your team, the work is " +
       "one click away, and so is my inbox.",
+    pixelLabel: "Pixel portrait of Gonzalo Martin Perez",
+    pixelCaption: "Same face, fewer pixels.",
   },
   work: {
     metaTitle: "Work",

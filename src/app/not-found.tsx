@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PixelPortrait } from "@/components/pixel-portrait";
 import { getContent } from "@/content";
 import { defaultLocale } from "@/content/locales";
 import { LocalizedLayout } from "@/views/root-layout";
@@ -24,7 +25,8 @@ export default function NotFound() {
   return (
     <LocalizedLayout locale={defaultLocale}>
       <section className="section frame">
-        <p className="eyebrow">{copy.notFound.eyebrow}</p>
+        <PixelPortrait size={72} />
+        <p className="eyebrow flow-tight">{copy.notFound.eyebrow}</p>
         <h1 className="flow-tight">{copy.notFound.title}</h1>
         <p className="lede flow-tight">{copy.notFound.body}</p>
         <div className="actions flow">

@@ -123,6 +123,8 @@ export const siteCopy: SiteCopy = {
       "Soy más útil donde el problema técnico y el problema de producto son el mismo problema " +
       "— y estoy disponible de inmediato. Si eso se parece a tu equipo, el trabajo está a un " +
       "clic, y mi bandeja de entrada también.",
+    pixelLabel: "Retrato en píxeles de Gonzalo Martin Perez",
+    pixelCaption: "La misma cara, con menos píxeles.",
   },
   work: {
     metaTitle: "Trabajo",

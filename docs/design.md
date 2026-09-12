@@ -28,7 +28,7 @@ gradients and cards.
 The owner named [morpho.org](https://morpho.org) as the reference for how the page should feel.
 What was taken from it are qualities, reached by this repository's own implementation:
 
-- a pure-black ground (`--surface-void: #000000`) rather than the earlier near-black;
+- a near-black ground rather than the earlier lighter one — lifted to `#08090c` rather than pure black, because the reference itself sits at `#121212` and long-form case-study text reads better off an absolute black;
 - a centred hero composition instead of a split one;
 - light-weight display type — headings at 500, the hero name at 400;
 - a dense, rim-lit particle **shell** rather than a diffuse volume;
@@ -56,9 +56,9 @@ persistence, never the theme itself.
 
 | Token | Dark | Light | Use |
 | --- | --- | --- | --- |
-| `--surface-void` | `#000000` | `#fafafb` | Page background |
-| `--surface-base` | `#07090d` | `#f1f4f8` | Sections that need separation from the void |
-| `--surface-raised` | `#0d1219` | `#ffffff` | Cards, quotes, code surfaces |
+| `--surface-void` | `#08090c` | `#fafafb` | Page background |
+| `--surface-base` | `#0d0f14` | `#f1f4f8` | Sections that need separation from the void |
+| `--surface-raised` | `#12151b` | `#ffffff` | Cards, quotes, code surfaces |
 | `--line-subtle` | `#1b2430` | `#e6e9ee` | Decorative rules and dividers |
 | `--line-strong` | `#2a3542` | `#d5dae2` | Card and section borders |
 | `--line-control` | `#586775` | `#7f8a99` | Borders that identify an interactive control |
@@ -159,6 +159,17 @@ the outer nodes merge into the stroke rather than disappearing.
   at its core.
 - **Still fallback** — one rendered frame of the same geometry, shown when WebGL2, JavaScript or
   motion is unavailable. It is composed, not degraded: a finished image on its own.
+
+## Pixel portrait
+
+A 24x30 sprite drawn by hand from the reference photograph, used on the About page beside the
+real portrait and on the 404 page. Colours were sampled from the photograph; the features were
+drawn rather than downsampled, because resampling a photograph at sprite resolution produces
+noise instead of readable pixel art — the blurred background bleeds straight through the hair.
+
+Runs of identical pixels are merged, so the sprite is 96 rectangles rather than 720 squares. The
+idle bob and the blink are CSS animations on two groups, and both stop under reduced motion. It
+is decorative unless given a label, in which case it becomes an image with an accessible name.
 
 ## Motion
 

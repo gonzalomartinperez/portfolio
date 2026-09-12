@@ -89,6 +89,8 @@ export type SiteCopy = {
     lookingEyebrow: string;
     lookingHeading: string;
     lookingBody: string;
+    pixelLabel: string;
+    pixelCaption: string;
   };
   work: {
     metaTitle: string;

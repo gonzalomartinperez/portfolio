@@ -10,9 +10,9 @@
 :root {
   color-scheme: dark;
 
-  --surface-void: #000000;
-  --surface-base: #07090d;
-  --surface-raised: #0d1219;
+  --surface-void: #08090c;
+  --surface-base: #0d0f14;
+  --surface-raised: #12151b;
 
   --line-subtle: #1b2430;
   --line-strong: #2a3542;
@@ -32,9 +32,9 @@
   --field-additive: 1;
 
   --portrait-filter: grayscale(0.42) contrast(1.05) brightness(0.94);
-  --portrait-veil: rgb(0 0 0 / 62%);
-  --header-veil: rgb(0 0 0 / 76%);
-  --toggle-veil: rgb(13 18 25 / 88%);
+  --portrait-veil: rgb(8 9 12 / 62%);
+  --header-veil: rgb(8 9 12 / 78%);
+  --toggle-veil: rgb(18 21 27 / 90%);
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
