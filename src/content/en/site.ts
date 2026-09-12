@@ -183,8 +183,8 @@ export const siteCopy: SiteCopy = {
       "A list of technologies without that context is just a list.",
     fieldHeading: "Everything I work with",
     fieldIntro:
-      "The tools behind the work above. Marks identify the technology and imply no endorsement; " +
-      "the grouped listing below is the authoritative one.",
+      "The tools behind the work. Marks identify each technology and imply no endorsement; the " +
+      "stack page groups them by what they are for, with the work that backs each group.",
     fieldLabel: "Technologies",
     noteHeading: "A note on how this list is written",
     noteScope:
