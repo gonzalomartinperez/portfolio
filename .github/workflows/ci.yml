@@ -53,14 +53,54 @@ jobs:
       - name: Verify tracked sources remain unchanged
         run: git diff --exit-code
 
+  legacy-linux:
+    name: Build (GLIBC 2.28)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    container:
+      image: rockylinux:8@sha256:2d05a9266523bbf24f33ebc3a9832e4d5fd74b973c220f2204ca802286aa275d
+    defaults:
+      run:
+        shell: bash
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - name: Install container prerequisites
+        run: dnf install -y git tar gzip xz
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up observed hosting runtime
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.6.0
+          package-manager-cache: false
+      - name: Verify compatibility baseline
+        run: |
+          test "$(getconf GNU_LIBC_VERSION)" = "glibc 2.28"
+          node --version
+          npm --version
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Require automatic SWC WebAssembly fallback
+        run: node -e 'require("next/dist/build/swc").loadBindings().then(b => { if (!b.isWasm) throw new Error("Expected SWC WASM on GLIBC 2.28"); })'
+      - name: Build without modern native tool requirements
+        run: npm run build
+      - name: Smoke-test the production server
+        run: npm run test:smoke
+      - name: Verify tracked sources remain unchanged
+        run: git diff --exit-code
+
   check:
     name: Quality checks
     if: always()
-    needs: validate
+    needs: [validate, legacy-linux]
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
-      - name: Require both runtime checks
+      - name: Require all runtime and compatibility checks
         env:
           RESULT: ${{ needs.validate.result }}
-        run: test "$RESULT" = success
+          LEGACY_RESULT: ${{ needs.legacy-linux.result }}
+        run: test "$RESULT" = success && test "$LEGACY_RESULT" = success

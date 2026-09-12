@@ -36,9 +36,31 @@ The hosting log reported missing `GLIBC_2.29` and `GLIBC_2.30` when starting Bio
 Linting now runs in the development/CI environment, not in the hosting build.
 Biome remains a required quality tool; no lint errors or TypeScript errors are
 ignored. Next.js retains its built-in type validation during `next build`.
-The Linux CI jobs match Node versions, not Hostinger's complete operating system
-or GLIBC. Next.js and TypeScript also use native binaries, so their compatibility
-on the actual hosting server still needs confirmation from a successful build.
+
+A subsequent hosting build also rejected native SWC with `GLIBC_2.29` missing,
+then failed while loading `next.config.ts`. Do not create the random generated
+`*.next.config` file mentioned in that error. The repository uses:
+
+- `next.config.mjs`: a native Node.js module, with JSDoc and TypeScript checking,
+  so loading configuration does not require SWC to transpile TypeScript.
+- `next build --webpack`: the documented production alternative to Turbopack,
+  whose native bindings cannot use the WebAssembly fallback.
+- An exact `@next/swc-wasm-nodejs` development dependency matching Next.js,
+  available for automatic fallback without an unpinned build-time download.
+
+Keep selecting **npm run build** in hPanel; the Webpack flag lives in the script.
+Do not omit development or optional dependencies during installation. Do not enable
+experimental flags, disable type checking, or install system libraries through npm.
+Development still uses Turbopack on supported local machines.
+
+The required CI gate also builds and starts the application in Rocky Linux 8 with
+GLIBC 2.28 and Node 24.6.0. It asserts that SWC actually selects WebAssembly.
+This reproduces the native-library constraint, not Hostinger's full infrastructure,
+resource limits, configuration rewriting, or routing. A successful hPanel build
+and live preview remain the final deployment confirmation.
+
+References: [Next.js Webpack opt-out](https://nextjs.org/docs/app/guides/upgrading/version-16#opting-out-of-turbopack)
+and [upstream GLIBC compatibility report](https://github.com/vercel/next.js/issues/96960).
 
 Check the installation log for npm and Node versions satisfying `engines`.
 Node 24.6.0 ships npm 11.5.1, the compatibility baseline tested in CI; the actual
