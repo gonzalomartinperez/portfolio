@@ -42,8 +42,10 @@ the current checks do not establish security, accessibility, or deployment succe
 
 Use the Node.js version in [.nvmrc](.nvmrc) and the exact pnpm version in `package.json`.
 
-Install that version following the [pnpm installation guide](https://pnpm.io/installation),
+Install that version following the [pnpm 10 installation guide](https://pnpm.io/10.x/installation),
 then confirm `pnpm --version` matches `packageManager` before installing dependencies.
+pnpm 10 is intentional: the managed Hostinger Corepack launcher is incompatible
+with pnpm 12. CI checks both the local Node baseline and the hosting runtime.
 
 ```sh
 pnpm install --frozen-lockfile
