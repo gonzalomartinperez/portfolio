@@ -1,0 +1,90 @@
+.stage {
+  aspect-ratio: 1 / 1;
+  /* Reserved before anything mounts, so the canvas cannot shift layout when it arrives. */
+  contain: layout paint;
+  margin-inline: auto;
+  max-width: min(40rem, 82vw);
+  position: relative;
+  width: 100%;
+}
+
+/* A soft core behind the cloud; pure CSS, so it is present in every fallback state. */
+.stage::before {
+  background: radial-gradient(circle at 50% 50%, var(--accent-wash) 0%, transparent 62%);
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.layer {
+  block-size: 100%;
+  inline-size: 100%;
+  inset: 0;
+  position: absolute;
+}
+
+/* The canvas carries .layer itself; the SVG is a child of one. */
+.layer svg {
+  height: 100%;
+  width: 100%;
+}
+
+.staticLayer {
+  transition: opacity var(--duration-transition) var(--ease-out);
+}
+
+.canvas {
+  opacity: 0;
+  transition: opacity var(--duration-transition) var(--ease-out);
+}
+
+/* Cross-fade only once the live field has actually produced a frame. */
+.stage[data-mode="running"] .canvas,
+.stage[data-mode="paused"] .canvas {
+  opacity: 1;
+}
+
+.stage[data-mode="running"] .staticLayer,
+.stage[data-mode="paused"] .staticLayer {
+  opacity: 0;
+}
+
+.toggle {
+  align-items: center;
+  background: var(--toggle-veil);
+  border: 1px solid var(--line-control);
+  border-radius: 999px;
+  bottom: 0;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--text-label);
+  gap: var(--space-2);
+  inset-inline-start: 50%;
+  letter-spacing: 0.06em;
+  min-height: 2rem;
+  padding: 0 var(--space-4);
+  position: absolute;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  transition:
+    color var(--duration-micro) var(--ease-standard),
+    border-color var(--duration-micro) var(--ease-standard);
+}
+
+.toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.toggleIcon {
+  background: currentColor;
+  block-size: 0.5rem;
+  inline-size: 0.5rem;
+  border-radius: 1px;
+}
+
+.stage[data-mode="paused"] .toggleIcon {
+  border-radius: 50%;
+}

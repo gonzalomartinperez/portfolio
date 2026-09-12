@@ -1,0 +1,115 @@
+.hero {
+  overflow: hidden;
+  padding-block: clamp(var(--space-6), 6vw, var(--space-8))
+    clamp(var(--space-6), 5vw, var(--space-7));
+  position: relative;
+}
+
+.inner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.eyebrow {
+  margin-bottom: var(--space-5);
+}
+
+.name {
+  font-size: var(--text-display);
+  /* Light weight at display size: the size carries the emphasis, not the stroke. */
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  max-width: 16ch;
+}
+
+.proposition {
+  color: var(--text-secondary);
+  font-size: clamp(1.0625rem, 0.95rem + 0.7vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.45;
+  margin-top: var(--space-4);
+  max-width: 44ch;
+  text-wrap: balance;
+}
+
+/* The field and the mark share one stacking context so the mark sits at the sphere's core. */
+.visual {
+  display: grid;
+  margin-block: clamp(var(--space-5), 3vw, var(--space-6));
+  place-items: center;
+  width: 100%;
+}
+
+.visual > * {
+  grid-area: 1 / 1;
+}
+
+.core {
+  color: var(--text-primary);
+  pointer-events: none;
+}
+
+.actions {
+  justify-content: center;
+}
+
+.availability {
+  align-items: center;
+  color: var(--text-muted);
+  display: flex;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--text-label);
+  gap: var(--space-3);
+  letter-spacing: 0.05em;
+  margin-top: var(--space-5);
+  text-transform: uppercase;
+}
+
+.pulse {
+  background: var(--accent);
+  block-size: 0.5rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--accent-wash);
+  flex: none;
+  inline-size: 0.5rem;
+}
+
+/* Evidence strip closing the hero */
+
+.proof {
+  border-top: 1px solid var(--line-subtle);
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
+  margin-top: clamp(var(--space-6), 5vw, var(--space-8));
+  padding-top: var(--space-5);
+}
+
+.proofValue {
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.proofLabel {
+  color: var(--text-muted);
+  font-size: var(--text-small);
+  margin-top: var(--space-1);
+}
+
+.proofNote {
+  align-self: end;
+  color: var(--text-muted);
+  font-size: var(--text-small);
+  text-align: left;
+}
+
+@media (width >= 64rem) {
+  .proofNote {
+    text-align: right;
+  }
+}

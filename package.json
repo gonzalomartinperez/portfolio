@@ -21,8 +21,11 @@
     "lint": "biome check .",
     "format": "biome check --write .",
     "typecheck": "next typegen && tsc --noEmit",
-    "check": "npm run test:repository && npm run lint && npm run build",
+    "check": "npm run test:repository && npm run test:content && npm run lint && npm run build && npm run test:budget",
     "test:repository": "node --test scripts/repository.test.mjs",
+    "test:content": "node --test scripts/content.test.mjs",
+    "test:budget": "node --test scripts/budget.test.mjs",
+    "test:rendered": "node --test scripts/rendered.test.mjs",
     "test:smoke": "node scripts/smoke-test.mjs"
   },
   "dependencies": {

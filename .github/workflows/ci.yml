@@ -37,6 +37,8 @@ jobs:
         run: npm run check
       - name: Smoke-test the production server
         run: npm run test:smoke
+      - name: Test the rendered site
+        run: npm run test:rendered
       - name: Verify tracked sources remain unchanged
         run: git diff --exit-code
 
