@@ -140,7 +140,7 @@
 .stackGrid {
   display: grid;
   gap: var(--space-5);
-  grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
   margin-top: var(--space-6);
 }
 

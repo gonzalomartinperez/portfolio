@@ -220,11 +220,11 @@ ol {
 }
 
 .section {
-  padding-block: clamp(var(--space-8), 10vw, var(--space-10));
+  padding-block: clamp(var(--space-7), 7vw, var(--space-9));
 }
 
 .section-tight {
-  padding-block: clamp(var(--space-7), 7vw, var(--space-9));
+  padding-block: clamp(var(--space-6), 5vw, var(--space-8));
 }
 
 .prose {
@@ -354,7 +354,7 @@ ol {
 .metric-grid {
   display: grid;
   gap: var(--space-5);
-  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
 }
 
 .metric-value {

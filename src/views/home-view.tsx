@@ -10,7 +10,15 @@ import styles from "./home.module.css";
 
 export function HomeView({ locale }: { locale: Locale }) {
   const content = getContent(locale);
-  const { profile, roles, filomena, stackGroups, featuredStackIds, siteCopy: copy } = content;
+  const {
+    profile,
+    roles,
+    filomena,
+    stackGroups,
+    featuredStackIds,
+    academicResults,
+    siteCopy: copy,
+  } = content;
   const featuredStack = stackGroups.filter((group) => featuredStackIds.includes(group.id));
 
   return (
@@ -163,7 +171,10 @@ export function HomeView({ locale }: { locale: Locale }) {
           <h2>{copy.home.educationHeading}</h2>
           <p>{copy.home.educationBody}</p>
         </div>
-        <div className="actions flow-tight">
+        <div className="flow">
+          <MetricList metrics={academicResults} />
+        </div>
+        <div className="actions flow">
           <Link className="button button-secondary" href={localePath(locale, "/education")}>
             {copy.actions.academicRecord}
           </Link>
