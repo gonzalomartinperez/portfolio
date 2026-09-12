@@ -1,0 +1,141 @@
+/*
+ * Two screens of scroll sharing one canvas. The canvas is sticky and full-bleed; the hero
+ * occupies the first screen and the technology field the second, so dispersing the shell and
+ * resolving the marks is a single continuous movement.
+ */
+.stage {
+  --stage-progress: 0;
+
+  position: relative;
+}
+
+.viewport {
+  block-size: 100svh;
+  inset-block-start: 0;
+  overflow: hidden;
+  position: sticky;
+  z-index: 0;
+}
+
+.still,
+.canvas {
+  block-size: 100%;
+  inline-size: 100%;
+  inset: 0;
+  position: absolute;
+}
+
+.still {
+  display: grid;
+  opacity: 1;
+  place-items: center;
+  transition: opacity var(--duration-transition) var(--ease-out);
+}
+
+.still svg {
+  block-size: min(34rem, 94vw, 40vh);
+  inline-size: min(34rem, 94vw, 40vh);
+}
+
+.canvas {
+  opacity: 0;
+  transition: opacity var(--duration-transition) var(--ease-out);
+}
+
+.stage[data-mode="running"] .canvas,
+.stage[data-mode="paused"] .canvas {
+  opacity: 1;
+}
+
+.stage[data-mode="running"] .still,
+.stage[data-mode="paused"] .still {
+  opacity: 0;
+}
+
+/* Content rides above the canvas; the first pane is pulled back over the sticky viewport. */
+.content {
+  margin-block-start: -100svh;
+  position: relative;
+  z-index: 1;
+}
+
+.heroPane {
+  align-items: center;
+  display: flex;
+  min-block-size: 100svh;
+}
+
+.constellationPane {
+  align-items: center;
+  display: flex;
+  min-block-size: 100svh;
+  /* The marks begin scattered outside the frame and settle inward, so the pane clips rather
+     than letting them extend the page. `clip` does this without creating a scroll container. */
+  overflow: clip;
+  padding-block: var(--space-8);
+}
+
+.toggle {
+  align-items: center;
+  background: var(--toggle-veil);
+  border: 1px solid var(--line-control);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--text-label);
+  gap: var(--space-2);
+  inset-block-end: var(--space-5);
+  inset-inline-start: 50%;
+  letter-spacing: 0.06em;
+  min-block-size: 2rem;
+  padding: 0 var(--space-4);
+  position: absolute;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.toggleIcon {
+  background: currentColor;
+  block-size: 0.5rem;
+  border-radius: 1px;
+  inline-size: 0.5rem;
+}
+
+.stage[data-mode="paused"] .toggleIcon {
+  border-radius: 50%;
+}
+
+/* A stage this tall only makes sense when there is height to spend. */
+@media (height < 34rem) {
+  .viewport {
+    block-size: 34rem;
+  }
+
+  .content {
+    margin-block-start: -34rem;
+  }
+
+  .heroPane,
+  .constellationPane {
+    min-block-size: 34rem;
+  }
+}
+
+/* The mark holds the centre while the field disperses around it, then fades as the
+   technology marks take over the screen. */
+.core {
+  display: grid;
+  inset: 0;
+  opacity: calc(1 - clamp(0, calc(var(--stage-progress, 0) * 2.4), 1));
+  place-items: center;
+  pointer-events: none;
+  position: absolute;
+}

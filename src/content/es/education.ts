@@ -30,15 +30,18 @@ export const academicResults: Metric[] = [
 ];
 
 export const coursework = [
-  "Sistemas de IA",
-  "Arquitectura y Diseño de Sistemas",
-  "Ingeniería de Aplicaciones Web",
-  "Bases de Datos",
+  "Sistemas Inteligentes Artificiales",
   "Verificación y Validación de Software",
-  "Gestión de la Calidad",
-  "Redes de Computadoras",
+  "Arquitectura y Diseño de Sistemas",
+  "Bases de Datos",
   "Algoritmos y Complejidad",
-  "Métodos Formales",
+  "Estructuras de Datos",
+  "Sistemas Operativos",
+  "Ingeniería de Aplicaciones Web",
+  "Proyectos de Sistemas de Software",
+  "Redes de Computadoras",
+  "Métodos Formales para Ingeniería de Software",
+  "Gestión de Calidad en el Software",
 ];
 
 export const professionalPractice = {

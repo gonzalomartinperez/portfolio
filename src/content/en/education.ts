@@ -31,14 +31,17 @@ export const academicResults: Metric[] = [
 
 export const coursework = [
   "AI Systems",
-  "Systems Architecture & Design",
-  "Web Application Engineering",
-  "Databases",
   "Software Verification & Validation",
-  "Quality Management",
-  "Computer Networks",
+  "Systems Architecture & Design",
+  "Databases",
   "Algorithms & Complexity",
-  "Formal Methods",
+  "Data Structures",
+  "Operating Systems",
+  "Web Application Engineering",
+  "Software Systems Projects",
+  "Computer Networks",
+  "Formal Methods for Software Engineering",
+  "Software Quality Management",
 ];
 
 export const professionalPractice = {

@@ -188,8 +188,8 @@ export const siteCopy: SiteCopy = {
       "lista de tecnologías sin ese contexto es apenas una lista.",
     fieldHeading: "Todo lo que uso",
     fieldIntro:
-      "Las herramientas detrás del trabajo de arriba. Las marcas identifican la tecnología y no " +
-      "implican ningún respaldo; el listado agrupado de abajo es el que vale.",
+      "Las herramientas detrás del trabajo. Las marcas identifican cada tecnología y no implican " +
+      "ningún respaldo; la página de stack las agrupa por su propósito, con el trabajo que las respalda.",
     fieldLabel: "Tecnologías",
     noteHeading: "Una nota sobre cómo está escrita esta lista",
     noteScope:
