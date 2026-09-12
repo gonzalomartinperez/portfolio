@@ -3,7 +3,7 @@ name: CI
 on:
   workflow_dispatch:
   push:
-    branches: [main, develop]
+    branches: [main]
   pull_request:
     branches: [main, develop]
 
@@ -33,10 +33,8 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci
-      - name: Check formatting and lint
-        run: npm run lint
-      - name: Build and validate TypeScript
-        run: npm run build
+      - name: Check repository, lint, types, and production build
+        run: npm run check
       - name: Smoke-test the production server
         run: npm run test:smoke
       - name: Verify tracked sources remain unchanged

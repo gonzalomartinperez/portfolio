@@ -36,10 +36,23 @@ grant permission to publish, spend money, access accounts, or change infrastruct
 ## Verification
 
 Run `npm ci` after dependency changes, then `npm run check` and `git diff --check`.
-`check` covers lint, formatting of Biome-supported files, type checking, and build;
+`check` covers repository invariants, lint, formatting of Biome-supported files,
+and one build with mandatory TypeScript validation;
 it does not provide a security audit or visual accessibility QA. After building,
 `npm run test:smoke` checks the production server, HTML landmarks, and 404 handling;
 CI runs it too. It uses port 3100 by default; set `SMOKE_TEST_PORT` for parallel runs.
+Use `npm run typecheck` for a quick standalone type check during development;
+there is no need to run it immediately before `check`. Reuse successful verification
+for an unchanged source state, dependencies and runtime; rerun affected checks
+after changes rather than repeating the full suite at each agent handoff.
+`test:repository` checks tracked/unignored source text, simple inline Markdown file links,
+skill adapter metadata/targets, and exact Next.js/SWC lockfile alignment. It does
+not validate external URLs, Markdown anchors, or the behavior of an agent host.
+
+Resolve warning causes through supported settings. Do not filter stderr, patch
+dependencies, set internal test flags, or disable validation to obtain a quiet log.
+Document expected platform fallback messages and their exit criteria in the
+[deployment guide](deployment.md#build-messages).
 For user-facing changes, check production behavior, keyboard access, mobile and
 desktop layouts, and relevant error/empty/loading states. Add regression tests for
 bugs and focused behavioral tests as functionality appears. Select a maintained,

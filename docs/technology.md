@@ -64,17 +64,19 @@ The development lane reads `.nvmrc`; the hosting lane pins the observed Node 24.
 Corepack is not invoked. The required `Quality checks`
 gate fails if either job fails or is skipped/cancelled. CI never caches
 `node_modules` or shares build output across operating systems. Obsolete runs are
-cancelled and each run has a timeout. Local `check` runs lint, explicit type checking,
-and one production build. CI runs lint and build directly: the build's mandatory
-TypeScript validation avoids running the compiler twice. `build` invokes only Next.js,
+cancelled and each run has a timeout. Local and development CI use the same `check`:
+repository invariants, lint and one production build with mandatory TypeScript
+validation. Standalone `typecheck` remains available for fast iteration. No compiler
+is invoked twice in the full check. `build` invokes only Next.js,
 so Hostinger does not need to execute Biome's incompatible native binary. Next.js
 type validation remains enabled. Production uses the supported Webpack build option;
 development retains Turbopack. The JavaScript module `next.config.mjs` retains
 JSDoc type checking without requiring SWC configuration transpilation.
 
 The pinned `@next/swc-wasm-nodejs` package must match the exact Next.js version.
-Review and update both together. It supplies the automatic fallback when native
-SWC cannot load; Webpack supports this fallback, unlike Turbopack. A separate,
+Review and update both together. Next.js's loader currently uses its download/cache
+fallback despite the installed package; see [build messages](deployment.md#build-messages)
+for the version-specific limitation. Webpack supports WASM, unlike Turbopack. A separate,
 required hosting job uses a Rocky Linux 8 container, checks GLIBC 2.28, asserts the WASM fallback,
 then builds and starts the app using Node 24.6.0. Biome remains in the modern Linux
 quality job, not this hosting compatibility lane. There is no redundant modern-Linux

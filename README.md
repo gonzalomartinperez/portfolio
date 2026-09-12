@@ -4,9 +4,10 @@
 
 The foundation for a personal portfolio focused on software engineering and applied AI.
 
-**Current stage:** initial setup. The website has a starter landing page;
-project case studies and professional content will be added separately.
-Intended domain: **gonzalomartinperez.com** — hosting and domain activation are pending.
+**Live:** [gonzalomartinperez.com](https://gonzalomartinperez.com) — deployed on
+Hostinger's managed Node.js hosting, with the domain registered through Cloudflare.
+The starter landing page is online; project case studies and professional content
+will be added separately.
 
 [Explore the source](src/app/) · [Technology decisions](docs/technology.md) · [Development workflow](docs/development.md)
 
@@ -17,8 +18,8 @@ Intended domain: **gonzalomartinperez.com** — hosting and domain activation ar
 | Application | Next.js App Router, React, and Server Components by default |
 | Type safety | TypeScript 7.0.2 with strict checking |
 | Runtime | Node.js 24 LTS and Next.js 16 Active LTS |
-| Code quality | Biome linting and formatting, reproducible dependency installation |
-| Delivery | Required CI checks and protected pull-request integration |
+| Code quality | Biome linting and formatting, locked dependency installation |
+| Delivery | Protected pull requests, GitHub Actions CI, native Hostinger CD from `main` |
 | AI-assisted development | Shared Claude Code and Codex guidance, specifications, isolated worktrees |
 
 TypeScript 7 is stable, not LTS. Next.js still labels its default TypeScript CLI
@@ -56,7 +57,9 @@ On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 | Command | Purpose |
 | --- | --- |
 | `npm run build` | Compile Next.js with Webpack for hosting compatibility; no Biome invocation |
-| `npm run check` | Validate formatting, lint, types, and the production build |
+| `npm run check` | Repository checks, formatting, lint, and one production build with type validation |
+| `npm run typecheck` | Fast standalone type validation without a production build |
+| `npm run test:repository` | Check UTF-8, local links, skill adapters, and compiler version alignment |
 | `npm run test:smoke` | After `build`, check the production server responds correctly |
 | `npm run format` | Apply formatting and safe Biome fixes |
 | `npm run start` | Serve the previously built production app |
