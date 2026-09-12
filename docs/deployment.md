@@ -11,7 +11,7 @@ and review the detected settings:
 | Framework | Next.js |
 | Root directory | Repository root (`./`) |
 | Node.js | 24.x LTS |
-| Package manager | pnpm (version pinned in `package.json`) |
+| Package manager | pnpm (10.34.5, pinned in `package.json`) |
 | Install command, if requested | `pnpm install --frozen-lockfile` |
 | Build command | `pnpm run build` |
 | Build output, if requested | `.next` |
@@ -33,6 +33,21 @@ successful locked install. Hostinger supporting pnpm does not guarantee its
 bootstrap version honors that field. If it reports an incompatible lockfile,
 configure the pinned version with Hostinger support; do not delete or regenerate
 the lockfile on the server. Confirm the actual Node patch satisfies `engines` too.
+
+### Corepack compatibility regression
+
+The deployment log on 2026-09-12 reported Node 24.6.0 and a missing
+`pnpm/12.4.1/bin/pnpm.cjs`. That failed before application installation: the
+hosting Corepack expected pnpm's older JavaScript entrypoint, not its v12 native
+layout. The repository now pins pnpm 10.34.5 and its compatible single-document
+lockfile. CI runs Corepack bootstrap, frozen installation, build, and production
+smoke checks on both the local Node baseline and the observed hosting runtime.
+
+After this fix reaches `main`, redeploy the latest commit with the settings above.
+Verify the log selects pnpm 10.34.5. If it still mentions 12.4.1, confirm the source
+commit and use hPanel's clean rebuild/cache reset if available, or contact support.
+Do not change `build`, `.next`, or disable signature/quality checks to mask an
+installation failure. A successful CI run still does not prove deployment success.
 
 The repository contains CI configuration, but hPanel connection, auto-deployment,
 build settings, and the domain must be activated in your account. A green GitHub

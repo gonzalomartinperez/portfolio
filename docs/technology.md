@@ -7,6 +7,15 @@
 - TypeScript **7.0.2** in strict mode, Biome for linting and formatting, and plain CSS.
 - Exact direct dependency versions and a committed `pnpm-lock.yaml`.
 
+pnpm **10.34.5** is pinned for the managed hosting environment. Its
+`bin/pnpm.cjs` entrypoint works with the Corepack bundled with Node 24.6.0;
+pnpm 12's native executable did not work with the Hostinger launcher.
+Do not upgrade the package-manager major without testing the hosting bootstrap.
+The preferred local runtime remains `.nvmrc`; `engines` also accepts the observed
+Hostinger Node 24.6.0 baseline. CI tests both. This compatibility floor is not a
+recommendation to downgrade local Node or a claim that an older patch has all
+current security fixes. Request current Node 24 patches from the hosting provider.
+
 React, TypeScript, and Biome do not share Node.js's LTS labels. Their versions are
 selected for compatibility, not described as LTS. Recheck support and security
 updates regularly: pinning dependencies does not replace maintenance.
@@ -49,15 +58,19 @@ their release on September 11 was less than 24 hours old at the first Linux CI
 run. No application package versions changed during import. These exact-version
 exceptions do not allow later releases early; remove them on the next Next update.
 
-CI uses SHA-pinned actions, read-only permissions, the pinned Node and pnpm
-versions, and a pnpm store cache keyed by the lockfile. It never caches
+CI uses SHA-pinned actions, read-only permissions, a two-runtime matrix, bundled
+Corepack bootstrap and installation, and a pnpm store cache keyed by the lockfile.
+The development lane reads `.nvmrc`; the hosting lane pins the observed Node 24.6.0.
+Corepack signature verification remains enabled. The required `Quality checks`
+gate fails if either runtime fails or is skipped/cancelled. CI never caches
 `node_modules` or shares build output across operating systems. Obsolete runs are
 cancelled and each run has a timeout. The production build is the shared quality
 gate; `check` is an alias, not a second compilation. A production smoke test checks
 HTTP responses, HTML landmarks, and 404 handling. A final diff check detects
 changes to tracked sources. Dependabot's `npm` ecosystem also supports pnpm.
 
-References: [pnpm configuration](https://pnpm.io/settings),
+References: [pnpm 10 installation](https://pnpm.io/10.x/installation),
+[pnpm configuration](https://pnpm.io/10.x/settings),
 [pnpm CI guidance](https://pnpm.io/continuous-integration).
 
 Dependencies are pinned and reviewed through Dependabot PRs into `develop`.

@@ -15,12 +15,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check:
-    name: Quality checks
+  validate:
+    name: Build (${{ matrix.runtime }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runtime: development
+            node-file: .nvmrc
+          - runtime: hostinger
+            node-version: 24.6.0
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
       NEXT_TELEMETRY_DISABLED: "1"
+      COREPACK_HOME: ${{ runner.temp }}/portfolio-corepack
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -29,8 +38,13 @@ jobs:
       - name: Set up Node.js LTS
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version-file: .nvmrc
+          node-version-file: ${{ matrix.node-file }}
+          node-version: ${{ matrix.node-version }}
           package-manager-cache: false
+      - name: Verify bundled Corepack can launch pinned pnpm
+        run: |
+          corepack --version
+          corepack pnpm --version
       - name: Set up pinned pnpm and dependency cache
         uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
         with:
@@ -41,10 +55,22 @@ jobs:
           node --version
           pnpm --version
       - name: Install locked dependencies
-        run: pnpm install --frozen-lockfile
+        run: corepack pnpm install --frozen-lockfile
       - name: Run quality checks
-        run: pnpm run build
+        run: corepack pnpm run build
       - name: Smoke-test the production server
         run: pnpm run test:smoke
       - name: Verify tracked sources remain unchanged
         run: git diff --exit-code
+
+  check:
+    name: Quality checks
+    if: always()
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Require both runtime checks
+        env:
+          RESULT: ${{ needs.validate.result }}
+        run: test "$RESULT" = success
