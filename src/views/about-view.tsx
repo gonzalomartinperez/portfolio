@@ -41,10 +41,6 @@ export function AboutView({ locale }: { locale: Locale }) {
                 <dd>{profile.currentPosition}</dd>
               </div>
               <div>
-                <dt className="eyebrow">{copy.about.asideLevel}</dt>
-                <dd>{profile.seniority}</dd>
-              </div>
-              <div>
                 <dt className="eyebrow">{copy.about.asideArrangement}</dt>
                 <dd>
                   {profile.arrangement}, {profile.timezone}

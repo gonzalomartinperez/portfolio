@@ -16,9 +16,8 @@ export const profile = {
   intro:
     "Soy AI Software Engineer. Trabajo en todo el recorrido que va de la interfaz al dato — " +
     "interfaces de producto, BFFs, microservicios event-driven — y construyo sistemas de " +
-    "recuperación y agénticos con la misma disciplina de ingeniería: contratos, tests, " +
-    "guardrails, observabilidad. Si buscás a alguien que pueda hacerse cargo de un problema de " +
-    "punta a punta, esa es la parte que más disfruto.",
+    "recuperación y agénticos con el mismo estándar: contratos, tests, guardrails, " +
+    "observabilidad. Dame la parte del sistema que nadie quiere tocar; es la que mejor hago.",
 
   summary:
     "La mayor parte de mi trabajo fue convertir dominios complejos en software que aguanta en " +
