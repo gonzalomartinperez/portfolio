@@ -1,80 +1,78 @@
 .constellation {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  inline-size: 100%;
+  display: grid;
+  gap: 4rem;
 }
-
 .intro {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+  display: grid;
+  gap: 1.25rem;
   text-align: center;
+  justify-items: center;
 }
-
 .heading {
   font-size: var(--text-h2);
-  font-weight: 500;
+  font-weight: 450;
+  letter-spacing: -0.04em;
+  max-width: 22ch;
 }
-
 .note {
   color: var(--text-secondary);
-  margin-inline: auto;
-  max-width: 46ch;
+  max-width: 54ch;
+  text-wrap: pretty;
 }
-
+.groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem 3rem;
+}
+.group {
+  border-top: 1px solid var(--line-subtle);
+  padding-top: 1.5rem;
+}
+.group h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
 .marks {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  justify-content: center;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
 }
-
 .mark {
-  align-items: center;
-  backdrop-filter: blur(2px);
-  background: rgb(18 21 27 / 62%);
-  border: 1px solid var(--line-subtle);
-  border-radius: 999px;
-  color: var(--text-secondary);
   display: inline-flex;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-4) var(--space-2) var(--space-3);
-
-  /*
-   * The marks arrive with the field: they start scattered along the same spiral the points
-   * disperse on, then settle into the row as the stage completes. `--stage-progress` is written
-   * by the stage on a frame callback, so this is one custom property driving every tile.
-   */
-  --settle: clamp(0, calc((var(--stage-progress, 0) - 0.15) * 2), 1);
-
-  opacity: var(--settle);
-  transform: translate(
-    calc(var(--x, 0) * 34vw * (1 - var(--settle))),
-    calc(var(--y, 0) * 26vh * (1 - var(--settle)))
-  );
+  text-decoration: none;
+  border: 1px solid var(--line-subtle);
+  border-radius: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  min-height: 44px;
+  color: var(--text-secondary);
+  background: var(--surface-base);
 }
-
-/* The chip supplies the light ground brand colours are drawn for, so each mark can keep its
-   own colour instead of being reversed or tinted. */
+.mark:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+.identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 .glyph {
-  background: #f4f6f9;
-  border-radius: 50%;
   display: grid;
-  padding: 0.3rem;
   place-items: center;
+  flex-shrink: 0;
 }
-
 .name {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: var(--text-label);
-  letter-spacing: 0.04em;
-  white-space: nowrap;
+  font-size: 0.8rem;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .mark {
-    opacity: 1;
-    transform: none;
+@media (width < 768px) {
+  .groups {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .constellation {
+    gap: 2.5rem;
   }
 }

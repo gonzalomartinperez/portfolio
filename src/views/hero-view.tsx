@@ -39,11 +39,15 @@ export function HeroView({ locale }: { locale: Locale }) {
     <>
       <HeroStage
         constellation={
-          <TechConstellation heading={copy.stack.fieldHeading} note={copy.stack.fieldIntro} />
+          <TechConstellation
+            heading={copy.stack.fieldHeading}
+            note={copy.stack.fieldIntro}
+            locale={locale}
+          />
         }
         core={
           <span aria-hidden="true" className={styles.core}>
-            <Mark size={40} />
+            <Mark size={64} />
           </span>
         }
         hero={hero}
