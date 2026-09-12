@@ -1,7 +1,17 @@
 .body {
   display: flex;
   flex-direction: column;
-  gap: clamp(var(--space-7), 6vw, var(--space-9));
+  gap: clamp(var(--space-6), 5vw, var(--space-8));
+}
+
+/* Prose is centred on the page rather than pinned left, so a long read does not run beside a
+   permanently empty half. Full-width elements — the walkthrough, the table, the architecture
+   list — keep the wider frame. */
+.block > .prose,
+.block > p,
+.block > h2 {
+  margin-inline: auto;
+  width: min(46rem, 100%);
 }
 
 .block {
