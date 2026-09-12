@@ -75,31 +75,40 @@
   padding-block: var(--space-8);
 }
 
+/*
+ * WCAG 2.2 SC 2.2.2 requires a way to stop animation that starts on its own, and it is a
+ * non-interference criterion, so this control cannot simply be dropped. It can be quiet: an
+ * icon in the corner at low opacity, which comes to full strength on hover and on focus and is
+ * always reachable by keyboard.
+ */
 .toggle {
   align-items: center;
   background: var(--toggle-veil);
-  border: 1px solid var(--line-control);
-  border-radius: 999px;
-  color: var(--text-secondary);
+  border: 1px solid var(--line-subtle);
+  border-radius: 50%;
+  color: var(--text-muted);
   cursor: pointer;
   display: inline-flex;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: var(--text-label);
-  gap: var(--space-2);
   inset-block-end: var(--space-5);
-  inset-inline-start: 50%;
-  letter-spacing: 0.06em;
-  min-block-size: 2rem;
-  padding: 0 var(--space-4);
+  inset-inline-end: var(--space-5);
+  justify-content: center;
+  min-block-size: 2.25rem;
+  min-inline-size: 2.25rem;
+  opacity: 0.35;
+  padding: 0;
   position: absolute;
-  text-transform: uppercase;
-  transform: translateX(-50%);
+  transition:
+    opacity var(--duration-micro) var(--ease-standard),
+    border-color var(--duration-micro) var(--ease-standard),
+    color var(--duration-micro) var(--ease-standard);
   z-index: 2;
 }
 
-.toggle:hover {
+.toggle:hover,
+.toggle:focus-visible {
   border-color: var(--accent);
   color: var(--accent);
+  opacity: 1;
 }
 
 .toggleIcon {

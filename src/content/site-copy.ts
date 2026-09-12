@@ -79,7 +79,6 @@ export type SiteCopy = {
     title: string;
     paragraphs: string[];
     asideCurrently: string;
-    asideLevel: string;
     asideArrangement: string;
     asideLanguages: string;
     asideAvailability: string;

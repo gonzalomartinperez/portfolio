@@ -55,8 +55,13 @@
   );
 }
 
+/* The chip supplies the light ground brand colours are drawn for, so each mark can keep its
+   own colour instead of being reversed or tinted. */
 .glyph {
+  background: #f4f6f9;
+  border-radius: 50%;
   display: grid;
+  padding: 0.3rem;
   place-items: center;
 }
 

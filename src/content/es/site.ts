@@ -88,14 +88,13 @@ export const siteCopy: SiteCopy = {
       "Gonzalo Martin Perez — AI Software Engineer. Trayectoria, cómo encaro el trabajo de " +
       "ingeniería y qué estoy buscando.",
     eyebrow: "Sobre mí",
-    title: "Convierto dominios complejos en software que la gente puede operar de verdad",
+    title: "Me hago cargo de sistemas completos, de la interfaz hasta la cola de procesamiento",
     paragraphs: [
       "Mi camino de entrada fue una carrera de ingeniería de cinco años en la Universidad Nacional del Sur, en paralelo con trabajo independiente para clientes que empezó en 2024 y no se detuvo. El hilo conductor es el product engineering: me gusta hacerme cargo de algo desde la interfaz hasta la cola que lo hace funcionar.",
       "Desde entonces trabajé en una plataforma de promociones a escala fintech, un backoffice de permisos que abarca los sistemas internos de una empresa, y una plataforma de exámenes de la que dependen cinco instituciones. La IA aplicada atraviesa el trabajo reciente en lugar de quedar al costado: un asistente de recuperación dentro de un producto para comercios, pipelines de agentes para clientes, y los entornos agénticos de ingeniería que construyo para hacer el trabajo en sí.",
       "Actualmente soy AI Engineer en Rampy, y esa es la dirección en la que estoy profundizando deliberadamente: agentes, recuperación, y la disciplina de ingeniería que los vuelve confiables en lugar de impresionantes una sola vez.",
     ],
     asideCurrently: "Actualmente",
-    asideLevel: "Nivel",
     asideArrangement: "Modalidad de trabajo",
     asideLanguages: "Idiomas",
     asideAvailability: "Disponibilidad",

@@ -14,19 +14,24 @@ export const profile = {
   headline: "I build production systems, and the AI that runs inside them.",
 
   intro:
-    "I'm an AI Software Engineer. I work across the whole path from interface to data — " +
-    "product interfaces, BFFs, event-driven microservices — and I build retrieval and agentic " +
-    "systems with the same engineering discipline: contracts, tests, guardrails, observability. " +
-    "If you're looking for someone who can own a problem end to end, that's the part I enjoy most.",
+    "I'm an AI Software Engineer. I take a problem from the interface down to the data and own " +
+    "the whole path — product interfaces, BFFs, event-driven microservices — and I build " +
+    "retrieval and agentic systems to the same standard: contracts, tests, guardrails, " +
+    "observability. Give me the part of the system nobody wants to touch; that is the part I " +
+    "do best.",
 
   summary:
-    "Most of my work has been turning complicated domains into software that holds up in " +
+    "I have spent my career turning complicated domains into software that holds up in " +
     "production: a promotions platform at fintech scale, a permissions back office spanning an " +
-    "enterprise's internal systems, and an exam platform that five institutions now run on. " +
-    "Applied AI is where I'm deliberately going deeper, and it's already part of that work " +
-    "rather than a separate track.",
+    "enterprise's internal systems, and an exam platform five institutions now depend on. In " +
+    "each one I was trusted with the architecture, not just the tickets. Applied AI runs " +
+    "through that work rather than sitting beside it.",
 
-  /** Kept exactly at the canonical label. Never Senior, Tech Lead, Architect or Staff. */
+  /**
+   * Retained because structured forms elsewhere ask for it, and deliberately not published:
+   * a portfolio is not a structured field, and a level label only narrows how a reader sizes
+   * the work. Never Senior, Tech Lead, Architect or Staff.
+   */
   seniority: "Mid-level",
   experienceLength: "2 years and 8 months",
   experienceSince: "January 2024",

@@ -87,14 +87,13 @@ export const siteCopy: SiteCopy = {
       "Gonzalo Martin Perez — AI Software Engineer. Background, how I approach engineering " +
       "work, and what I am looking for.",
     eyebrow: "About",
-    title: "I turn complicated domains into software people can actually operate",
+    title: "I own systems end to end, from the interface down to the queue",
     paragraphs: [
       "My route in was a five-year engineering degree at Universidad Nacional del Sur, alongside independent client work that started in 2024 and has not really stopped. The through-line is product engineering: I like owning a thing from the interface down to the queue that makes it work.",
       "Since then I have worked on a promotions platform at fintech scale, a permissions back office spanning an enterprise's internal systems, and an exam platform that five institutions depend on. Applied AI runs through the recent work rather than sitting beside it — a retrieval assistant inside a merchant product, agent pipelines for clients, and the agentic engineering environments I build to do the work itself.",
       "I am currently an AI Engineer at Rampy, and that is the direction I am deliberately going deeper in: agents, retrieval, and the engineering discipline that makes them dependable rather than impressive once.",
     ],
     asideCurrently: "Currently",
-    asideLevel: "Level",
     asideArrangement: "Working arrangement",
     asideLanguages: "Languages",
     asideAvailability: "Availability",
