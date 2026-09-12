@@ -83,6 +83,7 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           <h2>{copy.filomena.galleryHeading}</h2>
           <p className="muted">{copy.filomena.galleryCaption}</p>
           <GalleryCarousel
+            locale={locale}
             label={copy.filomena.galleryLabel}
             nextLabel={copy.filomena.galleryNext}
             slideLabels={slides.map((_, position) =>
@@ -111,7 +112,12 @@ export function FilomenaView({ locale }: { locale: Locale }) {
 
         <section className={styles.block}>
           <h2>{copy.filomena.changesHeading}</h2>
-          <div className={styles.tableScroll}>
+          <section
+            className={styles.tableScroll}
+            aria-label={copy.filomena.changesHeading}
+            // biome-ignore lint/a11y/noNoninteractiveTabindex: keyboard access to the horizontally scrollable comparison.
+            tabIndex={0}
+          >
             <table className={styles.changes}>
               <caption>{copy.filomena.changesCaption}</caption>
               <thead>
@@ -131,7 +137,7 @@ export function FilomenaView({ locale }: { locale: Locale }) {
                 ))}
               </tbody>
             </table>
-          </div>
+          </section>
         </section>
 
         <section className={styles.block}>

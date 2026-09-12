@@ -10,28 +10,99 @@ import styles from "./home.module.css";
 
 export function HomeView({ locale }: { locale: Locale }) {
   const content = getContent(locale);
-  const {
-    profile,
-    roles,
-    filomena,
-    stackGroups,
-    featuredStackIds,
-    academicResults,
-    siteCopy: copy,
-  } = content;
-  const featuredStack = stackGroups.filter((group) => featuredStackIds.includes(group.id));
+  const { profile, roles, filomena, academicResults, siteCopy: copy } = content;
 
   return (
     <>
       <HeroView locale={locale} />
+
+      <section className="section-tight frame">
+        <div className="section-head">
+          <p className="eyebrow">{copy.home.experienceEyebrow}</p>
+          <h2>{copy.home.experienceHeading}</h2>
+        </div>
+
+        <ol className={styles.roles}>
+          {roles.map((role) => (
+            <li className={styles.role} key={role.slug}>
+              <p className={styles.rolePeriod}>{role.period}</p>
+              <div>
+                <p>
+                  <Link
+                    className={styles.rolePosition}
+                    href={localePath(locale, `/work#${role.slug}`)}
+                  >
+                    {role.position}
+                  </Link>{" "}
+                  <span className={styles.roleCompany}>· {role.company}</span>
+                </p>
+                <p className={styles.roleContext}>{role.context}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <div className="actions flow">
+          <Link className="button button-secondary" href={localePath(locale, "/work")}>
+            {copy.actions.fullExperience}
+          </Link>
+        </div>
+      </section>
+
+      <section className="section-tight frame">
+        <div className="section-head">
+          <p className="eyebrow">{copy.home.workEyebrow}</p>
+          <h2>{copy.home.workHeading}</h2>
+        </div>
+
+        <article className={styles.feature}>
+          <div className={styles.featureTop}>
+            <div>
+              <h3 className={styles.featureTitle}>
+                <Link href={localePath(locale, "/work/filomena")}>{filomena.name}</Link>
+              </h3>
+              <p className="muted">{filomena.tagline}</p>
+            </div>
+            <p className="mono muted">{filomena.period}</p>
+          </div>
+
+          <Link className={styles.featureImage} href={localePath(locale, "/work/filomena")}>
+            <Image
+              alt={content.galleryAlt["040"]}
+              src="/filomena/filomena-040.webp"
+              width={1600}
+              height={720}
+              sizes="(min-width: 72rem) 64rem, 90vw"
+              unoptimized
+            />
+          </Link>
+          <p className="lede">{filomena.summary}</p>
+          <MetricList metrics={filomena.metrics} />
+
+          <ul className="tags">
+            {filomena.stack.map((item) => (
+              <li className="tag" key={item}>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <div className="actions">
+            <Link className="button button-primary" href={localePath(locale, "/work/filomena")}>
+              {copy.actions.readCaseStudy}
+            </Link>
+            <a className="button button-secondary" href={externalLinks.filomenaBackend}>
+              {copy.actions.sourceOnGithub}
+            </a>
+          </div>
+        </article>
+      </section>
 
       <section className="section frame">
         <div className={styles.split}>
           <div className={styles.portrait}>
             <Image
               alt={`${profile.name}, ${profile.role}`}
-              fetchPriority="high"
-              loading="eager"
               placeholder="blur"
               sizes="(min-width: 52rem) 20rem, 100vw"
               src={portrait}
@@ -72,96 +143,6 @@ export function HomeView({ locale }: { locale: Locale }) {
               </div>
             </dl>
           </div>
-        </div>
-      </section>
-
-      <section className="section-tight frame">
-        <div className="section-head">
-          <p className="eyebrow">{copy.home.workEyebrow}</p>
-          <h2>{copy.home.workHeading}</h2>
-        </div>
-
-        <article className={styles.feature}>
-          <div className={styles.featureTop}>
-            <div>
-              <h3 className={styles.featureTitle}>
-                <Link href={localePath(locale, "/work/filomena")}>{filomena.name}</Link>
-              </h3>
-              <p className="muted">{filomena.tagline}</p>
-            </div>
-            <p className="mono muted">{filomena.period}</p>
-          </div>
-
-          <p className="lede">{filomena.summary}</p>
-          <MetricList metrics={filomena.metrics} />
-
-          <ul className="tags">
-            {filomena.stack.map((item) => (
-              <li className="tag" key={item}>
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <div className="actions">
-            <Link className="button button-primary" href={localePath(locale, "/work/filomena")}>
-              {copy.actions.readCaseStudy}
-            </Link>
-            <a className="button button-secondary" href={externalLinks.filomenaBackend}>
-              {copy.actions.sourceOnGithub}
-            </a>
-          </div>
-        </article>
-      </section>
-
-      <section className="section-tight frame">
-        <div className="section-head">
-          <p className="eyebrow">{copy.home.experienceEyebrow}</p>
-          <h2>{copy.home.experienceHeading}</h2>
-        </div>
-
-        <ol className={styles.roles}>
-          {roles.map((role) => (
-            <li className={styles.role} key={role.slug}>
-              <p className={styles.rolePeriod}>{role.period}</p>
-              <div>
-                <p>
-                  <span className={styles.rolePosition}>{role.position}</span>{" "}
-                  <span className={styles.roleCompany}>· {role.company}</span>
-                </p>
-                <p className={styles.roleContext}>{role.context}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-
-        <div className="actions flow">
-          <Link className="button button-secondary" href={localePath(locale, "/work")}>
-            {copy.actions.fullExperience}
-          </Link>
-        </div>
-      </section>
-
-      <section className="section-tight frame">
-        <div className="section-head">
-          <p className="eyebrow">{copy.home.stackEyebrow}</p>
-          <h2>{copy.home.stackHeading}</h2>
-          <p>{copy.home.stackIntro}</p>
-        </div>
-
-        <div className={styles.stackGrid}>
-          {featuredStack.map((group) => (
-            <div key={group.id}>
-              <h3 className={styles.stackName}>{group.name}</h3>
-              <p className={styles.stackItems}>{group.items.slice(0, 8).join(" · ")}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="actions flow">
-          <Link className="button button-secondary" href={localePath(locale, "/stack")}>
-            {copy.actions.fullStack}
-          </Link>
         </div>
       </section>
 
