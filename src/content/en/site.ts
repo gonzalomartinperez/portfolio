@@ -24,15 +24,15 @@ export const siteCopy: SiteCopy = {
     caseStudy: "Filomena case study",
   },
   actions: {
-    seeWork: "See the work",
+    seeWork: "Explore my work",
     getInTouch: "Get in touch",
     readCaseStudy: "Read the case study",
     fullExperience: "Full experience and projects",
-    fullStack: "Full stack",
+    fullStack: "Explore all technologies",
     academicRecord: "Academic record",
     emailMe: "Email me",
     allContact: "All contact options",
-    backToWork: "Back to all work",
+    backToWork: "Back to experience and projects",
     sourceOnGithub: "Source on GitHub",
     goHome: "Take me home",
   },
@@ -52,7 +52,7 @@ export const siteCopy: SiteCopy = {
     whoEyebrow: "Who I am",
     whoHeading: "From complex systems to useful products",
     whoParagraph:
-      "I connect product interfaces, services and data into software people use every day. My work spans fintech integrations, enterprise back offices and applied AI: retrieval assistants, agent workflows and the engineering tools behind them.",
+      "I approach development across the whole product: understanding requirements, defining service boundaries and checking how the application behaves under real workloads.",
     factCurrently: "Currently",
     factExperience: "Experience",
     factBasedIn: "Based in",
@@ -74,7 +74,7 @@ export const siteCopy: SiteCopy = {
       "across 34 of 34 required courses, and a final year project graded 10/10.",
     closingHeading: "Let's talk",
     closingBody:
-      "Looking for someone who can connect software engineering with applied AI? I’m available for fully remote opportunities, with an immediate start date to coordinate.",
+      "Looking for someone who combines software engineering with applied AI? Let’s talk about your product and a fully remote role.",
   },
   about: {
     metaTitle: "About",
@@ -215,8 +215,7 @@ export const siteCopy: SiteCopy = {
     intro:
       "Tell me about your team, the product and the engineering challenges ahead. Email is the quickest way to reach me.",
     basedIn: (location, arrangement, timezone) =>
-      `I am based in ${location}, work ${arrangement} on ${timezone}, and can start immediately — ` +
-      "the exact date is easy to coordinate during the process.",
+      `Based in ${location} (${timezone}), working ${arrangement}. Available to start immediately, with the exact date agreed during the hiring process.`,
     hiringHint: "For a closer look at my product and engineering work, explore the",
     hiringLinkText: "Filomena case study",
     openToHeading: "Open to",

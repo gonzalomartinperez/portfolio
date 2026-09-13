@@ -92,7 +92,7 @@ export const filomenaCaseStudy = {
     body: [
       "Health-sciences degrees assess students through large, high-stakes written exams. " +
         "Filomena's first version was a CakePHP and jQuery monolith built for a single " +
-        "institution, and it was showing every symptom of that: it degraded under concurrent " +
+        "institution. Performance degraded under concurrent " +
         "load, exam delivery was sequential, access control was enforced inconsistently, and " +
         "adding an institution meant writing code.",
       "The original platform lacked proactive monitoring. The rebuild added visibility into application performance and the services supporting exam delivery.",
@@ -160,9 +160,7 @@ export const filomenaCaseStudy = {
     {
       heading: "Role checks on both sides",
       body: [
-        "Role-based access control is enforced in the API and reflected in the frontend. The " +
-          "frontend copy exists for usability; the API copy is the one that is actually load " +
-          "bearing.",
+        "The API enforces role-based access control. The frontend reflects those permissions so users see the actions available to them.",
       ],
     },
     {

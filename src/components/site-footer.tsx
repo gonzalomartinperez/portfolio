@@ -73,7 +73,7 @@ export function SiteFooter() {
 
       <div className={`frame ${styles.colophon}`}>
         <span>© 2026 {profile.name}</span>
-        <span className="mono">{copy.colophon}</span>
+        <span>{copy.colophon}</span>
       </div>
     </footer>
   );

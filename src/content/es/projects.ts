@@ -92,7 +92,7 @@ export const filomenaCaseStudy = {
     body: [
       "Las carreras de ciencias de la salud evalúan a sus estudiantes con exámenes escritos " +
         "masivos y de alta exigencia. La primera versión de Filomena era un monolito CakePHP y " +
-        "jQuery construido para una sola institución, y mostraba todos los síntomas de serlo: " +
+        "jQuery construido para una sola institución. Su rendimiento " +
         "se degradaba bajo carga concurrente, la toma de exámenes era secuencial, el control de " +
         "acceso se aplicaba de forma inconsistente y sumar una institución implicaba escribir " +
         "código.",
@@ -165,9 +165,7 @@ export const filomenaCaseStudy = {
     {
       heading: "Verificación de roles en ambos lados",
       body: [
-        "El control de acceso basado en roles se aplica en la API y se refleja en el frontend. " +
-          "La copia del frontend existe por usabilidad; la de la API es la que realmente " +
-          "sostiene la garantía.",
+        "La API aplica el control de acceso basado en roles. El frontend refleja esos permisos para mostrar a cada usuario las acciones disponibles.",
       ],
     },
     {

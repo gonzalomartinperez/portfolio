@@ -32,10 +32,10 @@ export const roles: Role[] = [
       "de un ecosistema de 350.000+ comercios, 70+ emisores de tarjetas y 13 países.",
     contributions: [
       "Entregué la experiencia de promociones de punta a punta: un microfrontend React y TypeScript con Single-SPA embebido como sección nativa del portal de comercios, conectado mediante un BFF Spring WebFlux a múltiples microservicios y proveedores.",
-      "Usé Amazon API Gateway para conectar el portal HTTPS de comercios con servicios HTTP internos de la empresa, manteniendo la integración segura desde el lado de la aplicación.",
+      "Diseñé un asistente RAG y agéntico integrado al producto para dueños de comercios con Python, LangChain, LangGraph, PostgreSQL/pgvector y guardrails, recuperando las promociones bancarias asociadas a cada comercio para fundamentar las respuestas del modelo.",
+      "Integré el portal HTTPS de comercios con los servicios HTTP internos de la empresa mediante Amazon API Gateway.",
       "Construí microservicios en Java/Spring Boot y TypeScript/Node.js/NestJS para ingerir, normalizar y procesar promociones de comercios, entidades financieras y proveedores, adaptando los contratos según cada integración.",
       "Implementé un flujo event-driven y serverless con Amazon S3, SQS y una Lambda en Python/FastAPI con estrategias de procesamiento ordenado.",
-      "Diseñé un asistente RAG y agéntico integrado al producto para dueños de comercios con Python, LangChain, LangGraph, PostgreSQL/pgvector y guardrails, recuperando las promociones bancarias asociadas a cada comercio para fundamentar las respuestas del modelo.",
       "Construí un entorno agéntico de ingeniería adaptado al proyecto para preservar contexto entre repositorios de integración y mantener consistencia en la entrega de funcionalidades.",
       "Apliqué arquitectura hexagonal en microservicios específicos y arquitectura en capas en otros componentes.",
       "Construí tooling en Python y Node.js para reejecutar cargas masivas de forma segura contra bases de datos locales aisladas, reconciliar resultados y exponer promociones fallidas y casos borde antes de cada release.",
@@ -95,8 +95,7 @@ export const roles: Role[] = [
     location: "Argentina",
     arrangement: "Remote",
     context:
-      "Product engineering independiente para clientes de e-commerce, redes sociales y productos " +
-      "digitales. Los proyectos son ocasionales, no continuos.",
+      "Desarrollo independiente de productos mediante proyectos ocasionales para clientes de comercio electrónico, redes sociales y productos digitales.",
     contributions: [
       "Diseñé y entregué productos digitales, backoffices y extensiones de stock y punto de venta, conectando necesidades comerciales con sistemas mantenibles.",
       "Construí pipelines y agentes con MCP, Claude y otros LLMs que investigan, generan y publican contenido de punta a punta.",

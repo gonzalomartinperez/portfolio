@@ -32,10 +32,10 @@ export const roles: Role[] = [
       "ecosystem of 350,000+ merchants, 70+ card issuers and 13 countries.",
     contributions: [
       "Delivered the promotions experience end to end: a Single-SPA React and TypeScript microfrontend embedded as a native section of the merchant portal, connected through a Spring WebFlux BFF to multiple microservices and providers.",
-      "Used Amazon API Gateway to bridge the HTTPS merchant portal with internal HTTP enterprise services, keeping the integration secure from the application side.",
+      "Designed an in-product RAG and agentic assistant for merchant owners with Python, LangChain, LangGraph, PostgreSQL/pgvector and guardrails, retrieving the banking promotions tied to each merchant to ground the model's answers.",
+      "Integrated the HTTPS merchant portal with internal HTTP enterprise services through Amazon API Gateway.",
       "Built Java/Spring Boot and TypeScript/Node.js/NestJS microservices to ingest, normalise and process promotions from merchants, financial entities and providers, adapting contracts per integration.",
       "Implemented an event-driven, serverless flow with Amazon S3, SQS and a Python/FastAPI Lambda using ordered processing strategies.",
-      "Designed an in-product RAG and agentic assistant for merchant owners with Python, LangChain, LangGraph, PostgreSQL/pgvector and guardrails, retrieving the banking promotions tied to each merchant to ground the model's answers.",
       "Built a project-specific agentic engineering environment to preserve context across integration repositories and support consistent feature delivery.",
       "Applied hexagonal architecture in selected microservices and layered architecture in other components.",
       "Built Python and Node.js tooling to replay bulk loads safely against isolated local databases, reconcile results and surface failed promotions and edge cases before release.",
@@ -94,8 +94,7 @@ export const roles: Role[] = [
     location: "Argentina",
     arrangement: "Remote",
     context:
-      "Independent product engineering for e-commerce, social media and digital-product clients. " +
-      "Projects are occasional rather than continuous.",
+      "Independent product engineering through occasional projects for clients in e-commerce, social media and digital products.",
     contributions: [
       "Designed and shipped digital products, back offices and stock and point-of-sale extensions, connecting commercial needs to maintainable systems.",
       "Built MCP-, Claude- and LLM-powered pipelines and agents that research, generate and publish content end to end.",
