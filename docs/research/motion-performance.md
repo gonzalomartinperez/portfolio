@@ -121,6 +121,11 @@ on this four-core workstation. Default to one browser worker without weakening
 timeouts or assertions. Independent implementation work and the Hostinger
 compatibility job can still run in parallel.
 
+Time-sensitive gesture tests use a controlled browser clock for transient shader
+state, following Playwright's [Clock guidance](https://playwright.dev/docs/clock).
+This prevents slow automation transport from changing a tap into a long press or
+missing the whole impulse. It is a correctness test, not a performance measurement.
+
 ## Decision register
 
 | Priority | Decision | Verification |

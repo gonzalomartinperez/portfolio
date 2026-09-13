@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml)
 
-A personal portfolio focused on software engineering and applied AI: seven routes,
+A personal portfolio focused on software engineering and applied AI: eight routes,
 two languages, and two themes.
 
 **Live:** [gonzalomartinperez.com](https://gonzalomartinperez.com) — served from
@@ -24,12 +24,14 @@ Hostinger's managed Node.js hosting, with the domain registered through Cloudfla
 | `/stack` | Technology expertise organised by capability |
 | `/education` | Degree, academic results, and approved public evidence |
 | `/contact` | Contact routes and what he is open to |
+| `/cv` | Self-contained CV with reviewed PDF downloads |
 
 English is served unprefixed and Spanish under `/es`, with the same path segments in
 both, so switching language adds or removes the prefix and nothing else. Dark is the
 default and needs no JavaScript; light is an explicit choice from the header toggle.
-[The redesign specification](docs/specs/portfolio-redesign.md) holds the current scope and
-acceptance criteria.
+[The autonomy specification](docs/specs/portfolio-autonomy.md) holds the current scope
+and acceptance criteria; the [redesign](docs/specs/portfolio-redesign.md) retains the
+visual foundation.
 
 ## Engineering at a glance
 
@@ -69,7 +71,8 @@ features. Playwright and axe check production routes, both themes, keyboard jour
 fallbacks. Automated tests complement visual review; they do not certify accessibility, security
 or deployment success. The [initial verification log](docs/verification/portfolio-initial-release.md)
 retains the historical baseline; the [redesign verification](docs/verification/portfolio-redesign.md)
-records the new checks, measurements and remaining real-device verification limits.
+records the visual foundation. The [autonomy verification](docs/verification/portfolio-autonomy.md)
+records content migration, reversible scene measurements and remaining real-device limits.
 
 ## Run locally
 
@@ -94,10 +97,17 @@ On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 | `npm run test:repository` | Check UTF-8, local links, skill adapters, and compiler version alignment |
 | `npm run test:smoke` | After `build`, check the production server responds correctly |
 | `npm run test:browser` | After `build`, exercise desktop/mobile routes, axe and scene fallbacks |
+| `npm run test:site` | Run rendered and browser verification with one production-server lifecycle |
+| `npm run test:documents` | Verify approved local document signatures, sizes and hashes |
 | `npm run test:identity` | Verify favicon and PNG outputs match the approved avatar source |
 | `npm run identity:build` | Regenerate compatibility icons after an approved avatar change |
 | `npm run format` | Apply formatting and safe Biome fixes |
 | `npm run start` | Serve the previously built production app |
+
+The [autonomy specification](docs/specs/portfolio-autonomy.md) covers the local CV,
+academic evidence, prioritized technology catalogue and reversible scene. The
+[public-content contract](docs/public-content.md) explains how approved exports are
+updated without giving the public build access to private sources.
 
 ## Find your way around
 
