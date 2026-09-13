@@ -36,6 +36,9 @@ export function ContactView({ locale }: { locale: Locale }) {
           <aside className={styles.panel}>
             <h2 className={styles.panelTitle}>{copy.contact.resumeHeading}</h2>
             <div className={styles.downloads}>
+              <Link className="button button-secondary" href={localePath(locale, "/cv")}>
+                {locale === "es" ? "Leer CV online" : "Read CV online"}
+              </Link>
               {resumeLinks.map((link) => (
                 <a className="button button-secondary" download href={link.href} key={link.href}>
                   {link.label}

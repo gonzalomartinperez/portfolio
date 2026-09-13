@@ -1,0 +1,53 @@
+.resume {
+  max-width: 58rem;
+  padding-bottom: var(--space-8);
+  line-height: 1.7;
+}
+
+.actions,
+.contents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-block: 1.5rem;
+}
+
+.contents a {
+  padding-block: 0.5rem;
+}
+
+.section {
+  padding-block: 2rem;
+  border-top: 1px solid var(--line-strong);
+}
+
+.section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  scroll-margin-top: 8rem;
+}
+
+.entry + .entry {
+  margin-top: 2.5rem;
+}
+
+.entry h3 {
+  font-size: 1.15rem;
+}
+
+.entry p,
+.entry ul {
+  margin-block: 0.75rem;
+}
+
+.entry ul {
+  padding-left: 1.25rem;
+}
+
+.entry li + li {
+  margin-top: 0.6rem;
+}
+
+.subtitle {
+  font-weight: 600;
+}

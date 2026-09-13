@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/page-header";
 import { getContent } from "@/content";
 import { academicAreas, academicCatalogue, academicEntry } from "@/content/academic-catalogue";
 import { type Locale, localePath } from "@/content/locales";
+import documents from "@/content/public-documents.json";
 import styles from "./education.module.css";
 
 export function EducationView({ locale }: { locale: Locale }) {
@@ -271,7 +272,11 @@ export function EducationView({ locale }: { locale: Locale }) {
                 {link.label}
               </a>
               <p className="muted">
-                {link.description} · {link.href.includes("transcript") ? "135.3 KiB" : "89.1 KiB"}
+                {link.description} ·{" "}
+                {(
+                  (documents.find((document) => document.href === link.href)?.bytes ?? 0) / 1024
+                ).toFixed(1)}{" "}
+                KiB
               </p>
               <a href={link.href} download>
                 {locale === "es" ? "Descargar PDF" : "Download PDF"}

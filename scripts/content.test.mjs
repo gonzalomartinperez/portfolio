@@ -167,14 +167,14 @@ test("external links are https and evidence links are not placeholders", () => {
 });
 
 test("the Spanish site links Spanish evidence", () => {
-  const spanish = read("src/content/es/projects.ts") + read("src/content/es/education.ts");
+  const spanish = read("src/content/es/projects.ts");
   assert.ok(
-    spanish.includes("Filomena-Plataforma-Productiva"),
-    "Spanish projects should link the Spanish case study",
+    spanish.includes('href: "/es/education"'),
+    "Spanish projects should link the local Spanish academic page",
   );
   assert.ok(
-    spanish.includes("Registro-Acad-mico"),
-    "Spanish education should link the Spanish academic record",
+    read("src/content/es/education.ts").includes("academicDocuments"),
+    "Spanish education should reuse the shared local evidence catalogue",
   );
 });
 
