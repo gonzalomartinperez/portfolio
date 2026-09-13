@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { dispatchTouchSequence } from "./touch-sequence";
 
 test("scene mounting preserves an already focused hero link", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -108,56 +109,17 @@ test("touch impulses ignore scrolling gestures", async ({ page, isMobile }) => {
   await page.goto("/");
   const scene = page.locator("[data-scene]");
   await expect(scene).toHaveAttribute("data-mode", "running");
-  await scene.dispatchEvent("pointerdown", {
-    pointerType: "touch",
-    isPrimary: true,
-    pointerId: 1,
-    clientX: 180,
-    clientY: 550,
-  });
-  await scene.dispatchEvent("pointerup", {
-    pointerType: "touch",
-    isPrimary: true,
-    pointerId: 1,
-    clientX: 180,
-    clientY: 550,
-  });
+  await dispatchTouchSequence(scene, [{ type: "pointerdown" }, { type: "pointerup" }]);
   await expect(scene).toHaveAttribute("data-scene-tap", "1");
-  await scene.dispatchEvent("pointerdown", {
-    pointerType: "touch",
-    isPrimary: true,
-    pointerId: 2,
-    clientX: 180,
-    clientY: 550,
-  });
-  await scene.dispatchEvent("pointerup", {
-    pointerType: "touch",
-    isPrimary: true,
-    pointerId: 2,
-    clientX: 180,
-    clientY: 450,
-  });
+  await dispatchTouchSequence(scene, [
+    { type: "pointerdown", pointerId: 2 },
+    { type: "pointerup", pointerId: 2, clientY: 450 },
+  ]);
   await expect(scene).toHaveAttribute("data-scene-tap", "1");
-  await scene.dispatchEvent("pointerdown", {
-    pointerType: "touch",
-    isPrimary: true,
-    pointerId: 3,
-    clientX: 180,
-    clientY: 550,
-  });
-  await scene.dispatchEvent("pointermove", {
-    pointerType: "touch",
-    isPrimary: true,
-    pointerId: 3,
-    clientX: 180,
-    clientY: 450,
-  });
-  await scene.dispatchEvent("pointerup", {
-    pointerType: "touch",
-    isPrimary: true,
-    pointerId: 3,
-    clientX: 180,
-    clientY: 550,
-  });
+  await dispatchTouchSequence(scene, [
+    { type: "pointerdown", pointerId: 3 },
+    { type: "pointermove", pointerId: 3, clientY: 450 },
+    { type: "pointerup", pointerId: 3 },
+  ]);
   await expect(scene).toHaveAttribute("data-scene-tap", "1");
 });
