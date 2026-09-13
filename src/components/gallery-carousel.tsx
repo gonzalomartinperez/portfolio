@@ -3,21 +3,47 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import styles from "./gallery-carousel.module.css";
 
-export type GallerySlide = { id: string; src: string; alt: string };
+export type GallerySlide = { id: string; src: string; alt: string; width: number; height: number };
 const flows = [
-  { id: "access", en: "Access", es: "Acceso", shots: ["001", "004", "015"] },
+  {
+    id: "access",
+    en: "Access",
+    es: "Acceso",
+    shots: ["001", "004", "005", "006", "007", "011", "012", "015", "017", "019"],
+  },
   {
     id: "preparation",
     en: "Exam preparation",
     es: "Preparación",
-    shots: ["026", "029", "033", "017"],
+    shots: ["023", "026", "028", "029", "032", "033", "034", "038"],
   },
-  { id: "delivery", en: "Exam delivery", es: "Examen", shots: ["040", "057", "059", "066"] },
+  {
+    id: "delivery",
+    en: "Exam delivery",
+    es: "Examen",
+    shots: ["040", "052", "053", "057", "058", "059", "060", "063", "066", "068"],
+  },
   {
     id: "results",
     en: "Monitoring & results",
     es: "Monitoreo y resultados",
-    shots: ["043", "045", "077", "051", "091"],
+    shots: [
+      "043",
+      "044",
+      "045",
+      "049",
+      "051",
+      "070",
+      "074",
+      "075",
+      "076",
+      "077",
+      "078",
+      "079",
+      "086",
+      "090",
+      "091",
+    ],
   },
 ];
 
@@ -108,8 +134,8 @@ export function GalleryCarousel({
                 <Image
                   alt={slide.alt}
                   src={slide.src}
-                  width={1600}
-                  height={720}
+                  width={slide.width}
+                  height={slide.height}
                   sizes="(min-width: 52rem) 32rem, 92vw"
                   unoptimized
                   className={styles.image}
@@ -150,8 +176,8 @@ export function GalleryCarousel({
             <Image
               alt={activeSlide.alt}
               src={activeSlide.src}
-              width={1600}
-              height={720}
+              width={activeSlide.width}
+              height={activeSlide.height}
               sizes="96vw"
               unoptimized
               className={styles.fullImage}

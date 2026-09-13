@@ -3,31 +3,52 @@
  *
  * Ids are shared by both locales because they are filenames; only the alt text is translated.
  *
- * Four captures from the source gallery are deliberately absent. One showed a user table that
- * still held a real name, national ID, student file number and personal email left in the demo
- * database. Three showed a chest X-ray whose licence and provenance could not be established.
+ * Personal-data and medical-image captures remain withheld pending a public-safe derivative.
  */
 export const filomenaGallery = [
   "001",
   "004",
+  "005",
+  "006",
+  "007",
+  "011",
+  "012",
   "015",
-  "026",
-  "029",
-  "033",
   "017",
+  "019",
+  "023",
+  "026",
+  "028",
+  "029",
+  "032",
+  "033",
+  "034",
+  "038",
   "040",
+  "052",
+  "053",
   "057",
+  "058",
   "059",
+  "060",
+  "063",
   "066",
+  "068",
   "043",
+  "044",
   "045",
-  "077",
+  "049",
   "051",
+  "070",
+  "074",
+  "075",
+  "076",
+  "077",
+  "078",
+  "079",
+  "086",
+  "090",
   "091",
 ] as const;
 
 export type FilomenaShot = (typeof filomenaGallery)[number];
-
-/** Intrinsic size of every optimised capture, so the carousel reserves its space. */
-export const GALLERY_WIDTH = 1600;
-export const GALLERY_HEIGHT = 720;
