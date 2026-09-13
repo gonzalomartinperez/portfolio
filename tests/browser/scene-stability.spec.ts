@@ -1,5 +1,18 @@
 import { expect, test } from "@playwright/test";
 
+test("focused hero links remain readable while the scene is expanded", async ({ page }) => {
+  await page.goto("/?sceneProgress=0.75&sceneTime=0");
+  const scene = page.locator("[data-scene]");
+  await expect(scene).toHaveAttribute("data-mode", "running");
+  const hero = scene.locator("[data-scene-hero]");
+  await expect(hero).toHaveCSS("opacity", "0");
+  await hero.locator("a").first().focus();
+  await expect(hero).toHaveCSS("opacity", "1");
+  await expect(hero).toHaveCSS("transform", "none");
+  await page.getByRole("button", { name: "Pause animation", exact: true }).focus();
+  await expect(hero).toHaveCSS("opacity", "0");
+});
+
 test("twenty rapid reversals retain deterministic logo positions and a single canvas", async ({
   page,
 }) => {

@@ -4,6 +4,28 @@ import { createFieldEngine } from "./field-engine";
 
 export type SceneRuntime = { sync(paused: boolean): void; dispose(): void };
 
+type VisualNode = { element: HTMLElement | null; opacity: number; transform: string };
+const visualNode = (element: HTMLElement | null): VisualNode => ({
+  element,
+  opacity: -1,
+  transform: "",
+});
+const clamp = (value: number) => Math.min(1, Math.max(0, value));
+const rounded = (value: number) => Math.round(value * 1000) / 1000;
+
+function paint(node: VisualNode, opacity: number, transform = "") {
+  if (!node.element) return;
+  const alpha = rounded(opacity);
+  if (node.opacity !== alpha) {
+    node.element.style.opacity = String(alpha);
+    node.opacity = alpha;
+  }
+  if (node.transform !== transform) {
+    node.element.style.transform = transform;
+    node.transform = transform;
+  }
+}
+
 export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): SceneRuntime {
   const engine = createFieldEngine(canvas);
   gsap.registerPlugin(ScrollTrigger);
@@ -25,6 +47,22 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   const compact = matchMedia("(max-width: 767px)");
   const viewport = stage.querySelector<HTMLElement>("[data-scene-viewport]");
   const journey = stage.querySelector<HTMLElement>("[data-scene-journey]");
+  const hero = visualNode(stage.querySelector<HTMLElement>("[data-scene-hero]"));
+  let heroFocused = false;
+  const core = visualNode(stage.querySelector<HTMLElement>("[data-scene-core]"));
+  let copyView = visualNode(null);
+  const logos: {
+    view: VisualNode;
+    x: number;
+    y: number;
+    gridX: number;
+    gridY: number;
+    orbitX: number;
+    orbitY: number;
+    settledX: number;
+    settledY: number;
+    revealAt: number;
+  }[] = [];
   const parameters = new URLSearchParams(location.search);
   const requestedProgress = Number(parameters.get("sceneProgress"));
   const deterministic = parameters.has("sceneProgress") && Number.isFinite(requestedProgress);
@@ -45,17 +83,20 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     if (!cloud) return;
     const item = document.createElement("div");
     item.className = "scene-logo";
-    item.style.setProperty("--logo-index", String(index));
-    item.style.setProperty("--logo-count", String(sourceMarks.length));
     const angle = index * 2.399963;
     const radius = 0.5 + 0.48 * Math.sqrt((index + 1) / sourceMarks.length);
-    item.style.setProperty("--logo-x", String(Math.cos(angle) * radius));
-    item.style.setProperty("--logo-y", String(Math.sin(angle) * radius));
-    item.style.setProperty("--grid-x", String(((index % 7) / 6) * 2 - 1));
-    item.style.setProperty(
-      "--grid-y",
-      String((Math.floor(index / 7) / Math.max(1, Math.ceil(sourceMarks.length / 7) - 1)) * 2 - 1),
-    );
+    logos.push({
+      view: visualNode(item),
+      x: Math.cos(angle) * radius,
+      y: Math.sin(angle) * radius,
+      gridX: ((index % 7) / 6) * 2 - 1,
+      gridY: (Math.floor(index / 7) / Math.max(1, Math.ceil(sourceMarks.length / 7) - 1)) * 2 - 1,
+      orbitX: 0,
+      orbitY: 0,
+      settledX: 0,
+      settledY: 0,
+      revealAt: 0.55 + (index / sourceMarks.length) * 0.12,
+    });
     item.append(source.cloneNode(true));
     cloud.append(item);
   });
@@ -68,13 +109,31 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       element.removeAttribute("id");
     });
     cloud.append(copy);
+    copyView = visualNode(copy);
   }
   const update = (value: number) => {
     if (appliedProgress === value) return;
     appliedProgress = value;
-    (viewport ?? stage).style.setProperty("--stage-progress", String(value));
     stage.dataset.sceneProgress = value.toFixed(4);
     engine.setExpansion(value);
+    paint(
+      hero,
+      heroFocused ? 1 : 1 - clamp(value / 0.2),
+      heroFocused ? "none" : `translate3d(0,${rounded(value * -60)}px,0)`,
+    );
+    paint(core, 1 - clamp((value - 0.2) / 0.2));
+    paint(copyView, clamp((value - 0.55) / 0.15) * (1 - clamp((value - 0.8) / 0.1)));
+    const settle = clamp((value - 0.8) / 0.2);
+    for (const logo of logos) {
+      const reveal = clamp((value - logo.revealAt) / 0.13);
+      const x = rounded(logo.orbitX * (1 - settle) + logo.settledX * settle);
+      const y = rounded(logo.orbitY * (1 - settle) + logo.settledY * settle + (1 - reveal) * 80);
+      paint(
+        logo.view,
+        reveal,
+        `translate(-50%,-50%) translate3d(${x}px,${y}px,0) scale(${rounded(0.5 + reveal * 0.5)})`,
+      );
+    }
   };
   const trigger = ScrollTrigger.create({
     trigger: journey ?? stage,
@@ -193,26 +252,34 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   const pointerCancel = () => {
     touch = null;
   };
+  const focusIn = () => {
+    heroFocused = true;
+    paint(hero, 1, "none");
+  };
+  const focusOut = (event: FocusEvent) => {
+    if (event.relatedTarget instanceof Node && hero.element?.contains(event.relatedTarget)) return;
+    heroFocused = false;
+    paint(
+      hero,
+      1 - clamp(appliedProgress / 0.2),
+      `translate3d(0,${rounded(appliedProgress * -60)}px,0)`,
+    );
+  };
   const resize = () => {
     engine.resize();
     const width = viewport?.clientWidth ?? innerWidth;
     const height = viewport?.clientHeight ?? innerHeight;
-    cloud?.querySelectorAll<HTMLElement>(".scene-logo").forEach((item) => {
-      const x = Number(item.style.getPropertyValue("--logo-x"));
-      const y = Number(item.style.getPropertyValue("--logo-y"));
+    for (const logo of logos) {
+      const { x, y } = logo;
       // Keep the readable centre clear until its copy fades before grid settlement.
       const safeX = Math.abs(x) < 0.55 && Math.abs(y) < 0.4 ? Math.sign(x || 1) * 0.65 : x;
-      item.style.setProperty("--orbit-x", `${safeX * width * 0.44}px`);
-      item.style.setProperty("--orbit-y", `${y * height * 0.4}px`);
-      item.style.setProperty(
-        "--settled-x",
-        `${Number(item.style.getPropertyValue("--grid-x")) * width * 0.44}px`,
-      );
-      item.style.setProperty(
-        "--settled-y",
-        `${Number(item.style.getPropertyValue("--grid-y")) * height * 0.4}px`,
-      );
-    });
+      logo.orbitX = safeX * width * 0.44;
+      logo.orbitY = y * height * 0.4;
+      logo.settledX = logo.gridX * width * 0.44;
+      logo.settledY = logo.gridY * height * 0.4;
+    }
+    appliedProgress = -1;
+    update(deterministic ? fixedProgress : visualProgress);
     ScrollTrigger.refresh();
   };
   const resizeObserver = new ResizeObserver(resize);
@@ -234,6 +301,8 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   stage.addEventListener("pointerdown", pointerDown, { passive: true });
   stage.addEventListener("pointerup", pointerUp, { passive: true });
   stage.addEventListener("pointercancel", pointerCancel, { passive: true });
+  hero.element?.addEventListener("focusin", focusIn);
+  hero.element?.addEventListener("focusout", focusOut);
   document.addEventListener("visibilitychange", sync);
   applyTheme();
   update(deterministic ? fixedProgress : targetProgress);
@@ -248,7 +317,10 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       stage.removeAttribute("data-scene-visible");
       stage.removeAttribute("data-scene-quality");
       stage.removeAttribute("data-scene-tap");
-      viewport?.style.removeProperty("--stage-progress");
+      for (const node of [hero, core]) {
+        node.element?.style.removeProperty("opacity");
+        node.element?.style.removeProperty("transform");
+      }
       cancelAnimationFrame(frame);
       observer.disconnect();
       resizeObserver.disconnect();
@@ -259,6 +331,8 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       stage.removeEventListener("pointerdown", pointerDown);
       stage.removeEventListener("pointerup", pointerUp);
       stage.removeEventListener("pointercancel", pointerCancel);
+      hero.element?.removeEventListener("focusin", focusIn);
+      hero.element?.removeEventListener("focusout", focusOut);
       document.removeEventListener("visibilitychange", sync);
       cloud?.replaceChildren();
       engine.dispose();
