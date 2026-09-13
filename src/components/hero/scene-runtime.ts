@@ -177,8 +177,16 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     elapsed += delta;
     visualProgress += (targetProgress - visualProgress) * (1 - Math.exp(-delta * 12));
     update(Math.round(Math.min(1, Math.max(0, visualProgress)) * 100000) / 100000);
-    if (compact.matches && now > impulseUntil) {
-      engine.setPointer({ x: Math.sin(elapsed * 0.31) * 0.65, y: Math.cos(elapsed * 0.23) * 0.5 });
+    if (now > impulseUntil) {
+      if (compact.matches) {
+        engine.setPointer({
+          x: Math.sin(elapsed * 0.31) * 0.65,
+          y: Math.cos(elapsed * 0.23) * 0.5,
+        });
+      } else if (impulseUntil > 0) {
+        engine.setPointer(null);
+      }
+      impulseUntil = 0;
     }
     engine.render(delta);
     if (rawDelta > 0) measureQuality(Math.min(rawDelta, 0.25));
@@ -215,6 +223,10 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   const pointerLeave = () => engine.setPointer(null);
   const pointerDown = (event: PointerEvent) => {
     if (event.pointerType !== "touch" || paused) return;
+    if (!event.isPrimary) {
+      touch = null;
+      return;
+    }
     const bounds = canvas.getBoundingClientRect();
     if (event.clientY < bounds.top || event.clientY > bounds.bottom) return;
     touch = {

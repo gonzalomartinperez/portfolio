@@ -108,6 +108,7 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
   let fixedTime: number | null = null;
   let width = 1;
   let height = 1;
+  let pixelRatio = 0;
   let cameraExpansion = -1;
   const pointer = new Vector2(10, 10);
   const updateCamera = () => {
@@ -129,11 +130,14 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
   };
   const resize = () => {
     const rect = canvas.getBoundingClientRect();
-    width = Math.max(1, rect.width);
-    height = Math.max(1, rect.height);
+    const nextWidth = Math.max(1, rect.width);
+    const nextHeight = Math.max(1, rect.height);
     const ratio = Math.min(devicePixelRatio || 1, [1.75, 1.4, 1][quality]);
-    renderer.setPixelRatio(ratio);
-    renderer.setSize(width, height, false);
+    if (width === nextWidth && height === nextHeight && pixelRatio === ratio) return;
+    width = nextWidth;
+    height = nextHeight;
+    pixelRatio = ratio;
+    renderer.setDrawingBufferSize(width, height, ratio);
     material.uniforms.pixelRatio.value = ratio;
     camera.aspect = width / height;
     material.uniforms.aspect.value = camera.aspect;
