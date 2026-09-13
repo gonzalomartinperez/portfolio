@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
 import { getContent } from "@/content";
+import { academicAreas, academicCatalogue, academicEntry } from "@/content/academic-catalogue";
 import { type Locale, localePath } from "@/content/locales";
 import styles from "./education.module.css";
 
@@ -11,8 +12,6 @@ export function EducationView({ locale }: { locale: Locale }) {
   const {
     academicEvidence,
     academicResults,
-    coursework,
-    curriculum,
     curriculumNote,
     credentialNote,
     credentials,
@@ -86,18 +85,56 @@ export function EducationView({ locale }: { locale: Locale }) {
           <h2 id="curriculum">{copy.education.curriculumHeading}</h2>
           <p>{curriculumNote}</p>
         </div>
-        <ol className={`${styles.curriculum} flow`}>
-          {curriculum.map((year) => (
-            <li className={styles.year} key={year.year}>
-              <h3 className={styles.yearName}>{year.year}</h3>
-              <ul className={styles.subjects}>
-                {year.subjects.map((subject) => (
-                  <li key={subject}>{subject}</li>
-                ))}
+        <div className="flow">
+          {[1, 2, 3, 4, 5, 0].map((year) => (
+            <details className={styles.record} key={year}>
+              <summary>
+                {year
+                  ? `${locale === "es" ? "Año" : "Year"} ${year}`
+                  : locale === "es"
+                    ? "Requisitos de inglés"
+                    : "English requirements"}
+              </summary>
+              <ul className={styles.records}>
+                {academicCatalogue
+                  .filter((entry) => entry.year === year)
+                  .map((entry) => (
+                    <li key={entry.id} id={entry.id}>
+                      <div>
+                        <strong>{entry.name[locale]}</strong>
+                        {locale === "en" && (
+                          <span className={styles.original} lang="es">
+                            {entry.name.es}
+                          </span>
+                        )}
+                        <span className={styles.original}>
+                          {entry.code}
+                          {year > 0 &&
+                            ` · ${locale === "es" ? "Cuatrimestre" : "Semester"} ${entry.semester}`}{" "}
+                          · <time dateTime={entry.completed}>{entry.completed}</time>
+                        </span>
+                        {entry.kind === "practice" && (
+                          <span className={styles.original}>
+                            {locale === "es" ? "Práctica profesional" : "Professional practice"}
+                          </span>
+                        )}
+                        {entry.kind === "project" && (
+                          <Link href={localePath(locale, "/work/filomena")}>Filomena</Link>
+                        )}
+                      </div>
+                      <span className={styles.grade}>
+                        {entry.grade === "AP"
+                          ? locale === "es"
+                            ? "AP · Aprobado"
+                            : "AP · Passed"
+                          : `${entry.grade} / 10`}
+                      </span>
+                    </li>
+                  ))}
               </ul>
-            </li>
+            </details>
           ))}
-        </ol>
+        </div>
       </section>
 
       <section className="section-tight frame">
@@ -107,13 +144,24 @@ export function EducationView({ locale }: { locale: Locale }) {
               <p className="eyebrow">{copy.education.courseworkEyebrow}</p>
               <h2>{copy.education.courseworkHeading}</h2>
             </div>
-            <ul className={`${styles.courses} flow-tight`}>
-              {coursework.map((course) => (
-                <li className={styles.course} key={course}>
-                  {course}
-                </li>
+            <div className="flow-tight">
+              {academicAreas.map((area) => (
+                <article className={styles.area} key={area.id}>
+                  <h3>{area.title[locale]}</h3>
+                  <p className="muted">{area.description[locale]}</p>
+                  <ul className={styles.subjects}>
+                    {area.courseIds.map((id) => {
+                      const course = academicEntry(id);
+                      return (
+                        <li key={id}>
+                          {course.name[locale]} <span className="mono">· {course.grade} / 10</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </article>
               ))}
-            </ul>
+            </div>
             <p className="muted flow-tight">
               {professionalPractice.title}: {professionalPractice.detail}
             </p>
@@ -205,13 +253,30 @@ export function EducationView({ locale }: { locale: Locale }) {
         <div className="section-head">
           <p className="eyebrow">{copy.education.evidenceEyebrow}</p>
           <h2 id="evidence">{copy.education.evidenceHeading}</h2>
-          <p>{copy.education.evidenceBody}</p>
+          <p>
+            {locale === "es"
+              ? "Documentos originales disponibles directamente, sin servicios externos ni visores adicionales."
+              : "Original documents available directly, without external services or additional viewers."}
+          </p>
+          <p className="muted">
+            {locale === "es"
+              ? "El analítico es un registro histórico emitido el 22 de diciembre de 2025. Su validez administrativa de seis meses ya finalizó; los resultados se muestran como constancia de esa fecha, no como certificado vigente."
+              : "The transcript is a historical record issued on 22 December 2025. Its six-month administrative validity has expired; results are presented as recorded on that date, not as a currently valid certificate."}
+          </p>
         </div>
         <div className="actions flow">
           {academicEvidence.map((link) => (
-            <a className="button button-secondary" href={link.href} key={link.href}>
-              {link.label}
-            </a>
+            <div key={link.href}>
+              <a className="button button-secondary" href={link.href}>
+                {link.label}
+              </a>
+              <p className="muted">
+                {link.description} · {link.href.includes("transcript") ? "135.3 KiB" : "89.1 KiB"}
+              </p>
+              <a href={link.href} download>
+                {locale === "es" ? "Descargar PDF" : "Download PDF"}
+              </a>
+            </div>
           ))}
         </div>
       </section>
