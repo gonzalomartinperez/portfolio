@@ -122,11 +122,23 @@
     1
   );
   position: absolute;
-  left: calc(50% + (var(--logo-x) * (1 - var(--settle)) + var(--grid-x) * var(--settle)) * 44%);
-  top: calc(50% + (var(--logo-y) * (1 - var(--settle)) + var(--grid-y) * var(--settle)) * 40%);
+  left: 50%;
+  top: 50%;
   opacity: var(--reveal);
-  transform: translate(-50%, -50%) scale(calc(0.5 + var(--reveal) * 0.5))
-    translateY(calc((1 - var(--reveal)) * 80px));
+  transform: translate(-50%, -50%)
+    translate3d(
+      calc(var(--orbit-x) * (1 - var(--settle)) + var(--settled-x) * var(--settle)),
+      calc(
+        var(--orbit-y) *
+        (1 - var(--settle)) +
+        var(--settled-y) *
+        var(--settle) +
+        (1 - var(--reveal)) *
+        80px
+      ),
+      0
+    )
+    scale(calc(0.5 + var(--reveal) * 0.5));
 }
 .logoCloud :global(.scene-logo) > span {
   display: grid;

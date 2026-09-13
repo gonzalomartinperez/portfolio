@@ -14,8 +14,9 @@ import {
 import { buildConstellation } from "./constellation";
 
 export type FieldEngine = {
-  start(): void;
-  stop(): void;
+  render(deltaSeconds: number): void;
+  resize(): void;
+  setQuality(level: number): void;
   dispose(): void;
   setExpansion(progress: number): void;
   setPointer(pointer: { x: number; y: number } | null): void;
@@ -77,6 +78,13 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
   const geometry = new BufferGeometry();
   geometry.setAttribute("position", new BufferAttribute(data.positions, 3));
   geometry.setAttribute("seed", new BufferAttribute(data.seeds, 1));
+  // Spread reduced draw ranges over the whole shell, not its latitude-ordered prefix.
+  geometry.setIndex(
+    new BufferAttribute(
+      Uint16Array.from({ length: data.count }, (_, index) => (index * 7919) % data.count),
+      1,
+    ),
+  );
   const material = new ShaderMaterial({
     vertexShader,
     fragmentShader,
@@ -96,65 +104,57 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
   const points = new Points(geometry, material);
   scene.add(points);
   let progress = 0;
-  let frame = 0;
-  let lastTime = 0;
   let elapsed = 0;
   let fixedTime: number | null = null;
   let width = 1;
   let height = 1;
+  let cameraExpansion = -1;
   const pointer = new Vector2(10, 10);
   const updateCamera = () => {
     const expansion = Math.min(1, Math.max(0, (progress - 0.2) / 0.35));
+    material.uniforms.progress.value = progress;
+    if (cameraExpansion === expansion) return;
+    cameraExpansion = expansion;
     const startDistance = Math.max(5.6, 3 / camera.aspect);
     camera.position.z = startDistance + (0.4 - startDistance) * expansion;
     camera.setViewOffset(width, height, 0, -height * 0.18 * (1 - expansion), width, height);
     camera.updateProjectionMatrix();
-    material.uniforms.progress.value = progress;
   };
-  const render = (now: number, advance = false) => {
-    const delta = advance && lastTime ? Math.min((now - lastTime) / 1000, 0.05) : 0;
-    if (advance) lastTime = now;
+  let quality = 0;
+  const render = (delta = 0) => {
     elapsed += delta;
     material.uniforms.time.value = fixedTime ?? elapsed;
     material.uniforms.pointer.value.lerp(pointer, 1 - Math.exp(-delta * 9));
     renderer.render(scene, camera);
   };
-  const tick = (now: number) => {
-    render(now, true);
-    frame = requestAnimationFrame(tick);
-  };
   const resize = () => {
     const rect = canvas.getBoundingClientRect();
     width = Math.max(1, rect.width);
     height = Math.max(1, rect.height);
-    const ratio = Math.min(devicePixelRatio || 1, 1.75);
+    const ratio = Math.min(devicePixelRatio || 1, [1.75, 1.4, 1][quality]);
     renderer.setPixelRatio(ratio);
     renderer.setSize(width, height, false);
     material.uniforms.pixelRatio.value = ratio;
     camera.aspect = width / height;
     material.uniforms.aspect.value = camera.aspect;
+    cameraExpansion = -1;
     updateCamera();
-    render(performance.now());
+    render();
   };
-  const observer = new ResizeObserver(resize);
-  observer.observe(canvas);
   resize();
   return {
-    start() {
-      if (!frame && fixedTime === null) {
-        lastTime = 0;
-        frame = requestAnimationFrame(tick);
-      }
-    },
-    stop() {
-      cancelAnimationFrame(frame);
-      frame = 0;
-      lastTime = 0;
+    render,
+    resize,
+    setQuality(level) {
+      if (quality === level) return;
+      quality = level;
+      geometry.setDrawRange(0, Math.round(data.seeds.length * [1, 0.75, 0.5][quality]));
+      resize();
     },
     setExpansion(value) {
+      if (progress === value) return;
       progress = value;
       updateCamera();
-      if (!frame) render(performance.now());
     },
     setPointer(value) {
       pointer.set(value?.x ?? 10, value?.y ?? 10);
@@ -164,15 +164,13 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
       material.uniforms.farColor.value.set(light ? "#437ebc" : "#559cee");
       material.blending = light ? NormalBlending : AdditiveBlending;
       material.needsUpdate = true;
-      render(performance.now());
+      render();
     },
     setTime(value) {
       fixedTime = value;
-      render(performance.now());
+      render();
     },
     dispose() {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
       geometry.dispose();
       material.dispose();
       renderer.dispose();

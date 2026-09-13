@@ -88,8 +88,8 @@ export function HeroStage({
 
   return (
     <div className={styles.stage} data-mode={mode} data-scene ref={stageRef}>
-      <div className={styles.journey}>
-        <div className={styles.viewport}>
+      <div className={styles.journey} data-scene-journey>
+        <div className={styles.viewport} data-scene-viewport>
           <div className={styles.heroPane}>{hero}</div>
           <div className={styles.still}>{still}</div>
           {/* biome-ignore lint/a11y/noAriaHiddenOnFocusable: this decorative canvas has no tab stop or interaction. */}
