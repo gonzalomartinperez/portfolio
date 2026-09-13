@@ -49,6 +49,7 @@ export function TechConstellation({
                       <span
                         className={styles.identity}
                         data-tech-icon={item.icon ? item.id : undefined}
+                        data-scene-brand={item.icon === "springboot" ? "spring" : item.icon}
                       >
                         <span className={styles.glyph}>
                           <TechnologyMark technology={item} size={22} />

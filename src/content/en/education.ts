@@ -1,3 +1,4 @@
+import { certificateFiles } from "../site-config";
 import type { Credential, EvidenceLink, Metric, Ranking } from "../types";
 
 export const degree = {
@@ -71,8 +72,18 @@ export const rankings: Ranking[] = [
 export const rankingCaveat = "Institutional positions are shown with their ranking and edition.";
 
 export const credentials: Credential[] = [
-  { title: "Docker Fundamentals", issuer: "Universidad Nacional del Sur", date: "Mar 2024" },
-  { title: "Professional Power Skills", issuer: "Kognité", date: "Jun 2026" },
+  {
+    title: "Docker Fundamentals",
+    issuer: "Universidad Nacional del Sur",
+    date: "Mar 2024",
+    evidence: certificateFiles.docker,
+  },
+  {
+    title: "Professional Power Skills",
+    issuer: "Kognité",
+    date: "Jun 2026",
+    evidence: certificateFiles.powerSkills,
+  },
 ];
 
 export const credentialNote =

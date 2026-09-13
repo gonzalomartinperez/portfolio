@@ -71,18 +71,31 @@ export function TechnologyCatalogue({
         </label>
         <label>
           {copy.category}
-          <select
-            value={category}
-            onChange={(event) => setCategory(event.target.value)}
-            aria-controls="technology-results"
-          >
-            <option value="">{copy.all}</option>
-            {groups.map((group) => (
-              <option key={group.id} value={group.id}>
-                {group.name}
-              </option>
-            ))}
-          </select>
+          <span className={styles.selectField}>
+            <select
+              value={category}
+              onChange={(event) => setCategory(event.target.value)}
+              aria-controls="technology-results"
+            >
+              <option value="">{copy.all}</option>
+              {groups.map((group) => (
+                <option key={group.id} value={group.id}>
+                  {group.name}
+                </option>
+              ))}
+            </select>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.75"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </span>
         </label>
         <button
           type="button"

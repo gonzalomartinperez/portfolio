@@ -4,6 +4,7 @@ import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
 import { getContent } from "@/content";
 import { filomenaGallery } from "@/content/filomena-gallery";
+import imageDimensions from "@/content/filomena-image-dimensions.json";
 import { type Locale, localePath } from "@/content/locales";
 import styles from "./filomena.module.css";
 
@@ -14,6 +15,7 @@ export function FilomenaView({ locale }: { locale: Locale }) {
     id,
     src: `/filomena/filomena-${id}.webp`,
     alt: galleryAlt[id],
+    ...imageDimensions[id],
   }));
 
   const prose = (paragraphs: readonly string[]) => (

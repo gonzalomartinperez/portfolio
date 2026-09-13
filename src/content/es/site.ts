@@ -24,15 +24,15 @@ export const siteCopy: SiteCopy = {
     caseStudy: "Caso de estudio Filomena",
   },
   actions: {
-    seeWork: "Ver el trabajo",
+    seeWork: "Ver mi experiencia",
     getInTouch: "Contactarme",
     readCaseStudy: "Leer el caso de estudio",
     fullExperience: "Experiencia y proyectos completos",
-    fullStack: "Stack completo",
+    fullStack: "Explorar todas las tecnologías",
     academicRecord: "Registro académico",
     emailMe: "Escribirme un email",
     allContact: "Todas las formas de contacto",
-    backToWork: "Volver a todo el trabajo",
+    backToWork: "Volver a experiencia y proyectos",
     sourceOnGithub: "Código en GitHub",
     goHome: "Llevame a la portada",
   },
@@ -52,7 +52,7 @@ export const siteCopy: SiteCopy = {
     whoEyebrow: "Quién soy",
     whoHeading: "De sistemas complejos a productos útiles",
     whoParagraph:
-      "Conecto interfaces, servicios y datos para construir software que se usa todos los días. Mi trabajo abarca integraciones fintech, backoffices empresariales e IA aplicada: asistentes con recuperación de contexto, flujos agénticos y herramientas de ingeniería.",
+      "Trabajo sobre el producto completo: entender los requisitos, definir los límites entre servicios y comprobar cómo se comporta la aplicación con cargas reales.",
     factCurrently: "Actualmente",
     factExperience: "Experiencia",
     factBasedIn: "Radicado en",
@@ -74,7 +74,7 @@ export const siteCopy: SiteCopy = {
       "8,67/10 en 34 de 34 materias obligatorias, y un proyecto final calificado 10/10.",
     closingHeading: "Hablemos",
     closingBody:
-      "¿Buscás alguien que conecte ingeniería de software con IA aplicada? Estoy disponible para oportunidades 100% remotas, con incorporación inmediata a coordinar.",
+      "¿Buscás un perfil que combine ingeniería de software e IA aplicada? Hablemos de tu producto y de una oportunidad 100% remota.",
   },
   about: {
     metaTitle: "Sobre mí",
@@ -220,8 +220,7 @@ export const siteCopy: SiteCopy = {
     intro:
       "Contame sobre tu equipo, el producto y los desafíos de ingeniería que vienen. El email es la forma más directa de contactarme.",
     basedIn: (location, arrangement, timezone) =>
-      `Vivo en ${location}, trabajo ${arrangement} en ${timezone}, y puedo empezar de ` +
-      "inmediato — la fecha exacta es fácil de coordinar durante el proceso.",
+      `Vivo en ${location} (${timezone}) y trabajo ${arrangement}. Tengo disponibilidad inmediata; podemos acordar la fecha exacta durante el proceso.`,
     hiringHint: "Para conocer mi trabajo de producto e ingeniería, explorá el",
     hiringLinkText: "caso de estudio de Filomena",
     openToHeading: "Abierto a",

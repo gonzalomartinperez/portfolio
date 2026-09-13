@@ -10,23 +10,53 @@
   padding: var(--space-4);
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-md);
+  background: var(--surface-base);
 }
 .controls label {
   display: grid;
   gap: var(--space-2);
   flex: 1 1 15rem;
   font-size: var(--text-small);
+  min-width: 0;
 }
 .controls input,
 .controls select {
   width: 100%;
-  min-height: 2.8rem;
-  padding: 0.65rem 0.8rem;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
   border: 1px solid var(--line-control);
   border-radius: var(--radius-sm);
-  background: var(--surface-base);
+  background: var(--surface-raised);
   color: var(--text-primary);
   font: inherit;
+  font-size: 1rem;
+}
+.selectField {
+  position: relative;
+  display: block;
+}
+.selectField select {
+  appearance: none;
+  padding-inline-end: 3rem;
+  cursor: pointer;
+}
+.selectField > svg {
+  position: absolute;
+  inset-inline-end: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-secondary);
+}
+.controls input:hover,
+.controls select:hover {
+  border-color: var(--text-secondary);
+}
+.controls input:focus-visible,
+.controls select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-color: var(--accent);
 }
 .controls button {
   min-height: 2.8rem;

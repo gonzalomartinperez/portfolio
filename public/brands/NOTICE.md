@@ -1,4 +1,15 @@
-# Technology marks
+# Brand resources
+
+## University identity
+
+`universidad-nacional-del-sur.png` is the unmodified logo downloaded on 2026-09-12
+from the [official UNS site](https://www.uns.edu.ar/),
+[original asset](https://www.uns.edu.ar/img/uns_top_left.png). It identifies the
+degree-granting institution, not an endorsement of this portfolio. Its colours and
+proportions are preserved; university rights remain with their owner. This notice
+does not claim an open-content license for the university mark.
+
+## Technology marks
 
 Selected original SVGs from [Devicon](https://github.com/devicons/devicon), revision `7330accdbc47e2dc0c19789a48533c4a3c50fe58`, are stored in this directory. Individual trademarks belong to their respective owners; they identify technologies used in the portfolio and do not imply endorsement. Original artwork, colours and proportions are retained. The white backing is part of the portfolio layout, not an alteration to the mark.
 

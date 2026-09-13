@@ -3,6 +3,10 @@
   flex-wrap: wrap;
   gap: var(--space-3);
 }
+.list > li {
+  min-width: 0;
+  max-width: 100%;
+}
 
 .chip {
   background: #f4f6f9;
@@ -19,6 +23,7 @@
   border-radius: var(--radius-md);
   color: var(--text-primary);
   display: inline-flex;
+  max-width: 100%;
   gap: var(--space-3);
   min-block-size: 3rem;
   padding: var(--space-3) var(--space-5);
@@ -37,6 +42,7 @@
   display: flex;
   flex-direction: column;
   line-height: 1.3;
+  min-width: 0;
 }
 
 .name {
@@ -47,6 +53,34 @@
   color: var(--text-muted);
   font-size: var(--text-small);
   word-break: break-word;
+}
+.email {
+  word-break: normal;
+}
+.email > span {
+  display: inline-block;
+}
+@media (width < 36rem) {
+  .link {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    padding: var(--space-3);
+    gap: var(--space-2) var(--space-3);
+  }
+  .label {
+    display: contents;
+  }
+  .link .chip {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .name {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .detail {
+    grid-column: 1 / -1;
+  }
 }
 
 .link:hover .detail {
