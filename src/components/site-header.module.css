@@ -33,6 +33,9 @@
   flex-direction: column;
   line-height: 1.15;
 }
+.brand > img {
+  flex: none;
+}
 
 .brandName {
   color: var(--text-primary);

@@ -65,6 +65,7 @@ export type Credential = {
   title: string;
   issuer: string;
   date: string;
+  evidence?: { href: string; format: string };
 };
 
 export type Ranking = {

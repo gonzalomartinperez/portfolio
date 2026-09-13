@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
@@ -52,6 +53,15 @@ export function EducationView({ locale }: { locale: Locale }) {
 
       <section className="section-tight frame">
         <article className={styles.degree}>
+          <a className={styles.institutionLogo} href={degree.institutionHref}>
+            <Image
+              src="/brands/universidad-nacional-del-sur.png"
+              width={325}
+              height={80}
+              alt="Universidad Nacional del Sur"
+              unoptimized
+            />
+          </a>
           <div className={styles.degreeTop}>
             <div>
               <h2>{degree.qualification}</h2>
@@ -158,6 +168,16 @@ export function EducationView({ locale }: { locale: Locale }) {
                     <span className={styles.credentialIssuer}>{credential.issuer}</span>
                   </span>
                   <span className="mono muted">{credential.date}</span>
+                  {credential.evidence && (
+                    <a
+                      className={styles.certificateLink}
+                      href={credential.evidence.href}
+                      aria-label={`${locale === "es" ? "Ver certificado" : "View certificate"}: ${credential.title} (${credential.evidence.format})`}
+                    >
+                      {locale === "es" ? "Ver certificado" : "View certificate"} (
+                      {credential.evidence.format})
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

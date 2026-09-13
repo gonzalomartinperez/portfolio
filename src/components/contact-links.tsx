@@ -41,7 +41,19 @@ export function ContactLinks({ channels }: { channels: readonly ContactChannel[]
             </span>
             <span className={styles.label}>
               <span className={styles.name}>{channel.name}</span>
-              <span className={styles.detail}>{channel.detail}</span>
+              <span
+                className={`${styles.detail} ${channel.href.startsWith("mailto:") ? styles.email : ""}`}
+              >
+                {channel.href.startsWith("mailto:") && channel.detail.includes("@") ? (
+                  <>
+                    <span>{channel.detail.split("@")[0]}</span>
+                    <wbr />
+                    <span>@{channel.detail.split("@")[1]}</span>
+                  </>
+                ) : (
+                  channel.detail
+                )}
+              </span>
             </span>
           </a>
         </li>

@@ -41,8 +41,8 @@ export const chrome: Record<Locale, ChromeCopy> = {
     themeToDark: "Switch to dark theme",
     languageLabel: "Language",
     footerSite: "Site",
-    footerElsewhere: "Elsewhere",
-    colophon: "Next.js · TypeScript · no tracking",
+    footerElsewhere: "Profiles",
+    colophon: "Built with Next.js, React and TypeScript.",
     nav: {
       about: "About",
       work: "Work",
@@ -62,8 +62,8 @@ export const chrome: Record<Locale, ChromeCopy> = {
     themeToDark: "Cambiar al tema oscuro",
     languageLabel: "Idioma",
     footerSite: "Sitio",
-    footerElsewhere: "En otros lados",
-    colophon: "Next.js · TypeScript · sin rastreo",
+    footerElsewhere: "Perfiles",
+    colophon: "Desarrollado con Next.js, React y TypeScript.",
     nav: {
       about: "Sobre mí",
       work: "Trabajo",
