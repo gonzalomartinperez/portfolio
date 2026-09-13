@@ -68,6 +68,9 @@
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
   --duration-micro: 140ms;
   --duration-transition: 320ms;
+  --control-lift: perspective(700px) translate3d(0, -2px, 0) rotateX(3deg);
+  --control-press: perspective(700px) translate3d(0, 1px, 0) scale(0.985);
+  --control-depth: 0 3px 0 var(--line-subtle), 0 8px 18px rgb(0 0 0 / 12%);
 }
 
 :root[data-theme="light"] {
@@ -287,10 +290,35 @@ ol {
   min-height: 2.75rem;
   padding-inline: var(--space-5);
   text-decoration: none;
+  cursor: pointer;
   transition:
     background-color var(--duration-micro) var(--ease-standard),
     border-color var(--duration-micro) var(--ease-standard),
-    color var(--duration-micro) var(--ease-standard);
+    color var(--duration-micro) var(--ease-standard),
+    box-shadow var(--duration-micro) var(--ease-standard);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .button {
+    transition:
+      background-color var(--duration-micro) var(--ease-standard),
+      border-color var(--duration-micro) var(--ease-standard),
+      color var(--duration-micro) var(--ease-standard),
+      box-shadow var(--duration-micro) var(--ease-standard),
+      transform var(--duration-micro) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .button:not(:disabled):not([aria-disabled="true"]):hover {
+      transform: var(--control-lift);
+      box-shadow: var(--control-depth);
+    }
+  }
+
+  .button:not(:disabled):not([aria-disabled="true"]):active {
+    transform: var(--control-press);
+    box-shadow: none;
+  }
 }
 
 .button-primary {

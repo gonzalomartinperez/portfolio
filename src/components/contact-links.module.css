@@ -111,3 +111,28 @@
   border-color: var(--accent);
   color: var(--accent);
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .link,
+  .iconOnly {
+    transition:
+      border-color var(--duration-micro) var(--ease-standard),
+      color var(--duration-micro) var(--ease-standard),
+      transform var(--duration-micro) var(--ease-out),
+      box-shadow var(--duration-micro) var(--ease-standard);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .link:hover,
+    .iconOnly:hover {
+      transform: var(--control-lift);
+      box-shadow: var(--control-depth);
+    }
+  }
+
+  .link:active,
+  .iconOnly:active {
+    transform: var(--control-press);
+    box-shadow: none;
+  }
+}
