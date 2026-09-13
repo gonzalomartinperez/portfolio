@@ -48,6 +48,11 @@ export function FilomenaView({ locale }: { locale: Locale }) {
         </section>
 
         <section className={styles.block}>
+          <h2>{study.overview.heading}</h2>
+          {prose(study.overview.body)}
+        </section>
+
+        <section className={styles.block}>
           <h2>{study.problem.heading}</h2>
           {prose(study.problem.body)}
         </section>
@@ -59,7 +64,6 @@ export function FilomenaView({ locale }: { locale: Locale }) {
 
         <section className={styles.block}>
           <h2>{study.role.heading}</h2>
-          <p className={styles.attribution}>{filomena.attribution}</p>
           {prose(study.role.body)}
         </section>
 
@@ -161,10 +165,10 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           <h2>{copy.filomena.evidenceHeading}</h2>
           <div className={styles.evidence}>
             {filomena.links.map((link) => (
-              <a className={styles.evidenceLink} href={link.href} key={link.href}>
+              <Link className={styles.evidenceLink} href={link.href} key={link.href}>
                 <span className={styles.evidenceLabel}>{link.label}</span>
                 <span className={styles.evidenceDescription}>{link.description}</span>
-              </a>
+              </Link>
             ))}
           </div>
           <p className="muted">{copy.filomena.evidenceNote}</p>

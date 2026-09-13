@@ -33,7 +33,12 @@ export function WorkView({ locale }: { locale: Locale }) {
               <div className={styles.meta}>
                 <p className={styles.period}>{role.period}</p>
                 <p className={styles.place}>
-                  {role.location} · {role.arrangement}
+                  {role.location} ·{" "}
+                  {locale === "es"
+                    ? { Remote: "Remoto", "On-site": "Presencial", Hybrid: "Híbrido" }[
+                        role.arrangement
+                      ]
+                    : role.arrangement}
                 </p>
               </div>
 

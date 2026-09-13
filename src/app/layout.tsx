@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { PageMotion } from "@/components/page-motion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { chrome } from "@/content/chrome";
@@ -37,7 +38,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           {chrome[defaultLocale].skipToContent}
         </a>
         <SiteHeader />
-        <main id="main">{children}</main>
+        <main id="main">
+          <PageMotion>{children}</PageMotion>
+        </main>
         <SiteFooter />
         <ProfileJsonLd />
       </body>

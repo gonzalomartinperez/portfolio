@@ -31,6 +31,7 @@ export function SiteHeader() {
     { path: "/work", label: copy.nav.work },
     { path: "/stack", label: copy.nav.stack },
     { path: "/education", label: copy.nav.education },
+    { path: "/cv", label: copy.nav.cv },
     { path: "/contact", label: copy.nav.contact },
   ];
 

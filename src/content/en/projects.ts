@@ -4,7 +4,7 @@ import type { EvidenceLink, Metric, Project } from "../types";
 export const filomena: Project = {
   slug: "filomena",
   name: "Filomena",
-  tagline: "A health-sciences exam platform five institutions run on",
+  tagline: "Health-sciences exams across five institutions",
   period: "Jan – Dec 2025",
   summary:
     "A legacy CakePHP and jQuery monolith, rebuilt as an API-first platform that now runs " +
@@ -51,9 +51,9 @@ export const filomena: Project = {
   ]),
   links: [
     {
-      label: "Case study",
-      href: "https://vine-jupiter-8df.notion.site/Filomena-Production-Health-Sciences-Exam-Platform-367b68807486814ca99ad189ca70ff00",
-      description: "Full write-up with screenshots",
+      label: "Academic context",
+      href: "/education",
+      description: "Degree, final project and academic record",
     },
     {
       label: "Backend source",
@@ -87,6 +87,14 @@ type Change = {
 };
 
 export const filomenaCaseStudy = {
+  overview: {
+    heading: "One platform for the assessment lifecycle",
+    body: [
+      "Filomena supports exam preparation, scheduling, delivery and assessment for health-sciences institutions. Administrators configure exams and access, students work through clinical cases, and evaluators assess answers against structured rubrics.",
+      "The product brings those workflows together while separating institutional data and protecting student identity in the assessment process. Its 43-screen demonstration below follows those roles through the application.",
+    ],
+  } satisfies CaseStudySection,
+
   problem: {
     heading: "The problem",
     body: [
@@ -122,7 +130,7 @@ export const filomenaCaseStudy = {
   approach: {
     heading: "From monolith to API-first product",
     body: [
-      "We separated the CakePHP and jQuery monolith into a Laravel REST API and a Next.js, React and TypeScript frontend. The API provided a common contract for the interface and multi-institution workflows.",
+      "We separated the CakePHP and jQuery monolith into a Laravel REST API and a Next.js, React and TypeScript frontend. The API provided a common contract for the interface and multi-institution workflows, with input validation and role-based access control. Server-side rendering supported the initial page load, followed by interactive application flows.",
       "SQL tuning, indexes, Redis caching and queues supported concurrent exam workflows. Prometheus and Grafana made production behaviour visible across the application and its supporting services.",
     ],
   } satisfies CaseStudySection,
@@ -204,7 +212,7 @@ export const filomenaCaseStudy = {
     heading: "Delivery and operation",
     body: [
       "Our three-person team used Agile practices and Trello to coordinate requirements, implementation and release.",
-      "Docker and GitHub Actions supported production deployments observed at under fifteen minutes end to end. The public code repositories are snapshots and do not include the original deployment pipeline.",
+      "Docker and Docker Compose provided containerised environments, while GitHub Actions supported production deployments observed at under fifteen minutes end to end. The public code repositories are snapshots and do not include the original deployment pipeline.",
     ],
   } satisfies CaseStudySection,
 

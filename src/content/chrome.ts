@@ -26,6 +26,7 @@ export type ChromeCopy = {
     stack: string;
     education: string;
     contact: string;
+    cv: string;
     caseStudy: string;
   };
 };
@@ -49,6 +50,7 @@ export const chrome: Record<Locale, ChromeCopy> = {
       stack: "Stack",
       education: "Education",
       contact: "Contact",
+      cv: "CV",
       caseStudy: "Filomena case study",
     },
   },
@@ -70,6 +72,7 @@ export const chrome: Record<Locale, ChromeCopy> = {
       stack: "Stack",
       education: "Educación",
       contact: "Contacto",
+      cv: "CV",
       caseStudy: "Caso de estudio de Filomena",
     },
   },

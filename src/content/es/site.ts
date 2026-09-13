@@ -86,7 +86,8 @@ export const siteCopy: SiteCopy = {
     paragraphs: [
       "Soy Gonzalo, Ingeniero en Sistemas de Información por la Universidad Nacional del Sur y AI Software Engineer. Desde 2024 combino proyectos independientes con roles de ingeniería en software empresarial y fintech.",
       "Construí experiencias para comercios, integraciones entre servicios y un backoffice de permisos. Como contribuidor principal de un equipo de tres personas, también participé en la evolución de Filomena hacia una plataforma de exámenes usada por cinco instituciones.",
-      "Actualmente soy AI Engineer en Rampy. Mi enfoque une interfaces, servicios y datos con RAG, agentes y entornos de desarrollo que preservan contexto.",
+      "Actualmente soy AI Engineer en Rampy, donde mi primer aporte fue configurar un entorno agéntico de ingeniería para preservar contexto y coordinar trabajo en paralelo.",
+      "Mi enfoque combina IA aplicada e ingeniería de software: asistentes con recuperación de contexto para usuarios, servicios de integración para empresas y entornos de desarrollo apoyados por agentes. También estoy profundizando conocimientos de blockchain, smart accounts y DeFi, diferenciados de mi experiencia aplicada en fintech.",
     ],
     asideCurrently: "Actualmente",
     asideArrangement: "Modalidad de trabajo",
@@ -151,10 +152,10 @@ export const siteCopy: SiteCopy = {
     columnAfter: "Después",
     evidenceHeading: "Evidencia",
     evidenceNote:
-      "Explorá las versiones públicas del código y el recorrido completo del producto. Estas versiones documentan la implementación, no el historial original de desarrollo.",
+      "El recorrido del producto y el contexto de ingeniería están incluidos en esta página. Los repositorios enlazados son versiones públicas del código: documentan la implementación, no el historial original de desarrollo ni el pipeline de despliegue.",
     galleryHeading: "Explorá la aplicación",
     galleryCaption:
-      "Un recorrido de demostración por acceso, administración y exámenes. Las pantallas están agrupadas por flujo de trabajo.",
+      "43 pantallas de demostración revisadas que recorren administración, exámenes, corrección y monitoreo operativo. Explorá los flujos o ampliá una pantalla para ver el detalle.",
     galleryLabel: "Recorrido por la interfaz de Filomena",
     galleryPrevious: "Pantalla anterior",
     galleryNext: "Pantalla siguiente",

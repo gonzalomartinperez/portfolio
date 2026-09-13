@@ -38,7 +38,6 @@ export function HeroStage({
     const clear = () => {
       runtimeRef.current?.dispose();
       runtimeRef.current = null;
-      stage.style.removeProperty("--stage-progress");
       setMode("static");
     };
     const initialize = async () => {
@@ -88,13 +87,17 @@ export function HeroStage({
 
   return (
     <div className={styles.stage} data-mode={mode} data-scene ref={stageRef}>
-      <div className={styles.journey}>
-        <div className={styles.viewport}>
-          <div className={styles.heroPane}>{hero}</div>
+      <div className={styles.journey} data-scene-journey>
+        <div className={styles.viewport} data-scene-viewport>
+          <div className={styles.heroPane} data-scene-hero>
+            {hero}
+          </div>
           <div className={styles.still}>{still}</div>
           {/* biome-ignore lint/a11y/noAriaHiddenOnFocusable: this decorative canvas has no tab stop or interaction. */}
           <canvas aria-hidden="true" className={styles.canvas} ref={canvasRef} />
-          <div className={styles.core}>{core}</div>
+          <div className={styles.core} data-scene-core>
+            {core}
+          </div>
           <div className={styles.logoCloud} data-logo-cloud aria-hidden="true" inert />
           {mode !== "static" && (
             <button
