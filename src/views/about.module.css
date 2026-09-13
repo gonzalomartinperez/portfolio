@@ -37,17 +37,20 @@
   gap: var(--space-5);
 }
 
-/* The portrait dissolves into the page rather than sitting in a frame: an elliptical mask
-   fades every edge to transparent, so the background reads straight through it. */
 .portrait {
-  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 25%, var(--accent-wash), transparent 75%), var(--surface-raised);
+  border: 1px solid var(--line-control);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 4px var(--accent-wash);
+  overflow: hidden;
+  padding: var(--space-2);
 }
 
 .portrait img {
   filter: var(--portrait-filter);
+  border-radius: var(--radius-md);
   height: auto;
-  -webkit-mask-image: radial-gradient(ellipse 74% 68% at 50% 40%, #000 52%, transparent 100%);
-  mask-image: radial-gradient(ellipse 74% 68% at 50% 40%, #000 52%, transparent 100%);
   width: 100%;
 }
 
