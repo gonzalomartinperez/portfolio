@@ -1,3 +1,9 @@
+import {
+  academicDocuments,
+  academicEntry,
+  highlightedCourseIds,
+  localizedCurriculum,
+} from "../academic-catalogue";
 import { certificateFiles } from "../site-config";
 import type { Credential, EvidenceLink, Metric, Ranking } from "../types";
 
@@ -30,20 +36,7 @@ export const academicResults: Metric[] = [
   },
 ];
 
-export const coursework = [
-  "Sistemas Inteligentes Artificiales",
-  "Verificación y Validación de Software",
-  "Arquitectura y Diseño de Sistemas",
-  "Bases de Datos",
-  "Algoritmos y Complejidad",
-  "Estructuras de Datos",
-  "Sistemas Operativos",
-  "Ingeniería de Aplicaciones Web",
-  "Proyectos de Sistemas de Software",
-  "Redes de Computadoras",
-  "Métodos Formales para Ingeniería de Software",
-  "Gestión de Calidad en el Software",
-];
+export const coursework = highlightedCourseIds.map((id) => academicEntry(id).name.es);
 
 export const professionalPractice = {
   title: "Práctica Profesional Supervisada",
@@ -92,9 +85,14 @@ export const credentialNote =
 
 export const academicEvidence: EvidenceLink[] = [
   {
-    label: "Registro académico verificado",
-    href: "https://vine-jupiter-8df.notion.site/Registro-Acad-mico-Ingenier-a-en-Sistemas-de-Informaci-n-UNS-367b6880748681d2af22f678fb406878",
-    description: "Registro completo con verificación oficial",
+    label: "Analítico completo · PDF",
+    href: academicDocuments.transcript.href,
+    description: "Registro histórico emitido el 22 de diciembre de 2025",
+  },
+  {
+    label: "Plan universitario 2012 · PDF",
+    href: academicDocuments.plan.href,
+    description: "Plan oficial de Ingeniería en Sistemas de Información",
   },
 ];
 
@@ -105,67 +103,7 @@ export const languageNote =
  * The complete degree programme, taken from the university's published plan. It is the
  * curriculum, not a transcript: no grades appear here, and none are implied.
  */
-export const curriculum: { year: string; subjects: string[] }[] = [
-  {
-    year: "Primer año",
-    subjects: [
-      "Resolución de Problemas y Algoritmos",
-      "Elementos de Álgebra y de Geometría",
-      "Análisis Matemático I",
-      "Introducción a la Programación Orientada a Objetos",
-      "Lenguajes Formales y Autómatas",
-      "Introducción a la Ingeniería de Software",
-    ],
-  },
-  {
-    year: "Segundo año",
-    subjects: [
-      "Análisis Matemático II",
-      "Estructuras de Datos",
-      "Teoría de la Computabilidad",
-      "Tecnología de Programación",
-      "Organización de Computadoras",
-      "Modelos de Software",
-    ],
-  },
-  {
-    year: "Tercer año",
-    subjects: [
-      "Modelos Estadísticos para Ciencias de la Computación",
-      "Lógica para Ciencias de la Computación",
-      "Requerimientos de Sistemas",
-      "Arquitectura de Computadoras",
-      "Métodos Formales para Ingeniería de Software",
-      "Química",
-      "Sistemas Operativos",
-    ],
-  },
-  {
-    year: "Cuarto año",
-    subjects: [
-      "Bases de Datos",
-      "Ingeniería de Aplicaciones Web",
-      "Arquitectura y Diseño de Sistemas",
-      "Algoritmos y Complejidad",
-      "Proyectos de Sistemas de Software",
-      "Verificación y Validación de Software",
-      "Física I",
-    ],
-  },
-  {
-    year: "Quinto año",
-    subjects: [
-      "Gestión de Calidad en el Software",
-      "Práctica Profesional Supervisada",
-      "Economía de la Empresa",
-      "Redes de Computadoras",
-      "Auditoría de Sistemas",
-      "Sistemas Inteligentes Artificiales",
-      "Física II",
-      "Proyecto Final",
-    ],
-  },
-];
+export const curriculum = localizedCurriculum("es");
 
 export const curriculumNote =
-  "El Plan 2012 de la universidad describe la estructura del programa. Las materias aprobadas y las calificaciones individuales se documentan por separado en el registro académico verificado.";
+  "Plan 2012: nombres oficiales, ubicación curricular y resultados del analítico. El año indica la ubicación en el plan, no el año de cursado. AP significa aprobado sin nota numérica.";

@@ -35,14 +35,10 @@ jobs:
         run: npm ci
       - name: Check repository, lint, types, and production build
         run: npm run check
-      - name: Smoke-test the production server
-        run: npm run test:smoke
-      - name: Test the rendered site
-        run: npm run test:rendered
       - name: Install browser test runtime
         run: npx --no-install playwright install --with-deps chromium
-      - name: Verify interactions and accessibility
-        run: npm run test:browser
+      - name: Verify rendered routes, interactions, and accessibility
+        run: npm run test:site
       - name: Retain browser verification artifacts
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

@@ -10,6 +10,7 @@ const routes = [
   { path: "/contact", priority: 0.8 },
   { path: "/stack", priority: 0.7 },
   { path: "/education", priority: 0.7 },
+  { path: "/cv", priority: 0.8 },
 ];
 
 const absolute = (locale: Locale, path: string) => `${siteUrl}${localePath(locale, path)}`;

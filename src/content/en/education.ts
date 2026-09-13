@@ -1,3 +1,9 @@
+import {
+  academicDocuments,
+  academicEntry,
+  highlightedCourseIds,
+  localizedCurriculum,
+} from "../academic-catalogue";
 import { certificateFiles } from "../site-config";
 import type { Credential, EvidenceLink, Metric, Ranking } from "../types";
 
@@ -30,20 +36,7 @@ export const academicResults: Metric[] = [
   },
 ];
 
-export const coursework = [
-  "AI Systems",
-  "Software Verification & Validation",
-  "Systems Architecture & Design",
-  "Databases",
-  "Algorithms & Complexity",
-  "Data Structures",
-  "Operating Systems",
-  "Web Application Engineering",
-  "Software Systems Projects",
-  "Computer Networks",
-  "Formal Methods for Software Engineering",
-  "Software Quality Management",
-];
+export const coursework = highlightedCourseIds.map((id) => academicEntry(id).name.en);
 
 export const professionalPractice = {
   title: "Supervised Professional Practice",
@@ -91,9 +84,14 @@ export const credentialNote =
 
 export const academicEvidence: EvidenceLink[] = [
   {
-    label: "Verified academic record",
-    href: "https://vine-jupiter-8df.notion.site/Academic-Record-Information-Systems-Engineering-UNS-367b68807486817db09bc3f178ae0ffb",
-    description: "Full record with official verification",
+    label: "Full academic transcript · PDF",
+    href: academicDocuments.transcript.href,
+    description: "Historical record issued on 22 December 2025",
+  },
+  {
+    label: "University Plan 2012 · PDF",
+    href: academicDocuments.plan.href,
+    description: "Official Information Systems Engineering curriculum",
   },
 ];
 
@@ -104,67 +102,7 @@ export const languageNote =
  * The complete degree programme, taken from the university's published plan. It is the
  * curriculum, not a transcript: no grades appear here, and none are implied.
  */
-export const curriculum: { year: string; subjects: string[] }[] = [
-  {
-    year: "Year 1",
-    subjects: [
-      "Problem Solving & Algorithms",
-      "Algebra & Geometry",
-      "Calculus I",
-      "Introduction to Object-Oriented Programming",
-      "Formal Languages & Automata",
-      "Introduction to Software Engineering",
-    ],
-  },
-  {
-    year: "Year 2",
-    subjects: [
-      "Calculus II",
-      "Data Structures",
-      "Computability Theory",
-      "Programming Technology",
-      "Computer Organisation",
-      "Software Models",
-    ],
-  },
-  {
-    year: "Year 3",
-    subjects: [
-      "Statistical Models for Computer Science",
-      "Logic for Computer Science",
-      "Systems Requirements",
-      "Computer Architecture",
-      "Formal Methods for Software Engineering",
-      "Chemistry",
-      "Operating Systems",
-    ],
-  },
-  {
-    year: "Year 4",
-    subjects: [
-      "Databases",
-      "Web Application Engineering",
-      "Systems Architecture & Design",
-      "Algorithms & Complexity",
-      "Software Systems Projects",
-      "Software Verification & Validation",
-      "Physics I",
-    ],
-  },
-  {
-    year: "Year 5",
-    subjects: [
-      "Software Quality Management",
-      "Supervised Professional Practice",
-      "Business Economics",
-      "Computer Networks",
-      "Systems Auditing",
-      "Artificial Intelligence Systems",
-      "Physics II",
-      "Final Year Project",
-    ],
-  },
-];
+export const curriculum = localizedCurriculum("en");
 
 export const curriculumNote =
-  "The university’s Plan 2012 describes the programme structure below. Course completion and individual grades are documented separately in the verified academic record.";
+  "Plan 2012: curriculum placement and documented transcript results. Year refers to the curriculum, not the calendar year attended. English course names are editorial translations; original Spanish names remain available. AP means passed without a numerical grade.";

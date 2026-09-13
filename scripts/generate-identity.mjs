@@ -15,9 +15,14 @@ const sizes = [16, 32, 48, 96, 192];
 /** Smoothly resizes the approved PNG using sharp from Next.js's locked dependency tree. */
 async function generate() {
   const source = await readFile(new URL("src/assets/avatar.png", root));
+  // The selected portrait has extra canvas around the face; small icons need tighter framing.
+  const faviconSource = await sharp(source)
+    .extract({ left: 40, top: 34, width: 432, height: 432 })
+    .png()
+    .toBuffer();
   const pngs = await Promise.all(
     sizes.map((size) =>
-      sharp(source)
+      sharp(size <= 48 ? faviconSource : source)
         .resize(size, size, { kernel: "lanczos3" })
         .png({ compressionLevel: 9 })
         .toBuffer(),

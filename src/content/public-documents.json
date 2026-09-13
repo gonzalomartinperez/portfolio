@@ -1,0 +1,62 @@
+[
+  {
+    "href": "/documents/uns-academic-transcript-2025.pdf",
+    "title": {
+      "en": "Academic transcript (2025)",
+      "es": "Analítico académico (2025)"
+    },
+    "mime": "application/pdf",
+    "bytes": 138567,
+    "sha256": "39f0209f9ccf733bb5751c7c4e8faea090160993587c32b9f5deab83bbad779d"
+  },
+  {
+    "href": "/documents/uns-information-systems-plan-2012.pdf",
+    "title": {
+      "en": "University curriculum (2012)",
+      "es": "Plan universitario (2012)"
+    },
+    "mime": "application/pdf",
+    "bytes": 91190,
+    "sha256": "acb00660434c1f140fb43ead87b1181e3abb328fd57f6893ad075c9aca3554d8"
+  },
+  {
+    "href": "/certificates/docker-fundamentals-2024.pdf",
+    "title": {
+      "en": "Docker Fundamentals",
+      "es": "Fundamentos de Docker"
+    },
+    "mime": "application/pdf",
+    "bytes": 281963,
+    "sha256": "9634ed4bba96dfb61e764e81012aa12d83f24b93f92fdab9e87e8e7487f5c731"
+  },
+  {
+    "href": "/certificates/professional-power-skills-2026.png",
+    "title": {
+      "en": "Professional Power Skills",
+      "es": "Professional Power Skills"
+    },
+    "mime": "image/png",
+    "bytes": 192160,
+    "sha256": "672e2cb6b24aa78645e625f278c439c9c70a466699e933d2d4b35672a83874b6"
+  },
+  {
+    "href": "/gonzalo-martin-perez-ai-software-engineer-en.pdf",
+    "title": {
+      "en": "CV in English",
+      "es": "CV en inglés"
+    },
+    "mime": "application/pdf",
+    "bytes": 391996,
+    "sha256": "0767fb4be30d0e47eb4cdfdc5bf5363d9de0d1050edebaaf5cf9f47d1af092fd"
+  },
+  {
+    "href": "/gonzalo-martin-perez-ai-software-engineer-es.pdf",
+    "title": {
+      "en": "CV in Spanish",
+      "es": "CV en español"
+    },
+    "mime": "application/pdf",
+    "bytes": 336229,
+    "sha256": "3bddc8821ed00614fdb704810ae802125f8ce902555c284a11bb540cea76f2ac"
+  }
+]

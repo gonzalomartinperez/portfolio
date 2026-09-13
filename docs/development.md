@@ -43,7 +43,14 @@ Run `npm ci` after dependency changes, then `npm run check` and `git diff --chec
 and one build with mandatory TypeScript validation;
 it does not provide a security audit or visual accessibility QA. After building,
 `npm run test:smoke` checks the production server, HTML landmarks, and 404 handling;
-CI runs it too. It uses port 3100 by default; set `SMOKE_TEST_PORT` for parallel runs.
+The Hostinger compatibility job runs it too. It uses port 3100 by default; set
+`SMOKE_TEST_PORT` for parallel runs. The modern quality job uses `npm run test:site`:
+one owned production server serves rendered assertions and Playwright sequentially.
+Rendered tests already cover the smoke assertions, so they are not repeated there.
+Browser tests default to one worker to avoid competing software-rendered scenes;
+see the [motion research](research/motion-performance.md) for measurements and rationale.
+Use `SITE_TEST_PORT` to isolate this combined run; standalone browser tests retain
+their own managed server. Document hashes and signature checks run before the build.
 Use `npm run typecheck` for a quick standalone type check during development;
 there is no need to run it immediately before `check`. Reuse successful verification
 for an unchanged source state, dependencies and runtime; rerun affected checks

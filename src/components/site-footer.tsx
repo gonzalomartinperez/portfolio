@@ -27,6 +27,7 @@ export function SiteFooter() {
     { path: "/work/filomena", label: copy.nav.caseStudy },
     { path: "/stack", label: copy.nav.stack },
     { path: "/education", label: copy.nav.education },
+    { path: "/cv", label: copy.nav.cv },
     { path: "/contact", label: copy.nav.contact },
   ];
 
