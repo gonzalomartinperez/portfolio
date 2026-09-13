@@ -96,12 +96,14 @@ test("touch impulses ignore scrolling gestures", async ({ page, isMobile }) => {
   await expect(scene).toHaveAttribute("data-mode", "running");
   await scene.dispatchEvent("pointerdown", {
     pointerType: "touch",
+    isPrimary: true,
     pointerId: 1,
     clientX: 180,
     clientY: 550,
   });
   await scene.dispatchEvent("pointerup", {
     pointerType: "touch",
+    isPrimary: true,
     pointerId: 1,
     clientX: 180,
     clientY: 550,
@@ -109,12 +111,14 @@ test("touch impulses ignore scrolling gestures", async ({ page, isMobile }) => {
   await expect(scene).toHaveAttribute("data-scene-tap", "1");
   await scene.dispatchEvent("pointerdown", {
     pointerType: "touch",
+    isPrimary: true,
     pointerId: 2,
     clientX: 180,
     clientY: 550,
   });
   await scene.dispatchEvent("pointerup", {
     pointerType: "touch",
+    isPrimary: true,
     pointerId: 2,
     clientX: 180,
     clientY: 450,
@@ -122,18 +126,21 @@ test("touch impulses ignore scrolling gestures", async ({ page, isMobile }) => {
   await expect(scene).toHaveAttribute("data-scene-tap", "1");
   await scene.dispatchEvent("pointerdown", {
     pointerType: "touch",
+    isPrimary: true,
     pointerId: 3,
     clientX: 180,
     clientY: 550,
   });
   await scene.dispatchEvent("pointermove", {
     pointerType: "touch",
+    isPrimary: true,
     pointerId: 3,
     clientX: 180,
     clientY: 450,
   });
   await scene.dispatchEvent("pointerup", {
     pointerType: "touch",
+    isPrimary: true,
     pointerId: 3,
     clientX: 180,
     clientY: 550,
