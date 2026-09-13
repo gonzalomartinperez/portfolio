@@ -1,8 +1,6 @@
 import assert from "node:assert/strict";
-import { spawn } from "node:child_process";
-import { once } from "node:events";
 import test, { after, before } from "node:test";
-import { setTimeout as delay } from "node:timers/promises";
+import { localTestOrigin, startTestServer } from "./test-server.mjs";
 
 /**
  * Integration tests over the production server.
@@ -12,7 +10,7 @@ import { setTimeout as delay } from "node:timers/promises";
  */
 
 const port = process.env.RENDERED_TEST_PORT ?? "3140";
-const origin = `http://127.0.0.1:${port}`;
+const origin = localTestOrigin(process.env.SITE_TEST_ORIGIN ?? `http://127.0.0.1:${port}`);
 
 const routes = [
   "/",
@@ -22,6 +20,7 @@ const routes = [
   "/stack",
   "/education",
   "/contact",
+  "/cv",
   "/es",
   "/es/about",
   "/es/work",
@@ -29,6 +28,7 @@ const routes = [
   "/es/stack",
   "/es/education",
   "/es/contact",
+  "/es/cv",
 ];
 
 let server;
@@ -40,39 +40,12 @@ const get = async (path) => {
 };
 
 before(async () => {
-  server = spawn(
-    process.execPath,
-    ["node_modules/next/dist/bin/next", "start", "--hostname", "127.0.0.1", "--port", port],
-    { windowsHide: true, stdio: ["ignore", "pipe", "pipe"] },
-  );
-  let output = "";
-  let ready = false;
-  for (const stream of [server.stdout, server.stderr]) {
-    stream.on("data", (chunk) => {
-      output = `${output}${chunk}`.slice(-16_384);
-      ready ||= /Ready in/.test(output);
-    });
-  }
-  const deadline = Date.now() + 45_000;
-  while (!ready) {
-    assert.equal(server.exitCode, null, `Server exited: ${output}`);
-    assert.ok(Date.now() < deadline, `Server startup timed out: ${output}`);
-    await delay(200);
-  }
+  if (!process.env.SITE_TEST_ORIGIN) server = await startTestServer(port);
   for (const route of routes) pages.set(route, await get(route));
 });
 
 after(async () => {
-  if (server?.exitCode === null) {
-    const stopped = once(server, "exit");
-    server.kill();
-    const fallback = setTimeout(() => server.kill("SIGKILL"), 5_000);
-    try {
-      await stopped;
-    } finally {
-      clearTimeout(fallback);
-    }
-  }
+  await server?.stop();
 });
 
 test("every route returns HTML", () => {
@@ -179,6 +152,15 @@ test("no page advertises a placeholder or unfinished section", () => {
   }
 });
 
+test("the portfolio has no public Notion or Reactive Resume dependency", () => {
+  for (const [route, page] of pages) {
+    assert(
+      !/href="[^"]*(?:notion\.(?:site|so|com)|rxresu\.me|reactive-resume)/i.test(page.body),
+      route,
+    );
+  }
+});
+
 test("sitemap lists both languages and robots points at it", async () => {
   const sitemap = await get("/sitemap.xml");
   assert.equal(sitemap.status, 200);
@@ -235,4 +217,23 @@ test("switching language keeps you on the same page", () => {
   // The Spanish work page must link back to the English one and vice versa.
   assert.match(pages.get("/work").body, /href="\/es\/work"/);
   assert.match(pages.get("/es/work").body, /href="\/work"/);
+});
+
+test("internal context links resolve to rendered anchors", () => {
+  for (const [route, page] of pages) {
+    for (const match of page.body.matchAll(/href="([^"]+)"/g)) {
+      const url = new URL(
+        match[1].replaceAll("&amp;", "&"),
+        `https://gonzalomartinperez.com${route}`,
+      );
+      if (url.hostname !== "gonzalomartinperez.com" || !url.hash) continue;
+      const target = pages.get(url.pathname.replace(/\/$/, "") || "/");
+      if (!target) continue;
+      const id = decodeURIComponent(url.hash.slice(1));
+      assert(
+        target.body.includes(`id="${id}"`),
+        `${route} links to missing anchor ${url.pathname}#${id}`,
+      );
+    }
+  }
 });
