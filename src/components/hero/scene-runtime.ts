@@ -17,7 +17,15 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   if (deterministic) engine.setTime(Number.isFinite(requestedTime) ? requestedTime : 0);
   const progress = { value: 0 };
   const cloud = stage.querySelector<HTMLElement>("[data-logo-cloud]");
-  const sourceMarks = stage.querySelectorAll<HTMLElement>("[data-tech-icon]");
+  const seenBrands = new Set<string>();
+  const sourceMarks = [...stage.querySelectorAll<HTMLElement>("[data-tech-icon]")].filter(
+    (mark) => {
+      const brand = mark.dataset.sceneBrand ?? mark.dataset.techIcon;
+      if (!brand || seenBrands.has(brand)) return false;
+      seenBrands.add(brand);
+      return true;
+    },
+  );
   sourceMarks.forEach((source, index) => {
     if (!cloud) return;
     const item = document.createElement("div");
