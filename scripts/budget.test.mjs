@@ -50,7 +50,7 @@ test("stylesheets stay under 16 KB gzipped in total", () => {
 });
 
 test("the portrait stays under 80 KB", () => {
-  const portrait = path.join(root, "src", "assets", "portrait.webp");
+  const portrait = path.join(root, "src", "assets", "portrait.avif");
   const size = statSync(portrait).size / 1024;
   assert.ok(size < 80, `portrait is ${size.toFixed(1)} KB, budget is 80 KB`);
 });
