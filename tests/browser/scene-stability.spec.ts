@@ -1,5 +1,19 @@
 import { expect, test } from "@playwright/test";
 
+test("scene mounting preserves an already focused hero link", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/?sceneProgress=0.75&sceneTime=0");
+  const scene = page.locator("[data-scene]");
+  const hero = scene.locator("[data-scene-hero]");
+  const link = hero.locator("a").first();
+  await link.focus();
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await expect(scene).toHaveAttribute("data-mode", "running");
+  await expect(link).toBeFocused();
+  await expect(hero).toHaveCSS("opacity", "1");
+  await expect(hero).toHaveCSS("transform", "none");
+});
+
 test("focused hero links remain readable while the scene is expanded", async ({ page }) => {
   await page.goto("/?sceneProgress=0.75&sceneTime=0");
   const scene = page.locator("[data-scene]");

@@ -18,6 +18,7 @@ test("journey-only resizing does not reallocate the unchanged drawing buffer", a
   await page.goto("/");
   const scene = page.locator("[data-scene]");
   await expect(scene).toHaveAttribute("data-mode", "running");
+  await page.getByRole("button", { name: "Pause animation", exact: true }).click();
   await page.evaluate(async () => {
     await new Promise(requestAnimationFrame);
     await new Promise(requestAnimationFrame);

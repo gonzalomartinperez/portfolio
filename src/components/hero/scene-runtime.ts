@@ -48,7 +48,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   const viewport = stage.querySelector<HTMLElement>("[data-scene-viewport]");
   const journey = stage.querySelector<HTMLElement>("[data-scene-journey]");
   const hero = visualNode(stage.querySelector<HTMLElement>("[data-scene-hero]"));
-  let heroFocused = false;
+  let heroFocused = hero.element?.contains(document.activeElement) ?? false;
   const core = visualNode(stage.querySelector<HTMLElement>("[data-scene-core]"));
   let copyView = visualNode(null);
   const logos: {
