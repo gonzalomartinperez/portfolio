@@ -86,7 +86,8 @@ export const siteCopy: SiteCopy = {
     paragraphs: [
       "I’m Gonzalo, an Information Systems Engineer from Universidad Nacional del Sur and an AI Software Engineer. Since 2024, I’ve combined independent client projects with engineering roles in enterprise software and fintech.",
       "I’ve built merchant-facing experiences, service integrations and a permissions back office. As the principal contributor in a three-person team, I also helped turn Filomena into an exam platform used by five institutions.",
-      "Today I’m an AI Engineer at Rampy. My focus brings together the engineering of interfaces, services and data with RAG, agents and context-aware development workflows.",
+      "Today I’m an AI Engineer at Rampy, where my first contribution was setting up an agentic engineering workspace for context preservation and coordinated parallel work.",
+      "My broader focus combines applied AI with software engineering: retrieval assistants for users, integration services for businesses and development workflows supported by agents. I’m also building knowledge of blockchain, smart accounts and DeFi, distinct from my applied experience in fintech.",
     ],
     asideCurrently: "Currently",
     asideArrangement: "Working arrangement",
@@ -148,10 +149,10 @@ export const siteCopy: SiteCopy = {
     columnAfter: "After",
     evidenceHeading: "Evidence",
     evidenceNote:
-      "Explore the published source snapshots and the full product walkthrough. The snapshots document the implementation, rather than the original development history.",
+      "The product walkthrough and engineering context are included on this page. The linked repositories are public source snapshots; they document the implementation, not the original development history or deployment pipeline.",
     galleryHeading: "Explore the application",
     galleryCaption:
-      "A demonstration walkthrough covering access, administration and exams. Screens are grouped by workflow.",
+      "43 reviewed demonstration screens covering administration, student exams, evaluation and operational monitoring. Browse the workflows or enlarge a screen for a closer look.",
     galleryLabel: "Filomena interface walkthrough",
     galleryPrevious: "Previous screen",
     galleryNext: "Next screen",
