@@ -12,6 +12,7 @@
 }
 
 .portrait {
+  max-width: 25rem;
   background:
     radial-gradient(ellipse at 50% 25%, var(--accent-wash), transparent 75%), var(--surface-raised);
   border: 1px solid var(--line-control);

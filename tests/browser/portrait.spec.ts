@@ -27,6 +27,15 @@ for (const route of ["/", "/about"]) {
       expect(appearance.padding).toBeGreaterThanOrEqual(8);
       expect(appearance.background).not.toBe("none");
       expect(appearance.mask).toBe("none");
+      const resolution = await portrait.evaluate((image) => {
+        const photo = image as HTMLImageElement;
+        return {
+          natural: photo.naturalWidth,
+          required: photo.getBoundingClientRect().width * devicePixelRatio,
+        };
+      });
+      expect(resolution.natural).toBe(1254);
+      expect(resolution.natural).toBeGreaterThanOrEqual(resolution.required);
       await portrait.locator("..").screenshot({ path: info.outputPath(`portrait-${theme}.png`) });
     }
   });

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import portrait from "@/assets/portrait.webp";
+import portrait from "@/assets/portrait.avif";
 import { PageHeader } from "@/components/page-header";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
