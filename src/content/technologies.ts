@@ -14,32 +14,6 @@ export type Technology = {
 
 export const technologyCatalog: Technology[] = [
   {
-    id: "ai-agents",
-    name: "AI agents",
-    category: "applied-ai",
-    kind: "concept",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-  },
-  {
-    id: "rag",
-    name: "RAG",
-    category: "applied-ai",
-    kind: "concept",
-    status: "applied",
-    evidence: [
-      {
-        label: "Teamcubation",
-        href: "/work#teamcubation",
-      },
-    ],
-  },
-  {
     id: "langchain",
     name: "LangChain",
     category: "applied-ai",
@@ -66,6 +40,32 @@ export const technologyCatalog: Technology[] = [
       },
     ],
     icon: "langgraph",
+  },
+  {
+    id: "rag",
+    name: "RAG",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "ai-agents",
+    name: "AI agents",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
   },
   {
     id: "model-context-protocol",
@@ -96,19 +96,6 @@ export const technologyCatalog: Technology[] = [
     ],
   },
   {
-    id: "vector-databases",
-    name: "Vector databases",
-    category: "applied-ai",
-    kind: "concept",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-  },
-  {
     id: "pgvector",
     name: "pgvector",
     category: "applied-ai",
@@ -118,6 +105,19 @@ export const technologyCatalog: Technology[] = [
       {
         label: "Teamcubation",
         href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "vector-databases",
+    name: "Vector databases",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
       },
     ],
   },
@@ -149,19 +149,6 @@ export const technologyCatalog: Technology[] = [
     icon: "anthropic",
   },
   {
-    id: "spec-driven-development",
-    name: "Spec-driven development",
-    category: "applied-ai",
-    kind: "concept",
-    status: "applied",
-    evidence: [
-      {
-        label: "Independent work",
-        href: "/work#independent",
-      },
-    ],
-  },
-  {
     id: "agentic-engineering",
     name: "Agentic engineering",
     category: "applied-ai",
@@ -175,9 +162,22 @@ export const technologyCatalog: Technology[] = [
     ],
   },
   {
-    id: "spring-boot",
-    name: "Spring Boot",
-    category: "backend",
+    id: "spec-driven-development",
+    name: "Spec-driven development",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+  },
+  {
+    id: "python",
+    name: "Python",
+    category: "languages",
     kind: "brand",
     status: "applied",
     evidence: [
@@ -186,7 +186,90 @@ export const technologyCatalog: Technology[] = [
         href: "/work",
       },
     ],
-    icon: "springboot",
+    icon: "python",
+  },
+  {
+    id: "typescript",
+    name: "TypeScript",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "typescript",
+  },
+  {
+    id: "nodejs",
+    name: "Node.js",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "nodedotjs",
+  },
+  {
+    id: "java",
+    name: "Java",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "openjdk",
+  },
+  {
+    id: "javascript",
+    name: "JavaScript",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "javascript",
+  },
+  {
+    id: "sql",
+    name: "SQL",
+    category: "languages",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "php",
+    name: "PHP",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "php",
   },
   {
     id: "fastapi",
@@ -215,6 +298,59 @@ export const technologyCatalog: Technology[] = [
       },
     ],
     icon: "nestjs",
+  },
+  {
+    id: "spring-boot",
+    name: "Spring Boot",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "springboot",
+  },
+  {
+    id: "rest-apis",
+    name: "REST APIs",
+    category: "backend",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "microservices",
+    name: "Microservices",
+    category: "backend",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "api-design",
+    name: "API design",
+    category: "backend",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
   },
   {
     id: "spring-webflux",
@@ -301,47 +437,9 @@ export const technologyCatalog: Technology[] = [
     icon: "laravel",
   },
   {
-    id: "rest-apis",
-    name: "REST APIs",
-    category: "backend",
-    kind: "concept",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-  },
-  {
-    id: "microservices",
-    name: "Microservices",
-    category: "backend",
-    kind: "concept",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-  },
-  {
-    id: "api-design",
-    name: "API design",
-    category: "backend",
-    kind: "concept",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-  },
-  {
     id: "openapi",
     name: "OpenAPI",
+    aliases: ["Swagger"],
     category: "backend",
     kind: "brand",
     status: "applied",
@@ -352,184 +450,6 @@ export const technologyCatalog: Technology[] = [
       },
     ],
     icon: "openapi",
-  },
-  {
-    id: "python",
-    name: "Python",
-    category: "languages",
-    kind: "brand",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-    icon: "python",
-  },
-  {
-    id: "typescript",
-    name: "TypeScript",
-    category: "languages",
-    kind: "brand",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-    icon: "typescript",
-  },
-  {
-    id: "java",
-    name: "Java",
-    category: "languages",
-    kind: "brand",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-    icon: "openjdk",
-  },
-  {
-    id: "javascript",
-    name: "JavaScript",
-    category: "languages",
-    kind: "brand",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-    icon: "javascript",
-  },
-  {
-    id: "nodejs",
-    name: "Node.js",
-    category: "languages",
-    kind: "brand",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-    icon: "nodedotjs",
-  },
-  {
-    id: "sql",
-    name: "SQL",
-    category: "languages",
-    kind: "concept",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-  },
-  {
-    id: "php",
-    name: "PHP",
-    category: "languages",
-    kind: "brand",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-    icon: "php",
-  },
-  {
-    id: "react",
-    name: "React",
-    category: "frontend",
-    kind: "brand",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-    icon: "react",
-  },
-  {
-    id: "nextjs",
-    name: "Next.js",
-    category: "frontend",
-    kind: "brand",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-    icon: "nextdotjs",
-  },
-  {
-    id: "single-spa",
-    name: "Single-SPA",
-    category: "frontend",
-    kind: "brand",
-    status: "applied",
-    evidence: [
-      {
-        label: "Teamcubation",
-        href: "/work#teamcubation",
-      },
-    ],
-  },
-  {
-    id: "microfrontends",
-    name: "Microfrontends",
-    category: "frontend",
-    kind: "concept",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-  },
-  {
-    id: "responsive-design",
-    name: "Responsive design",
-    category: "frontend",
-    kind: "concept",
-    status: "applied",
-    evidence: [
-      {
-        label: "Experience & projects",
-        href: "/work",
-      },
-    ],
-  },
-  {
-    id: "wordpress",
-    name: "WordPress",
-    category: "frontend",
-    kind: "brand",
-    status: "applied",
-    evidence: [
-      {
-        label: "Independent work",
-        href: "/work#independent",
-      },
-    ],
-    icon: "wordpress",
   },
   {
     id: "postgresql",
@@ -734,6 +654,7 @@ export const technologyCatalog: Technology[] = [
   {
     id: "data-modelling",
     name: "Data modelling",
+    aliases: ["Data modeling"],
     category: "data",
     kind: "concept",
     status: "applied",
@@ -743,6 +664,105 @@ export const technologyCatalog: Technology[] = [
         href: "/work",
       },
     ],
+  },
+  {
+    id: "react",
+    name: "React",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "react",
+  },
+  {
+    id: "nextjs",
+    name: "Next.js",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "nextdotjs",
+  },
+  {
+    id: "single-spa",
+    name: "Single-SPA",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "microfrontends",
+    name: "Microfrontends",
+    category: "frontend",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "responsive-design",
+    name: "Responsive design",
+    category: "frontend",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "wordpress",
+    name: "WordPress",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+    icon: "wordpress",
+  },
+  {
+    id: "server-side-rendering",
+    name: "Server-side rendering",
+    category: "frontend",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Filomena", href: "/work/filomena" }],
+    aliases: ["SSR"],
+  },
+  {
+    id: "single-page-applications",
+    name: "Single-page applications",
+    category: "frontend",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Filomena", href: "/work/filomena" }],
+    aliases: ["SPA"],
   },
   {
     id: "aws",
@@ -951,6 +971,14 @@ export const technologyCatalog: Technology[] = [
     icon: "linux",
   },
   {
+    id: "docker-compose",
+    name: "Docker Compose",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Filomena", href: "/work/filomena" }],
+  },
+  {
     id: "junit",
     name: "JUnit",
     category: "quality",
@@ -1151,6 +1179,22 @@ export const technologyCatalog: Technology[] = [
         href: "/work",
       },
     ],
+  },
+  {
+    id: "input-validation",
+    name: "Input validation",
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Filomena", href: "/work/filomena" }],
+  },
+  {
+    id: "health-checks",
+    name: "Health checks",
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Filomena", href: "/work/filomena" }],
   },
   {
     id: "agile",
@@ -1431,17 +1475,6 @@ export const technologyGroups = [
     },
   },
   {
-    id: "backend",
-    name: {
-      en: "Backend & APIs",
-      es: "Backend y APIs",
-    },
-    evidence: {
-      en: "Service contracts, BFFs and integrations across fintech, enterprise systems and Filomena.",
-      es: "Contratos, BFFs e integraciones en fintech, sistemas empresariales y Filomena.",
-    },
-  },
-  {
     id: "languages",
     name: {
       en: "Languages & runtimes",
@@ -1453,14 +1486,14 @@ export const technologyGroups = [
     },
   },
   {
-    id: "frontend",
+    id: "backend",
     name: {
-      en: "Frontend & product interfaces",
-      es: "Frontend e interfaces de producto",
+      en: "Backend & APIs",
+      es: "Backend y APIs",
     },
     evidence: {
-      en: "Merchant experiences, enterprise back offices and an institutional exam platform.",
-      es: "Experiencias para comercios, backoffices empresariales y una plataforma de exámenes.",
+      en: "Service contracts, BFFs and integrations across fintech, enterprise systems and Filomena.",
+      es: "Contratos, BFFs e integraciones en fintech, sistemas empresariales y Filomena.",
     },
   },
   {
@@ -1472,6 +1505,17 @@ export const technologyGroups = [
     evidence: {
       en: "Historical ingestion, permission queries and concurrent exams shaped these choices.",
       es: "Ingesta histórica, consultas de permisos y exámenes concurrentes guiaron estas decisiones.",
+    },
+  },
+  {
+    id: "frontend",
+    name: {
+      en: "Frontend & product interfaces",
+      es: "Frontend e interfaces de producto",
+    },
+    evidence: {
+      en: "Merchant experiences, enterprise back offices and an institutional exam platform.",
+      es: "Experiencias para comercios, backoffices empresariales y una plataforma de exámenes.",
     },
   },
   {
@@ -1522,6 +1566,9 @@ export const technologyGroups = [
 
 const aliases: Record<string, string> = {
   mcp: "model-context-protocol",
+  ssr: "server-side-rendering",
+  spa: "single-page-applications",
+  swagger: "openapi",
   "model context protocol (mcp)": "model-context-protocol",
   lambda: "aws-lambda",
   s3: "amazon-s3",
@@ -1539,7 +1586,9 @@ export function getTechnology(nameOrId: string) {
   const key = nameOrId.trim().toLowerCase();
   return technologyCatalog.find(
     (technology) =>
-      technology.id === (aliases[key] ?? key) || technology.name.toLowerCase() === key,
+      technology.id === (aliases[key] ?? key) ||
+      technology.name.toLowerCase() === key ||
+      technology.aliases?.some((alias) => alias.toLowerCase() === key),
   );
 }
 

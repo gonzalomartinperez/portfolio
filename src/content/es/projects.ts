@@ -4,7 +4,7 @@ import type { EvidenceLink, Metric, Project } from "../types";
 export const filomena: Project = {
   slug: "filomena",
   name: "Filomena",
-  tagline: "Una plataforma de exámenes de ciencias de la salud que usan cinco instituciones",
+  tagline: "Exámenes de ciencias de la salud en cinco instituciones",
   period: "Ene – Dic 2025",
   summary:
     "Un monolito heredado en CakePHP y jQuery, reconstruido como una plataforma API-first que " +
@@ -51,9 +51,9 @@ export const filomena: Project = {
   ]),
   links: [
     {
-      label: "Caso de estudio",
-      href: "https://vine-jupiter-8df.notion.site/Filomena-Plataforma-Productiva-de-Ex-menes-de-Ciencias-de-la-Salud-29ab68807486806db025cfeef5de9f73",
-      description: "Desarrollo completo con capturas de pantalla",
+      label: "Contexto académico",
+      href: "/es/education",
+      description: "Carrera, proyecto final y registro académico",
     },
     {
       label: "Código del backend",
@@ -87,6 +87,14 @@ type Change = {
 };
 
 export const filomenaCaseStudy = {
+  overview: {
+    heading: "Una plataforma para todo el ciclo de evaluación",
+    body: [
+      "Filomena permite preparar, programar, tomar y corregir exámenes en instituciones de ciencias de la salud. Los administradores configuran los exámenes y el acceso, los estudiantes resuelven casos clínicos y los evaluadores corrigen las respuestas con rúbricas estructuradas.",
+      "El producto reúne esos flujos, separa los datos de cada institución y protege la identidad del estudiante durante la corrección. La demostración de 43 pantallas recorre las tareas de cada rol dentro de la aplicación.",
+    ],
+  } satisfies CaseStudySection,
+
   problem: {
     heading: "El problema",
     body: [
@@ -124,7 +132,7 @@ export const filomenaCaseStudy = {
   approach: {
     heading: "De monolito a producto API-first",
     body: [
-      "Separamos el monolito CakePHP y jQuery en una API REST Laravel y un frontend Next.js, React y TypeScript. La API estableció un contrato común para la interfaz y los flujos multi-institución.",
+      "Separamos el monolito CakePHP y jQuery en una API REST Laravel y un frontend Next.js, React y TypeScript. La API estableció un contrato común para la interfaz y los flujos entre instituciones, con validación de entradas y control de acceso por roles. El renderizado del lado del servidor resolvía la carga inicial, seguido por los flujos interactivos de la aplicación.",
       "El tuning SQL, los índices, la caché Redis y las colas sostuvieron los flujos de exámenes concurrentes. Prometheus y Grafana permitieron observar el comportamiento de la aplicación y sus servicios en producción.",
     ],
   } satisfies CaseStudySection,
@@ -209,7 +217,7 @@ export const filomenaCaseStudy = {
     heading: "Entrega y operación",
     body: [
       "El equipo de tres personas utilizó prácticas Agile y Trello para coordinar requisitos, implementación y releases.",
-      "Docker y GitHub Actions sostuvieron despliegues productivos observados por debajo de quince minutos de punta a punta. Los repositorios públicos son versiones del código y no incluyen el pipeline original de despliegue.",
+      "Docker y Docker Compose proporcionaron entornos contenerizados, mientras que GitHub Actions sostuvo despliegues productivos observados por debajo de quince minutos de punta a punta. Los repositorios públicos son versiones del código y no incluyen el pipeline original de despliegue.",
     ],
   } satisfies CaseStudySection,
 
