@@ -111,15 +111,17 @@
   }
 
   .list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 3.5rem), 1fr));
     gap: 0;
+  }
+
+  .list > li {
+    flex: 1 1 auto;
   }
 
   .link {
     justify-content: center;
-    letter-spacing: -0.02em;
-    padding-inline: 0;
+    min-width: 2.75rem;
+    padding-inline: 0.25rem;
     font-size: clamp(0.75rem, 3.2vw, 0.9375rem);
     white-space: nowrap;
     width: 100%;

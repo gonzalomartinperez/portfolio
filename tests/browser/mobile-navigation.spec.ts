@@ -1,6 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-test("both navigation languages use equal centered columns on mobile", async ({ page }) => {
+test("mobile navigation gives each centered label a content-aware share of the row", async ({
+  page,
+}) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const prefix of ["", "/es"]) {
     await page.goto(`${prefix}/contact`);
@@ -25,6 +27,7 @@ test("both navigation languages use equal centered columns on mobile", async ({ 
           range.selectNodeContents(link);
           const text = range.getBoundingClientRect();
           return {
+            label: link.textContent,
             left: rect.left,
             right: rect.right,
             width: rect.width,
@@ -39,10 +42,18 @@ test("both navigation languages use equal centered columns on mobile", async ({ 
         .locator("header")
         .evaluate((header) => header.getBoundingClientRect().width);
       for (const link of geometry) {
-        expect(Math.abs(link.width - headerWidth / 6)).toBeLessThan(1);
         expect(link.centerOffset).toBeLessThan(1);
         expect(link.textWidth).toBeLessThanOrEqual(link.width);
+        expect(link.width).toBeGreaterThanOrEqual(44);
       }
+      expect(
+        Math.abs(geometry.reduce((sum, link) => sum + link.width, 0) - headerWidth),
+      ).toBeLessThan(1);
+      const education = geometry.find(
+        (link) => link.label === (prefix ? "Educación" : "Education"),
+      );
+      const cv = geometry.find((link) => link.label === "CV");
+      expect(education?.width).toBeGreaterThan(cv?.width ?? 0);
       expect(geometry[0].left).toBeLessThan(1);
       expect(Math.max(...geometry.map((link) => link.right))).toBeLessThanOrEqual(width);
       expect(Math.min(...geometry.map((link) => link.height))).toBeGreaterThanOrEqual(44);
