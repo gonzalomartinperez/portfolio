@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("both navigation languages fit one row on common mobile widths", async ({ page }) => {
+test("both navigation languages use equal centered columns on mobile", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const prefix of ["", "/es"]) {
     await page.goto(`${prefix}/contact`);
@@ -21,10 +21,29 @@ test("both navigation languages fit one row on common mobile widths", async ({ p
       const geometry = await nav.locator("a").evaluateAll((links) =>
         links.map((link) => {
           const rect = link.getBoundingClientRect();
-          return { top: rect.top, right: rect.right, height: rect.height };
+          const range = document.createRange();
+          range.selectNodeContents(link);
+          const text = range.getBoundingClientRect();
+          return {
+            left: rect.left,
+            right: rect.right,
+            width: rect.width,
+            height: rect.height,
+            textWidth: text.width,
+            centerOffset: Math.abs(text.left + text.width / 2 - (rect.left + rect.width / 2)),
+          };
         }),
       );
       expect(geometry).toHaveLength(6);
+      const headerWidth = await page
+        .locator("header")
+        .evaluate((header) => header.getBoundingClientRect().width);
+      for (const link of geometry) {
+        expect(Math.abs(link.width - headerWidth / 6)).toBeLessThan(1);
+        expect(link.centerOffset).toBeLessThan(1);
+        expect(link.textWidth).toBeLessThanOrEqual(link.width);
+      }
+      expect(geometry[0].left).toBeLessThan(1);
       expect(Math.max(...geometry.map((link) => link.right))).toBeLessThanOrEqual(width);
       expect(Math.min(...geometry.map((link) => link.height))).toBeGreaterThanOrEqual(44);
     }
