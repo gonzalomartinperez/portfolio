@@ -40,6 +40,37 @@
   pointer-events: none;
   z-index: 1;
 }
+.avatar {
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  min-width: 80px;
+  min-height: 80px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-primary);
+  pointer-events: auto;
+  cursor: pointer;
+}
+.avatar:hover,
+.avatar:focus-visible,
+.avatar:active {
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+.avatar:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+.avatar:disabled {
+  pointer-events: none;
+}
+.avatarArt {
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
 .constellationPane {
   position: relative;
   z-index: 2;

@@ -20,6 +20,28 @@
   color: var(--accent);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .toggle {
+    transition:
+      border-color var(--duration-micro) var(--ease-standard),
+      color var(--duration-micro) var(--ease-standard),
+      transform var(--duration-micro) var(--ease-out),
+      box-shadow var(--duration-micro) var(--ease-standard);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .toggle:hover {
+      transform: var(--control-lift);
+      box-shadow: var(--control-depth);
+    }
+  }
+
+  .toggle:active {
+    transform: var(--control-press);
+    box-shadow: none;
+  }
+}
+
 /* Each icon shows the theme the button switches to. */
 .sun {
   display: block;

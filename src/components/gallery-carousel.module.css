@@ -56,8 +56,32 @@
   height: auto;
   transition: transform var(--duration-transition) var(--ease-out);
 }
-.enlarge:hover .image {
-  transform: scale(1.02);
+@media (prefers-reduced-motion: no-preference) {
+  .filter,
+  .control {
+    transition:
+      transform var(--duration-micro) var(--ease-out),
+      box-shadow var(--duration-micro) var(--ease-standard),
+      border-color var(--duration-micro) var(--ease-standard);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .filter:not(:disabled):hover,
+    .control:not(:disabled):hover {
+      transform: var(--control-lift);
+      box-shadow: var(--control-depth);
+    }
+
+    .enlarge:hover .image {
+      transform: scale(1.02);
+    }
+  }
+
+  .filter:not(:disabled):active,
+  .control:not(:disabled):active {
+    transform: var(--control-press);
+    box-shadow: none;
+  }
 }
 .enlargeHint {
   position: absolute;

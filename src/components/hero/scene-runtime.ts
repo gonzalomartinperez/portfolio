@@ -2,7 +2,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { createFieldEngine } from "./field-engine";
 
-export type SceneRuntime = { sync(paused: boolean): void; dispose(): void };
+export type SceneRuntime = { sync(paused: boolean): void; activateAvatar(): void; dispose(): void };
 
 type VisualNode = { element: HTMLElement | null; opacity: number; transform: string };
 const visualNode = (element: HTMLElement | null): VisualNode => ({
@@ -42,14 +42,24 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   let targetProgress = 0;
   let visualProgress = 0;
   let appliedProgress = -1;
-  let touch: { x: number; y: number; scroll: number; time: number; id: number } | null = null;
+  let touch: {
+    x: number;
+    y: number;
+    scroll: number;
+    time: number;
+    id: number;
+    avatar: boolean;
+  } | null = null;
   let impulseUntil = 0;
+  let pulse: { age: number; avatar: boolean; origin: { x: number; y: number } } | null = null;
   const compact = matchMedia("(max-width: 767px)");
   const viewport = stage.querySelector<HTMLElement>("[data-scene-viewport]");
   const journey = stage.querySelector<HTMLElement>("[data-scene-journey]");
   const hero = visualNode(stage.querySelector<HTMLElement>("[data-scene-hero]"));
   let heroFocused = hero.element?.contains(document.activeElement) ?? false;
   const core = visualNode(stage.querySelector<HTMLElement>("[data-scene-core]"));
+  const avatar = visualNode(stage.querySelector<HTMLElement>("[data-scene-avatar-art]"));
+  const avatarButton = stage.querySelector<HTMLButtonElement>("[data-scene-avatar]");
   let copyView = visualNode(null);
   const logos: {
     view: VisualNode;
@@ -122,6 +132,11 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       heroFocused ? "none" : `translate3d(0,${rounded(value * -60)}px,0)`,
     );
     paint(core, 1 - clamp((value - 0.2) / 0.2));
+    if (avatarButton) {
+      avatarButton.disabled = value >= 0.38;
+      avatarButton.style.visibility = value >= 0.4 ? "hidden" : "visible";
+    }
+    if (viewport) viewport.style.cursor = "";
     paint(copyView, clamp((value - 0.55) / 0.15) * (1 - clamp((value - 0.8) / 0.1)));
     const settle = clamp((value - 0.8) / 0.2);
     for (const logo of logos) {
@@ -188,6 +203,25 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       }
       impulseUntil = 0;
     }
+    if (pulse) {
+      pulse.age += delta;
+      const phase = clamp(pulse.age / (pulse.avatar ? 1.2 : 0.75));
+      engine.setPulse(phase, pulse.avatar, pulse.origin);
+      if (pulse.avatar) {
+        const lift = Math.sin(phase * Math.PI) ** 2;
+        const tilt = Math.sin(phase * Math.PI * 2) * lift;
+        paint(
+          avatar,
+          1,
+          `perspective(500px) translate3d(0,${rounded(-12 * lift)}px,${rounded(48 * lift)}px) rotateX(${rounded(-14 * lift)}deg) rotateY(${rounded(28 * tilt)}deg) scale(${rounded(1 + 0.12 * lift)})`,
+        );
+      }
+      if (phase === 1) {
+        pulse = null;
+        paint(avatar, 1);
+        stage.dataset.scenePulse = "idle";
+      }
+    }
     engine.render(delta);
     if (rawDelta > 0) measureQuality(Math.min(rawDelta, 0.25));
     frame = requestAnimationFrame(tick);
@@ -211,55 +245,91 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     const selected = document.documentElement.dataset.theme;
     engine.setLight(selected === "light");
   };
+  const coordinates = (x: number, y: number) => {
+    const bounds = canvas.getBoundingClientRect();
+    return {
+      x: ((x - bounds.left) / bounds.width) * 2 - 1,
+      y: 1 - ((y - bounds.top) / bounds.height) * 2,
+    };
+  };
+  const startPulse = (isAvatar: boolean, origin: { x: number; y: number }) => {
+    if (paused || !onScreen || document.hidden || deterministic || pulse) return;
+    pulse = { age: 0, avatar: isAvatar, origin };
+    stage.dataset.scenePulse = isAvatar ? "avatar" : "sphere";
+    stage.dataset.scenePulseCount = String(Number(stage.dataset.scenePulseCount ?? 0) + 1);
+  };
+  const activateAvatar = () => {
+    if (!avatarButton || avatarButton.disabled) return;
+    const bounds = avatarButton.getBoundingClientRect();
+    startPulse(true, coordinates(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2));
+  };
   const pointerMove = (event: PointerEvent) => {
     if (touch && Math.hypot(event.clientX - touch.x, event.clientY - touch.y) > 10) touch = null;
     if (paused || event.pointerType === "touch") return;
-    const bounds = canvas.getBoundingClientRect();
-    engine.setPointer({
-      x: ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
-      y: 1 - ((event.clientY - bounds.top) / bounds.height) * 2,
-    });
+    const point = coordinates(event.clientX, event.clientY);
+    const control =
+      event.target instanceof Element && event.target.closest("a,button,input,select,summary");
+    const inside = engine.containsPoint(point.x, point.y);
+    if (viewport) viewport.style.cursor = inside && !control ? "pointer" : "";
+    engine.setPointer(inside ? point : null);
   };
-  const pointerLeave = () => engine.setPointer(null);
+  const pointerLeave = () => {
+    engine.setPointer(null);
+    if (viewport) viewport.style.cursor = "";
+    touch = null;
+  };
   const pointerDown = (event: PointerEvent) => {
-    if (event.pointerType !== "touch" || paused) return;
+    if (paused || (event.pointerType !== "touch" && event.button !== 0)) return;
     if (!event.isPrimary) {
       touch = null;
       return;
     }
-    const bounds = canvas.getBoundingClientRect();
-    if (event.clientY < bounds.top || event.clientY > bounds.bottom) return;
+    const isAvatar =
+      event.target instanceof Element && !!event.target.closest("[data-scene-avatar]");
+    if (
+      !isAvatar &&
+      event.target instanceof Element &&
+      event.target.closest("a,button,input,select,summary")
+    )
+      return;
+    const point = coordinates(event.clientX, event.clientY);
+    if (!isAvatar && !engine.containsPoint(point.x, point.y)) return;
     touch = {
       x: event.clientX,
       y: event.clientY,
       scroll: scrollY,
       time: performance.now(),
       id: event.pointerId,
+      avatar: isAvatar,
     };
   };
   const pointerUp = (event: PointerEvent) => {
     const start = touch;
     touch = null;
-    if (
-      !start ||
-      start.id !== event.pointerId ||
-      paused ||
-      (event.target instanceof Element && event.target.closest("a,button"))
-    )
-      return;
+    if (!start || start.id !== event.pointerId || paused) return;
     if (
       Math.hypot(event.clientX - start.x, event.clientY - start.y) > 10 ||
       Math.abs(scrollY - start.scroll) > 5 ||
       performance.now() - start.time > 350
     )
       return;
-    const bounds = canvas.getBoundingClientRect();
-    engine.setPointer({
-      x: ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
-      y: 1 - ((event.clientY - bounds.top) / bounds.height) * 2,
-    });
+    const isAvatar =
+      event.target instanceof Element && !!event.target.closest("[data-scene-avatar]");
+    if (start.avatar !== isAvatar) return;
+    if (
+      !isAvatar &&
+      event.target instanceof Element &&
+      event.target.closest("a,button,input,select,summary")
+    )
+      return;
+    const point = coordinates(event.clientX, event.clientY);
+    if (!isAvatar && !engine.containsPoint(point.x, point.y)) return;
+    engine.setPointer(point);
     impulseUntil = performance.now() + 650;
-    stage.dataset.sceneTap = String(Number(stage.dataset.sceneTap ?? 0) + 1);
+    if (event.pointerType === "touch")
+      stage.dataset.sceneTap = String(Number(stage.dataset.sceneTap ?? 0) + 1);
+    if (isAvatar) activateAvatar();
+    else startPulse(false, point);
   };
   const pointerCancel = () => {
     touch = null;
@@ -279,6 +349,9 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   };
   const resize = () => {
     engine.resize();
+    const bounds = canvas.getBoundingClientRect();
+    const readingBottom = hero.element?.getBoundingClientRect().bottom ?? bounds.top;
+    engine.setReadingBoundary(1 - ((readingBottom + 20 - bounds.top) / bounds.height) * 2);
     const width = viewport?.clientWidth ?? innerWidth;
     const height = viewport?.clientHeight ?? innerHeight;
     for (const logo of logos) {
@@ -321,15 +394,25 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   resize();
   sync();
   return {
+    activateAvatar,
     sync(value) {
       paused = value;
+      touch = null;
+      if (paused && viewport) viewport.style.cursor = "";
       sync();
     },
     dispose() {
       stage.removeAttribute("data-scene-visible");
       stage.removeAttribute("data-scene-quality");
       stage.removeAttribute("data-scene-tap");
-      for (const node of [hero, core]) {
+      stage.removeAttribute("data-scene-pulse");
+      stage.removeAttribute("data-scene-pulse-count");
+      if (viewport) viewport.style.removeProperty("cursor");
+      if (avatarButton) {
+        avatarButton.disabled = false;
+        avatarButton.style.removeProperty("visibility");
+      }
+      for (const node of [hero, core, avatar]) {
         node.element?.style.removeProperty("opacity");
         node.element?.style.removeProperty("transform");
       }
