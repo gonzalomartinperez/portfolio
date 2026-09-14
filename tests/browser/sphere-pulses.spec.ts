@@ -19,6 +19,8 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
     { type: "pointerup", clientX: x, clientY: y },
   ]);
   await expect(scene).toHaveAttribute("data-scene-pulse", "sphere");
+  await expect(scene.locator("canvas")).toHaveCSS("z-index", "3");
+  await expect(scene.locator("canvas")).toHaveCSS("pointer-events", "none");
   await page.clock.runFor(300);
   const uniform = (name: string) =>
     scene.locator("canvas").evaluate((canvas: HTMLCanvasElement, name) => {
@@ -33,10 +35,21 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
   expect(await uniform("avatarPulse")).toBe(0);
   await page.clock.runFor(600);
   await expect(scene).toHaveAttribute("data-scene-pulse", "idle");
+  await expect(scene.locator("canvas")).toHaveCSS("z-index", "auto");
   await avatar.focus();
   await avatar.press("Enter");
   await page.clock.runFor(350);
   await expect(scene).toHaveAttribute("data-scene-pulse", "avatar");
+  await expect(scene.locator("canvas")).toHaveCSS("z-index", "3");
+  const heroLink = scene.locator("[data-scene-hero] a").first();
+  expect(
+    await heroLink.evaluate((link) => {
+      const bounds = link.getBoundingClientRect();
+      return link.contains(
+        document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2),
+      );
+    }),
+  ).toBe(true);
   expect(await uniform("avatarPulse")).toBe(1);
   await expect(scene.locator("[data-scene-avatar-art]")).not.toHaveCSS("transform", "none");
   for (let index = 0; index < 5; index += 1) await avatar.press("Enter");
@@ -46,6 +59,7 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
   await page.clock.runFor(1100);
   await expect(scene).toHaveAttribute("data-scene-pulse", "idle");
   await expect(scene.locator("[data-scene-avatar-art]")).toHaveCSS("transform", "none");
+  await expect(scene.locator("canvas")).toHaveCSS("z-index", "auto");
   await avatar.press("Space");
   await expect(scene).toHaveAttribute("data-scene-pulse-count", "3");
 });

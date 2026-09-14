@@ -10,6 +10,9 @@ Status: done
   radial wave, with a perspective lift of the portrait. Enter and Space work too.
 - One bounded pulse runs at a time; repeated input cannot accumulate animation
   queues, energy or render loops. Pulses never change scroll progress or logo paths.
+- Pulse particles may pass in front of the hero copy without a reading-boundary
+  constraint. The canvas remains pointer-transparent and returns behind the copy
+  when the pulse ends; links and controls remain operable throughout.
 - Drag, long press, secondary pointers, page scrolling and other controls do not
   activate the sphere. Native touch scrolling and zoom remain available.
 - Paused scenes do not animate. Reduced-motion and unavailable-WebGL presentations
