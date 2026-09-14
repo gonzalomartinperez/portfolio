@@ -23,6 +23,9 @@
 .canvas {
   opacity: 0;
 }
+.stage:is([data-scene-pulse="sphere"], [data-scene-pulse="avatar"]) .canvas {
+  z-index: 3;
+}
 .still {
   display: grid;
   place-items: center;
