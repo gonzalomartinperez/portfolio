@@ -59,7 +59,7 @@ export function pageMetadata(locale: Locale, path: string): Metadata {
   const { siteCopy: copy } = getContent(locale);
   const byPath: Record<string, { title: string; description: string }> = {
     "/cv": {
-      title: locale === "es" ? "Currículum" : "CV",
+      title: "CV",
       description:
         locale === "es"
           ? "Experiencia, IA aplicada, ingeniería de software y formación de Gonzalo Martin Perez. CV completo y PDF descargable."
