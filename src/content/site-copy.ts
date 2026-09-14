@@ -45,6 +45,7 @@ export type SiteCopy = {
     openToRemote: string;
     pauseAnimation: string;
     playAnimation: string;
+    avatarInteraction: string;
     proof: { value: string; label: string }[];
     proofNote: string;
     proofNoteLink: string;

@@ -40,6 +40,7 @@ export const siteCopy: SiteCopy = {
     openToRemote: "Abierto a trabajo remoto",
     pauseAnimation: "Pausar la animación",
     playAnimation: "Reproducir la animación",
+    avatarInteraction: "Interactuar con el avatar de Gonzalo",
     proof: [
       { value: "20M+", label: "promociones en producción" },
       { value: "1.000+", label: "usuarios simultáneos de la plataforma" },

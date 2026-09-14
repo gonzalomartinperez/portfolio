@@ -32,6 +32,8 @@ default and needs no JavaScript; light is an explicit choice from the header tog
 [The autonomy specification](docs/specs/portfolio-autonomy.md) holds the current scope
 and acceptance criteria; the [redesign](docs/specs/portfolio-redesign.md) retains the
 visual foundation.
+The [interaction specification](docs/specs/interactive-sphere.md) covers sphere
+pulses, the keyboard-accessible avatar and restrained depth on interface controls.
 
 ## Engineering at a glance
 
