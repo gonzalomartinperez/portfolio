@@ -349,9 +349,6 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   };
   const resize = () => {
     engine.resize();
-    const bounds = canvas.getBoundingClientRect();
-    const readingBottom = hero.element?.getBoundingClientRect().bottom ?? bounds.top;
-    engine.setReadingBoundary(1 - ((readingBottom + 20 - bounds.top) / bounds.height) * 2);
     const width = viewport?.clientWidth ?? innerWidth;
     const height = viewport?.clientHeight ?? innerHeight;
     for (const logo of logos) {

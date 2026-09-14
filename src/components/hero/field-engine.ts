@@ -24,7 +24,6 @@ export type FieldEngine = {
   setTime(seconds: number | null): void;
   setPulse(phase: number, avatar: boolean, origin: { x: number; y: number }): void;
   containsPoint(x: number, y: number): boolean;
-  setReadingBoundary(y: number): void;
 };
 
 const vertexShader = `
@@ -37,7 +36,6 @@ uniform vec2 pointer;
 uniform float pulsePhase;
 uniform float avatarPulse;
 uniform vec2 pulseOrigin;
-uniform float readingBoundary;
 varying float depth;
 varying float sparkle;
 varying float waveLight;
@@ -46,7 +44,6 @@ void main() {
   float angle = time * 0.035;
   p.xz = mat2(cos(angle), -sin(angle), sin(angle), cos(angle)) * p.xz;
   p *= 1.0 + sin(time * 0.45 + seed * 6.283) * 0.012;
-  vec4 restingProjection = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
   float envelope = pow(sin(pulsePhase * 3.14159265), 2.0);
   float twist = envelope * avatarPulse * (0.65 + p.y * 0.5);
   p.xz = mat2(cos(twist), -sin(twist), sin(twist), cos(twist)) * p.xz;
@@ -58,8 +55,6 @@ void main() {
   float radius = length(pulseDelta);
   float ring = exp(-pow((radius - pulsePhase * 1.65) * 7.0, 2.0)) * envelope;
   projected.xy += (screen - pulseOrigin) * ring * (0.22 + avatarPulse * 0.18) * projected.w;
-  float readingGuard = smoothstep(readingBoundary - 0.22, readingBoundary, restingProjection.y / restingProjection.w);
-  projected = mix(projected, restingProjection, readingGuard * (1.0 - smoothstep(0.0, 0.2, progress)));
   waveLight = ring * 0.18;
   vec2 delta = screen - pointer;
   vec2 isotropicDelta = delta * vec2(aspect, 1.0);
@@ -121,7 +116,6 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
       pulsePhase: { value: 0 },
       avatarPulse: { value: 0 },
       pulseOrigin: { value: new Vector2() },
-      readingBoundary: { value: 1 },
       nearColor: { value: new Color("#c0efff") },
       farColor: { value: new Color("#2777e9") },
     },
@@ -200,9 +194,6 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
         1 / (Math.tan((camera.fov * Math.PI) / 360) * Math.sqrt(camera.position.z ** 2 - 1));
       const centreY = -0.36 * (1 - cameraExpansion);
       return Math.hypot(x * camera.aspect, y - centreY) <= radius;
-    },
-    setReadingBoundary(y) {
-      material.uniforms.readingBoundary.value = y;
     },
     setLight(light) {
       material.uniforms.nearColor.value.set(light ? "#164886" : "#e3ffff");
