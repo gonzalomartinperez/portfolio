@@ -113,10 +113,12 @@
   .list {
     flex-wrap: wrap;
     justify-content: flex-start;
+    gap: clamp(0.125rem, 0.5vw, 0.25rem);
   }
 
   .link {
-    padding-inline: var(--space-2);
+    padding-inline: clamp(0.125rem, 0.8vw, 0.5rem);
+    font-size: clamp(0.75rem, 3.2vw, 0.9375rem);
     white-space: nowrap;
   }
 
@@ -137,8 +139,5 @@
   }
   .header {
     position: relative;
-  }
-  .link {
-    font-size: 0.8125rem;
   }
 }
