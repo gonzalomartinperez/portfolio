@@ -55,12 +55,12 @@ export const contactLinks: EvidenceLink[] = [
 
 export const resumeLinks: EvidenceLink[] = [
   {
-    label: "Resume — English (PDF)",
+    label: "CV — English (PDF)",
     href: resumeFiles.en,
     description: "Three pages, updated September 2026",
   },
   {
-    label: "Currículum — Español (PDF)",
+    label: "CV — Spanish (PDF)",
     href: resumeFiles.es,
     description: "Tres páginas, actualizado en septiembre de 2026",
   },

@@ -40,6 +40,7 @@ export const siteCopy: SiteCopy = {
     openToRemote: "Open to remote work",
     pauseAnimation: "Pause animation",
     playAnimation: "Play animation",
+    avatarInteraction: "Interact with Gonzalo’s avatar",
     proof: [
       { value: "20M+", label: "promotions in production" },
       { value: "1,000+", label: "simultaneous platform users" },
@@ -220,9 +221,8 @@ export const siteCopy: SiteCopy = {
     hiringHint: "For a closer look at my product and engineering work, explore the",
     hiringLinkText: "Filomena case study",
     openToHeading: "Open to",
-    resumeHeading: "Resume",
-    resumeNote:
-      "Download the English or Spanish resume for experience, skills and contact details.",
+    resumeHeading: "CV",
+    resumeNote: "Download the English or Spanish CV for experience, skills and contact details.",
   },
   notFound: {
     metaTitle: "Page not found",

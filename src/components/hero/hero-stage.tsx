@@ -13,6 +13,7 @@ export function HeroStage({
   constellation,
   pauseLabel,
   playLabel,
+  avatarLabel,
 }: {
   still: ReactNode;
   core: ReactNode;
@@ -20,6 +21,7 @@ export function HeroStage({
   constellation: ReactNode;
   pauseLabel: string;
   playLabel: string;
+  avatarLabel: string;
 }) {
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -93,10 +95,22 @@ export function HeroStage({
             {hero}
           </div>
           <div className={styles.still}>{still}</div>
-          {/* biome-ignore lint/a11y/noAriaHiddenOnFocusable: this decorative canvas has no tab stop or interaction. */}
+          {/* biome-ignore lint/a11y/noAriaHiddenOnFocusable: the named avatar button provides keyboard access to this visual effect. */}
           <canvas aria-hidden="true" className={styles.canvas} ref={canvasRef} />
           <div className={styles.core} data-scene-core>
-            {core}
+            <button
+              type="button"
+              className={styles.avatar}
+              data-scene-avatar
+              aria-label={avatarLabel}
+              onClick={(event) => {
+                if (event.detail === 0) runtimeRef.current?.activateAvatar();
+              }}
+            >
+              <span className={styles.avatarArt} data-scene-avatar-art>
+                {core}
+              </span>
+            </button>
           </div>
           <div className={styles.logoCloud} data-logo-cloud aria-hidden="true" inert />
           {mode !== "static" && (

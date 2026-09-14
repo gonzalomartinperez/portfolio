@@ -40,6 +40,7 @@ export const siteCopy: SiteCopy = {
     openToRemote: "Abierto a trabajo remoto",
     pauseAnimation: "Pausar la animación",
     playAnimation: "Reproducir la animación",
+    avatarInteraction: "Interactuar con el avatar de Gonzalo",
     proof: [
       { value: "20M+", label: "promociones en producción" },
       { value: "1.000+", label: "usuarios simultáneos de la plataforma" },
@@ -225,7 +226,7 @@ export const siteCopy: SiteCopy = {
     hiringHint: "Para conocer mi trabajo de producto e ingeniería, explorá el",
     hiringLinkText: "caso de estudio de Filomena",
     openToHeading: "Abierto a",
-    resumeHeading: "Currículum",
+    resumeHeading: "CV",
     resumeNote:
       "Descargá el CV en inglés o español con experiencia, habilidades y datos de contacto.",
   },
