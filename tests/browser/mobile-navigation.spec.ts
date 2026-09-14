@@ -4,9 +4,20 @@ test("both navigation languages fit one row on common mobile widths", async ({ p
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const prefix of ["", "/es"]) {
     await page.goto(`${prefix}/contact`);
+    await page.evaluate(() => document.fonts.ready);
     const nav = page.getByRole("navigation", { name: prefix ? "Principal" : "Main", exact: true });
     for (const width of [360, 375, 390, 412, 430]) {
       await page.setViewportSize({ width, height: 839 });
+      await expect
+        .poll(
+          () =>
+            nav.locator("a").evaluateAll((links) => {
+              const rows = links.map((link) => link.getBoundingClientRect().top);
+              return Math.max(...rows) - Math.min(...rows);
+            }),
+          { message: `${prefix || "en"} navigation at ${width}px` },
+        )
+        .toBeLessThan(2);
       const geometry = await nav.locator("a").evaluateAll((links) =>
         links.map((link) => {
           const rect = link.getBoundingClientRect();
@@ -14,10 +25,6 @@ test("both navigation languages fit one row on common mobile widths", async ({ p
         }),
       );
       expect(geometry).toHaveLength(6);
-      expect(
-        Math.max(...geometry.map((link) => link.top)) -
-          Math.min(...geometry.map((link) => link.top)),
-      ).toBeLessThan(2);
       expect(Math.max(...geometry.map((link) => link.right))).toBeLessThanOrEqual(width);
       expect(Math.min(...geometry.map((link) => link.height))).toBeGreaterThanOrEqual(44);
     }
