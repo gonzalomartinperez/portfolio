@@ -8,6 +8,19 @@ import { type Locale, localePath } from "@/content/locales";
 import documents from "@/content/public-documents.json";
 import styles from "./education.module.css";
 
+const credentialMarks: Record<string, string> = {
+  "Universidad Nacional del Sur": "/images/institutions/uns.jpg",
+  Kognité: "/images/institutions/kognite.jpg",
+};
+
+function Grade({ value, locale }: { value: number | "AP"; locale: Locale }) {
+  return (
+    <span className={styles.grade} data-academic-grade={value}>
+      {value === "AP" ? (locale === "es" ? "AP · Aprobado" : "AP · Passed") : `${value} / 10`}
+    </span>
+  );
+}
+
 export function EducationView({ locale }: { locale: Locale }) {
   const content = getContent(locale);
   const {
@@ -123,13 +136,7 @@ export function EducationView({ locale }: { locale: Locale }) {
                           <Link href={localePath(locale, "/work/filomena")}>Filomena</Link>
                         )}
                       </div>
-                      <span className={styles.grade}>
-                        {entry.grade === "AP"
-                          ? locale === "es"
-                            ? "AP · Aprobado"
-                            : "AP · Passed"
-                          : `${entry.grade} / 10`}
-                      </span>
+                      <Grade value={entry.grade} locale={locale} />
                     </li>
                   ))}
               </ul>
@@ -155,7 +162,8 @@ export function EducationView({ locale }: { locale: Locale }) {
                       const course = academicEntry(id);
                       return (
                         <li key={id}>
-                          {course.name[locale]} <span className="mono">· {course.grade} / 10</span>
+                          <span>{course.name[locale]}</span>
+                          <Grade value={course.grade} locale={locale} />
                         </li>
                       );
                     })}
@@ -212,9 +220,21 @@ export function EducationView({ locale }: { locale: Locale }) {
             <ul className="flow-tight">
               {credentials.map((credential) => (
                 <li className={styles.credential} key={credential.title}>
-                  <span>
-                    <span className={styles.credentialTitle}>{credential.title}</span>
-                    <span className={styles.credentialIssuer}>{credential.issuer}</span>
+                  <span className={styles.credentialIdentity}>
+                    {credentialMarks[credential.issuer] && (
+                      <Image
+                        className={styles.credentialMark}
+                        src={credentialMarks[credential.issuer]}
+                        alt=""
+                        width={40}
+                        height={40}
+                        unoptimized
+                      />
+                    )}
+                    <span>
+                      <span className={styles.credentialTitle}>{credential.title}</span>
+                      <span className={styles.credentialIssuer}>{credential.issuer}</span>
+                    </span>
                   </span>
                   <span className="mono muted">{credential.date}</span>
                   {credential.evidence && (
@@ -259,31 +279,44 @@ export function EducationView({ locale }: { locale: Locale }) {
               ? "Documentos originales disponibles directamente, sin servicios externos ni visores adicionales."
               : "Original documents available directly, without external services or additional viewers."}
           </p>
-          <p className="muted">
-            {locale === "es"
-              ? "El analítico es un registro histórico emitido el 22 de diciembre de 2025. Su validez administrativa de seis meses ya finalizó; los resultados se muestran como constancia de esa fecha, no como certificado vigente."
-              : "The transcript is a historical record issued on 22 December 2025. Its six-month administrative validity has expired; results are presented as recorded on that date, not as a currently valid certificate."}
-          </p>
         </div>
-        <div className="actions flow">
-          {academicEvidence.map((link) => (
-            <div key={link.href}>
-              <a className="button button-secondary" href={link.href}>
-                {link.label}
-              </a>
-              <p className="muted">
-                {link.description} ·{" "}
-                {(
-                  (documents.find((document) => document.href === link.href)?.bytes ?? 0) / 1024
-                ).toFixed(1)}{" "}
-                KiB
-              </p>
-              <a href={link.href} download>
-                {locale === "es" ? "Descargar PDF" : "Download PDF"}
-              </a>
-            </div>
-          ))}
-        </div>
+        <ul className={styles.documents} aria-labelledby="evidence">
+          {academicEvidence.map((link) => {
+            const document = documents.find((entry) => entry.href === link.href);
+            const title = link.label.replace(/ · PDF$/, "");
+            return (
+              <li className={styles.document} key={link.href}>
+                <span className={styles.documentFormat}>
+                  PDF{document && ` · ${(document.bytes / 1024).toFixed(1)} KiB`}
+                </span>
+                <h3>{title}</h3>
+                <p>{link.description}</p>
+                <div className={styles.documentActions}>
+                  <a
+                    href={link.href}
+                    aria-label={`${locale === "es" ? "Abrir" : "Open"}: ${title}`}
+                  >
+                    {locale === "es" ? "Abrir documento" : "Open document"}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                  <a
+                    href={link.href}
+                    download
+                    aria-label={`${locale === "es" ? "Descargar" : "Download"}: ${title}`}
+                  >
+                    {locale === "es" ? "Descargar" : "Download"}
+                    <span aria-hidden="true">↓</span>
+                  </a>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        <p className={styles.documentNote}>
+          {locale === "es"
+            ? "Analítico emitido el 22 de diciembre de 2025: su validez administrativa de seis meses finalizó. Se conserva como registro histórico de los resultados académicos, no como certificado vigente."
+            : "Transcript issued on 22 December 2025: its six-month administrative validity has expired. It is retained as a historical academic record, not a currently valid certificate."}
+        </p>
       </section>
     </>
   );
