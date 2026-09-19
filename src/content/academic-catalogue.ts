@@ -60,7 +60,7 @@ const rows: readonly CourseRow[] = [
   ["7655", "Estructuras de Datos", "Data Structures", 2, 1, 8, "2021-07-16"],
   ["7949", "Teoría de la Computabilidad", "Computability Theory", 2, 1, 10, "2021-07-16"],
   ["7951", "Tecnología de Programación", "Programming Technology", 2, 2, 9, "2021-12-03"],
-  ["5744", "Organización de Computadoras", "Computer Organisation", 2, 2, 8, "2022-02-25"],
+  ["5744", "Organización de Computadoras", "Computer Organization", 2, 2, 8, "2022-02-25"],
   ["7821", "Modelos de Software", "Software Models", 2, 2, 8, "2021-12-03"],
   [
     "7820",
@@ -284,7 +284,7 @@ export const academicAreas = [
     id: "systems",
     title: { en: "Computer systems and networks", es: "Sistemas de computación y redes" },
     description: {
-      en: "A systems perspective spanning computer organisation, architecture, operating systems and networks.",
+      en: "A systems perspective spanning computer organization, architecture, operating systems and networks.",
       es: "Una perspectiva de sistemas que conecta organización y arquitectura de computadoras, sistemas operativos y redes.",
     },
     courseIds: ["uns-5744", "uns-5561", "uns-5949", "uns-7903"],

@@ -32,7 +32,7 @@ export const filomena: Project = {
     },
     {
       value: "10 / 10",
-      label: "final year project",
+      label: "final-year project",
       qualifier: "Graded at Universidad Nacional del Sur.",
     },
   ],
@@ -131,7 +131,7 @@ export const filomenaCaseStudy = {
     heading: "From monolith to API-first product",
     body: [
       "We separated the CakePHP and jQuery monolith into a Laravel REST API and a Next.js, React and TypeScript frontend. The API provided a common contract for the interface and multi-institution workflows, with input validation and role-based access control. Server-side rendering supported the initial page load, followed by interactive application flows.",
-      "SQL tuning, indexes, Redis caching and queues supported concurrent exam workflows. Prometheus and Grafana made production behaviour visible across the application and its supporting services.",
+      "SQL tuning, indexes, Redis caching and queues supported concurrent exam workflows. Prometheus and Grafana made production behavior visible across the application and its supporting services.",
     ],
   } satisfies CaseStudySection,
 
@@ -174,7 +174,7 @@ export const filomenaCaseStudy = {
     {
       heading: "Visibility into production",
       body: [
-        "Prometheus and Grafana provide visibility into production behaviour across the database, Redis, queues and workers, supported by structured logging and health checks.",
+        "Prometheus and Grafana provide visibility into production behavior across the database, Redis, queues and workers, supported by structured logging and health checks.",
       ],
     },
   ] satisfies CaseStudySection[],
@@ -212,7 +212,7 @@ export const filomenaCaseStudy = {
     heading: "Delivery and operation",
     body: [
       "Our three-person team used Agile practices and Trello to coordinate requirements, implementation and release.",
-      "Docker and Docker Compose provided containerised environments, while GitHub Actions supported production deployments observed at under fifteen minutes end to end. The public code repositories are snapshots and do not include the original deployment pipeline.",
+      "Docker and Docker Compose provided containerized environments, while GitHub Actions supported production deployments observed at under fifteen minutes end to end. The public code repositories are snapshots and do not include the original deployment pipeline.",
     ],
   } satisfies CaseStudySection,
 
@@ -227,8 +227,8 @@ export const filomenaCaseStudy = {
   lessons: {
     heading: "Next engineering priorities",
     body: [
-      "The next iteration would prioritise automated regression coverage for concurrent exams and permission boundaries. The public snapshots currently contain framework smoke tests.",
-      "I would also preserve repeatable performance scenarios alongside each release, so future changes can be compared with the production behaviour already observed.",
+      "The next iteration would prioritize automated regression coverage for concurrent exams and permission boundaries. The public snapshots currently contain framework smoke tests.",
+      "I would also preserve repeatable performance scenarios alongside each release, so future changes can be compared with the production behavior already observed.",
     ],
   } satisfies CaseStudySection,
 };

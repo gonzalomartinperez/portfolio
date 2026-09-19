@@ -20,6 +20,14 @@ test("catalogue preserves AI-first breadth with grounded additions", () => {
     "aave",
     "compound",
     "defi",
+    "privy",
+    "token-swaps",
+    "vaults",
+    "protocol-integrations",
+    "perpetual-futures",
+    "non-custodial-wallets",
+    "user-authorization",
+    "transaction-execution",
   ]) {
     assert.equal(getTechnology(id)?.status, "applied", `${id}: approved production experience`);
     assert.ok(getTechnology(id)?.evidence.some(({ href }) => href === "/work#rampy"));

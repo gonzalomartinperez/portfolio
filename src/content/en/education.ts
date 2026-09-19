@@ -15,7 +15,7 @@ export const degree = {
   location: "Bahía Blanca, Argentina",
   period: "Jan 2020 – Oct 2025",
   status: "Graduated",
-  programme: "A five-year accredited engineering programme.",
+  programme: "A five-year accredited engineering program.",
 };
 
 export const academicResults: Metric[] = [
@@ -27,12 +27,12 @@ export const academicResults: Metric[] = [
   {
     value: "34 / 34",
     label: "required courses passed",
-    qualifier: "Every course in the programme, with no outstanding subjects.",
+    qualifier: "Every course in the program, with no outstanding subjects.",
   },
   {
     value: "10 / 10",
-    label: "final year project",
-    qualifier: "Filomena, graded at the maximum mark.",
+    label: "final-year project",
+    qualifier: "Filomena, graded at the highest grade.",
   },
 ];
 
@@ -99,7 +99,7 @@ export const languageNote =
   "English: professional working proficiency (B2). The degree also included two university English examinations.";
 
 /**
- * The complete degree programme, taken from the university's published plan. It is the
+ * The complete degree program, taken from the university's published plan. It is the
  * curriculum, not a transcript: no grades appear here, and none are implied.
  */
 export const curriculum = localizedCurriculum("en");

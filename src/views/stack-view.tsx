@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/page-header";
 import { TechnologyCatalogue } from "@/components/technology-catalogue";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
-import { technologyCatalog } from "@/content/technologies";
+import { compareTechnologyNames, publicTechnologyCatalog } from "@/content/technologies";
 import styles from "./stack.module.css";
 
 export function StackView({ locale }: { locale: Locale }) {
@@ -38,8 +38,9 @@ export function StackView({ locale }: { locale: Locale }) {
       : {};
   const groups = stackGroups.map((group) => ({
     ...group,
-    technologies: technologyCatalog
+    technologies: publicTechnologyCatalog
       .filter((technology) => technology.category === group.id)
+      .sort(compareTechnologyNames)
       .map((technology) => ({
         ...technology,
         evidence: technology.evidence.map((evidence) => ({

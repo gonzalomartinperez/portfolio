@@ -34,20 +34,31 @@ export const siteCopy: SiteCopy = {
     allContact: "Todas las formas de contacto",
     backToWork: "Volver a experiencia y proyectos",
     sourceOnGithub: "Código en GitHub",
-    goHome: "Llevame a la portada",
+    goHome: "Volver al inicio",
   },
   hero: {
     openToRemote: "Abierto a trabajo remoto",
     pauseAnimation: "Pausar la animación",
     playAnimation: "Reproducir la animación",
     avatarInteraction: "Interactuar con el avatar de Gonzalo",
-    proof: [
-      { value: "20M+", label: "promociones en producción" },
-      { value: "1.000+", label: "usuarios simultáneos de la plataforma" },
-      { value: "10+", label: "sistemas empresariales integrados" },
+    principles: [
+      {
+        title: "Escalabilidad",
+        description:
+          "Límites claros entre servicios, trabajo asíncrono y acceso eficiente a datos.",
+      },
+      {
+        title: "Mantenibilidad",
+        description: "Código legible, componentes reutilizables y decisiones documentadas.",
+      },
+      {
+        title: "Calidad de software",
+        description:
+          "Pruebas automatizadas, evaluación de agentes y revisión humana antes de entregar.",
+      },
     ],
-    proofNote: "Resultados observados en producción.",
-    proofNoteLink: "Explorá el contexto y mi contribución.",
+    principlesLabel: "Principios de ingeniería",
+    principlesLink: "Cómo los aplico →",
   },
   home: {
     whoEyebrow: "Quién soy",
@@ -67,7 +78,7 @@ export const siteCopy: SiteCopy = {
     stackEyebrow: "Stack",
     stackHeading: "Un conjunto de herramientas para todo el producto",
     stackIntro:
-      "Explorá los lenguajes, frameworks y prácticas detrás de mi trabajo, con enlaces a los proyectos y experiencias donde los apliqué.",
+      "Explora los lenguajes, frameworks y prácticas detrás de mi trabajo, con enlaces a los proyectos y experiencias donde los apliqué.",
     educationEyebrow: "Educación",
     educationHeading: "Ingeniero en Sistemas de Información, UNS",
     educationBody:
@@ -75,7 +86,7 @@ export const siteCopy: SiteCopy = {
       "8,67/10 en 34 de 34 materias obligatorias, y un proyecto final calificado 10/10.",
     closingHeading: "Hablemos",
     closingBody:
-      "¿Buscás un perfil que combine ingeniería de software e IA aplicada? Hablemos de tu producto y de una oportunidad 100% remota.",
+      "¿Buscas un perfil que combine ingeniería de software e IA aplicada? Hablemos de tu producto y de una oportunidad 100% remota.",
   },
   about: {
     metaTitle: "Sobre mí",
@@ -87,8 +98,9 @@ export const siteCopy: SiteCopy = {
     paragraphs: [
       "Soy Gonzalo, Ingeniero en Sistemas de Información por la Universidad Nacional del Sur y AI Software Engineer. Desde 2024 combino proyectos independientes con roles de ingeniería en software empresarial y fintech.",
       "Construí experiencias para comercios, integraciones entre servicios y un backoffice de permisos. Como contribuidor principal de un equipo de tres personas, también participé en la evolución de Filomena hacia una plataforma de exámenes usada por cinco instituciones.",
-      "Actualmente soy AI Engineer en Rampy y colaboro directamente con los founders, desde los requisitos de producto hasta la implementación y el despliegue. Trabajo sobre rendimiento agéntico, recuperación de contexto y memoria, funcionalidades web y mobile e integraciones financieras.",
+      "Hoy soy AI Engineer en Rampy, una startup de ritmo alto donde trabajo directamente con tres founders. Ayudo a dar forma a las ideas, tomo decisiones técnicas y acompaño las funcionalidades hasta las pruebas y el despliegue. Las prioridades cambian, así que busco equilibrar entregas útiles con un producto cada vez más fácil de mantener y hacer crecer.",
       "Conecto IA aplicada con la ingeniería que la sostiene: contratos explícitos, evaluaciones automatizadas, ejecución controlada de herramientas y servicios mantenibles. Mi trabajo DeFi incluye integraciones con Morpho, Aave y Compound, conectando interfaces de producto con ejecución en el backend.",
+      "Me gusta entender cómo encajan las piezas, conversar sobre alternativas y convertir un problema complejo en un próximo paso claro. Busco un equipo de AI engineering donde pueda seguir construyendo, aprendiendo y aportando al producto de punta a punta.",
     ],
     asideCurrently: "Actualmente",
     asideArrangement: "Modalidad de trabajo",
@@ -131,7 +143,7 @@ export const siteCopy: SiteCopy = {
       `${length} de experiencia profesional a ${asOf}, construyendo productos en fintech, sistemas empresariales e IA aplicada.`,
     experienceHeading: "Experiencia profesional",
     projectsEyebrow: "Proyectos seleccionados",
-    projectsHeading: "Explorá el producto en detalle",
+    projectsHeading: "Explora el producto en detalle",
     projectsBody:
       "Filomena reúne el recorrido del producto, las decisiones de arquitectura y las versiones públicas del código. Las experiencias empresariales describen mi contribución y el contexto de operación.",
   },
@@ -154,9 +166,9 @@ export const siteCopy: SiteCopy = {
     evidenceHeading: "Evidencia",
     evidenceNote:
       "El recorrido del producto y el contexto de ingeniería están incluidos en esta página. Los repositorios enlazados son versiones públicas del código: documentan la implementación, no el historial original de desarrollo ni el pipeline de despliegue.",
-    galleryHeading: "Explorá la aplicación",
+    galleryHeading: "Explora la aplicación",
     galleryCaption:
-      "43 pantallas de demostración revisadas que recorren administración, exámenes, corrección y monitoreo operativo. Explorá los flujos o ampliá una pantalla para ver el detalle.",
+      "43 pantallas de demostración revisadas que recorren administración, exámenes, corrección y monitoreo operativo. Explora los flujos o amplía una pantalla para ver el detalle.",
     galleryLabel: "Recorrido por la interfaz de Filomena",
     galleryPrevious: "Pantalla anterior",
     galleryNext: "Pantalla siguiente",
@@ -170,16 +182,15 @@ export const siteCopy: SiteCopy = {
     eyebrow: "Stack",
     title: "La tecnología detrás del trabajo",
     intro:
-      "Desde interfaces y contratos de servicios hasta recuperación de contexto y flujos agénticos. Explorá el conjunto completo por capacidad y accedé al contexto profesional de cada entrada.",
+      "Desde interfaces y contratos de servicios hasta recuperación de contexto y flujos agénticos. Explora el conjunto completo por capacidad y accede al contexto profesional de cada entrada.",
     fieldHeading: "Herramientas de ingeniería conectadas",
     fieldIntro:
       "Lenguajes, frameworks y herramientas que uso en desarrollo de productos e IA aplicada.",
     fieldLabel: "Tecnologías",
-    noteHeading: "Experiencia aplicada y conocimientos en desarrollo",
+    noteHeading: "Experiencia detrás de las herramientas",
     noteScope:
       "En Rampy trabajo sobre infraestructura y despliegues en DigitalOcean. La experiencia en AWS y Kubernetes de otros roles abarca integración, desarrollo y diagnóstico de aplicaciones, no administración de clústeres.",
-    noteLogos:
-      "Las marcas conservan sus colores e identifican tecnologías, sin implicar patrocinio. Las integraciones DeFi productivas se distinguen de los estándares específicos todavía en consolidación.",
+    noteLogos: "Estos logos identifican las herramientas que utilizo y no implican patrocinio.",
   },
   education: {
     metaTitle: "Educación",
@@ -220,15 +231,15 @@ export const siteCopy: SiteCopy = {
     eyebrow: "Contacto",
     title: "Hablemos",
     intro:
-      "Contame sobre tu equipo, el producto y los desafíos de ingeniería que vienen. El email es la forma más directa de contactarme.",
+      "Cuéntame sobre tu equipo, el producto y los desafíos de ingeniería que vienen. El email es la forma más directa de contactarme.",
     basedIn: (location, arrangement, timezone) =>
       `Vivo en ${location} (${timezone}) y trabajo ${arrangement}. Tengo disponibilidad inmediata; podemos acordar la fecha exacta durante el proceso.`,
-    hiringHint: "Para conocer mi trabajo de producto e ingeniería, explorá el",
+    hiringHint: "Para conocer mi trabajo de producto e ingeniería, explora el",
     hiringLinkText: "caso de estudio de Filomena",
     openToHeading: "Abierto a",
     resumeHeading: "CV",
     resumeNote:
-      "Descargá el CV en inglés o español con experiencia, habilidades y datos de contacto.",
+      "Descarga el CV en inglés o español con experiencia, habilidades y datos de contacto.",
   },
   notFound: {
     metaTitle: "Página no encontrada",

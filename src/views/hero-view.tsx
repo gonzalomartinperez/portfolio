@@ -57,18 +57,17 @@ export function HeroView({ locale }: { locale: Locale }) {
         still={<StaticConstellation />}
       />
 
-      <div className={`frame ${styles.proof}`}>
-        {copy.hero.proof.map((item) => (
-          <div key={item.label}>
-            <p className={styles.proofValue}>{item.value}</p>
-            <p className={styles.proofLabel}>{item.label}</p>
+      <section className={`frame ${styles.principles}`} aria-label={copy.hero.principlesLabel}>
+        {copy.hero.principles.map((item) => (
+          <div key={item.title}>
+            <h2 className={styles.principleTitle}>{item.title}</h2>
+            <p className={styles.principleDescription}>{item.description}</p>
           </div>
         ))}
-        <p className={styles.proofNote}>
-          {copy.hero.proofNote}{" "}
-          <Link href={localePath(locale, "/work")}>{copy.hero.proofNoteLink}</Link>
-        </p>
-      </div>
+        <Link className={styles.principlesLink} href={localePath(locale, "/work")}>
+          {copy.hero.principlesLink}
+        </Link>
+      </section>
     </>
   );
 }

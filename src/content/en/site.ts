@@ -41,13 +41,22 @@ export const siteCopy: SiteCopy = {
     pauseAnimation: "Pause animation",
     playAnimation: "Play animation",
     avatarInteraction: "Interact with Gonzalo’s avatar",
-    proof: [
-      { value: "20M+", label: "promotions in production" },
-      { value: "1,000+", label: "simultaneous platform users" },
-      { value: "10+", label: "enterprise systems integrated" },
+    principles: [
+      {
+        title: "Scalability",
+        description: "Clear service boundaries, asynchronous work and deliberate data access.",
+      },
+      {
+        title: "Maintainability",
+        description: "Readable code, reusable components and documented decisions.",
+      },
+      {
+        title: "Software quality",
+        description: "Automated tests, agent evaluations and human review before delivery.",
+      },
     ],
-    proofNote: "Measured in production.",
-    proofNoteLink: "Explore the context and contribution.",
+    principlesLabel: "Engineering principles",
+    principlesLink: "See how I apply them →",
   },
   home: {
     whoEyebrow: "Who I am",
@@ -72,7 +81,7 @@ export const siteCopy: SiteCopy = {
     educationHeading: "Information Systems Engineer, UNS",
     educationBody:
       "Graduated from Universidad Nacional del Sur in October 2025 with an 8.67/10 average " +
-      "across 34 of 34 required courses, and a final year project graded 10/10.",
+      "across 34 of 34 required courses, and a final-year project graded 10/10.",
     closingHeading: "Let's talk",
     closingBody:
       "Looking for someone who combines software engineering with applied AI? Let’s talk about your product and a fully remote role.",
@@ -87,8 +96,9 @@ export const siteCopy: SiteCopy = {
     paragraphs: [
       "I’m Gonzalo, an Information Systems Engineer from Universidad Nacional del Sur and an AI Software Engineer. Since 2024, I’ve combined independent client projects with engineering roles in enterprise software and fintech.",
       "I’ve built merchant-facing experiences, service integrations and a permissions back office. As the principal contributor in a three-person team, I also helped turn Filomena into an exam platform used by five institutions.",
-      "Today I’m an AI Engineer at Rampy, collaborating directly with the founders from product requirements through implementation and deployment. I work on agent performance, retrieval and memory, web and mobile features, and integrations that turn financial data into useful user experiences.",
+      "Today I’m an AI Engineer at Rampy, a fast-moving startup where I work directly with three founders. I help shape ideas, make technical decisions and carry features through testing and deployment. Priorities evolve, so I balance getting useful changes into users’ hands with making the product easier to maintain and grow.",
       "I connect applied AI with the engineering around it: explicit contracts, automated evaluations, controlled tool execution and maintainable services. My DeFi work includes Morpho, Aave and Compound integrations, bringing product interfaces and backend execution together.",
+      "I enjoy understanding how the pieces fit together, discussing options and turning a complex problem into a clear next step. I’m looking for an AI engineering team where I can keep building, learning and contributing across the product.",
     ],
     asideCurrently: "Currently",
     asideArrangement: "Working arrangement",
@@ -171,31 +181,30 @@ export const siteCopy: SiteCopy = {
     fieldHeading: "A connected engineering toolkit",
     fieldIntro: "Languages, frameworks and tools used across product development and applied AI.",
     fieldLabel: "Technologies",
-    noteHeading: "Applied experience and growing expertise",
+    noteHeading: "Experience behind the toolkit",
     noteScope:
       "At Rampy, my work includes DigitalOcean infrastructure and delivery. AWS and Kubernetes experience elsewhere covers application integration, development and diagnostics, not cluster administration.",
-    noteLogos:
-      "Original-colour marks identify technologies, not endorsements. Production DeFi integrations are distinguished from individual standards still being developed.",
+    noteLogos: "These logos identify the tools I use and do not imply endorsement.",
   },
   education: {
     metaTitle: "Education",
     metaDescription:
       "Information Systems Engineer from Universidad Nacional del Sur: 8.67/10 average across " +
-      "34 of 34 required courses, a 10/10 final year project, and verified public evidence.",
+      "34 of 34 required courses, a 10/10 final-year project, and verified public evidence.",
     eyebrow: "Education",
     title: "Information Systems Engineering",
     intro:
       "A five-year accredited engineering degree combining software architecture, mathematics, systems and applied project work.",
     curriculumEyebrow: "Curriculum",
-    curriculumHeading: "The five-year programme",
+    curriculumHeading: "The five-year program",
     courseworkEyebrow: "Coursework",
     courseworkHeading: "Relevant subjects",
     contextEyebrow: "Institutional context",
     contextHeading: "Universidad Nacional del Sur",
-    projectEyebrow: "Final year project",
+    projectEyebrow: "Final-year project",
     projectHeading: "Filomena, graded 10/10",
     projectBody:
-      "My final year project became a platform that five Argentine national institutions now " +
+      "My final-year project became a platform that five Argentine national institutions now " +
       "run in production. It was built by a three-person team, with me as principal author and " +
       "contributor.",
     certificationsEyebrow: "Certifications",

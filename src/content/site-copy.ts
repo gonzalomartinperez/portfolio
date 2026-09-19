@@ -46,9 +46,9 @@ export type SiteCopy = {
     pauseAnimation: string;
     playAnimation: string;
     avatarInteraction: string;
-    proof: { value: string; label: string }[];
-    proofNote: string;
-    proofNoteLink: string;
+    principles: { title: string; description: string }[];
+    principlesLabel: string;
+    principlesLink: string;
   };
   home: {
     whoEyebrow: string;

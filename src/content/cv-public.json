@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-09-19.1",
+  "revision": "2026-09-19.2",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -15,7 +15,7 @@
           "href": ""
         },
         {
-          "text": " and Information Systems Engineer from UNS. I build production AI products with agents, RAG, and Python/FastAPI services connected to web and mobile experiences. I combine product development with architecture, evaluation, and operations, grounded in TypeScript/React, Java/Spring Boot, distributed systems, and AWS. My experience includes a historical load of ",
+          "text": " with an Information Systems Engineering degree from UNS. Delivers production agents, RAG, and web/mobile products, from architecture and evaluation through operations. Combines applied AI with distributed systems: contributed to a historical load of ",
           "bold": false,
           "href": ""
         },
@@ -25,7 +25,7 @@
           "href": ""
         },
         {
-          "text": " and a back office integrating ",
+          "text": " and built a back office integrating ",
           "bold": false,
           "href": ""
         },
@@ -49,7 +49,7 @@
               "id": "rampy",
               "title": "Rampy",
               "subtitle": "AI Engineer",
-              "details": ["Sep 2026 – Present", "Remote"],
+              "details": ["Sep 2026 – Present", "United States · Remote"],
               "href": "https://rampyapp.com/",
               "keywords": [],
               "blocks": [
@@ -58,12 +58,12 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Production AI product",
+                      "text": "AI startup with a production product",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " · Analysis, architecture, web/mobile development, evaluation, and operations in direct collaboration with three founders.",
+                      "text": " · Works directly with three founders to turn evolving priorities into shipped features across analysis, architecture, web/mobile development, evaluation, and operations.",
                       "bold": false,
                       "href": ""
                     }
@@ -153,7 +153,7 @@
                       "href": ""
                     },
                     {
-                      "text": " while retaining checks and optimizing the bundle; operated containers, databases, monitoring, and backups on DigitalOcean.",
+                      "text": " while retaining checks and optimizing the bundle. Prepared DigitalOcean infrastructure for growth toward thousands of users, with containers, databases, monitoring, and backups.",
                       "bold": false,
                       "href": ""
                     }
@@ -514,22 +514,22 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Cut permission searches from approximately 10 minutes to under 10 seconds",
+                      "text": "Automated permission lookups that previously took about 10 minutes of manual work, bringing them under 10 seconds",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " through SQL tuning, indexing, and pagination while keeping critical endpoints below ",
+                      "text": " through the integrated back office, SQL tuning, indexing, and pagination. Critical endpoints averaged under ",
                       "bold": false,
                       "href": ""
                     },
                     {
-                      "text": "300 ms on average",
+                      "text": "300 ms",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " in qualified tests on enterprise on-premise servers.",
+                      "text": " in tests on enterprise on-premise servers.",
                       "bold": false,
                       "href": ""
                     }
@@ -710,7 +710,22 @@
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": ["Fintech", "Blockchain", "Web3", "DeFi", "Morpho", "Aave", "Compound"],
+              "keywords": [
+                "Fintech",
+                "Blockchain",
+                "Web3",
+                "DeFi",
+                "Morpho",
+                "Aave",
+                "Compound",
+                "Privy",
+                "Swaps",
+                "Vaults",
+                "Perpetuals",
+                "Non-Custodial Wallets",
+                "User Authorization",
+                "Transactions"
+              ],
               "blocks": []
             }
           ]
@@ -809,7 +824,7 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Production platform active at ",
+                      "text": "Principal author and contributor in a three-person team building a production platform active at ",
                       "bold": false,
                       "href": ""
                     },
@@ -829,7 +844,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", built by a three-person team with me as principal author and contributor.",
+                      "text": ".",
                       "bold": false,
                       "href": ""
                     }
@@ -1002,7 +1017,7 @@
           "href": ""
         },
         {
-          "text": " e Ingeniero en Sistemas de Información por la UNS. Construyo productos de IA en producción con agentes, RAG y servicios Python/FastAPI, conectados a experiencias web y mobile. Combino desarrollo de producto con arquitectura, evaluación y operación, sobre una base de TypeScript/React, Java/Spring Boot, sistemas distribuidos y AWS. Mi experiencia incluye una carga histórica de ",
+          "text": " e Ingeniero en Sistemas de Información por la UNS. Experiencia en agentes, RAG y productos web/móviles en producción, desde arquitectura y evaluación hasta operación. Combina IA aplicada con sistemas distribuidos: contribuyó a una carga histórica de ",
           "bold": false,
           "href": ""
         },
@@ -1012,7 +1027,7 @@
           "href": ""
         },
         {
-          "text": " y un backoffice que integra ",
+          "text": " y construyó un backoffice que integra ",
           "bold": false,
           "href": ""
         },
@@ -1036,7 +1051,7 @@
               "id": "rampy",
               "title": "Rampy",
               "subtitle": "AI Engineer",
-              "details": ["Sep 2026 – Actualidad", "Remoto"],
+              "details": ["Sep 2026 – Actualidad", "Estados Unidos · Remoto"],
               "href": "https://rampyapp.com/",
               "keywords": [],
               "blocks": [
@@ -1045,12 +1060,12 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Producto de IA en producción",
+                      "text": "Startup de IA con producto en producción",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " · Análisis, arquitectura, desarrollo web/mobile, evaluación y operación en colaboración directa con tres founders.",
+                      "text": " · Colaboración directa con tres founders para convertir prioridades cambiantes en entregas: análisis, arquitectura, desarrollo web/móvil, evaluación y operación.",
                       "bold": false,
                       "href": ""
                     }
@@ -1140,7 +1155,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", conservando controles y optimizando el bundle; operé contenedores, bases de datos, monitoreo y backups en DigitalOcean.",
+                      "text": ", conservando controles y optimizando el bundle. Preparé infraestructura DigitalOcean para crecer hacia miles de usuarios, con contenedores, bases de datos, monitoreo y backups.",
                       "bold": false,
                       "href": ""
                     }
@@ -1501,22 +1516,22 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Reduje las búsquedas de permisos de aproximadamente 10 minutos a menos de 10 segundos",
+                      "text": "Automaticé búsquedas de permisos que requerían unos 10 minutos de trabajo manual, llevándolas a menos de 10 segundos",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " mediante SQL tuning, índices y paginación, manteniendo endpoints críticos por debajo de ",
+                      "text": " mediante el backoffice y sus integraciones, SQL tuning, índices y paginación. Los endpoints críticos promediaron menos de ",
                       "bold": false,
                       "href": ""
                     },
                     {
-                      "text": "300 ms en promedio",
+                      "text": "300 ms",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " en pruebas calificadas sobre servidores empresariales on-premise.",
+                      "text": " en pruebas sobre servidores empresariales on-premise.",
                       "bold": false,
                       "href": ""
                     }
@@ -1697,7 +1712,22 @@
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": ["Fintech", "Blockchain", "Web3", "DeFi", "Morpho", "Aave", "Compound"],
+              "keywords": [
+                "Fintech",
+                "Blockchain",
+                "Web3",
+                "DeFi",
+                "Morpho",
+                "Aave",
+                "Compound",
+                "Privy",
+                "Swaps",
+                "Vaults",
+                "Perpetuals",
+                "Non-Custodial Wallets",
+                "User Authorization",
+                "Transactions"
+              ],
               "blocks": []
             }
           ]
@@ -1974,11 +2004,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "0ed9119faff163d6cb08f81b4cd064c810deef6bef55b7009fc5aed28f657b64",
-    "factsSha256": "0a52a19bb7eb77a990e6454d5a3f0c468c775bed900fe82c4e78e895329d675a",
+    "sourceSha256": "07df805ecdf4353dbe81dd9c48e61a5181611e494ec28ff29fe42fd0edb71bd9",
+    "factsSha256": "62021436b375c8ffef30ce272249537798613c72403e547d9fbfeb10569794c8",
     "pdfSha256": {
-      "en": "1afbca4938570e140928d576c75792dbb182b1ccc23b905ba648b0acae9d124d",
-      "es": "f249f2a5bd92b0749ad268044f5dba717d693ebf50a4df9bdc090abf53bb6975"
+      "en": "e6e6adeff4b01e051089c5fd3745a88d45c7014f7d41cd1a4b653ef8f67ef403",
+      "es": "5824774322e3f821bb28739a90142f08be03e03a78c4b185ebdaf7084e48bd14"
     }
   }
 }

@@ -754,7 +754,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "data-modelling",
-    name: "Data modelling",
+    name: "Data modeling",
     aliases: ["Data modeling"],
     category: "data",
     kind: "concept",
@@ -1513,6 +1513,71 @@ export const technologyCatalog: Technology[] = [
     evidence: [{ label: "Rampy", href: "/work#rampy" }],
   },
   {
+    id: "privy",
+    name: "Privy",
+    icon: "privy",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "token-swaps",
+    name: "Token swaps",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "vaults",
+    name: "Vaults",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "protocol-integrations",
+    name: "Protocol integrations",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "perpetual-futures",
+    name: "Perpetual futures (perps)",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "non-custodial-wallets",
+    name: "Non-custodial wallets",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "user-authorization",
+    name: "User authorization",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "transaction-execution",
+    name: "Transaction execution",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
     id: "fintech",
     name: "Fintech",
     category: "fintech",
@@ -1644,6 +1709,10 @@ export const technologyCatalog: Technology[] = [
   },
 ];
 
+export const publicTechnologyCatalog = technologyCatalog.filter(
+  ({ status }) => status === "applied",
+);
+
 export const technologyGroups = [
   {
     id: "applied-ai",
@@ -1707,7 +1776,7 @@ export const technologyGroups = [
       es: "Cloud y delivery",
     },
     evidence: {
-      en: "DigitalOcean infrastructure and delivery at Rampy; application integration on AWS and containerised workloads.",
+      en: "DigitalOcean infrastructure and delivery at Rampy; application integration on AWS and containerized workloads.",
       es: "Infraestructura y despliegues en DigitalOcean en Rampy; integración de aplicaciones en AWS y contenedores.",
     },
   },
@@ -1783,8 +1852,13 @@ export function getStackGroups(locale: Locale): StackGroup[] {
     id: group.id,
     name: group.name[locale],
     evidence: group.evidence[locale],
-    items: technologyCatalog
+    items: publicTechnologyCatalog
       .filter((technology) => technology.category === group.id)
+      .sort(compareTechnologyNames)
       .map((technology) => technology.name),
   }));
+}
+
+export function compareTechnologyNames(a: Technology, b: Technology) {
+  return a.name.localeCompare(b.name, "en", { sensitivity: "base", numeric: true });
 }

@@ -9,10 +9,10 @@ export const roles: Role[] = [
     position: "AI Engineer",
     period: "Sep 2026 – Present",
     startedOn: "2026-09-01",
-    location: "Argentina",
+    location: "United States",
     arrangement: "Remote",
     context:
-      "Production AI and financial products, built across conversational agents, web, mobile and backend services in direct collaboration with three founders.",
+      "AI and financial products in a fast-moving startup: turning evolving priorities into production features across conversational agents, web, mobile and backend services, working directly with three founders.",
     contributions: [
       "Built a consolidated portfolio experience covering assets, tokens, vaults and 24-hour returns by orchestrating provider APIs in parallel, selectively caching results and assembling a consistent response.",
       "Improved agent workflows through retrieval, reranking, structured outputs and selective conversational memory; reduced redundant context and unnecessary calls while testing complete user journeys and tool selection.",
@@ -20,6 +20,7 @@ export const roles: Role[] = [
       "Refactored application boundaries and reusable components, delivered a shared design system, and developed mobile features with React Native and Kotlin, tested in emulators and on physical devices.",
       "Shortened the validation, build and deployment pipeline while retaining its checks; optimized application bundles, Docker images and development, staging and production environments on DigitalOcean.",
       "Centralized secrets with Infisical, per-user access, automated synchronization and on-demand rotation; worked across deployment, monitoring, backups, databases and server permissions.",
+      "Prepared scalable infrastructure with the design goal of supporting thousands of users, organizing environments, containers and operational controls for product growth.",
       "Standardized spec-driven engineering through an agent skills marketplace and repeatable local setup, connecting requirements, architecture, implementation, automated tests and human UI review.",
       "Added domain and malicious-instruction controls to agent workflows, checked with automated behavioral tests and human review.",
     ],
@@ -75,7 +76,7 @@ export const roles: Role[] = [
       "Delivered the promotions experience end to end: a Single-SPA React and TypeScript microfrontend embedded as a native section of the merchant portal, connected through a Spring WebFlux BFF to multiple microservices and providers.",
       "Designed an in-product RAG and agentic assistant for merchant owners with Python, LangChain, LangGraph, PostgreSQL/pgvector and guardrails, retrieving the banking promotions tied to each merchant to ground the model's answers.",
       "Integrated the HTTPS merchant portal with internal HTTP enterprise services through Amazon API Gateway.",
-      "Built Java/Spring Boot and TypeScript/Node.js/NestJS microservices to ingest, normalise and process promotions from merchants, financial entities and providers, adapting contracts per integration.",
+      "Built Java/Spring Boot and TypeScript/Node.js/NestJS microservices to ingest, normalize and process promotions from merchants, financial entities and providers, adapting contracts per integration.",
       "Implemented an event-driven, serverless flow with Amazon S3, SQS and a Python/FastAPI Lambda using ordered processing strategies.",
       "Built a project-specific agentic engineering environment to preserve context across integration repositories and support consistent feature delivery.",
       "Applied hexagonal architecture in selected microservices and layered architecture in other components.",
@@ -183,7 +184,7 @@ export const roles: Role[] = [
       "Built a responsive Next.js and TypeScript frontend whose only interface was a Python/FastAPI BFF, which defined the shared contract and decoupled the web experience from every downstream service.",
       "Personally integrated 10+ systems through Java/Spring Boot or TypeScript/Node.js/NestJS microservices, each conforming to the permissions API contract and encapsulating its own logic; legacy PHP applications used dedicated integrations.",
       "Built a personal cross-system agentic engineering environment to preserve context and work in parallel across independent integration repositories.",
-      "Standardised onboarding for new systems with reusable structures and filters.",
+      "Standardized onboarding for new systems with reusable structures and filters.",
       "Automated bulk loads and data validation with Python; combined LDAP authentication, role-based access and exportable audit reports with MySQL, MariaDB and Redis. The web development team took over maintenance after my departure.",
     ],
     attribution:
@@ -220,13 +221,13 @@ export const roles: Role[] = [
         value: "≥80%",
         label: "fewer permission tickets",
         qualifier:
-          "Compared against tickets and logs before and after standardised onboarding; ≥95% of recurring assignment bugs eliminated.",
+          "Compared against tickets and logs before and after standardized onboarding; ≥95% of recurring assignment bugs eliminated.",
       },
       {
         value: "10 min → <10 s",
-        label: "permission search",
+        label: "manual to automated permission lookup",
         qualifier:
-          "Through SQL tuning, indexing and pagination. Critical endpoints stayed below 300 ms on average in qualified, repeatable tests on on-premise enterprise servers.",
+          "Replaced a roughly ten-minute manual search with an automated back-office workflow, reducing manual steps through the system's architecture and integrations. Separately, critical endpoints averaged below 300 ms in repeatable on-premise tests, supported by SQL tuning, indexing and pagination.",
       },
     ],
   },

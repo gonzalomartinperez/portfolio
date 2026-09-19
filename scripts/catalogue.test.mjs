@@ -2,12 +2,36 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import {
+  compareTechnologyNames,
   getStackGroups,
+  publicTechnologyCatalog,
   technologyCatalog,
   technologyGroups,
 } from "../src/content/technologies.ts";
 
 const read = (file) => readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
+
+test("catalogue preserves category priority and sorts technology names alphabetically", () => {
+  const original = technologyCatalog.map(({ id }) => id);
+  for (const locale of ["en", "es"]) {
+    const groups = getStackGroups(locale);
+    assert.deepEqual(
+      groups.map(({ id }) => id),
+      technologyGroups.map(({ id }) => id),
+    );
+    for (const group of groups) {
+      const expected = publicTechnologyCatalog
+        .filter(({ category }) => category === group.id)
+        .toSorted(compareTechnologyNames)
+        .map(({ name }) => name);
+      assert.deepEqual(group.items, expected);
+    }
+  }
+  assert.deepEqual(
+    technologyCatalog.map(({ id }) => id),
+    original,
+  );
+});
 
 test("technology identifiers, categories and evidence remain complete", () => {
   const ids = technologyCatalog.map(({ id }) => id);
@@ -33,7 +57,7 @@ test("technology identifiers, categories and evidence remain complete", () => {
       getStackGroups(locale)
         .flatMap(({ items }) => items)
         .sort(),
-      technologyCatalog.map(({ name }) => name).sort(),
+      publicTechnologyCatalog.map(({ name }) => name).sort(),
       `${locale}: derived groups lose or duplicate a technology`,
     );
 });

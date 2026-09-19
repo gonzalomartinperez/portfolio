@@ -2,7 +2,7 @@
 
 This is a public personal portfolio, not a store for private career information.
 
-- Use English for code, documentation, interface text, and commit messages.
+- Use English for code, documentation and commit messages. The interface is bilingual; follow [the editorial guide](docs/editorial-guidelines.md) for US English and neutral Latin American Spanish.
 - Use the Node.js LTS version in `.nvmrc` and restore dependencies with `npm ci`.
 - Keep Next.js on a supported LTS line. Avoid canary releases and experimental flags.
 - Use the App Router, strict TypeScript, Server Components by default, and plain CSS.
