@@ -12,12 +12,12 @@ export const roles: Role[] = [
     location: "Estados Unidos",
     arrangement: "Remote",
     context:
-      "Productos financieros e IA en una startup de ritmo alto: convierto prioridades cambiantes en funcionalidades productivas de agentes conversacionales, web, mobile y backend, en colaboración directa con tres founders.",
+      "Productos financieros e IA en una startup de ritmo alto: convierto prioridades cambiantes en funcionalidades en producción para agentes conversacionales, web, aplicaciones móviles y backend, en colaboración directa con tres fundadores.",
     contributions: [
       "Construí una vista consolidada del portfolio con activos, tokens, vaults y rendimientos de las últimas 24 horas, orquestando APIs de proveedores en paralelo, aplicando caché selectiva y unificando los resultados.",
       "Mejoré los flujos agénticos mediante recuperación de contexto, reranking, salidas estructuradas y memoria conversacional selectiva; reduje contexto redundante y llamadas innecesarias, con pruebas de recorridos completos y selección de herramientas.",
       "Integré Morpho, Aave y Compound de punta a punta —backend, frontend y ejecución de transacciones— para consultar posiciones y rendimientos, depositar y retirar, con chequeos de completitud y seguimiento de estado mediante webhooks.",
-      "Refactoricé límites de la aplicación y componentes reutilizables, implementé un design system compartido y desarrollé funcionalidades mobile con React Native y Kotlin, verificadas en emuladores y teléfonos reales.",
+      "Refactoricé límites de la aplicación y componentes reutilizables, implementé un sistema de diseño compartido y desarrollé funcionalidades móviles con React Native y Kotlin, verificadas en emuladores y teléfonos reales.",
       "Reduje el tiempo del pipeline de validación, build y despliegue conservando sus controles; optimicé bundles, imágenes Docker y entornos de desarrollo, staging y producción en DigitalOcean.",
       "Centralicé secretos con Infisical, acceso por usuario, sincronización automatizada y rotación a demanda; trabajé sobre despliegues, monitoreo, backups, bases de datos y permisos de servidores.",
       "Preparé infraestructura escalable con el objetivo de soportar miles de usuarios, organizando entornos, contenedores y controles operativos para acompañar el crecimiento del producto.",
@@ -25,7 +25,7 @@ export const roles: Role[] = [
       "Incorporé controles de dominio y frente a instrucciones maliciosas en los flujos agénticos, verificados con pruebas automatizadas de comportamiento y revisión humana.",
     ],
     attribution:
-      "Ingeniería de producto desde los requisitos hasta producción, en colaboración directa con los founders y sobre el trabajo previo del equipo.",
+      "Ingeniería de producto desde los requisitos hasta producción, en colaboración directa con los fundadores y sobre el trabajo previo del equipo.",
     stack: technologyNames([
       "Python",
       "FastAPI",
@@ -180,7 +180,7 @@ export const roles: Role[] = [
       "Sistema de Gestión de Permisos para personal administrativo autorizado, administradores de sistemas y gerentes de la mayor cooperativa de consumo de Argentina: 150+ sucursales, 2,7M+ " +
       "asociados y un ecosistema de 50+ sistemas internos.",
     contributions: [
-      "Tuve un rol principal de diseño, arquitectura e implementación, con alcance de product engineering.",
+      "Tuve un rol principal de diseño, arquitectura e implementación, con responsabilidad sobre el desarrollo integral del producto.",
       "Construí un frontend responsive en Next.js y TypeScript cuya única interfaz era un BFF en Python/FastAPI, que definía el contrato común y desacoplaba la experiencia web de cada servicio downstream.",
       "Integré personalmente 10+ sistemas mediante microservicios Java/Spring Boot o TypeScript/Node.js/NestJS, con un contrato común de permisos y lógica interna encapsulada; las aplicaciones PHP heredadas se incorporaron mediante integraciones dedicadas.",
       "Construí un entorno agéntico personal de ingeniería cross-system para preservar contexto y trabajar en paralelo entre repositorios de integración independientes.",

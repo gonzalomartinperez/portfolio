@@ -1,3 +1,11 @@
+.introduction {
+  padding-top: 0;
+}
+
+.principle:last-child {
+  border-bottom: 0;
+}
+
 .split {
   display: grid;
   gap: clamp(var(--space-6), 5vw, var(--space-8));

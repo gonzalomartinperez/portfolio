@@ -94,11 +94,11 @@ export const siteCopy: SiteCopy = {
     eyebrow: "About",
     title: "Software engineering, with applied AI at its core",
     paragraphs: [
-      "I’m Gonzalo, an Information Systems Engineer from Universidad Nacional del Sur and an AI Software Engineer. Since 2024, I’ve combined independent client projects with engineering roles in enterprise software and fintech.",
+      "I graduated in Information Systems Engineering from Universidad Nacional del Sur. Since 2024, I’ve combined independent client projects with engineering roles in enterprise software and fintech.",
       "I’ve built merchant-facing experiences, service integrations and a permissions back office. As the principal contributor in a three-person team, I also helped turn Filomena into an exam platform used by five institutions.",
       "Today I’m an AI Engineer at Rampy, a fast-moving startup where I work directly with three founders. I help shape ideas, make technical decisions and carry features through testing and deployment. Priorities evolve, so I balance getting useful changes into users’ hands with making the product easier to maintain and grow.",
       "I connect applied AI with the engineering around it: explicit contracts, automated evaluations, controlled tool execution and maintainable services. My DeFi work includes Morpho, Aave and Compound integrations, bringing product interfaces and backend execution together.",
-      "I enjoy understanding how the pieces fit together, discussing options and turning a complex problem into a clear next step. I’m looking for an AI engineering team where I can keep building, learning and contributing across the product.",
+      "I enjoy understanding how the pieces fit together, discussing options and turning a complex problem into a clear next step. I like building with a team, learning and contributing across the product.",
     ],
     asideCurrently: "Currently",
     asideArrangement: "Working arrangement",
