@@ -21,7 +21,7 @@ Hostinger's managed Node.js hosting, with the domain registered through Cloudfla
 | `/about` | Professional narrative, how he works, languages, availability |
 | `/work` | Experience and selected projects in one chronology |
 | `/work/filomena` | The flagship product-engineering case study |
-| `/stack` | Technology expertise organised by capability |
+| `/stack` | Applied technology experience, AI-first categories and alphabetical entries |
 | `/education` | Degree, academic results, and approved public evidence |
 | `/contact` | Contact routes and what he is open to |
 | `/cv` | Self-contained CV with reviewed PDF downloads |
@@ -43,9 +43,9 @@ pulses, the keyboard-accessible avatar and restrained depth on interface control
 | Type safety | TypeScript 7.0.2 with strict checking |
 | Runtime | Node.js 24 LTS and Next.js 16 Active LTS |
 | Interface | Plain CSS with design tokens; focused client boundaries for theme, scene, search and gallery |
-| Languages | English and Spanish from one typed copy contract, so a missing translation fails the build |
+| Languages | American English and neutral Latin American Spanish, backed by a shared typed copy contract |
 | Hero identity | Owner-selected caricature, lazy Three.js particle scene and GSAP native-scroll choreography |
-| Technology catalogue | Shared typed inventory, original-colour local marks and linked experience context |
+| Technology catalog | Shared typed inventory, original-color local marks and linked experience context |
 | Code quality | Biome linting and formatting, locked dependency installation |
 | Delivery | Protected pull requests, GitHub Actions CI, native Hostinger CD from `main` |
 | AI-assisted development | Shared Claude Code and Codex guidance, specifications, isolated worktrees |
@@ -125,6 +125,8 @@ updated without giving the public build access to private sources.
 | [Research note](docs/research/portfolio-2026-09-12.md) | Sources behind those decisions, including the weak ones |
 | [Development guide](docs/development.md) | Code conventions, SDD, branches, agents, and review |
 | [Code-quality standard](docs/code-quality.md) | Readable code, necessary comments, useful API documentation |
+| [Editorial guidelines](docs/editorial-guidelines.md) | Natural bilingual copy, evidence-aware claims, technology and brand presentation |
+| [Public-content contract](docs/public-content.md) | Approved data projection, generated CV and reviewed document releases |
 | [Technology guide](docs/technology.md) | Version policy, compatibility, and maintenance |
 | [Deployment guide](docs/deployment.md) | Hostinger setup and the CI/CD boundary |
 | [AGENTS.md](AGENTS.md) / [CLAUDE.md](CLAUDE.md) | Shared agent contract and Claude entrypoint |
