@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/page-header";
 import cv from "@/content/cv-public.json";
 import { type Locale, localePath } from "@/content/locales";
 import documents from "@/content/public-documents.json";
-import { resumeFiles } from "@/content/site-config";
+import { resumeDownloads, resumeFiles } from "@/content/site-config";
 import styles from "./cv.module.css";
 
 type Run = { text: string; bold: boolean; href: string };
@@ -54,7 +54,7 @@ export function CvView({ locale }: { locale: Locale }) {
       <PageHeader eyebrow="CV" title={copy.name} intro={copy.headline} />
       <div className={`frame ${styles.resume}`}>
         <div className={styles.actions}>
-          <a className="button button-primary" href={resumeFiles[locale]} download>
+          <a className="button button-primary" href={resumeDownloads[locale]} download>
             {spanish ? "Descargar CV · PDF" : "Download CV · PDF"}
           </a>
           <Link className="button button-secondary" href={localePath(locale, "/contact")}>
