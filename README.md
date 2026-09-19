@@ -42,7 +42,7 @@ pulses, the keyboard-accessible avatar and restrained depth on interface control
 | Application | Next.js App Router, React, and Server Components by default |
 | Type safety | TypeScript 7.0.2 with strict checking |
 | Runtime | Node.js 24 LTS and Next.js 16 Active LTS |
-| Interface | Plain CSS with design tokens; focused client boundaries for theme, scene, search and gallery |
+| Interface | Owned shadcn/ui primitives, Tailwind utilities and CSS Modules; existing design tokens and focused client boundaries |
 | Languages | American English and neutral Latin American Spanish, backed by a shared typed copy contract |
 | Hero identity | Owner-selected caricature, lazy Three.js particle scene and GSAP native-scroll choreography |
 | Technology catalog | Shared typed inventory, original-color local marks and linked experience context |

@@ -1,17 +1,21 @@
+import { cva, type VariantProps } from "class-variance-authority";
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
-function Card({ className, ...props }: ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card"
-      className={cn(
-        "min-w-0 rounded-[var(--radius-lg)] border border-solid border-border bg-card text-card-foreground",
-        className,
-      )}
-      {...props}
-    />
-  );
+const cardVariants = cva(
+  "min-w-0 rounded-[var(--radius-lg)] border border-solid border-border bg-card text-card-foreground",
+  {
+    variants: { variant: { default: "", subtle: "bg-secondary" } },
+    defaultVariants: { variant: "default" },
+  },
+);
+
+function Card({
+  className,
+  variant,
+  ...props
+}: ComponentProps<"div"> & VariantProps<typeof cardVariants>) {
+  return <div data-slot="card" className={cn(cardVariants({ variant }), className)} {...props} />;
 }
 function CardHeader({ className, ...props }: ComponentProps<"div">) {
   return (
@@ -45,4 +49,4 @@ function CardFooter({ className, ...props }: ComponentProps<"div">) {
   );
 }
 
-export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle };
+export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, cardVariants };

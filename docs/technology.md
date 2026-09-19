@@ -4,7 +4,9 @@
 
 - Node.js **24 LTS**; the local baseline is pinned in `.nvmrc`.
 - Next.js **16 Active LTS** and React 19, using stable releases only.
-- TypeScript **7.0.2** in strict mode, Biome for linting and formatting, and plain CSS.
+- TypeScript **7.0.2** in strict mode and Biome for linting and formatting.
+- Owned shadcn/ui primitives using focused Radix packages, Tailwind 4 utilities,
+  and CSS Modules for page layout, branding and custom motion.
 - Exact direct dependency versions and a committed `package-lock.json`.
 
 npm **11.5.1**, bundled with the observed Node 24.6.0 runtime, is the hosting
@@ -44,6 +46,11 @@ Sources: [Node.js releases](https://nodejs.org/en/about/previous-releases),
 [Next.js TypeScript CLI integration](https://nextjs.org/docs/app/api-reference/config/next-config-js/useTypeScriptCli).
 
 ## Maintenance
+
+The consolidated UI migration includes the two patch updates previously proposed
+by Dependabot PR #49: Biome 2.5.14 and `@types/node` 24.13.5. That PR was closed
+at the owner's request so these versions are validated with the whole migration.
+No independent major upgrade is implied by the consolidation.
 
 `package-lock.json` is the only dependency lockfile. The original npm snapshot
 was restored with updated root engine metadata, preserving application versions.
