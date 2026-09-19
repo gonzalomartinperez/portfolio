@@ -6,6 +6,7 @@ import { chrome } from "@/content/chrome";
 import { contactChannels, contactLinks, profile } from "@/content/en/profile";
 import { contactChannels as spanishContactChannels } from "@/content/es/profile";
 import { defaultLocale, type Locale, localePath } from "@/content/locales";
+import { navigationPath } from "@/content/routes";
 import { ContactIcons } from "./contact-links";
 import { Mark } from "./mark";
 import styles from "./site-footer.module.css";
@@ -19,7 +20,7 @@ function localeFromPath(pathname: string): Locale {
  * client-side navigation. Contact links and the identity line are language-independent.
  */
 export function SiteFooter() {
-  const locale = localeFromPath(usePathname());
+  const locale = localeFromPath(navigationPath(usePathname()));
   const copy = chrome[locale];
 
   const routes = [

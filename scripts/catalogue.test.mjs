@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import {
   compareTechnologyNames,
+  getSceneMarkIdentity,
   getStackGroups,
   publicTechnologyCatalog,
   technologyCatalog,
@@ -10,6 +11,22 @@ import {
 } from "../src/content/technologies.ts";
 
 const read = (file) => readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
+
+test("the hero fills seven desktop and five mobile columns with 70 unique marks", () => {
+  const selected = publicTechnologyCatalog.filter(getSceneMarkIdentity);
+  const identities = new Set(selected.map(getSceneMarkIdentity));
+  assert.equal(identities.size, 70);
+  assert.equal(identities.size % 7, 0);
+  assert.equal(identities.size % 5, 0);
+  for (const technology of selected) assert.equal(technology.status, "applied");
+  assert.deepEqual(
+    selected
+      .filter(({ icon }) => !icon)
+      .map(({ id }) => id)
+      .sort(),
+    ["agent-evaluation", "pgvector", "rag"],
+  );
+});
 
 test("catalogue preserves category priority and sorts technology names alphabetically", () => {
   const original = technologyCatalog.map(({ id }) => id);

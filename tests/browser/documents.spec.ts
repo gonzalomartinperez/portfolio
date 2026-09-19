@@ -23,6 +23,15 @@ test("CV and contact downloads use reviewed content hashes as cache keys", async
           .digest("hex"),
       ).toBe(document?.sha256);
     }
+    if (route.endsWith("/cv")) {
+      const open = page.getByRole("link", { name: /^(Open CV|Abrir CV)/ });
+      const download = page.getByRole("link", { name: /^(Download CV|Descargar CV)/ });
+      await expect(open).toHaveAttribute("target", "_blank");
+      await expect(open).toHaveAttribute("rel", /noopener/);
+      expect(await open.getAttribute("download")).toBeNull();
+      await expect(download).toHaveAttribute("download", "");
+      await expect(open).toHaveAttribute("href", (await download.getAttribute("href")) ?? "");
+    }
   }
 });
 

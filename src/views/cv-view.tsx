@@ -55,6 +55,20 @@ export function CvView({ locale }: { locale: Locale }) {
       <PageHeader eyebrow="CV" title={copy.name} intro={copy.headline} />
       <div className={`frame ${styles.resume}`}>
         <div className={styles.actions}>
+          <a
+            className={buttonVariants({ variant: "outline" })}
+            href={resumeDownloads[locale]}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={
+              spanish
+                ? "Abrir CV · PDF (se abre en una pestaña nueva)"
+                : "Open CV · PDF (opens in a new tab)"
+            }
+          >
+            {spanish ? "Abrir CV · PDF" : "Open CV · PDF"}
+            <span aria-hidden="true">↗</span>
+          </a>
           <a className={buttonVariants()} href={resumeDownloads[locale]} download>
             {spanish ? "Descargar CV · PDF" : "Download CV · PDF"}
           </a>
