@@ -46,3 +46,18 @@ name as the accessible label and empty image alt text when it is redundant.
 All files were decoded to verify their formats and dimensions. Integration must
 still check the rendered light/dark UI, links and accessible names; asset inspection
 alone does not validate the final component.
+
+## Additional technology marks
+
+The following original-color SVGs were retrieved from the Devicon project's
+official repository on the same date. Devicon's distribution terms do not replace
+the individual brands' trademark terms. See the [Devicon license](https://github.com/devicons/devicon/blob/master/LICENSE)
+and [project disclaimer](https://github.com/devicons/devicon#disclaimer).
+
+| Mark | Source | Local asset | SHA-256 |
+| --- | --- | --- | --- |
+| DigitalOcean | [Devicon original](https://raw.githubusercontent.com/devicons/devicon/master/icons/digitalocean/digitalocean-original.svg) | [digitalocean.svg](../../public/brands/digitalocean.svg) | `237e683e4a5f982e299d77ad4afc4f77a6245c3905d5344d5de7cdfaaeef95af` |
+| Kotlin | [Devicon original](https://raw.githubusercontent.com/devicons/devicon/master/icons/kotlin/kotlin-original.svg) | [kotlin.svg](../../public/brands/kotlin.svg) | `5053c2e1288582d1ac2cfc1e807eabb7f6059b1aa2f7d04e5cf00063682a2cbe` |
+
+Both use a 128 × 128 viewBox, retain their original colors, and contain no scripts
+or remote resource dependencies. Render them without monochrome filtering.
