@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { chrome } from "@/content/chrome";
 import { contactChannels, contactLinks, profile } from "@/content/en/profile";
+import { contactChannels as spanishContactChannels } from "@/content/es/profile";
 import { defaultLocale, type Locale, localePath } from "@/content/locales";
 import { ContactIcons } from "./contact-links";
 import { Mark } from "./mark";
@@ -42,7 +43,7 @@ export function SiteFooter() {
           <p className="muted">
             {copy.roleSubtitle} · {profile.location} · {profile.timezone}
           </p>
-          <ContactIcons channels={contactChannels} />
+          <ContactIcons channels={locale === "es" ? spanishContactChannels : contactChannels} />
         </div>
 
         <nav aria-label={copy.footerNavLabel}>

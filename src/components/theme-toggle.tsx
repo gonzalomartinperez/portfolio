@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import styles from "./theme-toggle.module.css";
 
 type Theme = "light" | "dark";
@@ -24,7 +25,12 @@ export function ThemeToggle({
   const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem("theme");
+    let stored: string | null = null;
+    try {
+      stored = window.localStorage.getItem("theme");
+    } catch {
+      // The pre-paint default still works when storage is unavailable.
+    }
     if (stored === "light" || stored === "dark") {
       setTheme(stored);
       return;
@@ -47,7 +53,13 @@ export function ThemeToggle({
   const label = theme ? (theme === "light" ? toDarkLabel : toLightLabel) : neutralLabel;
 
   return (
-    <button aria-label={label} className={styles.toggle} onClick={toggle} type="button">
+    <Button
+      variant="outline"
+      size="icon"
+      aria-label={label}
+      className={styles.toggle}
+      onClick={toggle}
+    >
       <svg
         aria-hidden="true"
         className={styles.sun}
@@ -78,6 +90,6 @@ export function ThemeToggle({
           strokeWidth="1.6"
         />
       </svg>
-    </button>
+    </Button>
   );
 }
