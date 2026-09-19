@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import portrait from "@/assets/portrait.avif";
 import { PageHeader } from "@/components/page-header";
+import { buttonVariants } from "@/components/ui/button";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import styles from "./about.module.css";
@@ -97,10 +98,13 @@ export function AboutView({ locale }: { locale: Locale }) {
           <p>{copy.about.lookingBody}</p>
         </div>
         <div className="actions flow">
-          <Link className="button button-primary" href={localePath(locale, "/work")}>
+          <Link className={buttonVariants()} href={localePath(locale, "/work")}>
             {copy.actions.seeWork}
           </Link>
-          <Link className="button button-secondary" href={localePath(locale, "/contact")}>
+          <Link
+            className={buttonVariants({ variant: "outline" })}
+            href={localePath(locale, "/contact")}
+          >
             {copy.actions.getInTouch}
           </Link>
         </div>
