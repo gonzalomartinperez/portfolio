@@ -44,15 +44,17 @@ test("twenty rapid reversals retain deterministic logo positions and a single ca
     };
   });
   const move = async (progress: number) => {
-    await page.evaluate(
-      ({ start, distance, progress }) => scrollTo(0, start + distance * progress),
+    const target = await page.evaluate(
+      ({ start, distance, progress }) => {
+        scrollTo({ top: start + distance * progress, behavior: "instant" });
+        return Math.max(0, Math.min(1, (scrollY - start) / distance));
+      },
       { ...geometry, progress },
     );
+    // Compare settled states, accounting for the browser's integer scroll position.
     await expect
-      .poll(async () =>
-        Math.abs(Number(await scene.getAttribute("data-scene-progress")) - progress),
-      )
-      .toBeLessThan(0.002);
+      .poll(async () => Math.abs(Number(await scene.getAttribute("data-scene-progress")) - target))
+      .toBeLessThan(0.0001);
   };
   const positions = () =>
     scene.locator(".scene-logo").evaluateAll((elements) =>
