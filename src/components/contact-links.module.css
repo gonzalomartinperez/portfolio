@@ -12,8 +12,18 @@
   background: #f4f6f9;
   border-radius: 50%;
   display: grid;
-  padding: 0.35rem;
+  inline-size: 2rem;
+  block-size: 2rem;
+  flex: none;
   place-items: center;
+}
+
+.chip svg {
+  display: block;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .link {
@@ -95,6 +105,12 @@
 .iconOnly {
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
+  padding: 0;
+}
+
+.iconOnly .chip {
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
 }
 
 .iconOnly:hover {
