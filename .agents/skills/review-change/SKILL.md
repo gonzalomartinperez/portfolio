@@ -7,6 +7,9 @@ description: Review a portfolio diff for concrete correctness, security, accessi
 
 1. Read AGENTS.md, the relevant spec, and the actual diff against the requested base. Inspect callers and tests before concluding a behavior is wrong.
 2. Prioritize broken acceptance criteria, server/client data leaks, unsafe input handling, inaccessible interactions, and observable regressions.
+   For design-system changes, inspect semantic token mapping in both themes,
+   link/button roles, native no-JavaScript disclosures and actual mobile wrapping.
+   Reuse of a shadcn primitive is not evidence that its composed usage is accessible.
    For public content, use [editorial guidelines](../../../docs/editorial-guidelines.md)
    to check claim scope and locale consistency; compare affected CV and PDF outputs
    through the [public-content contract](../../../docs/public-content.md). Distinguish

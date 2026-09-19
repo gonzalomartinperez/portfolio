@@ -16,6 +16,10 @@ description: Implement a requested portfolio feature or refactor with focused Ne
    inspect the diff for narration comments and unnecessary doc blocks. Preserve
    comments that carry real constraints; simplify unclear code before explaining it.
 5. Build semantic, keyboard-accessible, responsive UI. Include relevant loading, empty, and error states; avoid inventing profile content.
+   Reuse the owned shadcn primitives in `src/components/ui/` and the theme bridge
+   in globals.css. Preserve links, native no-JS disclosures and custom 3D boundaries;
+   a registry update must not overwrite local accessibility or visual contracts.
+   Loading skeletons require an actual pending resource, not an artificial delay.
 6. Add targeted tests when behavior is introduced. Run npm run check and git diff --check, plus relevant production and visual checks. Record what could not be verified.
    Select responsive, document and motion cases from the
    [task-specific QA matrix](../../../docs/development.md#task-specific-qa), including
