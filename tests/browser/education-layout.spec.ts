@@ -11,6 +11,7 @@ for (const locale of ["en", "es"]) {
     expect(await grades.count()).toBeGreaterThan(34);
     await expect(page.locator('[data-academic-grade="AP"]').first()).toContainText("AP");
     for (const grade of await grades.all()) {
+      await expect(grade).toHaveAttribute("data-slot", "badge");
       const value = await grade.getAttribute("data-academic-grade");
       await expect(grade).toContainText(value === "AP" ? "AP" : `${value} / 10`);
     }
@@ -21,6 +22,7 @@ for (const locale of ["en", "es"]) {
       const evidence = page.locator('ul[aria-labelledby="evidence"]');
       await expect(evidence.locator("li")).toHaveCount(2);
       for (const card of await evidence.locator("li").all()) {
+        await expect(card).toHaveAttribute("data-slot", "card");
         await expect(card.locator("h3")).toBeVisible();
         await expect(card).toContainText(/PDF · \d+\.\d KiB/);
         await expect(card.locator("a")).toHaveCount(2);

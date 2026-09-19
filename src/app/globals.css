@@ -314,7 +314,6 @@
     flex-wrap: wrap;
     gap: var(--space-3);
   }
-
   .button {
     align-items: center;
     border: 1px solid transparent;

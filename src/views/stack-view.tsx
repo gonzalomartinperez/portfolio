@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
 import { TechnologyCatalogue } from "@/components/technology-catalogue";
+import { buttonVariants } from "@/components/ui/button";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import { compareTechnologyNames, publicTechnologyCatalog } from "@/content/technologies";
@@ -60,7 +61,10 @@ export function StackView({ locale }: { locale: Locale }) {
           <h2>{copy.stack.noteHeading}</h2>
           <p>{copy.stack.noteScope}</p>
           <p>{copy.stack.noteLogos}</p>
-          <Link className="button button-secondary" href={localePath(locale, "/work")}>
+          <Link
+            className={buttonVariants({ variant: "outline" })}
+            href={localePath(locale, "/work")}
+          >
             {copy.actions.fullExperience}
           </Link>
         </div>
