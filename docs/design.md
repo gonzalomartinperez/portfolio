@@ -20,6 +20,38 @@ of the animation.
 
 ## Colour and typography
 
+Reusable interface components live in `src/components/ui/`, adapted from shadcn/ui
+to this identity rather than a stock theme. Tailwind utilities style primitives;
+CSS Modules retain custom page geometry and motion. Native details preserve
+no-JavaScript academic/work disclosure. Ordinary navigation and download actions
+remain links, not button roles. See the [migration contract](specs/shadcn-migration.md)
+and [upstream provenance](assets/shadcn-ui.md).
+
+Semantic utility colors map to the existing tokens in `globals.css`; the
+`data-theme` attribute remains the only theme authority. Tailwind Preflight is
+not imported, so it cannot reset the unchanged scene or editorial layout.
+
+### Safe visual refresh
+
+1. Change semantic color, spacing, type and radius tokens in `globals.css`,
+   including both theme values. Avoid per-page replacement color palettes.
+2. Change component variants in `src/components/ui/` when the shape, density or
+   interactive appearance changes. Semantic link/card variants serve server HTML
+   without turning content into client components.
+3. Change CSS Modules only for the affected page geometry or intentionally custom
+   presentation. The shared base is in a cascade layer below utilities; modules
+   can preserve explicit layout contracts without escalating specificity.
+4. Keep the existing `data-theme` storage/pre-paint behavior. Adding a second theme
+   provider or class authority would create conflicting initial states.
+5. Capture both themes/locales at narrow and wide viewports, verify keyboard and
+   reduced-motion states, then run the task-specific QA matrix in
+   [development](development.md#task-specific-qa). Check the expanded scene even
+   when the change is only typography: measured geometry can still be affected.
+
+A component library does not make a design responsive or accessible by itself.
+Visual approval, contrast checks, semantic content and regression tests remain
+required; no token update automatically approves a production release.
+
 The editable token authority is [globals.css](../src/app/globals.css). Dark is the default;
 light is an explicit, persistent choice applied before first paint when storage is available.
 Blocked storage does not prevent changing the current theme.

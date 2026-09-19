@@ -3,6 +3,7 @@ import { HeroStage } from "@/components/hero/hero-stage";
 import { StaticConstellation } from "@/components/hero/static-constellation";
 import { TechConstellation } from "@/components/hero/tech-constellation";
 import { Mark } from "@/components/mark";
+import { buttonVariants } from "@/components/ui/button";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import styles from "./hero.module.css";
@@ -20,10 +21,13 @@ export function HeroView({ locale }: { locale: Locale }) {
       <p className={styles.proposition}>{profile.headline}</p>
 
       <div className={`actions ${styles.actions}`}>
-        <Link className="button button-primary" href={localePath(locale, "/work")}>
+        <Link className={buttonVariants()} href={localePath(locale, "/work")}>
           {copy.actions.seeWork}
         </Link>
-        <Link className="button button-secondary" href={localePath(locale, "/contact")}>
+        <Link
+          className={buttonVariants({ variant: "outline" })}
+          href={localePath(locale, "/contact")}
+        >
           {copy.actions.getInTouch}
         </Link>
       </div>
