@@ -53,3 +53,8 @@ historical measurements or infer new academic or Filomena outcomes.
 - Required PR checks repeat the full browser suite and Hostinger/GLIBC baseline
   against the integrated source. Their results, not a local build, gate merging.
 - No new device-performance or field-metric claims are made by this content update.
+- Linux CI initially found the Spanish homepage at 60.2 KiB gzip, over its unchanged
+  60 KiB budget. The static sphere now batches its 1,000 original square positions
+  into 32 depth layers instead of serializing 1,000 React nodes. Only fallback
+  colour/opacity depth is quantized; the interactive WebGL scene is unchanged.
+  Deterministic geometry tests and reduced-motion screenshots cover the adjustment.

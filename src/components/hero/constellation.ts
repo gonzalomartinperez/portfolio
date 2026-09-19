@@ -106,3 +106,16 @@ export const POINT_COUNT_DESKTOP = 11000;
 export const POINT_COUNT_COMPACT = 7000;
 /** The still is inlined into the HTML, so its count is a payload decision, not a visual one. */
 export const POINT_COUNT_STATIC = 1000;
+
+/** Batch the static squares into depth layers to avoid serializing 1,000 React nodes. */
+export function buildStaticLayers() {
+  const layers = Array.from({ length: 32 }, (_, index) => ({
+    depth: (index + 0.5) / 32,
+    path: "",
+  }));
+  for (const point of projectConstellation(buildConstellation(POINT_COUNT_STATIC), 0.6)) {
+    const layer = layers[Math.min(31, Math.floor(point.depth * 32))];
+    layer.path += `M${point.x.toFixed(4)} ${(-point.y).toFixed(4)}h.006v.006h-.006Z`;
+  }
+  return layers.filter((layer) => layer.path.length > 0);
+}

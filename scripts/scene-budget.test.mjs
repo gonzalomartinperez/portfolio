@@ -3,7 +3,26 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
+import {
+  buildConstellation,
+  buildStaticLayers,
+  POINT_COUNT_STATIC,
+  projectConstellation,
+} from "../src/components/hero/constellation.ts";
 import { SceneBudgetPlugin } from "./scene-budget-plugin.mjs";
+
+test("static scene batches every deterministic square without changing its position", () => {
+  const layers = buildStaticLayers();
+  assert.equal(layers.length, 32);
+  assert.deepEqual(layers, buildStaticLayers());
+  const squares = layers.flatMap((layer) => layer.path.match(/M[^Z]+Z/g) ?? []);
+  assert.equal(squares.length, POINT_COUNT_STATIC);
+  const expected = projectConstellation(buildConstellation(POINT_COUNT_STATIC), 0.6).map(
+    (point) => `M${point.x.toFixed(4)} ${(-point.y).toFixed(4)}h.006v.006h-.006Z`,
+  );
+  assert.deepEqual(squares.sort(), expected.sort());
+  assert.ok(layers.every((layer, index) => index === 0 || layer.depth > layers[index - 1].depth));
+});
 
 test("scene budget includes extracted vendors and nested asynchronous chunks", () => {
   const directory = mkdtempSync(path.join(tmpdir(), "portfolio-budget-"));

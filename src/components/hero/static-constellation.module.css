@@ -1,4 +1,4 @@
-.field rect {
+.field path {
   /* --depth is 0 at the far edge of the cloud and 1 at the near edge. */
   fill: color-mix(in oklab, var(--field-near) calc(var(--depth) * 100%), var(--field-far));
 }
