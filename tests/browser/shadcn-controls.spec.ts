@@ -96,8 +96,16 @@ test("gallery links remain direct navigation with modified clicks", async ({
   const opened = context.waitForEvent("page");
   await trigger.click({ modifiers: ["ControlOrMeta"] });
   const imagePage = await opened;
-  await expect.poll(() => new URL(imagePage.url()).pathname).toBe(source);
-  await imagePage.waitForLoadState();
+  await imagePage.bringToFront();
+  await imagePage.waitForURL((url) => url.pathname === source, { timeout: 10_000 });
+  await expect(imagePage.locator("img")).toBeVisible();
+  await expect
+    .poll(() =>
+      imagePage
+        .locator("img")
+        .evaluate((image) => (image instanceof HTMLImageElement ? image.naturalWidth : 0)),
+    )
+    .toBeGreaterThan(0);
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await imagePage.close();
 });
