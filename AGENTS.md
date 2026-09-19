@@ -5,7 +5,7 @@ This is a public personal portfolio, not a store for private career information.
 - Use English for code, documentation and commit messages. The interface is bilingual; follow [the editorial guide](docs/editorial-guidelines.md) for US English and neutral Latin American Spanish.
 - Use the Node.js LTS version in `.nvmrc` and restore dependencies with `npm ci`.
 - Keep Next.js on a supported LTS line. Avoid canary releases and experimental flags.
-- Use the App Router, strict TypeScript, Server Components by default, and plain CSS.
+- Use the App Router, strict TypeScript and Server Components by default. Use owned shadcn/ui primitives with Tailwind utilities; preserve CSS Modules for layout, identity and custom motion.
 - Add dependencies only when the feature justifies them; commit the lockfile.
 - Keep changes focused. Do not add personal claims, metrics, or employer materials without approval.
 - Never commit credentials, private documents, `.env` files, caches, or builds.

@@ -1,4 +1,32 @@
-/* Design tokens and shared primitives. See docs/design.md for rationale and contrast figures. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "tw-animate-css";
+@source "../";
+
+@custom-variant dark (&:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *));
+
+@theme inline {
+  --color-background: var(--surface-void);
+  --color-foreground: var(--text-primary);
+  --color-card: var(--surface-raised);
+  --color-card-foreground: var(--text-primary);
+  --color-popover: var(--surface-raised);
+  --color-popover-foreground: var(--text-primary);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--surface-void);
+  --color-secondary: var(--surface-base);
+  --color-secondary-foreground: var(--text-primary);
+  --color-muted: var(--surface-base);
+  --color-muted-foreground: var(--text-secondary);
+  --color-accent: var(--accent-wash);
+  --color-accent-foreground: var(--text-primary);
+  --color-border: var(--line-strong);
+  --color-input: var(--line-control);
+  --color-ring: var(--accent);
+}
+
+/* Existing reset and tokens remain authoritative; no Tailwind Preflight reset. */
 
 /*
  * Dark is the default for every visitor, regardless of the system preference, because the
