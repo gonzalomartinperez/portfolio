@@ -15,6 +15,7 @@ export type Technology = {
 export const technologyCatalog: Technology[] = [
   {
     id: "agno",
+    icon: "agno",
     name: "Agno",
     category: "applied-ai",
     kind: "brand",
@@ -23,6 +24,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "mem0",
+    icon: "mem0",
     name: "Mem0",
     category: "applied-ai",
     kind: "brand",
@@ -31,6 +33,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "deepinfra",
+    icon: "deepinfra",
     name: "DeepInfra",
     category: "applied-ai",
     kind: "brand",
@@ -346,6 +349,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "celery",
+    icon: "celery",
     name: "Celery",
     category: "backend",
     kind: "brand",
@@ -809,6 +813,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "single-spa",
+    icon: "single-spa",
     name: "Single-SPA",
     category: "frontend",
     kind: "brand",
@@ -889,6 +894,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "hostinger",
+    icon: "hostinger",
     name: "Hostinger",
     category: "cloud",
     kind: "brand",
@@ -925,6 +931,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "amazon-api-gateway",
+    icon: "amazon-api-gateway",
     name: "Amazon API Gateway",
     category: "cloud",
     kind: "brand",
@@ -952,6 +959,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "amazon-sqs",
+    icon: "amazon-sqs",
     name: "Amazon SQS",
     category: "cloud",
     kind: "brand",
@@ -965,6 +973,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "amazon-cloudwatch",
+    icon: "amazon-cloudwatch",
     name: "Amazon CloudWatch",
     category: "cloud",
     kind: "brand",
@@ -1103,6 +1112,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "docker-compose",
+    icon: "docker",
     name: "Docker Compose",
     category: "cloud",
     kind: "brand",
@@ -1111,6 +1121,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "infisical",
+    icon: "infisical",
     name: "Infisical",
     category: "quality",
     kind: "brand",
@@ -1133,6 +1144,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "mockito",
+    icon: "mockito",
     name: "Mockito",
     category: "quality",
     kind: "brand",
@@ -1146,6 +1158,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "karate",
+    icon: "karate",
     name: "Karate",
     category: "quality",
     kind: "brand",
@@ -1187,6 +1200,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "testcontainers",
+    icon: "testcontainers",
     name: "Testcontainers",
     category: "quality",
     kind: "brand",
@@ -1228,6 +1242,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "micrometer",
+    icon: "micrometer",
     name: "Micrometer",
     category: "quality",
     kind: "brand",
@@ -1458,6 +1473,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "microsoft-teams",
+    icon: "microsoft-teams",
     name: "Microsoft Teams",
     category: "delivery",
     kind: "brand",
@@ -1471,6 +1487,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "morpho",
+    icon: "morpho",
     name: "Morpho",
     category: "fintech",
     kind: "brand",
@@ -1479,6 +1496,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "aave",
+    icon: "aave",
     name: "Aave",
     category: "fintech",
     kind: "brand",
@@ -1487,6 +1505,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "compound",
+    icon: "compound",
     name: "Compound",
     category: "fintech",
     kind: "brand",
