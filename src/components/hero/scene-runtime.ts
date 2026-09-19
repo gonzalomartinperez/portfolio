@@ -203,15 +203,15 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     }
     if (pulse) {
       pulse.age += delta;
-      const phase = clamp(pulse.age / (pulse.avatar ? 1.2 : 0.75));
+      const phase = clamp(pulse.age / (pulse.avatar ? 1.35 : 0.75));
       engine.setPulse(phase, pulse.avatar, pulse.origin);
       if (pulse.avatar) {
-        const lift = Math.sin(phase * Math.PI) ** 2;
+        const lift = Math.sin(phase * Math.PI) ** 2 * Math.exp(-phase * 1.4) * 2;
         const tilt = Math.sin(phase * Math.PI * 2) * lift;
         paint(
           avatar,
           1,
-          `perspective(500px) translate3d(0,${rounded(-12 * lift)}px,${rounded(48 * lift)}px) rotateX(${rounded(-14 * lift)}deg) rotateY(${rounded(28 * tilt)}deg) scale(${rounded(1 + 0.12 * lift)})`,
+          `perspective(500px) translate3d(${rounded(6 * tilt)}px,${rounded(-18 * lift)}px,${rounded(70 * lift)}px) rotateX(${rounded(-12 * lift)}deg) rotateY(${rounded(30 * tilt)}deg) rotateZ(${rounded(-3 * tilt)}deg) scale(${rounded(1 + 0.16 * lift)})`,
         );
       }
       if (phase === 1) {

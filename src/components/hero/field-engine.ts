@@ -45,9 +45,17 @@ void main() {
   p.xz = mat2(cos(angle), -sin(angle), sin(angle), cos(angle)) * p.xz;
   p *= 1.0 + sin(time * 0.45 + seed * 6.283) * 0.012;
   float envelope = pow(sin(pulsePhase * 3.14159265), 2.0);
-  float twist = envelope * avatarPulse * (0.65 + p.y * 0.5);
+  float lift = 0.0;
+  float shellWave = 0.0;
+  if (avatarPulse > 0.0 && pulsePhase > 0.0 && pulsePhase < 1.0) {
+    lift = envelope * exp(-pulsePhase * 1.4) * 2.0;
+    float latitude = acos(clamp(p.y, -1.0, 1.0));
+    shellWave = exp(-pow((latitude - pulsePhase * 3.14159265) * 3.5, 2.0)) * lift;
+  }
+  float twist = lift * (0.55 + p.y * 0.4);
   p.xz = mat2(cos(twist), -sin(twist), sin(twist), cos(twist)) * p.xz;
-  p *= 1.0 + envelope * avatarPulse * 0.16;
+  p *= 1.0 + lift * 0.12 + shellWave * 0.16;
+  p.z += shellWave * 0.12;
   vec4 viewPosition = modelViewMatrix * vec4(p, 1.0);
   vec4 projected = projectionMatrix * viewPosition;
   vec2 screen = projected.xy / projected.w;
@@ -55,7 +63,7 @@ void main() {
   float radius = length(pulseDelta);
   float ring = exp(-pow((radius - pulsePhase * 1.65) * 7.0, 2.0)) * envelope;
   projected.xy += (screen - pulseOrigin) * ring * (0.22 + avatarPulse * 0.18) * projected.w;
-  waveLight = ring * 0.18;
+  waveLight = ring * 0.18 + shellWave * 0.24;
   vec2 delta = screen - pointer;
   vec2 isotropicDelta = delta * vec2(aspect, 1.0);
   float influence = exp(-dot(isotropicDelta, isotropicDelta) * 35.0);
