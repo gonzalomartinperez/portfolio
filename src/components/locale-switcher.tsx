@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { type Locale, localeCodes, localeNames, locales, stripLocale } from "@/content/locales";
 import styles from "./locale-switcher.module.css";
 
@@ -12,8 +11,15 @@ import styles from "./locale-switcher.module.css";
  * prefix added or removed. These are real links, so they work without JavaScript, are
  * shareable, and let a crawler follow both versions.
  */
-export function LocaleSwitcher({ locale, label }: { locale: Locale; label: string }) {
-  const pathname = usePathname();
+export function LocaleSwitcher({
+  locale,
+  label,
+  pathname,
+}: {
+  locale: Locale;
+  label: string;
+  pathname: string;
+}) {
   const route = stripLocale(pathname);
 
   return (

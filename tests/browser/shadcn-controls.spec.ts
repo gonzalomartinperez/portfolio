@@ -84,7 +84,7 @@ test("gallery failures expose a direct recovery link without a stuck skeleton", 
   await expect(trigger).toBeFocused();
 });
 
-test("gallery links remain direct navigation with modified clicks", async ({
+test("gallery links open original images in a foreground tab with modified clicks", async ({
   page,
   context,
   isMobile,
@@ -94,7 +94,8 @@ test("gallery links remain direct navigation with modified clicks", async ({
   const trigger = page.getByRole("link", { name: /^Enlarge:/ }).first();
   const source = await trigger.getAttribute("href");
   const opened = context.waitForEvent("page");
-  await trigger.click({ modifiers: ["ControlOrMeta"] });
+  // Foreground activation avoids Chromium delaying a background image tab's page event.
+  await trigger.click({ modifiers: ["ControlOrMeta", "Shift"] });
   const imagePage = await opened;
   await imagePage.bringToFront();
   await imagePage.waitForURL((url) => url.pathname === source, { timeout: 10_000 });

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { chrome } from "@/content/chrome";
 import { defaultLocale, htmlLang, type Locale, localePath } from "@/content/locales";
+import { navigationPath } from "@/content/routes";
 import { LocaleSwitcher } from "./locale-switcher";
 import { Mark } from "./mark";
 import styles from "./site-header.module.css";
@@ -15,7 +16,7 @@ function localeFromPath(pathname: string): Locale {
 }
 
 export function SiteHeader() {
-  const pathname = usePathname();
+  const pathname = navigationPath(usePathname());
   const locale = localeFromPath(pathname);
   const copy = chrome[locale];
 
@@ -67,7 +68,7 @@ export function SiteHeader() {
         </nav>
 
         <div className={styles.controls}>
-          <LocaleSwitcher label={copy.languageLabel} locale={locale} />
+          <LocaleSwitcher label={copy.languageLabel} locale={locale} pathname={pathname} />
           <ThemeToggle
             neutralLabel={copy.themeToggleNeutral}
             toDarkLabel={copy.themeToDark}
