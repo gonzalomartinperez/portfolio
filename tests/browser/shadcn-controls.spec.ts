@@ -96,8 +96,8 @@ test("gallery links remain direct navigation with modified clicks", async ({
   const opened = context.waitForEvent("page");
   await trigger.click({ modifiers: ["ControlOrMeta"] });
   const imagePage = await opened;
+  await expect.poll(() => new URL(imagePage.url()).pathname).toBe(source);
   await imagePage.waitForLoadState();
-  expect(new URL(imagePage.url()).pathname).toBe(source);
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await imagePage.close();
 });

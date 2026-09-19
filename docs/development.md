@@ -165,6 +165,12 @@ the complete integrated release, not just individual lane results.
 
 ## Commit convention
 
+Browser retries retain diagnostic evidence in CI, but a test that passes only on
+retry still fails the quality gate. Fix synchronization or reproduce the actual
+regression instead of treating intermittent results as release approval. Avoid
+running independent browser suites concurrently on the same local machine when
+measuring scene stability; preserve traces and rerun a timeout in isolation.
+
 ### Protected integration flow
 
 `task branch -> PR -> develop -> PR -> main`

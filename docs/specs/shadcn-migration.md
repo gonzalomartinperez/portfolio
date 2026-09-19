@@ -1,6 +1,7 @@
 # Owned UI primitives without a visual reset
 
-Status: in-progress. Owner-approved expansion on 2026-09-19.
+Status: implemented. Owner-approved expansion on 2026-09-19. Verification and
+release boundaries are recorded in the [release ledger](release-2026-09-19.md).
 
 ## Outcome
 
