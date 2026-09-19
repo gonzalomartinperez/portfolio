@@ -9,10 +9,10 @@ export const roles: Role[] = [
     position: "AI Engineer",
     period: "Sep 2026 – Actualidad",
     startedOn: "2026-09-01",
-    location: "Argentina",
+    location: "Estados Unidos",
     arrangement: "Remote",
     context:
-      "Productos financieros e IA en producción: agentes conversacionales, web, mobile y servicios backend, en colaboración directa con tres founders.",
+      "Productos financieros e IA en una startup de ritmo alto: convierto prioridades cambiantes en funcionalidades productivas de agentes conversacionales, web, mobile y backend, en colaboración directa con tres founders.",
     contributions: [
       "Construí una vista consolidada del portfolio con activos, tokens, vaults y rendimientos de las últimas 24 horas, orquestando APIs de proveedores en paralelo, aplicando caché selectiva y unificando los resultados.",
       "Mejoré los flujos agénticos mediante recuperación de contexto, reranking, salidas estructuradas y memoria conversacional selectiva; reduje contexto redundante y llamadas innecesarias, con pruebas de recorridos completos y selección de herramientas.",
@@ -20,6 +20,7 @@ export const roles: Role[] = [
       "Refactoricé límites de la aplicación y componentes reutilizables, implementé un design system compartido y desarrollé funcionalidades mobile con React Native y Kotlin, verificadas en emuladores y teléfonos reales.",
       "Reduje el tiempo del pipeline de validación, build y despliegue conservando sus controles; optimicé bundles, imágenes Docker y entornos de desarrollo, staging y producción en DigitalOcean.",
       "Centralicé secretos con Infisical, acceso por usuario, sincronización automatizada y rotación a demanda; trabajé sobre despliegues, monitoreo, backups, bases de datos y permisos de servidores.",
+      "Preparé infraestructura escalable con el objetivo de soportar miles de usuarios, organizando entornos, contenedores y controles operativos para acompañar el crecimiento del producto.",
       "Estandaricé el desarrollo guiado por especificaciones mediante un marketplace de skills para agentes y un setup local reproducible, conectando requisitos, arquitectura, implementación, pruebas automatizadas y revisión humana de UI.",
       "Incorporé controles de dominio y frente a instrucciones maliciosas en los flujos agénticos, verificados con pruebas automatizadas de comportamiento y revisión humana.",
     ],
@@ -224,9 +225,9 @@ export const roles: Role[] = [
       },
       {
         value: "10 min → <10 s",
-        label: "búsqueda de permisos",
+        label: "de búsqueda manual a consulta automatizada",
         qualifier:
-          "Mediante SQL tuning, índices y paginación. Los endpoints críticos se mantuvieron por debajo de 300 ms en promedio en pruebas calificadas y repetibles sobre servidores empresariales on-premise.",
+          "Reemplacé búsquedas manuales de unos diez minutos por un flujo automatizado en el backoffice, reduciendo pasos manuales mediante la arquitectura y sus integraciones. Por separado, los endpoints críticos promediaron menos de 300 ms en pruebas repetibles on-premise, con SQL tuning, índices y paginación.",
       },
     ],
   },

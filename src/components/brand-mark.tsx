@@ -2,6 +2,22 @@ import Image from "next/image";
 import styles from "./brand-mark.module.css";
 
 const localMarks = new Set([
+  "celery",
+  "hostinger",
+  "agno",
+  "mem0",
+  "single-spa",
+  "infisical",
+  "karate",
+  "testcontainers",
+  "micrometer",
+  "aave",
+  "compound",
+  "amazon-api-gateway",
+  "amazon-sqs",
+  "amazon-cloudwatch",
+  "microsoft-teams",
+  "morpho",
   "digitalocean",
   "kotlin",
   "openjdk",
@@ -47,14 +63,16 @@ const localMarks = new Set([
   "testinglibrary",
 ]);
 
+const rasterMarks = new Set(["deepinfra", "mockito", "privy"]);
+
 export function BrandMark({ name, size = 20 }: { name: string; size?: number }) {
-  if (localMarks.has(name))
+  if (localMarks.has(name) || rasterMarks.has(name))
     return (
       <Image
         alt=""
         aria-hidden="true"
         className={styles.original}
-        src={`/brands/${name}.svg`}
+        src={`/brands/${name}.${rasterMarks.has(name) ? "png" : "svg"}`}
         width={size}
         height={size}
       />

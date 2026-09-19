@@ -3,9 +3,13 @@ import Link from "next/link";
 import portrait from "@/assets/portrait.avif";
 import { CompanyMark } from "@/components/company-mark";
 import { MetricList } from "@/components/metric-list";
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import { email, externalLinks } from "@/content/site-config";
+import { cn } from "@/lib/utils";
 import { HeroView } from "./hero-view";
 import styles from "./home.module.css";
 
@@ -47,7 +51,10 @@ export function HomeView({ locale }: { locale: Locale }) {
         </ol>
 
         <div className="actions flow">
-          <Link className="button button-secondary" href={localePath(locale, "/work")}>
+          <Link
+            className={buttonVariants({ variant: "outline" })}
+            href={localePath(locale, "/work")}
+          >
             {copy.actions.fullExperience}
           </Link>
         </div>
@@ -59,7 +66,7 @@ export function HomeView({ locale }: { locale: Locale }) {
           <h2>{copy.home.workHeading}</h2>
         </div>
 
-        <article className={styles.feature}>
+        <article data-slot="card" className={cn(cardVariants(), styles.feature)}>
           <div className={styles.featureTop}>
             <div>
               <h3 className={styles.featureTitle}>
@@ -85,17 +92,22 @@ export function HomeView({ locale }: { locale: Locale }) {
 
           <ul className="tags">
             {filomena.stack.map((item) => (
-              <li className="tag" key={item}>
-                {item}
+              <li key={item}>
+                <Badge variant="outline" className="font-mono">
+                  {item}
+                </Badge>
               </li>
             ))}
           </ul>
 
           <div className="actions">
-            <Link className="button button-primary" href={localePath(locale, "/work/filomena")}>
+            <Link className={buttonVariants()} href={localePath(locale, "/work/filomena")}>
               {copy.actions.readCaseStudy}
             </Link>
-            <a className="button button-secondary" href={externalLinks.filomenaBackend}>
+            <a
+              className={buttonVariants({ variant: "outline" })}
+              href={externalLinks.filomenaBackend}
+            >
               {copy.actions.sourceOnGithub}
             </a>
           </div>
@@ -160,21 +172,27 @@ export function HomeView({ locale }: { locale: Locale }) {
           <MetricList metrics={academicResults} />
         </div>
         <div className="actions flow">
-          <Link className="button button-secondary" href={localePath(locale, "/education")}>
+          <Link
+            className={buttonVariants({ variant: "outline" })}
+            href={localePath(locale, "/education")}
+          >
             {copy.actions.academicRecord}
           </Link>
         </div>
       </section>
 
       <section className="section-tight frame">
-        <div className={styles.closing}>
+        <div data-slot="card" className={cn(cardVariants(), styles.closing)}>
           <h2>{copy.home.closingHeading}</h2>
           <p>{copy.home.closingBody}</p>
           <div className="actions">
-            <a className="button button-primary" href={`mailto:${email}`}>
+            <a className={buttonVariants()} href={`mailto:${email}`}>
               {copy.actions.emailMe}
             </a>
-            <Link className="button button-secondary" href={localePath(locale, "/contact")}>
+            <Link
+              className={buttonVariants({ variant: "outline" })}
+              href={localePath(locale, "/contact")}
+            >
               {copy.actions.allContact}
             </Link>
           </div>

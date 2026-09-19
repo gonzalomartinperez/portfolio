@@ -52,13 +52,12 @@ test("every published metric carries a qualifier", () => {
   }
 });
 
-test("the hero figure strip carries its attribution note", () => {
-  // The strip summarises product-scale figures under one shared note instead of per-figure
-  // qualifiers, and links to where each figure is broken down.
+test("the hero presents engineering principles rather than unattributed figures", () => {
   for (const locale of ["en", "es"]) {
     const source = read(`src/content/${locale}/site.ts`);
-    assert.match(source, /proofNote:/, `${locale}: hero figures need an attribution note`);
-    assert.match(source, /proofNoteLink:/, `${locale}: hero figures need a link to the detail`);
+    assert.match(source, /principlesLabel:/, `${locale}: principles need an accessible label`);
+    assert.match(source, /principlesLink:/, `${locale}: principles link to applied experience`);
+    assert.doesNotMatch(source, /proofNote:|proof:/);
   }
 });
 

@@ -26,8 +26,14 @@ for (const prefix of ["", "/es"]) {
       await page.evaluate((value) => {
         document.documentElement.dataset.theme = value;
       }, theme);
-      for (const company of ["rampy", "teamcubation", "cooperativa-obrera", "pequeverso"]) {
-        const mark = page.locator(`main img[src="/images/companies/${company}.png"]`);
+      for (const file of [
+        "rampy.png",
+        "teamcubation.png",
+        "cooperativa-obrera-100.jpg",
+        "pequeverso-isotipo.webp",
+        "independent.jpg",
+      ]) {
+        const mark = page.locator(`main img[src="/images/companies/${file}"]`);
         await mark.scrollIntoViewIfNeeded();
         await expect(mark).toBeVisible();
         expect(

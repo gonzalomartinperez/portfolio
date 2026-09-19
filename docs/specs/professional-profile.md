@@ -27,7 +27,7 @@ Run repository/content checks, the production build and rendered/browser tests.
 Review company marks and the expanded experience on mobile and desktop. Preserve
 the protected task-to-develop-to-main workflow; do not infer deployment from a build.
 
-## Delivered content
+## Initial delivered content
 
 - Production Rampy contributions, selective caching, agent evaluations, mobile,
   DeFi integrations, secrets management and delivery operations in both languages.
@@ -58,3 +58,20 @@ historical measurements or infer new academic or Filomena outcomes.
   into 32 depth layers instead of serializing 1,000 React nodes. Only fallback
   colour/opacity depth is quantized; the interactive WebGL scene is unchanged.
   Deterministic geometry tests and reduced-motion screenshots cover the adjustment.
+
+## Follow-up refinement — 2026-09-19
+
+The next revision adds confirmed startup context and the US employer location,
+clarifies manual permission lookup versus endpoint latency, and presents general
+engineering principles on Home instead of decontextualized project figures.
+The catalogue contains 137 records: 131 applied entries in the public projection
+and six developing records retained without public chips. AI-first categories keep
+alphabetical names within each group; one mark per brand appears in the scene.
+
+CV revision `2026-09-19.2` retains three pages per language after a fresh six-page
+visual review and manifest-bound promotion. Education gains grade chips,
+institution marks and document cards; the web CV uses the standard content width.
+US English and neutral Latin American Spanish follow the
+[editorial guide](../editorial-guidelines.md). The
+[recruiter-journey research](../research/recruiter-journey-2026-09-19.md) records
+sources and limits. Release verification is recorded separately from this scope.

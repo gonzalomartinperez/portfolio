@@ -54,6 +54,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   let pulse: { age: number; avatar: boolean; origin: { x: number; y: number } } | null = null;
   const compact = matchMedia("(max-width: 767px)");
   const viewport = stage.querySelector<HTMLElement>("[data-scene-viewport]");
+  const header = document.querySelector<HTMLElement>("header");
   const journey = stage.querySelector<HTMLElement>("[data-scene-journey]");
   const hero = visualNode(stage.querySelector<HTMLElement>("[data-scene-hero]"));
   let heroFocused = hero.element?.contains(document.activeElement) ?? false;
@@ -65,8 +66,6 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     view: VisualNode;
     x: number;
     y: number;
-    gridX: number;
-    gridY: number;
     orbitX: number;
     orbitY: number;
     settledX: number;
@@ -99,8 +98,6 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       view: visualNode(item),
       x: Math.cos(angle) * radius,
       y: Math.sin(angle) * radius,
-      gridX: ((index % 7) / 6) * 2 - 1,
-      gridY: (Math.floor(index / 7) / Math.max(1, Math.ceil(sourceMarks.length / 7) - 1)) * 2 - 1,
       orbitX: 0,
       orbitY: 0,
       settledX: 0,
@@ -125,6 +122,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     if (appliedProgress === value) return;
     appliedProgress = value;
     stage.dataset.sceneProgress = value.toFixed(4);
+    stage.dataset.sceneSettled = String(value >= 0.98);
     engine.setExpansion(value);
     paint(
       hero,
@@ -205,15 +203,15 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     }
     if (pulse) {
       pulse.age += delta;
-      const phase = clamp(pulse.age / (pulse.avatar ? 1.2 : 0.75));
+      const phase = clamp(pulse.age / (pulse.avatar ? 1.35 : 0.75));
       engine.setPulse(phase, pulse.avatar, pulse.origin);
       if (pulse.avatar) {
-        const lift = Math.sin(phase * Math.PI) ** 2;
+        const lift = Math.sin(phase * Math.PI) ** 2 * Math.exp(-phase * 1.4) * 2;
         const tilt = Math.sin(phase * Math.PI * 2) * lift;
         paint(
           avatar,
           1,
-          `perspective(500px) translate3d(0,${rounded(-12 * lift)}px,${rounded(48 * lift)}px) rotateX(${rounded(-14 * lift)}deg) rotateY(${rounded(28 * tilt)}deg) scale(${rounded(1 + 0.12 * lift)})`,
+          `perspective(500px) translate3d(${rounded(6 * tilt)}px,${rounded(-18 * lift)}px,${rounded(70 * lift)}px) rotateX(${rounded(-12 * lift)}deg) rotateY(${rounded(30 * tilt)}deg) rotateZ(${rounded(-3 * tilt)}deg) scale(${rounded(1 + 0.16 * lift)})`,
         );
       }
       if (phase === 1) {
@@ -351,14 +349,29 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     engine.resize();
     const width = viewport?.clientWidth ?? innerWidth;
     const height = viewport?.clientHeight ?? innerHeight;
-    for (const logo of logos) {
+    const headerHeight =
+      header && getComputedStyle(header).position === "sticky" ? header.offsetHeight : 0;
+    const logoHeight = Math.max(0, ...logos.map((logo) => logo.view.element?.offsetHeight ?? 0));
+    const gridTop = headerHeight + 16 + logoHeight / 2;
+    const columns = compact.matches ? 5 : 7;
+    const rows = Math.ceil(logos.length / columns);
+    const gridBottom = Math.max(
+      height - 64 - logoHeight / 2,
+      gridTop + (rows - 1) * (logoHeight + 12),
+    );
+    const gridOverflow = Math.max(0, gridBottom + logoHeight / 2 + 64 - height);
+    journey?.style.setProperty("--toolkit-overflow", `${gridOverflow}px`);
+    for (const [index, logo] of logos.entries()) {
       const { x, y } = logo;
       // Keep the readable centre clear until its copy fades before grid settlement.
       const safeX = Math.abs(x) < 0.55 && Math.abs(y) < 0.4 ? Math.sign(x || 1) * 0.65 : x;
       logo.orbitX = safeX * width * 0.44;
       logo.orbitY = y * height * 0.4;
-      logo.settledX = logo.gridX * width * 0.44;
-      logo.settledY = logo.gridY * height * 0.4;
+      logo.settledX = ((index % columns) / (columns - 1) - 0.5) * width * 0.88;
+      logo.settledY =
+        gridTop +
+        (Math.floor(index / columns) / Math.max(1, rows - 1)) * (gridBottom - gridTop) -
+        height / 2;
     }
     appliedProgress = -1;
     update(deterministic ? fixedProgress : visualProgress);
@@ -367,6 +380,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   const resizeObserver = new ResizeObserver(resize);
   if (viewport) resizeObserver.observe(viewport);
   if (journey) resizeObserver.observe(journey);
+  if (header) resizeObserver.observe(header);
   const observer = new IntersectionObserver(([entry]) => {
     onScreen = entry.isIntersecting;
     stage.dataset.sceneVisible = String(onScreen);
@@ -400,6 +414,8 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     },
     dispose() {
       stage.removeAttribute("data-scene-visible");
+      stage.removeAttribute("data-scene-settled");
+      journey?.style.removeProperty("--toolkit-overflow");
       stage.removeAttribute("data-scene-quality");
       stage.removeAttribute("data-scene-tap");
       stage.removeAttribute("data-scene-pulse");

@@ -4,6 +4,10 @@ The website is a self-contained public projection, not a mirror of a private car
 workspace. Builds require only committed public source and assets. Notion and
 Reactive Resume remain historical external records, not runtime dependencies.
 
+Use [editorial guidelines](editorial-guidelines.md) for locale, claim and catalog
+presentation decisions. Content imports require explicit public scope; an asset
+existing on the author's computer is not permission to publish its private data.
+
 ## CV export
 
 `src/content/cv-public.json` is generated, not independently edited. To update it,
@@ -32,6 +36,11 @@ three-page general baseline, all six rendered pages reviewed, then explicit
 manifest-bound promotion. Copy only the two promoted public PDFs. No automatic
 Reactive Resume synchronization or professional-platform publication takes place.
 
+When correcting a shared metric, compare the experience page, CV projection and
+PDFs before release. Keep the measurement's baseline and qualifier consistent.
+Never hand-edit the generated CV JSON or substitute an unreviewed PDF to make
+the outputs appear synchronized. Update the reviewed inputs and export instead.
+
 ## Documents
 
 The explicit list in `scripts/documents.mjs` contains six authorized assets: two
@@ -47,6 +56,11 @@ npm run test:documents
 Review the hash diff; this command records bytes, not approval. Browser tests check
 the served response against the same manifest. No PDF viewers, preload requests,
 private roadmaps or additional personal documents are part of the website.
+
+CV download URLs carry the corresponding manifest hash through `resumeDownloads`.
+Preserve that cache key when updating documents: a successful deploy can coexist
+with a stale response at an unversioned CDN URL. Verify bytes using the actual
+download links rendered on the live CV and Contact pages.
 
 The transcript is explicitly authorized in original, unredacted form. Its six-month
 administrative validity has expired; the page describes the issue date and historical

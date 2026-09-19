@@ -14,7 +14,7 @@ export const profile = {
   headline: "Construyo software que conecta productos, sistemas e IA.",
 
   intro:
-    "Convierto ideas de producto en aplicaciones en producción: agentes de IA, recuperación de contexto, servicios backend y experiencias web y mobile.",
+    "Soy Gonzalo, AI Software Engineer. Transformo ideas en productos útiles: desde agentes de IA y servicios backend hasta aplicaciones web y mobile.",
 
   summary:
     "En Rampy conecto desarrollo de producto con orquestación de agentes, recuperación de contexto, memoria e integraciones financieras. Mi experiencia abarca permisos empresariales, procesamiento masivo de promociones y Filomena, una plataforma de exámenes desarrollada por un equipo de tres personas y usada por cinco instituciones.",

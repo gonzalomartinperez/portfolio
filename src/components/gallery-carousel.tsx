@@ -1,9 +1,49 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 import styles from "./gallery-carousel.module.css";
 
 export type GallerySlide = { id: string; src: string; alt: string; width: number; height: number };
+
+function EnlargedImage({ slide, locale }: { slide: GallerySlide; locale: "en" | "es" }) {
+  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  return (
+    <div className={styles.imageFrame} aria-busy={status === "loading"}>
+      {status === "loading" && (
+        <>
+          <Skeleton className={styles.skeleton} />
+          <span className="sr-only" role="status">
+            {locale === "es" ? "Cargando imagen" : "Loading image"}
+          </span>
+        </>
+      )}
+      {status !== "error" && (
+        <Image
+          alt={slide.alt}
+          src={slide.src}
+          width={slide.width}
+          height={slide.height}
+          sizes="96vw"
+          unoptimized
+          className={styles.fullImage}
+          onLoad={() => setStatus("ready")}
+          onError={() => setStatus("error")}
+        />
+      )}
+      {status === "error" && (
+        <p role="alert" className={styles.imageError}>
+          {locale === "es" ? "No se pudo cargar la imagen. " : "The image could not be loaded. "}
+          <a href={slide.src}>
+            {locale === "es" ? "Abrir el archivo original" : "Open the original file"}
+          </a>
+        </p>
+      )}
+    </div>
+  );
+}
 const flows = [
   {
     id: "access",
@@ -64,7 +104,6 @@ export function GalleryCarousel({
 }) {
   const [filter, setFilter] = useState("all");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLAnchorElement | null>(null);
   const activeSlide = activeIndex === null ? undefined : slides[activeIndex];
   const selectedFlow = flows.find((flow) => flow.id === filter);
@@ -74,21 +113,6 @@ export function GalleryCarousel({
   const closeLabel = locale === "es" ? "Cerrar galería" : "Close gallery";
   const enlargeLabel = locale === "es" ? "Ampliar" : "Enlarge";
 
-  useEffect(() => {
-    if (activeIndex === null) return;
-    const dialog = dialogRef.current;
-    if (!dialog?.open) dialog?.showModal();
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [activeIndex]);
-
-  function finishClose() {
-    setActiveIndex(null);
-    triggerRef.current?.focus();
-  }
   function navigate(delta: number) {
     setActiveIndex((index) =>
       index === null ? null : (index + delta + slides.length) % slides.length,
@@ -102,7 +126,9 @@ export function GalleryCarousel({
         aria-label={locale === "es" ? "Filtrar pantallas" : "Filter screens"}
       >
         {[{ id: "all", en: "All screens", es: "Todas las pantallas" }, ...flows].map((flow) => (
-          <button
+          <Button
+            variant={filter === flow.id ? "default" : "outline"}
+            size="sm"
             type="button"
             key={flow.id}
             aria-pressed={filter === flow.id}
@@ -110,7 +136,7 @@ export function GalleryCarousel({
             className={styles.filter}
           >
             {flow[locale]}
-          </button>
+          </Button>
         ))}
       </fieldset>
       <p aria-live="polite" className={styles.count}>
@@ -149,63 +175,58 @@ export function GalleryCarousel({
           </li>
         ))}
       </ul>
-      <dialog
-        ref={dialogRef}
-        className={styles.dialog}
-        aria-label={label}
-        onClose={finishClose}
-        onKeyDown={(event) => {
-          if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
-            event.preventDefault();
-            navigate(event.key === "ArrowRight" ? 1 : -1);
-          }
+      <Dialog
+        open={activeIndex !== null}
+        onOpenChange={(open) => {
+          if (!open) setActiveIndex(null);
         }}
       >
-        <div className={styles.toolbar}>
-          <p aria-live="polite">{activeIndex === null ? "" : slideLabels[activeIndex]}</p>
-          <button
-            type="button"
-            className={styles.control}
-            onClick={() => dialogRef.current?.close()}
-          >
-            {closeLabel} <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        {activeSlide && (
-          <figure className={styles.fullFigure}>
-            <Image
-              alt={activeSlide.alt}
-              src={activeSlide.src}
-              width={activeSlide.width}
-              height={activeSlide.height}
-              sizes="96vw"
-              unoptimized
-              className={styles.fullImage}
-            />
-            <figcaption aria-live="polite" className={styles.caption}>
-              {activeSlide.alt}
-            </figcaption>
-          </figure>
-        )}
-        <div className={styles.navigation}>
-          <button
-            type="button"
-            className={styles.control}
-            aria-label={previousLabel}
-            onClick={() => navigate(-1)}
-          >
-            ← {previousLabel}
-          </button>
-          <button
-            type="button"
-            className={styles.control}
-            aria-label={nextLabel}
-            onClick={() => navigate(1)}
-          >
-            {nextLabel} →
-          </button>
-        </div>
-      </dialog>
+        <DialogContent
+          className={styles.dialog}
+          closeLabel={closeLabel}
+          onCloseAutoFocus={(event) => {
+            event.preventDefault();
+            triggerRef.current?.focus();
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+              event.preventDefault();
+              navigate(event.key === "ArrowRight" ? 1 : -1);
+            }
+          }}
+        >
+          <div className={styles.toolbar}>
+            <DialogTitle>{label}</DialogTitle>
+            <p aria-live="polite">{activeIndex === null ? "" : slideLabels[activeIndex]}</p>
+          </div>
+          <DialogDescription aria-live="polite">{activeSlide?.alt}</DialogDescription>
+          {activeSlide && (
+            <EnlargedImage key={activeSlide.id} slide={activeSlide} locale={locale} />
+          )}
+          <div className={styles.navigation}>
+            <Button
+              variant="outline"
+              size="sm"
+              type="button"
+              className={styles.control}
+              aria-label={previousLabel}
+              onClick={() => navigate(-1)}
+            >
+              ← {previousLabel}
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              type="button"
+              className={styles.control}
+              aria-label={nextLabel}
+              onClick={() => navigate(1)}
+            >
+              {nextLabel} →
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
