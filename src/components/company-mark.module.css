@@ -1,0 +1,17 @@
+.tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  flex: none;
+  background: #fff;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line-subtle);
+}
+
+.image {
+  object-fit: contain;
+  width: 40px;
+  height: 40px;
+}

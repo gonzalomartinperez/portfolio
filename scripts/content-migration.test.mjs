@@ -7,8 +7,37 @@ import { getTechnology, technologyCatalog, technologyGroups } from "../src/conte
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("catalogue preserves AI-first breadth with grounded additions", () => {
-  assert.equal(technologyCatalog.length, 109);
-  assert.equal(technologyCatalog.filter((entry) => entry.status === "developing").length, 9);
+  assert.ok(technologyCatalog.length >= 109, "preserve the existing catalogue breadth");
+  for (const id of [
+    "agno",
+    "mem0",
+    "celery",
+    "react-native",
+    "kotlin",
+    "digitalocean",
+    "infisical",
+    "morpho",
+    "aave",
+    "compound",
+    "defi",
+  ]) {
+    assert.equal(getTechnology(id)?.status, "applied", `${id}: approved production experience`);
+    assert.ok(getTechnology(id)?.evidence.some(({ href }) => href === "/work#rampy"));
+  }
+  for (const id of [
+    "erc-4337",
+    "erc-4626",
+    "eip-712",
+    "account-abstraction",
+    "smart-accounts",
+    "erc-20",
+  ]) {
+    assert.equal(
+      getTechnology(id)?.status,
+      "developing",
+      `${id}: integration work does not automatically establish every standard`,
+    );
+  }
   assert.deepEqual(
     technologyGroups.slice(0, 4).map((entry) => entry.id),
     ["applied-ai", "languages", "backend", "data"],

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import portrait from "@/assets/portrait.avif";
+import { CompanyMark } from "@/components/company-mark";
 import { MetricList } from "@/components/metric-list";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
@@ -25,7 +26,10 @@ export function HomeView({ locale }: { locale: Locale }) {
         <ol className={styles.roles}>
           {roles.map((role) => (
             <li className={styles.role} key={role.slug}>
-              <p className={styles.rolePeriod}>{role.period}</p>
+              <div className={styles.roleIdentity}>
+                <CompanyMark company={role.slug} />
+                <p className={styles.rolePeriod}>{role.period}</p>
+              </div>
               <div>
                 <p>
                   <Link

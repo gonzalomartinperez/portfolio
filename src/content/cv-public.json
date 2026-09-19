@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-09-13.1",
+  "revision": "2026-09-19.1",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -15,7 +15,7 @@
           "href": ""
         },
         {
-          "text": " with Product Engineering scope, turning complex domains into scalable products across interfaces, BFFs, event-driven microservices, data, and agentic systems, in both cloud and enterprise on-premise environments. Production experience with Java/Spring Boot, Python/FastAPI, TypeScript/Node.js/NestJS, React, PostgreSQL, and AWS, plus RAG and agents with vector retrieval, tools, and guardrails. At fintech scale, helped deliver a complete production load of ",
+          "text": " and Information Systems Engineer from UNS. I build production AI products with agents, RAG, and Python/FastAPI services connected to web and mobile experiences. I combine product development with architecture, evaluation, and operations, grounded in TypeScript/React, Java/Spring Boot, distributed systems, and AWS. My experience includes a historical load of ",
           "bold": false,
           "href": ""
         },
@@ -25,57 +25,17 @@
           "href": ""
         },
         {
-          "text": " through an event-driven AWS pipeline that reached approximately ",
+          "text": " and a back office integrating ",
           "bold": false,
           "href": ""
         },
         {
-          "text": "90,000 promotions/s",
+          "text": "10+ enterprise systems",
           "bold": true,
           "href": ""
         },
         {
-          "text": " with zero data loss, and designed the in-product RAG assistant for merchant owners. Held a principal design and implementation role on an enterprise back office, personally integrating its ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "10+ systems",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": ". Within a three-person team, delivered a platform active at ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "5 institutions",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": " and used by ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "1,000+ simultaneous users",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": ". Independent products generated ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "USD 10,000+ in cumulative client profit",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": ". Information Systems Engineer, 8.67/10 average and 10/10 Final Year Project.",
+          "text": ".",
           "bold": false,
           "href": ""
         }
@@ -90,7 +50,7 @@
               "title": "Rampy",
               "subtitle": "AI Engineer",
               "details": ["Sep 2026 – Present", "Remote"],
-              "href": "https://www.getrampy.com/",
+              "href": "https://rampyapp.com/",
               "keywords": [],
               "blocks": [
                 {
@@ -98,8 +58,103 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "AI Engineering · Agentic Systems · Fintech",
+                      "text": "Production AI product",
                       "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " · Analysis, architecture, web/mobile development, evaluation, and operations in direct collaboration with three founders.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-portfolio-orchestration",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Enabled a consolidated portfolio view with 24-hour performance",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " through parallel provider calls, result aggregation, selective Redis caching, and Celery tasks to accelerate asset and vault queries.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-rag-evaluation",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Improved RAG, memory, and tool selection",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " through automated flow evaluations and controls against malicious instructions; removing redundant queries yielded an estimated ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "30% reduction in tokens associated with unnecessary queries",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": ".",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-defi-integrations",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Integrated Morpho, Aave, and Compound end to end",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " for positions, yields, deposits, and withdrawals across backend, frontend, and transaction execution, with completeness checks and webhook-based status tracking.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-architecture-mobile",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Refactored the product around hexagonal architecture and a design system",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " to reuse components; developed React Native/Kotlin features and validated them through automated tests, emulators, and real devices.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-delivery-operations",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Cut validation, build, and deployment from approximately 1 hour to 10 minutes",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " while retaining checks and optimizing the bundle; operated containers, databases, monitoring, and backups on DigitalOcean.",
+                      "bold": false,
                       "href": ""
                     }
                   ]
@@ -109,12 +164,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Set up an agentic engineering workspace",
+                      "text": "Automated local setup with Makefile and Infisical",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " to preserve context and enable coordinated parallel work while onboarding as an AI Engineer.",
+                      "text": " and a reusable development-agent skills catalog, standardizing environments, per-user access, and secrets synchronization with on-demand rotation.",
                       "bold": false,
                       "href": ""
                     }
@@ -193,22 +248,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Implemented an event-driven/serverless flow",
+                      "text": "Implemented event-driven processing",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " with Amazon S3, SQS, and a Python/FastAPI AWS Lambda: production execution with real data reached approximately ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "90,000 promotions/s",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " with zero data loss across the complete load. Also built Python/Node.js tooling for local loads, reconciliation, reporting, and diagnostics.",
+                      "text": " with S3, SQS, and a Python/FastAPI Lambda for the historical load; built Python/Node.js tooling to reproduce local loads, reconcile results, and identify failed promotions.",
                       "bold": false,
                       "href": ""
                     }
@@ -219,12 +264,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Designed an in-product RAG and agentic system",
+                      "text": "Designed a merchant-facing RAG assistant",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " for merchant owners using Python, LangChain, LangGraph, PostgreSQL/pgvector, and guardrails, augmenting LLM context with banking promotions associated with each merchant.",
+                      "text": " with Python, LangChain, LangGraph, PostgreSQL/pgvector, and guardrails for active/expired promotions and statistics, without executing commercial actions.",
                       "bold": false,
                       "href": ""
                     }
@@ -329,12 +374,22 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Developed online stores, WordPress solutions",
+                      "text": "Built stores, APIs, and Python/Node.js automation",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", APIs, and custom full-stack integrations with Python/Node.js tooling for automation, bulk processing, and data analysis under Spec-Driven Development, cutting manual tasks from hours to minutes per cycle.",
+                      "text": " using Spec-Driven Development, cutting tasks from hours to minutes. For ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "Pequeverso",
+                      "bold": false,
+                      "href": "https://pequeverso.com/"
+                    },
+                    {
+                      "text": ", delivered a Next.js site on Hostinger and an informational product and shopping assistant.",
                       "bold": false,
                       "href": ""
                     }
@@ -355,12 +410,12 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "SGA · Secure, scalable enterprise back office",
+                      "text": "Permissions Management System",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " for administering sensitive data, permissions, and auditing at Argentina's largest consumer cooperative: ",
+                      "text": " · Principal design, architecture, and implementation of a back office for authorized personnel at an organization with ",
                       "bold": false,
                       "href": ""
                     },
@@ -380,7 +435,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", and 50+ internal systems. Held a principal design, architecture, and implementation role with Product Engineering scope.",
+                      "text": ", and 50+ internal systems.",
                       "bold": false,
                       "href": ""
                     }
@@ -407,12 +462,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Personally integrated all 10+ systems covered by SGA",
+                      "text": "Integrated 10+ systems",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " through Java/Spring Boot and TypeScript/Node.js/NestJS microservices conforming to a shared permissions contract. To scale the work, built an agentic cross-system workspace that preserved context across repositories.",
+                      "text": " through Java/Spring Boot and TypeScript/Node.js/NestJS microservices with a shared permissions contract; built an agentic development workspace to preserve context across repositories.",
                       "bold": false,
                       "href": ""
                     }
@@ -485,12 +540,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Automated bulk loads and data validation with Python",
+                      "text": "Implemented LDAP, RBAC, and exportable auditing",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " and implemented LDAP authentication and a complete audit trail with exportable reports.",
+                      "text": " to restrict access to authorized personnel; automated Python validation and bulk loads for a MySQL/MariaDB and Redis system subsequently maintained by the web team.",
                       "bold": false,
                       "href": ""
                     }
@@ -515,11 +570,15 @@
                 "RAG",
                 "LangChain",
                 "LangGraph",
+                "Agno",
+                "Mem0",
+                "LLM Evaluation",
                 "Model Context Protocol (MCP)",
                 "LLM Integration",
                 "Vector Databases",
                 "pgvector",
                 "AI Guardrails",
+                "Structured Outputs",
                 "Claude API"
               ],
               "blocks": []
@@ -541,6 +600,7 @@
                 "Laravel",
                 "REST APIs",
                 "Microservices",
+                "Celery",
                 "OpenAPI"
               ],
               "blocks": []
@@ -551,7 +611,16 @@
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": ["Python", "TypeScript", "Java", "JavaScript", "Node.js", "SQL", "PHP"],
+              "keywords": [
+                "Python",
+                "TypeScript",
+                "Java",
+                "JavaScript",
+                "Node.js",
+                "SQL",
+                "Kotlin",
+                "PHP"
+              ],
               "blocks": []
             },
             {
@@ -560,7 +629,14 @@
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": ["React", "Next.js", "Single-SPA", "Microfrontends"],
+              "keywords": [
+                "React",
+                "Next.js",
+                "React Native",
+                "Design Systems",
+                "Single-SPA",
+                "Microfrontends"
+              ],
               "blocks": []
             },
             {
@@ -572,6 +648,7 @@
               "keywords": [
                 "PostgreSQL",
                 "MySQL",
+                "MariaDB",
                 "Redis",
                 "System Design",
                 "Distributed Systems",
@@ -590,6 +667,7 @@
               "details": [],
               "href": "",
               "keywords": [
+                "DigitalOcean",
                 "AWS",
                 "AWS Lambda",
                 "Amazon API Gateway",
@@ -621,26 +699,18 @@
                 "RBAC",
                 "LDAP",
                 "Application Security",
+                "Infisical",
                 "Agile"
               ],
               "blocks": []
             },
             {
               "id": "fintech-blockchain",
-              "title": "Fintech & Blockchain Foundations",
+              "title": "Fintech & DeFi Integrations",
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": [
-                "Fintech",
-                "Blockchain",
-                "Web3",
-                "Account Abstraction",
-                "Smart Accounts",
-                "DeFi",
-                "ERC-20",
-                "ERC-4337"
-              ],
+              "keywords": ["Fintech", "Blockchain", "Web3", "DeFi", "Morpho", "Aave", "Compound"],
               "blocks": []
             }
           ]
@@ -932,7 +1002,7 @@
           "href": ""
         },
         {
-          "text": " con alcance de Product Engineering: convierto dominios complejos en productos escalables sobre interfaces, BFFs, microservicios event-driven, datos y sistemas agénticos, tanto en cloud como en entornos empresariales on-premise. Tengo experiencia productiva con Java/Spring Boot, Python/FastAPI, TypeScript/Node.js/NestJS, React, PostgreSQL y AWS, además de RAG y agentes con recuperación vectorial, tools y guardrails. En un contexto fintech contribuí a completar una carga productiva de ",
+          "text": " e Ingeniero en Sistemas de Información por la UNS. Construyo productos de IA en producción con agentes, RAG y servicios Python/FastAPI, conectados a experiencias web y mobile. Combino desarrollo de producto con arquitectura, evaluación y operación, sobre una base de TypeScript/React, Java/Spring Boot, sistemas distribuidos y AWS. Mi experiencia incluye una carga histórica de ",
           "bold": false,
           "href": ""
         },
@@ -942,57 +1012,17 @@
           "href": ""
         },
         {
-          "text": " mediante un flujo event-driven en AWS que alcanzó aproximadamente ",
+          "text": " y un backoffice que integra ",
           "bold": false,
           "href": ""
         },
         {
-          "text": "90.000 promociones/s",
+          "text": "10+ sistemas empresariales",
           "bold": true,
           "href": ""
         },
         {
-          "text": " sin pérdida de datos, y diseñé el asistente RAG integrado para dueños de comercios. Tuve un rol principal de diseño e implementación en un backoffice empresarial e integré personalmente sus ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "10+ sistemas",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": ". En un equipo de tres entregué una plataforma activa en ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "5 instituciones",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": " y utilizada por ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "1.000+ usuarios simultáneos",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": ". Mis productos independientes generaron ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "USD 10.000+ en ganancias acumuladas para clientes",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": ". Ingeniero en Sistemas de Información, promedio 8,67/10 y Proyecto Final 10/10.",
+          "text": ".",
           "bold": false,
           "href": ""
         }
@@ -1007,7 +1037,7 @@
               "title": "Rampy",
               "subtitle": "AI Engineer",
               "details": ["Sep 2026 – Actualidad", "Remoto"],
-              "href": "https://www.getrampy.com/",
+              "href": "https://rampyapp.com/",
               "keywords": [],
               "blocks": [
                 {
@@ -1015,8 +1045,103 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "AI Engineering · Sistemas agénticos · Fintech",
+                      "text": "Producto de IA en producción",
                       "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " · Análisis, arquitectura, desarrollo web/mobile, evaluación y operación en colaboración directa con tres founders.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-portfolio-orchestration",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Habilité una vista consolidada del portfolio y su rendimiento de 24 horas",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " consultando proveedores en paralelo, reconstruyendo resultados y aplicando caché selectiva con Redis y tareas Celery para agilizar consultas de activos y vaults.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-rag-evaluation",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Mejoré RAG, memoria y selección de herramientas",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " con evaluaciones automatizadas de flujos y controles frente a instrucciones maliciosas; al eliminar consultas redundantes estimé un ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "30% menos de tokens asociados a consultas innecesarias",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": ".",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-defi-integrations",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Integré Morpho, Aave y Compound de punta a punta",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " para consultar posiciones y rendimientos, depositar y retirar: backend, frontend y ejecución de transacciones con controles de completitud y seguimiento por webhooks.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-architecture-mobile",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Refactoricé el producto con arquitectura hexagonal y un design system",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " para reutilizar componentes; desarrollé funcionalidades React Native/Kotlin y las validé con pruebas automatizadas, emuladores y dispositivos reales.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-delivery-operations",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Reduje validaciones, build y despliegue de aproximadamente 1 hora a 10 minutos",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": ", conservando controles y optimizando el bundle; operé contenedores, bases de datos, monitoreo y backups en DigitalOcean.",
+                      "bold": false,
                       "href": ""
                     }
                   ]
@@ -1026,12 +1151,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Configuré un entorno agéntico de ingeniería",
+                      "text": "Automaticé el setup local con Makefile e Infisical",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " para preservar contexto y habilitar trabajo paralelo coordinado durante el onboarding como AI Engineer.",
+                      "text": " y un catálogo reutilizable de skills para agentes de desarrollo, estandarizando entornos, acceso por usuario y sincronización de secretos con rotación a demanda.",
                       "bold": false,
                       "href": ""
                     }
@@ -1110,22 +1235,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Implementé un flujo event-driven/serverless",
+                      "text": "Implementé procesamiento event-driven",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " con Amazon S3, SQS y una AWS Lambda en Python/FastAPI: la ejecución productiva con datos reales alcanzó aproximadamente ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "90.000 promociones/s",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " y validó cero pérdida sobre la carga completa. También desarrollé tooling Python/Node.js para cargas locales, reconciliación, reportes y diagnóstico.",
+                      "text": " con S3, SQS y una Lambda Python/FastAPI para la carga histórica; desarrollé tooling Python/Node.js para reproducir cargas locales, reconciliar resultados y detectar promociones fallidas.",
                       "bold": false,
                       "href": ""
                     }
@@ -1136,12 +1251,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Diseñé un sistema RAG y agéntico integrado",
+                      "text": "Diseñé un asistente RAG para comercios",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " para dueños de comercios con Python, LangChain, LangGraph, PostgreSQL/pgvector y guardrails, aumentando el contexto del LLM con promociones bancarias asociadas al comercio.",
+                      "text": " con Python, LangChain, LangGraph, PostgreSQL/pgvector y guardrails: consultas sobre promociones vigentes/vencidas y estadísticas, sin ejecutar operaciones comerciales.",
                       "bold": false,
                       "href": ""
                     }
@@ -1246,12 +1361,22 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Desarrollé tiendas online, WordPress, APIs",
+                      "text": "Desarrollé tiendas, APIs y automatizaciones Python/Node.js",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " e integraciones full-stack a medida con tooling Python/Node.js para automatización, carga masiva y análisis de datos bajo Spec-Driven Development, reduciendo tareas manuales de horas a minutos por ciclo.",
+                      "text": " bajo Spec-Driven Development, reduciendo tareas de horas a minutos. Para ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "Pequeverso",
+                      "bold": false,
+                      "href": "https://pequeverso.com/"
+                    },
+                    {
+                      "text": ", implementé un sitio Next.js en Hostinger y un asistente informativo de productos y compras.",
                       "bold": false,
                       "href": ""
                     }
@@ -1272,12 +1397,12 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "SGA · Backoffice empresarial seguro y escalable",
+                      "text": "Sistema de Gestión de Permisos",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " para administrar información sensible, permisos y auditoría en la mayor cooperativa de consumo de Argentina: ",
+                      "text": " · Diseño, arquitectura e implementación principal del backoffice para personal autorizado de una organización con ",
                       "bold": false,
                       "href": ""
                     },
@@ -1297,7 +1422,7 @@
                       "href": ""
                     },
                     {
-                      "text": " y 50+ sistemas internos. Tuve un rol principal de diseño, arquitectura e implementación con alcance de Product Engineering.",
+                      "text": " y 50+ sistemas internos.",
                       "bold": false,
                       "href": ""
                     }
@@ -1324,12 +1449,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Integré personalmente los 10+ sistemas alcanzados por SGA",
+                      "text": "Integré 10+ sistemas",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " mediante microservicios Java/Spring Boot y TypeScript/Node.js/NestJS adheridos a un contrato común de permisos. Para escalar el trabajo, construí un entorno agéntico cross-system que preservaba contexto entre repositorios.",
+                      "text": " mediante microservicios Java/Spring Boot y TypeScript/Node.js/NestJS con un contrato común de permisos; construí un entorno agéntico de desarrollo para preservar contexto entre repositorios.",
                       "bold": false,
                       "href": ""
                     }
@@ -1402,12 +1527,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Automaticé cargas masivas y validación de datos con Python",
+                      "text": "Implementé LDAP, RBAC y auditoría exportable",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " e implementé autenticación LDAP y un registro de auditoría completo con reportes exportables.",
+                      "text": " para restringir el acceso a personal autorizado; automaticé validaciones y cargas Python sobre un sistema con MySQL/MariaDB y Redis, luego mantenido por el equipo web.",
                       "bold": false,
                       "href": ""
                     }
@@ -1432,11 +1557,15 @@
                 "RAG",
                 "LangChain",
                 "LangGraph",
+                "Agno",
+                "Mem0",
+                "LLM Evaluation",
                 "Model Context Protocol (MCP)",
                 "LLM Integration",
                 "Vector Databases",
                 "pgvector",
                 "AI Guardrails",
+                "Structured Outputs",
                 "Claude API"
               ],
               "blocks": []
@@ -1458,6 +1587,7 @@
                 "Laravel",
                 "REST APIs",
                 "Microservices",
+                "Celery",
                 "OpenAPI"
               ],
               "blocks": []
@@ -1468,7 +1598,16 @@
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": ["Python", "TypeScript", "Java", "JavaScript", "Node.js", "SQL", "PHP"],
+              "keywords": [
+                "Python",
+                "TypeScript",
+                "Java",
+                "JavaScript",
+                "Node.js",
+                "SQL",
+                "Kotlin",
+                "PHP"
+              ],
               "blocks": []
             },
             {
@@ -1477,7 +1616,14 @@
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": ["React", "Next.js", "Single-SPA", "Microfrontends"],
+              "keywords": [
+                "React",
+                "Next.js",
+                "React Native",
+                "Design Systems",
+                "Single-SPA",
+                "Microfrontends"
+              ],
               "blocks": []
             },
             {
@@ -1489,6 +1635,7 @@
               "keywords": [
                 "PostgreSQL",
                 "MySQL",
+                "MariaDB",
                 "Redis",
                 "System Design",
                 "Distributed Systems",
@@ -1507,6 +1654,7 @@
               "details": [],
               "href": "",
               "keywords": [
+                "DigitalOcean",
                 "AWS",
                 "AWS Lambda",
                 "Amazon API Gateway",
@@ -1538,26 +1686,18 @@
                 "RBAC",
                 "LDAP",
                 "Application Security",
+                "Infisical",
                 "Agile"
               ],
               "blocks": []
             },
             {
               "id": "fintech-blockchain",
-              "title": "Fintech y fundamentos de blockchain",
+              "title": "Fintech e integraciones DeFi",
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": [
-                "Fintech",
-                "Blockchain",
-                "Web3",
-                "Account Abstraction",
-                "Smart Accounts",
-                "DeFi",
-                "ERC-20",
-                "ERC-4337"
-              ],
+              "keywords": ["Fintech", "Blockchain", "Web3", "DeFi", "Morpho", "Aave", "Compound"],
               "blocks": []
             }
           ]
@@ -1834,11 +1974,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "72af2ba008726cf66eb86c632082caafbe4bd223b3b0ae619ecb584ddb437fe1",
-    "factsSha256": "6fb48713d568220f6bbf8b5944c286c709228dcb3226f3db86159b29a10f9a35",
+    "sourceSha256": "0ed9119faff163d6cb08f81b4cd064c810deef6bef55b7009fc5aed28f657b64",
+    "factsSha256": "0a52a19bb7eb77a990e6454d5a3f0c468c775bed900fe82c4e78e895329d675a",
     "pdfSha256": {
-      "en": "0767fb4be30d0e47eb4cdfdc5bf5363d9de0d1050edebaaf5cf9f47d1af092fd",
-      "es": "3bddc8821ed00614fdb704810ae802125f8ce902555c284a11bb540cea76f2ac"
+      "en": "1afbca4938570e140928d576c75792dbb182b1ccc23b905ba648b0acae9d124d",
+      "es": "f249f2a5bd92b0749ad268044f5dba717d693ebf50a4df9bdc090abf53bb6975"
     }
   }
 }

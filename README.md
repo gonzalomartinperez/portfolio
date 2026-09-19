@@ -75,6 +75,8 @@ or deployment success. The [initial verification log](docs/verification/portfoli
 retains the historical baseline; the [redesign verification](docs/verification/portfolio-redesign.md)
 records the visual foundation. The [autonomy verification](docs/verification/portfolio-autonomy.md)
 records content migration, reversible scene measurements and remaining real-device limits.
+The [production-profile update](docs/specs/professional-profile.md) records the latest
+approved experience, catalogue and reviewed bilingual CV revision.
 
 ## Run locally
 

@@ -5,18 +5,59 @@ export const roles: Role[] = [
   {
     slug: "rampy",
     company: "Rampy",
-    companyHref: "https://www.getrampy.com/",
+    companyHref: "https://rampyapp.com/",
     position: "AI Engineer",
     period: "Sep 2026 – Present",
     startedOn: "2026-09-01",
     location: "Argentina",
     arrangement: "Remote",
-    context: "AI engineering in a fintech context.",
+    context:
+      "Production AI and financial products, built across conversational agents, web, mobile and backend services in direct collaboration with three founders.",
     contributions: [
-      "Set up an agentic engineering workspace that preserves context and enables coordinated parallel work.",
+      "Built a consolidated portfolio experience covering assets, tokens, vaults and 24-hour returns by orchestrating provider APIs in parallel, selectively caching results and assembling a consistent response.",
+      "Improved agent workflows through retrieval, reranking, structured outputs and selective conversational memory; reduced redundant context and unnecessary calls while testing complete user journeys and tool selection.",
+      "Integrated Morpho, Aave and Compound across backend, frontend and transaction execution for positions, yields, deposits and withdrawals, with completeness checks and webhook-based status tracking.",
+      "Refactored application boundaries and reusable components, delivered a shared design system, and developed mobile features with React Native and Kotlin, tested in emulators and on physical devices.",
+      "Shortened the validation, build and deployment pipeline while retaining its checks; optimized application bundles, Docker images and development, staging and production environments on DigitalOcean.",
+      "Centralized secrets with Infisical, per-user access, automated synchronization and on-demand rotation; worked across deployment, monitoring, backups, databases and server permissions.",
+      "Standardized spec-driven engineering through an agent skills marketplace and repeatable local setup, connecting requirements, architecture, implementation, automated tests and human UI review.",
+      "Added domain and malicious-instruction controls to agent workflows, checked with automated behavioral tests and human review.",
     ],
-    attribution: "Agentic engineering and coordinated parallel work.",
-    stack: technologyNames(["Applied AI", "Agentic systems"]),
+    attribution:
+      "Product engineering from requirements through production, in direct collaboration with the founders and building on the team's existing work.",
+    stack: technologyNames([
+      "Python",
+      "FastAPI",
+      "Agno",
+      "RAG",
+      "Mem0",
+      "pgvector",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "React Native",
+      "Kotlin",
+      "PostgreSQL",
+      "Redis",
+      "Celery",
+      "Docker",
+      "DigitalOcean",
+      "Infisical",
+    ]),
+    metrics: [
+      {
+        value: "~1 h → 10 min",
+        label: "delivery pipeline",
+        qualifier:
+          "Approximate observed before/after for validation, build and deployment, with checks retained.",
+      },
+      {
+        value: "~30%",
+        label: "fewer tokens in targeted queries",
+        qualifier:
+          "Estimated reduction for queries affected by unnecessary calls and redundant context; not a system-wide benchmark.",
+      },
+    ],
   },
   {
     slug: "teamcubation",
@@ -74,11 +115,6 @@ export const roles: Role[] = [
           "The complete historical load, executed in production, followed by thousands of new promotions daily.",
       },
       {
-        value: "~90,000/s",
-        label: "processing throughput",
-        qualifier: "Measured during production execution with real data across the full 20M+ load.",
-      },
-      {
         value: "Zero",
         label: "data loss",
         qualifier: "Validated across that same complete production load.",
@@ -88,6 +124,7 @@ export const roles: Role[] = [
   {
     slug: "independent",
     company: "Self-employed",
+    links: [{ label: "Pequeverso — client website", href: "https://pequeverso.com/" }],
     position: "AI Engineer & Full-Stack Developer",
     period: "Jan 2024 – Present",
     startedOn: "2024-01-01",
@@ -97,10 +134,12 @@ export const roles: Role[] = [
       "Independent product engineering through occasional projects for clients in e-commerce, social media and digital products.",
     contributions: [
       "Designed and shipped digital products, back offices and stock and point-of-sale extensions, connecting commercial needs to maintainable systems.",
+      "Delivered Pequeverso’s digital-products storefront with Node.js and Next.js on Hostinger, including a conversational shopping assistant that answers product questions without executing purchases.",
       "Built MCP-, Claude- and LLM-powered pipelines and agents that research, generate and publish content end to end.",
       "Developed online stores, WordPress solutions, APIs and custom full-stack integrations, with Python and Node.js tooling for automation, bulk processing and data analysis under spec-driven development.",
     ],
-    attribution: "Independent delivery for individual client projects.",
+    attribution:
+      "Independent delivery for individual clients. The figures below cover historical client projects collectively, not Pequeverso alone.",
     stack: technologyNames([
       "Python",
       "Node.js",
@@ -109,6 +148,9 @@ export const roles: Role[] = [
       "Model Context Protocol",
       "REST APIs",
       "WordPress",
+      "Next.js",
+      "React",
+      "Hostinger",
     ]),
     metrics: [
       {
@@ -133,19 +175,19 @@ export const roles: Role[] = [
     location: "Bahía Blanca, Argentina",
     arrangement: "On-site",
     context:
-      "SGA, a secure enterprise back office for administering sensitive data, permissions and " +
-      "auditing at Argentina's largest consumer cooperative: 150+ branches, 2.7M+ members and " +
+      "A permissions-management back office for authorized administrative staff, system administrators and managers at " +
+      "Argentina's largest consumer cooperative: 150+ branches, 2.7M+ members and " +
       "an ecosystem of 50+ internal systems.",
     contributions: [
       "Held a principal design, architecture and implementation role with product-engineering scope.",
       "Built a responsive Next.js and TypeScript frontend whose only interface was a Python/FastAPI BFF, which defined the shared contract and decoupled the web experience from every downstream service.",
-      "Personally integrated the 10+ systems within SGA's scope through Java/Spring Boot or TypeScript/Node.js/NestJS microservices, each conforming to that contract and encapsulating its own internal logic; legacy PHP applications were brought in through dedicated integrations.",
+      "Personally integrated 10+ systems through Java/Spring Boot or TypeScript/Node.js/NestJS microservices, each conforming to the permissions API contract and encapsulating its own logic; legacy PHP applications used dedicated integrations.",
       "Built a personal cross-system agentic engineering environment to preserve context and work in parallel across independent integration repositories.",
       "Standardised onboarding for new systems with reusable structures and filters.",
-      "Automated bulk loads and data validation with Python, and implemented LDAP authentication and a complete audit trail with exportable reports.",
+      "Automated bulk loads and data validation with Python; combined LDAP authentication, role-based access and exportable audit reports with MySQL, MariaDB and Redis. The web development team took over maintenance after my departure.",
     ],
     attribution:
-      "Principal design and implementation responsibility across the integrations delivered for SGA.",
+      "Principal design and implementation responsibility for the permissions-management product and its integrations.",
     stack: technologyNames([
       "Python",
       "FastAPI",
@@ -159,6 +201,10 @@ export const roles: Role[] = [
       "SQL",
       "Docker",
       "LDAP",
+      "RBAC",
+      "MySQL",
+      "MariaDB",
+      "Redis",
       "Prometheus",
       "Grafana",
       "GitLab CI/CD",
@@ -168,7 +214,7 @@ export const roles: Role[] = [
         value: "10+",
         label: "systems integrated",
         qualifier:
-          "Every system within SGA's scope, integrated personally, inside an ecosystem of 50+.",
+          "The systems within the permissions back office’s scope, integrated personally, inside an ecosystem of 50+.",
       },
       {
         value: "≥80%",

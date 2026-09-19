@@ -87,8 +87,8 @@ export const siteCopy: SiteCopy = {
     paragraphs: [
       "I’m Gonzalo, an Information Systems Engineer from Universidad Nacional del Sur and an AI Software Engineer. Since 2024, I’ve combined independent client projects with engineering roles in enterprise software and fintech.",
       "I’ve built merchant-facing experiences, service integrations and a permissions back office. As the principal contributor in a three-person team, I also helped turn Filomena into an exam platform used by five institutions.",
-      "Today I’m an AI Engineer at Rampy, where my first contribution was setting up an agentic engineering workspace for context preservation and coordinated parallel work.",
-      "My broader focus combines applied AI with software engineering: retrieval assistants for users, integration services for businesses and development workflows supported by agents. I’m also building knowledge of blockchain, smart accounts and DeFi, distinct from my applied experience in fintech.",
+      "Today I’m an AI Engineer at Rampy, collaborating directly with the founders from product requirements through implementation and deployment. I work on agent performance, retrieval and memory, web and mobile features, and integrations that turn financial data into useful user experiences.",
+      "I connect applied AI with the engineering around it: explicit contracts, automated evaluations, controlled tool execution and maintainable services. My DeFi work includes Morpho, Aave and Compound integrations, bringing product interfaces and backend execution together.",
     ],
     asideCurrently: "Currently",
     asideArrangement: "Working arrangement",
@@ -107,22 +107,22 @@ export const siteCopy: SiteCopy = {
       },
       {
         title: "Product responsibility",
-        body: "Filomena connected architecture, implementation and deployment with the needs of institutions, evaluators and students. I enjoy working across that whole path.",
+        body: "At Rampy, I translate founder requirements into web, mobile and backend changes, then carry them through testing and deployment. Product and engineering decisions belong in the same conversation.",
       },
       {
         title: "AI connected to the application",
-        body: "For merchant queries, retrieval brought relevant promotion data into the conversation. LangChain, LangGraph and pgvector supported the assistant, with guardrails around its scope.",
+        body: "I evaluate complete journeys, tool selection and response behavior, combine automated checks with human review, and keep context and memory relevant to the task.",
       },
     ],
     lookingEyebrow: "What I am looking for",
     lookingHeading: "Remote work where engineering and product meet",
     lookingBody:
-      "I’m looking for fully remote software and AI engineering roles with meaningful product responsibility. I’m available to start immediately, with the exact date agreed during the process.",
+      "I’m prioritizing fully remote AI Engineer roles focused on applied AI, agents and retrieval, while remaining open to software engineering opportunities with meaningful product responsibility. I’m available immediately, with the exact date agreed during the process.",
   },
   work: {
     metaTitle: "Work",
     metaDescription:
-      "Professional experience and selected projects: fintech-scale event pipelines at Payway, " +
+      "Professional experience and selected projects: production AI at Rampy, event pipelines at Payway, " +
       "an enterprise permissions back office, independent product engineering, and Filomena.",
     eyebrow: "Work",
     title: "Experience and selected projects",
@@ -173,9 +173,9 @@ export const siteCopy: SiteCopy = {
     fieldLabel: "Technologies",
     noteHeading: "Applied experience and growing expertise",
     noteScope:
-      "Cloud experience covers application integration with AWS services and development, configuration and diagnostics of containerised workloads.",
+      "At Rampy, my work includes DigitalOcean infrastructure and delivery. AWS and Kubernetes experience elsewhere covers application integration, development and diagnostics, not cluster administration.",
     noteLogos:
-      "Original-colour marks identify their technologies; they do not imply endorsement. Blockchain concepts are marked as developing expertise.",
+      "Original-colour marks identify technologies, not endorsements. Production DeFi integrations are distinguished from individual standards still being developed.",
   },
   education: {
     metaTitle: "Education",
