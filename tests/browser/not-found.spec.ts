@@ -6,12 +6,28 @@ for (const locale of ["en", "es"]) {
   test(`${locale} missing pages provide usable recovery routes and retain a real 404`, async ({
     page,
   }) => {
+    const hydrationErrors: string[] = [];
+    page.on("pageerror", (error) => hydrationErrors.push(error.message));
+    page.on("console", (message) => {
+      if (message.type() === "error" && /hydration|Minified React error/i.test(message.text())) {
+        hydrationErrors.push(message.text());
+      }
+    });
     const response = await page.goto(`${prefix}/this-page-does-not-exist/nested`);
     expect(response?.status()).toBe(404);
     await expect(page.locator('meta[name="robots"]').first()).toHaveAttribute("content", /noindex/);
     await expect(page.locator("main h1")).toHaveText("This page does not exist");
     await expect(page.locator('main [lang="es"]')).toContainText("Esta página no existe");
     await expect(page.locator('main a[href="/es"]')).toBeVisible();
+    const language = page.getByRole("navigation", { name: "Language", exact: true });
+    await expect(language.getByRole("link", { name: "EN", exact: true })).toHaveAttribute(
+      "href",
+      "/",
+    );
+    await expect(language.getByRole("link", { name: "ES", exact: true })).toHaveAttribute(
+      "href",
+      "/es",
+    );
     for (const path of ["/", "/work", "/cv", "/contact"]) {
       const href = path;
       await expect(page.locator(`main a[href="${href}"]`)).toBeVisible();
@@ -34,6 +50,7 @@ for (const locale of ["en", "es"]) {
         fullPage: true,
       });
     }
+    expect(hydrationErrors).toEqual([]);
     const work = page.locator('main a[href="/work"]');
     await work.focus();
     await page.keyboard.press("Enter");
