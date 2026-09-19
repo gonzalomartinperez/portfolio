@@ -5,9 +5,14 @@ test("control depth respects pointer capabilities and leaves native filters stab
   isMobile,
 }, testInfo) => {
   await page.goto("/stack");
-  const clear = page.locator("main button.button").first();
+  const clear = page.getByRole("button", { name: "Clear filters", exact: true }).first();
   await expect(clear).toBeDisabled();
-  await clear.hover();
+  const disabledBox = await clear.boundingBox();
+  if (!disabledBox) throw new Error("Missing clear-filter button");
+  await page.mouse.move(
+    disabledBox.x + disabledBox.width / 2,
+    disabledBox.y + disabledBox.height / 2,
+  );
   await expect(clear).toHaveCSS("transform", "none");
 
   const search = page.getByRole("searchbox");
@@ -41,7 +46,7 @@ test("reduced motion keeps interactive depth static in both themes", async ({ pa
     await page.evaluate((value) => {
       document.documentElement.dataset.theme = value;
     }, theme);
-    const action = page.locator("main .button").first();
+    const action = page.locator("main a[href^='mailto:']").first();
     await action.hover();
     await expect(action).toHaveCSS("transform", "none");
     await action.focus();

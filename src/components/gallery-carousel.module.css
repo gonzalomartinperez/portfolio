@@ -10,23 +10,6 @@
   flex-wrap: wrap;
   gap: var(--space-2);
 }
-.filter,
-.control {
-  font: inherit;
-  font-size: var(--text-small);
-  color: var(--text-primary);
-  background: var(--surface-base);
-  border: 1px solid var(--line-control);
-  border-radius: 999px;
-  min-height: 2.75rem;
-  padding: 0.65rem 1rem;
-  cursor: pointer;
-}
-.filter[aria-pressed="true"] {
-  color: var(--surface-void);
-  background: var(--accent);
-  border-color: var(--accent);
-}
 .filter:hover,
 .control:hover {
   border-color: var(--accent);
@@ -57,30 +40,10 @@
   transition: transform var(--duration-transition) var(--ease-out);
 }
 @media (prefers-reduced-motion: no-preference) {
-  .filter,
-  .control {
-    transition:
-      transform var(--duration-micro) var(--ease-out),
-      box-shadow var(--duration-micro) var(--ease-standard),
-      border-color var(--duration-micro) var(--ease-standard);
-  }
-
   @media (hover: hover) and (pointer: fine) {
-    .filter:not(:disabled):hover,
-    .control:not(:disabled):hover {
-      transform: var(--control-lift);
-      box-shadow: var(--control-depth);
-    }
-
     .enlarge:hover .image {
       transform: scale(1.02);
     }
-  }
-
-  .filter:not(:disabled):active,
-  .control:not(:disabled):active {
-    transform: var(--control-press);
-    box-shadow: none;
   }
 }
 .enlargeHint {
@@ -102,18 +65,10 @@
   line-height: 1.5;
 }
 .dialog {
-  margin: auto;
   padding: clamp(1rem, 3vw, 2rem);
-  background: var(--surface-void);
-  color: var(--text-primary);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-lg);
   width: min(96vw, 100rem);
+  max-width: 100rem;
   max-height: 94svh;
-}
-.dialog::backdrop {
-  background: rgb(0 0 0 / 88%);
-  backdrop-filter: blur(8px);
 }
 .toolbar,
 .navigation {
@@ -124,14 +79,25 @@
   gap: var(--space-3);
 }
 .toolbar {
-  margin-bottom: var(--space-4);
+  padding-inline-end: 3rem;
   font-size: var(--text-small);
 }
 .navigation {
   margin-top: var(--space-5);
 }
-.fullFigure {
-  margin: 0;
+.imageFrame {
+  position: relative;
+  min-height: 8rem;
+  display: grid;
+  place-items: center;
+}
+.skeleton {
+  position: absolute;
+  inset: 0;
+}
+.imageError {
+  padding: var(--space-5);
+  color: var(--text-secondary);
 }
 .fullImage {
   width: 100%;

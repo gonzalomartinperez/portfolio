@@ -1,3 +1,5 @@
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { BrandMark } from "./brand-mark";
 import styles from "./contact-links.module.css";
 
@@ -31,7 +33,7 @@ export function ContactLinks({ channels }: { channels: readonly ContactChannel[]
                 ? `${channel.name}: ${channel.detail} (${channel.newTabHint})`
                 : `${channel.name}: ${channel.detail}`
             }
-            className={styles.link}
+            className={cn(buttonVariants({ variant: "outline" }), styles.link)}
             href={channel.href}
             rel={channel.external ? "noopener noreferrer me" : undefined}
             target={channel.external ? "_blank" : undefined}
@@ -70,7 +72,7 @@ export function ContactIcons({ channels }: { channels: readonly ContactChannel[]
         <li key={channel.href}>
           <a
             aria-label={channel.external ? `${channel.name} (${channel.newTabHint})` : channel.name}
-            className={styles.iconOnly}
+            className={cn(buttonVariants({ variant: "outline", size: "icon" }), styles.iconOnly)}
             href={channel.href}
             rel={channel.external ? "noopener noreferrer me" : undefined}
             target={channel.external ? "_blank" : undefined}
