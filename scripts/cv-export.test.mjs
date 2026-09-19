@@ -2,11 +2,20 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { resumeDownloads, resumeFiles } from "../src/content/site-config.ts";
 import { exportCv, inlineRuns, safeLink } from "./export-cv.mjs";
 
 const cv = JSON.parse(
   readFileSync(new URL("../src/content/cv-public.json", import.meta.url), "utf8"),
 );
+
+test("CV download cache keys track reviewed PDF bytes while file paths stay stable", () => {
+  for (const locale of ["en", "es"]) {
+    const download = new URL(resumeDownloads[locale], "https://gonzalomartinperez.com");
+    assert.equal(download.pathname, resumeFiles[locale]);
+    assert.equal(download.searchParams.get("v"), cv.provenance.pdfSha256[locale]);
+  }
+});
 
 test("public CV retains bilingual sections, stable IDs, metrics and B2", () => {
   for (const locale of ["es", "en"]) {

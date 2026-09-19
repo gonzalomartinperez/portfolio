@@ -2,6 +2,30 @@ import { createHash } from "node:crypto";
 import { expect, test } from "@playwright/test";
 import documents from "../../src/content/public-documents.json" with { type: "json" };
 
+test("CV and contact downloads use reviewed content hashes as cache keys", async ({
+  page,
+  request,
+}) => {
+  for (const route of ["/cv", "/es/cv", "/contact", "/es/contact"]) {
+    await page.goto(route);
+    const links = page.locator('main a[href*="ai-software-engineer-"][href*=".pdf"]');
+    expect(await links.count()).toBeGreaterThan(0);
+    for (const link of await links.all()) {
+      const url = new URL((await link.getAttribute("href")) ?? "", page.url());
+      const document = documents.find((entry) => entry.href === url.pathname);
+      expect(document).toBeDefined();
+      expect(url.searchParams.get("v")).toBe(document?.sha256);
+      const response = await request.get(url.href);
+      expect(response.status()).toBe(200);
+      expect(
+        createHash("sha256")
+          .update(await response.body())
+          .digest("hex"),
+      ).toBe(document?.sha256);
+    }
+  }
+});
+
 test("approved evidence downloads preserve their MIME types and reviewed bytes", async ({
   request,
 }) => {
