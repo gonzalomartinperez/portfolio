@@ -14,10 +14,10 @@ export const profile = {
   headline: "I build software that connects products, systems and AI.",
 
   intro:
-    "From product interfaces and backend services to retrieval and agents, I turn complex requirements into working applications.",
+    "I turn product ideas into production applications: AI agents, retrieval, backend services and web and mobile experiences.",
 
   summary:
-    "My work connects fintech platforms, enterprise systems and applied AI. I build interfaces, BFFs, microservices and data workflows, with experience delivering a merchant RAG assistant and a production exam platform used by five institutions.",
+    "At Rampy, I connect product development with agent orchestration, retrieval, memory and financial integrations. My background spans enterprise permissions, large-scale promotions processing and Filomena, an exam platform built by a three-person team and used by five institutions.",
 
   /**
    * Retained because structured forms elsewhere ask for it, and deliberately not published:
@@ -67,8 +67,8 @@ export const resumeLinks: EvidenceLink[] = [
 ];
 
 export const openTo = [
-  "Software, backend and full-stack engineering",
   "AI engineering: agents, RAG, LLM integration",
+  "Software, backend and full-stack engineering",
   "Product engineering with end-to-end ownership",
 ];
 
