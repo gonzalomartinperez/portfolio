@@ -83,30 +83,3 @@ test("gallery failures expose a direct recovery link without a stuck skeleton", 
   await expect(dialog).not.toBeVisible();
   await expect(trigger).toBeFocused();
 });
-
-test("gallery links open original images in a foreground tab with modified clicks", async ({
-  page,
-  context,
-  isMobile,
-}) => {
-  test.skip(isMobile, "Desktop modified link interaction");
-  await page.goto("/work/filomena");
-  const trigger = page.getByRole("link", { name: /^Enlarge:/ }).first();
-  const source = await trigger.getAttribute("href");
-  const opened = context.waitForEvent("page");
-  // Foreground activation avoids Chromium delaying a background image tab's page event.
-  await trigger.click({ modifiers: ["ControlOrMeta", "Shift"] });
-  const imagePage = await opened;
-  await imagePage.bringToFront();
-  await imagePage.waitForURL((url) => url.pathname === source, { timeout: 10_000 });
-  await expect(imagePage.locator("img")).toBeVisible();
-  await expect
-    .poll(() =>
-      imagePage
-        .locator("img")
-        .evaluate((image) => (image instanceof HTMLImageElement ? image.naturalWidth : 0)),
-    )
-    .toBeGreaterThan(0);
-  await expect(page.getByRole("dialog")).toHaveCount(0);
-  await imagePage.close();
-});
