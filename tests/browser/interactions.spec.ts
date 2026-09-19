@@ -17,7 +17,7 @@ for (const progress of [0, 0.25, 0.5, 0.75, 1]) {
   });
 }
 
-test("pause and reduced motion leave content available", async ({ page }) => {
+test("pause and reduced motion leave content available", async ({ page }, info) => {
   await page.goto("/");
   await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "running");
   await page.getByRole("button", { name: "Pause animation", exact: true }).click();
@@ -33,6 +33,25 @@ test("pause and reduced motion leave content available", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "static");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  const still = page.locator('svg[viewBox="-1.1 -1.1 2.2 2.2"]');
+  await expect(still).toBeVisible();
+  await expect(still.locator("path")).toHaveCount(32);
+  expect(
+    await still
+      .locator("path")
+      .evaluateAll((paths) =>
+        paths.reduce(
+          (count, path) => count + (path.getAttribute("d")?.match(/M/g)?.length ?? 0),
+          0,
+        ),
+      ),
+  ).toBe(1000);
+  for (const theme of ["dark", "light"]) {
+    await page.evaluate((value) => {
+      document.documentElement.dataset.theme = value;
+    }, theme);
+    await still.screenshot({ path: info.outputPath(`static-${theme}.png`) });
+  }
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "running");
 });

@@ -14,10 +14,10 @@ export const profile = {
   headline: "Construyo software que conecta productos, sistemas e IA.",
 
   intro:
-    "Desde interfaces y servicios backend hasta recuperación de contexto y agentes, convierto requisitos complejos en aplicaciones funcionales.",
+    "Convierto ideas de producto en aplicaciones en producción: agentes de IA, recuperación de contexto, servicios backend y experiencias web y mobile.",
 
   summary:
-    "Mi trabajo conecta plataformas fintech, sistemas empresariales e IA aplicada. Construyo interfaces, BFFs, microservicios y flujos de datos, con experiencia en un asistente RAG para comercios y una plataforma de exámenes usada por cinco instituciones.",
+    "En Rampy conecto desarrollo de producto con orquestación de agentes, recuperación de contexto, memoria e integraciones financieras. Mi experiencia abarca permisos empresariales, procesamiento masivo de promociones y Filomena, una plataforma de exámenes desarrollada por un equipo de tres personas y usada por cinco instituciones.",
 
   /** Etiqueta canónica exacta. Nunca Senior, Tech Lead, Architect ni Staff. */
   seniority: "Semi-senior",
@@ -63,8 +63,8 @@ export const resumeLinks: EvidenceLink[] = [
 ];
 
 export const openTo = [
-  "Ingeniería de software, backend y full-stack",
   "AI engineering: agentes, RAG, integración de LLMs",
+  "Ingeniería de software, backend y full-stack",
   "Product engineering con responsabilidad de punta a punta",
 ];
 

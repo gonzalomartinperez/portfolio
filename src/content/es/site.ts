@@ -87,8 +87,8 @@ export const siteCopy: SiteCopy = {
     paragraphs: [
       "Soy Gonzalo, Ingeniero en Sistemas de Información por la Universidad Nacional del Sur y AI Software Engineer. Desde 2024 combino proyectos independientes con roles de ingeniería en software empresarial y fintech.",
       "Construí experiencias para comercios, integraciones entre servicios y un backoffice de permisos. Como contribuidor principal de un equipo de tres personas, también participé en la evolución de Filomena hacia una plataforma de exámenes usada por cinco instituciones.",
-      "Actualmente soy AI Engineer en Rampy, donde mi primer aporte fue configurar un entorno agéntico de ingeniería para preservar contexto y coordinar trabajo en paralelo.",
-      "Mi enfoque combina IA aplicada e ingeniería de software: asistentes con recuperación de contexto para usuarios, servicios de integración para empresas y entornos de desarrollo apoyados por agentes. También estoy profundizando conocimientos de blockchain, smart accounts y DeFi, diferenciados de mi experiencia aplicada en fintech.",
+      "Actualmente soy AI Engineer en Rampy y colaboro directamente con los founders, desde los requisitos de producto hasta la implementación y el despliegue. Trabajo sobre rendimiento agéntico, recuperación de contexto y memoria, funcionalidades web y mobile e integraciones financieras.",
+      "Conecto IA aplicada con la ingeniería que la sostiene: contratos explícitos, evaluaciones automatizadas, ejecución controlada de herramientas y servicios mantenibles. Mi trabajo DeFi incluye integraciones con Morpho, Aave y Compound, conectando interfaces de producto con ejecución en el backend.",
     ],
     asideCurrently: "Actualmente",
     asideArrangement: "Modalidad de trabajo",
@@ -107,22 +107,22 @@ export const siteCopy: SiteCopy = {
       },
       {
         title: "Responsabilidad sobre el producto",
-        body: "Filomena conectó arquitectura, implementación y despliegue con las necesidades de instituciones, evaluadores y estudiantes. Me interesa trabajar a lo largo de todo ese recorrido.",
+        body: "En Rampy traduzco requisitos de los founders en cambios web, mobile y backend, y los acompaño hasta las pruebas y el despliegue. Las decisiones de producto y de ingeniería forman parte de la misma conversación.",
       },
       {
         title: "IA integrada a la aplicación",
-        body: "En las consultas de comercios, la recuperación incorporaba promociones relevantes a la conversación. LangChain, LangGraph y pgvector sustentaron el asistente, con guardrails para controlar su alcance.",
+        body: "Evalúo recorridos completos, selección de herramientas y comportamiento de las respuestas; combino pruebas automatizadas con revisión humana y mantengo el contexto y la memoria relevantes para cada tarea.",
       },
     ],
     lookingEyebrow: "Qué estoy buscando",
     lookingHeading: "Trabajo remoto donde se encuentran ingeniería y producto",
     lookingBody:
-      "Busco roles 100% remotos de ingeniería de software e IA con responsabilidad sobre el producto. Puedo empezar de inmediato y coordinar la fecha exacta durante el proceso.",
+      "Priorizo roles de AI Engineer 100% remotos, enfocados en IA aplicada, agentes y recuperación de contexto. También estoy abierto a oportunidades de software engineering con responsabilidad sobre el producto. Tengo disponibilidad inmediata y podemos coordinar la fecha exacta durante el proceso.",
   },
   work: {
     metaTitle: "Trabajo",
     metaDescription:
-      "Experiencia profesional y proyectos seleccionados: pipelines event-driven a escala " +
+      "Experiencia profesional y proyectos seleccionados: IA y producto en Rampy, pipelines event-driven a escala " +
       "fintech en Payway, un backoffice empresarial de permisos, product engineering " +
       "independiente y Filomena.",
     eyebrow: "Trabajo",
@@ -177,9 +177,9 @@ export const siteCopy: SiteCopy = {
     fieldLabel: "Tecnologías",
     noteHeading: "Experiencia aplicada y conocimientos en desarrollo",
     noteScope:
-      "La experiencia cloud comprende integración de aplicaciones con servicios AWS y desarrollo, configuración y diagnóstico de servicios contenerizados.",
+      "En Rampy trabajo sobre infraestructura y despliegues en DigitalOcean. La experiencia en AWS y Kubernetes de otros roles abarca integración, desarrollo y diagnóstico de aplicaciones, no administración de clústeres.",
     noteLogos:
-      "Las marcas conservan sus colores e identifican cada tecnología, sin implicar patrocinio. Los conceptos de blockchain se distinguen como conocimientos en consolidación.",
+      "Las marcas conservan sus colores e identifican tecnologías, sin implicar patrocinio. Las integraciones DeFi productivas se distinguen de los estándares específicos todavía en consolidación.",
   },
   education: {
     metaTitle: "Educación",

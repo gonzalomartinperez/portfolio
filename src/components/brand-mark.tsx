@@ -2,6 +2,8 @@ import Image from "next/image";
 import styles from "./brand-mark.module.css";
 
 const localMarks = new Set([
+  "digitalocean",
+  "kotlin",
   "openjdk",
   "javascript",
   "php",

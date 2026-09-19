@@ -25,6 +25,7 @@ export type Role = {
   slug: string;
   company: string;
   companyHref?: string;
+  links?: EvidenceLink[];
   position: string;
   period: string;
   /** Machine-readable start for ordering and structured data. */

@@ -125,6 +125,13 @@
   font-size: var(--text-small);
 }
 
+.roleIdentity {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
 .rolePosition {
   text-decoration: none;
   color: var(--text-primary);

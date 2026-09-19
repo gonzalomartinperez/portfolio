@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CompanyMark } from "@/components/company-mark";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
 import { getContent } from "@/content";
@@ -31,6 +32,7 @@ export function WorkView({ locale }: { locale: Locale }) {
           {roles.map((role) => (
             <li className={styles.role} key={role.slug} id={role.slug}>
               <div className={styles.meta}>
+                <CompanyMark company={role.slug} />
                 <p className={styles.period}>{role.period}</p>
                 <p className={styles.place}>
                   {role.location} ·{" "}
@@ -78,6 +80,16 @@ export function WorkView({ locale }: { locale: Locale }) {
 
                 {role.metrics ? <MetricList metrics={role.metrics} /> : null}
                 {role.attribution ? <p className={styles.attribution}>{role.attribution}</p> : null}
+                {role.links && (
+                  <div className="actions">
+                    {role.links.map((link) => (
+                      <a className="button button-secondary" href={link.href} key={link.href}>
+                        <CompanyMark company="pequeverso" />
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
 
                 <ul className="tags">
                   {role.stack.map((item) => (

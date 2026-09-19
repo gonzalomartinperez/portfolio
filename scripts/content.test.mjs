@@ -95,6 +95,20 @@ test("Filomena always names the team", () => {
   }
 });
 
+test("production profile preserves corrected scope and metric qualifications", () => {
+  for (const locale of ["en", "es"]) {
+    const source = read(`src/content/${locale}/experience.ts`);
+    assert.match(source, /~1 h → 10 min/);
+    assert.match(source, /~30%/);
+    assert.doesNotMatch(source, /90[,.]000|\bSGA\b|\bIT Lead\b/);
+    assert.match(source, /https:\/\/rampyapp\.com\//);
+    assert.match(source, /https:\/\/pequeverso\.com\//);
+    assert.match(source, /historical client projects|proyectos históricos/);
+    const tokenMetric = source.slice(source.indexOf('value: "~30%"'));
+    assert.match(tokenMetric.slice(0, 450), /estimat|estimación/i);
+  }
+});
+
 test("client-estimated figures are labelled as estimates", () => {
   for (const [locale, marker] of [
     ["en", /estimat/i],
