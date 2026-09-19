@@ -51,6 +51,9 @@ one owned production server serves rendered assertions and Playwright sequential
 Rendered tests already cover the smoke assertions, so they are not repeated there.
 Browser tests default to one worker to avoid competing software-rendered scenes;
 see the [motion research](research/motion-performance.md) for measurements and rationale.
+Native image-tab tests use the full Chromium channel instead of headless shell
+to exercise browser document navigation. Install Chromium without `--only-shell`;
+the CI installation already provides both binaries. Other tests retain their runtime.
 Use `SITE_TEST_PORT` to isolate this combined run; standalone browser tests retain
 their own managed server. Document hashes and signature checks run before the build.
 Use `npm run typecheck` for a quick standalone type check during development;
