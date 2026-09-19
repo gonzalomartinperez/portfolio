@@ -6,6 +6,9 @@ description: Verify a portfolio change for handoff and prepare a Conventional Co
 # Prepare Delivery
 
 1. Read AGENTS.md and inspect Git status, intended branch, remote, and the exact diff. Keep unrelated changes out of staging.
+   For a cumulative release, reconcile the accepted requests against the release
+   ledger before closing the PR. Mark unverified or excluded items explicitly;
+   a passing feature lane does not establish integrated release acceptance.
 2. Verify the relevant acceptance criteria and npm run check plus git diff --check. For dependency changes, also verify npm ci and npm audit.
    Reuse recorded passing checks only for the same source state, dependencies and
    runtime; follow docs/development.md instead of repeating unchanged builds.

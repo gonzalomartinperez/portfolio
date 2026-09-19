@@ -12,8 +12,8 @@ export const siteCopy: SiteCopy = {
     themeDark: "oscuro",
     languageLabel: "Idioma",
     footerSite: "Sitio",
-    footerElsewhere: "En otros lugares",
-    colophon: "Next.js · TypeScript · sin rastreo",
+    footerElsewhere: "Perfiles",
+    colophon: "Desarrollado con Next.js, React y TypeScript.",
   },
   nav: {
     about: "Sobre mí",

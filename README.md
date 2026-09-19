@@ -77,6 +77,8 @@ records the visual foundation. The [autonomy verification](docs/verification/por
 records content migration, reversible scene measurements and remaining real-device limits.
 The [production-profile update](docs/specs/professional-profile.md) records the latest
 approved experience, catalogue and reviewed bilingual CV revision.
+The [current release ledger](docs/specs/release-2026-09-19.md) reconciles the
+combined requests, implementation boundaries and remaining verification.
 
 ## Run locally
 

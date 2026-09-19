@@ -126,8 +126,10 @@ belong in public copy.
 - Visible keyboard focus and a skip link support navigation; mobile navigation wraps.
 - The decorative canvas does not enter the accessibility tree. Pause is a labelled button.
 - Search and category filters retain a complete server-rendered default and a reset state.
-- Filomena's gallery groups screens by user flow. A native dialog supports Escape, arrow keys
-  and focus restoration; images retain their aspect ratio.
+- Filomena's gallery groups screens by user flow. The owned Radix Dialog composition
+  supports Escape, arrow keys and focus restoration; direct image links remain the
+  no-JavaScript fallback. Images retain their aspect ratio; a skeleton appears only
+  while the selected image is loading, with a recovery link if loading fails.
 - Metric qualifiers remain adjacent to their numbers. Disclosure sections do not remove
   contributions from the server-rendered document.
 
