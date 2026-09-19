@@ -1,4 +1,4 @@
-import { email, externalLinks, resumeFiles } from "../site-config";
+import { email, externalLinks, resumeDownloads } from "../site-config";
 import type { EvidenceLink } from "../types";
 
 export const profile = {
@@ -56,12 +56,12 @@ export const contactLinks: EvidenceLink[] = [
 export const resumeLinks: EvidenceLink[] = [
   {
     label: "CV — English (PDF)",
-    href: resumeFiles.en,
+    href: resumeDownloads.en,
     description: "Three pages, updated September 2026",
   },
   {
     label: "CV — Spanish (PDF)",
-    href: resumeFiles.es,
+    href: resumeDownloads.es,
     description: "Tres páginas, actualizado en septiembre de 2026",
   },
 ];
