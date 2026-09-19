@@ -65,40 +65,33 @@
   inline-size: 0.5rem;
 }
 
-/* Evidence strip closing the hero */
-
-.proof {
+.principles {
   border-top: 1px solid var(--line-subtle);
   padding-block-end: var(--space-4);
   display: grid;
   gap: var(--space-5);
-  grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
   margin-top: clamp(var(--space-5), 4vw, var(--space-6));
   padding-top: var(--space-5);
 }
 
-.proofValue {
+.principleTitle {
   font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
-  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  font-size: clamp(1.25rem, 1rem + 0.8vw, 1.6rem);
   font-weight: 500;
   letter-spacing: -0.02em;
 }
 
-.proofLabel {
+.principleDescription {
   color: var(--text-muted);
   font-size: var(--text-small);
   margin-top: var(--space-1);
 }
 
-.proofNote {
-  align-self: end;
-  color: var(--text-muted);
+.principlesLink {
+  grid-column: 1 / -1;
+  justify-self: start;
+  color: var(--accent);
   font-size: var(--text-small);
-  text-align: left;
-}
-
-@media (width >= 64rem) {
-  .proofNote {
-    text-align: right;
-  }
+  text-underline-offset: 0.2em;
 }

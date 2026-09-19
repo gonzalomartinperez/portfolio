@@ -3,6 +3,7 @@ import { HeroStage } from "@/components/hero/hero-stage";
 import { StaticConstellation } from "@/components/hero/static-constellation";
 import { TechConstellation } from "@/components/hero/tech-constellation";
 import { Mark } from "@/components/mark";
+import { buttonVariants } from "@/components/ui/button";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import styles from "./hero.module.css";
@@ -20,10 +21,13 @@ export function HeroView({ locale }: { locale: Locale }) {
       <p className={styles.proposition}>{profile.headline}</p>
 
       <div className={`actions ${styles.actions}`}>
-        <Link className="button button-primary" href={localePath(locale, "/work")}>
+        <Link className={buttonVariants()} href={localePath(locale, "/work")}>
           {copy.actions.seeWork}
         </Link>
-        <Link className="button button-secondary" href={localePath(locale, "/contact")}>
+        <Link
+          className={buttonVariants({ variant: "outline" })}
+          href={localePath(locale, "/contact")}
+        >
           {copy.actions.getInTouch}
         </Link>
       </div>
@@ -57,18 +61,17 @@ export function HeroView({ locale }: { locale: Locale }) {
         still={<StaticConstellation />}
       />
 
-      <div className={`frame ${styles.proof}`}>
-        {copy.hero.proof.map((item) => (
-          <div key={item.label}>
-            <p className={styles.proofValue}>{item.value}</p>
-            <p className={styles.proofLabel}>{item.label}</p>
+      <section className={`frame ${styles.principles}`} aria-label={copy.hero.principlesLabel}>
+        {copy.hero.principles.map((item) => (
+          <div key={item.title}>
+            <h2 className={styles.principleTitle}>{item.title}</h2>
+            <p className={styles.principleDescription}>{item.description}</p>
           </div>
         ))}
-        <p className={styles.proofNote}>
-          {copy.hero.proofNote}{" "}
-          <Link href={localePath(locale, "/work")}>{copy.hero.proofNoteLink}</Link>
-        </p>
-      </div>
+        <Link className={styles.principlesLink} href={localePath(locale, "/work")}>
+          {copy.hero.principlesLink}
+        </Link>
+      </section>
     </>
   );
 }

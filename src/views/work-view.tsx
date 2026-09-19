@@ -2,8 +2,12 @@ import Link from "next/link";
 import { CompanyMark } from "@/components/company-mark";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
+import { cn } from "@/lib/utils";
 import styles from "./work.module.css";
 
 export function WorkView({ locale }: { locale: Locale }) {
@@ -18,7 +22,11 @@ export function WorkView({ locale }: { locale: Locale }) {
       >
         <nav className="actions flow-tight" aria-label={copy.work.experienceHeading}>
           {roles.map((role) => (
-            <a key={role.slug} className="button button-secondary" href={`#${role.slug}`}>
+            <a
+              key={role.slug}
+              className={buttonVariants({ variant: "outline" })}
+              href={`#${role.slug}`}
+            >
               {role.company}
             </a>
           ))}
@@ -83,7 +91,11 @@ export function WorkView({ locale }: { locale: Locale }) {
                 {role.links && (
                   <div className="actions">
                     {role.links.map((link) => (
-                      <a className="button button-secondary" href={link.href} key={link.href}>
+                      <a
+                        className={buttonVariants({ variant: "outline" })}
+                        href={link.href}
+                        key={link.href}
+                      >
                         <CompanyMark company="pequeverso" />
                         {link.label}
                       </a>
@@ -93,8 +105,10 @@ export function WorkView({ locale }: { locale: Locale }) {
 
                 <ul className="tags">
                   {role.stack.map((item) => (
-                    <li className="tag" key={item}>
-                      {item}
+                    <li key={item}>
+                      <Badge variant="outline" className="font-mono">
+                        {item}
+                      </Badge>
                     </li>
                   ))}
                 </ul>
@@ -111,7 +125,7 @@ export function WorkView({ locale }: { locale: Locale }) {
           <p>{copy.work.projectsBody}</p>
         </div>
 
-        <article className={`${styles.project} flow`}>
+        <article data-slot="card" className={cn(cardVariants(), styles.project, "flow")}>
           <div className={styles.projectHead}>
             <div>
               <h3 className={styles.projectTitle}>
@@ -127,13 +141,17 @@ export function WorkView({ locale }: { locale: Locale }) {
           <MetricList metrics={filomena.metrics} />
 
           <div className="actions">
-            <Link className="button button-primary" href={localePath(locale, "/work/filomena")}>
+            <Link className={buttonVariants()} href={localePath(locale, "/work/filomena")}>
               {copy.actions.readCaseStudy}
             </Link>
             {filomena.links
               .filter((link) => link.href.startsWith("https://github.com"))
               .map((link) => (
-                <a className="button button-secondary" href={link.href} key={link.href}>
+                <a
+                  className={buttonVariants({ variant: "outline" })}
+                  href={link.href}
+                  key={link.href}
+                >
                   {link.label}
                 </a>
               ))}

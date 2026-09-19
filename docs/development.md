@@ -19,6 +19,8 @@ grant permission to publish, spend money, access accounts, or change infrastruct
 
 Use [Readable code and useful documentation](code-quality.md) for design,
 comments, JSDoc and the final clarity review. It is shared by both agent hosts.
+For public text and visual evidence, read [editorial guidelines](editorial-guidelines.md)
+and the relevant section of the [public-content contract](public-content.md).
 
 - Keep routes in `src/app/`. Colocate feature code first; extract shared components
   or utilities when actual reuse or a meaningful boundary justifies it.
@@ -72,6 +74,33 @@ Review the exact staged diff for private information, unexpected artifacts, and
 scope creep. Dependency auditing is an additional signal, not proof of security.
 Never put private career documents, account details, or personal work histories in
 specs, examples, commits, or prompts stored in this public repository.
+
+### Task-specific QA
+
+Select checks for the changed behavior; the release still runs the required CI.
+Do not repeat successful checks on unchanged inputs just to inflate a handoff.
+
+| Change | Verification focus |
+| --- | --- |
+| Shared layout, navigation or copy | All eight routes in both languages (16 paths), both themes, narrow mobile and desktop, keyboard, 200% zoom and horizontal overflow. Check localized wrapping rather than assuming English proves Spanish. |
+| Education or CV layout | Grade chips remain inside their rows with readable labels; CV heading, sections and downloads share the intended content width. Review long course names and both locales. |
+| Hero or interaction | Forward/reverse deterministic scroll states, rapid reversals, all rows of the expanded toolkit reachable by native scroll, no overlap with following content; avatar pulses return to rest without obscuring essential controls. |
+| Motion changes | Reduced motion, no WebGL, context loss, hidden tab, navigation cleanup and touch versus scroll gestures. Use actual measured conditions; emulation is not evidence of physical-device FPS. |
+| Assets, documents or CV | Local files, provenance, proportions, accessible context, document hashes and actual served downloads; source and generated outputs agree. |
+
+Existing browser coverage lives in [tests/browser](../tests/browser/), including
+route, education, document, scene-toolkit, scene-stability and sphere-pulse tests.
+Extend the relevant suite when fixing a regression; screenshots supplement
+behavioral assertions rather than replacing them. Record untested devices or
+states explicitly. A documentation-only handoff may report repository/link and
+skill checks without claiming that application or hosting QA was repeated.
+
+The modern quality job owns lint, content checks, one type-checked build, budgets
+and rendered/browser checks. The separate Hostinger job owns the GLIBC 2.28
+baseline, observed runtime, SWC WASM fallback, build and smoke check. Do not add
+Biome to the hosting build or duplicate the full browser suite there. Preserve
+the `Quality checks` aggregator and protected branch checks; deployment evidence
+remains separate from CI, as described in [deployment](deployment.md).
 
 ## Agent entrypoints and skills
 
@@ -135,6 +164,12 @@ files. The coordinator alone handles protected-branch PR promotion and confirms
 the complete integrated release, not just individual lane results.
 
 ## Commit convention
+
+Browser retries retain diagnostic evidence in CI, but a test that passes only on
+retry still fails the quality gate. Fix synchronization or reproduce the actual
+regression instead of treating intermittent results as release approval. Avoid
+running independent browser suites concurrently on the same local machine when
+measuring scene stability; preserve traces and rerun a timeout in isolation.
 
 ### Protected integration flow
 

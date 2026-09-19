@@ -14,7 +14,7 @@ export const profile = {
   headline: "I build software that connects products, systems and AI.",
 
   intro:
-    "I turn product ideas into production applications: AI agents, retrieval, backend services and web and mobile experiences.",
+    "I’m Gonzalo, an AI Software Engineer. I turn ideas into useful products, from AI agents and backend services to web and mobile apps.",
 
   summary:
     "At Rampy, I connect product development with agent orchestration, retrieval, memory and financial integrations. My background spans enterprise permissions, large-scale promotions processing and Filomena, an exam platform built by a three-person team and used by five institutions.",
@@ -62,7 +62,7 @@ export const resumeLinks: EvidenceLink[] = [
   {
     label: "CV — Spanish (PDF)",
     href: resumeDownloads.es,
-    description: "Tres páginas, actualizado en septiembre de 2026",
+    description: "Three pages, updated September 2026",
   },
 ];
 

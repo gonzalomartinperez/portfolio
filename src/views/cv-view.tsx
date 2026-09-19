@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fragment } from "react";
 import { PageHeader } from "@/components/page-header";
+import { buttonVariants } from "@/components/ui/button";
 import cv from "@/content/cv-public.json";
 import { type Locale, localePath } from "@/content/locales";
 import documents from "@/content/public-documents.json";
@@ -54,10 +55,13 @@ export function CvView({ locale }: { locale: Locale }) {
       <PageHeader eyebrow="CV" title={copy.name} intro={copy.headline} />
       <div className={`frame ${styles.resume}`}>
         <div className={styles.actions}>
-          <a className="button button-primary" href={resumeDownloads[locale]} download>
+          <a className={buttonVariants()} href={resumeDownloads[locale]} download>
             {spanish ? "Descargar CV · PDF" : "Download CV · PDF"}
           </a>
-          <Link className="button button-secondary" href={localePath(locale, "/contact")}>
+          <Link
+            className={buttonVariants({ variant: "outline" })}
+            href={localePath(locale, "/contact")}
+          >
             {spanish ? "Hablemos" : "Let’s talk"}
           </Link>
         </div>

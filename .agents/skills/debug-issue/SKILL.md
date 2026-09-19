@@ -17,4 +17,9 @@ description: Reproduce and diagnose a portfolio defect, then fix it only when re
    fixes and workaround comments; keep only verified rationale and a useful removal
    condition, not a transcript of the debugging session.
 5. For rendering bugs, distinguish server output, hydration, and client behavior. For dependency bugs, verify declared compatibility and the lockfile rather than forcing installation.
+   Capture the failing locale, theme, viewport and motion preference. For hero
+   issues, include the scroll direction and whether the full toolkit has settled;
+   use [task-specific QA](../../../docs/development.md#task-specific-qa) for regression coverage.
+   For stale CV downloads, compare the rendered hash-versioned link and response
+   bytes with the manifest before changing caching or hosting configuration.
 6. Use the verification and warning policy in docs/development.md. Report the cause, evidence, correction if authorized, and unresolved uncertainty. Stop when further action needs a new account, destructive reset, or expanded scope.

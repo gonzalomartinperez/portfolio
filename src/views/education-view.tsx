@@ -2,11 +2,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { CardTitle, cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { academicAreas, academicCatalogue, academicEntry } from "@/content/academic-catalogue";
 import { type Locale, localePath } from "@/content/locales";
 import documents from "@/content/public-documents.json";
+import { cn } from "@/lib/utils";
 import styles from "./education.module.css";
+
+const credentialMarks: Record<string, string> = {
+  "Universidad Nacional del Sur": "/images/institutions/uns.jpg",
+  Kognité: "/images/institutions/kognite.jpg",
+};
+
+function Grade({ value, locale }: { value: number | "AP"; locale: Locale }) {
+  return (
+    <Badge
+      className={cn("rounded-sm px-2 py-0.5 font-normal text-muted-foreground", styles.grade)}
+      data-academic-grade={value}
+    >
+      {value === "AP" ? (locale === "es" ? "AP · Aprobado" : "AP · Passed") : `${value} / 10`}
+    </Badge>
+  );
+}
 
 export function EducationView({ locale }: { locale: Locale }) {
   const content = getContent(locale);
@@ -36,23 +56,23 @@ export function EducationView({ locale }: { locale: Locale }) {
           className="actions flow-tight"
           aria-label={locale === "es" ? "Registro académico" : "Academic record"}
         >
-          <a className="button button-secondary" href="#results">
+          <a className={buttonVariants({ variant: "outline" })} href="#results">
             {copy.education.title}
           </a>
-          <a className="button button-secondary" href="#curriculum">
+          <a className={buttonVariants({ variant: "outline" })} href="#curriculum">
             {copy.education.curriculumHeading}
           </a>
-          <a className="button button-secondary" href="#credentials">
+          <a className={buttonVariants({ variant: "outline" })} href="#credentials">
             {copy.education.certificationsHeading}
           </a>
-          <a className="button button-secondary" href="#evidence">
+          <a className={buttonVariants({ variant: "outline" })} href="#evidence">
             {copy.education.evidenceHeading}
           </a>
         </nav>
       </PageHeader>
 
       <section className="section-tight frame">
-        <article className={styles.degree}>
+        <article data-slot="card" className={cn(cardVariants(), styles.degree)}>
           <a className={styles.institutionLogo} href={degree.institutionHref}>
             <Image
               src="/brands/universidad-nacional-del-sur.png"
@@ -69,7 +89,9 @@ export function EducationView({ locale }: { locale: Locale }) {
                 <a href={degree.institutionHref}>{degree.institution}</a> · {degree.location}
               </p>
             </div>
-            <span className={styles.status}>{degree.status}</span>
+            <Badge variant="outline" className={styles.status}>
+              {degree.status}
+            </Badge>
           </div>
           <p className="mono muted">{degree.period}</p>
           <p>{degree.programme}</p>
@@ -123,13 +145,7 @@ export function EducationView({ locale }: { locale: Locale }) {
                           <Link href={localePath(locale, "/work/filomena")}>Filomena</Link>
                         )}
                       </div>
-                      <span className={styles.grade}>
-                        {entry.grade === "AP"
-                          ? locale === "es"
-                            ? "AP · Aprobado"
-                            : "AP · Passed"
-                          : `${entry.grade} / 10`}
-                      </span>
+                      <Grade value={entry.grade} locale={locale} />
                     </li>
                   ))}
               </ul>
@@ -155,7 +171,8 @@ export function EducationView({ locale }: { locale: Locale }) {
                       const course = academicEntry(id);
                       return (
                         <li key={id}>
-                          {course.name[locale]} <span className="mono">· {course.grade} / 10</span>
+                          <span>{course.name[locale]}</span>
+                          <Grade value={course.grade} locale={locale} />
                         </li>
                       );
                     })}
@@ -196,7 +213,7 @@ export function EducationView({ locale }: { locale: Locale }) {
           <p>{copy.education.projectBody}</p>
         </div>
         <div className="actions flow">
-          <Link className="button button-primary" href={localePath(locale, "/work/filomena")}>
+          <Link className={buttonVariants()} href={localePath(locale, "/work/filomena")}>
             {copy.actions.readCaseStudy}
           </Link>
         </div>
@@ -211,10 +228,26 @@ export function EducationView({ locale }: { locale: Locale }) {
             </div>
             <ul className="flow-tight">
               {credentials.map((credential) => (
-                <li className={styles.credential} key={credential.title}>
-                  <span>
-                    <span className={styles.credentialTitle}>{credential.title}</span>
-                    <span className={styles.credentialIssuer}>{credential.issuer}</span>
+                <li
+                  data-slot="card"
+                  className={cn(cardVariants(), styles.credential)}
+                  key={credential.title}
+                >
+                  <span className={styles.credentialIdentity}>
+                    {credentialMarks[credential.issuer] && (
+                      <Image
+                        className={styles.credentialMark}
+                        src={credentialMarks[credential.issuer]}
+                        alt=""
+                        width={40}
+                        height={40}
+                        unoptimized
+                      />
+                    )}
+                    <span>
+                      <span className={styles.credentialTitle}>{credential.title}</span>
+                      <span className={styles.credentialIssuer}>{credential.issuer}</span>
+                    </span>
                   </span>
                   <span className="mono muted">{credential.date}</span>
                   {credential.evidence && (
@@ -259,31 +292,46 @@ export function EducationView({ locale }: { locale: Locale }) {
               ? "Documentos originales disponibles directamente, sin servicios externos ni visores adicionales."
               : "Original documents available directly, without external services or additional viewers."}
           </p>
-          <p className="muted">
-            {locale === "es"
-              ? "El analítico es un registro histórico emitido el 22 de diciembre de 2025. Su validez administrativa de seis meses ya finalizó; los resultados se muestran como constancia de esa fecha, no como certificado vigente."
-              : "The transcript is a historical record issued on 22 December 2025. Its six-month administrative validity has expired; results are presented as recorded on that date, not as a currently valid certificate."}
-          </p>
         </div>
-        <div className="actions flow">
-          {academicEvidence.map((link) => (
-            <div key={link.href}>
-              <a className="button button-secondary" href={link.href}>
-                {link.label}
-              </a>
-              <p className="muted">
-                {link.description} ·{" "}
-                {(
-                  (documents.find((document) => document.href === link.href)?.bytes ?? 0) / 1024
-                ).toFixed(1)}{" "}
-                KiB
-              </p>
-              <a href={link.href} download>
-                {locale === "es" ? "Descargar PDF" : "Download PDF"}
-              </a>
-            </div>
-          ))}
-        </div>
+        <ul className={styles.documents} aria-labelledby="evidence">
+          {academicEvidence.map((link) => {
+            const document = documents.find((entry) => entry.href === link.href);
+            const title = link.label.replace(/ · PDF$/, "");
+            return (
+              <li data-slot="card" className={cn(cardVariants(), styles.document)} key={link.href}>
+                <span className={styles.documentFormat}>
+                  PDF{document && ` · ${(document.bytes / 1024).toFixed(1)} KiB`}
+                </span>
+                <CardTitle>{title}</CardTitle>
+                <p>{link.description}</p>
+                <div className={styles.documentActions}>
+                  <a
+                    className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-md")}
+                    href={link.href}
+                    aria-label={`${locale === "es" ? "Abrir" : "Open"}: ${title}`}
+                  >
+                    {locale === "es" ? "Abrir documento" : "Open document"}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                  <a
+                    className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-md")}
+                    href={link.href}
+                    download
+                    aria-label={`${locale === "es" ? "Descargar" : "Download"}: ${title}`}
+                  >
+                    {locale === "es" ? "Descargar" : "Download"}
+                    <span aria-hidden="true">↓</span>
+                  </a>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        <p className={styles.documentNote}>
+          {locale === "es"
+            ? "Analítico emitido el 22 de diciembre de 2025: su validez administrativa de seis meses finalizó. Se conserva como registro histórico de los resultados académicos, no como certificado vigente."
+            : "Transcript issued on 22 December 2025: its six-month administrative validity has expired. It is retained as a historical academic record, not a currently valid certificate."}
+        </p>
       </section>
     </>
   );

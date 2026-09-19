@@ -45,33 +45,41 @@ for (const [route, label] of [
   ["/", "In development"],
   ["/es", "En consolidación"],
 ]) {
-  test(`${route} home chips separate status from the technology name`, async ({ page }, info) => {
+  test(`${route} public toolkit shows applied expertise without pending badges`, async ({
+    page,
+  }, info) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setViewportSize({ width: 320, height: 740 });
     await page.goto(route);
     const chips = page.getByText(label, { exact: true });
-    expect(await chips.count()).toBeGreaterThan(0);
+    await expect(chips).toHaveCount(0);
+    const toolkit = page.locator("#home-tech-fintech").locator("..");
     for (const theme of ["dark", "light"]) {
       await page.evaluate((value) => {
         document.documentElement.dataset.theme = value;
       }, theme);
-      await chips.first().scrollIntoViewIfNeeded();
+      await toolkit.scrollIntoViewIfNeeded();
       await page.screenshot({ path: info.outputPath(`expertise-${theme}.png`) });
-      for (const chip of await chips.all()) {
-        const metrics = await chip.evaluate((element) => {
-          const box = element.getBoundingClientRect();
-          const parent = element.parentElement?.getBoundingClientRect();
-          const identity = element.previousElementSibling?.getBoundingClientRect();
-          return {
-            gap: box.top - (identity?.bottom ?? box.top),
-            fits: box.left >= (parent?.left ?? 0) && box.right <= (parent?.right ?? innerWidth),
-            unclipped: element.scrollWidth <= element.clientWidth + 1,
-          };
-        });
-        expect(metrics.fits).toBe(true);
-        expect(metrics.unclipped).toBe(true);
-        expect(metrics.gap).toBeGreaterThanOrEqual(3);
+      for (const name of [
+        "Privy",
+        "Token swaps",
+        "Vaults",
+        "Non-custodial wallets",
+        "Transaction execution",
+      ]) {
+        await expect(toolkit.getByRole("link", { name, exact: true })).toBeVisible();
       }
+      expect(
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+      ).toBe(true);
+    }
+    await page.goto(route === "/" ? "/stack" : "/es/stack");
+    await expect(page.getByText(/^(Developing expertise|En consolidación)$/)).toHaveCount(0);
+    for (const group of await page.locator("#technology-results section").all()) {
+      const names = await group.locator("h3").allTextContents();
+      expect(names).toEqual(
+        [...names].sort((a, b) => a.localeCompare(b, "en", { sensitivity: "base", numeric: true })),
+      );
     }
   });
 }

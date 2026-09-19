@@ -43,6 +43,9 @@
   pointer-events: none;
   z-index: 1;
 }
+.stage[data-scene-pulse="avatar"] .core {
+  z-index: 4;
+}
 .avatar {
   display: grid;
   place-items: center;
@@ -112,12 +115,12 @@
 }
 .stage:is([data-mode="running"], [data-mode="paused"]) .journey {
   height: 300svh;
+  margin-bottom: var(--toolkit-overflow, 0px);
 }
 .stage:is([data-mode="running"], [data-mode="paused"]) .viewport {
   position: sticky;
   top: 0;
-  height: calc(100svh - 4rem);
-  min-height: 680px;
+  height: 100svh;
 }
 .stage:is([data-mode="running"], [data-mode="paused"]) .canvas {
   opacity: 1;
@@ -138,6 +141,10 @@
 }
 .stage:is([data-mode="running"], [data-mode="paused"]) .logoCloud {
   display: block;
+}
+.stage[data-scene-settled="true"] .viewport,
+.stage[data-scene-settled="true"] .logoCloud {
+  overflow: visible;
 }
 .logoCloud :global(.scene-logo) {
   position: absolute;
@@ -194,9 +201,6 @@
   }
   .stage:is([data-mode="running"], [data-mode="paused"]) .journey {
     height: 225svh;
-  }
-  .stage:is([data-mode="running"], [data-mode="paused"]) .viewport {
-    min-height: 760px;
   }
   .toggle {
     right: 1rem;

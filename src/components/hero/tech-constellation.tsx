@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { TechnologyMark } from "@/components/technology-mark";
 import { type Locale, localePath } from "@/content/locales";
-import { technologyCatalog, technologyGroups } from "@/content/technologies";
+import {
+  compareTechnologyNames,
+  publicTechnologyCatalog,
+  technologyGroups,
+} from "@/content/technologies";
 import styles from "./tech-constellation.module.css";
 
 export function TechConstellation({
@@ -38,8 +42,9 @@ export function TechConstellation({
           >
             <h3 id={`home-tech-${group.id}`}>{group.name[locale]}</h3>
             <ul className={styles.marks}>
-              {technologyCatalog
+              {publicTechnologyCatalog
                 .filter((item) => item.category === group.id)
+                .sort(compareTechnologyNames)
                 .map((item) => (
                   <li key={item.id}>
                     <Link

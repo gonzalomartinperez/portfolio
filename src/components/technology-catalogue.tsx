@@ -1,6 +1,12 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import type { Technology } from "@/content/technologies";
 import styles from "./technology-catalogue.module.css";
 import { TechnologyMark } from "./technology-mark";
@@ -59,53 +65,42 @@ export function TechnologyCatalogue({
   }
   return (
     <div className={styles.catalogue}>
-      <div className={styles.controls}>
-        <label>
-          {copy.search}
-          <input
+      <Card className={styles.controls}>
+        <div className={styles.field}>
+          <Label htmlFor="technology-search">{copy.search}</Label>
+          <Input
+            id="technology-search"
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             aria-controls="technology-results"
           />
-        </label>
-        <label>
-          {copy.category}
-          <span className={styles.selectField}>
-            <select
-              value={category}
-              onChange={(event) => setCategory(event.target.value)}
-              aria-controls="technology-results"
-            >
-              <option value="">{copy.all}</option>
-              {groups.map((group) => (
-                <option key={group.id} value={group.id}>
-                  {group.name}
-                </option>
-              ))}
-            </select>
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              width="20"
-              height="20"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.75"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </span>
-        </label>
-        <button
+        </div>
+        <div className={styles.field}>
+          <Label htmlFor="technology-category">{copy.category}</Label>
+          <NativeSelect
+            id="technology-category"
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+            aria-controls="technology-results"
+          >
+            <NativeSelectOption value="">{copy.all}</NativeSelectOption>
+            {groups.map((group) => (
+              <NativeSelectOption key={group.id} value={group.id}>
+                {group.name}
+              </NativeSelectOption>
+            ))}
+          </NativeSelect>
+        </div>
+        <Button
+          variant="outline"
           type="button"
-          className="button button-secondary"
           onClick={clearFilters}
           disabled={!query && !category}
         >
           {copy.clear}
-        </button>
-      </div>
+        </Button>
+      </Card>
       <p className={styles.count} role="status" aria-live="polite">
         {count} {copy.results}
       </p>
@@ -123,22 +118,26 @@ export function TechnologyCatalogue({
             </div>
             <ul className={styles.items}>
               {group.technologies.map((technology) => (
-                <li key={technology.id} id={`tech-${technology.id}`} className={styles.item}>
-                  <div className={styles.name}>
-                    <TechnologyMark technology={technology} size={32} />
-                    <h3>{technology.name}</h3>
-                  </div>
-                  {technology.status === "developing" && (
-                    <span className={styles.status}>{copy.developing}</span>
-                  )}
-                  <div className={styles.evidence}>
-                    {technology.evidence.map((evidence) => (
-                      <Link href={evidence.href} key={evidence.href}>
-                        {evidence.label}
-                        <span aria-hidden="true"> ↗</span>
-                      </Link>
-                    ))}
-                  </div>
+                <li key={technology.id} id={`tech-${technology.id}`}>
+                  <Card className={styles.item}>
+                    <div className={styles.name}>
+                      <TechnologyMark technology={technology} size={32} />
+                      <h3>{technology.name}</h3>
+                    </div>
+                    {technology.status === "developing" && (
+                      <Badge variant="outline" className={styles.status}>
+                        {copy.developing}
+                      </Badge>
+                    )}
+                    <div className={styles.evidence}>
+                      {technology.evidence.map((evidence) => (
+                        <Link href={evidence.href} key={evidence.href}>
+                          {evidence.label}
+                          <span aria-hidden="true"> ↗</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </Card>
                 </li>
               ))}
             </ul>
@@ -147,9 +146,9 @@ export function TechnologyCatalogue({
         {count === 0 && (
           <div className={styles.empty}>
             <h2>{copy.empty}</h2>
-            <button type="button" className="button button-secondary" onClick={clearFilters}>
+            <Button variant="outline" onClick={clearFilters}>
               {copy.clear}
-            </button>
+            </Button>
           </div>
         )}
       </div>

@@ -19,23 +19,22 @@
 .link {
   align-items: center;
   background: var(--surface-raised);
-  border: 1px solid var(--line-strong);
   border-radius: var(--radius-md);
   color: var(--text-primary);
-  display: inline-flex;
   max-width: 100%;
   gap: var(--space-3);
   min-block-size: 3rem;
+  height: auto;
   padding: var(--space-3) var(--space-5);
-  text-decoration: none;
-  transition:
-    border-color var(--duration-micro) var(--ease-standard),
-    color var(--duration-micro) var(--ease-standard);
 }
 
 .link:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+.link .chip svg {
+  width: 20px;
+  height: 20px;
 }
 
 .label {
@@ -94,45 +93,11 @@
 }
 
 .iconOnly {
-  align-items: center;
-  border: 1px solid var(--line-strong);
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
-  display: inline-flex;
-  justify-content: center;
-  min-block-size: 2.25rem;
-  min-inline-size: 2.25rem;
-  transition:
-    border-color var(--duration-micro) var(--ease-standard),
-    color var(--duration-micro) var(--ease-standard);
 }
 
 .iconOnly:hover {
   border-color: var(--accent);
   color: var(--accent);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .link,
-  .iconOnly {
-    transition:
-      border-color var(--duration-micro) var(--ease-standard),
-      color var(--duration-micro) var(--ease-standard),
-      transform var(--duration-micro) var(--ease-out),
-      box-shadow var(--duration-micro) var(--ease-standard);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .link:hover,
-    .iconOnly:hover {
-      transform: var(--control-lift);
-      box-shadow: var(--control-depth);
-    }
-  }
-
-  .link:active,
-  .iconOnly:active {
-    transform: var(--control-press);
-    box-shadow: none;
-  }
 }

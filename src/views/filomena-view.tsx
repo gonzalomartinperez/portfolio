@@ -2,10 +2,14 @@ import Link from "next/link";
 import { GalleryCarousel } from "@/components/gallery-carousel";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { filomenaGallery } from "@/content/filomena-gallery";
 import imageDimensions from "@/content/filomena-image-dimensions.json";
 import { type Locale, localePath } from "@/content/locales";
+import { cn } from "@/lib/utils";
 import styles from "./filomena.module.css";
 
 export function FilomenaView({ locale }: { locale: Locale }) {
@@ -35,8 +39,10 @@ export function FilomenaView({ locale }: { locale: Locale }) {
       >
         <ul className="tags flow-tight">
           {filomena.stack.map((item) => (
-            <li className="tag" key={item}>
-              {item}
+            <li key={item}>
+              <Badge variant="outline" className="font-mono">
+                {item}
+              </Badge>
             </li>
           ))}
         </ul>
@@ -77,7 +83,7 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           <p className="muted">{copy.filomena.architectureCaption}</p>
           <ol className={styles.architecture}>
             {study.architecture.map((step) => (
-              <li className={styles.layer} key={step.layer}>
+              <li data-slot="card" className={cn(cardVariants(), styles.layer)} key={step.layer}>
                 <span className={styles.layerName}>{step.layer}</span>
                 <span className={styles.layerDetail}>{step.detail}</span>
               </li>
@@ -104,7 +110,11 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           <h2>{copy.filomena.decisionsHeading}</h2>
           <div className={styles.decisions}>
             {study.decisions.map((decision) => (
-              <article className="card" key={decision.heading}>
+              <article
+                data-slot="card"
+                className={cn(cardVariants(), "p-5")}
+                key={decision.heading}
+              >
                 <h3>{decision.heading}</h3>
                 {decision.body.map((paragraph) => (
                   <p className="flow-tight" key={paragraph.slice(0, 40)}>
@@ -165,7 +175,12 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           <h2>{copy.filomena.evidenceHeading}</h2>
           <div className={styles.evidence}>
             {filomena.links.map((link) => (
-              <Link className={styles.evidenceLink} href={link.href} key={link.href}>
+              <Link
+                data-slot="card"
+                className={cn(cardVariants(), styles.evidenceLink)}
+                href={link.href}
+                key={link.href}
+              >
                 <span className={styles.evidenceLabel}>{link.label}</span>
                 <span className={styles.evidenceDescription}>{link.description}</span>
               </Link>
@@ -175,10 +190,13 @@ export function FilomenaView({ locale }: { locale: Locale }) {
         </section>
 
         <div className="actions">
-          <Link className="button button-secondary" href={localePath(locale, "/work")}>
+          <Link
+            className={buttonVariants({ variant: "outline" })}
+            href={localePath(locale, "/work")}
+          >
             {copy.actions.backToWork}
           </Link>
-          <Link className="button button-primary" href={localePath(locale, "/contact")}>
+          <Link className={buttonVariants()} href={localePath(locale, "/contact")}>
             {copy.actions.getInTouch}
           </Link>
         </div>

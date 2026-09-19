@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { ContactLinks } from "@/components/contact-links";
 import { PageHeader } from "@/components/page-header";
+import { buttonVariants } from "@/components/ui/button";
+import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
+import { cn } from "@/lib/utils";
 import styles from "./contact.module.css";
 
 export function ContactView({ locale }: { locale: Locale }) {
@@ -33,14 +36,22 @@ export function ContactView({ locale }: { locale: Locale }) {
             </div>
           </div>
 
-          <aside className={styles.panel}>
+          <aside data-slot="card" className={cn(cardVariants(), styles.panel)}>
             <h2 className={styles.panelTitle}>{copy.contact.resumeHeading}</h2>
             <div className={styles.downloads}>
-              <Link className="button button-secondary" href={localePath(locale, "/cv")}>
+              <Link
+                className={buttonVariants({ variant: "outline" })}
+                href={localePath(locale, "/cv")}
+              >
                 {locale === "es" ? "Leer CV online" : "Read CV online"}
               </Link>
               {resumeLinks.map((link) => (
-                <a className="button button-secondary" download href={link.href} key={link.href}>
+                <a
+                  className={buttonVariants({ variant: "outline" })}
+                  download
+                  href={link.href}
+                  key={link.href}
+                >
                   {link.label}
                 </a>
               ))}

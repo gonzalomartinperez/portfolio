@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
 import { TechnologyCatalogue } from "@/components/technology-catalogue";
+import { buttonVariants } from "@/components/ui/button";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
-import { technologyCatalog } from "@/content/technologies";
+import { compareTechnologyNames, publicTechnologyCatalog } from "@/content/technologies";
 import styles from "./stack.module.css";
 
 export function StackView({ locale }: { locale: Locale }) {
@@ -38,8 +39,9 @@ export function StackView({ locale }: { locale: Locale }) {
       : {};
   const groups = stackGroups.map((group) => ({
     ...group,
-    technologies: technologyCatalog
+    technologies: publicTechnologyCatalog
       .filter((technology) => technology.category === group.id)
+      .sort(compareTechnologyNames)
       .map((technology) => ({
         ...technology,
         evidence: technology.evidence.map((evidence) => ({
@@ -59,7 +61,10 @@ export function StackView({ locale }: { locale: Locale }) {
           <h2>{copy.stack.noteHeading}</h2>
           <p>{copy.stack.noteScope}</p>
           <p>{copy.stack.noteLogos}</p>
-          <Link className="button button-secondary" href={localePath(locale, "/work")}>
+          <Link
+            className={buttonVariants({ variant: "outline" })}
+            href={localePath(locale, "/work")}
+          >
             {copy.actions.fullExperience}
           </Link>
         </div>
