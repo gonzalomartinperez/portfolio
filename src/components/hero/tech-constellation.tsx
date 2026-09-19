@@ -3,6 +3,7 @@ import { TechnologyMark } from "@/components/technology-mark";
 import { type Locale, localePath } from "@/content/locales";
 import {
   compareTechnologyNames,
+  getSceneMarkIdentity,
   publicTechnologyCatalog,
   technologyGroups,
 } from "@/content/technologies";
@@ -53,8 +54,8 @@ export function TechConstellation({
                     >
                       <span
                         className={styles.identity}
-                        data-tech-icon={item.icon ? item.id : undefined}
-                        data-scene-brand={item.icon === "springboot" ? "spring" : item.icon}
+                        data-tech-icon={getSceneMarkIdentity(item) ? item.id : undefined}
+                        data-scene-brand={getSceneMarkIdentity(item)}
                       >
                         <span className={styles.glyph}>
                           <TechnologyMark technology={item} size={22} />

@@ -1862,3 +1862,10 @@ export function getStackGroups(locale: Locale): StackGroup[] {
 export function compareTechnologyNames(a: Technology, b: Technology) {
   return a.name.localeCompare(b.name, "en", { sensitivity: "base", numeric: true });
 }
+
+const illustratedSceneTechnologies = new Set(["agent-evaluation", "pgvector", "rag"]);
+
+export function getSceneMarkIdentity(technology: Technology): string | undefined {
+  if (technology.icon) return technology.icon === "springboot" ? "spring" : technology.icon;
+  return illustratedSceneTechnologies.has(technology.id) ? technology.id : undefined;
+}

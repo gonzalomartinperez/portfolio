@@ -53,7 +53,8 @@ for (const { height, extraMarks } of [
       });
       return { headerBottom: Math.max(0, header?.getBoundingClientRect().bottom ?? 0), logos };
     });
-    expect(layout.logos.length).toBeGreaterThan(40);
+    expect(layout.logos).toHaveLength(70 + extraMarks);
+    if (!extraMarks) expect(layout.logos.length % (isMobile ? 5 : 7)).toBe(0);
     for (const [index, logo] of layout.logos.entries()) {
       expect(logo.top).toBeGreaterThanOrEqual(layout.headerBottom + 12);
       expect(logo.left).toBeGreaterThanOrEqual(0);
