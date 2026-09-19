@@ -14,13 +14,9 @@ export function AboutView({ locale }: { locale: Locale }) {
     <>
       <PageHeader eyebrow={copy.about.eyebrow} intro={profile.intro} title={copy.about.title} />
 
-      <section className="section-tight frame">
+      <section className={`section-tight frame ${styles.introduction}`}>
         <div className={styles.split}>
           <div className="prose">
-            <p>
-              {profile.name} — {profile.role}, {profile.location} ({profile.timezone}).{" "}
-              {copy.home.experienceSince(profile.experienceLength, profile.experienceSince)}.
-            </p>
             {copy.about.paragraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 40)}>{paragraph}</p>
             ))}
@@ -37,6 +33,16 @@ export function AboutView({ locale }: { locale: Locale }) {
               />
             </div>
             <dl className={styles.facts}>
+              <div>
+                <dt className="eyebrow">{copy.home.factBasedIn}</dt>
+                <dd>{profile.location}</dd>
+              </div>
+              <div>
+                <dt className="eyebrow">{copy.home.factExperience}</dt>
+                <dd>
+                  {copy.home.experienceSince(profile.experienceLength, profile.experienceSince)}
+                </dd>
+              </div>
               <div>
                 <dt className="eyebrow">{copy.about.asideCurrently}</dt>
                 <dd>{profile.currentPosition}</dd>

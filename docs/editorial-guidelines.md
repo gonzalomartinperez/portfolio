@@ -54,7 +54,20 @@ vector wrapper or redrawing corporate artwork. Keep names visible, avoid
 duplicate hero brands and retain a descriptive icon for concepts or brands with
 no verified mark. Library licensing does not grant rights to every trademark.
 
-## Change boundary
+## Presentation consistency
+
+Introduce the person once per page. Keep location, availability and experience
+duration in labelled facts rather than a second biographical introduction.
+Translate explanatory Spanish prose naturally (for example, fundadores,
+aplicaciones móviles and ingeniería de producto), while preserving official
+job titles, product names and established technical identifiers.
+
+Use section rules to establish hierarchy and row rules between repeated items.
+Do not close the final list item with another rule immediately before the next
+section divider. Preserve card and disclosure outlines when they define a
+container. Check the resulting spacing on both narrow and wide viewports.
+
+## Public source boundary
 
 Professional facts remain in the approved source; the website contains a public
 projection. A correction affecting Work, the CV and downloadable PDFs must be

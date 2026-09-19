@@ -37,45 +37,50 @@ export function SiteHeader() {
   ];
 
   return (
-    <header className={styles.header}>
-      <div className={`frame ${styles.inner}`}>
-        <Link className={styles.brand} href={localePath(locale, "/")}>
-          <Mark size={44} />
-          <span className={styles.brandText}>
-            <span className={styles.brandName}>Gonzalo Martin Perez</span>
-            <span className={styles.brandRole}>{copy.roleSubtitle}</span>
-          </span>
-        </Link>
+    <>
+      <a className="skip-link" href="#main" lang={htmlLang[locale]}>
+        {copy.skipToContent}
+      </a>
+      <header className={styles.header}>
+        <div className={`frame ${styles.inner}`}>
+          <Link className={styles.brand} href={localePath(locale, "/")}>
+            <Mark size={44} />
+            <span className={styles.brandText}>
+              <span className={styles.brandName}>Gonzalo Martin Perez</span>
+              <span className={styles.brandRole}>{copy.roleSubtitle}</span>
+            </span>
+          </Link>
 
-        <nav aria-label={copy.mainNavLabel} className={styles.nav}>
-          <ul className={styles.list}>
-            {routes.map((route) => {
-              const href = localePath(locale, route.path);
-              const active = pathname === href || pathname.startsWith(`${href}/`);
-              return (
-                <li key={route.path}>
-                  <Link
-                    aria-current={active ? "page" : undefined}
-                    className={styles.link}
-                    href={href}
-                  >
-                    {route.label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+          <nav aria-label={copy.mainNavLabel} className={styles.nav}>
+            <ul className={styles.list}>
+              {routes.map((route) => {
+                const href = localePath(locale, route.path);
+                const active = pathname === href || pathname.startsWith(`${href}/`);
+                return (
+                  <li key={route.path}>
+                    <Link
+                      aria-current={active ? "page" : undefined}
+                      className={styles.link}
+                      href={href}
+                    >
+                      {route.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-        <div className={styles.controls}>
-          <LocaleSwitcher label={copy.languageLabel} locale={locale} pathname={pathname} />
-          <ThemeToggle
-            neutralLabel={copy.themeToggleNeutral}
-            toDarkLabel={copy.themeToDark}
-            toLightLabel={copy.themeToLight}
-          />
+          <div className={styles.controls}>
+            <LocaleSwitcher label={copy.languageLabel} locale={locale} pathname={pathname} />
+            <ThemeToggle
+              neutralLabel={copy.themeToggleNeutral}
+              toDarkLabel={copy.themeToDark}
+              toLightLabel={copy.themeToLight}
+            />
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }

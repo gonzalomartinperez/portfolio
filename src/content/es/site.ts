@@ -96,11 +96,11 @@ export const siteCopy: SiteCopy = {
     eyebrow: "Sobre mí",
     title: "Ingeniería de software con IA aplicada",
     paragraphs: [
-      "Soy Gonzalo, Ingeniero en Sistemas de Información por la Universidad Nacional del Sur y AI Software Engineer. Desde 2024 combino proyectos independientes con roles de ingeniería en software empresarial y fintech.",
+      "Me gradué en Ingeniería en Sistemas de Información en la Universidad Nacional del Sur. Desde 2024 combino proyectos independientes con roles de ingeniería en software empresarial y tecnología financiera.",
       "Construí experiencias para comercios, integraciones entre servicios y un backoffice de permisos. Como contribuidor principal de un equipo de tres personas, también participé en la evolución de Filomena hacia una plataforma de exámenes usada por cinco instituciones.",
-      "Hoy soy AI Engineer en Rampy, una startup de ritmo alto donde trabajo directamente con tres founders. Ayudo a dar forma a las ideas, tomo decisiones técnicas y acompaño las funcionalidades hasta las pruebas y el despliegue. Las prioridades cambian, así que busco equilibrar entregas útiles con un producto cada vez más fácil de mantener y hacer crecer.",
+      "Hoy trabajo en ingeniería de IA en Rampy, una startup donde colaboro directamente con tres fundadores. Ayudo a dar forma a las ideas, tomo decisiones técnicas y acompaño las funcionalidades hasta las pruebas y el despliegue. Las prioridades cambian, así que busco equilibrar entregas útiles con un producto cada vez más fácil de mantener y hacer crecer.",
       "Conecto IA aplicada con la ingeniería que la sostiene: contratos explícitos, evaluaciones automatizadas, ejecución controlada de herramientas y servicios mantenibles. Mi trabajo DeFi incluye integraciones con Morpho, Aave y Compound, conectando interfaces de producto con ejecución en el backend.",
-      "Me gusta entender cómo encajan las piezas, conversar sobre alternativas y convertir un problema complejo en un próximo paso claro. Busco un equipo de AI engineering donde pueda seguir construyendo, aprendiendo y aportando al producto de punta a punta.",
+      "Me gusta entender cómo encajan las piezas, conversar sobre alternativas y convertir un problema complejo en un próximo paso claro. Disfruto construir en equipo, aprender y aportar al producto de punta a punta.",
     ],
     asideCurrently: "Actualmente",
     asideArrangement: "Modalidad de trabajo",
@@ -115,11 +115,11 @@ export const siteCopy: SiteCopy = {
       },
       {
         title: "Rendimiento con cargas reales",
-        body: "Las cargas de promociones, las consultas de permisos y los exámenes concurrentes guiaron mi trabajo con datos: tuning de consultas, índices, caché y herramientas de carga aisladas.",
+        body: "Las cargas de promociones, las consultas de permisos y los exámenes concurrentes guiaron mi trabajo con datos: optimización de consultas, índices, caché y herramientas de carga aisladas.",
       },
       {
         title: "Responsabilidad sobre el producto",
-        body: "En Rampy traduzco requisitos de los founders en cambios web, mobile y backend, y los acompaño hasta las pruebas y el despliegue. Las decisiones de producto y de ingeniería forman parte de la misma conversación.",
+        body: "En Rampy traduzco requisitos de los fundadores en cambios para la web, las aplicaciones móviles y el backend, y los acompaño hasta las pruebas y el despliegue. Las decisiones de producto y de ingeniería forman parte de la misma conversación.",
       },
       {
         title: "IA integrada a la aplicación",
@@ -129,13 +129,13 @@ export const siteCopy: SiteCopy = {
     lookingEyebrow: "Qué estoy buscando",
     lookingHeading: "Trabajo remoto donde se encuentran ingeniería y producto",
     lookingBody:
-      "Priorizo roles de AI Engineer 100% remotos, enfocados en IA aplicada, agentes y recuperación de contexto. También estoy abierto a oportunidades de software engineering con responsabilidad sobre el producto. Tengo disponibilidad inmediata y podemos coordinar la fecha exacta durante el proceso.",
+      "Priorizo roles de ingeniería de IA 100% remotos, enfocados en IA aplicada, agentes y recuperación de contexto. También estoy abierto a oportunidades de ingeniería de software con responsabilidad sobre el producto. Tengo disponibilidad inmediata y podemos coordinar la fecha exacta durante el proceso.",
   },
   work: {
     metaTitle: "Trabajo",
     metaDescription:
-      "Experiencia profesional y proyectos seleccionados: IA y producto en Rampy, pipelines event-driven a escala " +
-      "fintech en Payway, un backoffice empresarial de permisos, product engineering " +
+      "Experiencia profesional y proyectos seleccionados: IA y producto en Rampy, procesamiento basado en eventos a escala " +
+      "financiera en Payway, un sistema empresarial de permisos, desarrollo de producto " +
       "independiente y Filomena.",
     eyebrow: "Trabajo",
     title: "Experiencia y proyectos seleccionados",
@@ -156,7 +156,7 @@ export const siteCopy: SiteCopy = {
     caseStudyLabel: "Caso de estudio",
     architectureHeading: "Arquitectura",
     architectureCaption:
-      "El recorrido del request desde el navegador, después de la reconstrucción.",
+      "El recorrido de una solicitud desde el navegador, después de la reconstrucción.",
     decisionsHeading: "Decisiones de ingeniería",
     changesHeading: "Qué cambió",
     changesCaption: "La primera versión comparada con la plataforma hoy en producción.",
@@ -178,7 +178,7 @@ export const siteCopy: SiteCopy = {
     metaTitle: "Stack",
     metaDescription:
       "Tecnología agrupada por capacidad — IA aplicada y sistemas agénticos, backend y APIs, " +
-      "datos y arquitectura, cloud y delivery — con el trabajo que respalda cada grupo.",
+      "datos y arquitectura, infraestructura en la nube y entrega de software — con el trabajo que respalda cada grupo.",
     eyebrow: "Stack",
     title: "La tecnología detrás del trabajo",
     intro:

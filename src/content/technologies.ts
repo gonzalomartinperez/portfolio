@@ -1766,7 +1766,7 @@ export const technologyGroups = [
     },
     evidence: {
       en: "Web and mobile products, shared design systems, merchant experiences and enterprise back offices.",
-      es: "Productos web y mobile, design systems compartidos, experiencias para comercios y backoffices.",
+      es: "Productos web y móviles, sistemas de diseño compartidos, experiencias para comercios y paneles de gestión empresarial.",
     },
   },
   {

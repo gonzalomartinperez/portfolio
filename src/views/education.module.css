@@ -14,6 +14,10 @@
   font-weight: 600;
   padding-block: var(--space-2);
 }
+.record:last-child,
+.area:last-child {
+  border-bottom: 0;
+}
 .records {
   display: grid;
   gap: var(--space-4);
