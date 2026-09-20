@@ -61,6 +61,25 @@ test("the hero presents engineering principles rather than unattributed figures"
   }
 });
 
+test("Rampy response improvements stay scoped and approximate in both locales", () => {
+  for (const locale of ["en", "es"]) {
+    const source = read(`src/content/${locale}/experience.ts`);
+    assert.match(source, /value: "~2×\+"/);
+    assert.match(
+      source,
+      locale === "en" ? /optimized agent workflows/ : /flujos agénticos optimizados/,
+    );
+    assert.match(
+      source,
+      locale === "en" ? /under comparable conditions/ : /condiciones comparables/,
+    );
+    assert.match(
+      source,
+      locale === "en" ? /not a system-wide benchmark/ : /no es un benchmark de todo el sistema/,
+    );
+  }
+});
+
 test("no claim exceeds the owner's verified position", () => {
   // Each entry is a claim the canonical career sources explicitly prohibit.
   const forbidden = [
