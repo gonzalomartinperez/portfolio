@@ -22,6 +22,19 @@
 }
 .canvas {
   opacity: 0;
+  mask-image: linear-gradient(#000 calc(100% - 96px), transparent);
+}
+.backdrop {
+  position: absolute;
+  inset: 0 0 calc(-1 * var(--toolkit-overflow, 0px) - 96px);
+  pointer-events: none;
+  opacity: 0;
+  background-image: url("/images/scene-stars.svg");
+  background-size: 211px 233px;
+  mask-image: linear-gradient(#000 calc(100% - 128px), transparent);
+}
+.stage[data-mode="static"] .backdrop {
+  display: none;
 }
 .stage:is([data-scene-pulse="sphere"], [data-scene-pulse="avatar"]) .canvas {
   z-index: 3;
@@ -103,6 +116,9 @@
   border-color: var(--accent);
   color: var(--text-primary);
 }
+.stage[data-scene-settled="true"] .toggle {
+  position: absolute;
+}
 .stage[data-scene-visible="false"] .toggle {
   display: none;
 }
@@ -120,7 +136,7 @@
 .stage:is([data-mode="running"], [data-mode="paused"]) .viewport {
   position: sticky;
   top: 0;
-  height: 100svh;
+  height: 100dvh;
 }
 .stage:is([data-mode="running"], [data-mode="paused"]) .canvas {
   opacity: 1;
@@ -213,6 +229,17 @@
   }
   .logoCloud :global(.scene-logo) [data-scene-label] {
     display: none;
+  }
+  .logoCloud :global(.scene-cloud-copy) {
+    width: 48vw;
+    gap: 0.75rem;
+  }
+  .logoCloud :global(.scene-cloud-copy) h2 {
+    font-size: 1.35rem;
+  }
+  .logoCloud :global(.scene-cloud-copy) > p {
+    font-size: 0.875rem;
+    line-height: 1.5;
   }
 }
 @media (prefers-reduced-motion: reduce), (height < 650px) {

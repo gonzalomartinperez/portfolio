@@ -47,6 +47,12 @@ export const roles: Role[] = [
     ]),
     metrics: [
       {
+        value: "~2×+",
+        label: "faster responses in optimized agent workflows",
+        qualifier:
+          "Estimated response times of roughly half the previous baseline or less under comparable conditions; not a system-wide benchmark.",
+      },
+      {
         value: "~1 h → 10 min",
         label: "delivery pipeline",
         qualifier:
