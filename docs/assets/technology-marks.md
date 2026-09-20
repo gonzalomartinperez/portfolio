@@ -6,6 +6,15 @@ is added. Names remain visible beside each mark.
 
 | Local file under `public/brands/` | Source | Treatment |
 | --- | --- | --- |
+| `pytest.svg` | [Simple Icons](https://cdn.simpleicons.org/pytest) | Original upstream artwork and published brand color. |
+| `sentry.svg` | [Simple Icons](https://cdn.simpleicons.org/sentry) | Original upstream artwork and published brand color. |
+| `expo.svg` | [Simple Icons](https://cdn.simpleicons.org/expo) | Original upstream artwork and published brand color. |
+| `reactquery.svg` | [Simple Icons](https://cdn.simpleicons.org/reactquery) | Original upstream artwork and published brand color. |
+| `zod.svg` | [Simple Icons](https://cdn.simpleicons.org/zod) | Original upstream artwork and published brand color. |
+| `vitest.svg` | [Simple Icons](https://cdn.simpleicons.org/vitest) | Original upstream artwork and published brand color. |
+| `googlegemini.svg` | [Simple Icons](https://cdn.simpleicons.org/googlegemini) | Original upstream artwork and published brand color. |
+| `googlecloud.svg` | [Simple Icons](https://cdn.simpleicons.org/googlecloud) | Original upstream artwork and published brand color. |
+| `openai.svg` | [Simple Icons 11.15.0](https://raw.githubusercontent.com/simple-icons/simple-icons/11.15.0/icons/openai.svg) | Pinned monochrome knot artwork; no claim of being the latest identity. |
 | `sqlalchemy.svg` | [Simple Icons](https://cdn.simpleicons.org/sqlalchemy) | Original upstream artwork and published brand color. |
 | `pydantic.svg` | [Simple Icons](https://cdn.simpleicons.org/pydantic) | Shared Pydantic family mark for Pydantic and Pydantic AI; names identify the product. |
 | `pandas.svg` | [Simple Icons](https://cdn.simpleicons.org/pandas) | Original upstream artwork and published brand color. |
@@ -55,12 +64,30 @@ Official naming references: [SQLModel](https://sqlmodel.tiangolo.com/),
 labelled category icons until an appropriate local brand asset is reviewed. Agent
 harnesses, bridges and fiat on/off ramps are concepts, not invented brands.
 
-The hero intentionally retains 70 curated identities, independently of catalog
-growth, so seven desktop and five mobile columns remain complete. This revision
-prioritizes PyTorch, TensorFlow, Pydantic, NumPy, pandas, SQLAlchemy, Prisma, TypeORM
-and Google Analytics over collaboration marks, PHP, WordPress, Mockito and Maven.
-Pydantic and Pydantic AI share one scene identity. The full applied inventory,
-including the tools omitted from the scene, remains searchable in both locales.
+The hero uses 35 curated identities, independently of catalog growth, giving
+seven desktop columns of five rows and five mobile columns of seven rows. This
+revision prioritizes applied AI, provider integration, Python and product delivery
+over collaboration tools and granular infrastructure detail. Pydantic and
+Pydantic AI share one scene identity. Other relevant applied skills remain in the
+searchable catalog in both locales. Explicit editorial exclusions preserve
+existing applied source records without presenting every tool as a priority skill.
+
+The follow-up confirmation covers the additional Rampy developer tooling, model
+providers, GraphRAG, streaming and transaction controls. Vertex AI uses the Google
+Cloud family mark; Gemini has its own labelled mark. The Google Cloud symbol does
+not imply certification or experience with every Google Cloud service. TanStack
+Query uses its React Query mark. Existing RAG and SDD entries gain Rampy context
+instead of becoming duplicate skills. Model frameworks describe application
+integration and evaluation, not foundation-model training or fine-tuning.
+
+The public selection emphasizes Alembic, pytest, Sentry, Expo, TanStack Query,
+Zod, Viem, ZeroDev and Vitest alongside model providers and GraphRAG. SSE,
+idempotency, reconciliation, quote routing and transaction signing describe
+confirmed implementation capabilities; existing transaction authorization and
+on-chain integration records are reused rather than duplicated. Auxiliary tools
+remain in the private career inventory instead of making the portfolio exhaustive.
+No employer source code, private configuration or repository-derived claim is
+included in the public catalog.
 
 Simple Icons is CC0, but its [disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md)
 expressly separates icon licensing from brand rights. The historical AWS and Teams
