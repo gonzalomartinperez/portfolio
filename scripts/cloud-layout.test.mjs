@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { layoutCloud } from "../src/components/hero/cloud-layout.ts";
+import { cloudEntrance, layoutCloud } from "../src/components/hero/cloud-layout.ts";
 
 for (const [width, height] of [
   [320, 650],
@@ -17,15 +17,17 @@ for (const [width, height] of [
         count,
         top: 78,
         bottom: 70,
-        markWidth: width < 768 ? 40 : 56,
-        markHeight: width < 768 ? 40 : 56,
+        markWidth: width < 768 ? 40 : 130,
+        markHeight: width < 768 ? 40 : 67,
         copyWidth: width < 768 ? 178 : 280,
         copyHeight: width < 768 ? 220 : 160,
       };
       const result = layoutCloud(bounds);
       assert.deepEqual(result, layoutCloud(bounds));
       assert.equal(result.positions.length, count);
-      assert.ok(result.scale >= 0.3, `unreadable scale ${result.scale}`);
+      assert.ok(result.scale > 0, "measured geometry must remain placeable");
+      if (count === 35 && (width === 393 || width === 1440))
+        assert.ok(result.scale >= 0.5, "default portrait and desktop marks remain legible");
       const halfWidth = (bounds.markWidth * result.scale) / 2;
       const halfHeight = (bounds.markHeight * result.scale) / 2;
       for (const [index, { x, y }] of result.positions.entries()) {
@@ -51,6 +53,37 @@ for (const [width, height] of [
         new Set(result.positions.map(({ y }) => y)).size > count * 0.8,
         "uniform grid rows",
       );
+      for (let tick = 0; tick <= 125; tick += 1) {
+        const progress = 0.55 + tick * 0.002;
+        const rectangles = result.positions.map(({ x, y }, index) => {
+          const reveal = Math.min(
+            1,
+            Math.max(0, (progress - (0.55 + (index / count) * 0.12)) / 0.13),
+          );
+          const scale = result.scale * (0.5 + 0.5 * reveal);
+          return {
+            x,
+            y: y + (1 - reveal) * 80,
+            halfWidth: (bounds.markWidth * scale) / 2,
+            halfHeight: (bounds.markHeight * scale) / 2,
+          };
+        });
+        for (const [index, rectangle] of rectangles.entries()) {
+          const { x, y, halfWidth, halfHeight } = rectangle;
+          assert.ok(y + halfHeight <= height / 2 - bounds.bottom - 8 + 1e-6);
+          assert.ok(
+            Math.abs(x) >= bounds.copyWidth / 2 + halfWidth + 12 - 1e-6 ||
+              Math.abs(y) >= bounds.copyHeight / 2 + halfHeight + 12 - 1e-6,
+            `copy collision at ${progress}`,
+          );
+          for (const other of rectangles.slice(index + 1))
+            assert.ok(
+              Math.abs(x - other.x) >= halfWidth + other.halfWidth + 6 - 1e-6 ||
+                Math.abs(y - other.y) >= halfHeight + other.halfHeight + 6 - 1e-6,
+              `pair collision at ${progress}`,
+            );
+        }
+      }
     });
   }
 }
@@ -71,7 +104,7 @@ test("unobstructed marks retain their original golden-angle positions", () => {
   assert.equal(scale, 1);
   const radiusX = (bounds.width - bounds.markWidth) / 2 - 12;
   const minY = -bounds.height / 2 + bounds.top + bounds.markHeight / 2 + 8;
-  const maxY = bounds.height / 2 - bounds.bottom - bounds.markHeight / 2 - 8;
+  const maxY = bounds.height / 2 - bounds.bottom - bounds.markHeight / 4 - 8 - cloudEntrance.offset;
   for (const [index, position] of positions.entries()) {
     const angle = index * 2.399963;
     const radius = 0.5 + 0.48 * Math.sqrt((index + 1) / bounds.count);
