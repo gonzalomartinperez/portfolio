@@ -1,6 +1,6 @@
 # Mobile cloud spacing and confirmed toolkit additions
 
-Status: implemented; remote release checks pending
+Status: implemented; release checks are recorded in the associated PR
 
 ## Acceptance
 
@@ -12,6 +12,8 @@ Status: implemented; remote release checks pending
   backdrop covers the expanded field and overflow, fading toward the next block.
 - Preserve five mobile and seven desktop columns, reversible scroll, native
   scrolling, reduced motion, pause, context-loss fallback and current budgets.
+- Keep pause visible on initial short viewports, then attach it to the settled
+  scene so it leaves with the toolkit instead of covering the next heading.
 - Add only owner-confirmed applied tools to the full catalogue, with experience
   links. A dependency found in an employer repo is a candidate, not personal evidence.
 - Analytics tools are catalogue entries, not authorization to install trackers.
@@ -36,6 +38,8 @@ run passed 36 cases and intentionally skipped one desktop touch-only case. Mobil
 reversal verification timed out at its final DOM query after the position checks;
 the unchanged test passed in isolation in 23.8 seconds. Keep this diagnostic visible
 and require the full CI suite before promotion; do not increase timeout or bypass it.
+Final control verification passed six desktop/mobile cases for initial short-screen
+visibility, pause/reduced motion and the settled scene's exit without heading overlap.
 No physical iPhone test is available; browser emulation cannot establish device FPS.
 
 ## Technical reference

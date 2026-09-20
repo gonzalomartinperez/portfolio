@@ -116,6 +116,9 @@
   border-color: var(--accent);
   color: var(--text-primary);
 }
+.stage[data-scene-settled="true"] .toggle {
+  position: absolute;
+}
 .stage[data-scene-visible="false"] .toggle {
   display: none;
 }

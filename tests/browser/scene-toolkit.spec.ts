@@ -89,6 +89,13 @@ for (const { height, extraMarks } of [
     await expect(backdrop).toHaveCSS("mask-image", /linear-gradient/);
     if (!extraMarks && height === 770) {
       await page.evaluate(() => scrollBy({ top: 160, behavior: "instant" }));
+      const control = await page
+        .getByRole("button", { name: "Pause animation", exact: true })
+        .boundingBox();
+      const heading = await page.locator("#technology-heading").boundingBox();
+      expect(control).not.toBeNull();
+      expect(heading).not.toBeNull();
+      if (control && heading) expect(control.y + control.height).toBeLessThan(heading.y);
       await page.screenshot({ path: test.info().outputPath("toolkit-fade.png") });
     }
   });
