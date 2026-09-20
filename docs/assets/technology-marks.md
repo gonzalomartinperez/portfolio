@@ -1,11 +1,21 @@
 # Additional technology marks
 
-Reviewed 2026-09-19. These local assets identify tools used in the portfolio; they
+Reviewed 2026-09-20. These local assets identify tools used in the portfolio; they
 are not endorsements or claims of ownership. No runtime icon CDN or icon package
 is added. Names remain visible beside each mark.
 
 | Local file under `public/brands/` | Source | Treatment |
 | --- | --- | --- |
+| `sqlalchemy.svg` | [Simple Icons](https://cdn.simpleicons.org/sqlalchemy) | Original upstream artwork and published brand color. |
+| `pydantic.svg` | [Simple Icons](https://cdn.simpleicons.org/pydantic) | Shared Pydantic family mark for Pydantic and Pydantic AI; names identify the product. |
+| `pandas.svg` | [Simple Icons](https://cdn.simpleicons.org/pandas) | Original upstream artwork and published brand color. |
+| `numpy.svg` | [Simple Icons](https://cdn.simpleicons.org/numpy) | Original upstream artwork and published brand color. |
+| `pytorch.svg` | [Simple Icons](https://cdn.simpleicons.org/pytorch) | Original upstream artwork and published brand color. |
+| `tensorflow.svg` | [Simple Icons](https://cdn.simpleicons.org/tensorflow) | Original upstream artwork and published brand color. |
+| `prisma.svg` | [Simple Icons](https://cdn.simpleicons.org/prisma) | Original upstream artwork and published brand color. |
+| `typeorm.svg` | [Simple Icons](https://cdn.simpleicons.org/typeorm) | Original upstream artwork and published brand color. |
+| `googleanalytics.svg` | [Simple Icons](https://cdn.simpleicons.org/googleanalytics) | Original upstream artwork and published brand color. |
+| `meta.svg` | [Simple Icons](https://cdn.simpleicons.org/meta) | Meta family mark identifies Meta Pixel; not a claim of a distinct Pixel logo. |
 | `celery.svg` | [Source](https://cdn.simpleicons.org/celery) | Original upstream artwork. |
 | `hostinger.svg` | [Source](https://cdn.simpleicons.org/hostinger) | Original upstream artwork. |
 | `agno.svg` | [Source](https://raw.githubusercontent.com/agno-agi/docs/main/logo/black.svg) | Original upstream artwork. |
@@ -30,6 +40,27 @@ Docker Compose uses the existing Docker mark; it does not introduce a duplicate
 brand in the hero. No independent pgvector brand asset was found in its upstream
 repository; its labelled data icon remains. Generic concepts retain descriptive
 category icons rather than invented logos.
+
+The full catalog includes the additional applied tools confirmed by the owner on
+2026-09-20. Experience links distinguish Rampy's Python/AI and fintech integrations,
+TypeORM and Prisma at Teamcubation and Cooperativa Obrera, and product analytics at
+Rampy and in independent work. These are public skill entries, not newly installed
+dependencies or tracking scripts. Existing OpenTelemetry remains the telemetry
+entry; product analytics represents event tracking without duplicating it.
+
+Official naming references: [SQLModel](https://sqlmodel.tiangolo.com/),
+[Pydantic AI](https://ai.pydantic.dev/), [LI.FI](https://docs.li.fi/),
+[Hyperliquid](https://hyperliquid.gitbook.io/hyperliquid-docs) and
+[MoonPay](https://dev.moonpay.com/). SQLModel, LI.FI, Hyperliquid and MoonPay retain
+labelled category icons until an appropriate local brand asset is reviewed. Agent
+harnesses, bridges and fiat on/off ramps are concepts, not invented brands.
+
+The hero intentionally retains 70 curated identities, independently of catalog
+growth, so seven desktop and five mobile columns remain complete. This revision
+prioritizes PyTorch, TensorFlow, Pydantic, NumPy, pandas, SQLAlchemy, Prisma, TypeORM
+and Google Analytics over collaboration marks, PHP, WordPress, Mockito and Maven.
+Pydantic and Pydantic AI share one scene identity. The full applied inventory,
+including the tools omitted from the scene, remains searchable in both locales.
 
 Simple Icons is CC0, but its [disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md)
 expressly separates icon licensing from brand rights. The historical AWS and Teams

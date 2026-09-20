@@ -14,6 +14,308 @@ export type Technology = {
 
 export const technologyCatalog: Technology[] = [
   {
+    id: "agent-harness",
+    name: "Agent harness",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Agent harnesses"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "pydantic-ai",
+    name: "Pydantic AI",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "pydantic",
+    aliases: ["PydanticAI"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "pytorch",
+    name: "PyTorch",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "pytorch",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "tensorflow",
+    name: "TensorFlow",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "tensorflow",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "pydantic",
+    name: "Pydantic",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    icon: "pydantic",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "sqlalchemy",
+    name: "SQLAlchemy",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    icon: "sqlalchemy",
+    aliases: ["SQL Alchemy"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "sqlmodel",
+    name: "SQLModel",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    aliases: ["SQL Model"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "pandas",
+    name: "pandas",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    icon: "pandas",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "numpy",
+    name: "NumPy",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    icon: "numpy",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "typeorm",
+    name: "TypeORM",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    icon: "typeorm",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+      {
+        label: "Cooperativa Obrera",
+        href: "/work#cooperativa-obrera",
+      },
+    ],
+  },
+  {
+    id: "prisma",
+    name: "Prisma",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    icon: "prisma",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+      {
+        label: "Cooperativa Obrera",
+        href: "/work#cooperativa-obrera",
+      },
+    ],
+  },
+  {
+    id: "google-analytics",
+    name: "Google Analytics",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    icon: "googleanalytics",
+    aliases: ["GA", "GA4"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+  },
+  {
+    id: "meta-pixel",
+    name: "Meta Pixel",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    icon: "meta",
+    aliases: ["Facebook Pixel"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+  },
+  {
+    id: "product-analytics",
+    name: "Product analytics",
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Tracking", "Event tracking", "Seguimiento de eventos"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+  },
+  {
+    id: "lifi",
+    name: "LI.FI",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    aliases: ["LiFi"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "hyperliquid",
+    name: "Hyperliquid",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "moonpay",
+    name: "MoonPay",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "cross-chain-bridges",
+    name: "Cross-chain bridges",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Bridges", "Cross-chain bridging"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "fiat-on-ramp",
+    name: "Fiat on-ramp",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Fiat on ramp", "On-ramp"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "fiat-off-ramp",
+    name: "Fiat off-ramp",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Fiat off ramp", "Off-ramp"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
     id: "agno",
     icon: "agno",
     name: "Agno",
@@ -1865,7 +2167,84 @@ export function compareTechnologyNames(a: Technology, b: Technology) {
 
 const illustratedSceneTechnologies = new Set(["agent-evaluation", "pgvector", "rag"]);
 
+// Curate the scene independently so catalogue growth does not crowd its layout.
+const selectedSceneMarks = new Set([
+  "pydantic",
+  "pytorch",
+  "tensorflow",
+  "numpy",
+  "pandas",
+  "sqlalchemy",
+  "prisma",
+  "typeorm",
+  "googleanalytics",
+  "agno",
+  "mem0",
+  "deepinfra",
+  "agent-evaluation",
+  "langchain",
+  "langgraph",
+  "rag",
+  "modelcontextprotocol",
+  "pgvector",
+  "anthropic",
+  "kotlin",
+  "python",
+  "typescript",
+  "nodedotjs",
+  "openjdk",
+  "javascript",
+  "celery",
+  "fastapi",
+  "nestjs",
+  "spring",
+  "hibernate",
+  "laravel",
+  "openapi",
+  "postgresql",
+  "mysql",
+  "mariadb",
+  "mongodb",
+  "redis",
+  "react",
+  "nextdotjs",
+  "single-spa",
+  "digitalocean",
+  "hostinger",
+  "amazonwebservices",
+  "awslambda",
+  "amazon-api-gateway",
+  "amazons3",
+  "amazon-sqs",
+  "amazon-cloudwatch",
+  "docker",
+  "kubernetes",
+  "helm",
+  "gitlab",
+  "githubactions",
+  "git",
+  "linux",
+  "infisical",
+  "junit",
+  "karate",
+  "jest",
+  "testinglibrary",
+  "testcontainers",
+  "sonarqube",
+  "opentelemetry",
+  "micrometer",
+  "prometheus",
+  "grafana",
+  "morpho",
+  "aave",
+  "compound",
+  "privy",
+]);
+
 export function getSceneMarkIdentity(technology: Technology): string | undefined {
-  if (technology.icon) return technology.icon === "springboot" ? "spring" : technology.icon;
+  if (technology.icon) {
+    const identity = technology.icon === "springboot" ? "spring" : technology.icon;
+    return selectedSceneMarks.has(identity) ? identity : undefined;
+  }
   return illustratedSceneTechnologies.has(technology.id) ? technology.id : undefined;
 }

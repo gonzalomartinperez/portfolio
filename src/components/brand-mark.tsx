@@ -2,6 +2,16 @@ import Image from "next/image";
 import styles from "./brand-mark.module.css";
 
 const localMarks = new Set([
+  "sqlalchemy",
+  "pydantic",
+  "pandas",
+  "numpy",
+  "pytorch",
+  "tensorflow",
+  "prisma",
+  "typeorm",
+  "googleanalytics",
+  "meta",
   "celery",
   "hostinger",
   "agno",
