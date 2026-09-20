@@ -53,7 +53,7 @@ for (const { height, extraMarks } of [
       });
       return { headerBottom: Math.max(0, header?.getBoundingClientRect().bottom ?? 0), logos };
     });
-    expect(layout.logos).toHaveLength(70 + extraMarks);
+    expect(layout.logos).toHaveLength(35 + extraMarks);
     if (!extraMarks) expect(layout.logos.length % (isMobile ? 5 : 7)).toBe(0);
     for (const [index, logo] of layout.logos.entries()) {
       expect(logo.top).toBeGreaterThanOrEqual(layout.headerBottom + 12);
@@ -79,5 +79,24 @@ for (const { height, extraMarks } of [
     expect(catalogue?.y).toBeGreaterThan(lastBounds.y + lastBounds.height);
     await expect(scene.locator("[data-scene-viewport]")).toHaveCSS("overflow", "visible");
     await page.screenshot({ path: test.info().outputPath("toolkit-last-row.png") });
+    const backdrop = scene.locator("[data-scene-backdrop]");
+    const backdropBounds = await backdrop.boundingBox();
+    expect(backdropBounds).not.toBeNull();
+    if (backdropBounds)
+      expect(backdropBounds.y + backdropBounds.height).toBeGreaterThan(
+        lastBounds.y + lastBounds.height,
+      );
+    await expect(backdrop).toHaveCSS("mask-image", /linear-gradient/);
+    if (!extraMarks && height === 770) {
+      await page.evaluate(() => scrollBy({ top: 160, behavior: "instant" }));
+      const control = await page
+        .getByRole("button", { name: "Pause animation", exact: true })
+        .boundingBox();
+      const heading = await page.locator("#technology-heading").boundingBox();
+      expect(control).not.toBeNull();
+      expect(heading).not.toBeNull();
+      if (control && heading) expect(control.y + control.height).toBeLessThan(heading.y);
+      await page.screenshot({ path: test.info().outputPath("toolkit-fade.png") });
+    }
   });
 }

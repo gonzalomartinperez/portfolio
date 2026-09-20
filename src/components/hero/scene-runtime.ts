@@ -1,5 +1,6 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { cloudEntrance, layoutCloud } from "./cloud-layout";
 import { createFieldEngine } from "./field-engine";
 
 export type SceneRuntime = { sync(paused: boolean): void; activateAvatar(): void; dispose(): void };
@@ -62,10 +63,10 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   const avatar = visualNode(stage.querySelector<HTMLElement>("[data-scene-avatar-art]"));
   const avatarButton = stage.querySelector<HTMLButtonElement>("[data-scene-avatar]");
   let copyView = visualNode(null);
+  const backdrop = visualNode(stage.querySelector<HTMLElement>("[data-scene-backdrop]"));
+  let cloudScale = 1;
   const logos: {
     view: VisualNode;
-    x: number;
-    y: number;
     orbitX: number;
     orbitY: number;
     settledX: number;
@@ -92,17 +93,13 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     if (!cloud) return;
     const item = document.createElement("div");
     item.className = "scene-logo";
-    const angle = index * 2.399963;
-    const radius = 0.5 + 0.48 * Math.sqrt((index + 1) / sourceMarks.length);
     logos.push({
       view: visualNode(item),
-      x: Math.cos(angle) * radius,
-      y: Math.sin(angle) * radius,
       orbitX: 0,
       orbitY: 0,
       settledX: 0,
       settledY: 0,
-      revealAt: 0.55 + (index / sourceMarks.length) * 0.12,
+      revealAt: cloudEntrance.start + (index / sourceMarks.length) * cloudEntrance.stagger,
     });
     item.append(source.cloneNode(true));
     cloud.append(item);
@@ -124,6 +121,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     stage.dataset.sceneProgress = value.toFixed(4);
     stage.dataset.sceneSettled = String(value >= 0.98);
     engine.setExpansion(value);
+    paint(backdrop, clamp((value - 0.35) / 0.2));
     paint(
       hero,
       heroFocused ? 1 : 1 - clamp(value / 0.2),
@@ -136,15 +134,17 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     }
     if (viewport) viewport.style.cursor = "";
     paint(copyView, clamp((value - 0.55) / 0.15) * (1 - clamp((value - 0.8) / 0.1)));
-    const settle = clamp((value - 0.8) / 0.2);
+    const settle = clamp((value - 0.9) / 0.1);
     for (const logo of logos) {
-      const reveal = clamp((value - logo.revealAt) / 0.13);
+      const reveal = clamp((value - logo.revealAt) / cloudEntrance.duration);
       const x = rounded(logo.orbitX * (1 - settle) + logo.settledX * settle);
-      const y = rounded(logo.orbitY * (1 - settle) + logo.settledY * settle + (1 - reveal) * 80);
+      const y = rounded(
+        logo.orbitY * (1 - settle) + logo.settledY * settle + (1 - reveal) * cloudEntrance.offset,
+      );
       paint(
         logo.view,
         reveal,
-        `translate(-50%,-50%) translate3d(${x}px,${y}px,0) scale(${rounded(0.5 + reveal * 0.5)})`,
+        `translate(-50%,-50%) translate3d(${x}px,${y}px,0) scale(${rounded((0.5 + reveal * 0.5) * (cloudScale + (1 - cloudScale) * settle))})`,
       );
     }
   };
@@ -352,6 +352,19 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     const headerHeight =
       header && getComputedStyle(header).position === "sticky" ? header.offsetHeight : 0;
     const logoHeight = Math.max(0, ...logos.map((logo) => logo.view.element?.offsetHeight ?? 0));
+    const logoWidth = Math.max(0, ...logos.map((logo) => logo.view.element?.offsetWidth ?? 0));
+    const layout = layoutCloud({
+      width,
+      height,
+      top: headerHeight + 16,
+      bottom: 72,
+      markWidth: logoWidth,
+      markHeight: logoHeight,
+      copyWidth: copyView.element?.offsetWidth ?? 0,
+      copyHeight: copyView.element?.offsetHeight ?? 0,
+      count: logos.length,
+    });
+    cloudScale = layout.scale;
     const gridTop = headerHeight + 16 + logoHeight / 2;
     const columns = compact.matches ? 5 : 7;
     const rows = Math.ceil(logos.length / columns);
@@ -361,12 +374,10 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     );
     const gridOverflow = Math.max(0, gridBottom + logoHeight / 2 + 64 - height);
     journey?.style.setProperty("--toolkit-overflow", `${gridOverflow}px`);
+    viewport?.style.setProperty("--toolkit-overflow", `${gridOverflow}px`);
     for (const [index, logo] of logos.entries()) {
-      const { x, y } = logo;
-      // Keep the readable centre clear until its copy fades before grid settlement.
-      const safeX = Math.abs(x) < 0.55 && Math.abs(y) < 0.4 ? Math.sign(x || 1) * 0.65 : x;
-      logo.orbitX = safeX * width * 0.44;
-      logo.orbitY = y * height * 0.4;
+      logo.orbitX = layout.positions[index].x;
+      logo.orbitY = layout.positions[index].y;
       logo.settledX = ((index % columns) / (columns - 1) - 0.5) * width * 0.88;
       logo.settledY =
         gridTop +
@@ -381,6 +392,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   if (viewport) resizeObserver.observe(viewport);
   if (journey) resizeObserver.observe(journey);
   if (header) resizeObserver.observe(header);
+  if (copyView.element) resizeObserver.observe(copyView.element);
   const observer = new IntersectionObserver(([entry]) => {
     onScreen = entry.isIntersecting;
     stage.dataset.sceneVisible = String(onScreen);
@@ -416,6 +428,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       stage.removeAttribute("data-scene-visible");
       stage.removeAttribute("data-scene-settled");
       journey?.style.removeProperty("--toolkit-overflow");
+      viewport?.style.removeProperty("--toolkit-overflow");
       stage.removeAttribute("data-scene-quality");
       stage.removeAttribute("data-scene-tap");
       stage.removeAttribute("data-scene-pulse");
@@ -425,7 +438,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
         avatarButton.disabled = false;
         avatarButton.style.removeProperty("visibility");
       }
-      for (const node of [hero, core, avatar]) {
+      for (const node of [hero, core, avatar, backdrop]) {
         node.element?.style.removeProperty("opacity");
         node.element?.style.removeProperty("transform");
       }

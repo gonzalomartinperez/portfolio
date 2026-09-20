@@ -47,6 +47,12 @@ export const roles: Role[] = [
     ]),
     metrics: [
       {
+        value: "~2×+",
+        label: "respuestas más rápidas en flujos agénticos optimizados",
+        qualifier:
+          "Tiempo de respuesta estimado de aproximadamente la mitad o menos que antes en condiciones comparables; no es un benchmark de todo el sistema.",
+      },
+      {
         value: "~1 h → 10 min",
         label: "pipeline de entrega",
         qualifier:
