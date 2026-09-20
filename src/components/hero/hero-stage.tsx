@@ -91,6 +91,7 @@ export function HeroStage({
     <div className={styles.stage} data-mode={mode} data-scene ref={stageRef}>
       <div className={styles.journey} data-scene-journey>
         <div className={styles.viewport} data-scene-viewport>
+          <div className={styles.backdrop} data-scene-backdrop aria-hidden="true" />
           <div className={styles.heroPane} data-scene-hero>
             {hero}
           </div>
