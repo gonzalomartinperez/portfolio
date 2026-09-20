@@ -5,12 +5,101 @@ import {
   compareTechnologyNames,
   getSceneMarkIdentity,
   getStackGroups,
+  getTechnology,
   publicTechnologyCatalog,
   technologyCatalog,
   technologyGroups,
 } from "../src/content/technologies.ts";
 
 const read = (file) => readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
+
+test("confirmed toolkit additions retain their applied experience context", () => {
+  const rampy = [
+    "agent-harness",
+    "pydantic-ai",
+    "pytorch",
+    "tensorflow",
+    "pydantic",
+    "sqlalchemy",
+    "sqlmodel",
+    "pandas",
+    "numpy",
+    "lifi",
+    "hyperliquid",
+    "moonpay",
+    "cross-chain-bridges",
+    "fiat-on-ramp",
+    "fiat-off-ramp",
+  ];
+  for (const id of rampy) {
+    const technology = getTechnology(id);
+    assert.equal(technology?.status, "applied", id);
+    assert.deepEqual(
+      technology.evidence.map(({ href }) => href),
+      ["/work#rampy"],
+      id,
+    );
+  }
+  for (const id of ["typeorm", "prisma"]) {
+    const technology = getTechnology(id);
+    assert.equal(technology?.status, "applied", id);
+    assert.deepEqual(
+      technology.evidence.map(({ href }) => href),
+      ["/work#teamcubation", "/work#cooperativa-obrera"],
+    );
+  }
+  for (const id of ["google-analytics", "meta-pixel", "product-analytics"]) {
+    const technology = getTechnology(id);
+    assert.equal(technology?.status, "applied", id);
+    assert.deepEqual(
+      technology.evidence.map(({ href }) => href),
+      ["/work#rampy", "/work#independent"],
+    );
+  }
+  for (const [alias, id] of [
+    ["SQL Alchemy", "sqlalchemy"],
+    ["SQL Model", "sqlmodel"],
+    ["PydanticAI", "pydantic-ai"],
+    ["LiFi", "lifi"],
+    ["Tracking", "product-analytics"],
+  ])
+    assert.equal(getTechnology(alias)?.id, id);
+  assert.equal(technologyCatalog.filter(({ name }) => name === "OpenTelemetry").length, 1);
+});
+
+test("the curated hero prioritizes applied AI without dropping other tools from the catalog", () => {
+  for (const id of [
+    "pydantic-ai",
+    "pytorch",
+    "tensorflow",
+    "numpy",
+    "pandas",
+    "sqlalchemy",
+    "prisma",
+    "typeorm",
+  ])
+    assert.ok(getSceneMarkIdentity(getTechnology(id)), id);
+  for (const id of [
+    "slack",
+    "discord",
+    "microsoft-teams",
+    "jira",
+    "trello",
+    "php",
+    "wordpress",
+    "mockito",
+    "maven",
+  ]) {
+    const technology = getTechnology(id);
+    assert.ok(publicTechnologyCatalog.includes(technology), id);
+    assert.equal(getSceneMarkIdentity(technology), undefined, id);
+  }
+  assert.equal(
+    getSceneMarkIdentity(getTechnology("pydantic")),
+    getSceneMarkIdentity(getTechnology("pydantic-ai")),
+  );
+  assert.equal(getTechnology("spec-driven-development")?.status, "applied");
+});
 
 test("the hero fills seven desktop and five mobile columns with 70 unique marks", () => {
   const selected = publicTechnologyCatalog.filter(getSceneMarkIdentity);
