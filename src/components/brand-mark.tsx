@@ -2,6 +2,15 @@ import Image from "next/image";
 import styles from "./brand-mark.module.css";
 
 const localMarks = new Set([
+  "pytest",
+  "sentry",
+  "expo",
+  "reactquery",
+  "zod",
+  "vitest",
+  "googlegemini",
+  "googlecloud",
+  "openai",
   "sqlalchemy",
   "pydantic",
   "pandas",

@@ -7,6 +7,7 @@ import {
   getStackGroups,
   getTechnology,
   publicTechnologyCatalog,
+  publicTechnologyExclusions,
   technologyCatalog,
   technologyGroups,
 } from "../src/content/technologies.ts";
@@ -67,16 +68,18 @@ test("confirmed toolkit additions retain their applied experience context", () =
   assert.equal(technologyCatalog.filter(({ name }) => name === "OpenTelemetry").length, 1);
 });
 
-test("the curated hero prioritizes applied AI without dropping other tools from the catalog", () => {
+test("the curated hero prioritizes applied AI while preserving source knowledge", () => {
   for (const id of [
     "pydantic-ai",
+    "google-vertex-ai",
+    "openai-api",
+    "pytest",
+    "sentry",
     "pytorch",
-    "tensorflow",
     "numpy",
     "pandas",
     "sqlalchemy",
-    "prisma",
-    "typeorm",
+    "expo",
   ])
     assert.ok(getSceneMarkIdentity(getTechnology(id)), id);
   for (const id of [
@@ -91,7 +94,7 @@ test("the curated hero prioritizes applied AI without dropping other tools from 
     "maven",
   ]) {
     const technology = getTechnology(id);
-    assert.ok(publicTechnologyCatalog.includes(technology), id);
+    assert.equal(technology?.status, "applied", id);
     assert.equal(getSceneMarkIdentity(technology), undefined, id);
   }
   assert.equal(
@@ -101,10 +104,64 @@ test("the curated hero prioritizes applied AI without dropping other tools from 
   assert.equal(getTechnology("spec-driven-development")?.status, "applied");
 });
 
-test("the hero fills seven desktop and five mobile columns with 70 unique marks", () => {
+test("additional Rampy confirmations describe integrations without inventing model training", () => {
+  for (const id of [
+    "alembic",
+    "pytest",
+    "sentry",
+    "expo",
+    "tanstack-query",
+    "zod",
+    "viem",
+    "zerodev",
+    "vitest",
+    "google-vertex-ai",
+    "google-gemini",
+    "openai-api",
+    "graphrag",
+    "llm-provider-fallback",
+    "server-sent-events",
+    "transaction-idempotency",
+    "transaction-reconciliation",
+    "quote-aggregation-routing",
+    "transaction-signing",
+  ]) {
+    const technology = getTechnology(id);
+    assert.equal(technology?.status, "applied", id);
+    assert.deepEqual(
+      technology.evidence.map(({ href }) => href),
+      ["/work#rampy"],
+      id,
+    );
+  }
+  for (const id of [
+    "rag",
+    "spec-driven-development",
+    "user-authorization",
+    "protocol-integrations",
+  ])
+    assert.ok(
+      getTechnology(id)?.evidence.some(({ href }) => href === "/work#rampy"),
+      id,
+    );
+  for (const [alias, id] of [
+    ["Vertex", "google-vertex-ai"],
+    ["Gemini", "google-gemini"],
+    ["OpenAI", "openai-api"],
+    ["SDD", "spec-driven-development"],
+    ["SSE", "server-sent-events"],
+    ["On-chain integrations", "protocol-integrations"],
+    ["React Query", "tanstack-query"],
+  ])
+    assert.equal(getTechnology(alias)?.id, id);
+  assert.equal(getTechnology("foundation-model-training"), undefined);
+  assert.equal(getTechnology("fine-tuning"), undefined);
+});
+
+test("the hero fills seven desktop and five mobile columns with 35 unique marks", () => {
   const selected = publicTechnologyCatalog.filter(getSceneMarkIdentity);
   const identities = new Set(selected.map(getSceneMarkIdentity));
-  assert.equal(identities.size, 70);
+  assert.equal(identities.size, 35);
   assert.equal(identities.size % 7, 0);
   assert.equal(identities.size % 5, 0);
   for (const technology of selected) assert.equal(technology.status, "applied");
@@ -137,6 +194,20 @@ test("catalogue preserves category priority and sorts technology names alphabeti
     technologyCatalog.map(({ id }) => id),
     original,
   );
+});
+
+test("editorial exclusions preserve applied source records and name valid IDs", () => {
+  for (const [id, reason] of Object.entries(publicTechnologyExclusions)) {
+    const technology = getTechnology(id);
+    assert.equal(technology?.id, id);
+    assert.equal(technology.status, "applied");
+    assert.ok(reason.length > 20);
+    assert.ok(!publicTechnologyCatalog.includes(technology));
+  }
+  for (const technology of publicTechnologyCatalog) {
+    assert.equal(technology.status, "applied");
+    assert.ok(!Object.hasOwn(publicTechnologyExclusions, technology.id));
+  }
 });
 
 test("technology identifiers, categories and evidence remain complete", () => {

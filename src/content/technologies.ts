@@ -14,6 +14,270 @@ export type Technology = {
 
 export const technologyCatalog: Technology[] = [
   {
+    id: "server-sent-events",
+    name: "Server-Sent Events",
+    category: "backend",
+    kind: "concept",
+    status: "applied",
+    aliases: ["SSE", "Response streaming"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "transaction-idempotency",
+    name: "Transaction idempotency",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Idempotency"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "transaction-reconciliation",
+    name: "Transaction reconciliation",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "quote-aggregation-routing",
+    name: "Quote aggregation & routing",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Quote aggregation", "Quote routing"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "transaction-signing",
+    name: "Transaction signing",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "google-vertex-ai",
+    name: "Google Vertex AI",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "googlecloud",
+    aliases: ["Vertex AI", "Vertex"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "google-gemini",
+    name: "Google Gemini",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "googlegemini",
+    aliases: ["Gemini", "Gemini API"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "openai-api",
+    name: "OpenAI API",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "openai",
+    aliases: ["OpenAI"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "graphrag",
+    name: "GraphRAG",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Graph RAG", "Graph-based RAG"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "llm-provider-fallback",
+    name: "LLM provider fallback",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "alembic",
+    name: "Alembic",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "pytest",
+    name: "pytest",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    icon: "pytest",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "sentry",
+    name: "Sentry",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    icon: "sentry",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "expo",
+    name: "Expo",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    icon: "expo",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "tanstack-query",
+    name: "TanStack Query",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    icon: "reactquery",
+    aliases: ["React Query"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "zod",
+    name: "Zod",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    icon: "zod",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "viem",
+    name: "Viem",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "zerodev",
+    name: "ZeroDev",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "vitest",
+    name: "Vitest",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    icon: "vitest",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
     id: "agent-harness",
     name: "Agent harness",
     category: "applied-ai",
@@ -417,6 +681,7 @@ export const technologyCatalog: Technology[] = [
     kind: "concept",
     status: "applied",
     evidence: [
+      { label: "Rampy", href: "/work#rampy" },
       {
         label: "Teamcubation",
         href: "/work#teamcubation",
@@ -533,10 +798,12 @@ export const technologyCatalog: Technology[] = [
   {
     id: "spec-driven-development",
     name: "Spec-driven development",
+    aliases: ["SDD"],
     category: "applied-ai",
     kind: "concept",
     status: "applied",
     evidence: [
+      { label: "Rampy", href: "/work#rampy" },
       {
         label: "Independent work",
         href: "/work#independent",
@@ -1841,6 +2108,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "protocol-integrations",
+    aliases: ["On-chain integrations"],
     name: "Protocol integrations",
     category: "fintech",
     kind: "concept",
@@ -1865,7 +2133,8 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "user-authorization",
-    name: "User authorization",
+    name: "Transaction authorization",
+    aliases: ["User authorization"],
     category: "fintech",
     kind: "concept",
     status: "applied",
@@ -2011,8 +2280,25 @@ export const technologyCatalog: Technology[] = [
   },
 ];
 
+export const publicTechnologyExclusions: Record<string, string> = {
+  slack: "Communication tool rather than a differentiating engineering capability.",
+  discord: "Communication tool rather than a differentiating engineering capability.",
+  "microsoft-teams": "Communication tool rather than a differentiating engineering capability.",
+  jira: "Routine project coordination, not a priority technical skill.",
+  trello: "Routine project coordination, not a priority technical skill.",
+  maven: "Build-tool detail remains documented in the source inventory.",
+  hostinger: "Hosting-provider detail does not strengthen the target role.",
+  wordpress: "Outside the current applied-AI and software engineering focus.",
+  fintech: "Concrete DeFi integrations provide more useful context than a broad industry label.",
+  blockchain: "Concrete protocol and transaction capabilities provide the relevant context.",
+  web3: "Concrete protocol and transaction capabilities provide the relevant context.",
+  "health-checks": "Covered by observability and production-engineering capabilities.",
+  "single-page-applications": "Covered by the named application frameworks.",
+  "responsive-design": "Baseline product practice rather than a differentiating technical entry.",
+};
+
 export const publicTechnologyCatalog = technologyCatalog.filter(
-  ({ status }) => status === "applied",
+  ({ id, status }) => status === "applied" && !Object.hasOwn(publicTechnologyExclusions, id),
 );
 
 export const technologyGroups = [
@@ -2023,8 +2309,8 @@ export const technologyGroups = [
       es: "IA aplicada y sistemas agénticos",
     },
     evidence: {
-      en: "Production agents, retrieval, memory and evaluations at Rampy; merchant RAG and client assistants.",
-      es: "Agentes, recuperación, memoria y evaluaciones en Rampy; RAG para comercios y asistentes para clientes.",
+      en: "Production agents, model integrations, retrieval and evaluations at Rampy; merchant RAG and client assistants.",
+      es: "Agentes, integración de modelos, recuperación y evaluaciones en Rampy; RAG para comercios y asistentes para clientes.",
     },
   },
   {
@@ -2107,12 +2393,12 @@ export const technologyGroups = [
   {
     id: "fintech",
     name: {
-      en: "Fintech & blockchain",
-      es: "Fintech y blockchain",
+      en: "Financial integrations",
+      es: "Integraciones financieras",
     },
     evidence: {
-      en: "Production Morpho, Aave and Compound integrations; individual standards retain their own experience status.",
-      es: "Integraciones productivas con Morpho, Aave y Compound; cada estándar conserva su nivel de experiencia.",
+      en: "Product integrations at Rampy: wallets, protocol APIs and transaction flows connected to the application.",
+      es: "Integraciones de producto en Rampy: billeteras, APIs de protocolos y flujos de transacciones conectados con la aplicación.",
     },
   },
 ];
@@ -2169,76 +2455,41 @@ const illustratedSceneTechnologies = new Set(["agent-evaluation", "pgvector", "r
 
 // Curate the scene independently so catalogue growth does not crowd its layout.
 const selectedSceneMarks = new Set([
-  "pydantic",
-  "pytorch",
-  "tensorflow",
-  "numpy",
-  "pandas",
-  "sqlalchemy",
-  "prisma",
-  "typeorm",
-  "googleanalytics",
   "agno",
-  "mem0",
-  "deepinfra",
-  "agent-evaluation",
   "langchain",
   "langgraph",
-  "rag",
-  "modelcontextprotocol",
-  "pgvector",
+  "openai",
   "anthropic",
-  "kotlin",
+  "googlecloud",
+  "pydantic",
+  "mem0",
+  "deepinfra",
+  "rag",
+  "pgvector",
+  "agent-evaluation",
   "python",
   "typescript",
-  "nodedotjs",
-  "openjdk",
-  "javascript",
-  "celery",
-  "fastapi",
-  "nestjs",
-  "spring",
-  "hibernate",
-  "laravel",
-  "openapi",
-  "postgresql",
-  "mysql",
-  "mariadb",
-  "mongodb",
-  "redis",
   "react",
   "nextdotjs",
-  "single-spa",
-  "digitalocean",
-  "hostinger",
-  "amazonwebservices",
-  "awslambda",
-  "amazon-api-gateway",
-  "amazons3",
-  "amazon-sqs",
-  "amazon-cloudwatch",
+  "nodedotjs",
+  "nestjs",
+  "openjdk",
+  "spring",
+  "fastapi",
+  "postgresql",
+  "redis",
+  "sqlalchemy",
+  "numpy",
+  "pandas",
   "docker",
   "kubernetes",
-  "helm",
-  "gitlab",
+  "amazonwebservices",
+  "digitalocean",
   "githubactions",
-  "git",
-  "linux",
-  "infisical",
-  "junit",
-  "karate",
-  "jest",
-  "testinglibrary",
-  "testcontainers",
-  "sonarqube",
-  "opentelemetry",
-  "micrometer",
-  "prometheus",
-  "grafana",
-  "morpho",
-  "aave",
-  "compound",
-  "privy",
+  "pytorch",
+  "pytest",
+  "sentry",
+  "expo",
 ]);
 
 export function getSceneMarkIdentity(technology: Technology): string | undefined {
