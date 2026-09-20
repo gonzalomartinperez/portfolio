@@ -48,3 +48,14 @@ The dynamic viewport follows mobile browser chrome; the small viewport does not
 grow when that chrome retracts. See [web.dev's viewport-unit explanation](https://web.dev/blog/viewport-units).
 Keep the scroll journey based on stable small-viewport units while measuring the
 actual sticky viewport for the animation range and canvas dimensions.
+
+### Native-scroll regression
+
+The immediate global refresh in the resize observer reset and restored the page's
+scroll position whenever mobile browser bars resized the dynamic viewport. A
+30-frame resizing/scrolling regression reproduced 87 unsolicited scroll writes in
+each locale before the correction. Use `ScrollTrigger.refresh(true)` so refreshes
+are coalesced and deferred until active scrolling ends; retain native gestures and
+the full-height star background. See [GSAP safe refresh](https://gsap.com/docs/v3/Plugins/ScrollTrigger/static.refresh()).
+The regression also checks that scene progress converges to the measured scroll
+geometry afterward. This simulation does not replace a physical Chrome mobile test.

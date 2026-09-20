@@ -386,7 +386,8 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     }
     appliedProgress = -1;
     update(deterministic ? fixedProgress : visualProgress);
-    ScrollTrigger.refresh();
+    // Mobile browser bars resize the viewport during native momentum scrolling.
+    ScrollTrigger.refresh(true);
   };
   const resizeObserver = new ResizeObserver(resize);
   if (viewport) resizeObserver.observe(viewport);
