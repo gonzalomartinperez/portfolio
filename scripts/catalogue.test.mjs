@@ -57,6 +57,15 @@ test("confirmed toolkit additions retain their applied experience context", () =
       ["/work#rampy", "/work#independent"],
     );
   }
+  for (const id of ["microsoft-clarity", "firebase-analytics", "meta-app-events", "singular-sdk"]) {
+    const technology = getTechnology(id);
+    assert.equal(technology?.status, "applied", id);
+    assert.deepEqual(
+      technology.evidence.map(({ href }) => href),
+      ["/work#rampy"],
+      id,
+    );
+  }
   for (const [alias, id] of [
     ["SQL Alchemy", "sqlalchemy"],
     ["SQL Model", "sqlmodel"],

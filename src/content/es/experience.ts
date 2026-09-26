@@ -14,10 +14,12 @@ export const roles: Role[] = [
     context:
       "Productos financieros e IA en una startup de ritmo alto: convierto prioridades cambiantes en funcionalidades en producción para agentes conversacionales, web, aplicaciones móviles y backend, en colaboración directa con tres fundadores.",
     contributions: [
-      "Construí una vista consolidada del portfolio con activos, tokens, vaults y rendimientos de las últimas 24 horas, orquestando APIs de proveedores en paralelo, aplicando caché selectiva y unificando los resultados.",
+      "Construí una vista consolidada del portfolio con activos, vaults y rendimientos de las últimas 24 horas; reduje la recuperación de datos en consultas comparables de vaults, mercados y perpetuos del rango de segundos al de milisegundos mediante precarga, consultas paralelas y caché selectiva.",
       "Mejoré los flujos agénticos mediante recuperación de contexto, reranking, salidas estructuradas y memoria conversacional selectiva; reduje contexto redundante y llamadas innecesarias, con pruebas de recorridos completos y selección de herramientas.",
       "Integré Morpho, Aave y Compound de punta a punta —backend, frontend y ejecución de transacciones— para consultar posiciones y rendimientos, depositar y retirar, con chequeos de completitud y seguimiento de estado mediante webhooks.",
       "Refactoricé límites de la aplicación y componentes reutilizables, implementé un sistema de diseño compartido y desarrollé funcionalidades móviles con React Native y Kotlin, verificadas en emuladores y teléfonos reales.",
+      "Reduje el tiempo promedio de arranque de la app móvil e instrumenté recorridos clave con Microsoft Clarity y Firebase Analytics; coordiné Meta App Events y Singular SDK para evitar eventos duplicados.",
+      "Diseñé, desarrollé, probé y desplegué una landing page para campañas de marketing orientadas a aumentar las descargas de la aplicación móvil.",
       "Reduje el tiempo del pipeline de validación, build y despliegue conservando sus controles; optimicé bundles, imágenes Docker y entornos de desarrollo, staging y producción en DigitalOcean.",
       "Centralicé secretos con Infisical, acceso por usuario, sincronización automatizada y rotación a demanda; trabajé sobre despliegues, monitoreo, backups, bases de datos y permisos de servidores.",
       "Preparé infraestructura escalable con el objetivo de soportar miles de usuarios, organizando entornos, contenedores y controles operativos para acompañar el crecimiento del producto.",
@@ -38,6 +40,10 @@ export const roles: Role[] = [
       "Next.js",
       "React Native",
       "Kotlin",
+      "Microsoft Clarity",
+      "Firebase Analytics",
+      "Meta App Events",
+      "Singular SDK",
       "PostgreSQL",
       "Redis",
       "Celery",
@@ -46,6 +52,12 @@ export const roles: Role[] = [
       "Infisical",
     ]),
     metrics: [
+      {
+        value: "~7–8 s → 1–2 s",
+        label: "arranque promedio de la app móvil",
+        qualifier:
+          "Promedios medidos por Gonzalo antes y después para el arranque; no se conservan la muestra ni el período de prueba y la cifra no describe todas las pantallas.",
+      },
       {
         value: "~2×+",
         label: "respuestas más rápidas en flujos agénticos optimizados",

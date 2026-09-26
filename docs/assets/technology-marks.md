@@ -24,7 +24,7 @@ is added. Names remain visible beside each mark.
 | `prisma.svg` | [Simple Icons](https://cdn.simpleicons.org/prisma) | Original upstream artwork and published brand color. |
 | `typeorm.svg` | [Simple Icons](https://cdn.simpleicons.org/typeorm) | Original upstream artwork and published brand color. |
 | `googleanalytics.svg` | [Simple Icons](https://cdn.simpleicons.org/googleanalytics) | Original upstream artwork and published brand color. |
-| `meta.svg` | [Simple Icons](https://cdn.simpleicons.org/meta) | Meta family mark identifies Meta Pixel; not a claim of a distinct Pixel logo. |
+| `meta.svg` | [Simple Icons](https://cdn.simpleicons.org/meta) | Meta family mark identifies Meta Pixel and Meta App Events; neither has a separate mark here. |
 | `celery.svg` | [Source](https://cdn.simpleicons.org/celery) | Original upstream artwork. |
 | `hostinger.svg` | [Source](https://cdn.simpleicons.org/hostinger) | Original upstream artwork. |
 | `agno.svg` | [Source](https://raw.githubusercontent.com/agno-agi/docs/main/logo/black.svg) | Original upstream artwork. |
@@ -88,6 +88,11 @@ on-chain integration records are reused rather than duplicated. Auxiliary tools
 remain in the private career inventory instead of making the portfolio exhaustive.
 No employer source code, private configuration or repository-derived claim is
 included in the public catalog.
+
+Microsoft Clarity, Firebase Analytics and Singular SDK use labelled category
+illustrations in the catalog. Their names and Rampy experience links provide the
+context without adding unreviewed brand artwork. Meta App Events reuses the
+existing Meta family mark; none of these additions changes the curated hero.
 
 Simple Icons is CC0, but its [disclaimer](https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md)
 expressly separates icon licensing from brand rights. The historical AWS and Teams
