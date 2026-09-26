@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { chrome } from "@/content/chrome";
 import { defaultLocale, htmlLang, type Locale, localePath } from "@/content/locales";
 import { navigationPath } from "@/content/routes";
+import { AssistantLauncher } from "./assistant/assistant-launcher";
 import { LocaleSwitcher } from "./locale-switcher";
 import { Mark } from "./mark";
 import styles from "./site-header.module.css";
@@ -72,6 +73,7 @@ export function SiteHeader() {
           </nav>
 
           <div className={styles.controls}>
+            <AssistantLauncher locale={locale} />
             <LocaleSwitcher label={copy.languageLabel} locale={locale} pathname={pathname} />
             <ThemeToggle
               neutralLabel={copy.themeToggleNeutral}

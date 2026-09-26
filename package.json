@@ -22,7 +22,7 @@
     "lint": "biome check .",
     "format": "biome check --write .",
     "typecheck": "next typegen && tsc --noEmit",
-    "check": "npm run test:repository && npm run test:content && npm run test:identity && npm run test:documents && npm run lint && npm run build && npm run test:budget",
+    "check": "npm run test:repository && npm run test:assistant-contract && npm run test:content && npm run test:identity && npm run test:documents && npm run lint && npm run build && npm run test:budget",
     "test:repository": "node --test scripts/repository.test.mjs scripts/scene-budget.test.mjs scripts/cloud-layout.test.mjs",
     "test:content": "node --test scripts/content.test.mjs scripts/catalogue.test.mjs scripts/academic.test.mjs scripts/content-migration.test.mjs scripts/cv-export.test.mjs",
     "test:budget": "node --test scripts/budget.test.mjs",
@@ -32,7 +32,8 @@
     "test:smoke": "node scripts/smoke-test.mjs",
     "test:browser": "playwright test",
     "test:identity": "node scripts/generate-identity.mjs --check",
-    "identity:build": "node scripts/generate-identity.mjs --write"
+    "identity:build": "node scripts/generate-identity.mjs --write",
+    "test:assistant-contract": "node scripts/check-assistant-contract.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "1.1.23",
