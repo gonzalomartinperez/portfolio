@@ -14,10 +14,12 @@ export const roles: Role[] = [
     context:
       "AI and financial products in a fast-moving startup: turning evolving priorities into production features across conversational agents, web, mobile and backend services, working directly with three founders.",
     contributions: [
-      "Built a consolidated portfolio experience covering assets, tokens, vaults and 24-hour returns by orchestrating provider APIs in parallel, selectively caching results and assembling a consistent response.",
+      "Built a consolidated portfolio experience for assets, vaults and 24-hour returns; reduced comparable vault, market and perpetual data retrieval from seconds into the millisecond range through prefetching, parallel provider calls and selective caching.",
       "Improved agent workflows through retrieval, reranking, structured outputs and selective conversational memory; reduced redundant context and unnecessary calls while testing complete user journeys and tool selection.",
       "Integrated Morpho, Aave and Compound across backend, frontend and transaction execution for positions, yields, deposits and withdrawals, with completeness checks and webhook-based status tracking.",
       "Refactored application boundaries and reusable components, delivered a shared design system, and developed mobile features with React Native and Kotlin, tested in emulators and on physical devices.",
+      "Reduced average mobile app startup time and instrumented key user journeys with Microsoft Clarity and Firebase Analytics; coordinated Meta App Events and Singular SDK to avoid duplicate event reporting.",
+      "Designed, built, tested and deployed a web landing page for marketing campaigns aimed at increasing mobile app downloads.",
       "Shortened the validation, build and deployment pipeline while retaining its checks; optimized application bundles, Docker images and development, staging and production environments on DigitalOcean.",
       "Centralized secrets with Infisical, per-user access, automated synchronization and on-demand rotation; worked across deployment, monitoring, backups, databases and server permissions.",
       "Prepared scalable infrastructure with the design goal of supporting thousands of users, organizing environments, containers and operational controls for product growth.",
@@ -38,6 +40,10 @@ export const roles: Role[] = [
       "Next.js",
       "React Native",
       "Kotlin",
+      "Microsoft Clarity",
+      "Firebase Analytics",
+      "Meta App Events",
+      "Singular SDK",
       "PostgreSQL",
       "Redis",
       "Celery",
@@ -46,6 +52,12 @@ export const roles: Role[] = [
       "Infisical",
     ]),
     metrics: [
+      {
+        value: "~7–8 s → 1–2 s",
+        label: "average mobile app startup",
+        qualifier:
+          "Owner-measured before/after averages for app startup; sample and test window were not retained, and the result does not describe every screen.",
+      },
       {
         value: "~2×+",
         label: "faster responses in optimized agent workflows",
