@@ -7,6 +7,7 @@ import {
   cancel,
   conversations,
   create,
+  getRun,
   type Message,
   messages,
   run,
@@ -120,7 +121,10 @@ export default function AssistantPanel({ locale }: { locale: "en" | "es" }) {
           setPartial((old) => old + String(entry.payload.text ?? ""));
         if (entry.type === "run.failed") setError(t.error);
       });
-      if (!terminal) setError(t.interrupted);
+      if (!terminal) {
+        const saved = runId.current ? await getRun(runId.current).catch(() => null) : null;
+        if (saved?.state !== "completed") setError(t.interrupted);
+      }
     } catch {
       if (!abort.signal.aborted) setError(t.error);
     } finally {

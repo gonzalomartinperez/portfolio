@@ -7,6 +7,7 @@ export type Event = {
   type: string;
   schema_version: "1";
   run_id: string;
+  sequence: number;
   payload: Record<string, unknown>;
 };
 const base = process.env.NEXT_PUBLIC_ASSISTANT_API_URL ?? "http://localhost:8000";
@@ -53,6 +54,9 @@ export async function create(): Promise<Conversation> {
 export async function messages(id: string): Promise<Message[]> {
   return (await (await call(`/api/v1/conversations/${id}/messages`)).json()).items.reverse();
 }
+export async function getRun(id: string): Promise<Run> {
+  return (await call(`/api/v1/runs/${id}`)).json();
+}
 export async function cancel(id: string) {
   await call(`/api/v1/runs/${id}/cancel`, { method: "POST", body: "{}" });
 }
@@ -74,12 +78,18 @@ export async function run(
   const decoder = new TextDecoder();
   let buffer = "";
   let terminal = false;
+  let totalBytes = 0;
+  let lastSequence = -1;
   while (true) {
     const { value, done } = await reader.read();
+    totalBytes += value?.byteLength ?? 0;
+    if (totalBytes > 1_000_000) throw new Error("stream_too_large");
     buffer += decoder.decode(value, { stream: !done });
     const frames = buffer.split(/\r?\n\r?\n/);
     buffer = frames.pop() ?? "";
+    if (buffer.length > 64_000) throw new Error("event_too_large");
     for (const frame of frames) {
+      if (frame.length > 64_000) throw new Error("event_too_large");
       const data = frame
         .split(/\r?\n/)
         .filter((line) => line.startsWith("data: "))
@@ -87,7 +97,9 @@ export async function run(
         .join("\n");
       if (!data) continue;
       const event = JSON.parse(data) as Event;
-      if (event.schema_version !== "1") throw new Error("stream_version_mismatch");
+      if (event.schema_version !== "1" || event.sequence <= lastSequence)
+        throw new Error("stream_version_mismatch");
+      lastSequence = event.sequence;
       onEvent(event);
       terminal ||= ["run.completed", "run.failed", "run.cancelled"].includes(event.type);
     }
