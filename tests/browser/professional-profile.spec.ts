@@ -12,9 +12,11 @@ for (const prefix of ["", "/es"]) {
       "https://rampyapp.com/",
     );
     await expect(rampy).toContainText("~1 h → 10 min");
+    await expect(rampy).toContainText("~7–8 s → 1–2 s");
     await expect(rampy).toContainText("~30%");
     await expect(rampy).toContainText(prefix ? /estimación/i : /estimat/i);
     await rampy.locator("summary").click();
+    await expect(rampy).toContainText("Singular SDK");
     for (const protocol of ["Morpho", "Aave", "Compound"]) {
       await expect(rampy.locator(".marked-list").last()).toContainText(protocol);
     }
