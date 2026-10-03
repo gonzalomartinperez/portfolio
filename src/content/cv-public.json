@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-03.9",
+  "revision": "2026-10-03.11",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -15,7 +15,7 @@
           "href": ""
         },
         {
-          "text": " with an Information Systems Engineering degree. Builds production AI agents, RAG, web/mobile products and DeFi integrations. Combines product architecture and design systems with backend scale: contributed to a historical load of ",
+          "text": " with an Information Systems Engineering degree. I build production AI agents, RAG, web/mobile products and DeFi integrations. I combine product architecture and design systems with backend scale: I contributed to a historical load of ",
           "bold": false,
           "href": ""
         },
@@ -95,7 +95,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", improving memory, retrieval, tool selection and evaluation. Optimized flows responded at least 2× faster by owner estimate; removing redundant calls cut tokens in affected queries by an estimated 30%.",
+                      "text": ", improving memory, retrieval, tool selection and evaluation. Optimized flows responded at least 2× faster by my estimate; removing redundant calls cut tokens in affected queries by an estimated 30%.",
                       "bold": false,
                       "href": ""
                     }
@@ -127,7 +127,7 @@
                       "href": ""
                     },
                     {
-                      "text": " for positions, yields, deposits, and withdrawals across backend, frontend, and transaction execution, with completeness checks and webhook-based status tracking; also worked with Privy and Stripe integrations in production.",
+                      "text": " for positions, yields, deposits, and withdrawals across backend, frontend, and transaction execution, with completeness checks and webhook-based status tracking; also worked with Hyperliquid and LI.FI, Privy authentication and wallets, and Stripe integrations, all in production.",
                       "bold": false,
                       "href": ""
                     }
@@ -159,7 +159,7 @@
                       "href": ""
                     },
                     {
-                      "text": " while retaining checks; prepared DigitalOcean environments and monitoring for growth.",
+                      "text": ", retaining checks and preparing DigitalOcean environments. Develop and expand the enterprise backoffice to manage the application, monitoring, telemetry and status.",
                       "bold": false,
                       "href": ""
                     }
@@ -206,7 +206,7 @@
                       "href": ""
                     },
                     {
-                      "text": " with LangChain/LangGraph, Neo4j and OpenAI API to relate enterprise policies and promotions, orchestrate agents, evaluate answers, tune performance and enforce domain and data-leakage guardrails. The assistant answered queries without executing commercial actions.",
+                      "text": " with LangChain/LangGraph, Neo4j and OpenAI API to relate enterprise policies and promotions, orchestrate agents, evaluate answers, tune performance and enforce domain and data-leakage guardrails. Connected to the Spring WebFlux BFF for portal access, the assistant answered queries without executing commercial actions.",
                       "bold": false,
                       "href": ""
                     }
@@ -217,12 +217,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Implemented event-driven processing for a production historical load of 20M+ promotions",
+                      "text": "Implemented event-driven ingestion for a production historical load of 20M+ promotions",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " with S3, SQS and a Python/FastAPI Lambda; built Python/Node.js tooling to reproduce local loads, reconcile results and identify failed promotions.",
+                      "text": ": S3 → SQS → Python/FastAPI Lambda → Java/Spring Boot and Node.js/NestJS microservices, each writing to its own database. Built Python/Node.js tooling to reproduce local loads, reconcile results and identify failed promotions.",
                       "bold": false,
                       "href": ""
                     }
@@ -677,6 +677,8 @@
                 "Morpho",
                 "Aave",
                 "Compound",
+                "Hyperliquid",
+                "LI.FI",
                 "Privy",
                 "Stripe",
                 "Swaps",
@@ -975,7 +977,7 @@
           "href": ""
         },
         {
-          "text": " e Ingeniero en Sistemas de Información. Construye agentes, RAG, productos web/móviles e integraciones DeFi en producción. Combina arquitectura y sistemas de diseño con backend a escala: contribuyó a una carga histórica de ",
+          "text": " e Ingeniero en Sistemas de Información. Construyo agentes, RAG, productos web/móviles e integraciones DeFi en producción. Combino arquitectura y sistemas de diseño con backend a escala: contribuí a una carga histórica de ",
           "bold": false,
           "href": ""
         },
@@ -985,7 +987,7 @@
           "href": ""
         },
         {
-          "text": " y construyó un backoffice que integra ",
+          "text": " y construí un backoffice que integra ",
           "bold": false,
           "href": ""
         },
@@ -1087,7 +1089,7 @@
                       "href": ""
                     },
                     {
-                      "text": " para consultar posiciones y rendimientos, depositar y retirar: backend, frontend y ejecución de transacciones con controles de completitud y seguimiento por webhooks; también trabajé con integraciones de Privy y Stripe en producción.",
+                      "text": " para consultar posiciones y rendimientos, depositar y retirar: backend, frontend y ejecución de transacciones con controles de completitud y seguimiento por webhooks; también trabajé con Hyperliquid y LI.FI, autenticación y wallets con Privy e integraciones de Stripe, todo en producción.",
                       "bold": false,
                       "href": ""
                     }
@@ -1119,7 +1121,7 @@
                       "href": ""
                     },
                     {
-                      "text": " conservando controles; preparé entornos y monitoreo en DigitalOcean para el crecimiento.",
+                      "text": ", conservando controles y preparando entornos DigitalOcean. Desarrollo y amplío el backoffice empresarial para gestionar la aplicación, su monitoreo, telemetría y estado.",
                       "bold": false,
                       "href": ""
                     }
@@ -1166,7 +1168,7 @@
                       "href": ""
                     },
                     {
-                      "text": " con LangChain/LangGraph, Neo4j y OpenAI API para relacionar políticas empresariales y promociones, orquestar agentes, evaluar respuestas, optimizar rendimiento y aplicar guardrails de dominio y protección de datos. El asistente respondía consultas sin ejecutar operaciones comerciales.",
+                      "text": " con LangChain/LangGraph, Neo4j y OpenAI API para relacionar políticas empresariales y promociones, orquestar agentes, evaluar respuestas, optimizar rendimiento y aplicar guardrails de dominio y protección de datos. Conectado al BFF Spring WebFlux para el acceso desde el portal, respondía consultas sin ejecutar operaciones comerciales.",
                       "bold": false,
                       "href": ""
                     }
@@ -1177,12 +1179,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Implementé procesamiento event-driven para una carga histórica productiva de 20M+ promociones",
+                      "text": "Implementé ingesta event-driven para una carga histórica productiva de 20M+ promociones",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " con S3, SQS y una Lambda Python/FastAPI; desarrollé tooling Python/Node.js para reproducir cargas locales, reconciliar resultados y detectar promociones fallidas.",
+                      "text": ": S3 → SQS → Lambda Python/FastAPI → microservicios Java/Spring Boot y Node.js/NestJS, cada uno con escritura en su base de datos. Desarrollé tooling Python/Node.js para reproducir cargas locales, reconciliar resultados y detectar promociones fallidas.",
                       "bold": false,
                       "href": ""
                     }
@@ -1632,6 +1634,8 @@
                 "Morpho",
                 "Aave",
                 "Compound",
+                "Hyperliquid",
+                "LI.FI",
                 "Privy",
                 "Stripe",
                 "Swaps",
@@ -1915,11 +1919,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "6b5e3448b6a7e63b131027b364bc098f877cba34e714dffd405bc09c71668c6c",
-    "factsSha256": "decadf5f665cfa82fec74747ab7d632ef49e31eac8f4db0ddd082d051bee80d2",
+    "sourceSha256": "b71210a3d0ff2211b1b43d9f7954ef09effab172f3910368a0b0a3e57ba5c37e",
+    "factsSha256": "7fe959c30596e48aa854c5eb36730b0abefadb08a6e2b97a00da10b6f32aae8d",
     "pdfSha256": {
-      "en": "1fc9214fbe3011d13f7cffb1824e548d6b557f3eaf3292297f3cc0ba254b4b45",
-      "es": "55754c955a821f8ae69362dda22e4fc578939cb1773f34a0144d36637042c144"
+      "en": "d1e1572171fa45dd52185ddcc51d053682f19dd7690a49202d862cfbd5cc826a",
+      "es": "baec547e3b4728b2ad4d35f64b005dd93b780dccfc01195375ed1bdc8e34f3ca"
     }
   }
 }

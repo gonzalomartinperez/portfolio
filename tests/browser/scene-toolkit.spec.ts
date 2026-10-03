@@ -1,5 +1,61 @@
 import { expect, test } from "@playwright/test";
 
+for (const locale of ["", "/es"]) {
+  test(`${locale || "en"} settled toolkit has breathing room and a native reading hold`, async ({
+    page,
+  }) => {
+    await page.goto(locale || "/");
+    const scene = page.locator("[data-scene]");
+    await expect(scene).toHaveAttribute("data-mode", "running");
+    const hold = await scene.evaluate((element) => {
+      const journey = element.querySelector<HTMLElement>("[data-scene-journey]");
+      const viewport = element.querySelector<HTMLElement>("[data-scene-viewport]");
+      if (!journey || !viewport) throw new Error("Scene geometry is missing");
+      const hold = Number.parseFloat(journey.style.getPropertyValue("--scene-reading-hold"));
+      scrollTo({
+        top:
+          journey.getBoundingClientRect().top +
+          scrollY +
+          journey.offsetHeight -
+          viewport.offsetHeight -
+          hold,
+        behavior: "instant",
+      });
+      return hold;
+    });
+    expect(hold).toBeGreaterThanOrEqual(200);
+    expect(hold).toBeLessThanOrEqual(320);
+    await expect
+      .poll(async () => Number(await scene.getAttribute("data-scene-progress")))
+      .toBeGreaterThan(0.9998);
+    const bounds = () =>
+      scene.evaluate((element) => {
+        const viewport = element.querySelector<HTMLElement>("[data-scene-viewport]");
+        const header = document.querySelector<HTMLElement>("header");
+        const logos = [...element.querySelectorAll<HTMLElement>(".scene-logo")].map((node) =>
+          node.getBoundingClientRect(),
+        );
+        if (!viewport || !header || !logos.length) throw new Error("Toolkit bounds are missing");
+        return {
+          top: Math.min(...logos.map((node) => node.top)),
+          bottom: Math.max(...logos.map((node) => node.bottom)),
+          headerBottom: Math.max(0, header.getBoundingClientRect().bottom),
+          viewportTop: viewport.getBoundingClientRect().top,
+          height: innerHeight,
+        };
+      });
+    const before = await bounds();
+    expect(before.top).toBeGreaterThanOrEqual(before.headerBottom + 44);
+    expect(before.bottom).toBeLessThanOrEqual(before.height - 92);
+    await page.evaluate((distance) => scrollBy({ top: distance, behavior: "instant" }), hold / 2);
+    const after = await bounds();
+    expect(Math.abs(after.viewportTop - before.viewportTop)).toBeLessThanOrEqual(1);
+    expect(Math.abs(after.top - before.top)).toBeLessThanOrEqual(1);
+    await expect(scene).toHaveAttribute("data-scene-settled", "true");
+    await page.screenshot({ path: test.info().outputPath("toolkit-reading-hold.png") });
+  });
+}
+
 for (const { height, extraMarks } of [
   { height: 650, extraMarks: 0 },
   { height: 770, extraMarks: 0 },

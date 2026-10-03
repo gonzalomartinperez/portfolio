@@ -1,3 +1,5 @@
+import type { AboutCopy } from "./about-copy";
+
 /**
  * Interface copy, separate from the professional facts in the per-locale content modules.
  *
@@ -72,24 +74,10 @@ export type SiteCopy = {
     educationBody: string;
     closingHeading: string;
     closingBody: string;
+    closingInvitation: string;
+    closingAvailability: string;
   };
-  about: {
-    metaTitle: string;
-    metaDescription: string;
-    eyebrow: string;
-    title: string;
-    paragraphs: string[];
-    asideCurrently: string;
-    asideArrangement: string;
-    asideLanguages: string;
-    asideAvailability: string;
-    principlesEyebrow: string;
-    principlesHeading: string;
-    principles: { title: string; body: string }[];
-    lookingEyebrow: string;
-    lookingHeading: string;
-    lookingBody: string;
-  };
+  about: AboutCopy;
   work: {
     metaTitle: string;
     metaDescription: string;
@@ -133,7 +121,7 @@ export type SiteCopy = {
     fieldLabel: string;
     noteHeading: string;
     noteScope: string;
-    noteLogos: string;
+    noteApproach: string;
   };
   education: {
     metaTitle: string;
@@ -152,6 +140,7 @@ export type SiteCopy = {
     projectBody: string;
     certificationsEyebrow: string;
     certificationsHeading: string;
+    certificationsDescription: string;
     languagesEyebrow: string;
     languagesHeading: string;
     evidenceEyebrow: string;

@@ -1,4 +1,5 @@
 import type { SiteCopy } from "../site-copy";
+import { aboutCopy } from "./about";
 
 export const siteCopy: SiteCopy = {
   chrome: {
@@ -66,9 +67,9 @@ export const siteCopy: SiteCopy = {
   },
   home: {
     whoEyebrow: "Quién soy",
-    whoHeading: "De sistemas complejos a productos útiles",
+    whoHeading: "De sistemas complejos a productos reales",
     whoParagraph:
-      "Trabajo sobre el producto completo: entender los requisitos, definir los límites entre servicios y comprobar cómo se comporta la aplicación con cargas reales.",
+      "Mi trabajo abarca sistemas agénticos potenciados con IA, APIs y backoffices empresariales, sitios web y aplicaciones móviles. Acompaño el recorrido completo: entender las necesidades del usuario, diseñar la arquitectura, desarrollar y probar, desplegar y observar el producto en producción.",
     factCurrently: "Actualmente",
     factExperience: "Experiencia",
     factBasedIn: "Radicado en",
@@ -89,56 +90,11 @@ export const siteCopy: SiteCopy = {
       "Graduado de la Universidad Nacional del Sur en octubre de 2025 con un promedio de " +
       "8,67/10 en 34 de 34 materias obligatorias, y un proyecto final calificado 10/10.",
     closingHeading: "Hablemos",
-    closingBody:
-      "¿Buscas un perfil que combine ingeniería de software e IA aplicada? Hablemos de tu producto y de una oportunidad 100% remota.",
+    closingInvitation: "Hablemos de tu producto.",
+    closingAvailability: "Estoy abierto a oportunidades 100% remotas.",
+    closingBody: "¿Buscas un perfil que combine ingeniería de software e IA aplicada?",
   },
-  about: {
-    metaTitle: "Sobre mí",
-    metaDescription:
-      "Gonzalo Martin Perez — AI Software Engineer. Trayectoria, cómo encaro el trabajo de " +
-      "ingeniería y qué estoy buscando.",
-    eyebrow: "Sobre mí",
-    title: "Ingeniería de software con IA aplicada",
-    paragraphs: [
-      "Me gradué en Ingeniería en Sistemas de Información en la Universidad Nacional del Sur. Desde 2024 combino proyectos independientes con roles de ingeniería en software empresarial y tecnología financiera.",
-      "Construí experiencias para comercios, integraciones entre servicios y un backoffice de permisos. Como contribuidor principal de un equipo de tres personas, también participé en la evolución de Filomena hacia una plataforma de exámenes usada por cinco instituciones.",
-      "Hoy trabajo en ingeniería de IA en Rampy, una startup donde colaboro directamente con tres fundadores. Ayudo a dar forma a las ideas, tomo decisiones técnicas y acompaño las funcionalidades hasta las pruebas y el despliegue. Las prioridades cambian, así que busco equilibrar entregas útiles con un producto cada vez más fácil de mantener y hacer crecer.",
-      "Conecto IA aplicada con la ingeniería que la sostiene: contratos explícitos, evaluaciones automatizadas, ejecución controlada de herramientas y servicios mantenibles. Mi trabajo DeFi incluye integraciones con Morpho, Aave y Compound, conectando interfaces de producto con ejecución en el backend.",
-      "Me gusta entender cómo encajan las piezas, conversar sobre alternativas y convertir un problema complejo en un próximo paso claro. Disfruto construir en equipo, aprender y aportar al producto de punta a punta.",
-    ],
-    asideCurrently: "Actualmente",
-    asideArrangement: "Modalidad de trabajo",
-    asideLanguages: "Idiomas",
-    asideAvailability: "Disponibilidad",
-    principlesEyebrow: "Cómo trabajo",
-    principlesHeading: "Estándares de ingeniería centrados en el usuario",
-    principles: [
-      {
-        title: "Empiezo por el resultado para el usuario",
-        body: "Aclaro la tarea, las restricciones y cómo medir el éxito antes de elegir una solución. Una funcionalidad rápida solo aporta valor si la experiencia sigue siendo clara, accesible y confiable.",
-      },
-      {
-        title: "Hago que el cambio sea sostenible",
-        body: "Separo responsabilidades por dominio, defino contratos explícitos y construyo interfaces reutilizables. Así es más fácil entender, probar y evolucionar nuevas funcionalidades e integraciones.",
-      },
-      {
-        title: "Mido el rendimiento donde importa",
-        body: "Establezco una línea de base, encuentro el cuello de botella y comparo el mismo recorrido después del cambio. Priorizo la velocidad percibida y los flujos productivos, desde el arranque hasta las consultas y las APIs.",
-      },
-      {
-        title: "Diseño para fallos y recuperación",
-        body: "Contemplo entradas inválidas, dependencias lentas, permisos y fallos parciales. La observabilidad, las opciones seguras por defecto y los errores claros facilitan operar y confiar en el sistema.",
-      },
-      {
-        title: "Verifico antes y después de publicar",
-        body: "Combino pruebas automatizadas, verificaciones de integración, revisión humana de UX y monitoreo en producción. En flujos de IA también evalúo respuestas, herramientas y guardrails con casos realistas.",
-      },
-    ],
-    lookingEyebrow: "Qué estoy buscando",
-    lookingHeading: "Trabajo remoto donde se encuentran ingeniería y producto",
-    lookingBody:
-      "Priorizo roles de ingeniería de IA 100% remotos, enfocados en IA aplicada, agentes y recuperación de contexto. También estoy abierto a oportunidades de ingeniería de software con responsabilidad sobre el producto. Tengo disponibilidad inmediata y podemos coordinar la fecha exacta durante el proceso.",
-  },
+  about: aboutCopy,
   work: {
     metaTitle: "Trabajo",
     metaDescription:
@@ -192,13 +148,13 @@ export const siteCopy: SiteCopy = {
     intro:
       "Desde interfaces y contratos de servicios hasta recuperación de contexto y flujos agénticos. Explora el conjunto completo por capacidad y accede al contexto profesional de cada entrada.",
     fieldHeading: "Herramientas de ingeniería conectadas",
-    fieldIntro:
-      "Lenguajes, frameworks y herramientas que uso en desarrollo de productos e IA aplicada.",
+    fieldIntro: "Lenguajes, frameworks y herramientas con los que construyo productos de calidad.",
     fieldLabel: "Tecnologías",
     noteHeading: "Experiencia detrás de las herramientas",
     noteScope:
-      "En Rampy trabajo sobre infraestructura y despliegues en DigitalOcean. La experiencia en AWS y Kubernetes de otros roles abarca integración, desarrollo y diagnóstico de aplicaciones, no administración de clústeres.",
-    noteLogos: "Estos logos identifican las herramientas que utilizo y no implican patrocinio.",
+      "En Rampy trabajo con infraestructura y despliegues en DigitalOcean. En otros roles utilicé AWS y Kubernetes para integrar servicios, desarrollar aplicaciones y diagnosticar problemas.",
+    noteApproach:
+      "Mi enfoque está en el desarrollo de aplicaciones y su entrega a producción; utilizo estas herramientas como parte de ese trabajo.",
   },
   education: {
     metaTitle: "Educación",
@@ -223,7 +179,9 @@ export const siteCopy: SiteCopy = {
       "argentinas ejecutan en producción. Fue desarrollado por un equipo de tres personas, con " +
       "mi participación como autor y contribuidor principal.",
     certificationsEyebrow: "Certificaciones",
-    certificationsHeading: "Credenciales completadas",
+    certificationsHeading: "Certificaciones adicionales",
+    certificationsDescription:
+      "Formación adicional completada en fundamentos de contenedores y habilidades profesionales.",
     languagesEyebrow: "Idiomas",
     languagesHeading: "Español e inglés",
     evidenceEyebrow: "Evidencia",
@@ -234,20 +192,19 @@ export const siteCopy: SiteCopy = {
   contact: {
     metaTitle: "Contacto",
     metaDescription:
-      "Contacta a Gonzalo Martin Perez — AI Software Engineer, disponible de inmediato para " +
+      "Contacta a Gonzalo Martin Perez — AI Software Engineer, abierto a nuevas oportunidades en " +
       "roles remotos. Email, LinkedIn y GitHub.",
     eyebrow: "Contacto",
     title: "Hablemos",
     intro:
-      "Cuéntame sobre tu equipo, el producto y los desafíos de ingeniería que vienen. El email es la forma más directa de contactarme.",
+      "Cuéntame sobre tu equipo, el producto y los desafíos de ingeniería que tienes en mente. El email es la forma más directa de contactarme.",
     basedIn: (location, arrangement, timezone) =>
-      `Vivo en ${location} (${timezone}) y trabajo ${arrangement}. Tengo disponibilidad inmediata; podemos acordar la fecha exacta durante el proceso.`,
+      `Vivo en ${location} (${timezone}) y trabajo ${arrangement}. Estoy abierto a nuevas oportunidades y disponible para entrevistas.`,
     hiringHint: "Para conocer mi trabajo de producto e ingeniería, explora mi",
     hiringLinkText: "experiencia y resultados en producción",
     openToHeading: "Abierto a",
     resumeHeading: "CV",
-    resumeNote:
-      "Descarga el CV en inglés o español con experiencia, habilidades y datos de contacto.",
+    resumeNote: "Descarga mi CV actualizado en inglés o español.",
   },
   notFound: {
     metaTitle: "Página no encontrada",

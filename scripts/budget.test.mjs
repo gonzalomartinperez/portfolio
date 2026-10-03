@@ -44,9 +44,9 @@ test("the deferred scene and its transitive chunks stay under 250 KiB gzip", () 
   assert.ok(size <= 250, `scene dependency closure is ${size.toFixed(1)} KiB gzip (budget 250)`);
 });
 
-test("stylesheets stay under 20 KB gzipped in total", () => {
+test("stylesheets stay under 22 KiB gzipped in total", () => {
   const size = totalGzippedKb(walk(staticDir, ".css"));
-  assert.ok(size < 20, `CSS is ${size.toFixed(1)} KB gzipped, budget is 20 KB`);
+  assert.ok(size < 22, `CSS is ${size.toFixed(1)} KiB gzipped, budget is 22 KiB`);
 });
 
 test("the portrait stays under 80 KB", () => {

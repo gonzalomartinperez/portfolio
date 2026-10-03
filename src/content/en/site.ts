@@ -1,4 +1,5 @@
 import type { SiteCopy } from "../site-copy";
+import { aboutCopy } from "./about";
 
 export const siteCopy: SiteCopy = {
   chrome: {
@@ -64,9 +65,9 @@ export const siteCopy: SiteCopy = {
   },
   home: {
     whoEyebrow: "Who I am",
-    whoHeading: "From complex systems to useful products",
+    whoHeading: "From complex systems to real products",
     whoParagraph:
-      "I approach development across the whole product: understanding requirements, defining service boundaries and checking how the application behaves under real workloads.",
+      "My work spans AI-powered agentic systems, APIs and enterprise back offices, websites, and mobile apps. I follow the full journey: understand user needs, design the architecture, build and test, deploy, and monitor the product in production.",
     factCurrently: "Currently",
     factExperience: "Experience",
     factBasedIn: "Based in",
@@ -87,56 +88,11 @@ export const siteCopy: SiteCopy = {
       "Graduated from Universidad Nacional del Sur in October 2025 with an 8.67/10 average " +
       "across 34 of 34 required courses, and a final-year project graded 10/10.",
     closingHeading: "Let's talk",
-    closingBody:
-      "Looking for someone who combines software engineering with applied AI? Let’s talk about your product and a fully remote role.",
+    closingInvitation: "Let’s talk about your product.",
+    closingAvailability: "I’m open to fully remote opportunities.",
+    closingBody: "Looking for someone who combines software engineering with applied AI?",
   },
-  about: {
-    metaTitle: "About",
-    metaDescription:
-      "Gonzalo Martin Perez — AI Software Engineer. Background, how I approach engineering " +
-      "work, and what I am looking for.",
-    eyebrow: "About",
-    title: "Software engineering, with applied AI at its core",
-    paragraphs: [
-      "I graduated in Information Systems Engineering from Universidad Nacional del Sur. Since 2024, I’ve combined independent client projects with engineering roles in enterprise software and fintech.",
-      "I’ve built merchant-facing experiences, service integrations and a permissions back office. As the principal contributor in a three-person team, I also helped turn Filomena into an exam platform used by five institutions.",
-      "Today I’m an AI Engineer at Rampy, a fast-moving startup where I work directly with three founders. I help shape ideas, make technical decisions and carry features through testing and deployment. Priorities evolve, so I balance getting useful changes into users’ hands with making the product easier to maintain and grow.",
-      "I connect applied AI with the engineering around it: explicit contracts, automated evaluations, controlled tool execution and maintainable services. My DeFi work includes Morpho, Aave and Compound integrations, bringing product interfaces and backend execution together.",
-      "I enjoy understanding how the pieces fit together, discussing options and turning a complex problem into a clear next step. I like building with a team, learning and contributing across the product.",
-    ],
-    asideCurrently: "Currently",
-    asideArrangement: "Working arrangement",
-    asideLanguages: "Languages",
-    asideAvailability: "Availability",
-    principlesEyebrow: "How I work",
-    principlesHeading: "Engineering standards shaped around the user",
-    principles: [
-      {
-        title: "Start with the user outcome",
-        body: "I clarify the task, constraints and signs of success before choosing an implementation. A fast feature is only useful if the experience stays clear, accessible and dependable.",
-      },
-      {
-        title: "Keep change affordable",
-        body: "I separate responsibilities by domain, define explicit contracts and build reusable interfaces. This keeps new features and integrations easier to understand, test and evolve.",
-      },
-      {
-        title: "Measure performance where it matters",
-        body: "I establish a baseline, find the bottleneck and compare the same journey after a change. I focus on perceived speed and production paths, from startup and rendering to queries and APIs.",
-      },
-      {
-        title: "Design for failure and recovery",
-        body: "I account for invalid input, slow dependencies, permissions and partial failures. Observability, safe defaults and clear error states make a system easier to operate and trust.",
-      },
-      {
-        title: "Verify before and after release",
-        body: "I combine automated tests, integration checks, human UX review and production monitoring. For AI workflows, I also evaluate responses, tool use and guardrails against realistic cases.",
-      },
-    ],
-    lookingEyebrow: "What I am looking for",
-    lookingHeading: "Remote work where engineering and product meet",
-    lookingBody:
-      "I’m prioritizing fully remote AI Engineer roles focused on applied AI, agents and retrieval, while remaining open to software engineering opportunities with meaningful product responsibility. I’m available immediately, with the exact date agreed during the process.",
-  },
+  about: aboutCopy,
   work: {
     metaTitle: "Work",
     metaDescription:
@@ -187,12 +143,13 @@ export const siteCopy: SiteCopy = {
     intro:
       "From interfaces and service contracts to retrieval and agent workflows. Explore the full toolkit by capability, and follow each entry to its professional context.",
     fieldHeading: "A connected engineering toolkit",
-    fieldIntro: "Languages, frameworks and tools used across product development and applied AI.",
+    fieldIntro: "Languages, frameworks, and tools I use to build high-quality products.",
     fieldLabel: "Technologies",
     noteHeading: "Experience behind the toolkit",
     noteScope:
-      "At Rampy, my work includes DigitalOcean infrastructure and delivery. AWS and Kubernetes experience elsewhere covers application integration, development and diagnostics, not cluster administration.",
-    noteLogos: "These logos identify the tools I use and do not imply endorsement.",
+      "At Rampy, I work with DigitalOcean infrastructure and deployments. In other roles, I used AWS and Kubernetes to integrate services, develop applications, and troubleshoot issues.",
+    noteApproach:
+      "My focus is on developing applications and shipping them to production; I use these tools as part of that work.",
   },
   education: {
     metaTitle: "Education",
@@ -216,7 +173,9 @@ export const siteCopy: SiteCopy = {
       "run in production. It was built by a three-person team, with me as principal author and " +
       "contributor.",
     certificationsEyebrow: "Certifications",
-    certificationsHeading: "Completed credentials",
+    certificationsHeading: "Additional certifications",
+    certificationsDescription:
+      "Additional training completed in container fundamentals and professional skills.",
     languagesEyebrow: "Languages",
     languagesHeading: "Spanish and English",
     evidenceEyebrow: "Evidence",
@@ -227,19 +186,19 @@ export const siteCopy: SiteCopy = {
   contact: {
     metaTitle: "Contact",
     metaDescription:
-      "Get in touch with Gonzalo Martin Perez — AI Software Engineer, available immediately for " +
+      "Get in touch with Gonzalo Martin Perez — AI Software Engineer, open to " +
       "remote roles. Email, LinkedIn and GitHub.",
     eyebrow: "Contact",
     title: "Let's talk",
     intro:
-      "Tell me about your team, the product and the engineering challenges ahead. Email is the quickest way to reach me.",
+      "Tell me about your team, the product and the engineering challenges you have in mind. Email is the most direct way to reach me.",
     basedIn: (location, arrangement, timezone) =>
-      `Based in ${location} (${timezone}), working ${arrangement}. Available to start immediately, with the exact date agreed during the hiring process.`,
+      `Based in ${location} (${timezone}), working ${arrangement}. I’m open to new opportunities and available for interviews.`,
     hiringHint: "For a closer look at my product and engineering work, explore the",
     hiringLinkText: "production experience and outcomes",
     openToHeading: "Open to",
     resumeHeading: "CV",
-    resumeNote: "Download the English or Spanish CV for experience, skills and contact details.",
+    resumeNote: "Download my updated CV in English or Spanish.",
   },
   notFound: {
     metaTitle: "Page not found",

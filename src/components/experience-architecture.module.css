@@ -46,9 +46,14 @@
   opacity: 0.35;
 }
 
+.rampy .canvas,
+.rampy .loading {
+  height: 415px;
+}
+
 .teamcubation .canvas,
 .teamcubation .loading {
-  height: 455px;
+  height: 800px;
 }
 
 .filomena .canvas,
@@ -75,7 +80,7 @@
 }
 
 .node {
-  width: 190px;
+  width: 11.875rem;
   min-height: 76px;
   display: flex;
   flex-direction: column;
@@ -88,6 +93,7 @@
   border-radius: 0.7rem;
   box-shadow: 0 10px 28px color-mix(in srgb, var(--surface-void) 35%, transparent);
   text-align: left;
+  overflow-wrap: anywhere;
 }
 
 .node strong {
@@ -118,6 +124,7 @@
 }
 
 .caption {
+  overflow-wrap: anywhere;
   border-top: 1px solid var(--line-subtle);
   padding: 0.8rem 1.35rem 1rem;
   color: var(--text-secondary);
@@ -128,12 +135,12 @@
 @media (width <= 620px) {
   .rampy .canvas,
   .rampy .loading {
-    height: 520px;
+    height: 660px;
   }
 
   .teamcubation .canvas,
   .teamcubation .loading {
-    height: 1030px;
+    height: 1050px;
   }
 
   .filomena .canvas,
@@ -147,7 +154,7 @@
   }
 
   .node {
-    width: 150px;
+    width: 9.375rem;
   }
 }
 
@@ -166,4 +173,81 @@
 
 .canvas :global(.react-flow__attribution a) {
   color: inherit;
+}
+
+.nodeAction {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-height: 44px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.node:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.node:hover {
+  border-color: var(--accent);
+}
+.inspectionCopy {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.canvas :global(.react-flow__controls-button) {
+  width: 44px;
+  height: 44px;
+}
+.canvas :global(.react-flow__pane),
+.canvas :global(.react-flow__viewport),
+.canvas :global(.react-flow__node),
+.nodeAction {
+  touch-action: pan-y pinch-zoom;
+}
+@media (width <= 620px) {
+  .teamcubation .node {
+    width: 8.75rem;
+  }
+}
+
+.inspection {
+  position: absolute;
+  z-index: 6;
+  right: 0.5rem;
+  top: 0.5rem;
+  max-width: 28rem;
+  max-height: calc(100% - 5rem);
+  overflow: auto;
+  width: calc(100% - 1rem);
+  padding: 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.7rem;
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--surface-void) 35%, transparent);
+  overflow-wrap: anywhere;
+}
+.inspection h5 {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+.inspectionClose {
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.5rem;
+  background: var(--surface-base);
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
 }

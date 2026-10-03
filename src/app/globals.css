@@ -303,6 +303,7 @@
   /* Section heading block */
 
   .section-head {
+    overflow-wrap: anywhere;
     border-top: 1px solid var(--line-strong);
     display: flex;
     flex-direction: column;
@@ -328,6 +329,10 @@
       justify-content: center;
     }
     .actions .ui-action {
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      text-align: center;
       padding-inline: min(1.5rem, 24px);
     }
   }
@@ -386,6 +391,11 @@
   }
 
   /* Compact technology references within narrative sections. */
+
+  .tags > li {
+    min-width: 0;
+    max-width: 100%;
+  }
 
   .tags {
     display: flex;

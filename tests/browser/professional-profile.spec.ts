@@ -15,6 +15,21 @@ for (const prefix of ["", "/es"]) {
     await expect(rampy).toContainText("~7–8 s → 1–2 s");
     await expect(rampy).toContainText("~30%");
     await expect(rampy).toContainText(prefix ? /estimación/i : /estimat/i);
+    for (const slug of ["rampy", "teamcubation", "cooperativa-obrera", "independent"]) {
+      const role = page.locator(`#${slug}`);
+      await expect(role).toContainText(prefix ? "En producción" : "In production");
+      const summary = role.locator("summary");
+      if (await summary.count()) {
+        expect((await summary.boundingBox())?.height).toBeGreaterThanOrEqual(44);
+      }
+    }
+    const outcomes = await rampy.locator(".metric-grid").boundingBox();
+    const architecture = await rampy.locator("figure").boundingBox();
+    expect(outcomes).not.toBeNull();
+    expect(architecture).not.toBeNull();
+    if (outcomes && architecture) {
+      expect(outcomes.y + outcomes.height).toBeLessThan(architecture.y);
+    }
     await rampy.locator("summary").click();
     await expect(rampy).toContainText("Singular SDK");
     for (const protocol of ["Morpho", "Aave", "Compound"]) {
@@ -57,6 +72,51 @@ for (const prefix of ["", "/es"]) {
       expect(
         await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
       ).toBe(true);
+    }
+  });
+}
+
+for (const prefix of ["", "/es"]) {
+  test(`${prefix || "en"} CV achievement lists show visible, indented bullets`, async ({
+    page,
+  }) => {
+    await page.goto(`${prefix}/cv`);
+    const bullets = page.locator("main article ul li");
+    expect(await bullets.count()).toBeGreaterThan(10);
+    const visibleMarkers = await bullets.evaluateAll((items) =>
+      items.every((item) => {
+        const list = item.parentElement;
+        if (!list) return false;
+        const marker = getComputedStyle(item, "::marker");
+        return (
+          getComputedStyle(list).listStyleType !== "none" &&
+          marker.color !== "transparent" &&
+          marker.color !== "rgba(0, 0, 0, 0)" &&
+          item.getBoundingClientRect().left - list.getBoundingClientRect().left >= 12
+        );
+      }),
+    );
+    expect(visibleMarkers, "Every achievement has a visible marker and space for it").toBe(true);
+  });
+}
+
+for (const prefix of ["", "/es"]) {
+  test(`${prefix || "en"} Work content and client links reflow at 200 percent text size`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.goto(`${prefix}/work`);
+    await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+    await expect
+      .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1))
+      .toBe(true);
+    const client = page.locator('a[href="https://pequeverso.com/"]');
+    await client.scrollIntoViewIfNeeded();
+    const bounds = await client.boundingBox();
+    expect(bounds).not.toBeNull();
+    if (bounds) {
+      expect(bounds.x).toBeGreaterThanOrEqual(0);
+      expect(bounds.x + bounds.width).toBeLessThanOrEqual(320);
     }
   });
 }

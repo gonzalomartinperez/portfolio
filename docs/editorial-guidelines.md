@@ -9,6 +9,9 @@ rules; the [code-quality standard](code-quality.md) owns code and comments.
 - Write for recruiters and engineering decision-makers: what was built, the
   contribution, relevant technical decisions and the result. Prefer concrete
   examples over superlatives, defensive disclaimers or repeated stack lists.
+- Explain the work in a personal, grounded voice: what I build, who it helps and
+  what improves. Show end-to-end scope through concrete responsibilities and
+  verified outcomes rather than generic labels or dense keyword lists.
 - Use American English and neutral Latin American Spanish, warm and professional.
   In Spanish, use neutral imperatives or infinitives, not voseo: `Explora`,
   `Cuéntame`, `Descargar`. Keep technical brand names unchanged.

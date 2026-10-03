@@ -1,7 +1,16 @@
 import Image from "next/image";
+import privyMark from "../../public/brands/privy.png";
 import styles from "./brand-mark.module.css";
 
 const localMarks = new Set([
+  "singular",
+  "neo4j",
+  "android-studio",
+  "zerodev",
+  "sqlmodel",
+  "stripe",
+  "swift",
+  "lifi",
   "pytest",
   "sentry",
   "expo",
@@ -82,7 +91,16 @@ const localMarks = new Set([
   "testinglibrary",
 ]);
 
-const rasterMarks = new Set(["deepinfra", "mockito", "privy"]);
+const rasterMarks = new Set([
+  "deepinfra",
+  "mockito",
+  "privy",
+  "hyperliquid",
+  "viem",
+  "firebase",
+  "moonpay",
+  "clarity",
+]);
 
 export function BrandMark({ name, size = 20 }: { name: string; size?: number }) {
   if (localMarks.has(name) || rasterMarks.has(name))
@@ -90,9 +108,17 @@ export function BrandMark({ name, size = 20 }: { name: string; size?: number }) 
       <Image
         alt=""
         aria-hidden="true"
-        className={styles.original}
-        src={`/brands/${name}.${rasterMarks.has(name) ? "png" : "svg"}`}
-        width={size}
+        className={
+          name === "privy"
+            ? `${styles.original} ${styles.privy}`
+            : name === "hyperliquid"
+              ? `${styles.original} ${styles.hyperliquid}`
+              : styles.original
+        }
+        src={
+          name === "privy" ? privyMark : `/brands/${name}.${rasterMarks.has(name) ? "png" : "svg"}`
+        }
+        width={name === "privy" || name === "mockito" ? Math.round(size * 1.8) : size}
         height={size}
       />
     );

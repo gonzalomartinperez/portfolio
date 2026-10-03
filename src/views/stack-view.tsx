@@ -60,7 +60,7 @@ export function StackView({ locale }: { locale: Locale }) {
         <div className={styles.note}>
           <h2>{copy.stack.noteHeading}</h2>
           <p>{copy.stack.noteScope}</p>
-          <p>{copy.stack.noteLogos}</p>
+          <p>{copy.stack.noteApproach}</p>
           <Link
             className={buttonVariants({ variant: "outline" })}
             href={localePath(locale, "/work")}

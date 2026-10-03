@@ -70,6 +70,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   const backdrop = visualNode(stage.querySelector<HTMLElement>("[data-scene-backdrop]"));
   let cloudScale = 1;
   let cloudCenterY = 0;
+  let readingHold = 0;
   const logos: {
     view: VisualNode;
     orbitX: number;
@@ -161,7 +162,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     trigger: journey ?? stage,
     start: "top top",
     end: () =>
-      `+=${Math.max(1, (journey?.offsetHeight ?? innerHeight * 3) - (viewport?.offsetHeight ?? innerHeight))}`,
+      `+=${Math.max(1, (journey?.offsetHeight ?? innerHeight * 3) - (viewport?.offsetHeight ?? innerHeight) - readingHold)}`,
     onUpdate: (self) => {
       targetProgress = self.progress;
     },
@@ -271,16 +272,23 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     startPulse(true, coordinates(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2));
   };
   const pointerMove = (event: PointerEvent) => {
-    if (touch && Math.hypot(event.clientX - touch.x, event.clientY - touch.y) > 10) touch = null;
+    if (touch && Math.hypot(event.clientX - touch.x, event.clientY - touch.y) > 10) {
+      touch = null;
+      stage.removeAttribute("data-scene-press");
+    }
     if (paused || event.pointerType === "touch") return;
     const point = coordinates(event.clientX, event.clientY);
     const control =
       event.target instanceof Element && event.target.closest("a,button,input,select,summary");
     const inside = engine.containsPoint(point.x, point.y);
+    if (inside && !control) stage.dataset.sceneHover = "sphere";
+    else stage.removeAttribute("data-scene-hover");
     if (viewport) viewport.style.cursor = inside && !control ? "pointer" : "";
     engine.setPointer(inside ? point : null);
   };
   const pointerLeave = () => {
+    stage.removeAttribute("data-scene-hover");
+    stage.removeAttribute("data-scene-press");
     engine.setPointer(null);
     if (viewport) viewport.style.cursor = "";
     touch = null;
@@ -288,6 +296,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   const pointerDown = (event: PointerEvent) => {
     if (paused || (event.pointerType !== "touch" && event.button !== 0)) return;
     if (!event.isPrimary) {
+      stage.removeAttribute("data-scene-press");
       touch = null;
       return;
     }
@@ -301,6 +310,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       return;
     const point = coordinates(event.clientX, event.clientY);
     if (!isAvatar && !engine.containsPoint(point.x, point.y)) return;
+    stage.dataset.scenePress = isAvatar ? "avatar" : "sphere";
     touch = {
       x: event.clientX,
       y: event.clientY,
@@ -311,6 +321,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     };
   };
   const pointerUp = (event: PointerEvent) => {
+    stage.removeAttribute("data-scene-press");
     const start = touch;
     touch = null;
     if (!start || start.id !== event.pointerId || paused) return;
@@ -339,6 +350,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     else startPulse(false, point);
   };
   const pointerCancel = () => {
+    stage.removeAttribute("data-scene-press");
     touch = null;
   };
   const focusIn = () => {
@@ -364,16 +376,19 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       header && (headerPosition === "sticky" || headerPosition === "fixed")
         ? header.getBoundingClientRect().height
         : 0;
-    const resting = engine.setRestingRegion(heroBottom + 24, height - headerHeight - 24);
+    const entryHeaderHeight = header?.getBoundingClientRect().height ?? 0;
+    const resting = engine.setRestingRegion(heroBottom + 24, height - entryHeaderHeight - 24);
     viewport?.style.setProperty("--scene-core-y", `${resting.centerY}px`);
     viewport?.style.setProperty("--scene-sphere-radius", `${resting.radius}px`);
+    readingHold = Math.round(Math.min(320, height * 0.35));
+    journey?.style.setProperty("--scene-reading-hold", `${readingHold}px`);
     const logoHeight = Math.max(0, ...logos.map((logo) => logo.view.element?.offsetHeight ?? 0));
     const logoWidth = Math.max(0, ...logos.map((logo) => logo.view.element?.offsetWidth ?? 0));
     const layout = layoutCloud({
       width,
       height,
-      top: headerHeight + 16,
-      bottom: 72,
+      top: headerHeight + 48,
+      bottom: 96,
       markWidth: logoWidth,
       markHeight: logoHeight,
       copyWidth: copyView.element?.offsetWidth ?? 0,
@@ -382,14 +397,14 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     });
     cloudScale = layout.scale;
     cloudCenterY = layout.center.y;
-    const gridTop = headerHeight + 16 + logoHeight / 2;
+    const gridTop = headerHeight + 48 + logoHeight / 2;
     const columns = compact.matches ? 5 : 7;
     const rows = Math.ceil(logos.length / columns);
     const gridBottom = Math.max(
-      height - 64 - logoHeight / 2,
+      height - 96 - logoHeight / 2,
       gridTop + (rows - 1) * (logoHeight + 12),
     );
-    const gridOverflow = Math.max(0, gridBottom + logoHeight / 2 + 64 - height);
+    const gridOverflow = Math.max(0, gridBottom + logoHeight / 2 + 96 - height);
     journey?.style.setProperty("--toolkit-overflow", `${gridOverflow}px`);
     viewport?.style.setProperty("--toolkit-overflow", `${gridOverflow}px`);
     for (const [index, logo] of logos.entries()) {
@@ -403,8 +418,8 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     }
     appliedProgress = -1;
     update(deterministic ? fixedProgress : visualProgress);
-    // Mobile browser bars resize the viewport during native momentum scrolling.
-    ScrollTrigger.refresh(true);
+    // This unpinned scene can refresh its bounds without resetting the page scroll.
+    trigger.refresh();
   };
   const resizeObserver = new ResizeObserver(resize);
   if (viewport) resizeObserver.observe(viewport);
@@ -440,6 +455,9 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     sync(value) {
       paused = value;
       touch = null;
+      stage.removeAttribute("data-scene-press");
+      stage.removeAttribute("data-scene-hover");
+      if (paused) engine.setPointer(null);
       if (paused && viewport) viewport.style.cursor = "";
       sync();
     },
@@ -447,6 +465,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       stage.removeAttribute("data-scene-visible");
       stage.removeAttribute("data-scene-settled");
       journey?.style.removeProperty("--toolkit-overflow");
+      journey?.style.removeProperty("--scene-reading-hold");
       viewport?.style.removeProperty("--toolkit-overflow");
       viewport?.style.removeProperty("--scene-core-y");
       viewport?.style.removeProperty("--scene-sphere-radius");
@@ -454,6 +473,8 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       stage.removeAttribute("data-scene-tap");
       stage.removeAttribute("data-scene-pulse");
       stage.removeAttribute("data-scene-pulse-count");
+      stage.removeAttribute("data-scene-hover");
+      stage.removeAttribute("data-scene-press");
       if (viewport) viewport.style.removeProperty("cursor");
       if (avatarButton) {
         avatarButton.disabled = false;
