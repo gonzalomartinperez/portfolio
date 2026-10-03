@@ -20,12 +20,13 @@
   text-wrap: pretty;
 }
 .groups {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2.5rem 3rem;
+  columns: 2;
+  column-gap: 3rem;
 }
 .group {
   border-top: 1px solid var(--line-subtle);
+  break-inside: avoid;
+  margin-bottom: 2.5rem;
   padding-top: 1.5rem;
 }
 .group h3 {
@@ -75,8 +76,7 @@
 }
 @media (width < 768px) {
   .groups {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    columns: 1;
   }
   .constellation {
     gap: 2.5rem;

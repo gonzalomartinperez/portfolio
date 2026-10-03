@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Fragment } from "react";
+import { ExternalLink } from "@/components/external-link";
 import { PageHeader } from "@/components/page-header";
 import { buttonVariants } from "@/components/ui/button";
 import cv from "@/content/cv-public.json";
@@ -11,19 +12,29 @@ import styles from "./cv.module.css";
 type Run = { text: string; bold: boolean; href: string };
 type Block = { id: string; kind: string; runs: Run[] };
 
-function InlineCopy({ runs }: { runs: Run[] }) {
+function InlineCopy({ runs, locale }: { runs: Run[]; locale: Locale }) {
   return runs.map((run, index) => {
     const text = run.bold ? <strong>{run.text}</strong> : run.text;
     return (
       // biome-ignore lint/suspicious/noArrayIndexKey: immutable exported text runs have no reorderable state.
       <Fragment key={`${index}-${run.text}`}>
-        {run.href ? <a href={run.href}>{text}</a> : text}
+        {run.href ? (
+          run.href.startsWith("http") ? (
+            <ExternalLink href={run.href} locale={locale}>
+              {text}
+            </ExternalLink>
+          ) : (
+            <a href={run.href}>{text}</a>
+          )
+        ) : (
+          text
+        )}
       </Fragment>
     );
   });
 }
 
-function CopyBlocks({ blocks }: { blocks: Block[] }) {
+function CopyBlocks({ blocks, locale }: { blocks: Block[]; locale: Locale }) {
   const groups: Block[][] = [];
   for (const block of blocks) {
     const previous = groups.at(-1);
@@ -35,13 +46,13 @@ function CopyBlocks({ blocks }: { blocks: Block[] }) {
       <ul key={group[0].id}>
         {group.map((block) => (
           <li key={block.id}>
-            <InlineCopy runs={block.runs} />
+            <InlineCopy runs={block.runs} locale={locale} />
           </li>
         ))}
       </ul>
     ) : (
       <p key={group[0].id}>
-        <InlineCopy runs={group[0].runs} />
+        <InlineCopy runs={group[0].runs} locale={locale} />
       </p>
     ),
   );
@@ -97,7 +108,7 @@ export function CvView({ locale }: { locale: Locale }) {
         <section className={styles.section} aria-labelledby="cv-summary">
           <h2 id="cv-summary">{copy.summaryTitle}</h2>
           <p>
-            <InlineCopy runs={copy.summary} />
+            <InlineCopy runs={copy.summary} locale={locale} />
           </p>
         </section>
         {copy.sections.map((section) => (
@@ -105,11 +116,23 @@ export function CvView({ locale }: { locale: Locale }) {
             <h2 id={`cv-${section.id}`}>{section.title}</h2>
             {section.entries.map((entry) => (
               <article className={styles.entry} key={entry.id}>
-                <h3>{entry.href ? <a href={entry.href}>{entry.title}</a> : entry.title}</h3>
+                <h3>
+                  {entry.href ? (
+                    entry.href.startsWith("http") ? (
+                      <ExternalLink href={entry.href} locale={locale}>
+                        {entry.title}
+                      </ExternalLink>
+                    ) : (
+                      <a href={entry.href}>{entry.title}</a>
+                    )
+                  ) : (
+                    entry.title
+                  )}
+                </h3>
                 {entry.subtitle && <p className={styles.subtitle}>{entry.subtitle}</p>}
                 {entry.details.length > 0 && <p className="muted">{entry.details.join(" · ")}</p>}
                 {entry.keywords.length > 0 && <p>{entry.keywords.join(" · ")}</p>}
-                <CopyBlocks blocks={entry.blocks} />
+                <CopyBlocks blocks={entry.blocks} locale={locale} />
               </article>
             ))}
           </section>

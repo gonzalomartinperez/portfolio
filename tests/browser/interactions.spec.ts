@@ -159,12 +159,15 @@ test("client navigation mounts only one scene and releases the previous canvas",
   await expect(page.locator("[data-scene]")).toHaveCount(1);
 });
 
-test("scene libraries are not requested on an unrelated direct navigation", async ({ page }) => {
+test("3D scene code is not requested on an unrelated direct navigation", async ({ page }) => {
   const { readFileSync } = await import("node:fs");
-  const report: { files: string[] } = JSON.parse(readFileSync(".next/scene-budget.json", "utf8"));
+  const report: { threeFiles: string[] } = JSON.parse(
+    readFileSync(".next/scene-budget.json", "utf8"),
+  );
+  expect(report.threeFiles.length).toBeGreaterThan(0);
   const sceneRequests: string[] = [];
   page.on("request", (request) => {
-    if (report.files.some((file) => request.url().endsWith(file)))
+    if (report.threeFiles.some((file) => request.url().endsWith(file)))
       sceneRequests.push(request.url());
   });
   await page.goto("/education");

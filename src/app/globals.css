@@ -2,6 +2,7 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 @import "tw-animate-css";
+@import "@xyflow/react/dist/style.css";
 @source "../";
 
 @custom-variant dark (&:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *));
@@ -164,6 +165,13 @@
     /* The hero canvas is absolutely positioned and must never widen the page. */
     overflow-x: hidden;
     text-rendering: optimizeLegibility;
+  }
+
+  body > header,
+  body > main,
+  body > footer {
+    position: relative;
+    z-index: 1;
   }
 
   /* The header is sticky, so anchored headings need to clear it. */
@@ -431,4 +439,37 @@
   .flow-tight {
     margin-top: var(--space-5);
   }
+}
+
+/* Shared portrait treatment gives the transparent cutout a real visual setting. */
+.portrait-frame {
+  max-width: 25rem;
+  background: radial-gradient(ellipse at 52% 40%, #273d5d 0, #172239 48%, #0d1423 100%);
+  border: 1px solid var(--line-control);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 4px var(--accent-wash);
+  overflow: hidden;
+  padding: var(--space-2);
+  position: relative;
+}
+.portrait-frame::before {
+  content: "";
+  position: absolute;
+  width: 90%;
+  aspect-ratio: 1;
+  left: 5%;
+  top: 10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(113 193 232 / 26%), transparent 72%);
+  pointer-events: none;
+}
+.portrait-frame img {
+  filter: var(--portrait-filter);
+  border-radius: var(--radius-md);
+  height: auto;
+  width: 100%;
+  position: relative;
+}
+:root[data-theme="light"] .portrait-frame {
+  background: radial-gradient(ellipse at 52% 38%, #b9d2e9 0, #d7e4f0 55%, #eaf1f7 100%);
 }

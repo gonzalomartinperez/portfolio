@@ -12,6 +12,10 @@ const visualNode = (element: HTMLElement | null): VisualNode => ({
   transform: "",
 });
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
+const ease = (value: number) => {
+  const t = clamp(value);
+  return t * t * (3 - 2 * t);
+};
 const rounded = (value: number) => Math.round(value * 1000) / 1000;
 
 function paint(node: VisualNode, opacity: number, transform = "") {
@@ -121,7 +125,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     stage.dataset.sceneProgress = value.toFixed(4);
     stage.dataset.sceneSettled = String(value >= 0.98);
     engine.setExpansion(value);
-    paint(backdrop, clamp((value - 0.35) / 0.2));
+    paint(backdrop, ease((value - 0.35) / 0.2));
     paint(
       hero,
       heroFocused ? 1 : 1 - clamp(value / 0.2),
@@ -133,10 +137,10 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       avatarButton.style.visibility = value >= 0.4 ? "hidden" : "visible";
     }
     if (viewport) viewport.style.cursor = "";
-    paint(copyView, clamp((value - 0.55) / 0.15) * (1 - clamp((value - 0.8) / 0.1)));
-    const settle = clamp((value - 0.9) / 0.1);
+    paint(copyView, ease((value - 0.55) / 0.15) * (1 - ease((value - 0.8) / 0.1)));
+    const settle = ease((value - 0.86) / 0.14);
     for (const logo of logos) {
-      const reveal = clamp((value - logo.revealAt) / cloudEntrance.duration);
+      const reveal = ease((value - logo.revealAt) / cloudEntrance.duration);
       const x = rounded(logo.orbitX * (1 - settle) + logo.settledX * settle);
       const y = rounded(
         logo.orbitY * (1 - settle) + logo.settledY * settle + (1 - reveal) * cloudEntrance.offset,

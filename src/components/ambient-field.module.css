@@ -1,0 +1,46 @@
+.field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.42;
+}
+
+.starsNear,
+.starsFar {
+  position: absolute;
+  inset: -3rem;
+  background-image: url("/images/scene-stars.svg");
+  background-repeat: repeat;
+  background-size: 211px 233px;
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 10%, transparent 85%);
+  will-change: transform;
+}
+
+.starsFar {
+  background-size: 317px 350px;
+  opacity: 0.38;
+  transform: rotate(17deg);
+}
+
+.orbit {
+  position: absolute;
+  width: 90vw;
+  height: 50vw;
+  min-width: 45rem;
+  min-height: 25rem;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%) rotate(-22deg);
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 8vw color-mix(in srgb, var(--accent) 1%, transparent),
+    0 0 0 17vw color-mix(in srgb, var(--accent) 1%, transparent);
+  opacity: 0.45;
+}
+
+:global(:root[data-theme="light"]) .field {
+  opacity: 0.22;
+}

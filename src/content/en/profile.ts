@@ -11,13 +11,13 @@ export const profile = {
   availability: "Open to remote roles, available immediately",
 
   /** The five-second message. Kept to one clause per idea. */
-  headline: "I build software that connects products, systems and AI.",
+  headline: "I turn complex AI and fintech systems into fast, polished products.",
 
   intro:
     "I’m Gonzalo, an AI Software Engineer. I turn ideas into useful products, from AI agents and backend services to web and mobile apps.",
 
   summary:
-    "At Rampy, I connect product development with agent orchestration, retrieval, memory and financial integrations. My background spans enterprise permissions, large-scale promotions processing and Filomena, an exam platform built by a three-person team and used by five institutions.",
+    "At Rampy, I ship production AI, fintech and mobile experiences: faster financial queries, a redesigned app and a complete design system. I also built enterprise GraphRAG workflows, contributed to a 20M+ promotions load and designed permission systems across 10+ integrations.",
 
   /**
    * Retained because structured forms elsewhere ask for it, and deliberately not published:
@@ -25,9 +25,9 @@ export const profile = {
    * the work. Never Senior, Tech Lead, Architect or Staff.
    */
   seniority: "Mid-level",
-  experienceLength: "2 years and 8 months",
+  experienceLength: "2 years and 9 months",
   experienceSince: "January 2024",
-  experienceAsOf: "September 2026",
+  experienceAsOf: "October 2026",
 
   languages: [
     { language: "Spanish", level: "Native" },
@@ -57,12 +57,12 @@ export const resumeLinks: EvidenceLink[] = [
   {
     label: "CV — English (PDF)",
     href: resumeDownloads.en,
-    description: "Three pages, updated September 2026",
+    description: "Three pages, updated October 2026",
   },
   {
     label: "CV — Spanish (PDF)",
     href: resumeDownloads.es,
-    description: "Three pages, updated September 2026",
+    description: "Three pages, updated October 2026",
   },
 ];
 

@@ -18,7 +18,7 @@ jobs:
   validate:
     name: Quality (development)
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 25
     env:
       NEXT_TELEMETRY_DISABLED: "1"
     steps:

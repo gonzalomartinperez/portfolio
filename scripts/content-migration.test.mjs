@@ -10,6 +10,13 @@ test("catalogue preserves AI-first breadth with grounded additions", () => {
   assert.ok(technologyCatalog.length >= 109, "preserve the existing catalogue breadth");
   for (const id of [
     "agno",
+    "langchain",
+    "langgraph",
+    "openai-api",
+    "graphrag",
+    "neo4j",
+    "swift",
+    "android-studio",
     "mem0",
     "celery",
     "react-native",

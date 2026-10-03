@@ -46,6 +46,12 @@
   gap: var(--space-5);
 }
 
+.featuredContributions {
+  border-left: 2px solid var(--accent);
+  background: linear-gradient(90deg, var(--accent-wash), transparent 70%);
+  padding: var(--space-4) var(--space-5);
+}
+
 .details {
   border-block: 1px solid var(--line-subtle);
   padding-block: var(--space-4);

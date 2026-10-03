@@ -112,6 +112,15 @@ export const technologyCatalog: Technology[] = [
     ],
   },
   {
+    id: "agno",
+    icon: "agno",
+    name: "Agno",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
     id: "openai-api",
     name: "OpenAI API",
     category: "applied-ai",
@@ -123,6 +132,10 @@ export const technologyCatalog: Technology[] = [
       {
         label: "Rampy",
         href: "/work#rampy",
+      },
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
       },
     ],
   },
@@ -138,6 +151,21 @@ export const technologyCatalog: Technology[] = [
         label: "Rampy",
         href: "/work#rampy",
       },
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "neo4j",
+    name: "Neo4j",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      { label: "Rampy", href: "/work#rampy" },
+      { label: "Teamcubation", href: "/work#teamcubation" },
     ],
   },
   {
@@ -207,6 +235,14 @@ export const technologyCatalog: Technology[] = [
         href: "/work#rampy",
       },
     ],
+  },
+  {
+    id: "android-studio",
+    name: "Android Studio",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
   },
   {
     id: "tanstack-query",
@@ -616,15 +652,6 @@ export const technologyCatalog: Technology[] = [
     ],
   },
   {
-    id: "agno",
-    icon: "agno",
-    name: "Agno",
-    category: "applied-ai",
-    kind: "brand",
-    status: "applied",
-    evidence: [{ label: "Rampy", href: "/work#rampy" }],
-  },
-  {
     id: "mem0",
     icon: "mem0",
     name: "Mem0",
@@ -689,6 +716,7 @@ export const technologyCatalog: Technology[] = [
     kind: "brand",
     status: "applied",
     evidence: [
+      { label: "Rampy", href: "/work#rampy" },
       {
         label: "Teamcubation",
         href: "/work#teamcubation",
@@ -703,6 +731,7 @@ export const technologyCatalog: Technology[] = [
     kind: "brand",
     status: "applied",
     evidence: [
+      { label: "Rampy", href: "/work#rampy" },
       {
         label: "Teamcubation",
         href: "/work#teamcubation",
@@ -854,6 +883,14 @@ export const technologyCatalog: Technology[] = [
     status: "applied",
     evidence: [{ label: "Rampy", href: "/work#rampy" }],
     icon: "kotlin",
+  },
+  {
+    id: "swift",
+    name: "Swift",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
   },
   {
     id: "python",
@@ -2127,6 +2164,23 @@ export const technologyCatalog: Technology[] = [
     evidence: [{ label: "Rampy", href: "/work#rampy" }],
   },
   {
+    id: "stripe",
+    name: "Stripe",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "end-to-end-encryption",
+    name: "End-to-end encryption",
+    aliases: ["E2EE"],
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
     id: "token-swaps",
     name: "Token swaps",
     category: "fintech",
@@ -2491,7 +2545,7 @@ const illustratedSceneTechnologies = new Set(["agent-evaluation", "pgvector", "r
 
 // Curate the scene independently so catalogue growth does not crowd its layout.
 const selectedSceneMarks = new Set([
-  "agno",
+  "celery",
   "langchain",
   "langgraph",
   "openai",

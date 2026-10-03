@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-09-19.2",
+  "revision": "2026-10-03.7",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -15,7 +15,7 @@
           "href": ""
         },
         {
-          "text": " with an Information Systems Engineering degree from UNS. Delivers production agents, RAG, and web/mobile products, from architecture and evaluation through operations. Combines applied AI with distributed systems: contributed to a historical load of ",
+          "text": " with an Information Systems Engineering degree. Builds production AI agents, RAG, web/mobile products and DeFi integrations. Combines product architecture and design systems with backend scale: contributed to a historical load of ",
           "bold": false,
           "href": ""
         },
@@ -58,12 +58,12 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "AI startup with a production product",
+                      "text": "AI Engineer · end-to-end product engineering",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " · Works directly with three founders to turn evolving priorities into shipped features across analysis, architecture, web/mobile development, evaluation, and operations.",
+                      "text": " · Work directly with three founders to ship AI, fintech, web and mobile features through architecture, delivery and operations.",
                       "bold": false,
                       "href": ""
                     }
@@ -74,12 +74,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Enabled a consolidated portfolio view with 24-hour performance",
+                      "text": "Built a consolidated portfolio and 24-hour returns view",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " through parallel provider calls, result aggregation, selective Redis caching, and Celery tasks to accelerate asset and vault queries.",
+                      "text": " with parallel calls, prefetching and Redis caching; comparable vault, market and perpetual queries moved from seconds to milliseconds.",
                       "bold": false,
                       "href": ""
                     }
@@ -90,22 +90,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Improved RAG, memory, and tool selection",
+                      "text": "Built Agno, LangChain/LangGraph and OpenAI API agent workflows with Neo4j GraphRAG",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " through automated flow evaluations and controls against malicious instructions; removing redundant queries yielded an estimated ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "30% reduction in tokens associated with unnecessary queries",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ".",
+                      "text": ", improving memory, retrieval, tool selection and evaluation. Optimized flows responded at least 2× faster by owner estimate; removing redundant calls cut tokens in affected queries by an estimated 30%.",
                       "bold": false,
                       "href": ""
                     }
@@ -121,7 +111,7 @@
                       "href": ""
                     },
                     {
-                      "text": " for positions, yields, deposits, and withdrawals across backend, frontend, and transaction execution, with completeness checks and webhook-based status tracking.",
+                      "text": " for positions, yields, deposits, and withdrawals across backend, frontend, and transaction execution, with completeness checks and webhook-based status tracking; also worked with Privy and Stripe integrations in production.",
                       "bold": false,
                       "href": ""
                     }
@@ -132,12 +122,28 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Refactored the product around hexagonal architecture and a design system",
+                      "text": "Refactored the full backend into hexagonal architecture and the React/Next.js frontend by user feature",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " to reuse components; developed React Native/Kotlin features and validated them through automated tests, emulators, and real devices.",
+                      "text": "; built Rampy’s complete design system with reusable component abstractions, all in production. Implemented E2EE for user conversations with encrypted database storage.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-mobile-production",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Shipped React Native, Kotlin and Swift mobile features",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " using Android Studio; cut measured average app startup from about 7–8 s to 1–2 s. Implemented end-to-end event tracking with Firebase Analytics, Clarity Mobile on every screen, Singular SDK and Meta App Events, avoiding duplicates.",
                       "bold": false,
                       "href": ""
                     }
@@ -148,28 +154,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Cut validation, build, and deployment from approximately 1 hour to 10 minutes",
+                      "text": "Cut validation, build and deployment from about 1 hour to 10 minutes",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " while retaining checks and optimizing the bundle. Prepared DigitalOcean infrastructure for growth toward thousands of users, with containers, databases, monitoring, and backups.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "rampy-agentic-workspace",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Automated local setup with Makefile and Infisical",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " and a reusable development-agent skills catalog, standardizing environments, per-user access, and secrets synchronization with on-demand rotation.",
+                      "text": " while retaining checks; prepared DigitalOcean environments and monitoring for growth.",
                       "bold": false,
                       "href": ""
                     }
@@ -190,22 +180,17 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Payway promotions platform",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " — contributed as a key engineering team member to a complete historical load of ",
+                      "text": "Payway promotions platform: contributed to a production historical load of ",
                       "bold": false,
                       "href": ""
                     },
                     {
-                      "text": "20M+ promotions in production",
+                      "text": "20M+ promotions",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " and the ingestion of thousands of new promotions per day, within an ecosystem of 350,000+ merchants, 70+ card issuers, and 13 countries.",
+                      "text": " plus thousands of new promotions daily, in a 13-country ecosystem.",
                       "bold": false,
                       "href": ""
                     }
@@ -221,7 +206,28 @@
                       "href": ""
                     },
                     {
-                      "text": ": integrated a Single-SPA React/TypeScript microfrontend through a Spring WebFlux BFF and used Amazon API Gateway to bridge the HTTPS merchant portal with internal HTTP services.",
+                      "text": ": connected a Single-SPA React/TypeScript microfrontend to Java/Spring Boot and Node.js/NestJS microservices through a Spring WebFlux BFF; Amazon API Gateway bridged the HTTPS portal to internal HTTP services.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "teamcubation-rag-assistant",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Built a merchant-facing ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "GraphRAG agent and harness with Neo4j and OpenAI API",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " to relate enterprise policies and promotions, orchestrate agents, evaluate answers, tune performance and enforce promotion-domain and data-leakage guardrails. The assistant answered queries without executing commercial actions.",
                       "bold": false,
                       "href": ""
                     }
@@ -254,22 +260,6 @@
                     },
                     {
                       "text": " with S3, SQS, and a Python/FastAPI Lambda for the historical load; built Python/Node.js tooling to reproduce local loads, reconcile results, and identify failed promotions.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "teamcubation-rag-assistant",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Designed a merchant-facing RAG assistant",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " with Python, LangChain, LangGraph, PostgreSQL/pgvector, and guardrails for active/expired promotions and statistics, without executing commercial actions.",
                       "bold": false,
                       "href": ""
                     }
@@ -451,7 +441,7 @@
                       "href": ""
                     },
                     {
-                      "text": " connected exclusively to a Python/FastAPI BFF, which centralized the back-office contract and decoupled the UI from downstream microservices and integrations.",
+                      "text": " connected exclusively to a Python/FastAPI BFF, standardizing frontend views against its contract and integrations with Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger.",
                       "bold": false,
                       "href": ""
                     }
@@ -467,7 +457,7 @@
                       "href": ""
                     },
                     {
-                      "text": " through Java/Spring Boot and TypeScript/Node.js/NestJS microservices with a shared permissions contract; built an agentic development workspace to preserve context across repositories.",
+                      "text": " through Java/Spring Boot and TypeScript/Node.js/NestJS microservices with different databases and permission models behind a consistent admin UI; used an agentic workspace to preserve context across repositories.",
                       "bold": false,
                       "href": ""
                     }
@@ -568,17 +558,17 @@
               "keywords": [
                 "AI Agents",
                 "RAG",
+                "GraphRAG",
+                "Agno",
                 "LangChain",
                 "LangGraph",
-                "Agno",
                 "Mem0",
                 "LLM Evaluation",
                 "Model Context Protocol (MCP)",
-                "LLM Integration",
-                "Vector Databases",
                 "pgvector",
+                "Neo4j",
                 "AI Guardrails",
-                "Structured Outputs",
+                "OpenAI API",
                 "Claude API"
               ],
               "blocks": []
@@ -594,9 +584,7 @@
                 "FastAPI",
                 "NestJS",
                 "Spring WebFlux",
-                "Spring MVC",
                 "Spring Security",
-                "Spring Data JPA",
                 "Laravel",
                 "REST APIs",
                 "Microservices",
@@ -619,24 +607,18 @@
                 "Node.js",
                 "SQL",
                 "Kotlin",
+                "Swift",
                 "PHP"
               ],
               "blocks": []
             },
             {
               "id": "frontend",
-              "title": "Frontend & Product UI",
+              "title": "Web & Mobile",
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": [
-                "React",
-                "Next.js",
-                "React Native",
-                "Design Systems",
-                "Single-SPA",
-                "Microfrontends"
-              ],
+              "keywords": ["React", "Next.js", "React Native", "Android Studio", "Design Systems"],
               "blocks": []
             },
             {
@@ -650,11 +632,7 @@
                 "MySQL",
                 "MariaDB",
                 "Redis",
-                "System Design",
-                "Distributed Systems",
                 "Hexagonal Architecture",
-                "Layered Architecture",
-                "MVC",
                 "Event-Driven Architecture",
                 "SQL Tuning"
               ],
@@ -668,13 +646,10 @@
               "href": "",
               "keywords": [
                 "DigitalOcean",
-                "AWS",
                 "AWS Lambda",
                 "Amazon API Gateway",
                 "Amazon S3",
                 "Amazon SQS",
-                "Amazon CloudWatch",
-                "Serverless",
                 "Docker",
                 "Kubernetes",
                 "GitLab CI/CD",
@@ -691,7 +666,6 @@
               "keywords": [
                 "JUnit",
                 "Mockito",
-                "Jest",
                 "SonarQube",
                 "OpenTelemetry",
                 "Prometheus",
@@ -699,8 +673,8 @@
                 "RBAC",
                 "LDAP",
                 "Application Security",
-                "Infisical",
-                "Agile"
+                "End-to-End Encryption",
+                "Infisical"
               ],
               "blocks": []
             },
@@ -719,12 +693,11 @@
                 "Aave",
                 "Compound",
                 "Privy",
+                "Stripe",
                 "Swaps",
                 "Vaults",
                 "Perpetuals",
-                "Non-Custodial Wallets",
-                "User Authorization",
-                "Transactions"
+                "Non-Custodial Wallets"
               ],
               "blocks": []
             }
@@ -939,12 +912,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Drove the technical contribution and coordinated Agile delivery",
+                      "text": "Coordinated Agile delivery",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " with Trello, from requirements through production; the project received interviews and mentions from university authorities and outlets.",
+                      "text": " from requirements through production.",
                       "bold": false,
                       "href": ""
                     }
@@ -1017,7 +990,7 @@
           "href": ""
         },
         {
-          "text": " e Ingeniero en Sistemas de Información por la UNS. Experiencia en agentes, RAG y productos web/móviles en producción, desde arquitectura y evaluación hasta operación. Combina IA aplicada con sistemas distribuidos: contribuyó a una carga histórica de ",
+          "text": " e Ingeniero en Sistemas de Información. Construye agentes, RAG, productos web/móviles e integraciones DeFi en producción. Combina arquitectura y sistemas de diseño con backend a escala: contribuyó a una carga histórica de ",
           "bold": false,
           "href": ""
         },
@@ -1060,12 +1033,12 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Startup de IA con producto en producción",
+                      "text": "AI Engineer · ingeniería de producto de punta a punta",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " · Colaboración directa con tres founders para convertir prioridades cambiantes en entregas: análisis, arquitectura, desarrollo web/móvil, evaluación y operación.",
+                      "text": " · Colaboro con tres fundadores para llevar IA, fintech, web y mobile desde la arquitectura hasta producción y operación.",
                       "bold": false,
                       "href": ""
                     }
@@ -1076,12 +1049,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Habilité una vista consolidada del portfolio y su rendimiento de 24 horas",
+                      "text": "Construí una vista consolidada del portfolio y rendimientos de 24 horas",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " consultando proveedores en paralelo, reconstruyendo resultados y aplicando caché selectiva con Redis y tareas Celery para agilizar consultas de activos y vaults.",
+                      "text": " con consultas paralelas, precarga y caché Redis; consultas comparables de vaults, mercados y perpetuos pasaron de segundos a milisegundos.",
                       "bold": false,
                       "href": ""
                     }
@@ -1092,22 +1065,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Mejoré RAG, memoria y selección de herramientas",
+                      "text": "Desarrollé agentes con Agno, LangChain/LangGraph y OpenAI API, y GraphRAG con Neo4j",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " con evaluaciones automatizadas de flujos y controles frente a instrucciones maliciosas; al eliminar consultas redundantes estimé un ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "30% menos de tokens asociados a consultas innecesarias",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ".",
+                      "text": ", mejorando memoria, recuperación, selección de herramientas y evaluación. Según mi estimación, los flujos optimizados respondieron al menos 2× más rápido; eliminar llamadas redundantes redujo un 30% estimado de tokens en las consultas afectadas.",
                       "bold": false,
                       "href": ""
                     }
@@ -1123,7 +1086,7 @@
                       "href": ""
                     },
                     {
-                      "text": " para consultar posiciones y rendimientos, depositar y retirar: backend, frontend y ejecución de transacciones con controles de completitud y seguimiento por webhooks.",
+                      "text": " para consultar posiciones y rendimientos, depositar y retirar: backend, frontend y ejecución de transacciones con controles de completitud y seguimiento por webhooks; también trabajé con integraciones de Privy y Stripe en producción.",
                       "bold": false,
                       "href": ""
                     }
@@ -1134,12 +1097,28 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Refactoricé el producto con arquitectura hexagonal y un design system",
+                      "text": "Refactoricé todo el backend con arquitectura hexagonal y el frontend React/Next.js por funcionalidades",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " para reutilizar componentes; desarrollé funcionalidades React Native/Kotlin y las validé con pruebas automatizadas, emuladores y dispositivos reales.",
+                      "text": "; desarrollé el design system completo de Rampy con abstracciones de componentes reutilizables, todo en producción. Implementé E2EE para conversaciones de usuarios con almacenamiento cifrado en la base de datos.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-mobile-production",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Entregué funcionalidades móviles con React Native, Kotlin y Swift",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " usando Android Studio; bajé el arranque promedio medido de unos 7–8 s a 1–2 s. Implementé tracking de eventos de punta a punta con Firebase Analytics, Clarity Mobile en todas las pantallas, Singular SDK y Meta App Events, evitando duplicados.",
                       "bold": false,
                       "href": ""
                     }
@@ -1150,28 +1129,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Reduje validaciones, build y despliegue de aproximadamente 1 hora a 10 minutos",
+                      "text": "Reduje validaciones, build y despliegue de unas 1 hora a 10 minutos",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", conservando controles y optimizando el bundle. Preparé infraestructura DigitalOcean para crecer hacia miles de usuarios, con contenedores, bases de datos, monitoreo y backups.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "rampy-agentic-workspace",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Automaticé el setup local con Makefile e Infisical",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " y un catálogo reutilizable de skills para agentes de desarrollo, estandarizando entornos, acceso por usuario y sincronización de secretos con rotación a demanda.",
+                      "text": " conservando controles; preparé entornos y monitoreo en DigitalOcean para el crecimiento.",
                       "bold": false,
                       "href": ""
                     }
@@ -1192,22 +1155,17 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Plataforma de promociones de Payway",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " — participé como integrante relevante de ingeniería en una carga histórica completa de ",
+                      "text": "Plataforma de promociones de Payway: contribuí a una carga histórica productiva de ",
                       "bold": false,
                       "href": ""
                     },
                     {
-                      "text": "20M+ promociones en producción",
+                      "text": "20M+ promociones",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " y en la ingesta de miles de promociones nuevas por día, dentro de un ecosistema de 350.000+ comercios, 70+ emisores y 13 países.",
+                      "text": " y miles de altas diarias en un ecosistema de 13 países.",
                       "bold": false,
                       "href": ""
                     }
@@ -1223,7 +1181,28 @@
                       "href": ""
                     },
                     {
-                      "text": ": integré un microfrontend React/TypeScript con Single-SPA mediante un BFF Spring WebFlux y utilicé Amazon API Gateway para conectar el portal HTTPS con servicios HTTP internos.",
+                      "text": ": conecté un microfrontend React/TypeScript (Single-SPA) a microservicios Java/Spring Boot y Node.js/NestJS mediante un BFF Spring WebFlux; Amazon API Gateway enlazó el portal HTTPS con servicios HTTP internos.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "teamcubation-rag-assistant",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Construí un ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "agente GraphRAG con Neo4j, OpenAI API y su harness",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " para relacionar políticas empresariales y promociones, orquestar agentes, evaluar respuestas, optimizar rendimiento y aplicar guardrails de dominio y protección de datos. El asistente respondía consultas sin ejecutar operaciones comerciales.",
                       "bold": false,
                       "href": ""
                     }
@@ -1256,22 +1235,6 @@
                     },
                     {
                       "text": " con S3, SQS y una Lambda Python/FastAPI para la carga histórica; desarrollé tooling Python/Node.js para reproducir cargas locales, reconciliar resultados y detectar promociones fallidas.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "teamcubation-rag-assistant",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Diseñé un asistente RAG para comercios",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " con Python, LangChain, LangGraph, PostgreSQL/pgvector y guardrails: consultas sobre promociones vigentes/vencidas y estadísticas, sin ejecutar operaciones comerciales.",
                       "bold": false,
                       "href": ""
                     }
@@ -1453,7 +1416,7 @@
                       "href": ""
                     },
                     {
-                      "text": " conectado exclusivamente a un BFF Python/FastAPI, que centralizaba el contrato del backoffice y desacoplaba la UI de microservicios e integraciones.",
+                      "text": " conectado exclusivamente a un BFF Python/FastAPI, que estandarizaba las vistas y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante contratos OpenAPI/Swagger.",
                       "bold": false,
                       "href": ""
                     }
@@ -1469,7 +1432,7 @@
                       "href": ""
                     },
                     {
-                      "text": " mediante microservicios Java/Spring Boot y TypeScript/Node.js/NestJS con un contrato común de permisos; construí un entorno agéntico de desarrollo para preservar contexto entre repositorios.",
+                      "text": " mediante microservicios Java/Spring Boot y TypeScript/Node.js/NestJS con bases de datos y permisos heterogéneos, ofreciendo una vista uniforme a administradores; usé un entorno agéntico para conservar contexto entre repositorios.",
                       "bold": false,
                       "href": ""
                     }
@@ -1570,17 +1533,17 @@
               "keywords": [
                 "AI Agents",
                 "RAG",
+                "GraphRAG",
+                "Agno",
                 "LangChain",
                 "LangGraph",
-                "Agno",
                 "Mem0",
                 "LLM Evaluation",
                 "Model Context Protocol (MCP)",
-                "LLM Integration",
-                "Vector Databases",
                 "pgvector",
+                "Neo4j",
                 "AI Guardrails",
-                "Structured Outputs",
+                "OpenAI API",
                 "Claude API"
               ],
               "blocks": []
@@ -1596,9 +1559,7 @@
                 "FastAPI",
                 "NestJS",
                 "Spring WebFlux",
-                "Spring MVC",
                 "Spring Security",
-                "Spring Data JPA",
                 "Laravel",
                 "REST APIs",
                 "Microservices",
@@ -1621,24 +1582,18 @@
                 "Node.js",
                 "SQL",
                 "Kotlin",
+                "Swift",
                 "PHP"
               ],
               "blocks": []
             },
             {
               "id": "frontend",
-              "title": "Frontend e interfaces de producto",
+              "title": "Web y mobile",
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": [
-                "React",
-                "Next.js",
-                "React Native",
-                "Design Systems",
-                "Single-SPA",
-                "Microfrontends"
-              ],
+              "keywords": ["React", "Next.js", "React Native", "Android Studio", "Design Systems"],
               "blocks": []
             },
             {
@@ -1652,11 +1607,7 @@
                 "MySQL",
                 "MariaDB",
                 "Redis",
-                "System Design",
-                "Distributed Systems",
                 "Hexagonal Architecture",
-                "Layered Architecture",
-                "MVC",
                 "Event-Driven Architecture",
                 "SQL Tuning"
               ],
@@ -1670,13 +1621,10 @@
               "href": "",
               "keywords": [
                 "DigitalOcean",
-                "AWS",
                 "AWS Lambda",
                 "Amazon API Gateway",
                 "Amazon S3",
                 "Amazon SQS",
-                "Amazon CloudWatch",
-                "Serverless",
                 "Docker",
                 "Kubernetes",
                 "GitLab CI/CD",
@@ -1693,7 +1641,6 @@
               "keywords": [
                 "JUnit",
                 "Mockito",
-                "Jest",
                 "SonarQube",
                 "OpenTelemetry",
                 "Prometheus",
@@ -1701,8 +1648,8 @@
                 "RBAC",
                 "LDAP",
                 "Application Security",
-                "Infisical",
-                "Agile"
+                "End-to-End Encryption",
+                "Infisical"
               ],
               "blocks": []
             },
@@ -1721,12 +1668,11 @@
                 "Aave",
                 "Compound",
                 "Privy",
+                "Stripe",
                 "Swaps",
                 "Vaults",
                 "Perpetuals",
-                "Non-Custodial Wallets",
-                "User Authorization",
-                "Transactions"
+                "Non-Custodial Wallets"
               ],
               "blocks": []
             }
@@ -1937,12 +1883,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Conduje la contribución técnica y coordiné la entrega Agile",
+                      "text": "Coordiné la entrega Agile",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " del equipo con Trello, desde requisitos hasta producción; el proyecto recibió entrevistas y menciones de autoridades y portales universitarios.",
+                      "text": " del equipo desde requisitos hasta producción.",
                       "bold": false,
                       "href": ""
                     }
@@ -2004,11 +1950,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "07df805ecdf4353dbe81dd9c48e61a5181611e494ec28ff29fe42fd0edb71bd9",
-    "factsSha256": "62021436b375c8ffef30ce272249537798613c72403e547d9fbfeb10569794c8",
+    "sourceSha256": "52d5448740027da7bfabeca9d350fde1412e1daa02177d03efc904738c0ddb3b",
+    "factsSha256": "e44cb8542db52581e2e181b01a2afc71cdc3b8763f3c33d9e478a9f07ef0697c",
     "pdfSha256": {
-      "en": "e6e6adeff4b01e051089c5fd3745a88d45c7014f7d41cd1a4b653ef8f67ef403",
-      "es": "5824774322e3f821bb28739a90142f08be03e03a78c4b185ebdaf7084e48bd14"
+      "en": "522ce38bdf1f6bd94eb21c727a556a275abcca7a89b268cd81158421d30845c3",
+      "es": "1f069705a3d0c83aaf41b3f653f7a85fe1f17b8f5f0228598939af6cf96d92e8"
     }
   }
 }

@@ -45,24 +45,6 @@
   gap: var(--space-5);
 }
 
-.portrait {
-  max-width: 25rem;
-  background:
-    radial-gradient(ellipse at 50% 25%, var(--accent-wash), transparent 75%), var(--surface-raised);
-  border: 1px solid var(--line-control);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 0 0 4px var(--accent-wash);
-  overflow: hidden;
-  padding: var(--space-2);
-}
-
-.portrait img {
-  filter: var(--portrait-filter);
-  border-radius: var(--radius-md);
-  height: auto;
-  width: 100%;
-}
-
 .facts {
   display: flex;
   flex-direction: column;

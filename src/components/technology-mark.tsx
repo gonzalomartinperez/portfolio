@@ -62,6 +62,7 @@ const specificIllustrations: Record<string, Illustration> = {
   micrometer: "chart",
   "structured-logging": "document",
   rbac: "shield",
+  "end-to-end-encryption": "shield",
   ldap: "shield",
   "microsoft-teams": "message",
   "technical-documentation": "document",

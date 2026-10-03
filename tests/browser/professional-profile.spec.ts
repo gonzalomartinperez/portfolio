@@ -7,7 +7,7 @@ for (const prefix of ["", "/es"]) {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(`${prefix}/work`);
     const rampy = page.locator("#rampy");
-    await expect(rampy.getByRole("link", { name: "Rampy", exact: true })).toHaveAttribute(
+    await expect(rampy.locator('a[href="https://rampyapp.com/"]')).toHaveAttribute(
       "href",
       "https://rampyapp.com/",
     );
@@ -30,17 +30,19 @@ for (const prefix of ["", "/es"]) {
       }, theme);
       for (const file of [
         "rampy.png",
-        "teamcubation.png",
-        "cooperativa-obrera-100.jpg",
+        "teamcubation.svg",
+        "cooperativa-obrera.png",
         "pequeverso-isotipo.webp",
         "independent.jpg",
       ]) {
         const mark = page.locator(`main img[src="/images/companies/${file}"]`);
         await mark.scrollIntoViewIfNeeded();
         await expect(mark).toBeVisible();
-        expect(
-          await mark.evaluate((element) => (element as HTMLImageElement).naturalWidth),
-        ).toBeGreaterThan(0);
+        await expect
+          .poll(() => mark.evaluate((element) => (element as HTMLImageElement).naturalWidth), {
+            message: `${file} loads after entering the viewport`,
+          })
+          .toBeGreaterThan(0);
       }
       await rampy.scrollIntoViewIfNeeded();
       await page.screenshot({ path: info.outputPath(`experience-${theme}.png`) });
