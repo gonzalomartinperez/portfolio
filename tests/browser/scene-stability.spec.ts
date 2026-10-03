@@ -1,6 +1,63 @@
 import { expect, test } from "@playwright/test";
 import { dispatchTouchSequence } from "./touch-sequence";
 
+for (const prefix of ["", "/es"]) {
+  test(`${prefix || "en"} hero availability remains clear above the resting sphere`, async ({
+    page,
+    isMobile,
+  }) => {
+    for (const height of isMobile ? [650, 844] : [866, 1080]) {
+      await page.emulateMedia({ reducedMotion: "no-preference" });
+      await page.setViewportSize({ width: isMobile ? 393 : 1760, height });
+      await page.goto(`${prefix || "/"}?sceneProgress=0&sceneTime=0`);
+      const scene = page.locator("[data-scene]");
+      await expect(scene).toHaveAttribute("data-mode", "running");
+      await page.evaluate(() => document.fonts.ready);
+      const geometry = () =>
+        scene.evaluate((element) => {
+          const viewport = element.querySelector<HTMLElement>("[data-scene-viewport]");
+          const hero = element.querySelector<HTMLElement>("[data-scene-hero]");
+          const core = element.querySelector<HTMLElement>("[data-scene-core]");
+          if (!viewport || !hero || !core) throw new Error("Scene geometry is missing");
+          const bounds = core.getBoundingClientRect();
+          const radius = Number.parseFloat(
+            viewport.style.getPropertyValue("--scene-sphere-radius"),
+          );
+          return {
+            heroBottom: hero.getBoundingClientRect().bottom,
+            sphereTop: bounds.top + bounds.height / 2 - radius,
+            sphereBottom: bounds.top + bounds.height / 2 + radius,
+            viewportBottom: Math.min(
+              viewport.getBoundingClientRect().bottom,
+              getComputedStyle(document.querySelector("header") as HTMLElement).position ===
+                "sticky"
+                ? innerHeight
+                : Number.POSITIVE_INFINITY,
+            ),
+          };
+        });
+      await expect
+        .poll(async () => {
+          const bounds = await geometry();
+          return (
+            bounds.sphereTop >= bounds.heroBottom + 20 &&
+            bounds.sphereBottom <= bounds.viewportBottom - 20
+          );
+        })
+        .toBe(true);
+      await expect(scene.locator("[data-scene-hero] p").last()).toBeVisible();
+      await scene.screenshot({ path: test.info().outputPath(`hero-${height}.png`) });
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await expect(scene).toHaveAttribute("data-mode", "static");
+      const fallback = await scene.locator("svg").first().boundingBox();
+      const hero = await scene.locator("[data-scene-hero]").boundingBox();
+      expect(fallback).not.toBeNull();
+      expect(hero).not.toBeNull();
+      if (fallback && hero) expect(fallback.y).toBeGreaterThanOrEqual(hero.y + hero.height + 20);
+    }
+  });
+}
+
 test("scene mounting preserves an already focused hero link", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/?sceneProgress=0.75&sceneTime=0");

@@ -80,5 +80,5 @@ sources and limits. Release verification is recorded separately from this scope.
 
 The [October cumulative ledger](release-2026-10-03.md) records the current
 production scope, original employer marks, Home/mobile refinements and reviewed
-bilingual CV revision `2026-10-03.8`. The earlier dated revisions and QA records
+bilingual CV revision `2026-10-03.9`. The earlier dated revisions and QA records
 above remain historical evidence.

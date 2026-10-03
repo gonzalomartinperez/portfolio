@@ -62,7 +62,7 @@ depends on display refresh and device capacity.
   centering, header/actions/chips and original marks; the final 12 checks passed
   after reserving a clear control strip below architecture nodes.
 - An independent read-only review found no blocking defects or omitted requests.
-- Reviewed bilingual CV revision `2026-10-03.8` matches the Career Ops release
+- Reviewed bilingual CV revision `2026-10-03.9` matches the Career Ops release
   manifest and both public PDF hashes. See the [cumulative ledger](release-2026-10-03.md).
 - The delivery PR records the full browser suite and final-head CI results.
   Both required jobs and their aggregator must pass before integration; main
