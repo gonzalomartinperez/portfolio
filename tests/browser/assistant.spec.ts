@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-const enabled = process.env.ASSISTANT_BROWSER_TEST === "1";
+const enabled = false;
 
-test.skip(!enabled, "Requires the local fixture API and both databases");
+test.skip(!enabled, "Assistant launch is disabled pending explicit release approval");
 
 test("native panel streams cited fixture content and restores focus", async ({ page }) => {
   await page.goto("/");

@@ -37,3 +37,10 @@
 .list li + li .option {
   border-left: 1px solid var(--line-strong);
 }
+
+@media (width < 52rem) {
+  .option {
+    min-block-size: 44px;
+    min-inline-size: 38px;
+  }
+}

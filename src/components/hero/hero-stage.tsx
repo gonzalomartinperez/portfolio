@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import { setPageMotionPaused, usePageMotionPaused } from "../motion-state";
 import styles from "./hero-stage.module.css";
 import type { SceneRuntime } from "./scene-runtime";
 
@@ -26,8 +27,15 @@ export function HeroStage({
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const runtimeRef = useRef<SceneRuntime | null>(null);
-  const pausedRef = useRef(false);
+  const paused = usePageMotionPaused();
+  const pausedRef = useRef(paused);
   const [mode, setMode] = useState<Mode>("static");
+
+  useEffect(() => {
+    pausedRef.current = paused;
+    runtimeRef.current?.sync(paused);
+    setMode((current) => (current === "static" ? current : paused ? "paused" : "running"));
+  }, [paused]);
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -82,9 +90,7 @@ export function HeroStage({
   }, []);
 
   const toggle = () => {
-    pausedRef.current = !pausedRef.current;
-    setMode(pausedRef.current ? "paused" : "running");
-    runtimeRef.current?.sync(pausedRef.current);
+    setPageMotionPaused(!paused);
   };
 
   return (

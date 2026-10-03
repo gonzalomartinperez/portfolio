@@ -4,6 +4,7 @@ import { ExperienceArchitecture } from "@/components/experience-architecture";
 import { ExternalLink } from "@/components/external-link";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
+import { ProductionBadge } from "@/components/production-badge";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cardVariants } from "@/components/ui/card";
@@ -52,6 +53,9 @@ export function WorkView({ locale }: { locale: Locale }) {
                       ]
                     : role.arrangement}
                 </p>
+                {["rampy", "teamcubation", "cooperativa-obrera"].includes(role.slug) && (
+                  <ProductionBadge locale={locale} />
+                )}
               </div>
 
               <div className={styles.body}>

@@ -20,8 +20,24 @@ for (const locale of ["", "/es"]) {
         const viewport = element.querySelector("[data-scene-viewport]");
         const backdrop = element.querySelector("[data-scene-backdrop]");
         if (!copy || !viewport || !backdrop) throw new Error("Missing scene layout");
+        const marks = [...element.querySelectorAll<HTMLElement>(".scene-logo")];
+        const firstMark = marks[0];
+        const scale = firstMark.getBoundingClientRect().width / firstMark.offsetWidth;
+        const markHeight = Math.max(...marks.map((mark) => mark.offsetHeight)) * scale;
+        const header = document.querySelector("header");
+        const headerPosition = header ? getComputedStyle(header).position : "";
+        const headerHeight =
+          header && (headerPosition === "sticky" || headerPosition === "fixed")
+            ? header.getBoundingClientRect().height
+            : 0;
+        const viewportBounds = viewport.getBoundingClientRect();
+        const ellipseCenterY =
+          viewportBounds.top +
+          viewportBounds.height / 2 +
+          (headerHeight + 16 - 72 + markHeight / 4 - 80) / 2;
         return {
           copy: bounds(copy),
+          ellipseCenterY,
           viewport: bounds(viewport),
           backdrop: bounds(backdrop),
           visibleHeight: innerHeight,
@@ -31,6 +47,15 @@ for (const locale of ["", "/es"]) {
       const overlaps = (a: typeof layout.copy, b: typeof layout.copy) =>
         a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
       expect(layout.marks).toHaveLength(35);
+      expect(
+        Math.abs((layout.copy.top + layout.copy.bottom) / 2 - layout.ellipseCenterY),
+      ).toBeLessThan(1);
+      expect(
+        Math.abs(
+          (layout.copy.left + layout.copy.right) / 2 -
+            (layout.viewport.left + layout.viewport.right) / 2,
+        ),
+      ).toBeLessThan(1);
       for (const [index, mark] of layout.marks.entries()) {
         expect(overlaps(mark, layout.copy), `mark ${index} covers the copy`).toBe(false);
         for (const other of layout.marks.slice(index + 1)) {
@@ -40,7 +65,7 @@ for (const locale of ["", "/es"]) {
       expect(layout.viewport.bottom - layout.viewport.top).toBe(layout.visibleHeight);
       expect(layout.viewport.top).toBeLessThanOrEqual(1);
       expect(layout.viewport.bottom).toBeGreaterThanOrEqual(layout.visibleHeight - 1);
-      expect(layout.backdrop.bottom).toBeGreaterThan(layout.viewport.bottom);
+      expect(layout.backdrop.bottom).toBeGreaterThanOrEqual(layout.viewport.bottom);
       if (progress === 0.8)
         await page.screenshot({ path: test.info().outputPath("cloud-spacing.png") });
     });

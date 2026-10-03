@@ -28,10 +28,7 @@ export function ContactView({ locale }: { locale: Locale }) {
               <p>{copy.contact.basedIn(profile.location, profile.arrangement, profile.timezone)}</p>
               <p>
                 {copy.contact.hiringHint}{" "}
-                <Link href={localePath(locale, "/work/filomena")}>
-                  {copy.contact.hiringLinkText}
-                </Link>
-                .
+                <Link href={localePath(locale, "/work")}>{copy.contact.hiringLinkText}</Link>.
               </p>
             </div>
           </div>

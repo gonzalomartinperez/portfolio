@@ -46,6 +46,16 @@
   opacity: 0.35;
 }
 
+.teamcubation .canvas,
+.teamcubation .loading {
+  height: 455px;
+}
+
+.filomena .canvas,
+.filomena .loading {
+  height: 415px;
+}
+
 .canvas :global(.react-flow__edge path) {
   stroke: var(--accent);
 }
@@ -59,6 +69,9 @@
   border: 1px solid var(--line-strong);
   border-radius: 0.5rem;
   overflow: hidden;
+  margin: 0;
+  bottom: 0.5rem;
+  left: 0.5rem;
 }
 
 .node {
@@ -115,17 +128,22 @@
 @media (width <= 620px) {
   .rampy .canvas,
   .rampy .loading {
-    height: 460px;
+    height: 520px;
   }
 
   .teamcubation .canvas,
   .teamcubation .loading {
-    height: 690px;
+    height: 1030px;
+  }
+
+  .filomena .canvas,
+  .filomena .loading {
+    height: 720px;
   }
 
   .cooperativa-obrera .canvas,
   .cooperativa-obrera .loading {
-    height: 560px;
+    height: 620px;
   }
 
   .node {

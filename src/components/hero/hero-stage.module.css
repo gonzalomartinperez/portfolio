@@ -1,6 +1,7 @@
 .stage {
   position: relative;
   isolation: isolate;
+  --scene-edge-fade: clamp(10rem, 25svh, 20rem);
 }
 .viewport {
   height: max(760px, calc(100svh - 4rem));
@@ -22,16 +23,26 @@
 }
 .canvas {
   opacity: 0;
-  mask-image: linear-gradient(#000 calc(100% - 96px), transparent);
+  mask-image: linear-gradient(
+    #000 calc(100% - var(--scene-edge-fade)),
+    rgb(0 0 0 / 65%) calc(100% - var(--scene-edge-fade) * 0.6),
+    rgb(0 0 0 / 20%) calc(100% - var(--scene-edge-fade) * 0.25),
+    transparent
+  );
 }
 .backdrop {
   position: absolute;
-  inset: 0 0 calc(-1 * var(--toolkit-overflow, 0px) - 96px);
+  inset: 0 0 calc(-1 * var(--toolkit-overflow, 0px));
   pointer-events: none;
   opacity: 0;
   background-image: url("/images/scene-stars.svg");
   background-size: 211px 233px;
-  mask-image: linear-gradient(#000 calc(100% - 128px), transparent);
+  mask-image: linear-gradient(
+    #000 calc(100% - var(--scene-edge-fade)),
+    rgb(0 0 0 / 65%) calc(100% - var(--scene-edge-fade) * 0.6),
+    rgb(0 0 0 / 20%) calc(100% - var(--scene-edge-fade) * 0.25),
+    transparent
+  );
 }
 .stage[data-mode="static"] .backdrop {
   display: none;

@@ -30,13 +30,17 @@ for (const [width, height] of [
         assert.ok(result.scale >= 0.5, "default portrait and desktop marks remain legible");
       const halfWidth = (bounds.markWidth * result.scale) / 2;
       const halfHeight = (bounds.markHeight * result.scale) / 2;
+      const ellipseTop = -height / 2 + bounds.top + halfHeight + 8;
+      const ellipseBottom = height / 2 - bounds.bottom - halfHeight / 2 - 8 - cloudEntrance.offset;
+      assert.equal(result.center.x, 0);
+      assert.equal(result.center.y, (ellipseTop + ellipseBottom) / 2);
       for (const [index, { x, y }] of result.positions.entries()) {
         assert.ok(Math.abs(x) + halfWidth <= width / 2 - 12);
         assert.ok(y - halfHeight >= -height / 2 + bounds.top + 8);
         assert.ok(y + halfHeight <= height / 2 - bounds.bottom - 8);
         assert.ok(
           Math.abs(x) >= bounds.copyWidth / 2 + halfWidth + 12 ||
-            Math.abs(y) >= bounds.copyHeight / 2 + halfHeight + 12,
+            Math.abs(y - result.center.y) >= bounds.copyHeight / 2 + halfHeight + 12,
           `mark ${index} overlaps centered copy`,
         );
         for (const other of result.positions.slice(index + 1))
@@ -73,7 +77,7 @@ for (const [width, height] of [
           assert.ok(y + halfHeight <= height / 2 - bounds.bottom - 8 + 1e-6);
           assert.ok(
             Math.abs(x) >= bounds.copyWidth / 2 + halfWidth + 12 - 1e-6 ||
-              Math.abs(y) >= bounds.copyHeight / 2 + halfHeight + 12 - 1e-6,
+              Math.abs(y - result.center.y) >= bounds.copyHeight / 2 + halfHeight + 12 - 1e-6,
             `copy collision at ${progress}`,
           );
           for (const other of rectangles.slice(index + 1))
@@ -126,5 +130,40 @@ test("empty and impossible cloud geometry do not interrupt the page", () => {
     copyHeight: 100,
   };
   assert.equal(layoutCloud(bounds).scale, 0);
-  assert.deepEqual(layoutCloud({ ...bounds, count: 0 }), { scale: 1, positions: [] });
+  assert.deepEqual(layoutCloud({ ...bounds, count: 0 }), {
+    scale: 1,
+    positions: [],
+    center: { x: 0, y: 0 },
+  });
 });
+
+for (const copyHeight of [160, 220, 260]) {
+  test(`copy exclusion stays centered in the ellipse with ${copyHeight}px localized copy`, () => {
+    const bounds = {
+      width: 393,
+      height: 852,
+      top: 78,
+      bottom: 72,
+      count: 35,
+      markWidth: 40,
+      markHeight: 40,
+      copyWidth: 190,
+      copyHeight,
+    };
+    const initial = layoutCloud(bounds);
+    const resized = layoutCloud({ ...bounds, top: 128 });
+    for (const result of [initial, resized]) {
+      assert.ok(result.scale > 0);
+      for (const { x, y } of result.positions)
+        assert.ok(
+          Math.abs(x) >= (bounds.copyWidth + bounds.markWidth * result.scale) / 2 + 12 ||
+            Math.abs(y - result.center.y) >=
+              (bounds.copyHeight + bounds.markHeight * result.scale) / 2 + 12,
+        );
+    }
+    assert.ok(
+      resized.center.y > initial.center.y + 20,
+      "header growth moves ellipse and copy together",
+    );
+  });
+}
