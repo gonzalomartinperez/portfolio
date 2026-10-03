@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { CompanyMark } from "@/components/company-mark";
+import { ExperienceArchitecture } from "@/components/experience-architecture";
+import { ExternalLink } from "@/components/external-link";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -57,7 +59,9 @@ export function WorkView({ locale }: { locale: Locale }) {
                   {role.position}
                   <span className={styles.company}>
                     {role.companyHref ? (
-                      <a href={role.companyHref}>{role.company}</a>
+                      <ExternalLink href={role.companyHref} locale={locale}>
+                        {role.company}
+                      </ExternalLink>
                     ) : (
                       role.company
                     )}
@@ -66,7 +70,7 @@ export function WorkView({ locale }: { locale: Locale }) {
 
                 <p className={styles.context}>{role.context}</p>
 
-                <ul className="marked-list">
+                <ul className={`marked-list ${styles.featuredContributions}`}>
                   {role.contributions.slice(0, 2).map((contribution) => (
                     <li key={contribution}>{contribution}</li>
                   ))}
@@ -86,19 +90,26 @@ export function WorkView({ locale }: { locale: Locale }) {
                   </details>
                 )}
 
+                {role.slug === "rampy" ||
+                role.slug === "teamcubation" ||
+                role.slug === "cooperativa-obrera" ? (
+                  <ExperienceArchitecture kind={role.slug} locale={locale} />
+                ) : null}
+
                 {role.metrics ? <MetricList metrics={role.metrics} /> : null}
                 {role.attribution ? <p className={styles.attribution}>{role.attribution}</p> : null}
                 {role.links && (
                   <div className="actions">
                     {role.links.map((link) => (
-                      <a
+                      <ExternalLink
                         className={buttonVariants({ variant: "outline" })}
                         href={link.href}
                         key={link.href}
+                        locale={locale}
                       >
                         <CompanyMark company="pequeverso" />
                         {link.label}
-                      </a>
+                      </ExternalLink>
                     ))}
                   </div>
                 )}
@@ -147,13 +158,14 @@ export function WorkView({ locale }: { locale: Locale }) {
             {filomena.links
               .filter((link) => link.href.startsWith("https://github.com"))
               .map((link) => (
-                <a
+                <ExternalLink
                   className={buttonVariants({ variant: "outline" })}
                   href={link.href}
                   key={link.href}
+                  locale={locale}
                 >
                   {link.label}
-                </a>
+                </ExternalLink>
               ))}
           </div>
         </article>

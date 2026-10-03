@@ -23,7 +23,7 @@ export function AboutView({ locale }: { locale: Locale }) {
           </div>
 
           <aside className={styles.aside}>
-            <div className={styles.portrait}>
+            <div className="portrait-frame">
               <Image
                 alt={`${profile.name}, ${profile.role}`}
                 placeholder="blur"

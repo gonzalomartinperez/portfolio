@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ExternalLink } from "@/components/external-link";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -73,7 +74,11 @@ export function EducationView({ locale }: { locale: Locale }) {
 
       <section className="section-tight frame">
         <article data-slot="card" className={cn(cardVariants(), styles.degree)}>
-          <a className={styles.institutionLogo} href={degree.institutionHref}>
+          <ExternalLink
+            className={styles.institutionLogo}
+            href={degree.institutionHref}
+            locale={locale}
+          >
             <Image
               src="/brands/universidad-nacional-del-sur.png"
               width={325}
@@ -81,12 +86,15 @@ export function EducationView({ locale }: { locale: Locale }) {
               alt="Universidad Nacional del Sur"
               unoptimized
             />
-          </a>
+          </ExternalLink>
           <div className={styles.degreeTop}>
             <div>
               <h2>{degree.qualification}</h2>
               <p className="muted">
-                <a href={degree.institutionHref}>{degree.institution}</a> · {degree.location}
+                <ExternalLink href={degree.institutionHref} locale={locale}>
+                  {degree.institution}
+                </ExternalLink>{" "}
+                · {degree.location}
               </p>
             </div>
             <Badge variant="outline" className={styles.status}>
@@ -194,9 +202,13 @@ export function EducationView({ locale }: { locale: Locale }) {
               {rankings.map((ranking) => (
                 <li className={styles.ranking} key={ranking.source}>
                   <span className={styles.rankingPosition}>{ranking.position}</span>
-                  <a className={styles.rankingSource} href={ranking.href}>
+                  <ExternalLink
+                    className={styles.rankingSource}
+                    href={ranking.href}
+                    locale={locale}
+                  >
                     {ranking.source}
-                  </a>
+                  </ExternalLink>
                   <span className={styles.rankingEdition}>{ranking.edition}</span>
                 </li>
               ))}

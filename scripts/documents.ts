@@ -2,7 +2,14 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 
-const definitions = [
+type DocumentDefinition = readonly [
+  href: string,
+  en: string,
+  es: string,
+  mime: "application/pdf" | "image/png",
+];
+
+const definitions: DocumentDefinition[] = [
   [
     "/documents/uns-academic-transcript-2025.pdf",
     "Academic transcript (2025)",
@@ -62,7 +69,7 @@ const target = new URL("../src/content/public-documents.json", import.meta.url);
 const args = process.argv.slice(2);
 assert(
   args.length <= 1 && (!args.length || args[0] === "--write"),
-  "Usage: node scripts/documents.mjs [--write]",
+  "Usage: node scripts/documents.ts [--write]",
 );
 if (args[0] === "--write") {
   await writeFile(target, `${JSON.stringify(records, null, 2)}\n`);

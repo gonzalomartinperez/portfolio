@@ -81,7 +81,6 @@ test("the curated hero prioritizes applied AI while preserving source knowledge"
   for (const id of [
     "pydantic-ai",
     "google-vertex-ai",
-    "openai-api",
     "pytest",
     "sentry",
     "pytorch",
@@ -126,8 +125,6 @@ test("additional Rampy confirmations describe integrations without inventing mod
     "vitest",
     "google-vertex-ai",
     "google-gemini",
-    "openai-api",
-    "graphrag",
     "llm-provider-fallback",
     "server-sent-events",
     "transaction-idempotency",
@@ -143,6 +140,14 @@ test("additional Rampy confirmations describe integrations without inventing mod
       id,
     );
   }
+  assert.deepEqual(
+    getTechnology("openai-api")?.evidence.map(({ href }) => href),
+    ["/work#rampy", "/work#teamcubation"],
+  );
+  assert.deepEqual(
+    getTechnology("graphrag")?.evidence.map(({ href }) => href),
+    ["/work#rampy", "/work#teamcubation"],
+  );
   for (const id of [
     "rag",
     "spec-driven-development",

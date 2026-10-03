@@ -18,6 +18,19 @@ then run the manual export with explicit local input arguments:
 node scripts/export-cv.mjs <approved-editorial-json> <verified-facts-json> <reviewed-release-manifest>
 ```
 
+After copying the reviewed PDFs, verify the public projection and PDF bytes
+against those same inputs without writing files:
+
+```sh
+npm run cv:sync:check -- <approved-editorial-json> <verified-facts-json> <reviewed-release-manifest>
+```
+
+The Work pages take contractual position titles and public periods directly from
+the generated CV projection in both languages. Page-specific narratives and
+company labels remain editorial copy; compare their claims with the approved
+source during review. The check requires the private inputs only in the local
+career workspace; CI continues to build from committed public files alone.
+
 The exporter allows identity name, public email/location, confirmed experience,
 approved copy, education, skills, languages and completed credentials. It omits
 phone, evidence paths, internal notes, vacancies, hidden sections and source-system
@@ -43,13 +56,13 @@ the outputs appear synchronized. Update the reviewed inputs and export instead.
 
 ## Documents
 
-The explicit list in `scripts/documents.mjs` contains six authorized assets: two
+The explicit list in `scripts/documents.ts` contains six authorized assets: two
 CVs, two completed-course certificates, the original university plan and the original
 historical transcript. `src/content/public-documents.json` records their sizes,
 MIME types and SHA-256 hashes. After an approved asset update:
 
 ```sh
-node scripts/documents.mjs --write
+node scripts/documents.ts --write
 npm run test:documents
 ```
 

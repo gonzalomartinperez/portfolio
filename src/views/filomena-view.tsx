@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ExternalLink } from "@/components/external-link";
 import { GalleryCarousel } from "@/components/gallery-carousel";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
@@ -174,17 +175,30 @@ export function FilomenaView({ locale }: { locale: Locale }) {
         <section className={styles.block}>
           <h2>{copy.filomena.evidenceHeading}</h2>
           <div className={styles.evidence}>
-            {filomena.links.map((link) => (
-              <Link
-                data-slot="card"
-                className={cn(cardVariants(), styles.evidenceLink)}
-                href={link.href}
-                key={link.href}
-              >
-                <span className={styles.evidenceLabel}>{link.label}</span>
-                <span className={styles.evidenceDescription}>{link.description}</span>
-              </Link>
-            ))}
+            {filomena.links.map((link) =>
+              link.href.startsWith("http") ? (
+                <ExternalLink
+                  data-slot="card"
+                  className={cn(cardVariants(), styles.evidenceLink)}
+                  href={link.href}
+                  key={link.href}
+                  locale={locale}
+                >
+                  <span className={styles.evidenceLabel}>{link.label}</span>
+                  <span className={styles.evidenceDescription}>{link.description}</span>
+                </ExternalLink>
+              ) : (
+                <Link
+                  data-slot="card"
+                  className={cn(cardVariants(), styles.evidenceLink)}
+                  href={link.href}
+                  key={link.href}
+                >
+                  <span className={styles.evidenceLabel}>{link.label}</span>
+                  <span className={styles.evidenceDescription}>{link.description}</span>
+                </Link>
+              ),
+            )}
           </div>
           <p className="muted">{copy.filomena.evidenceNote}</p>
         </section>

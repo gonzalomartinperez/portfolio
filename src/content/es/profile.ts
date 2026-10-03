@@ -11,19 +11,19 @@ export const profile = {
   availability: "Abierto a roles remotos, disponible de inmediato",
 
   /** El mensaje de cinco segundos. Una idea por frase. */
-  headline: "Construyo software que conecta productos, sistemas e IA.",
+  headline: "Transformo sistemas complejos de IA y fintech en productos rápidos y cuidados.",
 
   intro:
     "Soy Gonzalo, ingeniero de software especializado en IA aplicada. Transformo ideas en productos útiles: desde agentes de IA y servicios backend hasta aplicaciones web y móviles.",
 
   summary:
-    "En Rampy conecto desarrollo de producto con orquestación de agentes, recuperación de contexto, memoria e integraciones financieras. Mi experiencia abarca permisos empresariales, procesamiento masivo de promociones y Filomena, una plataforma de exámenes desarrollada por un equipo de tres personas y usada por cinco instituciones.",
+    "En Rampy entrego experiencias productivas de IA, fintech y mobile: consultas financieras más rápidas, una aplicación renovada y un design system completo. También desarrollé flujos GraphRAG empresariales, contribuí a una carga de 20M+ promociones y diseñé permisos para más de 10 integraciones.",
 
   /** Etiqueta canónica exacta. Nunca Senior, Tech Lead, Architect ni Staff. */
   seniority: "Semi-senior",
-  experienceLength: "2 años y 8 meses",
+  experienceLength: "2 años y 9 meses",
   experienceSince: "enero de 2024",
-  experienceAsOf: "septiembre de 2026",
+  experienceAsOf: "octubre de 2026",
 
   languages: [
     { language: "Español", level: "Nativo" },
@@ -53,12 +53,12 @@ export const resumeLinks: EvidenceLink[] = [
   {
     label: "CV — Inglés (PDF)",
     href: resumeDownloads.en,
-    description: "Tres páginas, actualizado en septiembre de 2026",
+    description: "Tres páginas, actualizado en octubre de 2026",
   },
   {
     label: "CV — Español (PDF)",
     href: resumeDownloads.es,
-    description: "Tres páginas, actualizado en septiembre de 2026",
+    description: "Tres páginas, actualizado en octubre de 2026",
   },
 ];
 

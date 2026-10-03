@@ -28,7 +28,8 @@
     "test:budget": "node --test scripts/budget.test.mjs",
     "test:rendered": "node --test scripts/rendered.test.mjs",
     "test:site": "node scripts/test-site.mjs",
-    "test:documents": "node scripts/documents.mjs",
+    "test:documents": "node scripts/documents.ts",
+    "cv:sync:check": "node scripts/export-cv.mjs --check",
     "test:smoke": "node scripts/smoke-test.mjs",
     "test:browser": "playwright test",
     "test:identity": "node scripts/generate-identity.mjs --check",
@@ -38,6 +39,7 @@
   "dependencies": {
     "@radix-ui/react-dialog": "1.1.23",
     "@radix-ui/react-slot": "1.3.3",
+    "@xyflow/react": "12.12.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "gsap": "3.15.0",
