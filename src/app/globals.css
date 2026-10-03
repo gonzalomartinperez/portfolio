@@ -327,6 +327,9 @@
     .actions {
       justify-content: center;
     }
+    .actions .ui-action {
+      padding-inline: min(1.5rem, 24px);
+    }
   }
 
   @media (prefers-reduced-motion: no-preference) {

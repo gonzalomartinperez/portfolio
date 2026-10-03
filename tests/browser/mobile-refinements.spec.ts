@@ -80,5 +80,15 @@ for (const prefix of ["", "/es"]) {
         await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
       ).toBe(true);
     }
+    await page.goto(`${prefix}/contact`);
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.evaluate(() => (document.documentElement.style.fontSize = "200%"));
+    await expect
+      .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1))
+      .toBe(true);
+    const brandName = await page
+      .locator(`header a[href="${prefix || "/"}"] > span > span:first-child`)
+      .boundingBox();
+    expect(brandName?.width).toBeGreaterThan(60);
   });
 }
