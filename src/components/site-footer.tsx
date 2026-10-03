@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ExternalLink } from "@/components/external-link";
+import { Button } from "@/components/ui/button";
 import { chrome } from "@/content/chrome";
 import { contactChannels, contactLinks, profile } from "@/content/en/profile";
 import { contactChannels as spanishContactChannels } from "@/content/es/profile";
@@ -10,6 +11,7 @@ import { defaultLocale, type Locale, localePath } from "@/content/locales";
 import { navigationPath } from "@/content/routes";
 import { ContactIcons } from "./contact-links";
 import { Mark } from "./mark";
+import { setPageMotionPaused, usePageMotionPaused } from "./motion-state";
 import styles from "./site-footer.module.css";
 
 function localeFromPath(pathname: string): Locale {
@@ -21,6 +23,7 @@ function localeFromPath(pathname: string): Locale {
  * client-side navigation. Contact links and the identity line are language-independent.
  */
 export function SiteFooter() {
+  const paused = usePageMotionPaused();
   const locale = localeFromPath(navigationPath(usePathname()));
   const copy = chrome[locale];
 
@@ -84,6 +87,17 @@ export function SiteFooter() {
       <div className={`frame ${styles.colophon}`}>
         <span>© 2026 {profile.name}</span>
         <span>{copy.colophon}</span>
+        <Button
+          variant="ghost"
+          size="sm"
+          className={styles.motionToggle}
+          aria-pressed={paused}
+          data-motion-toggle
+          onClick={() => setPageMotionPaused(!paused)}
+        >
+          <span aria-hidden="true">{paused ? "▶" : "Ⅱ"}</span>
+          {paused ? copy.resumeMotion : copy.pauseMotion}
+        </Button>
       </div>
     </footer>
   );

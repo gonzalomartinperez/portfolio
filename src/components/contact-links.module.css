@@ -55,6 +55,7 @@
 }
 
 .name {
+  overflow-wrap: anywhere;
   font-weight: 550;
 }
 
@@ -68,6 +69,10 @@
 }
 .email > span {
   display: inline-block;
+}
+.email > span:first-child {
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 @media (width < 36rem) {
   .link {
@@ -99,6 +104,7 @@
 /* Compact, icon-only row for the footer. */
 .compact {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-2);
 }
 

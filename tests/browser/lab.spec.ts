@@ -26,7 +26,9 @@ test("record local loading and frame-cadence observations", async ({ page }, inf
       };
       requestAnimationFrame(tick);
     });
-    const gl = document.querySelector("canvas")?.getContext("webgl2");
+    const gl = document
+      .querySelector<HTMLCanvasElement>("[data-scene] canvas")
+      ?.getContext("webgl2");
     const debug = gl?.getExtension("WEBGL_debug_renderer_info");
     const readings = (window as Window & { portfolioLab?: { lcpMs: number; cls: number } })
       .portfolioLab;

@@ -65,8 +65,14 @@ export function TechConstellation({
                         </span>
                       </span>
                       {item.status === "developing" && (
-                        <span className={styles.status}>
-                          {locale === "es" ? "En consolidación" : "In development"}
+                        <span
+                          className={styles.status}
+                          title={locale === "es" ? "En consolidación" : "In development"}
+                        >
+                          <span aria-hidden="true">◌</span>
+                          <span className="sr-only">
+                            {locale === "es" ? "En consolidación" : "In development"}
+                          </span>
                         </span>
                       )}
                     </Link>

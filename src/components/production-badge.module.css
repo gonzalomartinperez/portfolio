@@ -1,0 +1,5 @@
+.badge {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  background: var(--accent-wash);
+}

@@ -68,10 +68,20 @@
   color: var(--text-secondary);
   font-size: var(--text-small);
   padding-left: var(--space-3);
+  overflow-wrap: anywhere;
 }
 
 .downloads {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+}
+
+@media (width < 52rem) {
+  .panel {
+    padding: min(var(--space-5), 24px);
+  }
+  .panel :global(.ui-action) {
+    padding-inline: min(1.5rem, 24px);
+  }
 }

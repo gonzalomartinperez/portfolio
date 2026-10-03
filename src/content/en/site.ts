@@ -43,6 +43,10 @@ export const siteCopy: SiteCopy = {
     avatarInteraction: "Interact with Gonzalo’s avatar",
     principles: [
       {
+        title: "Performance",
+        description: "Measured latency, fast startup and efficient use of resources.",
+      },
+      {
         title: "Scalability",
         description: "Clear service boundaries, asynchronous work and deliberate data access.",
       },
@@ -69,8 +73,8 @@ export const siteCopy: SiteCopy = {
     factLanguages: "Languages",
     languagesValue: "Spanish (native) · English (B2)",
     experienceSince: (length, since) => `${length}, since ${since}`,
-    workEyebrow: "Production impact",
-    workHeading: "AI and software that ship",
+    workEyebrow: "Featured project",
+    workHeading: "A real product, built end to end",
     experienceEyebrow: "Experience",
     experienceHeading: "Products, teams and contributions",
     stackEyebrow: "Stack",
@@ -232,7 +236,7 @@ export const siteCopy: SiteCopy = {
     basedIn: (location, arrangement, timezone) =>
       `Based in ${location} (${timezone}), working ${arrangement}. Available to start immediately, with the exact date agreed during the hiring process.`,
     hiringHint: "For a closer look at my product and engineering work, explore the",
-    hiringLinkText: "Filomena case study",
+    hiringLinkText: "production experience and outcomes",
     openToHeading: "Open to",
     resumeHeading: "CV",
     resumeNote: "Download the English or Spanish CV for experience, skills and contact details.",

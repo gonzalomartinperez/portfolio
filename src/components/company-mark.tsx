@@ -2,9 +2,9 @@ import Image from "next/image";
 import styles from "./company-mark.module.css";
 
 const companyImages: Record<string, string> = {
-  rampy: "rampy.png",
-  teamcubation: "teamcubation.svg",
-  "cooperativa-obrera": "cooperativa-obrera.png",
+  rampy: "rampy-original.jpg",
+  teamcubation: "teamcubation-original.jpg",
+  "cooperativa-obrera": "cooperativa-obrera-100.jpg",
   pequeverso: "pequeverso-isotipo.webp",
   independent: "independent.jpg",
 };

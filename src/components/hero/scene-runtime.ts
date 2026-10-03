@@ -69,6 +69,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   let copyView = visualNode(null);
   const backdrop = visualNode(stage.querySelector<HTMLElement>("[data-scene-backdrop]"));
   let cloudScale = 1;
+  let cloudCenterY = 0;
   const logos: {
     view: VisualNode;
     orbitX: number;
@@ -137,7 +138,11 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       avatarButton.style.visibility = value >= 0.4 ? "hidden" : "visible";
     }
     if (viewport) viewport.style.cursor = "";
-    paint(copyView, ease((value - 0.55) / 0.15) * (1 - ease((value - 0.8) / 0.1)));
+    paint(
+      copyView,
+      ease((value - 0.55) / 0.15) * (1 - ease((value - 0.8) / 0.1)),
+      `translate(-50%,-50%) translate3d(0,${rounded(cloudCenterY)}px,0)`,
+    );
     const settle = ease((value - 0.86) / 0.14);
     for (const logo of logos) {
       const reveal = ease((value - logo.revealAt) / cloudEntrance.duration);
@@ -353,8 +358,15 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     engine.resize();
     const width = viewport?.clientWidth ?? innerWidth;
     const height = viewport?.clientHeight ?? innerHeight;
+    const heroBottom = (hero.element?.offsetTop ?? 0) + (hero.element?.offsetHeight ?? 0);
+    const headerPosition = header ? getComputedStyle(header).position : "";
     const headerHeight =
-      header && getComputedStyle(header).position === "sticky" ? header.offsetHeight : 0;
+      header && (headerPosition === "sticky" || headerPosition === "fixed")
+        ? header.getBoundingClientRect().height
+        : 0;
+    const resting = engine.setRestingRegion(heroBottom + 24, height - headerHeight - 24);
+    viewport?.style.setProperty("--scene-core-y", `${resting.centerY}px`);
+    viewport?.style.setProperty("--scene-sphere-radius", `${resting.radius}px`);
     const logoHeight = Math.max(0, ...logos.map((logo) => logo.view.element?.offsetHeight ?? 0));
     const logoWidth = Math.max(0, ...logos.map((logo) => logo.view.element?.offsetWidth ?? 0));
     const layout = layoutCloud({
@@ -369,6 +381,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       count: logos.length,
     });
     cloudScale = layout.scale;
+    cloudCenterY = layout.center.y;
     const gridTop = headerHeight + 16 + logoHeight / 2;
     const columns = compact.matches ? 5 : 7;
     const rows = Math.ceil(logos.length / columns);
@@ -397,6 +410,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   if (viewport) resizeObserver.observe(viewport);
   if (journey) resizeObserver.observe(journey);
   if (header) resizeObserver.observe(header);
+  if (hero.element) resizeObserver.observe(hero.element);
   if (copyView.element) resizeObserver.observe(copyView.element);
   const observer = new IntersectionObserver(([entry]) => {
     onScreen = entry.isIntersecting;
@@ -434,6 +448,8 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       stage.removeAttribute("data-scene-settled");
       journey?.style.removeProperty("--toolkit-overflow");
       viewport?.style.removeProperty("--toolkit-overflow");
+      viewport?.style.removeProperty("--scene-core-y");
+      viewport?.style.removeProperty("--scene-sphere-radius");
       stage.removeAttribute("data-scene-quality");
       stage.removeAttribute("data-scene-tap");
       stage.removeAttribute("data-scene-pulse");

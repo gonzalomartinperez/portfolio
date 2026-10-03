@@ -323,6 +323,15 @@
     gap: var(--space-3);
   }
 
+  @media (width < 52rem) {
+    .actions {
+      justify-content: center;
+    }
+    .actions .ui-action {
+      padding-inline: min(1.5rem, 24px);
+    }
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     @media (hover: hover) and (pointer: fine) {
       .ui-action:not(:disabled):not([aria-disabled="true"]):hover {

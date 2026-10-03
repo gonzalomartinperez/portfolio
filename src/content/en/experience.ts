@@ -14,18 +14,18 @@ export const roles: Role[] = [
     context:
       "AI Engineer with end-to-end product engineering scope: partnering directly with three founders to shape priorities and ship production AI, fintech, web and mobile features across architecture, implementation, evaluation and operations.",
     contributions: [
+      "Rebuilt Rampy’s product architecture in production: refactored the entire backend into a cohesive hexagonal architecture and the React/Next.js frontend into feature-based domains, with a complete design system and reusable component abstractions.",
+      "Built production agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j-backed GraphRAG, combining retrieval, reranking, selective memory and evaluation of complete journeys and tool selection. Optimized workflows responded at least 2× faster by my estimate; removing redundant calls and context cut tokens in affected queries by an estimated 30%.",
+      "Cut measured average mobile app startup from about 7–8 seconds to 1–2 seconds; shipped React Native, Kotlin and Swift features, using Android Studio for Android development and testing in emulators and on physical devices.",
+      "Implemented end-to-end encryption (E2EE) for user conversations in the production app, with messages persisted encrypted in the database.",
+      "Implemented end-to-end mobile event tracking with Google Analytics through Firebase, Clarity Mobile on every screen, and Singular SDK for Meta App Events, coordinating integrations to prevent duplicate events. Designed, built, tested and deployed a campaign landing page for app downloads.",
+      "Integrated Morpho, Aave and Compound across backend, frontend and transaction execution for positions, yields, deposits and withdrawals, with completeness checks and webhook-based status tracking; also worked with Privy and Stripe integrations in production.",
       "Built a consolidated portfolio experience for assets, vaults and 24-hour returns; reduced comparable vault, market and perpetual data retrieval from seconds into the millisecond range through prefetching, parallel provider calls and selective caching.",
-      "Built agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j-backed GraphRAG, retrieval, reranking and selective memory; evaluated complete journeys and tool selection while reducing redundant context and calls.",
-      "Integrated Morpho, Aave and Compound across backend, frontend and transaction execution for positions, yields, deposits and withdrawals, with completeness checks and webhook-based status tracking.",
-      "Refactored the entire backend into a cohesive hexagonal architecture and the React/Next.js frontend around user-facing features; built Rampy’s complete design system with reusable component abstractions, all shipped to production.",
-      "Shipped React Native, Kotlin and Swift mobile features using Android Studio, tested in emulators and on physical devices; reduced measured average app startup time.",
-      "Implemented end-to-end mobile event tracking with Google Analytics through Firebase, Clarity Mobile on every screen, and Singular SDK for Meta App Events, coordinating the integrations to prevent duplicate events. Designed, built, tested and deployed a campaign landing page for app downloads.",
-      "Implemented end-to-end encryption for user conversations, persisting messages encrypted in the database; worked with Privy and Stripe integrations in the production product.",
-      "Shortened the validation, build and deployment pipeline while retaining its checks; optimized application bundles, Docker images and development, staging and production environments on DigitalOcean.",
-      "Centralized secrets with Infisical, per-user access, automated synchronization and on-demand rotation; worked across deployment, monitoring, backups, databases and server permissions.",
-      "Prepared scalable infrastructure with the design goal of supporting thousands of users, organizing environments, containers and operational controls for product growth.",
-      "Standardized spec-driven engineering through an agent skills marketplace and repeatable local setup, connecting requirements, architecture, implementation, automated tests and human UI review.",
+      "Cut the validation, build and deployment pipeline from about one hour to ten minutes while retaining its checks; optimized application bundles, Docker images and development, staging and production environments on DigitalOcean.",
       "Added domain and malicious-instruction controls to agent workflows, checked with automated behavioral tests and human review.",
+      "Centralized secrets with Infisical, per-user access, automated synchronization and on-demand rotation; worked across deployment, monitoring, backups, databases and server permissions.",
+      "Standardized spec-driven engineering through an agent skills marketplace and repeatable local setup, connecting requirements, architecture, implementation, automated tests and human UI review.",
+      "Prepared scalable infrastructure with the design goal of supporting thousands of users, organizing environments, containers and operational controls for product growth.",
     ],
     attribution:
       "Product engineering from requirements through production, in direct collaboration with the founders and building on the team's existing work.",
@@ -64,10 +64,16 @@ export const roles: Role[] = [
     ]),
     metrics: [
       {
-        value: "≥2×",
-        label: "faster optimized financial queries",
+        value: "~2×+",
+        label: "faster responses in optimized agent workflows",
         qualifier:
-          "Owner estimate for comparable vault, market and swap queries in production; exact samples and values were not retained, and this is not whole-product latency.",
+          "Estimated response times of roughly half the previous baseline or less under comparable conditions; not a system-wide benchmark.",
+      },
+      {
+        value: "~30%",
+        label: "fewer tokens in targeted queries",
+        qualifier:
+          "Estimated reduction for queries affected by unnecessary calls and redundant context; not a system-wide benchmark.",
       },
       {
         value: "~7–8 s → 1–2 s",
@@ -76,22 +82,16 @@ export const roles: Role[] = [
           "Owner-measured before/after averages for app startup; sample and test window were not retained, and the result does not describe every screen.",
       },
       {
-        value: "~2×+",
-        label: "faster responses in optimized agent workflows",
+        value: "≥2×",
+        label: "faster optimized financial queries",
         qualifier:
-          "Estimated response times of roughly half the previous baseline or less under comparable conditions; not a system-wide benchmark.",
+          "Owner estimate for comparable vault, market and swap queries in production; exact samples and values were not retained, and this is not whole-product latency.",
       },
       {
         value: "~1 h → 10 min",
         label: "delivery pipeline",
         qualifier:
           "Approximate observed before/after for validation, build and deployment, with checks retained.",
-      },
-      {
-        value: "~30%",
-        label: "fewer tokens in targeted queries",
-        qualifier:
-          "Estimated reduction for queries affected by unnecessary calls and redundant context; not a system-wide benchmark.",
       },
     ],
   },
@@ -107,14 +107,14 @@ export const roles: Role[] = [
       "The promotions platform for Payway, a leading Latin American fintech, serving an " +
       "ecosystem of 350,000+ merchants, 70+ card issuers and 13 countries.",
     contributions: [
+      "Built an in-product GraphRAG agent and harness with LangChain, LangGraph, Neo4j and OpenAI API for merchant owners, relating enterprise policies and promotions. The harness orchestrated agents, evaluated answers, supported performance tuning and enforced promotion-domain and data-leakage guardrails; the assistant answered queries without executing commercial actions.",
+      "Contributed to a historical production load of 20M+ promotions, followed by thousands of new promotions daily; implemented an event-driven, serverless flow with Amazon S3, SQS and a Python/FastAPI Lambda using ordered processing strategies. The complete production load was validated with zero data loss.",
       "Delivered the promotions experience end to end: a Single-SPA React and TypeScript microfrontend embedded as a native section of the merchant portal, connected through a Spring WebFlux BFF to Java/Spring Boot and Node.js/NestJS microservices and providers.",
-      "Built an in-product GraphRAG agent and harness with Neo4j and OpenAI API for merchant owners, relating enterprise policies and promotions. The harness orchestrated agents, evaluated answers, supported performance tuning and enforced promotion-domain and data-leakage guardrails; the assistant did not execute commercial actions.",
-      "Integrated the HTTPS merchant portal with internal HTTP enterprise services through Amazon API Gateway.",
       "Built Java/Spring Boot and TypeScript/Node.js/NestJS microservices to ingest, normalize and process promotions from merchants, financial entities and providers, adapting contracts per integration.",
-      "Implemented an event-driven, serverless flow with Amazon S3, SQS and a Python/FastAPI Lambda using ordered processing strategies.",
-      "Built a project-specific agentic engineering environment to preserve context across integration repositories and support consistent feature delivery.",
-      "Applied hexagonal architecture in selected microservices and layered architecture in other components.",
       "Built Python and Node.js tooling to replay bulk loads safely against isolated local databases, reconcile results and surface failed promotions and edge cases before release.",
+      "Integrated the HTTPS merchant portal with internal HTTP enterprise services through Amazon API Gateway.",
+      "Applied hexagonal architecture in selected microservices and layered architecture in other components.",
+      "Built a project-specific agentic engineering environment to preserve context across integration repositories and support consistent feature delivery.",
     ],
     attribution:
       "Key engineering contributor with substantial component ownership within the team. Application development, configuration, observability and diagnostics in Docker and Kubernetes environments.",
@@ -170,9 +170,9 @@ export const roles: Role[] = [
     context:
       "Independent product engineering through occasional projects for clients in e-commerce, social media and digital products.",
     contributions: [
-      "Designed and shipped digital products, back offices and stock and point-of-sale extensions, connecting commercial needs to maintainable systems.",
       "Delivered Pequeverso’s digital-products storefront with Node.js and Next.js on Hostinger, including a conversational shopping assistant that answers product questions without executing purchases.",
-      "Built MCP-, Claude- and LLM-powered pipelines and agents that research, generate and publish content end to end.",
+      "Built MCP-, Claude- and LLM-powered pipelines and agents that research, generate and publish content end to end. Across historical client projects, clients estimated operating-cost reductions of at least 70%.",
+      "Designed and shipped digital products, back offices and stock and point-of-sale extensions, connecting commercial needs to maintainable systems. Delivered products generated USD 10,000+ in cumulative client profit across historical projects.",
       "Developed online stores, WordPress solutions, APIs and custom full-stack integrations, with Python and Node.js tooling for automation, bulk processing and data analysis under spec-driven development.",
     ],
     attribution:
@@ -215,12 +215,13 @@ export const roles: Role[] = [
       "Argentina's largest consumer cooperative: 150+ branches, 2.7M+ members and " +
       "an ecosystem of 50+ internal systems.",
     contributions: [
-      "Held a principal design, architecture and implementation role with product-engineering scope.",
+      "Designed and built a permissions-management back office integrating 10+ enterprise systems; replaced roughly ten minutes of manual permission lookup with an automated workflow taking under ten seconds, giving administrators a consistent experience across different databases and permission models.",
+      "Standardized system onboarding with reusable structures, filters and validation, reducing permission-related tickets by at least 80% and eliminating at least 95% of recurring assignment bugs, based on before/after tickets and logs.",
       "Built a responsive Next.js and TypeScript frontend whose only interface was a Python/FastAPI BFF, standardizing frontend views against its contract and integrations with Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger contracts.",
-      "Personally integrated 10+ systems through Java/Spring Boot or TypeScript/Node.js/NestJS microservices, each encapsulating different databases and permission models behind a consistent administrator experience; PHP services and legacy applications were also connected through the BFF.",
-      "Built a personal cross-system agentic engineering environment to preserve context and work in parallel across independent integration repositories.",
-      "Standardized onboarding for new systems with reusable structures and filters.",
+      "Personally connected systems through Java/Spring Boot and TypeScript/Node.js/NestJS microservices, encapsulating their databases and permission models; PHP services and legacy applications were also connected through the BFF.",
+      "Tuned SQL queries, indexes and pagination; critical endpoints averaged below 300 ms in repeatable tests on enterprise on-premise servers, a separate measurement from the automated permission-lookup workflow.",
       "Automated bulk loads and data validation with Python; combined LDAP authentication, role-based access and exportable audit reports with MySQL, MariaDB and Redis. The web development team took over maintenance after my departure.",
+      "Built a personal cross-system agentic engineering environment to preserve context and work in parallel across independent integration repositories.",
     ],
     attribution:
       "Principal design and implementation responsibility for the permissions-management product and its integrations.",
@@ -234,6 +235,8 @@ export const roles: Role[] = [
       "Spring Boot",
       "Node.js",
       "NestJS",
+      "PHP",
+      "OpenAPI",
       "SQL",
       "Docker",
       "LDAP",
@@ -247,10 +250,10 @@ export const roles: Role[] = [
     ]),
     metrics: [
       {
-        value: "10+",
-        label: "systems integrated",
+        value: "10 min → <10 s",
+        label: "manual to automated permission lookup",
         qualifier:
-          "The systems within the permissions back office’s scope, integrated personally, inside an ecosystem of 50+.",
+          "Replaced a roughly ten-minute manual search with an automated back-office workflow, reducing manual steps through the system's architecture and integrations. Separately, critical endpoints averaged below 300 ms in repeatable on-premise tests, supported by SQL tuning, indexing and pagination.",
       },
       {
         value: "≥80%",
@@ -259,10 +262,10 @@ export const roles: Role[] = [
           "Compared against tickets and logs before and after standardized onboarding; ≥95% of recurring assignment bugs eliminated.",
       },
       {
-        value: "10 min → <10 s",
-        label: "manual to automated permission lookup",
+        value: "10+",
+        label: "systems integrated",
         qualifier:
-          "Replaced a roughly ten-minute manual search with an automated back-office workflow, reducing manual steps through the system's architecture and integrations. Separately, critical endpoints averaged below 300 ms in repeatable on-premise tests, supported by SQL tuning, indexing and pagination.",
+          "The systems within the permissions back office’s scope, integrated personally, inside an ecosystem of 50+.",
       },
     ],
   },

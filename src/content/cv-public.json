@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-03.7",
+  "revision": "2026-10-03.9",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -70,16 +70,16 @@
                   ]
                 },
                 {
-                  "id": "rampy-portfolio-orchestration",
+                  "id": "rampy-architecture-mobile",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Built a consolidated portfolio and 24-hour returns view",
+                      "text": "Rebuilt production product architecture",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " with parallel calls, prefetching and Redis caching; comparable vault, market and perpetual queries moved from seconds to milliseconds.",
+                      "text": ": refactored the full backend into hexagonal architecture and the React/Next.js frontend into feature-based domains; built Rampy’s complete design system with reusable components. Implemented E2EE for user conversations with encrypted database storage.",
                       "bold": false,
                       "href": ""
                     }
@@ -90,12 +90,28 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Built Agno, LangChain/LangGraph and OpenAI API agent workflows with Neo4j GraphRAG",
+                      "text": "Built production Agno, LangChain/LangGraph and OpenAI API agent workflows with Neo4j GraphRAG",
                       "bold": true,
                       "href": ""
                     },
                     {
                       "text": ", improving memory, retrieval, tool selection and evaluation. Optimized flows responded at least 2× faster by owner estimate; removing redundant calls cut tokens in affected queries by an estimated 30%.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-mobile-production",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Cut measured average mobile app startup from about 7–8 s to 1–2 s",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": "; shipped React Native, Kotlin and Swift features, using Android Studio for Android. Implemented end-to-end event tracking with Firebase Analytics, Clarity Mobile on every screen, Singular SDK and Meta App Events, avoiding duplicates.",
                       "bold": false,
                       "href": ""
                     }
@@ -118,32 +134,16 @@
                   ]
                 },
                 {
-                  "id": "rampy-architecture-mobile",
+                  "id": "rampy-portfolio-orchestration",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Refactored the full backend into hexagonal architecture and the React/Next.js frontend by user feature",
+                      "text": "Built a consolidated portfolio and 24-hour returns view",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": "; built Rampy’s complete design system with reusable component abstractions, all in production. Implemented E2EE for user conversations with encrypted database storage.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "rampy-mobile-production",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Shipped React Native, Kotlin and Swift mobile features",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " using Android Studio; cut measured average app startup from about 7–8 s to 1–2 s. Implemented end-to-end event tracking with Firebase Analytics, Clarity Mobile on every screen, Singular SDK and Meta App Events, avoiding duplicates.",
+                      "text": " with parallel calls, prefetching and Redis caching; comparable vault, market and perpetual queries moved from seconds to milliseconds.",
                       "bold": false,
                       "href": ""
                     }
@@ -197,6 +197,38 @@
                   ]
                 },
                 {
+                  "id": "teamcubation-rag-assistant",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Built a merchant-facing GraphRAG agent and harness",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " with LangChain/LangGraph, Neo4j and OpenAI API to relate enterprise policies and promotions, orchestrate agents, evaluate answers, tune performance and enforce domain and data-leakage guardrails. The assistant answered queries without executing commercial actions.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "teamcubation-event-driven-processing",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Implemented event-driven processing for a production historical load of 20M+ promotions",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " with S3, SQS and a Python/FastAPI Lambda; built Python/Node.js tooling to reproduce local loads, reconcile results and identify failed promotions.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
                   "id": "teamcubation-portal-bff",
                   "kind": "bullet",
                   "runs": [
@@ -213,27 +245,6 @@
                   ]
                 },
                 {
-                  "id": "teamcubation-rag-assistant",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Built a merchant-facing ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "GraphRAG agent and harness with Neo4j and OpenAI API",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " to relate enterprise policies and promotions, orchestrate agents, evaluate answers, tune performance and enforce promotion-domain and data-leakage guardrails. The assistant answered queries without executing commercial actions.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
                   "id": "teamcubation-microservices",
                   "kind": "bullet",
                   "runs": [
@@ -244,22 +255,6 @@
                     },
                     {
                       "text": " using hexagonal or layered architecture, and developed and diagnosed containerized workloads running in Docker/Kubernetes-managed environments.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "teamcubation-event-driven-processing",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Implemented event-driven processing",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " with S3, SQS, and a Python/FastAPI Lambda for the historical load; built Python/Node.js tooling to reproduce local loads, reconcile results, and identify failed promotions.",
                       "bold": false,
                       "href": ""
                     }
@@ -308,26 +303,26 @@
                   ]
                 },
                 {
-                  "id": "independent-client-products",
+                  "id": "independent-commerce-automation",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Designed and shipped digital products",
+                      "text": "Delivered ",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", back offices, and stock/point-of-sale extensions that generated ",
-                      "bold": false,
-                      "href": ""
+                      "text": "Pequeverso",
+                      "bold": true,
+                      "href": "https://pequeverso.com/"
                     },
                     {
-                      "text": "USD 10,000+ in cumulative client profit",
+                      "text": "’s digital-product storefront",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", connecting commercial needs with maintainable, scalable operations.",
+                      "text": " with Next.js on Hostinger and an informational product and shopping assistant. Built stores, APIs and Python/Node.js automation under Spec-Driven Development, cutting tasks from hours to minutes.",
                       "bold": false,
                       "href": ""
                     }
@@ -360,26 +355,26 @@
                   ]
                 },
                 {
-                  "id": "independent-commerce-automation",
+                  "id": "independent-client-products",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Built stores, APIs, and Python/Node.js automation",
+                      "text": "Designed and shipped digital products",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " using Spec-Driven Development, cutting tasks from hours to minutes. For ",
+                      "text": ", back offices, and stock/point-of-sale extensions that generated ",
                       "bold": false,
                       "href": ""
                     },
                     {
-                      "text": "Pequeverso",
-                      "bold": false,
-                      "href": "https://pequeverso.com/"
+                      "text": "USD 10,000+ in cumulative client profit across historical projects",
+                      "bold": true,
+                      "href": ""
                     },
                     {
-                      "text": ", delivered a Next.js site on Hostinger and an informational product and shopping assistant.",
+                      "text": ", connecting commercial needs with maintainable, scalable operations.",
                       "bold": false,
                       "href": ""
                     }
@@ -432,32 +427,16 @@
                   ]
                 },
                 {
-                  "id": "cooperativa-frontend-bff",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Built a responsive, dynamic Next.js/TypeScript frontend",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " connected exclusively to a Python/FastAPI BFF, standardizing frontend views against its contract and integrations with Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
                   "id": "cooperativa-system-integrations",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Integrated 10+ systems",
+                      "text": "Designed and built a permissions back office integrating 10+ enterprise systems",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " through Java/Spring Boot and TypeScript/Node.js/NestJS microservices with different databases and permission models behind a consistent admin UI; used an agentic workspace to preserve context across repositories.",
+                      "text": " with different databases and permission models; automated roughly 10 minutes of manual permission lookup into a workflow taking under 10 seconds, giving administrators a consistent experience.",
                       "bold": false,
                       "href": ""
                     }
@@ -500,26 +479,32 @@
                   ]
                 },
                 {
+                  "id": "cooperativa-frontend-bff",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Built a responsive, dynamic Next.js/TypeScript frontend",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " connected exclusively to a Python/FastAPI BFF, standardizing frontend views against its contract and integrations with Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
                   "id": "cooperativa-query-performance",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Automated permission lookups that previously took about 10 minutes of manual work, bringing them under 10 seconds",
+                      "text": "Kept critical endpoints below 300 ms on average",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " through the integrated back office, SQL tuning, indexing, and pagination. Critical endpoints averaged under ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "300 ms",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " in tests on enterprise on-premise servers.",
+                      "text": " in tests on enterprise on-premise servers through SQL tuning, indexing and pagination; used an agentic engineering workspace to preserve context across integration repositories.",
                       "bold": false,
                       "href": ""
                     }
@@ -824,22 +809,6 @@
                   ]
                 },
                 {
-                  "id": "filomena-modernization",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Led architecture, backend, frontend, and infrastructure",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", modernizing a CakePHP + jQuery monolith into an API-first product with a Laravel REST API and Next.js/React/TypeScript frontend.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
                   "id": "filomena-concurrency",
                   "kind": "bullet",
                   "runs": [
@@ -860,6 +829,22 @@
                     },
                     {
                       "text": " through SQL tuning, Redis caching and queues.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "filomena-modernization",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Led architecture, backend, frontend, and infrastructure",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": ", modernizing a CakePHP + jQuery monolith into an API-first product with a Laravel REST API and Next.js/React/TypeScript frontend.",
                       "bold": false,
                       "href": ""
                     }
@@ -1045,16 +1030,16 @@
                   ]
                 },
                 {
-                  "id": "rampy-portfolio-orchestration",
+                  "id": "rampy-architecture-mobile",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Construí una vista consolidada del portfolio y rendimientos de 24 horas",
+                      "text": "Reconstruí la arquitectura del producto en producción",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " con consultas paralelas, precarga y caché Redis; consultas comparables de vaults, mercados y perpetuos pasaron de segundos a milisegundos.",
+                      "text": ": refactoricé todo el backend con arquitectura hexagonal y el frontend React/Next.js por dominios y funcionalidades; desarrollé el design system completo con componentes reutilizables. Implementé E2EE para conversaciones con almacenamiento cifrado en la base de datos.",
                       "bold": false,
                       "href": ""
                     }
@@ -1065,12 +1050,28 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Desarrollé agentes con Agno, LangChain/LangGraph y OpenAI API, y GraphRAG con Neo4j",
+                      "text": "Desarrollé agentes productivos con Agno, LangChain/LangGraph y OpenAI API, y GraphRAG con Neo4j",
                       "bold": true,
                       "href": ""
                     },
                     {
                       "text": ", mejorando memoria, recuperación, selección de herramientas y evaluación. Según mi estimación, los flujos optimizados respondieron al menos 2× más rápido; eliminar llamadas redundantes redujo un 30% estimado de tokens en las consultas afectadas.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "rampy-mobile-production",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Reduje el arranque promedio medido de la app móvil de unos 7–8 s a 1–2 s",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": "; entregué funcionalidades React Native, Kotlin y Swift, usando Android Studio para Android. Implementé tracking de eventos de punta a punta con Firebase Analytics, Clarity Mobile en todas las pantallas, Singular SDK y Meta App Events, evitando duplicados.",
                       "bold": false,
                       "href": ""
                     }
@@ -1093,32 +1094,16 @@
                   ]
                 },
                 {
-                  "id": "rampy-architecture-mobile",
+                  "id": "rampy-portfolio-orchestration",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Refactoricé todo el backend con arquitectura hexagonal y el frontend React/Next.js por funcionalidades",
+                      "text": "Construí una vista consolidada del portfolio y rendimientos de 24 horas",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": "; desarrollé el design system completo de Rampy con abstracciones de componentes reutilizables, todo en producción. Implementé E2EE para conversaciones de usuarios con almacenamiento cifrado en la base de datos.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "rampy-mobile-production",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Entregué funcionalidades móviles con React Native, Kotlin y Swift",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " usando Android Studio; bajé el arranque promedio medido de unos 7–8 s a 1–2 s. Implementé tracking de eventos de punta a punta con Firebase Analytics, Clarity Mobile en todas las pantallas, Singular SDK y Meta App Events, evitando duplicados.",
+                      "text": " con consultas paralelas, precarga y caché Redis; consultas comparables de vaults, mercados y perpetuos pasaron de segundos a milisegundos.",
                       "bold": false,
                       "href": ""
                     }
@@ -1129,7 +1114,7 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Reduje validaciones, build y despliegue de unas 1 hora a 10 minutos",
+                      "text": "Reduje validaciones, build y despliegue de aproximadamente 1 hora a 10 minutos",
                       "bold": true,
                       "href": ""
                     },
@@ -1172,6 +1157,38 @@
                   ]
                 },
                 {
+                  "id": "teamcubation-rag-assistant",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Construí un agente GraphRAG para comercios y su harness",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " con LangChain/LangGraph, Neo4j y OpenAI API para relacionar políticas empresariales y promociones, orquestar agentes, evaluar respuestas, optimizar rendimiento y aplicar guardrails de dominio y protección de datos. El asistente respondía consultas sin ejecutar operaciones comerciales.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "teamcubation-event-driven-processing",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Implementé procesamiento event-driven para una carga histórica productiva de 20M+ promociones",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " con S3, SQS y una Lambda Python/FastAPI; desarrollé tooling Python/Node.js para reproducir cargas locales, reconciliar resultados y detectar promociones fallidas.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
                   "id": "teamcubation-portal-bff",
                   "kind": "bullet",
                   "runs": [
@@ -1188,27 +1205,6 @@
                   ]
                 },
                 {
-                  "id": "teamcubation-rag-assistant",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Construí un ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "agente GraphRAG con Neo4j, OpenAI API y su harness",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " para relacionar políticas empresariales y promociones, orquestar agentes, evaluar respuestas, optimizar rendimiento y aplicar guardrails de dominio y protección de datos. El asistente respondía consultas sin ejecutar operaciones comerciales.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
                   "id": "teamcubation-microservices",
                   "kind": "bullet",
                   "runs": [
@@ -1219,22 +1215,6 @@
                     },
                     {
                       "text": " con arquitectura hexagonal o en capas, y desarrollé y diagnostiqué workloads contenerizados ejecutados en entornos gestionados con Docker/Kubernetes.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "teamcubation-event-driven-processing",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Implementé procesamiento event-driven",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " con S3, SQS y una Lambda Python/FastAPI para la carga histórica; desarrollé tooling Python/Node.js para reproducir cargas locales, reconciliar resultados y detectar promociones fallidas.",
                       "bold": false,
                       "href": ""
                     }
@@ -1283,26 +1263,21 @@
                   ]
                 },
                 {
-                  "id": "independent-client-products",
+                  "id": "independent-commerce-automation",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Diseñé y entregué productos digitales",
+                      "text": "Entregué la tienda de productos digitales de ",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", backoffices y extensiones de stock/caja que generaron ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "USD 10.000+ en ganancias acumuladas para clientes",
+                      "text": "Pequeverso",
                       "bold": true,
-                      "href": ""
+                      "href": "https://pequeverso.com/"
                     },
                     {
-                      "text": ", conectando necesidades comerciales con operaciones mantenibles y escalables.",
+                      "text": " con Next.js en Hostinger y un asistente informativo de productos y compras. Desarrollé tiendas, APIs y automatizaciones Python/Node.js bajo Spec-Driven Development, reduciendo tareas de horas a minutos.",
                       "bold": false,
                       "href": ""
                     }
@@ -1335,26 +1310,26 @@
                   ]
                 },
                 {
-                  "id": "independent-commerce-automation",
+                  "id": "independent-client-products",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Desarrollé tiendas, APIs y automatizaciones Python/Node.js",
+                      "text": "Diseñé y entregué productos digitales",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " bajo Spec-Driven Development, reduciendo tareas de horas a minutos. Para ",
+                      "text": ", backoffices y extensiones de stock/caja que generaron ",
                       "bold": false,
                       "href": ""
                     },
                     {
-                      "text": "Pequeverso",
-                      "bold": false,
-                      "href": "https://pequeverso.com/"
+                      "text": "USD 10.000+ en ganancias acumuladas para clientes de distintos proyectos históricos",
+                      "bold": true,
+                      "href": ""
                     },
                     {
-                      "text": ", implementé un sitio Next.js en Hostinger y un asistente informativo de productos y compras.",
+                      "text": ", conectando necesidades comerciales con operaciones mantenibles y escalables.",
                       "bold": false,
                       "href": ""
                     }
@@ -1407,32 +1382,16 @@
                   ]
                 },
                 {
-                  "id": "cooperativa-frontend-bff",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Construí un frontend responsive y dinámico en Next.js/TypeScript",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " conectado exclusivamente a un BFF Python/FastAPI, que estandarizaba las vistas y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante contratos OpenAPI/Swagger.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
                   "id": "cooperativa-system-integrations",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Integré 10+ sistemas",
+                      "text": "Diseñé y construí un backoffice de permisos que integró 10+ sistemas empresariales",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " mediante microservicios Java/Spring Boot y TypeScript/Node.js/NestJS con bases de datos y permisos heterogéneos, ofreciendo una vista uniforme a administradores; usé un entorno agéntico para conservar contexto entre repositorios.",
+                      "text": " con bases de datos y permisos heterogéneos; reemplacé búsquedas manuales de unos 10 minutos por un flujo automatizado de menos de 10 segundos, con una experiencia uniforme para administradores.",
                       "bold": false,
                       "href": ""
                     }
@@ -1475,26 +1434,32 @@
                   ]
                 },
                 {
+                  "id": "cooperativa-frontend-bff",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Construí un frontend responsive y dinámico en Next.js/TypeScript",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " conectado exclusivamente a un BFF Python/FastAPI, que estandarizaba las vistas y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante contratos OpenAPI/Swagger.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
                   "id": "cooperativa-query-performance",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Automaticé búsquedas de permisos que requerían unos 10 minutos de trabajo manual, llevándolas a menos de 10 segundos",
+                      "text": "Mantuve los endpoints críticos por debajo de 300 ms en promedio",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " mediante el backoffice y sus integraciones, SQL tuning, índices y paginación. Los endpoints críticos promediaron menos de ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "300 ms",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " en pruebas sobre servidores empresariales on-premise.",
+                      "text": " en pruebas sobre servidores empresariales on-premise mediante SQL tuning, índices y paginación; usé un entorno agéntico de ingeniería para preservar contexto entre repositorios de integración.",
                       "bold": false,
                       "href": ""
                     }
@@ -1795,22 +1760,6 @@
                   ]
                 },
                 {
-                  "id": "filomena-modernization",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Lideré arquitectura, backend, frontend e infraestructura",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", modernizando un monolito CakePHP + jQuery hacia un producto API-first con API REST Laravel y frontend Next.js/React/TypeScript.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
                   "id": "filomena-concurrency",
                   "kind": "bullet",
                   "runs": [
@@ -1831,6 +1780,22 @@
                     },
                     {
                       "text": " mediante SQL tuning, caché y colas Redis.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "filomena-modernization",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Lideré arquitectura, backend, frontend e infraestructura",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": ", modernizando un monolito CakePHP + jQuery hacia un producto API-first con API REST Laravel y frontend Next.js/React/TypeScript.",
                       "bold": false,
                       "href": ""
                     }
@@ -1950,11 +1915,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "52d5448740027da7bfabeca9d350fde1412e1daa02177d03efc904738c0ddb3b",
-    "factsSha256": "e44cb8542db52581e2e181b01a2afc71cdc3b8763f3c33d9e478a9f07ef0697c",
+    "sourceSha256": "6b5e3448b6a7e63b131027b364bc098f877cba34e714dffd405bc09c71668c6c",
+    "factsSha256": "decadf5f665cfa82fec74747ab7d632ef49e31eac8f4db0ddd082d051bee80d2",
     "pdfSha256": {
-      "en": "522ce38bdf1f6bd94eb21c727a556a275abcca7a89b268cd81158421d30845c3",
-      "es": "1f069705a3d0c83aaf41b3f653f7a85fe1f17b8f5f0228598939af6cf96d92e8"
+      "en": "1fc9214fbe3011d13f7cffb1824e548d6b557f3eaf3292297f3cc0ba254b4b45",
+      "es": "55754c955a821f8ae69362dda22e4fc578939cb1773f34a0144d36637042c144"
     }
   }
 }

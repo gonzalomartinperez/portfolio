@@ -20,6 +20,8 @@ export type ChromeCopy = {
   footerSite: string;
   footerElsewhere: string;
   colophon: string;
+  pauseMotion: string;
+  resumeMotion: string;
   nav: {
     about: string;
     work: string;
@@ -44,6 +46,8 @@ export const chrome: Record<Locale, ChromeCopy> = {
     footerSite: "Site",
     footerElsewhere: "Profiles",
     colophon: "Built with Next.js, React and TypeScript.",
+    pauseMotion: "Pause page motion",
+    resumeMotion: "Resume page motion",
     nav: {
       about: "About",
       work: "Work",
@@ -66,6 +70,8 @@ export const chrome: Record<Locale, ChromeCopy> = {
     footerSite: "Sitio",
     footerElsewhere: "Perfiles",
     colophon: "Desarrollado con Next.js, React y TypeScript.",
+    pauseMotion: "Pausar movimiento de la página",
+    resumeMotion: "Reanudar movimiento de la página",
     nav: {
       about: "Sobre mí",
       work: "Trabajo",

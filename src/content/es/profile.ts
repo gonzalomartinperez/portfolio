@@ -21,9 +21,9 @@ export const profile = {
 
   /** Etiqueta canónica exacta. Nunca Senior, Tech Lead, Architect ni Staff. */
   seniority: "Semi-senior",
-  experienceLength: "2 años y 9 meses",
+  experienceLength: "2 años y 8 meses",
   experienceSince: "enero de 2024",
-  experienceAsOf: "octubre de 2026",
+  experienceAsOf: "septiembre de 2026",
 
   languages: [
     { language: "Español", level: "Nativo" },

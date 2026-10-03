@@ -130,13 +130,13 @@ test("production profile preserves corrected scope and metric qualifications", (
 test("client-estimated figures are labelled as estimates", () => {
   for (const [locale, marker] of [
     ["en", /estimat/i],
-    ["es", /estimad/i],
+    ["es", /estimad|estimaron/i],
   ]) {
     const source = read(`src/content/${locale}/experience.ts`);
     const position = source.indexOf("70%");
     assert.ok(position > -1, `${locale}: the cost-reduction figure is missing`);
     assert.match(
-      source.slice(position, position + 400),
+      source.slice(Math.max(0, position - 200), position + 200),
       marker,
       `${locale}: the 70% figure must be marked as a client estimate`,
     );
