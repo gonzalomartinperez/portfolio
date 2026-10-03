@@ -71,8 +71,8 @@ export const siteCopy: SiteCopy = {
     factLanguages: "Idiomas",
     languagesValue: "Español (nativo) · Inglés (B2)",
     experienceSince: (length, since) => `${length}, desde ${since}`,
-    workEyebrow: "Impacto en producción",
-    workHeading: "IA y software que llegan a producción",
+    workEyebrow: "Proyecto destacado",
+    workHeading: "Un producto real, de punta a punta",
     experienceEyebrow: "Experiencia",
     experienceHeading: "Productos, equipos y contribuciones",
     stackEyebrow: "Stack",
@@ -238,8 +238,8 @@ export const siteCopy: SiteCopy = {
       "Cuéntame sobre tu equipo, el producto y los desafíos de ingeniería que vienen. El email es la forma más directa de contactarme.",
     basedIn: (location, arrangement, timezone) =>
       `Vivo en ${location} (${timezone}) y trabajo ${arrangement}. Tengo disponibilidad inmediata; podemos acordar la fecha exacta durante el proceso.`,
-    hiringHint: "Para conocer mi trabajo de producto e ingeniería, explora el",
-    hiringLinkText: "caso de estudio de Filomena",
+    hiringHint: "Para conocer mi trabajo de producto e ingeniería, explora mi",
+    hiringLinkText: "experiencia y resultados en producción",
     openToHeading: "Abierto a",
     resumeHeading: "CV",
     resumeNote:

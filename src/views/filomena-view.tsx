@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ExperienceArchitecture } from "@/components/experience-architecture";
 import { ExternalLink } from "@/components/external-link";
 import { GalleryCarousel } from "@/components/gallery-carousel";
 import { MetricList } from "@/components/metric-list";
@@ -82,6 +83,7 @@ export function FilomenaView({ locale }: { locale: Locale }) {
         <section className={styles.block}>
           <h2>{copy.filomena.architectureHeading}</h2>
           <p className="muted">{copy.filomena.architectureCaption}</p>
+          <ExperienceArchitecture kind="filomena" locale={locale} />
           <ol className={styles.architecture}>
             {study.architecture.map((step) => (
               <li data-slot="card" className={cn(cardVariants(), styles.layer)} key={step.layer}>

@@ -75,3 +75,10 @@ US English and neutral Latin American Spanish follow the
 [editorial guide](../editorial-guidelines.md). The
 [recruiter-journey research](../research/recruiter-journey-2026-09-19.md) records
 sources and limits. Release verification is recorded separately from this scope.
+
+## October reconciliation — 2026-10-03
+
+The [October cumulative ledger](release-2026-10-03.md) records the current
+production scope, original employer marks, Home/mobile refinements and reviewed
+bilingual CV revision `2026-10-03.8`. The earlier dated revisions and QA records
+above remain historical evidence.

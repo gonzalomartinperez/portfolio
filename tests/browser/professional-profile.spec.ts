@@ -29,9 +29,9 @@ for (const prefix of ["", "/es"]) {
         document.documentElement.dataset.theme = value;
       }, theme);
       for (const file of [
-        "rampy.png",
-        "teamcubation.svg",
-        "cooperativa-obrera.png",
+        "rampy-original.jpg",
+        "teamcubation-original.jpg",
+        "cooperativa-obrera-100.jpg",
         "pequeverso-isotipo.webp",
         "independent.jpg",
       ]) {
@@ -43,6 +43,14 @@ for (const prefix of ["", "/es"]) {
             message: `${file} loads after entering the viewport`,
           })
           .toBeGreaterThan(0);
+      }
+      for (const company of ["rampy", "teamcubation", "cooperativa-obrera", "independent"]) {
+        const tile = page.locator(`main [data-company="${company}"]`);
+        const image = tile.locator("img");
+        expect(await image.evaluate((node) => (node as HTMLImageElement).naturalWidth)).toBe(100);
+        await expect(image).toHaveCSS("filter", "none");
+        if (company !== "independent") await expect(image).toHaveCSS("object-fit", "contain");
+        await expect(tile).toHaveCSS("overflow", "hidden");
       }
       await rampy.scrollIntoViewIfNeeded();
       await page.screenshot({ path: info.outputPath(`experience-${theme}.png`) });

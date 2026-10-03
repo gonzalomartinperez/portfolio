@@ -25,9 +25,9 @@ export const profile = {
    * the work. Never Senior, Tech Lead, Architect or Staff.
    */
   seniority: "Mid-level",
-  experienceLength: "2 years and 9 months",
+  experienceLength: "2 years and 8 months",
   experienceSince: "January 2024",
-  experienceAsOf: "October 2026",
+  experienceAsOf: "September 2026",
 
   languages: [
     { language: "Spanish", level: "Native" },

@@ -39,7 +39,7 @@ export function layoutCloud(bounds: CloudBounds) {
   const { width, height, top, bottom, markWidth, markHeight, copyWidth, copyHeight, count } =
     bounds;
   const positions: Position[] = [];
-  if (count <= 0) return { scale: 1, positions };
+  if (count <= 0) return { scale: 1, positions, center: { x: 0, y: 0 } };
   // Pair motion changes slope at earlier start, later start, earlier end and later end.
   const entrancePairs = Array.from({ length: count }, (_, difference) => {
     const delay = Math.min(
@@ -80,7 +80,7 @@ export function layoutCloud(bounds: CloudBounds) {
     const fits = ({ x, y }: Position) => {
       const copyDistances = (reveal: number) => {
         const size = 0.5 + reveal * 0.5;
-        const center = y + cloudEntrance.offset * (1 - reveal);
+        const center = y - centerY + cloudEntrance.offset * (1 - reveal);
         const halfHeight = (copyHeight + scaledHeight * size) / 2 + 12;
         return [
           Math.abs(x) - (copyWidth + scaledWidth * size) / 2 - 12,
@@ -131,9 +131,13 @@ export function layoutCloud(bounds: CloudBounds) {
       if (!nearest) break;
       positions.push(nearest);
     }
-    if (positions.length === count) return { scale, positions };
+    if (positions.length === count) return { scale, positions, center: { x: 0, y: centerY } };
   }
 
   // Impossible geometry stays non-disruptive; the native toolkit remains available.
-  return { scale: 0, positions: Array.from({ length: count }, () => ({ x: 0, y: 0 })) };
+  return {
+    scale: 0,
+    positions: Array.from({ length: count }, () => ({ x: 0, y: 0 })),
+    center: { x: 0, y: 0 },
+  };
 }

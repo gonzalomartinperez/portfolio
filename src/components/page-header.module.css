@@ -9,6 +9,7 @@
 }
 
 .title {
+  overflow-wrap: anywhere;
   font-size: clamp(2.5rem, 2rem + 3.2vw, 5rem);
   max-width: 24ch;
 }

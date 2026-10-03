@@ -6,7 +6,28 @@ The owner approved displaying these organizations and the named client. That is
 not a trademark license from the organizations. Their marks remain their property;
 no redistribution or reuse license is asserted by this repository.
 
-## Provenance and display
+## Current owner-provided originals — 2026-10-03
+
+The owner explicitly requested the original files supplied in Downloads. Rampy,
+Teamcubation, Cooperativa Obrera and the independent-work illustration now use
+those exact JPEG bytes, with no recoloring, cropping, resampling or recompression.
+Each source is 100 × 100 pixels and contains no EXIF or ICC metadata. At a
+50 CSS-pixel image area, the source supplies a full 2x pixel density. Rounded CSS
+containers preserve the complete artwork and original background in either
+theme; no enhancement invents details absent from the source.
+
+| Organization | Current asset | SHA-256 |
+| --- | --- | --- |
+| Rampy | [rampy-original.jpg](../../public/images/companies/rampy-original.jpg) | `0fc89cabb97c298d6a14dd74a8c1ab5a33195d0541ed66ba6dbba1315ebde080` |
+| Teamcubation | [teamcubation-original.jpg](../../public/images/companies/teamcubation-original.jpg) | `e3e464b18b13c22c702360a4fdf67e116844f0036936ff3aff0e3222b8862e38` |
+| Cooperativa Obrera | [cooperativa-obrera-100.jpg](../../public/images/companies/cooperativa-obrera-100.jpg) | `a6b0434c6ba16af42fc5170a8a4d566567c386e652517cdaa0ff23559cfd80da` |
+| Independent work | [independent.jpg](../../public/images/companies/independent.jpg) | `1f6c5347094d6d46e7a7502e9ab36495a7cf67e4b3c62a5abc6ab88428f25a48` |
+
+Pequeverso remains the separately approved original round client mark below.
+The following official downloads are retained as historical provenance; they
+no longer replace the owner-selected employer files.
+
+## Historical provenance and display
 
 | Organization | Official website | Original asset | Local PNG | Dimensions |
 | --- | --- | --- | --- | --- |
@@ -44,7 +65,7 @@ provided; no additional rights are asserted. The independent-work illustration i
 shown in a 52 CSS-pixel tile; the Cooperativa alternative is retained for provenance.
 
 - [Cooperativa Obrera](../../public/images/companies/cooperativa-obrera-100.jpg)
-  was previously displayed in the interface; the current tile uses the official favicon above for a larger symbol. SHA-256:
+  is displayed again following the October request. SHA-256:
   `a6b0434c6ba16af42fc5170a8a4d566567c386e652517cdaa0ff23559cfd80da`.
 - [Independent work](../../public/images/companies/independent.jpg) is a generic
   handshake illustration, not an employer's mark. SHA-256:
@@ -90,4 +111,6 @@ and [project disclaimer](https://github.com/devicons/devicon#disclaimer).
 Both use a 128 × 128 viewBox, retain their original colors, and contain no scripts
 or remote resource dependencies. Render them without monochrome filtering.
 
-On 2026-10-03 the marks were resized within the existing 52-pixel tiles: Rampy and the official Teamcubation SVG use their full available dimensions, Cooperativa uses its tighter official PNG, and Pequeverso and the independent-work illustration fill their tiles without distortion. The larger appearance was checked in both themes.
+The initial October display used the official alternatives above. The owner then
+explicitly selected the supplied originals; the current display follows that
+selection, as recorded at the top of this document.

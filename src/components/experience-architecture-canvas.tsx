@@ -74,6 +74,18 @@ const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
       { id: "node", title: "Services", detail: "Node.js · NestJS", tier: "service" },
       { id: "source", title: "Ingestion", detail: "Amazon S3 · SQS", tier: "surface" },
       { id: "lambda", title: "Processing", detail: "Python · FastAPI Lambda", tier: "service" },
+      {
+        id: "agent",
+        title: "Agent harness",
+        detail: "LangChain · LangGraph · OpenAI API",
+        tier: "gateway",
+      },
+      {
+        id: "graph",
+        title: "GraphRAG",
+        detail: "Neo4j · enterprise policies · promotions",
+        tier: "service",
+      },
     ],
     es: [
       { id: "portal", title: "Portal de comercios", detail: "React · Single-SPA", tier: "surface" },
@@ -82,6 +94,18 @@ const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
       { id: "node", title: "Servicios", detail: "Node.js · NestJS", tier: "service" },
       { id: "source", title: "Ingesta", detail: "Amazon S3 · SQS", tier: "surface" },
       { id: "lambda", title: "Procesamiento", detail: "Lambda Python · FastAPI", tier: "service" },
+      {
+        id: "agent",
+        title: "Harness agéntico",
+        detail: "LangChain · LangGraph · OpenAI API",
+        tier: "gateway",
+      },
+      {
+        id: "graph",
+        title: "GraphRAG",
+        detail: "Neo4j · políticas empresariales · promociones",
+        tier: "service",
+      },
     ],
   },
   "cooperativa-obrera": {
@@ -100,6 +124,54 @@ const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
       { id: "php", title: "Servicios", detail: "PHP", tier: "service" },
     ],
   },
+  filomena: {
+    en: [
+      { id: "web", title: "Exam client", detail: "Next.js · React · TypeScript", tier: "surface" },
+      { id: "api", title: "Shared API", detail: "Laravel · REST", tier: "gateway" },
+      { id: "data", title: "Exam data", detail: "MySQL · indexes · query tuning", tier: "service" },
+      {
+        id: "queues",
+        title: "Cache and queues",
+        detail: "Redis · asynchronous work",
+        tier: "service",
+      },
+      {
+        id: "observability",
+        title: "Observability",
+        detail: "Prometheus · Grafana",
+        tier: "service",
+      },
+      { id: "delivery", title: "Delivery", detail: "Docker · GitHub Actions", tier: "surface" },
+    ],
+    es: [
+      {
+        id: "web",
+        title: "Cliente de exámenes",
+        detail: "Next.js · React · TypeScript",
+        tier: "surface",
+      },
+      { id: "api", title: "API compartida", detail: "Laravel · REST", tier: "gateway" },
+      {
+        id: "data",
+        title: "Datos de exámenes",
+        detail: "MySQL · índices · consultas",
+        tier: "service",
+      },
+      {
+        id: "queues",
+        title: "Caché y colas",
+        detail: "Redis · trabajo asíncrono",
+        tier: "service",
+      },
+      {
+        id: "observability",
+        title: "Observabilidad",
+        detail: "Prometheus · Grafana",
+        tier: "service",
+      },
+      { id: "delivery", title: "Delivery", detail: "Docker · GitHub Actions", tier: "surface" },
+    ],
+  },
 };
 
 const connections: Record<ArchitectureKind, [string, string][]> = {
@@ -114,12 +186,18 @@ const connections: Record<ArchitectureKind, [string, string][]> = {
     ["bff", "java"],
     ["bff", "node"],
     ["source", "lambda"],
+    ["agent", "graph"],
   ],
   "cooperativa-obrera": [
     ["web", "bff"],
     ["bff", "java"],
     ["bff", "node"],
     ["bff", "php"],
+  ],
+  filomena: [
+    ["web", "api"],
+    ["api", "data"],
+    ["api", "queues"],
   ],
 };
 
@@ -138,6 +216,8 @@ const desktopPositions: Record<ArchitectureKind, Record<string, { x: number; y: 
     node: { x: 550, y: 70 },
     source: { x: 0, y: 185 },
     lambda: { x: 275, y: 185 },
+    agent: { x: 0, y: 315 },
+    graph: { x: 275, y: 315 },
   },
   "cooperativa-obrera": {
     web: { x: 0, y: 65 },
@@ -145,6 +225,14 @@ const desktopPositions: Record<ArchitectureKind, Record<string, { x: number; y: 
     java: { x: 550, y: -40 },
     node: { x: 550, y: 65 },
     php: { x: 550, y: 170 },
+  },
+  filomena: {
+    web: { x: 0, y: 65 },
+    api: { x: 275, y: 65 },
+    data: { x: 550, y: 0 },
+    queues: { x: 550, y: 130 },
+    observability: { x: 275, y: 260 },
+    delivery: { x: 0, y: 260 },
   },
 };
 
@@ -163,6 +251,8 @@ const mobilePositions: Record<ArchitectureKind, Record<string, { x: number; y: n
     node: { x: 170, y: 245 },
     source: { x: 85, y: 390 },
     lambda: { x: 85, y: 510 },
+    agent: { x: 85, y: 665 },
+    graph: { x: 85, y: 790 },
   },
   "cooperativa-obrera": {
     web: { x: 85, y: 0 },
@@ -170,6 +260,14 @@ const mobilePositions: Record<ArchitectureKind, Record<string, { x: number; y: n
     java: { x: 0, y: 255 },
     node: { x: 170, y: 255 },
     php: { x: 85, y: 390 },
+  },
+  filomena: {
+    web: { x: 85, y: 0 },
+    api: { x: 85, y: 125 },
+    data: { x: 0, y: 255 },
+    queues: { x: 170, y: 255 },
+    observability: { x: 0, y: 420 },
+    delivery: { x: 170, y: 420 },
   },
 };
 function ArchitectureNode({ data }: NodeProps<DiagramNode>) {
@@ -234,7 +332,15 @@ export default function DiagramCanvas({
       edges={edges}
       nodeTypes={nodeTypes}
       fitView
-      fitViewOptions={{ padding: vertical ? 0.04 : 0.16, maxZoom: vertical ? 1 : 1.1 }}
+      fitViewOptions={{
+        padding: {
+          top: vertical ? "16px" : "32px",
+          bottom: "56px",
+          left: vertical ? "8px" : "32px",
+          right: vertical ? "8px" : "32px",
+        },
+        maxZoom: vertical ? 1 : 1.1,
+      }}
       nodesDraggable={false}
       nodesConnectable={false}
       elementsSelectable={false}
@@ -246,6 +352,8 @@ export default function DiagramCanvas({
       <Background variant={BackgroundVariant.Dots} gap={22} size={0.8} />
       <Controls
         showInteractive={false}
+        orientation="horizontal"
+        position="bottom-left"
         aria-label={locale === "es" ? "Controles del diagrama" : "Diagram controls"}
       />
     </ReactFlow>

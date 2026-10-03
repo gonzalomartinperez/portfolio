@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-03.7",
+  "revision": "2026-10-03.8",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -122,7 +122,7 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Refactored the full backend into hexagonal architecture and the React/Next.js frontend by user feature",
+                      "text": "Refactored the full backend into hexagonal architecture and the React/Next.js frontend into feature-based domains",
                       "bold": true,
                       "href": ""
                     },
@@ -143,7 +143,7 @@
                       "href": ""
                     },
                     {
-                      "text": " using Android Studio; cut measured average app startup from about 7–8 s to 1–2 s. Implemented end-to-end event tracking with Firebase Analytics, Clarity Mobile on every screen, Singular SDK and Meta App Events, avoiding duplicates.",
+                      "text": " using Android Studio for Android development; cut measured average app startup from about 7–8 s to 1–2 s. Implemented end-to-end event tracking with Firebase Analytics, Clarity Mobile on every screen, Singular SDK and Meta App Events, avoiding duplicates.",
                       "bold": false,
                       "href": ""
                     }
@@ -1097,7 +1097,7 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Refactoricé todo el backend con arquitectura hexagonal y el frontend React/Next.js por funcionalidades",
+                      "text": "Refactoricé todo el backend con arquitectura hexagonal y el frontend React/Next.js por dominios y funcionalidades",
                       "bold": true,
                       "href": ""
                     },
@@ -1118,7 +1118,7 @@
                       "href": ""
                     },
                     {
-                      "text": " usando Android Studio; bajé el arranque promedio medido de unos 7–8 s a 1–2 s. Implementé tracking de eventos de punta a punta con Firebase Analytics, Clarity Mobile en todas las pantallas, Singular SDK y Meta App Events, evitando duplicados.",
+                      "text": " con Android Studio para desarrollar en Android; bajé el arranque promedio medido de unos 7–8 s a 1–2 s. Implementé tracking de eventos de punta a punta con Firebase Analytics, Clarity Mobile en todas las pantallas, Singular SDK y Meta App Events, evitando duplicados.",
                       "bold": false,
                       "href": ""
                     }
@@ -1129,7 +1129,7 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Reduje validaciones, build y despliegue de unas 1 hora a 10 minutos",
+                      "text": "Reduje validaciones, build y despliegue de aproximadamente 1 hora a 10 minutos",
                       "bold": true,
                       "href": ""
                     },
@@ -1950,11 +1950,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "52d5448740027da7bfabeca9d350fde1412e1daa02177d03efc904738c0ddb3b",
-    "factsSha256": "e44cb8542db52581e2e181b01a2afc71cdc3b8763f3c33d9e478a9f07ef0697c",
+    "sourceSha256": "4fb7681aceedad01086800b02032b6b808563c0288cb3865be75de1c4e8e1ae7",
+    "factsSha256": "d27e4512a2cf93c5bb9d63e74f6c4a39bfe77552c25a25061380c81b08fdf4a8",
     "pdfSha256": {
-      "en": "522ce38bdf1f6bd94eb21c727a556a275abcca7a89b268cd81158421d30845c3",
-      "es": "1f069705a3d0c83aaf41b3f653f7a85fe1f17b8f5f0228598939af6cf96d92e8"
+      "en": "dc8af89084dbb776f2387707c8d912505d5d86a2fccd9a85eb84ee1261ce68c0",
+      "es": "4dfff9ae99bcca23613a60eabb73c2d236e473d3bd0b25ca1710c7450524ece2"
     }
   }
 }

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import type { Locale } from "@/content/locales";
 import styles from "./experience-architecture.module.css";
 
-export type ArchitectureKind = "rampy" | "teamcubation" | "cooperativa-obrera";
+export type ArchitectureKind = "rampy" | "teamcubation" | "cooperativa-obrera" | "filomena";
 
 const DiagramCanvas = dynamic(() => import("./experience-architecture-canvas"), {
   ssr: false,
@@ -26,14 +26,14 @@ const descriptions: Record<ArchitectureKind, Record<Locale, { title: string; sum
   },
   teamcubation: {
     en: {
-      title: "Portal and ingestion architecture",
+      title: "Portal, ingestion and AI architecture",
       summary:
-        "The React/Single-SPA portal connected through a Spring WebFlux BFF to Java/Spring Boot and Node.js/NestJS services. Separately, S3 and SQS fed a Python/FastAPI Lambda for promotion ingestion.",
+        "The React/Single-SPA portal connected through a Spring WebFlux BFF to Java/Spring Boot and Node.js/NestJS services. S3 and SQS fed a separate Python/FastAPI Lambda for promotion ingestion. The AI lane shows the LangChain/LangGraph and OpenAI API harness with Neo4j-backed GraphRAG, agent orchestration, answer evaluation and domain guardrails. Separate lanes do not imply an undocumented connection between systems.",
     },
     es: {
-      title: "Arquitectura del portal y la ingesta",
+      title: "Arquitectura del portal, la ingesta y la IA",
       summary:
-        "El portal React/Single-SPA se conectaba mediante un BFF Spring WebFlux con servicios Java/Spring Boot y Node.js/NestJS. Por separado, S3 y SQS alimentaban una Lambda Python/FastAPI para ingerir promociones.",
+        "El portal React/Single-SPA se conectaba mediante un BFF Spring WebFlux con servicios Java/Spring Boot y Node.js/NestJS. S3 y SQS alimentaban una Lambda Python/FastAPI separada para ingerir promociones. El bloque de IA muestra el harness con LangChain/LangGraph, OpenAI API y GraphRAG sobre Neo4j, con orquestación, evaluación de respuestas y guardrails de dominio. Los bloques separados no implican conexiones entre sistemas que no se hayan documentado.",
     },
   },
   "cooperativa-obrera": {
@@ -46,6 +46,18 @@ const descriptions: Record<ArchitectureKind, Record<Locale, { title: string; sum
       title: "Arquitectura del sistema de permisos",
       summary:
         "Las vistas React/Next.js seguían el contrato del BFF Python/FastAPI. El BFF integraba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante OpenAPI/Swagger, ocultando bases de datos y modelos de permisos distintos tras una experiencia uniforme para administradores.",
+    },
+  },
+  filomena: {
+    en: {
+      title: "Exam platform architecture",
+      summary:
+        "The Next.js/React client uses one Laravel REST API backed by MySQL and Redis for caching and asynchronous work. Prometheus and Grafana observe the database, queues and workers; Docker images are built and deployed through GitHub Actions. The diagram groups request handling and operational capabilities; the layer descriptions below explain each responsibility.",
+    },
+    es: {
+      title: "Arquitectura de la plataforma de exámenes",
+      summary:
+        "El cliente Next.js/React usa una API REST Laravel respaldada por MySQL y Redis para caché y trabajo asíncrono. Prometheus y Grafana observan la base de datos, las colas y los workers; las imágenes Docker se construyen y despliegan mediante GitHub Actions. El gráfico agrupa solicitudes y capacidades operativas; las descripciones siguientes explican cada responsabilidad.",
     },
   },
 };

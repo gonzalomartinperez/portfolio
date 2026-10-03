@@ -18,11 +18,15 @@ for (const { height, extraMarks } of [
         .locator("[data-tech-icon]")
         .first()
         .evaluate((source, count) => {
+          const item = source.closest("li");
+          if (!item?.parentElement) throw new Error("Technology catalogue item is missing");
           for (let index = 0; index < count; index += 1) {
-            const mark = source.cloneNode(true) as HTMLElement;
+            const clone = item.cloneNode(true) as HTMLElement;
+            const mark = clone.querySelector<HTMLElement>("[data-tech-icon]");
+            if (!mark) throw new Error("Technology identity is missing");
             mark.dataset.techIcon = `layout-fixture-${index}`;
             mark.dataset.sceneBrand = `layout-fixture-${index}`;
-            source.parentElement?.append(mark);
+            item.parentElement.append(clone);
           }
         }, extraMarks);
       await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -45,6 +49,9 @@ for (const { height, extraMarks } of [
     await expect
       .poll(async () => Number(await scene.getAttribute("data-scene-progress")))
       .toBeGreaterThan(0.9998);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+      isMobile ? 393 : 1920,
+    );
     const layout = await scene.evaluate((element) => {
       const header = document.querySelector("header");
       const logos = [...element.querySelectorAll<HTMLElement>(".scene-logo")].map((logo) => {

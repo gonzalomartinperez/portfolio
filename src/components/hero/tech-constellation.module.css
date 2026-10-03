@@ -43,14 +43,15 @@
 }
 .mark {
   display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
   gap: 0.25rem;
   max-width: 100%;
   text-decoration: none;
   border: 1px solid var(--line-subtle);
   border-radius: 0.6rem;
   padding: 0.5rem 0.75rem;
+  height: 3.5rem;
   min-height: 44px;
   color: var(--text-secondary);
   background: var(--surface-base);
@@ -64,6 +65,7 @@
   align-items: center;
   gap: 0.5rem;
   min-width: 0;
+  flex: 1;
 }
 .glyph {
   display: grid;
@@ -72,6 +74,7 @@
 }
 .name {
   font-size: 0.8rem;
+  line-height: 1.2;
   overflow-wrap: anywhere;
 }
 @media (width < 768px) {

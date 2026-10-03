@@ -13,13 +13,8 @@
 
 .image {
   object-fit: contain;
-  width: 46px;
-  height: 46px;
-}
-
-.tile[data-company="teamcubation"] .image {
-  width: 48px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
 }
 
 .tile[data-company="independent"] .image,

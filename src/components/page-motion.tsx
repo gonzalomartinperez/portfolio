@@ -2,15 +2,17 @@
 
 import { usePathname } from "next/navigation";
 import { type ReactNode, useEffect, useRef } from "react";
+import { usePageMotionPaused } from "./motion-state";
 
 export function PageMotion({ children }: { children: ReactNode }) {
+  const paused = usePageMotionPaused();
   const container = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
     const root = container.current;
     const preference = matchMedia("(prefers-reduced-motion: reduce)");
-    if (!pathname || !root || preference.matches) return;
+    if (!pathname || !root || preference.matches || paused) return;
     const animations = new Set<Animation>();
     const animate = (element: Element, keyframes: Keyframe[], duration: number) => {
       const animation = element.animate(keyframes, { duration, easing: "ease-out" });
@@ -50,7 +52,7 @@ export function PageMotion({ children }: { children: ReactNode }) {
       cancel();
       preference.removeEventListener("change", cancel);
     };
-  }, [pathname]);
+  }, [pathname, paused]);
 
   return <div ref={container}>{children}</div>;
 }
