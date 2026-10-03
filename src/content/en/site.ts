@@ -43,6 +43,10 @@ export const siteCopy: SiteCopy = {
     avatarInteraction: "Interact with Gonzalo’s avatar",
     principles: [
       {
+        title: "Performance",
+        description: "Measured latency, fast startup and efficient use of resources.",
+      },
+      {
         title: "Scalability",
         description: "Clear service boundaries, asynchronous work and deliberate data access.",
       },

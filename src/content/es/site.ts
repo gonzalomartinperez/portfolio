@@ -43,6 +43,10 @@ export const siteCopy: SiteCopy = {
     avatarInteraction: "Interactuar con el avatar de Gonzalo",
     principles: [
       {
+        title: "Rendimiento",
+        description: "Latencia medida, carga inicial rápida y uso eficiente de recursos.",
+      },
+      {
         title: "Escalabilidad",
         description:
           "Límites claros entre servicios, trabajo asíncrono y acceso eficiente a datos.",
