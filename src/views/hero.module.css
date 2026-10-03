@@ -46,14 +46,19 @@
 
 .availability {
   align-items: center;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   display: flex;
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   gap: var(--space-3);
   letter-spacing: 0.05em;
   margin-top: var(--space-4);
   text-transform: uppercase;
+  max-width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--line-subtle);
+  border-radius: 999px;
+  background: var(--surface-void);
 }
 
 .pulse {

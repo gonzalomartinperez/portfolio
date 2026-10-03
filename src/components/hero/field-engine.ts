@@ -19,6 +19,7 @@ export type FieldEngine = {
   setQuality(level: number): void;
   dispose(): void;
   setExpansion(progress: number): void;
+  setRestingRegion(top: number, bottom: number): { centerY: number; radius: number };
   setPointer(pointer: { x: number; y: number } | null): void;
   setLight(light: boolean): void;
   setTime(seconds: number | null): void;
@@ -137,15 +138,24 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
   let height = 1;
   let pixelRatio = 0;
   let cameraExpansion = -1;
+  let restingCenter = 0.68;
+  let fittingDistance = 0;
   const pointer = new Vector2(10, 10);
   const updateCamera = () => {
     const expansion = Math.min(1, Math.max(0, (progress - 0.2) / 0.35));
     material.uniforms.progress.value = progress;
     if (cameraExpansion === expansion) return;
     cameraExpansion = expansion;
-    const startDistance = Math.max(5.6, 3 / camera.aspect);
+    const startDistance = Math.max(5.6, 3 / camera.aspect, fittingDistance);
     camera.position.z = startDistance + (0.4 - startDistance) * expansion;
-    camera.setViewOffset(width, height, 0, -height * 0.18 * (1 - expansion), width, height);
+    camera.setViewOffset(
+      width,
+      height,
+      0,
+      -height * (restingCenter - 0.5) * (1 - expansion),
+      width,
+      height,
+    );
     camera.updateProjectionMatrix();
   };
   let quality = 0;
@@ -176,6 +186,23 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
   return {
     render,
     resize,
+    setRestingRegion(top, bottom) {
+      const radius = Math.max(24, (bottom - top) / 2);
+      const centerY = (top + bottom) / 2;
+      restingCenter = centerY / height;
+      fittingDistance = Math.sqrt(
+        1 + (height / (2 * Math.tan((camera.fov * Math.PI) / 360) * radius)) ** 2,
+      );
+      cameraExpansion = -1;
+      updateCamera();
+      render();
+      const actualRadius =
+        height /
+        (2 *
+          Math.tan((camera.fov * Math.PI) / 360) *
+          Math.sqrt(Math.max(5.6, 3 / camera.aspect, fittingDistance) ** 2 - 1));
+      return { centerY, radius: actualRadius };
+    },
     setQuality(level) {
       if (quality === level) return;
       quality = level;
@@ -200,7 +227,7 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
       if (camera.position.z <= 1) return true;
       const radius =
         1 / (Math.tan((camera.fov * Math.PI) / 360) * Math.sqrt(camera.position.z ** 2 - 1));
-      const centreY = -0.36 * (1 - cameraExpansion);
+      const centreY = -2 * (restingCenter - 0.5) * (1 - cameraExpansion);
       return Math.hypot(x * camera.aspect, y - centreY) <= radius;
     },
     setLight(light) {
