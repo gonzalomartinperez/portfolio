@@ -31,30 +31,13 @@
   background-repeat: repeat;
   background-size: 211px 233px;
   mask-image: radial-gradient(ellipse at 50% 45%, #000 10%, transparent 85%);
-  opacity: 0.28;
+  opacity: 0.42;
 }
 
 .starsFar {
   background-size: 317px 350px;
-  opacity: 0.12;
+  opacity: 0.2;
   transform: rotate(17deg);
-}
-
-.orbit {
-  position: absolute;
-  width: 90vw;
-  height: 50vw;
-  min-width: 45rem;
-  min-height: 25rem;
-  left: 50%;
-  top: 35%;
-  transform: translate(-50%, -50%) rotate(-22deg);
-  border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 8vw color-mix(in srgb, var(--accent) 1%, transparent),
-    0 0 0 17vw color-mix(in srgb, var(--accent) 1%, transparent);
-  opacity: 0.3;
 }
 
 .particles,
@@ -67,13 +50,13 @@
 }
 
 .particles {
-  opacity: 0.7;
+  opacity: 0.85;
   mask-image: radial-gradient(ellipse at 50% 45%, #000 35%, transparent 95%);
 }
 
 .field[data-state="running"] .starsNear,
 .field[data-state="paused"] .starsNear {
-  opacity: 0.1;
+  opacity: 0.2;
 }
 
 :global(:root[data-theme="light"]) .particles,

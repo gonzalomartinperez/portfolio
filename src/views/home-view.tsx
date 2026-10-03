@@ -5,6 +5,7 @@ import { CompanyMark } from "@/components/company-mark";
 import { ExternalLink } from "@/components/external-link";
 import { MetricList } from "@/components/metric-list";
 import { TechnologyMark } from "@/components/technology-mark";
+import { ToolCarousel } from "@/components/tool-carousel";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cardVariants } from "@/components/ui/card";
@@ -20,7 +21,7 @@ export function HomeView({ locale }: { locale: Locale }) {
   const content = getContent(locale);
   const { profile, roles, filomena, academicResults, siteCopy: copy } = content;
   const showcaseScreens = [
-    { id: "059", height: 680, label: locale === "es" ? "Rendir el examen" : "Taking the exam" },
+    { id: "057", height: 725, label: locale === "es" ? "Rendir el examen" : "Taking the exam" },
     {
       id: "077",
       height: 727,
@@ -224,6 +225,8 @@ export function HomeView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
+      <ToolCarousel locale={locale} />
+
       <section className="section-tight frame">
         <div className="section-head">
           <p className="eyebrow">{copy.home.educationEyebrow}</p>
@@ -246,7 +249,11 @@ export function HomeView({ locale }: { locale: Locale }) {
       <section className="section-tight frame">
         <div data-slot="card" className={cn(cardVariants(), styles.closing)}>
           <h2>{copy.home.closingHeading}</h2>
-          <p>{copy.home.closingBody}</p>
+          <div className={styles.closingMessage}>
+            <p className={styles.closingQuestion}>{copy.home.closingBody}</p>
+            <p className={styles.closingInvitation}>{copy.home.closingInvitation}</p>
+            <p>{copy.home.closingAvailability}</p>
+          </div>
           <div className="actions">
             <a className={buttonVariants()} href={`mailto:${email}`}>
               {copy.actions.emailMe}

@@ -15,14 +15,14 @@ const options: ISourceOptions = {
   pauseOnBlur: true,
   particles: {
     number: {
-      value: 60,
+      value: 105,
       density: { enable: true, width: 1280, height: 800 },
-      limit: { value: 85 },
+      limit: { value: 140 },
     },
     paint: { color: { value: ["#92c8e6", "#b8d6f0", "#5ea5c9"] } },
     shape: { type: "circle" },
-    opacity: { value: { min: 0.18, max: 0.58 } },
-    size: { value: { min: 0.7, max: 1.6 } },
+    opacity: { value: { min: 0.25, max: 0.72 } },
+    size: { value: { min: 0.7, max: 1.8 } },
     move: {
       enable: true,
       speed: { min: 0.08, max: 0.2 },

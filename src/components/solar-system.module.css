@@ -1,0 +1,95 @@
+.system {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.26;
+  mask-image: radial-gradient(ellipse at 45% 45%, transparent 12%, #000 65%);
+}
+
+.plane {
+  position: absolute;
+  left: 68%;
+  top: 44%;
+  transform: rotate(-24deg) scaleY(0.72);
+}
+
+.orbit {
+  position: absolute;
+  width: calc(var(--orbit-radius) * 2);
+  height: calc(var(--orbit-radius) * 2);
+  left: calc(var(--orbit-radius) * -1);
+  top: calc(var(--orbit-radius) * -1);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  border-radius: 50%;
+}
+
+.planet {
+  position: absolute;
+  left: calc(50% - var(--planet-size) / 2);
+  top: calc(var(--planet-size) / -2);
+  width: var(--planet-size);
+  height: var(--planet-size);
+  border-radius: 50%;
+  box-shadow:
+    inset -8px -4px 12px #0009,
+    inset 2px 2px 4px #ffffff38;
+}
+
+.sun {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  margin: -24px;
+  background: radial-gradient(circle at 35% 30%, #ffe1a1, #e49c45 65%, #ae6033);
+  border-radius: 50%;
+  box-shadow: 0 0 60px 12px #efb56730;
+}
+
+.mercury {
+  background: radial-gradient(circle at 30% 30%, #d0c9bc, #77736b);
+}
+.venus {
+  background: repeating-linear-gradient(15deg, #d9bb7c 0 4px, #c5a06e 5px 9px);
+}
+.earth {
+  background:
+    radial-gradient(ellipse at 32% 30%, #87a886 0 16%, transparent 19%),
+    radial-gradient(ellipse at 60% 55%, #698c73 0 20%, transparent 24%),
+    radial-gradient(circle at 40% 25%, #8bc0d7, #32628d 70%);
+}
+.mars {
+  background: radial-gradient(circle at 35% 25%, #d3916d, #a45b46 65%, #613d35);
+}
+.jupiter {
+  background: repeating-linear-gradient(-10deg, #baa893 0 7px, #cfbda1 8px 12px, #947968 13px 16px);
+}
+.saturn {
+  background: repeating-linear-gradient(8deg, #d5c29b 0 5px, #bca782 6px 9px);
+}
+.uranus {
+  background: radial-gradient(circle at 35% 25%, #b0d5d5, #609fa8);
+}
+.neptune {
+  background: radial-gradient(circle at 35% 25%, #7396d1, #375b9a);
+}
+
+.rings {
+  position: absolute;
+  inset: 30% -40%;
+  border: 6px solid #bbaa8366;
+  border-radius: 50%;
+  transform: rotate(-24deg);
+  box-shadow: 0 0 0 2px #dbcaa438;
+}
+
+:global(:root[data-theme="light"]) .system {
+  opacity: 0.18;
+}
+
+@media (width < 40rem) {
+  .plane {
+    left: 85%;
+    transform: rotate(-24deg) scale(0.6, 0.46);
+  }
+}

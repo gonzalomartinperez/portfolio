@@ -35,6 +35,7 @@ export function LocaleSwitcher({
                 className={styles.option}
                 hrefLang={option}
                 href={href}
+                scroll={false}
                 lang={option}
                 title={localeNames[option]}
               >

@@ -159,6 +159,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "neo4j",
+    icon: "neo4j",
     name: "Neo4j",
     category: "data",
     kind: "brand",
@@ -238,6 +239,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "android-studio",
+    icon: "android-studio",
     name: "Android Studio",
     category: "frontend",
     kind: "brand",
@@ -275,6 +277,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "viem",
+    icon: "viem",
     name: "Viem",
     category: "fintech",
     kind: "brand",
@@ -288,6 +291,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "zerodev",
+    icon: "zerodev",
     name: "ZeroDev",
     category: "fintech",
     kind: "brand",
@@ -401,6 +405,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "sqlmodel",
+    icon: "sqlmodel",
     name: "SQLModel",
     category: "data",
     kind: "brand",
@@ -527,6 +532,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "microsoft-clarity",
+    icon: "clarity",
     name: "Microsoft Clarity",
     category: "quality",
     kind: "brand",
@@ -536,6 +542,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "firebase-analytics",
+    icon: "firebase",
     name: "Firebase Analytics",
     category: "quality",
     kind: "brand",
@@ -545,6 +552,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "singular-sdk",
+    icon: "singular",
     name: "Singular SDK",
     category: "quality",
     kind: "brand",
@@ -571,6 +579,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "lifi",
+    icon: "lifi",
     name: "LI.FI",
     category: "fintech",
     kind: "brand",
@@ -585,6 +594,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "hyperliquid",
+    icon: "hyperliquid",
     name: "Hyperliquid",
     category: "fintech",
     kind: "brand",
@@ -598,6 +608,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "moonpay",
+    icon: "moonpay",
     name: "MoonPay",
     category: "fintech",
     kind: "brand",
@@ -886,6 +897,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "swift",
+    icon: "swift",
     name: "Swift",
     category: "languages",
     kind: "brand",
@@ -2165,6 +2177,7 @@ export const technologyCatalog: Technology[] = [
   },
   {
     id: "stripe",
+    icon: "stripe",
     name: "Stripe",
     category: "fintech",
     kind: "brand",

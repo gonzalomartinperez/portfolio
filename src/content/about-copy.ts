@@ -1,0 +1,23 @@
+export type AboutCopy = {
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  paragraphs: string[];
+  asideCurrently: string;
+  asideArrangement: string;
+  asideLanguages: string;
+  asideAvailability: string;
+  experienceAsOf: (asOf: string) => string;
+  focusEyebrow: string;
+  focusHeading: string;
+  focus: { id: "ai" | "product" | "systems"; title: string; body: string }[];
+  principlesEyebrow: string;
+  principlesHeading: string;
+  principlesIntro: string;
+  principles: { title: string; body: string }[];
+  lookingEyebrow: string;
+  lookingHeading: string;
+  lookingParagraphs: string[];
+};

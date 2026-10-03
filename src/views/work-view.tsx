@@ -53,9 +53,9 @@ export function WorkView({ locale }: { locale: Locale }) {
                       ]
                     : role.arrangement}
                 </p>
-                {["rampy", "teamcubation", "cooperativa-obrera"].includes(role.slug) && (
-                  <ProductionBadge locale={locale} />
-                )}
+                {["rampy", "teamcubation", "cooperativa-obrera", "independent"].includes(
+                  role.slug,
+                ) && <ProductionBadge locale={locale} />}
               </div>
 
               <div className={styles.body}>
@@ -80,6 +80,13 @@ export function WorkView({ locale }: { locale: Locale }) {
                   ))}
                 </ul>
 
+                {role.metrics && (
+                  <div className={styles.outcomes}>
+                    <MetricList metrics={role.metrics} />
+                    {role.attribution && <p className={styles.attribution}>{role.attribution}</p>}
+                  </div>
+                )}
+
                 {role.contributions.length > 2 && (
                   <details className={styles.details}>
                     <summary>
@@ -100,10 +107,11 @@ export function WorkView({ locale }: { locale: Locale }) {
                   <ExperienceArchitecture kind={role.slug} locale={locale} />
                 ) : null}
 
-                {role.metrics ? <MetricList metrics={role.metrics} /> : null}
-                {role.attribution ? <p className={styles.attribution}>{role.attribution}</p> : null}
+                {!role.metrics && role.attribution ? (
+                  <p className={styles.attribution}>{role.attribution}</p>
+                ) : null}
                 {role.links && (
-                  <div className="actions">
+                  <div className={`actions ${styles.clientLinks}`}>
                     {role.links.map((link) => (
                       <ExternalLink
                         className={buttonVariants({ variant: "outline" })}

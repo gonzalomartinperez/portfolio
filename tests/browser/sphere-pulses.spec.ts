@@ -33,6 +33,8 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
     }, name);
   expect(await uniform("pulsePhase")).toBeGreaterThan(0.2);
   expect(await uniform("avatarPulse")).toBe(0);
+  expect(await uniform("pulseReach")).toBeGreaterThan(0);
+  expect(await uniform("pulseReach")).toBeLessThan(1.65);
   await page.clock.runFor(600);
   await expect(scene).toHaveAttribute("data-scene-pulse", "idle");
   await expect(scene.locator("canvas")).toHaveCSS("z-index", "auto");
@@ -51,6 +53,7 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
     }),
   ).toBe(true);
   expect(await uniform("avatarPulse")).toBe(1);
+  expect(await uniform("pulseReach")).toBeCloseTo(1.65);
   await expect(scene.locator("[data-scene-avatar-art]")).not.toHaveCSS("transform", "none");
   for (let index = 0; index < 5; index += 1) await avatar.press("Enter");
   await expect(scene).toHaveAttribute("data-scene-pulse-count", "2");
@@ -77,6 +80,19 @@ test("real pointer activation works on avatar and the sphere shows a hand only i
   if (!isMobile) {
     await page.mouse.move(box.x + box.width + 20, box.y + box.height / 2);
     await expect(scene.locator("[data-scene-viewport]")).toHaveCSS("cursor", "pointer");
+    await expect
+      .poll(() =>
+        scene
+          .locator("[data-scene-core]")
+          .evaluate((element) => Number(getComputedStyle(element, "::before").opacity)),
+      )
+      .toBeGreaterThan(0.5);
+    await page.mouse.down();
+    await expect(scene).toHaveAttribute("data-scene-press", "sphere");
+    await page.mouse.move(2, box.y + box.height / 2);
+    await page.mouse.up();
+    await expect(scene).not.toHaveAttribute("data-scene-press");
+    await expect(scene).not.toHaveAttribute("data-scene-pulse-count");
     await page.mouse.move(2, box.y + box.height / 2);
     await expect(scene.locator("[data-scene-viewport]")).not.toHaveCSS("cursor", "pointer");
     await page.mouse.click(box.x + box.width + 20, box.y + box.height / 2);
@@ -115,6 +131,7 @@ test("drag, outside taps, secondary pointers and paused activation do not pulse"
     { type: "pointerup", clientX: 2, clientY: point.clientY },
   ]);
   await expect(scene).not.toHaveAttribute("data-scene-pulse-count");
+  await expect(scene).not.toHaveAttribute("data-scene-press");
   await page.getByRole("button", { name: "Pause animation", exact: true }).click();
   await avatar.focus();
   await avatar.press("Enter");

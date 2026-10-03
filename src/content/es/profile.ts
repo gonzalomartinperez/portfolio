@@ -8,16 +8,17 @@ export const profile = {
   location: "Bahía Blanca, Argentina",
   timezone: "UTC-3",
   arrangement: "100% remoto",
-  availability: "Abierto a roles remotos, disponible de inmediato",
+  availability: "Abierto a oportunidades remotas y disponible para entrevistas",
 
   /** El mensaje de cinco segundos. Una idea por frase. */
-  headline: "Transformo sistemas complejos de IA y fintech en productos rápidos y cuidados.",
+  headline:
+    "Transformo sistemas complejos de IA, fintech y blockchain en productos confiables, rápidos y pensados para los usuarios.",
 
   intro:
     "Soy Gonzalo, ingeniero de software especializado en IA aplicada. Transformo ideas en productos útiles: desde agentes de IA y servicios backend hasta aplicaciones web y móviles.",
 
   summary:
-    "En Rampy entrego experiencias productivas de IA, fintech y mobile: consultas financieras más rápidas, una aplicación renovada y un design system completo. También desarrollé flujos GraphRAG empresariales, contribuí a una carga de 20M+ promociones y diseñé permisos para más de 10 integraciones.",
+    "Hoy trabajo en Rampy, una startup fintech y blockchain, donde desarrollo un sistema agéntico que conecta a los usuarios con activos digitales, swaps, vaults y mercados de perpetuos. Construyo las experiencias web y móviles, las APIs y las integraciones que lo sostienen. En producción, el arranque promedio observado de la app pasó de unos 7–8 segundos a 1–2 segundos.",
 
   /** Etiqueta canónica exacta. Nunca Senior, Tech Lead, Architect ni Staff. */
   seniority: "Semi-senior",
@@ -63,7 +64,7 @@ export const resumeLinks: EvidenceLink[] = [
 ];
 
 export const openTo = [
-  "Ingeniería de IA: agentes, RAG e integración de modelos de lenguaje",
+  "Ingeniería de IA: sistemas agénticos, RAG/GraphRAG e integración de modelos de lenguaje",
   "Ingeniería de software, backend y full-stack",
   "Ingeniería de producto con responsabilidad de punta a punta",
 ];

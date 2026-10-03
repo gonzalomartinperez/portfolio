@@ -35,6 +35,7 @@ uniform float pixelRatio;
 uniform float aspect;
 uniform vec2 pointer;
 uniform float pulsePhase;
+uniform float pulseReach;
 uniform float avatarPulse;
 uniform vec2 pulseOrigin;
 varying float depth;
@@ -62,7 +63,8 @@ void main() {
   vec2 screen = projected.xy / projected.w;
   vec2 pulseDelta = (screen - pulseOrigin) * vec2(aspect, 1.0);
   float radius = length(pulseDelta);
-  float ring = exp(-pow((radius - pulsePhase * 1.65) * 7.0, 2.0)) * envelope;
+  float waveWidth = mix(max(pulseReach * 0.12, 0.035), 1.0 / 7.0, avatarPulse);
+  float ring = exp(-pow((radius - pulsePhase * pulseReach) / waveWidth, 2.0)) * envelope;
   projected.xy += (screen - pulseOrigin) * ring * (0.22 + avatarPulse * 0.18) * projected.w;
   waveLight = ring * 0.18 + shellWave * 0.24;
   vec2 delta = screen - pointer;
@@ -123,6 +125,7 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
       aspect: { value: 1 },
       pointer: { value: new Vector2(10, 10) },
       pulsePhase: { value: 0 },
+      pulseReach: { value: 1.65 },
       avatarPulse: { value: 0 },
       pulseOrigin: { value: new Vector2() },
       nearColor: { value: new Color("#c0efff") },
@@ -140,13 +143,14 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
   let cameraExpansion = -1;
   let restingCenter = 0.68;
   let fittingDistance = 0;
+  const minimumRestingDistance = 5;
   const pointer = new Vector2(10, 10);
   const updateCamera = () => {
     const expansion = Math.min(1, Math.max(0, (progress - 0.2) / 0.35));
     material.uniforms.progress.value = progress;
     if (cameraExpansion === expansion) return;
     cameraExpansion = expansion;
-    const startDistance = Math.max(5.6, 3 / camera.aspect, fittingDistance);
+    const startDistance = Math.max(minimumRestingDistance, 3 / camera.aspect, fittingDistance);
     camera.position.z = startDistance + (0.4 - startDistance) * expansion;
     camera.setViewOffset(
       width,
@@ -200,7 +204,7 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
         height /
         (2 *
           Math.tan((camera.fov * Math.PI) / 360) *
-          Math.sqrt(Math.max(5.6, 3 / camera.aspect, fittingDistance) ** 2 - 1));
+          Math.sqrt(Math.max(minimumRestingDistance, 3 / camera.aspect, fittingDistance) ** 2 - 1));
       return { centerY, radius: actualRadius };
     },
     setQuality(level) {
@@ -221,6 +225,14 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
       material.uniforms.pulsePhase.value = phase;
       material.uniforms.avatarPulse.value = avatar ? 1 : 0;
       material.uniforms.pulseOrigin.value.set(origin.x, origin.y);
+      const radius =
+        camera.position.z <= 1
+          ? 2.4
+          : 1 / (Math.tan((camera.fov * Math.PI) / 360) * Math.sqrt(camera.position.z ** 2 - 1));
+      const centerY = -2 * (restingCenter - 0.5) * (1 - cameraExpansion);
+      material.uniforms.pulseReach.value = avatar
+        ? 1.65
+        : Math.min(2.4, radius + Math.hypot(origin.x * camera.aspect, origin.y - centerY));
     },
     containsPoint(x, y) {
       if (Math.abs(x) > 1 || Math.abs(y) > 1 || progress >= 0.8) return false;

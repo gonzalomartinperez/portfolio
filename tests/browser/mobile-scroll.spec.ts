@@ -7,6 +7,11 @@ for (const locale of ["", "/es"]) {
     await page.goto(locale || "/");
     const scene = page.locator("[data-scene]");
     await expect(scene).toHaveAttribute("data-mode", "running");
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      await new Promise(requestAnimationFrame);
+      await new Promise(requestAnimationFrame);
+    });
     const writes = await scene.evaluate(async (element) => {
       const viewport = element.querySelector<HTMLElement>("[data-scene-viewport]");
       if (!viewport) throw new Error("Missing scene viewport");
@@ -37,10 +42,16 @@ for (const locale of ["", "/es"]) {
           const journey = element.querySelector<HTMLElement>("[data-scene-journey]");
           const viewport = element.querySelector<HTMLElement>("[data-scene-viewport]");
           if (!journey || !viewport) return 1;
-          const start = journey.getBoundingClientRect().top + scrollY;
+          const start = Math.round(journey.getBoundingClientRect().top + scrollY);
+          const readingHold = Number.parseFloat(
+            journey.style.getPropertyValue("--scene-reading-hold") || "0",
+          );
           const expected = Math.max(
             0,
-            Math.min(1, (scrollY - start) / (journey.offsetHeight - viewport.offsetHeight)),
+            Math.min(
+              1,
+              (scrollY - start) / (journey.offsetHeight - viewport.offsetHeight - readingHold),
+            ),
           );
           return Math.abs(Number((element as HTMLElement).dataset.sceneProgress) - expected);
         }),

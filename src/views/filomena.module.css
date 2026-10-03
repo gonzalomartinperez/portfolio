@@ -46,7 +46,7 @@
   align-items: baseline;
   display: grid;
   gap: var(--space-2) var(--space-4);
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   padding: var(--space-4) var(--space-5);
   position: relative;
 }
@@ -58,6 +58,7 @@
 }
 
 .layerName {
+  overflow-wrap: anywhere;
   color: var(--accent);
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: var(--text-label);
@@ -66,6 +67,8 @@
 }
 
 .layerDetail {
+  min-width: 0;
+  overflow-wrap: anywhere;
   color: var(--text-secondary);
   font-size: var(--text-small);
 }
