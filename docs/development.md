@@ -229,7 +229,7 @@ agent vendor mandates a universal development process.
 - [Claude Code skills](https://code.claude.com/docs/en/skills)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
-## Assistant panel preview on develop
+## Dormant assistant panel
 
 The assistant is disabled in the public portfolio by owner request. The header
 does not import or mount its launcher, so visitors cannot open the panel or call
@@ -237,6 +237,4 @@ the API. Its implementation and contracts are retained for a future explicitly
 approved release; fixture browser tests remain disabled until that launch.
 
 When approved and mounted, the assistant panel loads after a visitor chooses
-**Ask AI** or **Preguntar**. It calls the assistant API directly from the browser; no model credentials are used by this portfolio. To preview locally, start the fixture API and its PostgreSQL/Neo4j Compose services from `portfolio-assistant-api`, then run `npm run dev -- --webpack --port 3000` here and open `http://localhost:3000` or `/es`. The API allows those exact localhost origins. The full chat link defaults to `http://localhost:3001` in local development. Before any future release, set `NEXT_PUBLIC_ASSISTANT_API_URL` and `NEXT_PUBLIC_ASSISTANT_WEB_URL` to the approved HTTPS origins in the build environment and verify proxy SSE; do not put API keys in either variable.
-
-This feature remains on `develop` until a separate release PR. The live `main` site does not include it.
+**Ask AI** or **Preguntar**. It calls the assistant API directly from the browser; no model credentials are used by this portfolio. A future local preview must explicitly mount the retained launcher and re-enable its fixture tests, then start the fixture API and its PostgreSQL/Neo4j Compose services from `portfolio-assistant-api` and run `npm run dev -- --webpack --port 3000` here. The API allows the localhost origins on port 3000. The full chat link defaults to `http://localhost:3001` in local development. Before any future release, set `NEXT_PUBLIC_ASSISTANT_API_URL` and `NEXT_PUBLIC_ASSISTANT_WEB_URL` to the approved HTTPS origins in the build environment and verify proxy SSE; do not put API keys in either variable.
