@@ -27,7 +27,7 @@ is added. Names remain visible beside each mark.
 | `meta.svg` | [Simple Icons](https://cdn.simpleicons.org/meta) | Meta family mark identifies Meta Pixel and Meta App Events; neither has a separate mark here. |
 | `celery.svg` | [Source](https://cdn.simpleicons.org/celery) | Original upstream artwork. |
 | `hostinger.svg` | [Source](https://cdn.simpleicons.org/hostinger) | Original upstream artwork. |
-| `agno.svg` | [Source](https://raw.githubusercontent.com/agno-agi/docs/main/logo/black.svg) | Original upstream artwork. |
+| `agno.svg` | [Agno repository](https://github.com/agno-agi/agno) | Original logo restored for confirmed Rampy experience. |
 | `mem0.svg` | [Source](https://raw.githubusercontent.com/mem0ai/mem0/main/docs/favicon.svg) | Original upstream artwork. |
 | `single-spa.svg` | [Source](https://single-spa.js.org/img/single-spa-mark-magenta.svg) | Original upstream artwork. |
 | `infisical.svg` | [Source](https://infisical.com/images/v2/infisical-logo.svg) | Official symbol cropped from wordmark; aspect ratio preserved. |

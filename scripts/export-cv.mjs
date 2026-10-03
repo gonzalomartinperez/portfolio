@@ -123,10 +123,11 @@ export function exportCv(source, facts) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const [sourcePath, factsPath, releasePath] = process.argv.slice(2);
+  const checkOnly = process.argv[2] === "--check";
+  const [sourcePath, factsPath, releasePath] = process.argv.slice(checkOnly ? 3 : 2);
   assert(
-    sourcePath && factsPath && releasePath && process.argv.length === 5,
-    "Usage: node scripts/export-cv.mjs <approved-editorial-json> <verified-facts-json> <reviewed-release-manifest>",
+    sourcePath && factsPath && releasePath && process.argv.length === (checkOnly ? 6 : 5),
+    "Usage: node scripts/export-cv.mjs [--check] <approved-editorial-json> <verified-facts-json> <reviewed-release-manifest>",
   );
   const sourceBytes = await readFile(sourcePath);
   const factsBytes = await readFile(factsPath);
@@ -149,9 +150,25 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       return [locale, hash];
     }),
   );
-  await writeFile(
-    new URL("../src/content/cv-public.json", import.meta.url),
-    `${JSON.stringify(result, null, 2)}\n`,
-  );
-  console.log(`Exported bilingual public CV revision ${result.revision}; private fields excluded.`);
+  const output = new URL("../src/content/cv-public.json", import.meta.url);
+  if (checkOnly) {
+    assert.deepEqual(
+      JSON.parse(await readFile(output, "utf8")),
+      result,
+      "Public CV projection is stale",
+    );
+    for (const locale of ["en", "es"]) {
+      const pdf = new URL(
+        `../public/gonzalo-martin-perez-ai-software-engineer-${locale}.pdf`,
+        import.meta.url,
+      );
+      assert.equal(sha256(await readFile(pdf)), result.provenance.pdfSha256[locale]);
+    }
+    console.log(`Public CV and PDFs match reviewed career revision ${result.revision}.`);
+  } else {
+    await writeFile(output, `${JSON.stringify(result, null, 2)}\n`);
+    console.log(
+      `Exported bilingual public CV revision ${result.revision}; private fields excluded.`,
+    );
+  }
 }

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ExternalLink } from "@/components/external-link";
 import { chrome } from "@/content/chrome";
 import { contactChannels, contactLinks, profile } from "@/content/en/profile";
 import { contactChannels as spanishContactChannels } from "@/content/es/profile";
@@ -65,9 +66,15 @@ export function SiteFooter() {
           <ul className={styles.list}>
             {contactLinks.map((link) => (
               <li key={link.href}>
-                <a className={styles.link} href={link.href}>
-                  {link.label}
-                </a>
+                {link.href.startsWith("http") ? (
+                  <ExternalLink className={styles.link} href={link.href} locale={locale}>
+                    {link.label}
+                  </ExternalLink>
+                ) : (
+                  <a className={styles.link} href={link.href}>
+                    {link.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>

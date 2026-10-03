@@ -3,23 +3,58 @@ import Link from "next/link";
 import portrait from "@/assets/portrait.avif";
 import { CompanyMark } from "@/components/company-mark";
 import { MetricList } from "@/components/metric-list";
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
-import { email, externalLinks } from "@/content/site-config";
+import { email } from "@/content/site-config";
 import { cn } from "@/lib/utils";
 import { HeroView } from "./hero-view";
 import styles from "./home.module.css";
 
 export function HomeView({ locale }: { locale: Locale }) {
   const content = getContent(locale);
-  const { profile, roles, filomena, academicResults, siteCopy: copy } = content;
+  const { profile, roles, academicResults, siteCopy: copy } = content;
+  const featuredWork = roles.filter((role) => ["rampy", "teamcubation"].includes(role.slug));
 
   return (
     <>
       <HeroView locale={locale} />
+
+      <section className="section-tight frame">
+        <div className="section-head">
+          <p className="eyebrow">{copy.home.workEyebrow}</p>
+          <h2>{copy.home.workHeading}</h2>
+        </div>
+
+        <div className={styles.featureGrid}>
+          {featuredWork.map((role) => (
+            <article
+              data-slot="card"
+              className={cn(cardVariants(), styles.feature)}
+              key={role.slug}
+            >
+              <div className={styles.featureTop}>
+                <CompanyMark company={role.slug} />
+                <p className={styles.rolePeriod}>{role.period}</p>
+              </div>
+              <h3 className={styles.featureTitle}>
+                <Link href={localePath(locale, `/work#${role.slug}`)}>
+                  {role.position} · {role.company}
+                </Link>
+              </h3>
+              <p className={styles.featureContext}>{role.context}</p>
+              {role.metrics && <MetricList metrics={role.metrics.slice(0, 2)} />}
+              <Link
+                className={buttonVariants({ variant: "outline" })}
+                href={localePath(locale, `/work#${role.slug}`)}
+              >
+                {copy.actions.fullExperience}
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section className="section-tight frame">
         <div className="section-head">
@@ -60,63 +95,9 @@ export function HomeView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="section-tight frame">
-        <div className="section-head">
-          <p className="eyebrow">{copy.home.workEyebrow}</p>
-          <h2>{copy.home.workHeading}</h2>
-        </div>
-
-        <article data-slot="card" className={cn(cardVariants(), styles.feature)}>
-          <div className={styles.featureTop}>
-            <div>
-              <h3 className={styles.featureTitle}>
-                <Link href={localePath(locale, "/work/filomena")}>{filomena.name}</Link>
-              </h3>
-              <p className="muted">{filomena.tagline}</p>
-            </div>
-            <p className="mono muted">{filomena.period}</p>
-          </div>
-
-          <Link className={styles.featureImage} href={localePath(locale, "/work/filomena")}>
-            <Image
-              alt={content.galleryAlt["040"]}
-              src="/filomena/filomena-040.webp"
-              width={1600}
-              height={720}
-              sizes="(min-width: 72rem) 64rem, 90vw"
-              unoptimized
-            />
-          </Link>
-          <p className="lede">{filomena.summary}</p>
-          <MetricList metrics={filomena.metrics} />
-
-          <ul className="tags">
-            {filomena.stack.map((item) => (
-              <li key={item}>
-                <Badge variant="outline" className="font-mono">
-                  {item}
-                </Badge>
-              </li>
-            ))}
-          </ul>
-
-          <div className="actions">
-            <Link className={buttonVariants()} href={localePath(locale, "/work/filomena")}>
-              {copy.actions.readCaseStudy}
-            </Link>
-            <a
-              className={buttonVariants({ variant: "outline" })}
-              href={externalLinks.filomenaBackend}
-            >
-              {copy.actions.sourceOnGithub}
-            </a>
-          </div>
-        </article>
-      </section>
-
       <section className="section frame">
         <div className={styles.split}>
-          <div className={styles.portrait}>
+          <div className="portrait-frame">
             <Image
               alt={`${profile.name}, ${profile.role}`}
               placeholder="blur"

@@ -68,6 +68,7 @@ test("scene budget includes extracted vendors and nested asynchronous chunks", (
       "static/chunks/scene.js",
       "static/chunks/vendors.js",
     ]);
+    assert.deepEqual(report.threeFiles, []);
     assert.equal(report.initial, false);
     assert.equal(report.roots, 1);
   } finally {

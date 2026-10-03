@@ -18,6 +18,10 @@ for (const locale of ["", "/es"]) {
           (value) => document.documentElement.setAttribute("data-theme", value),
           theme,
         );
+        await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+        // Color transitions can briefly mix the previous text color with the new surface.
+        // Audit the settled theme rather than an intermediate animation frame.
+        await page.waitForTimeout(350);
         const result = await new AxeBuilder({ page })
           .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
           .analyze();

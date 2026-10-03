@@ -38,14 +38,13 @@ name as the accessible label and empty image alt text when it is redundant.
 ### Owner-provided alternatives
 
 On 2026-09-19 the owner supplied six 100 × 100 JPEGs. The original files remain
-archived privately; only two selected assets are included here. Neither contains
+archived privately; two alternatives remain in this repository. Neither contains
 EXIF or ICC metadata. Their download origins and redistribution licenses were not
-provided; no additional rights are asserted. They are displayed at 40 CSS pixels
-without enlargement or AI reconstruction.
+provided; no additional rights are asserted. The independent-work illustration is
+shown in a 52 CSS-pixel tile; the Cooperativa alternative is retained for provenance.
 
 - [Cooperativa Obrera](../../public/images/companies/cooperativa-obrera-100.jpg)
-  replaces the 48-pixel favicon in the interface, providing enough source pixels
-  for its 40-pixel tile at 2× density. SHA-256:
+  was previously displayed in the interface; the current tile uses the official favicon above for a larger symbol. SHA-256:
   `a6b0434c6ba16af42fc5170a8a4d566567c386e652517cdaa0ff23559cfd80da`.
 - [Independent work](../../public/images/companies/independent.jpg) is a generic
   handshake illustration, not an employer's mark. SHA-256:
@@ -53,15 +52,12 @@ without enlargement or AI reconstruction.
 
 The existing higher-resolution Rampy, Teamcubation and UNS resources are retained.
 Kognite remains an archived option, not a newly asserted employer or credential.
-The filename of the replacement Cooperativa image differs from the old favicon
-so deployment does not depend on eviction of a cached asset.
-
 ### Officially retrieved assets
 
 Pequeverso now uses its [round transparent mark](../../public/images/companies/pequeverso-isotipo.webp)
 from the [official site's header resource](https://pequeverso.com/media/brand/brand-isotipo-w96-cf729aa6.webp),
 retrieved 2026-09-19. The 96 × 96 WebP has alpha transparency and no EXIF or ICC
-profile. It is shown at 40 CSS pixels on a round white backing, retaining the
+profile. It is shown in a 52 CSS-pixel round white tile, retaining the
 original colours. SHA-256:
 `31fd9052695fcfa3f70afa60e3817ad7602a21ebb04e8f05f4791e85864bc660`.
 The original square touch icon below is retained as source history, not used by
@@ -93,3 +89,5 @@ and [project disclaimer](https://github.com/devicons/devicon#disclaimer).
 
 Both use a 128 × 128 viewBox, retain their original colors, and contain no scripts
 or remote resource dependencies. Render them without monochrome filtering.
+
+On 2026-10-03 the marks were resized within the existing 52-pixel tiles: Rampy and the official Teamcubation SVG use their full available dimensions, Cooperativa uses its tighter official PNG, and Pequeverso and the independent-work illustration fill their tiles without distortion. The larger appearance was checked in both themes.

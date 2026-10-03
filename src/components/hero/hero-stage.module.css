@@ -136,7 +136,8 @@
 .stage:is([data-mode="running"], [data-mode="paused"]) .viewport {
   position: sticky;
   top: 0;
-  height: 100dvh;
+  /* Stable height keeps mobile browser chrome from shifting every logo while scrolling. */
+  height: 100svh;
 }
 .stage:is([data-mode="running"], [data-mode="paused"]) .canvas {
   opacity: 1;

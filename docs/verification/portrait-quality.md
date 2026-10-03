@@ -1,16 +1,9 @@
-# Portrait resolution
+# Portrait asset — 2026-10-03
 
-The 720 × 720 WebP derivative was replaced with an AVIF encoded directly from the
-approved 1254 × 1254 transparent original, without resizing, sharpening or generative
-retouching. The source remains unchanged in the private asset archive.
+The owner supplied a new 1254 × 1254 PNG portrait with its own dark studio background. The portfolio uses a 1254 × 1254 AVIF derivative at quality 65 and encoder effort 6, preserving the composition without retouching. The source stays in the owner's Downloads; only the optimized derivative is tracked.
 
-- AVIF quality 65, effort 6, 4:4:4 chroma; 74,701 bytes.
-- Alpha preserved; no EXIF or XMP embedded.
-- The existing 80 KiB transfer budget remains enforced.
-- Portrait frames are capped at 25rem to avoid oversized presentation on tablets.
-- Browser regression checks compare decoded width against rendered width × device
-  pixel ratio on the configured desktop and mobile projects, in both themes.
+- AVIF: 59,129 bytes, below the existing 80 KiB portrait transfer budget.
+- The portrait appears in Home and About with a neutral frame that works in both themes. Its built-in background avoids the cutout or “sticker” appearance in light mode.
+- At the 25rem maximum display width, the full-resolution derivative supports a 3× pixel ratio.
 
-This restores available source detail; it does not claim to recover detail absent
-from the original or guarantee pixel density at arbitrary browser zoom levels.
-The previous derivative remains recoverable through Git history.
+The previous approved image remains recoverable from Git history. Visual review should cover both themes and mobile/desktop widths.

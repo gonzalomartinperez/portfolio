@@ -1,6 +1,11 @@
 import { writeFileSync } from "node:fs";
 import path from "node:path";
 
+function containsThree(module) {
+  if (/[/\\]node_modules[/\\]three[/\\]/.test(module.identifier())) return true;
+  return module.modules ? [...module.modules].some(containsThree) : false;
+}
+
 function containsSceneEntry(module) {
   if (/[/\\]hero[/\\]scene-runtime\.ts(?:[?|]|$)/.test(module.identifier())) return true;
   return module.modules ? [...module.modules].some(containsSceneEntry) : false;
@@ -13,6 +18,12 @@ export class SceneBudgetPlugin {
       const roots = [...compilation.chunks].filter((chunk) =>
         [...compilation.chunkGraph.getChunkModulesIterable(chunk)].some(containsSceneEntry),
       );
+      const threeChunks = [...compilation.chunks].filter((chunk) =>
+        [...compilation.chunkGraph.getChunkModulesIterable(chunk)].some(containsThree),
+      );
+      const threeFiles = [...new Set(threeChunks.flatMap((chunk) => [...chunk.files]))]
+        .filter((file) => file.endsWith(".js"))
+        .sort();
       const groups = new Set(roots.flatMap((chunk) => [...chunk.groupsIterable]));
       const chunks = new Set(roots);
       for (const group of groups) {
@@ -30,6 +41,7 @@ export class SceneBudgetPlugin {
             roots: roots.length,
             initial: [...chunks].some((chunk) => chunk.canBeInitial()),
             files,
+            threeFiles,
           },
           null,
           2,

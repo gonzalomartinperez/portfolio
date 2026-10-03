@@ -228,3 +228,9 @@ agent vendor mandates a universal development process.
 - [Claude Code memory and imports](https://code.claude.com/docs/en/memory)
 - [Claude Code skills](https://code.claude.com/docs/en/skills)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+
+## Assistant panel preview on develop
+
+The assistant panel loads after a visitor chooses **Ask AI** or **Preguntar**. It calls the assistant API directly from the browser; no model credentials are used by this portfolio. To preview locally, start the fixture API and its PostgreSQL/Neo4j Compose services from `portfolio-assistant-api`, then run `npm run dev -- --webpack --port 3000` here and open `http://localhost:3000` or `/es`. The API allows those exact localhost origins. The full chat link defaults to `http://localhost:3001` in local development. Before any future release, set `NEXT_PUBLIC_ASSISTANT_API_URL` and `NEXT_PUBLIC_ASSISTANT_WEB_URL` to the approved HTTPS origins in the build environment and verify proxy SSE; do not put API keys in either variable.
+
+This feature remains on `develop` until a separate release PR. The live `main` site does not include it.
