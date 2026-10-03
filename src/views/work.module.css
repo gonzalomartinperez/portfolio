@@ -41,6 +41,7 @@
 
 .body {
   min-width: 0;
+  overflow-wrap: anywhere;
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
@@ -52,6 +53,20 @@
   padding: var(--space-4) var(--space-5);
 }
 
+.outcomes {
+  background: var(--surface-raised);
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--space-5);
+  padding: clamp(var(--space-4), 3vw, var(--space-5));
+}
+
+.outcomes :global(.metric-grid) > li {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .details {
   border-block: 1px solid var(--line-subtle);
   padding-block: var(--space-4);
@@ -60,13 +75,19 @@
   cursor: pointer;
   color: var(--accent);
   font-size: var(--text-small);
-  min-height: 2rem;
+  min-height: 44px;
+  align-content: center;
 }
+.details[open] summary {
+  margin-bottom: var(--space-4);
+}
+
 .details summary span {
   color: var(--text-muted);
 }
 
 .position {
+  overflow-wrap: anywhere;
   font-size: var(--text-h3);
 }
 
@@ -125,4 +146,12 @@
 
 .projectTitle a:hover {
   color: var(--accent);
+}
+
+.clientLinks a {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  text-align: center;
+  flex-wrap: wrap;
 }

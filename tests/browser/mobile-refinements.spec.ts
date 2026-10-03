@@ -44,12 +44,14 @@ for (const prefix of ["", "/es"]) {
       expect(Math.abs(geometry.languageCenter - geometry.themeCenter)).toBeLessThan(1);
       expect(geometry.brandRight).toBeLessThanOrEqual(geometry.languageLeft);
       expect(geometry.navTop).toBeGreaterThanOrEqual(geometry.rowBottom);
-      const chips = await page.locator('a[href*="/stack#tech-"]').evaluateAll((links) =>
-        links.map((link) => ({
-          height: link.getBoundingClientRect().height,
-          mark: !!link.querySelector("img,svg"),
-        })),
-      );
+      const chips = await page
+        .locator('[data-scene] a[href*="/stack#tech-"]')
+        .evaluateAll((links) =>
+          links.map((link) => ({
+            height: link.getBoundingClientRect().height,
+            mark: !!link.querySelector("img,svg"),
+          })),
+        );
       expect(chips.length).toBeGreaterThan(35);
       expect(
         Math.max(...chips.map((chip) => chip.height)) -

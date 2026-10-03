@@ -4,6 +4,7 @@ import { type ComponentType, useCallback, useEffect, useState } from "react";
 import styles from "./ambient-field.module.css";
 import type { AmbientParticlesProps } from "./ambient-particles";
 import { usePageMotionPaused } from "./motion-state";
+import { SolarSystem } from "./solar-system";
 
 export function AmbientField() {
   const paused = usePageMotionPaused();
@@ -61,7 +62,7 @@ export function AmbientField() {
       <div className={styles.nebula} />
       <div className={styles.starsNear} />
       <div className={styles.starsFar} />
-      <div className={styles.orbit} />
+      <SolarSystem />
       {Renderer && <Renderer paused={paused} onReady={onReady} />}
     </div>
   );

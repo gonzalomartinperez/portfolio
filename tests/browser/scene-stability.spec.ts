@@ -1,11 +1,17 @@
 import { expect, test } from "@playwright/test";
 import { dispatchTouchSequence } from "./touch-sequence";
 
-for (const prefix of ["", "/es"]) {
-  test(`${prefix || "en"} hero availability remains clear above the resting sphere`, async ({
+for (const { prefix, theme } of [
+  { prefix: "", theme: "dark" },
+  { prefix: "", theme: "light" },
+  { prefix: "/es", theme: "dark" },
+  { prefix: "/es", theme: "light" },
+]) {
+  test(`${prefix || "en"} ${theme} hero availability remains clear above the resting sphere`, async ({
     page,
     isMobile,
   }) => {
+    await page.addInitScript((theme) => localStorage.setItem("theme", theme), theme);
     for (const height of isMobile ? [650, 844] : [866, 1080]) {
       await page.emulateMedia({ reducedMotion: "no-preference" });
       await page.setViewportSize({ width: isMobile ? 393 : 1760, height });
@@ -27,13 +33,7 @@ for (const prefix of ["", "/es"]) {
             heroBottom: hero.getBoundingClientRect().bottom,
             sphereTop: bounds.top + bounds.height / 2 - radius,
             sphereBottom: bounds.top + bounds.height / 2 + radius,
-            viewportBottom: Math.min(
-              viewport.getBoundingClientRect().bottom,
-              getComputedStyle(document.querySelector("header") as HTMLElement).position ===
-                "sticky"
-                ? innerHeight
-                : Number.POSITIVE_INFINITY,
-            ),
+            viewportBottom: Math.min(viewport.getBoundingClientRect().bottom, innerHeight),
           };
         });
       await expect
@@ -45,8 +45,23 @@ for (const prefix of ["", "/es"]) {
           );
         })
         .toBe(true);
-      await expect(scene.locator("[data-scene-hero] p").last()).toBeVisible();
-      await scene.screenshot({ path: test.info().outputPath(`hero-${height}.png`) });
+      const availability = scene.locator("[data-scene-hero] p").last();
+      await expect(availability).toBeVisible();
+      const spans = await availability.locator("span:not([aria-hidden])").evaluateAll((elements) =>
+        elements.map((element) => ({
+          top: element.getBoundingClientRect().top,
+          bottom: element.getBoundingClientRect().bottom,
+        })),
+      );
+      expect(spans).toHaveLength(2);
+      if (isMobile) {
+        expect(spans[1].top).toBeGreaterThanOrEqual(spans[0].bottom);
+        await expect(availability.locator("span[aria-hidden]").first()).not.toBeVisible();
+      } else {
+        expect(Math.abs(spans[0].top - spans[1].top)).toBeLessThan(1);
+        await expect(availability.locator("span[aria-hidden]").first()).toBeVisible();
+      }
+      await scene.screenshot({ path: test.info().outputPath(`hero-${height}-${theme}.png`) });
       await page.emulateMedia({ reducedMotion: "reduce" });
       await expect(scene).toHaveAttribute("data-mode", "static");
       const fallback = await scene.locator("svg").first().boundingBox();
@@ -55,6 +70,33 @@ for (const prefix of ["", "/es"]) {
       expect(hero).not.toBeNull();
       if (fallback && hero) expect(fallback.y).toBeGreaterThanOrEqual(hero.y + hero.height + 20);
     }
+  });
+}
+
+for (const prefix of ["", "/es"]) {
+  test(`${prefix || "en"} mobile hero actions use available width and reflow safely`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 393, height: 844 });
+    await page.goto(`${prefix || "/"}?sceneProgress=0&sceneTime=0`);
+    const actions = page.locator("[data-scene-hero] a");
+    const first = await actions.first().boundingBox();
+    const second = await actions.last().boundingBox();
+    expect(first).not.toBeNull();
+    expect(second).not.toBeNull();
+    if (first && second) {
+      expect(Math.abs(first.y - second.y)).toBeLessThan(1);
+      expect(first.height).toBeGreaterThanOrEqual(44);
+      expect(second.height).toBeGreaterThanOrEqual(44);
+      expect(Math.abs((first.x + second.x + second.width) / 2 - 393 / 2)).toBeLessThan(9);
+    }
+    await page.setViewportSize({ width: 320, height: 650 });
+    await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+    await expect(actions.first()).toBeVisible();
+    await expect(actions.last()).toBeVisible();
+    await expect
+      .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1))
+      .toBe(true);
   });
 }
 
@@ -96,8 +138,11 @@ test("twenty rapid reversals retain deterministic logo positions and a single ca
     const viewport = element.querySelector<HTMLElement>("[data-scene-viewport]");
     if (!journey || !viewport) throw new Error("Scene geometry is missing");
     return {
-      start: journey.getBoundingClientRect().top + scrollY,
-      distance: journey.offsetHeight - viewport.offsetHeight,
+      start: Math.round(journey.getBoundingClientRect().top + scrollY),
+      distance:
+        journey.offsetHeight -
+        viewport.offsetHeight -
+        Number.parseFloat(journey.style.getPropertyValue("--scene-reading-hold") || "0"),
     };
   });
   const move = async (progress: number) => {

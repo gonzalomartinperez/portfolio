@@ -28,12 +28,12 @@ const descriptions: Record<ArchitectureKind, Record<Locale, { title: string; sum
     en: {
       title: "Portal, ingestion and AI architecture",
       summary:
-        "The React/Single-SPA portal connected through a Spring WebFlux BFF to Java/Spring Boot and Node.js/NestJS services. S3 and SQS fed a separate Python/FastAPI Lambda for promotion ingestion. The AI lane shows the LangChain/LangGraph and OpenAI API harness with Neo4j-backed GraphRAG, agent orchestration, answer evaluation and domain guardrails. Separate lanes do not imply an undocumented connection between systems.",
+        "The React/Single-SPA portal uses a Spring WebFlux BFF to access Java/Spring Boot and Node.js/NestJS microservices and an AI harness with LangChain, LangGraph and OpenAI API. The harness uses Neo4j GraphRAG to relate enterprise policies and promotion information, with agent orchestration, answer evaluation and domain guardrails. A bulk promotion pipeline runs from S3 through SQS and a Python/FastAPI Lambda to the microservices and their respective databases.",
     },
     es: {
       title: "Arquitectura del portal, la ingesta y la IA",
       summary:
-        "El portal React/Single-SPA se conectaba mediante un BFF Spring WebFlux con servicios Java/Spring Boot y Node.js/NestJS. S3 y SQS alimentaban una Lambda Python/FastAPI separada para ingerir promociones. El bloque de IA muestra el harness con LangChain/LangGraph, OpenAI API y GraphRAG sobre Neo4j, con orquestación, evaluación de respuestas y guardrails de dominio. Los bloques separados no implican conexiones entre sistemas que no se hayan documentado.",
+        "El portal React/Single-SPA accede mediante un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS, y a un harness agéntico con LangChain, LangGraph y OpenAI API. El harness usa GraphRAG sobre Neo4j para relacionar políticas empresariales y promociones, con orquestación, evaluación de respuestas y guardrails de dominio. El flujo masivo de promociones pasa de S3 a SQS y una Lambda Python/FastAPI, y desde allí a los microservicios y sus respectivas bases de datos.",
     },
   },
   "cooperativa-obrera": {

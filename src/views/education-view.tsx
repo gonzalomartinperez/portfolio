@@ -35,7 +35,6 @@ export function EducationView({ locale }: { locale: Locale }) {
     academicEvidence,
     academicResults,
     curriculumNote,
-    credentialNote,
     credentials,
     degree,
     languageNote,
@@ -238,7 +237,7 @@ export function EducationView({ locale }: { locale: Locale }) {
               <p className="eyebrow">{copy.education.certificationsEyebrow}</p>
               <h2 id="credentials">{copy.education.certificationsHeading}</h2>
             </div>
-            <ul className="flow-tight">
+            <ul className={styles.credentials}>
               {credentials.map((credential) => (
                 <li
                   data-slot="card"
@@ -275,7 +274,7 @@ export function EducationView({ locale }: { locale: Locale }) {
                 </li>
               ))}
             </ul>
-            <p className="muted flow-tight">{credentialNote}</p>
+            <p className="muted flow-tight">{copy.education.certificationsDescription}</p>
           </div>
 
           <div>

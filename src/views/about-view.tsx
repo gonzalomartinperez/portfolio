@@ -1,3 +1,4 @@
+import { Bot, Boxes, PanelsTopLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import portrait from "@/assets/portrait.avif";
@@ -10,11 +11,16 @@ import styles from "./about.module.css";
 export function AboutView({ locale }: { locale: Locale }) {
   const { profile, degree, siteCopy: copy } = getContent(locale);
 
+  const focusIcons = { ai: Bot, product: PanelsTopLeft, systems: Boxes };
+
   return (
     <>
-      <PageHeader eyebrow={copy.about.eyebrow} intro={profile.intro} title={copy.about.title} />
+      <PageHeader eyebrow={copy.about.eyebrow} intro={copy.about.intro} title={copy.about.title} />
 
-      <section className={`section-tight frame ${styles.introduction}`}>
+      <section
+        aria-label={copy.about.eyebrow}
+        className={`section-tight frame ${styles.introduction}`}
+      >
         <div className={styles.split}>
           <div className="prose">
             {copy.about.paragraphs.map((paragraph) => (
@@ -23,7 +29,7 @@ export function AboutView({ locale }: { locale: Locale }) {
           </div>
 
           <aside className={styles.aside}>
-            <div className="portrait-frame">
+            <div className={`portrait-frame ${styles.portrait}`}>
               <Image
                 alt={`${profile.name}, ${profile.role}`}
                 placeholder="blur"
@@ -41,6 +47,9 @@ export function AboutView({ locale }: { locale: Locale }) {
                 <dt className="eyebrow">{copy.home.factExperience}</dt>
                 <dd>
                   {copy.home.experienceSince(profile.experienceLength, profile.experienceSince)}
+                  <span className={styles.asOf}>
+                    {copy.about.experienceAsOf(profile.experienceAsOf)}
+                  </span>
                 </dd>
               </div>
               <div>
@@ -76,32 +85,57 @@ export function AboutView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="section-tight frame">
+      <section aria-labelledby="about-focus-heading" className="section-tight frame">
+        <div className="section-head">
+          <p className="eyebrow">{copy.about.focusEyebrow}</p>
+          <h2 id="about-focus-heading">{copy.about.focusHeading}</h2>
+        </div>
+        <div className={styles.focus}>
+          {copy.about.focus.map((area) => {
+            const Icon = focusIcons[area.id];
+            return (
+              <article className={styles.focusArea} key={area.id}>
+                <Icon aria-hidden="true" className={styles.focusIcon} size={24} strokeWidth={1.5} />
+                <h3>{area.title}</h3>
+                <p>{area.body}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section aria-labelledby="about-principles-heading" className="section-tight frame">
         <div className="section-head">
           <p className="eyebrow">{copy.about.principlesEyebrow}</p>
-          <h2>{copy.about.principlesHeading}</h2>
+          <h2 id="about-principles-heading">{copy.about.principlesHeading}</h2>
+          <p>{copy.about.principlesIntro}</p>
         </div>
 
-        <div className={styles.principles}>
+        <ol className={styles.principles}>
           {copy.about.principles.map((principle, index) => (
-            <article className={styles.principle} key={principle.title}>
+            <li className={styles.principle} key={principle.title}>
               <span className={styles.number} aria-hidden="true">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div>
                 <h3>{principle.title}</h3>
-                <p className="flow-tight">{principle.body}</p>
+                <p>{principle.body}</p>
               </div>
-            </article>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
-      <section className="section-tight frame">
+      <section
+        aria-labelledby="about-looking-heading"
+        className={`section-tight frame ${styles.looking}`}
+      >
         <div className="section-head">
           <p className="eyebrow">{copy.about.lookingEyebrow}</p>
-          <h2>{copy.about.lookingHeading}</h2>
-          <p>{copy.about.lookingBody}</p>
+          <h2 id="about-looking-heading">{copy.about.lookingHeading}</h2>
+          {copy.about.lookingParagraphs.map((paragraph) => (
+            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+          ))}
         </div>
         <div className="actions flow">
           <Link className={buttonVariants()} href={localePath(locale, "/work")}>

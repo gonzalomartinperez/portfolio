@@ -29,6 +29,11 @@
   justify-content: space-between;
   gap: var(--space-2) var(--space-4);
 }
+.degreeTop > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .records li > div {
   min-width: 0;
   flex: 1 1 16rem;
@@ -93,7 +98,7 @@
 .columns {
   display: grid;
   gap: clamp(var(--space-6), 5vw, var(--space-8));
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 @media (width >= 52rem) {
@@ -165,6 +170,10 @@
   gap: var(--space-3);
   min-width: 0;
 }
+.credentialIdentity > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .credentialMark {
   flex: none;
   width: 40px;
@@ -176,6 +185,8 @@
 .certificateLink {
   flex-basis: 100%;
   width: fit-content;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   color: var(--accent);
   text-underline-offset: 0.2em;
 }
@@ -263,4 +274,19 @@
   max-width: 85ch;
   font-size: var(--text-small);
   color: var(--text-secondary);
+}
+
+.credentials {
+  display: grid;
+  gap: var(--space-4);
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+}
+
+.documentActions > a {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
 }

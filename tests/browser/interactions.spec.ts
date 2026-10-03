@@ -180,16 +180,30 @@ test("every catalogue entry has a logo or a labelled-context illustration", asyn
   await page.goto("/stack");
   const entries = page.locator("#technology-results li[id^='tech-']");
   expect(await entries.count()).toBeGreaterThan(100);
-  for (const entry of await entries.all()) {
-    await expect(entry.getByRole("heading", { level: 3 })).toBeVisible();
-    await expect(entry.locator("svg, img")).toHaveCount(1);
-  }
+  await expect
+    .poll(() =>
+      entries.evaluateAll((items) =>
+        items
+          .filter((item) => {
+            const heading = item.querySelector("h3");
+            const bounds = heading?.getBoundingClientRect();
+            return (
+              !heading ||
+              !bounds?.width ||
+              !bounds.height ||
+              getComputedStyle(heading).visibility !== "visible" ||
+              item.querySelectorAll("svg, img").length !== 1
+            );
+          })
+          .map((item) => item.id),
+      ),
+    )
+    .toEqual([]);
   await expect(page.locator("#tech-rag [data-representation='illustration']")).toHaveCount(1);
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "LangGraph", exact: true })).toHaveAttribute(
-    "href",
-    "/stack#tech-langgraph",
-  );
+  await expect(
+    page.locator("[data-scene]").getByRole("link", { name: "LangGraph", exact: true }),
+  ).toHaveAttribute("href", "/stack#tech-langgraph");
 });
 
 test("the layout reflows at a 200 percent text scale", async ({ page }) => {

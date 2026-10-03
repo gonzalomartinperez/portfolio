@@ -34,7 +34,7 @@ for (const locale of ["", "/es"]) {
         const ellipseCenterY =
           viewportBounds.top +
           viewportBounds.height / 2 +
-          (headerHeight + 16 - 72 + markHeight / 4 - 80) / 2;
+          (headerHeight + 48 - 96 + markHeight / 4 - 80) / 2;
         return {
           copy: bounds(copy),
           ellipseCenterY,

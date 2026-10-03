@@ -3,7 +3,15 @@
   flex: none;
   object-fit: contain;
   background: #fff;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 3px;
   box-sizing: content-box;
+}
+
+.privy {
+  background: #010110;
+}
+
+.hyperliquid {
+  background: #072723;
 }

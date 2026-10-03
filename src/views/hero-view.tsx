@@ -34,7 +34,11 @@ export function HeroView({ locale }: { locale: Locale }) {
 
       <p className={styles.availability}>
         <span aria-hidden="true" className={styles.pulse} />
-        {profile.currentPosition} · {copy.hero.openToRemote}
+        <span>{profile.currentPosition}</span>
+        <span aria-hidden="true" className={styles.separator}>
+          ·
+        </span>
+        <span>{copy.hero.openToRemote}</span>
       </p>
     </div>
   );
