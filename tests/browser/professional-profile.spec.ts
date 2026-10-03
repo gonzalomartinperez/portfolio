@@ -38,9 +38,11 @@ for (const prefix of ["", "/es"]) {
         const mark = page.locator(`main img[src="/images/companies/${file}"]`);
         await mark.scrollIntoViewIfNeeded();
         await expect(mark).toBeVisible();
-        expect(
-          await mark.evaluate((element) => (element as HTMLImageElement).naturalWidth),
-        ).toBeGreaterThan(0);
+        await expect
+          .poll(() => mark.evaluate((element) => (element as HTMLImageElement).naturalWidth), {
+            message: `${file} loads after entering the viewport`,
+          })
+          .toBeGreaterThan(0);
       }
       await rampy.scrollIntoViewIfNeeded();
       await page.screenshot({ path: info.outputPath(`experience-${theme}.png`) });
