@@ -46,14 +46,27 @@ and one build with mandatory TypeScript validation;
 it does not provide a security audit or visual accessibility QA. After building,
 `npm run test:smoke` checks the production server, HTML landmarks, and 404 handling;
 The Hostinger compatibility job runs it too. It uses port 3100 by default; set
-`SMOKE_TEST_PORT` for parallel runs. The modern quality job uses `npm run test:site`:
-one owned production server serves rendered assertions and Playwright sequentially.
+`SMOKE_TEST_PORT` for parallel runs. Locally, `npm run test:site` uses one owned
+production server for rendered assertions and Playwright sequentially. In CI, `Quality (development)` runs
+`npm run check` and the server-rendered assertions once, then uploads its verified
+production build. Eight isolated browser runners restore that same-run artifact
+and run the complete Playwright suite in eight shards without rebuilding.
 Rendered tests already cover the smoke assertions, so they are not repeated there.
 Browser tests default to one worker to avoid competing software-rendered scenes;
 see the [motion research](research/motion-performance.md) for measurements and rationale.
-The modern quality job allows 60 minutes for both viewport suites after a slower
-software-rendered run exceeded 45 minutes without an individual test failure.
-Individual test deadlines, mandatory coverage and failure on flaky tests remain unchanged.
+Each browser shard retains one worker and has a 30-minute job ceiling, avoiding
+competition for a shared software-rendered GPU. Shards run on separate runners
+with fail-fast disabled so every shard can finish and retain diagnostics.
+Eight browser jobs plus compatibility fit below GitHub Free's standard-runner
+limit of 20 concurrent jobs; account-wide activity can still introduce queuing.
+Standard hosted runners are free for this public repository; this workflow uses
+no larger runners. See [Actions limits](https://docs.github.com/en/actions/reference/limits)
+and [billing and usage](https://docs.github.com/en/actions/concepts/billing-and-usage).
+Individual test deadlines, mandatory coverage, retries and failure on flaky tests
+remain unchanged. The build/rendered job has a 15-minute ceiling; the previous
+60-minute allowance covered the complete sequential browser suite.
+`Quality checks` requires every shard, the development checks
+and Hostinger compatibility to succeed; skipped or cancelled jobs fail the gate.
 Native image-tab tests use the full Chromium channel instead of headless shell
 to exercise browser document navigation. Install Chromium without `--only-shell`;
 the CI installation already provides both binaries. Other tests retain their runtime.
@@ -102,7 +115,10 @@ states explicitly. A documentation-only handoff may report repository/link and
 skill checks without claiming that application or hosting QA was repeated.
 
 The modern quality job owns lint, content checks, one type-checked build, budgets
-and rendered/browser checks. The separate Hostinger job owns the GLIBC 2.28
+and rendered checks. The browser matrix consumes that build and owns interaction
+and accessibility checks. Build artifacts are scoped to their workflow run, omit
+build caches and expire after one day; browser diagnostics expire after seven
+days. The separate Hostinger job owns the GLIBC 2.28
 baseline, observed runtime, SWC WASM fallback, build and smoke check. Do not add
 Biome to the hosting build or duplicate the full browser suite there. Preserve
 the `Quality checks` aggregator and protected branch checks; deployment evidence

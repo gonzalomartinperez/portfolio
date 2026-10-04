@@ -4,8 +4,9 @@ import { useState } from "react";
 import styles from "./ambient-field.module.css";
 import { usePageMotionPaused } from "./motion-state";
 import { SolarSystem } from "./solar-system";
+import type { SolarTextureVersions } from "./solar-system-scene";
 
-export function AmbientField() {
+export function AmbientField({ textureVersions }: { textureVersions: SolarTextureVersions }) {
   const paused = usePageMotionPaused();
   const [ready, setReady] = useState(false);
   return (
@@ -18,7 +19,7 @@ export function AmbientField() {
       <div className={styles.nebula} />
       <div className={styles.starsNear} />
       <div className={styles.starsFar} />
-      <SolarSystem onReadyChange={setReady} />
+      <SolarSystem textureVersions={textureVersions} onReadyChange={setReady} />
     </div>
   );
 }

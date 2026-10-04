@@ -18,7 +18,7 @@ the decorative scene follows the portfolio theme and has restrained transparency
 
 The home toolkit contains every entry from the existing public applied-technology
 catalogue, grouped and alphabetized within each category. Two balanced rows move
-in opposite directions at 24 CSS pixels/second (18 on mobile), with continuous
+in opposite directions at 42 CSS pixels/second (30 on mobile), with continuous
 cycles, equal-height tiles and no navigation arrows. Each technology has one linked
 DOM instance. GSAP wraps positions; no inaccessible duplicate links are required.
 
@@ -77,3 +77,15 @@ conversion. Original decoded texture sources are retained for resolution recover
 when resizing back to desktop. Decorative readiness crossfades over 600 ms, with
 reduced-motion transitions disabled. GPU memory numbers are conservative estimates,
 not measured driver allocation. Physical high-refresh FPS has not been measured.
+
+## Loading and architecture correction
+
+The server-rendered fallback uses the same initial camera elevation, field of view,
+framing radius, orbital positions and body radii as WebGL. Cold loads and reloads
+must preserve centers and apparent sizes within one CSS pixel at time zero,
+including the Moon. Loading still retains the complete scene.
+
+Solar texture URLs include each asset’s SHA-256 from the server-owned manifest.
+Both CSS and WebGL request the same content address, avoiding stale CDN maps
+when an existing filename is updated. This fixes the observed four-hour cache
+on the previously published Mercury texture without changing hosting settings.

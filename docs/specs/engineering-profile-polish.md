@@ -4,7 +4,7 @@
 
 Present the verified engineering scope clearly in US English and neutral Spanish,
 with an equally usable light and dark theme. Career Ops owns facts and PDF generation;
-the portfolio consumes reviewed revision `2026-10-03.11` without separate CV edits.
+the portfolio consumes reviewed revision `2026-10-04.1` without separate CV edits.
 
 ## Acceptance criteria
 
@@ -74,11 +74,11 @@ separately rather than inferred from an edited file.
 | Full frontend feature-domain refactor and complete design system; hexagonal backend | Work contributions and Rampy architecture diagram |
 | Production mobile React Native/Kotlin/Swift, Android Studio and startup improvement | Rampy evidence; no mobile claim for Cooperativa or Teamcubation |
 | Agno retained with LangChain/LangGraph, OpenAI API and Neo4j GraphRAG | Both Rampy and Teamcubation experience sources |
-| Agent harness orchestration, evaluation, performance and domain/security guardrails | Teamcubation achievements and BFF-connected agent diagram |
+| Agent harness orchestration, evaluation, performance and domain/security guardrails | Teamcubation achievements and BFF-connected Promotion Assistance System; harness remains an internal orchestration/evaluation component |
 | Fintech providers include Hyperliquid, LI.FI, Morpho, Aave and Compound | Catalog, Work diagram, CV skills and confirmed facts |
 | Privy authentication/wallets, Stripe integrations and E2EE | Rampy achievements and separated integration capabilities |
 | Full event tracking: Firebase/Google Analytics, Clarity Mobile and Singular/Meta | Confirmed Rampy achievement; no duplicate-event claim widened beyond scope |
-| Rampy enterprise back office is being developed and expanded | Current-tense operations contribution, diagram and CV/LinkedIn; no new metric |
+| Rampy enterprise back office is implemented and being expanded | Operations contribution and web-connected diagram; CV/LinkedIn follow the approved source correction; no new metric |
 | Cooperativa: React/Next.js → Python/FastAPI BFF → Java, Node and PHP services | Contracts/permissions achievements and architecture diagram |
 | Teamcubation portal: React/Single-SPA → Spring WebFlux BFF → services and GraphRAG | User-confirmed BFF connections; no disconnected assistant box |
 | Teamcubation ingestion: S3/SQS → Lambda Python/FastAPI → Java/Node services → their databases | User-confirmed ingestion branch, CV and LinkedIn descriptions |
@@ -126,3 +126,17 @@ The owner's subsequent request replaces it with nine textured orbiting bodies
 (including Pluto), the Sun, an Earth-orbiting Moon and occasional shooting stars.
 The [cinematic solar specification](cinematic-solar-system.md) owns the new
 Three.js rendering, asset credits, shared performance budget and verification.
+
+## October 4 final corrections
+
+Career Ops release `2026-10-04.1` supplies the reviewed three-page bilingual PDFs
+and public CV projection. Rampy’s backoffice is implemented and being expanded;
+Privy connects to the backend and the backoffice belongs to the web frontend.
+Teamcubation’s Promotion Assistance System connects to the BFF, with the harness
+inside that system. Architectural node names describe the actual layer or role.
+
+All routes opt out of automatic phone, date, address, email and URL detection.
+An attribute-specific CSS rule suppresses pointer activation and decoration on
+anchors inserted by iOS data detectors; authored contact and navigation links
+retain their behavior. This does not disable text selection or browser search
+features. Device-level detection remains dependent on browser support.

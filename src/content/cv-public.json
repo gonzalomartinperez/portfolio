@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-03.11",
+  "revision": "2026-10-04.1",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -159,7 +159,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", retaining checks and preparing DigitalOcean environments. Develop and expand the enterprise backoffice to manage the application, monitoring, telemetry and status.",
+                      "text": ", retaining checks and preparing DigitalOcean environments. Built the enterprise backoffice for application management, monitoring, telemetry and status; continue to expand its capabilities.",
                       "bold": false,
                       "href": ""
                     }
@@ -201,12 +201,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Built a merchant-facing GraphRAG agent and harness",
+                      "text": "Built the merchant-facing Promotion Assistance System",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " with LangChain/LangGraph, Neo4j and OpenAI API to relate enterprise policies and promotions, orchestrate agents, evaluate answers, tune performance and enforce domain and data-leakage guardrails. Connected to the Spring WebFlux BFF for portal access, the assistant answered queries without executing commercial actions.",
+                      "text": " with LangChain/LangGraph, Neo4j and OpenAI API. GraphRAG related enterprise policies and promotions; its internal harness orchestrated agents, evaluated answers, tuned performance and enforced domain and data-leakage guardrails. Connected to the Spring WebFlux BFF for portal access, the assistant answered queries without executing commercial actions.",
                       "bold": false,
                       "href": ""
                     }
@@ -1121,7 +1121,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", conservando controles y preparando entornos DigitalOcean. Desarrollo y amplío el backoffice empresarial para gestionar la aplicación, su monitoreo, telemetría y estado.",
+                      "text": ", conservando controles y preparando entornos DigitalOcean. Desarrollé el backoffice empresarial para gestionar la aplicación, su monitoreo, telemetría y estado; continúo ampliando sus capacidades.",
                       "bold": false,
                       "href": ""
                     }
@@ -1163,12 +1163,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Construí un agente GraphRAG para comercios y su harness",
+                      "text": "Construí el Sistema de asistencia de promociones para comercios",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " con LangChain/LangGraph, Neo4j y OpenAI API para relacionar políticas empresariales y promociones, orquestar agentes, evaluar respuestas, optimizar rendimiento y aplicar guardrails de dominio y protección de datos. Conectado al BFF Spring WebFlux para el acceso desde el portal, respondía consultas sin ejecutar operaciones comerciales.",
+                      "text": " con LangChain/LangGraph, Neo4j y OpenAI API. GraphRAG relacionaba políticas empresariales y promociones; el harness interno orquestaba agentes, evaluaba respuestas, optimizaba rendimiento y aplicaba guardrails de dominio y protección de datos. Conectado al BFF Spring WebFlux para el acceso desde el portal, respondía consultas sin ejecutar operaciones comerciales.",
                       "bold": false,
                       "href": ""
                     }
@@ -1919,11 +1919,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "b71210a3d0ff2211b1b43d9f7954ef09effab172f3910368a0b0a3e57ba5c37e",
-    "factsSha256": "7fe959c30596e48aa854c5eb36730b0abefadb08a6e2b97a00da10b6f32aae8d",
+    "sourceSha256": "ecf187a0793b8e2983f3e9f1509a14a7c43214b680f77251117a1d49ef732c81",
+    "factsSha256": "1e629b9e7e2dc33eb80a8d0f5d13d8b6233ee057a026c286bd7eb8ea4427cf2e",
     "pdfSha256": {
-      "en": "d1e1572171fa45dd52185ddcc51d053682f19dd7690a49202d862cfbd5cc826a",
-      "es": "baec547e3b4728b2ad4d35f64b005dd93b780dccfc01195375ed1bdc8e34f3ca"
+      "en": "40d008f45695c9d96d08d806c0587cb38cffab4dd5e75423d00a2d0e007040c8",
+      "es": "8c289a930d48377de7c304978880923930f535bb61465a742492d1c43d8793dc"
     }
   }
 }
