@@ -541,9 +541,12 @@ export default function DiagramCanvas({
     target,
     type: "smoothstep",
     pathOptions:
-      kind === "teamcubation" && source === "bff" && target === "node" && vertical
-        ? { stepPosition: 0.9 }
-        : undefined,
+      // Keep the AI branch in the gap below the wallet row.
+      kind === "rampy" && vertical && source === "backend" && target === "ai"
+        ? { stepPosition: 0.95 }
+        : kind === "teamcubation" && source === "bff" && target === "node" && vertical
+          ? { stepPosition: 0.9 }
+          : undefined,
     sourceHandle:
       kind === "rampy" && vertical && source === "privy"
         ? "side-source"

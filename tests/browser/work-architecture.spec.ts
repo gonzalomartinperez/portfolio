@@ -66,6 +66,32 @@ for (const locale of ["", "/es"]) {
     await expect(page.locator("#teamcubation .react-flow__node[data-id='agent']")).toContainText(
       "Harness",
     );
+    const clearLabels = await page.locator("#rampy figure").evaluate((figure) => {
+      const path = figure.querySelector<SVGPathElement>(
+        ".react-flow__edge[data-id='backend-ai'] .react-flow__edge-path",
+      );
+      const matrix = path?.getScreenCTM();
+      if (!path || !matrix) return false;
+      const obstacles = [...figure.querySelectorAll<HTMLElement>(".react-flow__node")]
+        .filter(({ dataset }) => !["backend", "ai"].includes(dataset.id ?? ""))
+        .map((node) => node.getBoundingClientRect());
+      const length = path.getTotalLength();
+      for (let distance = 0; distance <= length; distance += 2) {
+        const point = path.getPointAtLength(distance).matrixTransform(matrix);
+        if (
+          obstacles.some(
+            (bounds) =>
+              point.x > bounds.left + 3 &&
+              point.x < bounds.right - 3 &&
+              point.y > bounds.top + 3 &&
+              point.y < bounds.bottom - 3,
+          )
+        )
+          return false;
+      }
+      return true;
+    });
+    expect(clearLabels, "Backend-to-AI routing leaves other node labels clear").toBe(true);
     await expect(backoffice).toContainText(locale ? "telemetría" : "telemetry");
     await expect(page.locator("#teamcubation .react-flow__edge[data-id='source-sqs']")).toHaveCount(
       1,
