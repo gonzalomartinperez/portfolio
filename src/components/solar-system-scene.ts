@@ -122,8 +122,7 @@ export const solarTextureNames = [
   "earth-specular",
 ] as const;
 export const solarTextureUrl = (name: string) => `/images/solar-system/${name}.webp`;
-export const solarPhase = (planet: SolarPlanet, mobile: boolean) =>
-  ((mobile ? (planet.mobilePhase ?? planet.phase) : planet.phase) * Math.PI) / 180;
+export const solarPhase = (planet: SolarPlanet, _mobile: boolean) => (planet.phase * Math.PI) / 180;
 
 export function solarOrbitPoint(
   planet: SolarPlanet,

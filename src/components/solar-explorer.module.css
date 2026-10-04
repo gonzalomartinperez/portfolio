@@ -24,8 +24,15 @@
   --background: #060b18;
   --foreground: #eef4ff;
   --border: #77879b;
-  --accent: #22344b;
+  --accent: #8ed9ff;
+  --text-primary: #eef4ff;
+  --text-secondary: #c0ccdc;
   --accent-foreground: #eef4ff;
+}
+.dialog > :global(button[data-slot="button"]) {
+  color: #eef4ff;
+  background: #111d30;
+  border-color: #77879b;
 }
 .viewport {
   position: absolute;
