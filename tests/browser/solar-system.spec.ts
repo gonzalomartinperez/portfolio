@@ -10,11 +10,13 @@ type SolarSnapshot = {
   textureCount: number;
   gpuTextures: number;
   estimatedGpuBytes: number;
+  earthOceanRoughnessPatched: boolean;
   camera: { type: string };
   bodies: {
     name: string;
     texture: string;
     textureColorSpace: string;
+    textureWidth: number;
     geometry: string;
     parent: string;
     world: number[];
@@ -68,6 +70,8 @@ for (const theme of ["light", "dark"] as const) {
     expect(sun?.screen.x).toBeCloseTo(bounds.width / 2, 0);
     expect(sun?.screen.y).toBeCloseTo(bounds.height / 2, 0);
     expect(frame.camera.type).toBe("PerspectiveCamera");
+    expect(frame.earthOceanRoughnessPatched).toBe(true);
+    expect(sun?.textureWidth).toBe(bounds.width < 640 ? 2048 : 4096);
     expect(frame.estimatedGpuBytes).toBeLessThanOrEqual(
       (bounds.width < 640 ? 128 : 256) * 1024 * 1024,
     );

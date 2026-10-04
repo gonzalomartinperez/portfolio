@@ -22,6 +22,7 @@ import {
   PointsMaterial,
   RingGeometry,
   Scene,
+  ShaderChunk,
   ShaderMaterial,
   SphereGeometry,
   SRGBColorSpace,
@@ -157,6 +158,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
   const geometries = new Set<BufferGeometry>();
   const materials = new Set<Material>();
   const textures = new Map<string, Texture>();
+  const originalImages = new Map<Texture, HTMLImageElement | HTMLCanvasElement>();
   const geometry = <T extends BufferGeometry>(value: T) => {
     geometries.add(value);
     return value;
@@ -370,8 +372,11 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
               "#include <worldpos_vertex>\nsolarNormal=normalize(mat3(modelMatrix)*normal); solarPosition=(modelMatrix*vec4(transformed,1.0)).xyz;",
             );
           shader.fragmentShader = shader.fragmentShader.replace(
-            "roughnessFactor *= texelRoughness.g;",
-            "roughnessFactor *= 1.0 - texelRoughness.g * 0.85;",
+            "#include <roughnessmap_fragment>",
+            ShaderChunk.roughnessmap_fragment.replace(
+              "roughnessFactor *= texelRoughness.g;",
+              "roughnessFactor *= 1.0 - texelRoughness.g * 0.85;",
+            ),
           );
           shader.fragmentShader =
             "varying vec3 solarNormal; varying vec3 solarPosition;\n" +
@@ -671,8 +676,9 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     if (loaded && contextAvailable && !paused && !disposed) frame = requestAnimationFrame(animate);
   };
   const fitTexture = (texture: Texture, name: string) => {
-    const source = texture.source.data;
+    const source = originalImages.get(texture) ?? texture.source.data;
     if (!(source instanceof HTMLImageElement || source instanceof HTMLCanvasElement)) return;
+    originalImages.set(texture, source);
     const sourceWidth = source instanceof HTMLImageElement ? source.naturalWidth : source.width;
     const sourceHeight = source instanceof HTMLImageElement ? source.naturalHeight : source.height;
     const prominent = name === "sun" || name === "earth" || name === "jupiter";
@@ -681,10 +687,24 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       prominent ? (width < 640 ? 2048 : 4096) : 1024,
     );
     const factor = Math.min(1, maxDimension / Math.max(sourceWidth, sourceHeight));
-    if (factor >= 1) return;
+    if (factor >= 1) {
+      if (texture.image !== source) {
+        texture.image = source;
+        texture.needsUpdate = true;
+      }
+      return;
+    }
+    const targetWidth = Math.max(1, Math.round(sourceWidth * factor));
+    const targetHeight = Math.max(1, Math.round(sourceHeight * factor));
+    if (
+      texture.image instanceof HTMLCanvasElement &&
+      texture.image.width === targetWidth &&
+      texture.image.height === targetHeight
+    )
+      return;
     const decoded = document.createElement("canvas");
-    decoded.width = Math.max(1, Math.round(sourceWidth * factor));
-    decoded.height = Math.max(1, Math.round(sourceHeight * factor));
+    decoded.width = targetWidth;
+    decoded.height = targetHeight;
     const context = decoded.getContext("2d");
     if (!context) return;
     context.drawImage(source, 0, 0, decoded.width, decoded.height);
@@ -818,6 +838,12 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
               ? image.currentSrc || image.src
               : (texture?.userData.sourceUrl ?? null),
           textureColorSpace: texture?.colorSpace ?? null,
+          textureWidth:
+            image instanceof HTMLImageElement
+              ? image.naturalWidth
+              : image instanceof HTMLCanvasElement
+                ? image.width
+                : null,
         };
       });
       const saturnRings = bodies.find(({ name }) => name === "saturn")?.rings;
@@ -838,6 +864,20 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         paused,
         contextAvailable,
         pixelRatio,
+        earthOceanRoughnessPatched:
+          contextAvailable &&
+          (renderer.info.programs?.some(
+            ({ program }) =>
+              program instanceof WebGLProgram &&
+              context
+                .getAttachedShaders(program)
+                ?.some(
+                  (shader) =>
+                    context.getShaderParameter(shader, context.COMPILE_STATUS) &&
+                    context.getShaderSource(shader)?.includes("1.0 - texelRoughness.g * 0.85"),
+                ),
+          ) ??
+            false),
         textureCount: textures.size,
         gpuTextures: renderer.info.memory.textures,
         calls: renderer.info.render.calls,
@@ -980,6 +1020,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       canvas.removeEventListener("webglcontextrestored", restored);
       delete canvas.getSolarDebugSnapshot;
       for (const texture of textures.values()) texture.dispose();
+      originalImages.clear();
       for (const value of geometries) value.dispose();
       for (const value of materials) value.dispose();
       renderer.renderLists.dispose();

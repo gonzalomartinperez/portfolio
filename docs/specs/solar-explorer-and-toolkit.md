@@ -1,6 +1,6 @@
 # Solar explorer and continuous engineering toolkit
 
-Status: implementation verification in progress
+Status: implemented; final release verification tracked in [PR #86](https://github.com/gonzalomartinperez/portfolio/pull/86)
 
 ## Experience
 
@@ -61,3 +61,19 @@ production visual review across desktop/mobile, EN/ES and light/dark. Validate
 several orbit phases, loop seams, pause/resume, theme/locale position, context loss,
 optional/core texture failure, keyboard focus, no overflow and one solar canvas.
 Require the final PR head to pass CI before promotion through develop and main.
+
+## Implementation evidence
+
+Production npm run check passes, including strict TypeScript, document/identity
+contracts and all transfer budgets. Dedicated production browser verification
+covers both locales, themes and device layouts, focus/scroll recovery, GPU context
+loss, texture failures, shared pause and reduced/no-JavaScript fallbacks. Carousel
+review checks all 165 entries and three actual GSAP cycles with no visible gaps or
+clipped labels. The public PR records final integration and release checks.
+
+Earth specular-to-roughness conversion replaces the actual Three.js shader include;
+a debug-only browser assertion verifies the compiled GPU shader contains that
+conversion. Original decoded texture sources are retained for resolution recovery
+when resizing back to desktop. Decorative readiness crossfades over 600 ms, with
+reduced-motion transitions disabled. GPU memory numbers are conservative estimates,
+not measured driver allocation. Physical high-refresh FPS has not been measured.

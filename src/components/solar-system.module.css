@@ -17,12 +17,23 @@
 }
 .canvas {
   opacity: 0;
+  transition: opacity 600ms ease;
 }
 .system[data-renderer="webgl"] .canvas {
   opacity: 1;
 }
+.fallback {
+  opacity: 1;
+  transition:
+    opacity 600ms ease,
+    visibility 0s;
+}
 .system[data-renderer="webgl"] .fallback {
+  opacity: 0;
   visibility: hidden;
+  transition:
+    opacity 600ms ease,
+    visibility 0s 600ms;
 }
 .body,
 .sun {
@@ -122,5 +133,13 @@
     height: 9px;
     left: calc(50% + 14px);
     top: calc(50% - 6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canvas,
+  .fallback,
+  .system[data-renderer="webgl"] .fallback {
+    transition: none;
   }
 }
