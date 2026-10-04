@@ -81,3 +81,55 @@ test("Next.js and SWC WASM versions agree with the lockfile", () => {
   assert.deepEqual(lock.packages[""].dependencies, manifest.dependencies);
   assert.deepEqual(lock.packages[""].devDependencies, manifest.devDependencies);
 });
+
+test("CI isolates browser shards and fails the protected gate for incomplete verification", () => {
+  const workflow = read(".github/workflows/ci.yml");
+  const jobs = new Map(
+    [
+      ...workflow.matchAll(/^ {2}([a-z][a-z-]*):\n([\s\S]*?)(?=^ {2}[a-z][a-z-]*:|$(?![\s\S]))/gm),
+    ].map(([, id, body]) => [id, body]),
+  );
+  for (const id of ["validate", "browser", "legacy-linux", "check"]) {
+    assert.ok(jobs.has(id), `Missing verification job: ${id}`);
+  }
+  const development = jobs.get("validate");
+  const browser = jobs.get("browser");
+  const gate = jobs.get("check");
+  assert.match(development, /name: Quality \(development\)/);
+  assert.match(jobs.get("legacy-linux"), /name: Compatibility \(Hostinger \/ GLIBC 2\.28\)/);
+  assert.match(gate, /name: Quality checks/);
+  assert.match(read(".github/workflows/branch-policy.yml"), /name: Branch policy/);
+  assert.match(browser, /needs: validate/);
+  assert.match(browser, /fail-fast: false/);
+  assert.match(browser, /shard: \[1, 2, 3, 4\]/);
+  assert.match(browser, /npm run test:browser -- --shard=\$\{\{ matrix\.shard \}\}\/4/);
+  assert.match(read("playwright.config.ts"), /workers: 1,/);
+  assert.match(read("playwright.config.ts"), /failOnFlakyTests: Boolean\(process\.env\.CI\)/);
+  assert.match(gate, /if: always\(\)/);
+  assert.match(gate, /needs: \[validate, browser, legacy-linux\]/);
+  for (const id of ["validate", "browser", "legacy-linux"]) {
+    assert.match(gate, new RegExp(`needs\\.${id}\\.result`));
+  }
+  assert.match(
+    gate,
+    /test "\$RESULT" = success && test "\$BROWSER_RESULT" = success && test "\$LEGACY_RESULT" = success/,
+  );
+  assert.doesNotMatch(workflow, /continue-on-error:|pull_request_target:/);
+});
+
+test("browser shards reuse the same workflow's verified build without rebuilding", () => {
+  const workflow = read(".github/workflows/ci.yml");
+  const development = workflow.split("  validate:")[1].split("  browser:")[0];
+  const browser = workflow.split("  browser:")[1].split("  legacy-linux:")[0];
+  assert.match(development, /npm run check/);
+  assert.match(development, /npm run test:rendered/);
+  assert.match(
+    development,
+    /tar --exclude=\.next\/cache -czf \/tmp\/portfolio-production-build\.tar\.gz \.next/,
+  );
+  assert.match(development, /name: production-build/);
+  assert.match(browser, /actions\/download-artifact@[a-f0-9]{40}/);
+  assert.match(browser, /name: production-build/);
+  assert.doesNotMatch(browser, /run-id:|repository:|github-token:|npm run (check|build)/);
+  assert.match(browser, /name: browser-verification-\$\{\{ matrix\.shard \}\}/);
+});
