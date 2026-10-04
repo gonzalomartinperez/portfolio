@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { expect, test } from "@playwright/test";
 import documents from "../../src/content/public-documents.json" with { type: "json" };
+import { captureSettledPage } from "./capture";
 
 test("CV and contact downloads use reviewed content hashes as cache keys", async ({
   page,
@@ -70,10 +71,14 @@ test("all academic outcomes and CV content remain usable without JavaScript", as
       await expect(page.locator("li[id^='uns-']:visible")).toHaveCount(36);
       await expect(page.locator("#uns-7680")).toContainText("Ingeniería de Aplicaciones de Web");
       await expect(page.locator("#uns-7922")).toContainText("7 / 10");
-      await page.screenshot({
-        path: info.outputPath(`education${locale ? "-es" : "-en"}.png`),
-        fullPage: true,
-      });
+      await captureSettledPage(
+        page,
+        {
+          path: info.outputPath(`education${locale ? "-es" : "-en"}.png`),
+          fullPage: true,
+        },
+        false,
+      );
       await page.goto(`${locale}/cv`);
       await expect(page.getByRole("heading", { level: 1 })).toHaveText("Gonzalo Martin Perez");
       await expect(page.locator("#cv-experience")).toBeVisible();
@@ -81,10 +86,14 @@ test("all academic outcomes and CV content remain usable without JavaScript", as
         "href",
         /ai-software-engineer-(en|es)\.pdf/,
       );
-      await page.screenshot({
-        path: info.outputPath(`cv${locale ? "-es" : "-en"}.png`),
-        fullPage: true,
-      });
+      await captureSettledPage(
+        page,
+        {
+          path: info.outputPath(`cv${locale ? "-es" : "-en"}.png`),
+          fullPage: true,
+        },
+        false,
+      );
     }
   } finally {
     await context.close();
