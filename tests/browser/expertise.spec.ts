@@ -2,17 +2,20 @@ import { expect, test } from "@playwright/test";
 import { filomenaGallery } from "../../src/content/filomena-gallery";
 import { certificateFiles } from "../../src/content/site-config";
 
-test("reviewed gallery screens remain available across filters and certificate files open", async ({
-  page,
-  request,
-}) => {
-  for (const route of ["/work/filomena", "/es/work/filomena"]) {
+for (const route of ["/work/filomena", "/es/work/filomena"]) {
+  test(`${route} reviewed gallery screens remain available across filters`, async ({
+    page,
+    request,
+  }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(route);
     const images = page.locator('main a[href^="/filomena/"]');
     await expect(images).toHaveCount(filomenaGallery.length);
     for (const image of await images.all()) {
       await expect(image.locator("img")).toHaveAttribute("alt", /\S+/);
-      const response = await request.get((await image.getAttribute("href")) as string);
+      const href = await image.getAttribute("href");
+      expect(href).not.toBeNull();
+      const response = await request.get(href ?? "");
       expect(response.ok()).toBe(true);
     }
     const filters = page.locator("fieldset button");
@@ -27,8 +30,15 @@ test("reviewed gallery screens remain available across filters and certificate f
       }
     }
     expect(covered.size).toBe(filomenaGallery.length);
-  }
-  for (const route of ["/education", "/es/education"]) {
+  });
+}
+
+for (const route of ["/education", "/es/education"]) {
+  test(`${route} certificate files remain visible and open in their original format`, async ({
+    page,
+    request,
+  }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(route);
     for (const file of Object.values(certificateFiles)) {
       await expect(page.locator(`main a[href="${file.href}"]`)).toBeVisible();
@@ -38,8 +48,8 @@ test("reviewed gallery screens remain available across filters and certificate f
         file.format === "PDF" ? "application/pdf" : "image/png",
       );
     }
-  }
-});
+  });
+}
 
 for (const [route, label] of [
   ["/", "In development"],
@@ -95,7 +105,12 @@ test("the scene shows Spring once while the catalogue keeps every tool", async (
     "Spring Security",
     "Spring Data JPA",
   ]) {
-    await expect(page.getByRole("link", { name, exact: true })).toHaveCount(1);
+    for (const section of [
+      page.locator('section[aria-labelledby="technology-heading"]'),
+      page.locator("[data-tool-carousel]"),
+    ]) {
+      await expect(section.getByRole("link", { name, exact: true })).toHaveCount(1);
+    }
   }
 });
 
