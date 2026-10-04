@@ -6,18 +6,26 @@ function containsThree(module) {
   return module.modules ? [...module.modules].some(containsThree) : false;
 }
 
-function containsSceneEntry(module) {
-  if (/[/\\]hero[/\\]scene-runtime\.ts(?:[?|]|$)/.test(module.identifier())) return true;
-  return module.modules ? [...module.modules].some(containsSceneEntry) : false;
+function containsEntry(module, pattern) {
+  if (pattern.test(module.identifier())) return true;
+  return module.modules
+    ? [...module.modules].some((child) => containsEntry(child, pattern))
+    : false;
 }
 
 // Follow chunk groups, including extracted vendors, instead of guessing minified filenames.
 export class SceneBudgetPlugin {
   apply(compiler) {
     compiler.hooks.done.tap("SceneBudgetPlugin", ({ compilation }) => {
-      const roots = [...compilation.chunks].filter((chunk) =>
-        [...compilation.chunkGraph.getChunkModulesIterable(chunk)].some(containsSceneEntry),
-      );
+      const findRoots = (pattern) =>
+        [...compilation.chunks].filter((chunk) =>
+          [...compilation.chunkGraph.getChunkModulesIterable(chunk)].some((module) =>
+            containsEntry(module, pattern),
+          ),
+        );
+      const heroRoots = findRoots(/[/\\]hero[/\\]scene-runtime\.ts(?:[?|]|$)/);
+      const solarRoots = findRoots(/[/\\]solar-system-engine\.ts(?:[?|]|$)/);
+      const roots = [...new Set([...heroRoots, ...solarRoots])];
       const threeChunks = [...compilation.chunks].filter((chunk) =>
         [...compilation.chunkGraph.getChunkModulesIterable(chunk)].some(containsThree),
       );
@@ -38,10 +46,20 @@ export class SceneBudgetPlugin {
         `${JSON.stringify(
           {
             entry: "src/components/hero/scene-runtime.ts",
+            entries: [
+              "src/components/hero/scene-runtime.ts",
+              "src/components/solar-system-engine.ts",
+            ],
             roots: roots.length,
             initial: [...chunks].some((chunk) => chunk.canBeInitial()),
             files,
             threeFiles,
+            heroEntryFiles: [...new Set(heroRoots.flatMap((chunk) => [...chunk.files]))]
+              .filter((file) => file.endsWith(".js"))
+              .sort(),
+            solarEntryFiles: [...new Set(solarRoots.flatMap((chunk) => [...chunk.files]))]
+              .filter((file) => file.endsWith(".js"))
+              .sort(),
           },
           null,
           2,

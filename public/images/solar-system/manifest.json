@@ -1,0 +1,182 @@
+{
+  "reviewedOn": "2026-10-03",
+  "totalBytes": 433854,
+  "assets": [
+    {
+      "file": "mercury.webp",
+      "width": 512,
+      "height": 256,
+      "bytes": 19954,
+      "sha256": "8765d447832456d3d31ecb1d1a84a9e9e90c7a00d62a733c6897fa4d0d4cb92f",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_mercury.jpg",
+      "sourceSha256": "5a5c80607f643496bac9a631e71957def35ed788895f18b678ac849c2b38e48a",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": false
+    },
+    {
+      "file": "venus.webp",
+      "width": 1024,
+      "height": 512,
+      "bytes": 11510,
+      "sha256": "e2ffcd819dd9d1d286f54dd2faf063468b611533aa22ccefa81cc132597d01ed",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_venus_atmosphere.jpg",
+      "sourceSha256": "225012ad4911730605c4e189ca2a3bf674fce50cc48aab4102b936b47d6991ac",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": false
+    },
+    {
+      "file": "earth.webp",
+      "width": 1024,
+      "height": 512,
+      "bytes": 39770,
+      "sha256": "e4148619bb13e764e30295c5919639834a42ce9c1f56acddc9f4694c882a1ac1",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg",
+      "sourceSha256": "767ee1dc6eb3802699bfccf6f264880f8acd0b80de3191cd24984fe279b07b7c",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": false
+    },
+    {
+      "file": "earth-night.webp",
+      "width": 1024,
+      "height": 512,
+      "bytes": 15388,
+      "sha256": "3d8b3f083c37da152f97aafd5648a25343cd2bf58f1610efa5890976ea357757",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_earth_nightmap.jpg",
+      "sourceSha256": "c16fd1bc096ab91a5c5265c6ff9847c43f489f2e2ee790ccdbcbd03251cf3a5a",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": false
+    },
+    {
+      "file": "earth-clouds.webp",
+      "width": 512,
+      "height": 256,
+      "bytes": 93320,
+      "sha256": "a584e1d189ff6a06404bee394306feb8a3636434282a24327995fa43bb9d17b3",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_earth_clouds.jpg",
+      "sourceSha256": "fffd7f68d41b37274822150e54a6ef605af1d3ec35624d9f628c3b896bfa42ed",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": true,
+      "alphaRange": [
+        0,
+        231
+      ]
+    },
+    {
+      "file": "mars.webp",
+      "width": 1024,
+      "height": 512,
+      "bytes": 52438,
+      "sha256": "a83dfb3f44efb88705cb7fc9c9657afbabc1cbaf6cd860a24faf31a61fb82e9a",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_mars.jpg",
+      "sourceSha256": "2d187f3e77a98eaa8cea5f4cc722f633c122ef170b9e94ace6b5fb6cbc3f8e01",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": false
+    },
+    {
+      "file": "jupiter.webp",
+      "width": 1024,
+      "height": 512,
+      "bytes": 35552,
+      "sha256": "9aed5d863ebe9e12f896cd6784c0cfb61650a767635fda787ba8e71b726a1329",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_jupiter.jpg",
+      "sourceSha256": "b0f04d005350252636b0e3396fc592548cbd9e9126b269d32d5c6abd4b0e4f2b",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": false
+    },
+    {
+      "file": "saturn.webp",
+      "width": 1024,
+      "height": 512,
+      "bytes": 8362,
+      "sha256": "ad5427f48f19ff80025a746502527f5b4cd0b2483da73e7af4b1469fe3764c49",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_saturn.jpg",
+      "sourceSha256": "54a900ca9bf7ab62e70f862852759abdf342e6d6436a95a2fe9ebdb6bcd3bbac",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": false
+    },
+    {
+      "file": "saturn-rings.webp",
+      "width": 1024,
+      "height": 64,
+      "bytes": 2346,
+      "sha256": "017cacbc49b49bf2af6d3a73f6efcb1ce7ccd211e389a58f0bec603f56d183a1",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_saturn_ring_alpha.png",
+      "sourceSha256": "4b0644b2f3ef259fd0bfaedd9dc52f9e7d9738f65f50363e8c4dd19f650d7334",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": true,
+      "alphaRange": [
+        0,
+        249
+      ]
+    },
+    {
+      "file": "uranus.webp",
+      "width": 1024,
+      "height": 512,
+      "bytes": 2210,
+      "sha256": "9ecbe3425295e038240c5e46ce307a95afce27d44a8fe5f33bf0a9cd453d3b3e",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_uranus.jpg",
+      "sourceSha256": "d15239d46f82d3ea13d2b260b5b29b2a382f42f2916dae0694d0387b1204a09d",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": false
+    },
+    {
+      "file": "neptune.webp",
+      "width": 1024,
+      "height": 512,
+      "bytes": 4886,
+      "sha256": "8e0f16e7898db0bd50b9742f2c9ded23d7f71ab820f95cf3dd8d8e245feef167",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_neptune.jpg",
+      "sourceSha256": "cb42ea82709741d28b0af44d8b283cbc6dbd0c521a7f0e1e1e010ade00977df6",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": false
+    },
+    {
+      "file": "pluto.webp",
+      "width": 1024,
+      "height": 512,
+      "bytes": 42634,
+      "sha256": "5149139b1e915876b3639dc284e8b3aa43089967314896689c28bbb9a0f1e472",
+      "sourceUrl": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg",
+      "sourceSha256": "d63da5ee9eab8d0b98ebef3c0cdc3a92676d7c9b247b2383294fb5da5c67a71a",
+      "credit": "NASA/JHUAPL/SwRI",
+      "license": "NASA image-use guidelines",
+      "alpha": false
+    },
+    {
+      "file": "sun.webp",
+      "width": 1024,
+      "height": 512,
+      "bytes": 77234,
+      "sha256": "342cdd7ee2b7a89d13c18f3a6f0f76aa2639b49674092bb26216ca3bcfd05c7a",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_sun.jpg",
+      "sourceSha256": "ff0f076ba65e03b5ab518451bc96699325be38e3ccbdd5869ee1c00f3a0c8816",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": false
+    },
+    {
+      "file": "moon.webp",
+      "width": 512,
+      "height": 256,
+      "bytes": 28250,
+      "sha256": "5b682c7a547eead1bb14dc7fa572538477af9861d041990af6a5a10bd9eef4f9",
+      "sourceUrl": "https://www.solarsystemscope.com/textures/download/2k_moon.jpg",
+      "sourceSha256": "2764ba6535ea0481a062846ee033cc7a909dae05b31a8fd13f3e98f3a7fd92bd",
+      "credit": "Solar System Scope / INOVE",
+      "license": "CC BY 4.0",
+      "alpha": false
+    }
+  ]
+}

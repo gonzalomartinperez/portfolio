@@ -87,6 +87,23 @@
   color: var(--text-secondary);
 }
 
+.credits {
+  align-items: center;
+  color: var(--text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--text-label);
+  gap: 0.2rem;
+  padding-top: var(--space-3);
+}
+
+.credits a {
+  align-items: center;
+  display: inline-flex;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}
+
 :global(body:has([data-ambient-field][data-state="running"])) .motionToggle,
 :global(body:has([data-ambient-field][data-state="paused"])) .motionToggle {
   display: inline-flex;

@@ -6,6 +6,9 @@ for (const locale of ["en", "es"]) {
     page,
   }) => {
     await page.goto(locale === "es" ? "/es/education" : "/education");
+    // Static evidence captures use the same motion control available to readers.
+    await page.locator("[data-motion-toggle]").click();
+    await expect(page.locator("[data-ambient-field]")).toHaveAttribute("data-state", "paused");
     for (const summary of await page.locator("details > summary").all()) await summary.click();
     const grades = page.locator("[data-academic-grade]");
     expect(await grades.count()).toBeGreaterThan(34);

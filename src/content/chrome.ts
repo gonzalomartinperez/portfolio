@@ -22,6 +22,8 @@ export type ChromeCopy = {
   colophon: string;
   pauseMotion: string;
   resumeMotion: string;
+  planetTextureCredit: string;
+  plutoCredit: string;
   nav: {
     about: string;
     work: string;
@@ -48,6 +50,8 @@ export const chrome: Record<Locale, ChromeCopy> = {
     colophon: "Built with Next.js, React and TypeScript.",
     pauseMotion: "Pause page motion",
     resumeMotion: "Resume page motion",
+    planetTextureCredit: "Planet textures adapted from",
+    plutoCredit: "Pluto",
     nav: {
       about: "About",
       work: "Work",
@@ -72,6 +76,8 @@ export const chrome: Record<Locale, ChromeCopy> = {
     colophon: "Desarrollado con Next.js, React y TypeScript.",
     pauseMotion: "Pausar movimiento de la página",
     resumeMotion: "Reanudar movimiento de la página",
+    planetTextureCredit: "Texturas planetarias adaptadas de",
+    plutoCredit: "Plutón",
     nav: {
       about: "Sobre mí",
       work: "Trabajo",
