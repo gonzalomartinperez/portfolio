@@ -84,3 +84,18 @@ contexts suppress RAF callbacks and use the native path. JavaScript stays disabl
 throughout those tests. Assertions, full-page captures, retry policy and the
 fail-on-flaky gate are preserved. The repeated focused cases pass without retries;
 final remote CI remains mandatory.
+
+## Integrated CI follow-up
+
+The first feature CI attempt reached the 25-minute job limit after 207 browser
+cases. Desktop solar checks passed; mobile Education evidence captures exhausted
+their 45-second case deadline while the software-rendered background remained
+active. Those static-content tests now exercise the real shared pause control
+before retaining all badge, contrast, accessibility and image-capture assertions.
+Dedicated solar/ambient motion cases continue to run with animation enabled.
+The measured integrated duration justifies a 45-minute CI job budget; individual
+assertion deadlines, retries and fail-on-flaky behavior remain unchanged.
+
+Both Education locale cases pass twice in each viewport after the change: eight
+passes without retries, 13.4–15.9 seconds per case. Lint and the 21 repository
+checks also pass. The new complete remote run remains the delivery gate.
