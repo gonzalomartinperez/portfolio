@@ -35,6 +35,53 @@ const sourceFiles = tracked.filter((file) => /^src\/.*\.(ts|tsx|css)$/.test(file
 const contentFiles = tracked.filter((file) => /^src\/content\/.*\.ts$/.test(file));
 const localeFiles = contentFiles.filter((file) => /^src\/content\/(en|es)\//.test(file));
 
+test("experience architecture claims agree with the reviewed CV in both locales", () => {
+  const cv = JSON.parse(read("src/content/cv-public.json"));
+  for (const locale of ["en", "es"]) {
+    const source = readWithoutComments(`src/content/${locale}/experience.ts`);
+    const entries = cv.locales[locale].sections.find(
+      (section) => section.id === "experience",
+    ).entries;
+    for (const [slug, cvId] of [
+      ["rampy", "rampy"],
+      ["teamcubation", "teamcubation"],
+      ["cooperativa-obrera", "cooperativa"],
+    ]) {
+      const start = source.indexOf(`slug: "${slug}"`);
+      assert.ok(start >= 0, `${locale}: missing experience ${slug}`);
+      const next = source.indexOf("\n  {\n    slug:", start);
+      const role = source.slice(start, next === -1 ? undefined : next);
+      const entry = entries.find((entry) => entry.id === cvId);
+      assert.ok(entry, `${locale}: missing CV experience ${cvId}`);
+      for (const copy of [role, JSON.stringify(entry)]) {
+        assert.match(copy, /design system/i, `${locale}: ${slug} frontend uses a design system`);
+        assert.match(
+          copy,
+          /feature|funcionalidad/i,
+          `${locale}: ${slug} frontend has feature domains`,
+        );
+        if (slug === "rampy") {
+          assert.match(copy, /hexagonal/i, `${locale}: Rampy backend uses hexagonal architecture`);
+          for (const provider of ["pgvector", "Mem0", "Vertex AI", "DeepInfra"]) {
+            assert.ok(copy.includes(provider), `${locale}: Rampy includes ${provider}`);
+          }
+        } else {
+          assert.match(
+            copy,
+            /layered|en capas/i,
+            `${locale}: ${slug} backend uses layered architecture`,
+          );
+          assert.doesNotMatch(
+            copy,
+            /hexagonal/i,
+            `${locale}: ${slug} must not claim hexagonal architecture`,
+          );
+        }
+      }
+    }
+  }
+});
+
 test("every published metric carries a qualifier", () => {
   // Data modules only: the shared files declare types, and site.ts holds the hero summary
   // strip, which the attribution-note test below governs instead.

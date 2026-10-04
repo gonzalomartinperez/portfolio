@@ -97,6 +97,11 @@ crowding the avatar or copy, or changing the settled technology-grid spacing.
   confirms the canonical editorial/facts/release manifest and PDF hashes.
 - The public export preserves existing roles, dates and metrics and excludes
   private career fields. The prepared LinkedIn packet uses the same corrected facts.
+- The final consistency audit removed a stale hexagonal claim from Teamcubation's
+  bilingual Work descriptions. Both layered-backend roles now describe their
+  feature-organized frontends and use of design systems; Rampy's confirmed context
+  and model providers appear in its description and stack. A content invariant
+  checks these architecture claims against the reviewed public CV in both locales.
 - The diagram lane reviewed twelve production-build captures across both
   languages, themes and device layouts. Edge routing avoids unrelated cards;
   group-heading backdrops keep connecting lines out of label text.
