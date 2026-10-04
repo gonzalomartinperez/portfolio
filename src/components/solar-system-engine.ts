@@ -14,9 +14,12 @@ import {
   Mesh,
   MeshBasicMaterial,
   MeshStandardMaterial,
-  OrthographicCamera,
+  NoColorSpace,
+  PerspectiveCamera,
   PlaneGeometry,
   PointLight,
+  Points,
+  PointsMaterial,
   RingGeometry,
   Scene,
   ShaderMaterial,
@@ -24,9 +27,17 @@ import {
   SRGBColorSpace,
   Texture,
   TextureLoader,
+  Vector2,
   Vector3,
   WebGLRenderer,
+  WebGLRenderTarget,
 } from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
+import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
 import {
   type SolarPlanet,
   solarOrbitPoint,
@@ -39,6 +50,11 @@ import {
 export type SolarEngine = {
   setPaused(value: boolean): void;
   setLight(value: boolean): void;
+  setHost(host: HTMLElement | null): void;
+  setImmersive(value: boolean, interactionElement?: HTMLElement): void;
+  resetView(): void;
+  rotateView(delta: number): void;
+  highlightBody(name: string | null): void;
   dispose(): void;
 };
 type SolarOptions = {
@@ -72,21 +88,6 @@ void main() {
   surfaceUv = uv;
   gl_Position = projectionMatrix * viewMatrix * world;
 }`;
-const earthFragment = `
-uniform sampler2D dayMap;
-uniform sampler2D nightMap;
-uniform vec3 sunPosition;
-varying vec3 worldNormal;
-varying vec3 worldPosition;
-varying vec2 surfaceUv;
-void main() {
-  float sunlight = dot(normalize(worldNormal), normalize(sunPosition - worldPosition));
-  vec3 daylight = texture2D(dayMap, surfaceUv).rgb * (0.3 + 1.1 * max(sunlight, 0.0));
-  vec3 cities = texture2D(nightMap, surfaceUv).rgb * (1.0 - smoothstep(-0.25, 0.12, sunlight));
-  gl_FragColor = vec4(daylight + cities * 0.85, 1.0);
-  #include <tonemapping_fragment>
-  #include <colorspace_fragment>
-}`;
 const atmosphereFragment = `
 uniform vec3 glowColor;
 uniform float glowStrength;
@@ -116,22 +117,40 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     canvas,
     alpha: true,
     antialias: true,
-    powerPreference: "low-power",
+    powerPreference: "high-performance",
   });
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.1;
   renderer.setClearColor(0x000000, 0);
   const scene = new Scene();
-  const camera = new OrthographicCamera(-1, 1, 1, -1, 0.1, 3000);
-  camera.position.z = 1600;
+  const camera = new PerspectiveCamera(35, 1, 0.1, 1800);
+  let defaultDistance = 190;
+  let immersive = false;
+  let highlighted: string | null = null;
+  let controls: OrbitControls | undefined;
+  const originalHost = canvas.parentElement;
+  const baseTarget = new WebGLRenderTarget(1, 1);
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  const bloom = new UnrealBloomPass(new Vector2(1, 1), 0.38, 0.55, 2.1);
+  composer.addPass(bloom);
+  const alphaPass = new ShaderPass({
+    uniforms: { tDiffuse: { value: null }, base: { value: baseTarget.texture } },
+    vertexShader:
+      "varying vec2 vUv; void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}",
+    fragmentShader:
+      "uniform sampler2D tDiffuse; uniform sampler2D base; varying vec2 vUv; void main(){vec4 lit=texture2D(tDiffuse,vUv); vec4 original=texture2D(base,vUv); vec3 halo=max(vec3(0.),lit.rgb-original.rgb); float alpha=max(original.a,min(.8,max(halo.r,max(halo.g,halo.b)))); gl_FragColor=vec4(lit.rgb,alpha);}",
+  });
+  composer.addPass(alphaPass);
+  composer.addPass(new OutputPass());
   const solarRoot = new Group();
   solarRoot.name = "solar-system";
   scene.add(solarRoot);
-  const sunlight = new PointLight(0xffe6c2, 3.6, 0, 0);
+  const sunlight = new PointLight(0xffefdc, 5.5, 0, 0);
   sunlight.name = "sunlight";
   solarRoot.add(sunlight);
-  const ambient = new HemisphereLight(0xc4d2e6, 0x35465a, 1.15);
+  const ambient = new HemisphereLight(0xc4d2e6, 0x35465a, 0.23);
   scene.add(ambient);
   const geometries = new Set<BufferGeometry>();
   const materials = new Set<Material>();
@@ -144,13 +163,15 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     materials.add(value);
     return value;
   };
-  const sphere = geometry(new SphereGeometry(1, 48, 32));
+  const sphere = geometry(new SphereGeometry(1, 64, 40));
   const bodies: Body[] = [];
   const orbits: { config: SolarPlanet; line: Line; positions: Float32Array }[] = [];
   let sun: Body | undefined;
   let moon: Body | undefined;
   let corona: Mesh<PlaneGeometry, ShaderMaterial> | undefined;
-  let earthMaterial: ShaderMaterial | undefined;
+  const sunTime = { value: 0 };
+  const ringShadows: { center: { value: Vector3 }; radius: { value: number }; mesh: Mesh }[] = [];
+  let earthMaterial: MeshStandardMaterial | undefined;
   let meteor: Group | undefined;
   let meteorMaterial: ShaderMaterial | undefined;
   let width = 0,
@@ -164,8 +185,9 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     disposed = false,
     loaded = false,
     contextAvailable = true;
-  let pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
-  let averageDrawCost = 0;
+  let pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+  let averageFrameCost = 0;
+  let drawing = false;
 
   const glow = (color: number, strength: number) =>
     material(
@@ -188,7 +210,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       uv.setXY(index, (radius - inner) / (outer - inner), 0.5);
     }
     shape.rotateX(-Math.PI / 2);
-    return new Mesh(
+    const mesh = new Mesh(
       shape,
       material(
         new MeshStandardMaterial({
@@ -204,6 +226,27 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         }),
       ),
     );
+    const ringMaterial = mesh.material;
+    const center = { value: new Vector3() };
+    const radius = { value: 1 };
+    ringMaterial.onBeforeCompile = (shader) => {
+      shader.uniforms.planetCenter = center;
+      shader.uniforms.planetRadius = radius;
+      shader.vertexShader =
+        "varying vec3 ringWorld;\n" +
+        shader.vertexShader.replace(
+          "#include <worldpos_vertex>",
+          "#include <worldpos_vertex>\nringWorld=(modelMatrix*vec4(transformed,1.0)).xyz;",
+        );
+      shader.fragmentShader =
+        "varying vec3 ringWorld; uniform vec3 planetCenter; uniform float planetRadius;\n" +
+        shader.fragmentShader.replace(
+          "#include <color_fragment>",
+          "#include <color_fragment>\nvec3 ray=normalize(-ringWorld); vec3 toCenter=planetCenter-ringWorld; float along=dot(toCenter,ray); float separation=length(toCenter-ray*max(0.0,along)); float shadow=1.0-smoothstep(planetRadius*.93,planetRadius*1.08,separation); diffuseColor.rgb*=1.0-shadow*step(0.0,along)*.8;",
+        );
+    };
+    ringShadows.push({ center, radius, mesh });
+    return mesh;
   };
   const createBodies = () => {
     const sunOrbit = new Group(),
@@ -220,6 +263,16 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         }),
       ),
     );
+    const sunMaterial = sunMesh.material;
+    sunMaterial.onBeforeCompile = (shader) => {
+      shader.uniforms.solarTime = sunTime;
+      shader.fragmentShader =
+        "uniform float solarTime;\n" +
+        shader.fragmentShader.replace(
+          "#include <emissivemap_fragment>",
+          "#include <emissivemap_fragment>\nfloat limb=.52+.48*pow(max(0.0,dot(normal,normalize(vViewPosition))),.45); float convection=.97+.03*sin(vMapUv.x*620.0+sin(vMapUv.y*430.0)+solarTime*.13); totalEmissiveRadiance*=limb*convection;",
+        );
+    };
     sunMesh.name = "sun";
     sunTilt.add(sunMesh);
     sunOrbit.add(sunTilt);
@@ -239,7 +292,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         }),
       ),
     );
-    corona.position.z = -2;
+    corona.position.z = 0;
     solarRoot.add(corona);
     const sunShell = new Mesh(sphere, glow(0xffc578, 0.85));
     sunShell.name = "sun-corona";
@@ -248,20 +301,40 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       const orbit = new Group(),
         tilt = new Group();
       orbit.name = `${config.name}-orbit`;
-      tilt.rotation.set(0.24, 0, (config.tilt * Math.PI) / 180);
+      tilt.rotation.set(0, 0, (config.tilt * Math.PI) / 180);
       let surface: Material;
       if (config.name === "earth") {
         earthMaterial = material(
-          new ShaderMaterial({
-            vertexShader: surfaceVertex,
-            fragmentShader: earthFragment,
-            uniforms: {
-              dayMap: { value: textures.get("earth") },
-              nightMap: { value: textures.get("earth-night") },
-              sunPosition: { value: new Vector3() },
-            },
+          new MeshStandardMaterial({
+            map: textures.get("earth"),
+            normalMap: textures.get("earth-normal"),
+            normalScale: new Vector2(0.38, 0.38),
+            roughnessMap: textures.get("earth-specular"),
+            roughness: 0.85,
+            metalness: 0,
+            emissiveMap: textures.get("earth-night"),
+            emissive: 0xffd69a,
+            emissiveIntensity: textures.has("earth-night") ? 0.9 : 0,
           }),
         );
+        earthMaterial.onBeforeCompile = (shader) => {
+          shader.vertexShader =
+            "varying vec3 solarNormal; varying vec3 solarPosition;\n" +
+            shader.vertexShader.replace(
+              "#include <worldpos_vertex>",
+              "#include <worldpos_vertex>\nsolarNormal=normalize(mat3(modelMatrix)*normal); solarPosition=(modelMatrix*vec4(transformed,1.0)).xyz;",
+            );
+          shader.fragmentShader = shader.fragmentShader.replace(
+            "roughnessFactor *= texelRoughness.g;",
+            "roughnessFactor *= 1.0 - texelRoughness.g * 0.85;",
+          );
+          shader.fragmentShader =
+            "varying vec3 solarNormal; varying vec3 solarPosition;\n" +
+            shader.fragmentShader.replace(
+              "#include <emissivemap_fragment>",
+              "#include <emissivemap_fragment>\ntotalEmissiveRadiance *= 1.0-smoothstep(-0.22,0.12,dot(normalize(solarNormal),normalize(-solarPosition))); ",
+            );
+        };
         surface = earthMaterial;
       } else
         surface = material(
@@ -292,6 +365,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
           ),
         );
         body.clouds.name = "earth-clouds";
+        body.clouds.visible = textures.has("earth-clouds");
         tilt.add(body.clouds);
         body.atmosphere = new Mesh(sphere, glow(0x4bafff, 0.6));
         body.atmosphere.name = "earth-atmosphere";
@@ -364,30 +438,93 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       }),
     );
     meteor.add(new Line(tail, meteorMaterial));
+    meteor.scale.setScalar(0.045);
     const head = new Mesh(sphere, material(new MeshBasicMaterial({ color: 0xd9f1ff })));
     head.scale.setScalar(1.2);
     meteor.add(head);
   };
 
+  const createStars = () => {
+    const count = 1400;
+    const positions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
+    let seed = 48271;
+    const random = () => {
+      seed = (seed * 16807) % 2147483647;
+      return seed / 2147483647;
+    };
+    for (let index = 0; index < count; index++) {
+      const theta = random() * Math.PI * 2;
+      const y = random() * 2 - 1;
+      const radius = 500;
+      const span = Math.sqrt(1 - y * y);
+      positions.set(
+        [Math.cos(theta) * span * radius, y * radius, Math.sin(theta) * span * radius],
+        index * 3,
+      );
+      const brightness = 0.25 + random() * 0.65;
+      colors.set([brightness * 0.86, brightness * 0.94, brightness], index * 3);
+    }
+    const field = geometry(new BufferGeometry());
+    field.setAttribute("position", new BufferAttribute(positions, 3));
+    field.setAttribute("color", new BufferAttribute(colors, 3));
+    const stars = new Points(
+      field,
+      material(
+        new PointsMaterial({
+          size: 0.65,
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.78,
+          depthWrite: false,
+        }),
+      ),
+    );
+    stars.material.onBeforeCompile = (shader) => {
+      shader.fragmentShader = shader.fragmentShader.replace(
+        "#include <opaque_fragment>",
+        "diffuseColor.a*=1.0-smoothstep(.12,.5,length(gl_PointCoord-.5));\n#include <opaque_fragment>",
+      );
+    };
+    stars.name = "solar-stars";
+    scene.add(stars);
+  };
+  const resetView = () => {
+    const elevation = (Math.PI * 35) / 180;
+    camera.position.set(
+      0,
+      Math.sin(elevation) * defaultDistance,
+      Math.cos(elevation) * defaultDistance,
+    );
+    camera.lookAt(0, 0, 0);
+    controls?.target.set(0, 0, 0);
+    camera.updateMatrixWorld();
+  };
+  const controlChanged = () => {
+    if (paused) draw();
+  };
   const update = () => {
     const mobile = width < 640;
-    solarRoot.position.set(width * (mobile ? 0.22 : 0.12), height * 0.04, 0);
-    const sunRadius = (mobile ? 52 : 90) / 2;
+    sunTime.value = elapsed;
+    solarRoot.position.set(0, 0, 0);
+    const sunRadius = 6;
     sun?.mesh.scale.setScalar(sunRadius);
     if (sun) {
       sun.mesh.rotation.y = (elapsed * Math.PI * 2) / 180;
-      sun.tilt.children[1]?.scale.setScalar(sunRadius * 1.16);
+      sun.tilt.children[1]?.scale.setScalar(sunRadius * 1.1);
     }
-    corona?.scale.set(sunRadius * 6.4, sunRadius * 6.4, 1);
-    if (corona) corona.material.uniforms.time.value = elapsed;
-    earthMaterial?.uniforms.sunPosition.value.copy(solarRoot.position);
+    corona?.scale.set(sunRadius * 5.5, sunRadius * 5.5, 1);
+    if (corona) {
+      corona.material.uniforms.time.value = elapsed;
+      corona.quaternion.copy(camera.quaternion);
+    }
     for (const body of bodies) {
       if (!body.config) continue;
       const config = body.config;
       const angle = solarPhase(config, mobile) + (elapsed * Math.PI * 2) / config.period;
       const position = solarOrbitPoint(config, angle, width, height, mobile);
       body.orbit.position.set(position.x, position.y, position.z);
-      const radius = (mobile ? config.mobileDiameter : config.diameter) / 2;
+      const radius = config.radius;
       body.mesh.scale.setScalar(radius);
       body.mesh.rotation.y =
         (config.name === "pluto" ? 1.2 : 0.7) + (elapsed * Math.PI * 2) / config.spin;
@@ -402,33 +539,38 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
           Math.sin(angle) * radius * 0.48,
           Math.sin(angle) * radius * 1.4,
         );
-        moon.mesh.scale.setScalar(mobile ? 4.5 : 7);
+        moon.mesh.scale.setScalar(0.22);
         moon.mesh.rotation.y = -angle + Math.PI / 2;
       }
+    }
+    solarRoot.updateMatrixWorld(true);
+    for (const shadow of ringShadows) {
+      shadow.mesh.getWorldPosition(shadow.center.value);
+      shadow.radius.value = shadow.mesh.scale.x;
     }
     if (meteor && meteorMaterial) {
       const cycle = elapsed % 47,
         progress = (cycle - 18) / 1.6;
       meteor.visible = progress >= 0 && progress <= 1;
-      meteor.position.set(
-        -width * 0.44 + width * 0.65 * progress,
-        height * 0.33 - height * 0.29 * progress,
-        300,
-      );
+      meteor.position.set(-55 + 85 * progress, 38 - 36 * progress, -15);
       meteorMaterial.uniforms.strength.value =
         Math.sin(Math.max(0, Math.min(1, progress)) * Math.PI) * 0.8;
     }
   };
   const draw = () => {
-    if (disposed || !loaded || !contextAvailable) return;
+    if (disposed || !loaded || !contextAvailable || drawing) return;
+    drawing = true;
     update();
-    const started = performance.now();
+    controls?.update();
+    renderer.setRenderTarget(baseTarget);
     renderer.render(scene, camera);
+    renderer.setRenderTarget(null);
+    composer.render();
     framesRendered++;
-    averageDrawCost = averageDrawCost * 0.92 + (performance.now() - started) * 0.08;
-    if (framesRendered % 120 === 0 && averageDrawCost > 12 && pixelRatio > 0.85) {
-      pixelRatio = Math.max(0.85, pixelRatio * 0.8);
-      renderer.setPixelRatio(pixelRatio);
+    drawing = false;
+    if (framesRendered % 180 === 0 && averageFrameCost > 21 && pixelRatio > 0.8) {
+      pixelRatio = Math.max(0.8, pixelRatio * 0.85);
+      resize();
     }
   };
   const animate = (time: number) => {
@@ -436,6 +578,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     if (disposed || paused || !contextAvailable || !loaded) return;
     if (options.fixedTime === null)
       elapsed += lastTime ? Math.min(0.05, (time - lastTime) / 1000) : 0;
+    if (lastTime) averageFrameCost = averageFrameCost * 0.95 + (time - lastTime) * 0.05;
     lastTime = time;
     draw();
     frame = requestAnimationFrame(animate);
@@ -451,13 +594,20 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     if (bounds.width < 1 || bounds.height < 1) return;
     width = bounds.width;
     height = bounds.height;
-    pixelRatio = Math.min(pixelRatio, width < 640 ? 1.25 : 1.5);
+    pixelRatio = Math.min(
+      pixelRatio,
+      width < 640 ? 1.5 : 2,
+      Math.sqrt((width < 640 ? 1_500_000 : 3_500_000) / (width * height)),
+    );
     renderer.setPixelRatio(pixelRatio);
     renderer.setSize(width, height, false);
-    camera.left = -width / 2;
-    camera.right = width / 2;
-    camera.top = height / 2;
-    camera.bottom = -height / 2;
+    composer.setPixelRatio(pixelRatio);
+    composer.setSize(width, height);
+    bloom.setSize(Math.ceil(width * pixelRatio * 0.6), Math.ceil(height * pixelRatio * 0.6));
+    baseTarget.setSize(Math.ceil(width * pixelRatio), Math.ceil(height * pixelRatio));
+    camera.aspect = width / height;
+    defaultDistance = (60 / Math.sin((Math.PI * 35) / 360)) * Math.max(1, 1 / camera.aspect);
+    if (!immersive) resetView();
     camera.updateProjectionMatrix();
     for (const orbit of orbits) {
       for (let index = 0; index <= 128; index++) {
@@ -477,9 +627,9 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
   };
   const setLight = (value: boolean) => {
     light = value;
-    ambient.intensity = light ? 1.3 : 1.15;
+    ambient.intensity = immersive ? 0.23 : light ? 0.32 : 0.23;
     for (const orbit of orbits)
-      (orbit.line.material as LineBasicMaterial).opacity = light ? 0.025 : 0.04;
+      (orbit.line.material as LineBasicMaterial).opacity = light && !immersive ? 0.1 : 0.08;
     draw();
   };
   const lost = (event: Event) => {
@@ -499,6 +649,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
   canvas.addEventListener("webglcontextrestored", restored);
   const observer = new ResizeObserver(resize);
   observer.observe(canvas);
+  window.addEventListener("resize", resize);
   resize();
   if (options.debug)
     canvas.getSolarDebugSnapshot = () => {
@@ -524,7 +675,21 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
           world: world.toArray(),
           parent: body.orbit.parent?.name ?? "",
           rotation: body.mesh.rotation.toArray(),
-          screen: { x: ((point.x + 1) * width) / 2, y: ((1 - point.y) * height) / 2, radius },
+          screen: {
+            x: ((point.x + 1) * width) / 2,
+            y: ((1 - point.y) * height) / 2,
+            radius:
+              (Math.abs(
+                world
+                  .clone()
+                  .add(
+                    new Vector3().setFromMatrixColumn(camera.matrixWorld, 0).multiplyScalar(radius),
+                  )
+                  .project(camera).x - point.x,
+              ) *
+                width) /
+              2,
+          },
           axialTilt: body.tilt.rotation.toArray(),
           texture: image instanceof HTMLImageElement ? image.currentSrc || image.src : null,
           textureColorSpace: texture?.colorSpace ?? null,
@@ -535,6 +700,10 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         saturnRings && !Array.isArray(saturnRings.material) ? saturnRings.material : null;
       return {
         elapsed,
+        immersive,
+        highlighted,
+        camera: { type: camera.type, target: [0, 0, 0], position: camera.position.toArray() },
+        averageFrameCost,
         framesRendered,
         paused,
         contextAvailable,
@@ -555,12 +724,25 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
   const loader = new TextureLoader();
   void Promise.all(
     solarTextureNames.map(async (name) => {
-      const texture = await loader.loadAsync(solarTextureUrl(name));
+      let texture: Texture;
+      try {
+        texture = await loader.loadAsync(solarTextureUrl(name));
+      } catch (error) {
+        if (
+          name === "earth-normal" ||
+          name === "earth-specular" ||
+          name === "earth-night" ||
+          name === "earth-clouds"
+        )
+          return;
+        throw error;
+      }
       if (disposed) {
         texture.dispose();
         return;
       }
-      texture.colorSpace = SRGBColorSpace;
+      texture.colorSpace =
+        name === "earth-normal" || name === "earth-specular" ? NoColorSpace : SRGBColorSpace;
       texture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
       textures.set(name, texture);
     }),
@@ -568,6 +750,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     .then(() => {
       if (disposed) return;
       createBodies();
+      createStars();
       loaded = true;
       resize();
       setLight(light);
@@ -584,11 +767,65 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       sync();
     },
     setLight,
+    setHost(host) {
+      (host ?? originalHost)?.appendChild(canvas);
+      resize();
+    },
+    setImmersive(value, interactionElement) {
+      if (
+        value === immersive &&
+        (!value || controls?.domElement === (interactionElement ?? canvas))
+      )
+        return;
+      immersive = value;
+      controls?.dispose();
+      controls = undefined;
+      resetView();
+      if (value) {
+        controls = new OrbitControls(camera, interactionElement ?? canvas);
+        controls.enablePan = false;
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.08;
+        controls.minPolarAngle = (Math.PI * 25) / 180;
+        controls.maxPolarAngle = (Math.PI * 75) / 180;
+        controls.minDistance = defaultDistance * 0.3;
+        controls.maxDistance = defaultDistance * 1.8;
+        controls.target.set(0, 0, 0);
+        controls.addEventListener("change", controlChanged);
+      }
+      setLight(light);
+      resize();
+    },
+    resetView() {
+      resetView();
+      draw();
+    },
+    rotateView(delta) {
+      const x = camera.position.x;
+      const z = camera.position.z;
+      camera.position.x = x * Math.cos(delta) + z * Math.sin(delta);
+      camera.position.z = -x * Math.sin(delta) + z * Math.cos(delta);
+      camera.lookAt(0, 0, 0);
+      draw();
+    },
+    highlightBody(name) {
+      highlighted = name;
+      for (const orbit of orbits)
+        (orbit.line.material as LineBasicMaterial).opacity =
+          orbit.config.name === name ? 0.4 : light && !immersive ? 0.1 : 0.08;
+      draw();
+    },
     dispose() {
       if (disposed) return;
+      originalHost?.appendChild(canvas);
       disposed = true;
       cancelAnimationFrame(frame);
+      controls?.dispose();
       observer.disconnect();
+      window.removeEventListener("resize", resize);
+      baseTarget.dispose();
+      for (const pass of composer.passes) pass.dispose();
+      composer.dispose();
       canvas.removeEventListener("webglcontextlost", lost);
       canvas.removeEventListener("webglcontextrestored", restored);
       delete canvas.getSolarDebugSnapshot;
