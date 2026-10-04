@@ -20,6 +20,9 @@ for (const locale of ["en", "es"]) {
     await trigger.click();
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
+    const bounds = await dialog.boundingBox();
+    expect(bounds?.x).toBeCloseTo(0, 0);
+    expect(bounds?.y).toBeCloseTo(0, 0);
     await expect(dialog.locator("[data-solar-canvas]")).toHaveCount(1);
     await expect(page.locator("[data-solar-canvas]")).toHaveCount(1);
     expect(await original?.evaluate((node) => node.isConnected)).toBe(true);
