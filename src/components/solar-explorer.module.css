@@ -4,6 +4,9 @@
 :global(body:has([data-solar-system][data-renderer="webgl"])) .trigger {
   display: inline-flex;
 }
+:global(html):has(.dialog) {
+  background: #060b18;
+}
 .dialog {
   position: fixed;
   inset: 0;
