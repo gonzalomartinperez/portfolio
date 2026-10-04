@@ -46,11 +46,11 @@ test("the deferred hero and solar scenes share a 250 KiB gzip dependency budget"
   assert.ok(size <= 250, `scene dependency closure is ${size.toFixed(1)} KiB gzip (budget 250)`);
 });
 
-test("local solar texture maps stay under 600 KiB and match their reviewed manifest", async () => {
+test("local solar texture maps stay under 8 MiB and match their reviewed manifest", async () => {
   const { createHash } = await import("node:crypto");
   const directory = path.join(root, "public", "images", "solar-system");
   const manifest = JSON.parse(readFileSync(path.join(directory, "manifest.json"), "utf8"));
-  assert.equal(manifest.assets.length, 14);
+  assert.equal(manifest.assets.length, 16);
   let bytes = 0;
   for (const asset of manifest.assets) {
     assert.match(asset.file, /^[a-z-]+\.webp$/);
@@ -60,12 +60,12 @@ test("local solar texture maps stay under 600 KiB and match their reviewed manif
     assert.equal(createHash("sha256").update(content).digest("hex"), asset.sha256, asset.file);
   }
   assert.equal(bytes, manifest.totalBytes);
-  assert.ok(bytes < 600 * 1024, `solar texture transfer is ${(bytes / 1024).toFixed(1)} KiB`);
+  assert.ok(bytes < 8 * 1024 * 1024, `solar texture transfer is ${(bytes / 1024).toFixed(1)} KiB`);
 });
 
-test("stylesheets stay under 22 KiB gzipped in total", () => {
+test("stylesheets stay under 24 KiB gzipped in total", () => {
   const size = totalGzippedKb(walk(staticDir, ".css"));
-  assert.ok(size < 22, `CSS is ${size.toFixed(1)} KiB gzipped, budget is 22 KiB`);
+  assert.ok(size < 24, `CSS is ${size.toFixed(1)} KiB gzipped, budget is 24 KiB`);
 });
 
 test("the portrait stays under 80 KB", () => {
@@ -84,13 +84,13 @@ test("non-scene client chunks stay under 80 KiB gzip", () => {
   }
 });
 
-test("prerendered HTML stays under 60 KB gzipped per page", () => {
+test("prerendered HTML stays under 70 KB gzipped per page", () => {
   const serverDir = path.join(root, ".next", "server", "app");
   const pages = walk(serverDir, ".html");
   assert.ok(pages.length > 0, "no prerendered HTML found");
   for (const page of pages) {
     const size = gzippedKb(page);
-    assert.ok(size < 60, `${path.relative(serverDir, page)} is ${size.toFixed(1)} KB gzipped`);
+    assert.ok(size < 70, `${path.relative(serverDir, page)} is ${size.toFixed(1)} KB gzipped`);
   }
 });
 

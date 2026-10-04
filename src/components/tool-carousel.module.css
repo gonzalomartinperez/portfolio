@@ -12,11 +12,7 @@
 .header :global(.section-head) {
   max-width: 42rem;
 }
-.controls {
-  display: flex;
-  gap: var(--space-2);
-}
-.controls button {
+.control {
   display: grid;
   place-items: center;
   width: 2.75rem;
@@ -27,68 +23,101 @@
   color: var(--text-primary);
   cursor: pointer;
 }
-.controls button:disabled {
-  opacity: 0.35;
-  cursor: default;
+.rows {
+  display: grid;
+  gap: var(--space-3);
+}
+.viewport {
+  min-width: 0;
+  touch-action: pan-y;
 }
 .rail {
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
   gap: var(--space-3);
   margin: 0;
-  padding: var(--space-2) 0 var(--space-4);
+  padding: var(--space-1) 0;
   list-style: none;
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-  scroll-snap-type: x proximity;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line-strong) transparent;
 }
 .rail li {
-  flex: 0 0 clamp(7.5rem, 12vw, 9rem);
-  scroll-snap-align: start;
+  min-width: 0;
+}
+.section[data-animated="true"] .viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 2rem,
+    #000 calc(100% - 2rem),
+    transparent
+  );
+}
+.section[data-animated="true"] .rail {
+  display: flex;
+  width: max-content;
+}
+.section[data-animated="true"] .rail li {
+  flex: 0 0 auto;
+  width: clamp(10rem, 14vw, 12rem);
+  will-change: transform;
 }
 .tile {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--space-3);
-  min-height: 8rem;
-  height: 100%;
-  padding: var(--space-4) var(--space-2);
+  height: 6.5rem;
+  padding: var(--space-3);
   border: 1px solid var(--line-subtle);
   border-radius: var(--radius-md);
   background: var(--surface-raised);
   color: var(--text-primary);
-  text-align: center;
   text-decoration: none;
   font-size: var(--text-small);
   font-weight: 600;
-  transition:
-    border-color 160ms ease,
-    background-color 160ms ease;
+  line-height: 1.25;
+  transition: border-color 160ms ease;
 }
 .tile:hover {
   border-color: var(--accent);
 }
+.tile > span:last-child {
+  overflow-wrap: anywhere;
+}
 .mark {
   display: grid;
   place-items: center;
-  height: 3.5rem;
-  width: 100%;
+  flex: 0 0 2.25rem;
+  height: 2.25rem;
 }
 .tile:focus-visible,
-.controls button:focus-visible {
+.control:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: -3px;
 }
 .catalogue {
   display: inline-block;
-  margin-top: var(--space-3);
+  margin-top: var(--space-4);
   color: var(--accent);
   text-underline-offset: 0.25em;
 }
 @media (prefers-reduced-motion: reduce) {
+  .section[data-animated="true"] .viewport {
+    overflow: visible;
+    mask-image: none;
+  }
+  .section[data-animated="true"] .rail {
+    display: grid;
+    width: auto;
+  }
+  .section[data-animated="true"] .rail li {
+    width: auto;
+    will-change: auto;
+  }
+  .control {
+    display: none;
+  }
   .tile {
     transition: none;
   }

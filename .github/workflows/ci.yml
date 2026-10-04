@@ -18,8 +18,8 @@ jobs:
   validate:
     name: Quality (development)
     runs-on: ubuntu-24.04
-    # Both viewport suites exercise two WebGL scenes on a software-rendered runner.
-    timeout-minutes: 45
+    # Full dual-scene coverage can exceed 45 minutes on software-rendered runners.
+    timeout-minutes: 60
     env:
       NEXT_TELEMETRY_DISABLED: "1"
     steps:

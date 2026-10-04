@@ -2,18 +2,49 @@
 
 import { type CSSProperties, useEffect, useRef, useState } from "react";
 import { usePageMotionPaused } from "./motion-state";
+import { setSolarReady, solarExplorerSnapshot, useSolarExplorer } from "./solar-explorer-state";
 import styles from "./solar-system.module.css";
 import type { SolarEngine } from "./solar-system-engine";
 import { solarOrbitPoint, solarPhase, solarPlanets, solarTextureUrl } from "./solar-system-scene";
 
 /** Decorative, compressed orbits; the complete SSR scene is also the reduced-motion fallback. */
-export function SolarSystem() {
+export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean) => void }) {
+  const explorer = useSolarExplorer();
+  const revisions = useRef({
+    reset: explorer.resetRevision,
+    rotation: explorer.rotation,
+    zoom: explorer.zoom,
+  });
   const [canvasEnabled, setCanvasEnabled] = useState(false);
   const root = useRef<HTMLDivElement>(null);
-  const canvas = useRef<HTMLCanvasElement>(null);
+  const canvas = useRef<HTMLDivElement>(null);
   const engine = useRef<SolarEngine | null>(null);
   const paused = usePageMotionPaused();
   const pausedRef = useRef(paused);
+
+  useEffect(() => {
+    const active = engine.current;
+    if (!active || !explorer.ready) return;
+    active.setHost(explorer.host);
+    active.setImmersive(Boolean(explorer.host));
+  }, [explorer.host, explorer.ready]);
+
+  useEffect(() => {
+    if (explorer.ready) engine.current?.highlightBody(explorer.selected);
+  }, [explorer.selected, explorer.ready]);
+
+  useEffect(() => {
+    if (revisions.current.reset !== explorer.resetRevision) engine.current?.resetView();
+    if (revisions.current.rotation !== explorer.rotation)
+      engine.current?.rotateView(explorer.rotation - revisions.current.rotation);
+    if (revisions.current.zoom !== explorer.zoom)
+      engine.current?.zoomView(Math.exp(explorer.zoom - revisions.current.zoom));
+    revisions.current = {
+      reset: explorer.resetRevision,
+      rotation: explorer.rotation,
+      zoom: explorer.zoom,
+    };
+  }, [explorer.resetRevision, explorer.rotation, explorer.zoom]);
 
   useEffect(() => {
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
@@ -38,9 +69,15 @@ export function SolarSystem() {
   }, [paused]);
 
   useEffect(() => {
-    const element = root.current,
-      surface = canvas.current;
-    if (!element || !surface || !canvasEnabled) return;
+    const element = root.current;
+    const host = canvas.current;
+    if (!element || !host || !canvasEnabled) return;
+    // The engine owns this node; React can remove the host without reparenting conflicts.
+    const surface = document.createElement("canvas");
+    surface.className = styles.canvas;
+    surface.dataset.solarCanvas = "";
+    surface.setAttribute("aria-hidden", "true");
+    host.appendChild(surface);
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     let disposed = false,
       generation = 0;
@@ -48,6 +85,8 @@ export function SolarSystem() {
     const staticScene = () => {
       element.dataset.renderer = "static";
       element.dataset.state = "static";
+      setSolarReady(false);
+      onReadyChange(false);
     };
     const light = () => document.documentElement.dataset.theme === "light";
     const sync = () => {
@@ -74,6 +113,12 @@ export function SolarSystem() {
             debug: query.get("solarDebug") === "1",
             onReady() {
               if (disposed || token !== generation) return;
+              const currentExplorer = solarExplorerSnapshot();
+              engine.current?.setHost(currentExplorer.host);
+              engine.current?.setImmersive(Boolean(currentExplorer.host));
+              engine.current?.highlightBody(currentExplorer.selected);
+              setSolarReady(true);
+              onReadyChange(true);
               element.dataset.renderer = "webgl";
               element.dataset.state = pausedRef.current || document.hidden ? "paused" : "running";
             },
@@ -109,13 +154,17 @@ export function SolarSystem() {
       disposed = true;
       generation++;
       if (idle !== undefined) cancelIdleCallback(idle);
+      engine.current?.setHost(null);
       engine.current?.dispose();
       engine.current = null;
+      setSolarReady(false);
+      onReadyChange(false);
+      surface.remove();
       theme.disconnect();
       reduced.removeEventListener("change", sync);
       document.removeEventListener("visibilitychange", visibility);
     };
-  }, [canvasEnabled]);
+  }, [canvasEnabled, onReadyChange]);
 
   return (
     <div
@@ -138,10 +187,10 @@ export function SolarSystem() {
           const style = {
             "--body-size": `${planet.diameter}px`,
             "--mobile-size": `${planet.mobileDiameter}px`,
-            "--body-left": `${62 + desktop.x * 100}%`,
-            "--body-top": `${46 - desktop.y * 100}%`,
-            "--mobile-left": `${72 + mobile.x * 100}%`,
-            "--mobile-top": `${46 - mobile.y * 100}%`,
+            "--body-left": `calc(50% + ${desktop.x * 0.72}vmin)`,
+            "--body-top": `calc(50% - ${(desktop.y * 0.819 - desktop.z * 0.574) * 0.72}vmin)`,
+            "--mobile-left": `calc(50% + ${mobile.x * 0.72}vmin)`,
+            "--mobile-top": `calc(50% - ${(mobile.y * 0.819 - mobile.z * 0.574) * 0.72}vmin)`,
             "--surface": `url(${solarTextureUrl(planet.name)})`,
           } as CSSProperties;
           return (
@@ -164,7 +213,7 @@ export function SolarSystem() {
           );
         })}
       </div>
-      {canvasEnabled && <canvas ref={canvas} className={styles.canvas} data-solar-canvas />}
+      {canvasEnabled && <div ref={canvas} className={styles.canvasHost} data-solar-host />}
     </div>
   );
 }
