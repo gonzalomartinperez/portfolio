@@ -1,0 +1,131 @@
+/** Artistic space and time compression; these orbits are not an ephemeris. */
+export const solarPlanets = [
+  {
+    name: "mercury",
+    diameter: 30,
+    mobileDiameter: 17,
+    x: 0.12,
+    y: 0.145,
+    period: 140,
+    phase: 215,
+    tilt: 0.034,
+    spin: 220,
+  },
+  {
+    name: "venus",
+    diameter: 38,
+    mobileDiameter: 21,
+    x: 0.19,
+    y: 0.19,
+    period: 210,
+    phase: 20,
+    tilt: 177.4,
+    spin: 400,
+  },
+  {
+    name: "earth",
+    diameter: 44,
+    mobileDiameter: 24,
+    x: 0.25,
+    y: 0.22,
+    period: 280,
+    phase: 140,
+    tilt: 23.4,
+    spin: 140,
+  },
+  {
+    name: "mars",
+    diameter: 34,
+    mobileDiameter: 18,
+    x: 0.285,
+    y: 0.25,
+    period: 360,
+    phase: 325,
+    tilt: 25.2,
+    spin: 150,
+  },
+  {
+    name: "jupiter",
+    diameter: 90,
+    mobileDiameter: 48,
+    x: 0.32,
+    y: 0.28,
+    period: 450,
+    phase: 70,
+    tilt: 3.1,
+    spin: 75,
+  },
+  {
+    name: "saturn",
+    diameter: 72,
+    mobileDiameter: 40,
+    x: 0.36,
+    y: 0.31,
+    period: 560,
+    phase: 190,
+    mobilePhase: 30,
+    tilt: 26.7,
+    spin: 85,
+  },
+  {
+    name: "uranus",
+    diameter: 48,
+    mobileDiameter: 28,
+    x: 0.39,
+    y: 0.34,
+    period: 680,
+    phase: 285,
+    tilt: 97.8,
+    spin: 120,
+  },
+  {
+    name: "neptune",
+    diameter: 48,
+    mobileDiameter: 28,
+    x: 0.42,
+    y: 0.37,
+    period: 800,
+    phase: 110,
+    mobilePhase: 145,
+    tilt: 28.3,
+    spin: 110,
+  },
+  {
+    name: "pluto",
+    diameter: 28,
+    mobileDiameter: 17,
+    x: 0.445,
+    y: 0.4,
+    period: 960,
+    phase: 250,
+    tilt: 119.6,
+    spin: 220,
+  },
+] as const;
+
+export type SolarPlanet = (typeof solarPlanets)[number];
+export const solarTextureNames = [
+  "sun",
+  ...solarPlanets.map(({ name }) => name),
+  "moon",
+  "earth-clouds",
+  "earth-night",
+  "saturn-rings",
+] as const;
+export const solarTextureUrl = (name: string) => `/images/solar-system/${name}.webp`;
+export const solarPhase = (planet: SolarPlanet, mobile: boolean) =>
+  ((mobile && "mobilePhase" in planet ? planet.mobilePhase : planet.phase) * Math.PI) / 180;
+
+export function solarOrbitPoint(
+  planet: SolarPlanet,
+  angle: number,
+  width: number,
+  height: number,
+  mobile = false,
+) {
+  return {
+    x: Math.cos(angle) * planet.x * width * (mobile ? 0.5 : 0.78),
+    y: Math.sin(angle) * planet.y * height,
+    z: Math.sin(angle + (planet.tilt * Math.PI) / 180) * Math.min(width, height) * planet.x * 0.45,
+  };
+}

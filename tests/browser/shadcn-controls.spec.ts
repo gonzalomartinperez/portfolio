@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { captureSettledPage } from "./capture";
 
 test("owned filters preserve native semantics and localized footer labels", async ({
   page,
@@ -33,7 +34,7 @@ test("owned filters preserve native semantics and localized footer labels", asyn
     }, theme);
     await category.focus();
     await expect(category).toHaveCSS("outline-style", "solid");
-    await page.screenshot({ path: info.outputPath(`filters-${theme}.png`) });
+    await captureSettledPage(page, { path: info.outputPath(`filters-${theme}.png`) });
   }
 });
 

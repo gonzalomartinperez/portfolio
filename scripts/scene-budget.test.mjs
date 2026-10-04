@@ -24,12 +24,17 @@ test("static scene batches every deterministic square without changing its posit
   assert.ok(layers.every((layer, index) => index === 0 || layer.depth > layers[index - 1].depth));
 });
 
-test("scene budget includes extracted vendors and nested asynchronous chunks", () => {
+test("scene budget counts shared vendors once across both deferred scenes", () => {
   const directory = mkdtempSync(path.join(tmpdir(), "portfolio-budget-"));
   mkdirSync(path.join(directory, ".next"));
   try {
     const scene = {
       files: ["static/chunks/scene.js"],
+      groupsIterable: [],
+      canBeInitial: () => false,
+    };
+    const solar = {
+      files: ["static/chunks/solar.js"],
       groupsIterable: [],
       canBeInitial: () => false,
     };
@@ -39,6 +44,7 @@ test("scene budget includes extracted vendors and nested asynchronous chunks", (
       chunks: [scene, vendor],
       childrenIterable: [{ chunks: [nested], childrenIterable: [] }],
     });
+    solar.groupsIterable.push({ chunks: [solar, vendor], childrenIterable: [] });
     let callback;
     new SceneBudgetPlugin().apply({
       context: directory,
@@ -52,11 +58,26 @@ test("scene budget includes extracted vendors and nested asynchronous chunks", (
     });
     callback({
       compilation: {
-        chunks: [scene],
+        chunks: [scene, solar, vendor],
         chunkGraph: {
-          getChunkModulesIterable: () => [
-            { identifier: () => "C:/src/components/hero/scene-runtime.ts|app-pages-browser" },
-          ],
+          getChunkModulesIterable: (chunk) => {
+            if (chunk === scene)
+              return [
+                { identifier: () => "C:/src/components/hero/scene-runtime.ts|app-pages-browser" },
+              ];
+            if (chunk === solar)
+              return [
+                {
+                  identifier: () => "concatenated",
+                  modules: [
+                    {
+                      identifier: () => "/src/components/solar-system-engine.ts|app-pages-browser",
+                    },
+                  ],
+                },
+              ];
+            return [{ identifier: () => "/node_modules/three/src/Three.js" }];
+          },
         },
       },
     });
@@ -66,11 +87,14 @@ test("scene budget includes extracted vendors and nested asynchronous chunks", (
     assert.deepEqual(report.files, [
       "static/chunks/nested.js",
       "static/chunks/scene.js",
+      "static/chunks/solar.js",
       "static/chunks/vendors.js",
     ]);
-    assert.deepEqual(report.threeFiles, []);
+    assert.deepEqual(report.threeFiles, ["static/chunks/vendors.js"]);
+    assert.deepEqual(report.heroEntryFiles, ["static/chunks/scene.js"]);
+    assert.deepEqual(report.solarEntryFiles, ["static/chunks/solar.js"]);
     assert.equal(report.initial, false);
-    assert.equal(report.roots, 1);
+    assert.equal(report.roots, 2);
   } finally {
     rmSync(directory, { recursive: true });
   }

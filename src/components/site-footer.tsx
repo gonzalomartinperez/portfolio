@@ -99,6 +99,23 @@ export function SiteFooter() {
           {paused ? copy.resumeMotion : copy.pauseMotion}
         </Button>
       </div>
+      <p className={`frame ${styles.credits}`} data-visual-credits>
+        <span>{copy.planetTextureCredit}</span>
+        <ExternalLink href="https://www.solarsystemscope.com/textures/" locale={locale}>
+          Solar System Scope
+        </ExternalLink>
+        <span>·</span>
+        <ExternalLink href="https://creativecommons.org/licenses/by/4.0/" locale={locale}>
+          CC BY 4.0
+        </ExternalLink>
+        <span>· {copy.plutoCredit}:</span>
+        <ExternalLink
+          href="https://science.nasa.gov/resource/pluto-global-color-map/"
+          locale={locale}
+        >
+          NASA/JHUAPL/SwRI
+        </ExternalLink>
+      </p>
     </footer>
   );
 }

@@ -3,93 +3,123 @@
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  opacity: 0.26;
-  mask-image: radial-gradient(ellipse at 45% 45%, transparent 12%, #000 65%);
+  opacity: 0.62;
+  mask-image: radial-gradient(ellipse at 50% 45%, rgb(0 0 0 / 65%) 15%, #000d 60%, #000 90%);
 }
-
-.plane {
+.canvas,
+.fallback {
   position: absolute;
-  left: 68%;
-  top: 44%;
-  transform: rotate(-24deg) scaleY(0.72);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
-
-.orbit {
-  position: absolute;
-  width: calc(var(--orbit-radius) * 2);
-  height: calc(var(--orbit-radius) * 2);
-  left: calc(var(--orbit-radius) * -1);
-  top: calc(var(--orbit-radius) * -1);
-  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
-  border-radius: 50%;
+.canvas {
+  opacity: 0;
 }
-
-.planet {
-  position: absolute;
-  left: calc(50% - var(--planet-size) / 2);
-  top: calc(var(--planet-size) / -2);
-  width: var(--planet-size);
-  height: var(--planet-size);
-  border-radius: 50%;
-  box-shadow:
-    inset -8px -4px 12px #0009,
-    inset 2px 2px 4px #ffffff38;
+.system[data-renderer="webgl"] .canvas {
+  opacity: 1;
 }
-
+.system[data-renderer="webgl"] .fallback {
+  visibility: hidden;
+}
+.body,
 .sun {
   position: absolute;
-  width: 48px;
-  height: 48px;
-  margin: -24px;
-  background: radial-gradient(circle at 35% 30%, #ffe1a1, #e49c45 65%, #ae6033);
+  transform: translate(-50%, -50%);
+}
+.body {
+  left: var(--body-left);
+  top: var(--body-top);
+  width: var(--body-size);
+  height: var(--body-size);
+}
+.surface,
+.sun,
+.moon {
   border-radius: 50%;
-  box-shadow: 0 0 60px 12px #efb56730;
+  background-size: 200% 100%;
+  background-position: 40% center;
+  box-shadow:
+    inset -8px -3px 12px #000b,
+    inset 1px 1px 3px #ffffff70;
 }
-
-.mercury {
-  background: radial-gradient(circle at 30% 30%, #d0c9bc, #77736b);
+.surface {
+  position: absolute;
+  inset: 0;
+  background-image: var(--surface);
 }
-.venus {
-  background: repeating-linear-gradient(15deg, #d9bb7c 0 4px, #c5a06e 5px 9px);
+.sun {
+  left: 62%;
+  top: 46%;
+  width: 90px;
+  height: 90px;
+  box-shadow:
+    0 0 28px 3px #f4a54955,
+    0 0 80px 12px #efab4820;
 }
-.earth {
-  background:
-    radial-gradient(ellipse at 32% 30%, #87a886 0 16%, transparent 19%),
-    radial-gradient(ellipse at 60% 55%, #698c73 0 20%, transparent 24%),
-    radial-gradient(circle at 40% 25%, #8bc0d7, #32628d 70%);
+.moon {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: calc(50% + 23px);
+  top: calc(50% - 13px);
+  background-image: url("/images/solar-system/moon.webp");
 }
-.mars {
-  background: radial-gradient(circle at 35% 25%, #d3916d, #a45b46 65%, #613d35);
-}
-.jupiter {
-  background: repeating-linear-gradient(-10deg, #baa893 0 7px, #cfbda1 8px 12px, #947968 13px 16px);
-}
-.saturn {
-  background: repeating-linear-gradient(8deg, #d5c29b 0 5px, #bca782 6px 9px);
-}
-.uranus {
-  background: radial-gradient(circle at 35% 25%, #b0d5d5, #609fa8);
-}
-.neptune {
-  background: radial-gradient(circle at 35% 25%, #7396d1, #375b9a);
-}
-
 .rings {
   position: absolute;
-  inset: 30% -40%;
-  border: 6px solid #bbaa8366;
+  width: 210%;
+  height: 210%;
+  left: -55%;
+  top: -55%;
+  background-image: radial-gradient(
+    circle closest-side,
+    transparent 61.9%,
+    rgb(19 18 41 / 5.1%) 64.28%,
+    rgb(45 47 60 / 32.9%) 66.66%,
+    rgb(58 51 65 / 42%) 69.04%,
+    rgb(46 49 59 / 46.3%) 71.42%,
+    rgb(83 76 78 / 67.5%) 73.81%,
+    rgb(96 92 89 / 78%) 76.19%,
+    rgb(132 119 114 / 94.9%) 78.57%,
+    rgb(133 121 111 / 94.1%) 80.95%,
+    rgb(134 123 118 / 94.1%) 83.33%,
+    rgb(125 117 111 / 92.5%) 85.71%,
+    rgb(55 54 59 / 27.8%) 88.09%,
+    rgb(94 91 92 / 82.4%) 90.47%,
+    rgb(88 84 81 / 69.4%) 92.86%,
+    rgb(89 85 82 / 69%) 95.24%,
+    rgb(84 83 88 / 76.5%) 97.62%,
+    transparent 100%
+  );
   border-radius: 50%;
-  transform: rotate(-24deg);
-  box-shadow: 0 0 0 2px #dbcaa438;
+  transform: rotate(-24deg) scaleY(0.4);
 }
-
+.ringsBack {
+  clip-path: inset(0 0 50% 0);
+}
+.ringsFront {
+  clip-path: inset(50% 0 0 0);
+}
 :global(:root[data-theme="light"]) .system {
-  opacity: 0.18;
+  opacity: 0.44;
 }
-
 @media (width < 40rem) {
-  .plane {
-    left: 85%;
-    transform: rotate(-24deg) scale(0.6, 0.46);
+  .body {
+    width: var(--mobile-size);
+    height: var(--mobile-size);
+    left: var(--mobile-left);
+    top: var(--mobile-top);
+  }
+  .sun {
+    left: 72%;
+    width: 52px;
+    height: 52px;
+  }
+  .moon {
+    width: 9px;
+    height: 9px;
+    left: calc(50% + 14px);
+    top: calc(50% - 6px);
   }
 }

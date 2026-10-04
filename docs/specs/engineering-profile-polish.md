@@ -118,3 +118,11 @@ owner estimates qualified, team attribution visible, completed work distinct fro
 work in progress, and interview availability distinct from a start-date promise.
 Review actual desktop/mobile screenshots, light/dark presentation, generated PDFs,
 keyboard/touch interactions and production files before marking this release done.
+
+## Subsequent solar enhancement
+
+The eight-planet GSAP treatment above describes the initial profile release.
+The owner's subsequent request replaces it with nine textured orbiting bodies
+(including Pluto), the Sun, an Earth-orbiting Moon and occasional shooting stars.
+The [cinematic solar specification](cinematic-solar-system.md) owns the new
+Three.js rendering, asset credits, shared performance budget and verification.
