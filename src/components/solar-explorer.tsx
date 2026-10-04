@@ -11,6 +11,7 @@ import {
   selectSolarBody,
   setSolarExplorerHost,
   useSolarExplorer,
+  zoomSolarView,
 } from "./solar-explorer-state";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "./ui/dialog";
@@ -90,6 +91,22 @@ export function SolarExplorer({ locale }: { locale: Locale }) {
               ))}
             </select>
           </label>
+          <Button
+            variant="outline"
+            onClick={() => zoomSolarView(-0.2)}
+            disabled={!explorer.ready}
+            aria-label={es ? "Acercar la vista" : "Zoom in"}
+          >
+            +
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => zoomSolarView(0.2)}
+            disabled={!explorer.ready}
+            aria-label={es ? "Alejar la vista" : "Zoom out"}
+          >
+            −
+          </Button>
           <Button
             variant="outline"
             onClick={() => rotateSolarView(-Math.PI / 12)}

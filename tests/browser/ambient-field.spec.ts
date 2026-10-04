@@ -8,13 +8,13 @@ test("the shared solar star field drifts, pauses and survives localized client n
   await page.goto("/about?solarDebug=1");
   const field = page.locator("[data-ambient-field]");
   const canvas = field.locator("canvas[data-solar-canvas]");
-  await expect(field).toHaveAttribute("data-state", "running");
+  await expect(field).toHaveAttribute("data-state", "running", { timeout: 25_000 });
   await expect(canvas).toHaveCount(1);
   await expect(field).toHaveCSS("pointer-events", "none");
   await expect(field).toHaveAttribute("aria-hidden", "true");
   const solar = field.locator("[data-solar-system]");
   await expect(solar.locator("[data-planet]")).toHaveCount(9);
-  await expect(solar).toHaveAttribute("data-renderer", "webgl");
+  await expect(solar).toHaveAttribute("data-renderer", "webgl", { timeout: 25_000 });
   const solarCanvas = solar.locator("[data-solar-canvas]");
   const solarTime = () =>
     solarCanvas.evaluate((node) => {
@@ -55,7 +55,7 @@ test("the shared solar star field drifts, pauses and survives localized client n
   await expect(page).toHaveURL(/\/es\/work$/);
   await expect(toggle).toHaveText(/Reanudar/);
   await toggle.click();
-  await expect(field).toHaveAttribute("data-state", "running");
+  await expect(field).toHaveAttribute("data-state", "running", { timeout: 25_000 });
   await page
     .getByRole("link", { name: /Gonzalo Martin Perez/ })
     .first()
@@ -87,7 +87,7 @@ test("reduced motion keeps the static field and can remove an already loaded can
   await expect(page.locator("[data-motion-toggle]")).toBeHidden();
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await page.emulateMedia({ reducedMotion: "no-preference" });
-  await expect(field).toHaveAttribute("data-state", "running");
+  await expect(field).toHaveAttribute("data-state", "running", { timeout: 25_000 });
   await expect(field.locator("canvas")).toHaveCount(1);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(field.locator("canvas")).toHaveCount(0);

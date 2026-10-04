@@ -10,7 +10,11 @@ import { solarOrbitPoint, solarPhase, solarPlanets, solarTextureUrl } from "./so
 /** Decorative, compressed orbits; the complete SSR scene is also the reduced-motion fallback. */
 export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean) => void }) {
   const explorer = useSolarExplorer();
-  const revisions = useRef({ reset: explorer.resetRevision, rotation: explorer.rotation });
+  const revisions = useRef({
+    reset: explorer.resetRevision,
+    rotation: explorer.rotation,
+    zoom: explorer.zoom,
+  });
   const [canvasEnabled, setCanvasEnabled] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -33,8 +37,14 @@ export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean)
     if (revisions.current.reset !== explorer.resetRevision) engine.current?.resetView();
     if (revisions.current.rotation !== explorer.rotation)
       engine.current?.rotateView(explorer.rotation - revisions.current.rotation);
-    revisions.current = { reset: explorer.resetRevision, rotation: explorer.rotation };
-  }, [explorer.resetRevision, explorer.rotation]);
+    if (revisions.current.zoom !== explorer.zoom)
+      engine.current?.zoomView(Math.exp(explorer.zoom - revisions.current.zoom));
+    revisions.current = {
+      reset: explorer.resetRevision,
+      rotation: explorer.rotation,
+      zoom: explorer.zoom,
+    };
+  }, [explorer.resetRevision, explorer.rotation, explorer.zoom]);
 
   useEffect(() => {
     const motion = matchMedia("(prefers-reduced-motion: reduce)");

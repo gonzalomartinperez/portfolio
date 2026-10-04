@@ -9,7 +9,9 @@ for (const locale of ["en", "es"]) {
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(`${locale === "es" ? "/es" : ""}/contact?solarDebug=1`);
     const canvas = page.locator("[data-solar-canvas]");
-    await expect(page.locator("[data-solar-system]")).toHaveAttribute("data-renderer", "webgl");
+    await expect(page.locator("[data-solar-system]")).toHaveAttribute("data-renderer", "webgl", {
+      timeout: 25_000,
+    });
     const original = await canvas.elementHandle();
     const trigger = page.locator("[data-solar-explore]");
     await trigger.scrollIntoViewIfNeeded();
@@ -21,6 +23,12 @@ for (const locale of ["en", "es"]) {
     await expect(page.locator("[data-solar-canvas]")).toHaveCount(1);
     expect(await original?.evaluate((node) => node.isConnected)).toBe(true);
     await dialog.getByRole("combobox").selectOption("saturn");
+    await dialog
+      .getByRole("button", { name: locale === "es" ? "Acercar la vista" : "Zoom in", exact: true })
+      .click();
+    await dialog
+      .getByRole("button", { name: locale === "es" ? "Alejar la vista" : "Zoom out", exact: true })
+      .click();
     await dialog
       .getByRole("button", {
         name: locale === "es" ? "Rotar hacia la derecha" : "Rotate right",

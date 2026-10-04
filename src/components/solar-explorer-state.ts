@@ -8,6 +8,7 @@ type ExplorerState = {
   selected: string | null;
   resetRevision: number;
   rotation: number;
+  zoom: number;
 };
 const initial: ExplorerState = {
   host: null,
@@ -15,6 +16,7 @@ const initial: ExplorerState = {
   selected: null,
   resetRevision: 0,
   rotation: 0,
+  zoom: 0,
 };
 let state = initial;
 const listeners = new Set<() => void>();
@@ -52,4 +54,8 @@ export function resetSolarView() {
 }
 export function rotateSolarView(delta: number) {
   update({ rotation: state.rotation + delta });
+}
+
+export function zoomSolarView(delta: number) {
+  update({ zoom: state.zoom + delta });
 }
