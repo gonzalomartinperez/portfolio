@@ -54,6 +54,7 @@ export type SolarEngine = {
   setImmersive(value: boolean, interactionElement?: HTMLElement): void;
   resetView(): void;
   rotateView(delta: number): void;
+  zoomView(factor: number): void;
   highlightBody(name: string | null): void;
   dispose(): void;
 };
@@ -193,6 +194,45 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
   let starsMaterial: PointsMaterial | undefined;
   let selectionHalo: Mesh | undefined;
   let drawing = false;
+  let bloomEnabled = true;
+  let frameBudget = 21;
+  let calibrationFrame = 0;
+  let calibrationTime = 0;
+  let calibrationAttempts = 0;
+  const refreshIntervals: number[] = [];
+  const calibrateRefresh = (time: number) => {
+    calibrationFrame = 0;
+    if (disposed || document.hidden) return;
+    if (calibrationTime) {
+      const interval = time - calibrationTime;
+      if (interval >= 4 && interval <= 40) refreshIntervals.push(interval);
+    }
+    calibrationTime = time;
+    calibrationAttempts++;
+    if (refreshIntervals.length < 12 && calibrationAttempts < 48)
+      calibrationFrame = requestAnimationFrame(calibrateRefresh);
+    else if (refreshIntervals.length >= 3) {
+      refreshIntervals.sort((a, b) => a - b);
+      frameBudget = Math.max(9, refreshIntervals[2] * 1.35);
+    }
+  };
+  calibrationFrame = requestAnimationFrame(calibrateRefresh);
+  const context = renderer.getContext();
+  const gl = context instanceof WebGL2RenderingContext ? context : null;
+  const timerExtension: unknown = gl?.getExtension("EXT_disjoint_timer_query_webgl2");
+  const timer = timerExtension as { TIME_ELAPSED_EXT: number; GPU_DISJOINT_EXT: number } | null;
+  let pendingQuery: WebGLQuery | null = null;
+  let averageGpuCost = 0;
+  const pollGpuCost = () => {
+    if (!gl || !timer || !pendingQuery || gl.isContextLost()) return;
+    if (!gl.getQueryParameter(pendingQuery, gl.QUERY_RESULT_AVAILABLE)) return;
+    if (!gl.getParameter(timer.GPU_DISJOINT_EXT)) {
+      const milliseconds = Number(gl.getQueryParameter(pendingQuery, gl.QUERY_RESULT)) / 1_000_000;
+      averageGpuCost = averageGpuCost ? averageGpuCost * 0.8 + milliseconds * 0.2 : milliseconds;
+    }
+    gl.deleteQuery(pendingQuery);
+    pendingQuery = null;
+  };
 
   const glow = (color: number, strength: number) =>
     material(
@@ -502,6 +542,12 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     scene.add(selectionHalo);
   };
   const resetView = () => {
+    if (controls) {
+      const damping = controls.enableDamping;
+      controls.enableDamping = false;
+      controls.update();
+      controls.enableDamping = damping;
+    }
     const elevation = (Math.PI * 35) / 180;
     camera.position.set(
       0,
@@ -580,17 +626,32 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
   const draw = () => {
     if (disposed || !loaded || !contextAvailable || drawing) return;
     drawing = true;
+    pollGpuCost();
+    let queryStarted = false;
+    if (gl && timer && !pendingQuery && framesRendered % 60 === 0 && !gl.isContextLost()) {
+      pendingQuery = gl.createQuery();
+      if (pendingQuery) {
+        gl.beginQuery(timer.TIME_ELAPSED_EXT, pendingQuery);
+        queryStarted = true;
+      }
+    }
     update();
     controls?.update();
-    renderer.setRenderTarget(baseTarget);
-    renderer.render(scene, camera);
-    renderer.setRenderTarget(null);
-    composer.render();
+    if (bloomEnabled) {
+      renderer.setRenderTarget(baseTarget);
+      renderer.render(scene, camera);
+      renderer.setRenderTarget(null);
+      composer.render();
+    } else renderer.render(scene, camera);
+    if (queryStarted && timer && gl) gl.endQuery(timer.TIME_ELAPSED_EXT);
     framesRendered++;
     drawing = false;
-    if (framesRendered % 180 === 0 && averageFrameCost > 21 && pixelRatio > 0.8) {
-      pixelRatio = Math.max(0.8, pixelRatio * 0.85);
-      resize();
+    if (framesRendered % 12 === 0 && Math.max(averageFrameCost, averageGpuCost) > frameBudget) {
+      const previousRatio = pixelRatio;
+      const previousBloom = bloomEnabled;
+      pixelRatio = Math.max(0.6, pixelRatio * 0.85);
+      if (Math.max(averageFrameCost, averageGpuCost) > 50) bloomEnabled = false;
+      if (pixelRatio !== previousRatio || bloomEnabled !== previousBloom) resize();
     }
   };
   const animate = (time: number) => {
@@ -609,13 +670,41 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     lastTime = 0;
     if (loaded && contextAvailable && !paused && !disposed) frame = requestAnimationFrame(animate);
   };
+  const fitTexture = (texture: Texture, name: string) => {
+    const source = texture.source.data;
+    if (!(source instanceof HTMLImageElement || source instanceof HTMLCanvasElement)) return;
+    const sourceWidth = source instanceof HTMLImageElement ? source.naturalWidth : source.width;
+    const sourceHeight = source instanceof HTMLImageElement ? source.naturalHeight : source.height;
+    const prominent = name === "sun" || name === "earth" || name === "jupiter";
+    const maxDimension = Math.min(
+      renderer.capabilities.maxTextureSize,
+      prominent ? (width < 640 ? 2048 : 4096) : 1024,
+    );
+    const factor = Math.min(1, maxDimension / Math.max(sourceWidth, sourceHeight));
+    if (factor >= 1) return;
+    const decoded = document.createElement("canvas");
+    decoded.width = Math.max(1, Math.round(sourceWidth * factor));
+    decoded.height = Math.max(1, Math.round(sourceHeight * factor));
+    const context = decoded.getContext("2d");
+    if (!context) return;
+    context.drawImage(source, 0, 0, decoded.width, decoded.height);
+    texture.image = decoded;
+    texture.needsUpdate = true;
+  };
   const resize = () => {
     const bounds = canvas.getBoundingClientRect();
     if (bounds.width < 1 || bounds.height < 1) return;
     width = bounds.width;
     height = bounds.height;
+    textureBytes = 0;
+    for (const [name, texture] of textures) {
+      fitTexture(texture, name);
+      const image = texture.image;
+      if (image instanceof HTMLCanvasElement || image instanceof HTMLImageElement)
+        textureBytes += Math.ceil((image.width * image.height * 4 * 4) / 3);
+    }
     const memoryLimit = (width < 640 ? 128 : 256) * 1024 * 1024;
-    const memoryPixels = Math.max(250_000, ((memoryLimit - textureBytes) * 0.98) / 40);
+    const memoryPixels = Math.max(250_000, ((memoryLimit - textureBytes) * 0.98) / 80);
     pixelRatio = Math.min(
       pixelRatio,
       width < 640 ? 1.5 : 2,
@@ -623,12 +712,18 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     );
     renderer.setPixelRatio(pixelRatio);
     renderer.setSize(width, height, false);
-    composer.setPixelRatio(pixelRatio);
-    composer.setSize(width, height);
-    bloom.setSize(Math.ceil(width * pixelRatio * 0.6), Math.ceil(height * pixelRatio * 0.6));
-    baseTarget.setSize(Math.ceil(width * pixelRatio), Math.ceil(height * pixelRatio));
+    composer.setPixelRatio(bloomEnabled ? pixelRatio : 1);
+    composer.setSize(bloomEnabled ? width : 1, bloomEnabled ? height : 1);
+    bloom.setSize(
+      bloomEnabled ? Math.ceil(width * pixelRatio * 0.6) : 1,
+      bloomEnabled ? Math.ceil(height * pixelRatio * 0.6) : 1,
+    );
+    baseTarget.setSize(
+      bloomEnabled ? Math.ceil(width * pixelRatio) : 1,
+      bloomEnabled ? Math.ceil(height * pixelRatio) : 1,
+    );
     estimatedGpuBytes =
-      textureBytes + Math.ceil(width * pixelRatio) * Math.ceil(height * pixelRatio) * 40;
+      textureBytes + Math.ceil(width * pixelRatio) * Math.ceil(height * pixelRatio) * 80;
     camera.aspect = width / height;
     defaultDistance = (60 / Math.sin((Math.PI * 35) / 360)) * Math.max(1, 1 / camera.aspect);
     if (!immersive) resetView();
@@ -660,6 +755,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
   };
   const lost = (event: Event) => {
     event.preventDefault();
+    pendingQuery = null;
     contextAvailable = false;
     sync();
     options.onUnavailable("context");
@@ -733,6 +829,9 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         highlighted,
         camera: { type: camera.type, target: [0, 0, 0], position: camera.position.toArray() },
         averageFrameCost,
+        averageGpuCost,
+        frameBudget,
+        bloomEnabled,
         estimatedGpuBytes,
         textureBytes,
         framesRendered,
@@ -773,31 +872,9 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         return;
       }
       const source = texture.source.data;
-      if (source instanceof HTMLImageElement) {
+      if (source instanceof HTMLImageElement)
         texture.userData.sourceUrl = source.currentSrc || source.src;
-        const prominent = name === "sun" || name === "earth" || name === "jupiter";
-        const maxDimension = Math.min(
-          renderer.capabilities.maxTextureSize,
-          prominent ? (width < 640 ? 2048 : 4096) : 1024,
-        );
-        const factor = Math.min(
-          1,
-          maxDimension / Math.max(source.naturalWidth, source.naturalHeight),
-        );
-        if (factor < 1) {
-          const decoded = document.createElement("canvas");
-          decoded.width = Math.max(1, Math.round(source.naturalWidth * factor));
-          decoded.height = Math.max(1, Math.round(source.naturalHeight * factor));
-          const context = decoded.getContext("2d");
-          if (context) {
-            context.drawImage(source, 0, 0, decoded.width, decoded.height);
-            texture.image = decoded;
-          }
-        }
-        const decoded = texture.image;
-        if (decoded instanceof HTMLCanvasElement || decoded instanceof HTMLImageElement)
-          textureBytes += Math.ceil((decoded.width * decoded.height * 4 * 4) / 3);
-      }
+      fitTexture(texture, name);
       texture.colorSpace =
         name === "earth-normal" || name === "earth-specular" ? NoColorSpace : SRGBColorSpace;
       texture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
@@ -826,7 +903,9 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     },
     setLight,
     setHost(host) {
-      (host ?? originalHost)?.appendChild(canvas);
+      const desiredHost = host ?? originalHost;
+      if (!desiredHost || canvas.parentElement === desiredHost) return;
+      desiredHost.appendChild(canvas);
       resize();
     },
     setImmersive(value, interactionElement) {
@@ -866,6 +945,16 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       camera.lookAt(0, 0, 0);
       draw();
     },
+    zoomView(factor) {
+      if (!Number.isFinite(factor) || factor <= 0 || !immersive) return;
+      const distance = camera.position.length();
+      const next = Math.max(
+        controls?.minDistance ?? defaultDistance * 0.3,
+        Math.min(controls?.maxDistance ?? defaultDistance * 1.8, distance * factor),
+      );
+      camera.position.multiplyScalar(next / distance);
+      draw();
+    },
     highlightBody(name) {
       highlighted = name;
       for (const orbit of orbits)
@@ -878,6 +967,9 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       originalHost?.appendChild(canvas);
       disposed = true;
       cancelAnimationFrame(frame);
+      cancelAnimationFrame(calibrationFrame);
+      if (gl && pendingQuery && !gl.isContextLost()) gl.deleteQuery(pendingQuery);
+      pendingQuery = null;
       controls?.dispose();
       observer.disconnect();
       window.removeEventListener("resize", resize);
