@@ -492,3 +492,12 @@
 :root[data-theme="light"] .portrait-frame {
   background: radial-gradient(ellipse at 52% 38%, #b9d2e9 0, #d7e4f0 55%, #eaf1f7 100%);
 }
+
+/* Some iOS browsers insert detector anchors despite the document metadata. */
+a[x-apple-data-detectors="true"] {
+  /* biome-ignore lint/complexity/noImportantStyles: iOS inserts inline detector styles. */
+  color: inherit !important;
+  /* biome-ignore lint/complexity/noImportantStyles: iOS inserts inline detector styles. */
+  text-decoration: none !important;
+  pointer-events: none;
+}

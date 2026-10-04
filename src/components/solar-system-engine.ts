@@ -41,6 +41,8 @@ import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
 import {
   type SolarPlanet,
+  type SolarTextureVersions,
+  solarCamera,
   solarOrbitPoint,
   solarPhase,
   solarPlanets,
@@ -60,6 +62,7 @@ export type SolarEngine = {
   dispose(): void;
 };
 type SolarOptions = {
+  textureVersions: SolarTextureVersions;
   paused: boolean;
   light: boolean;
   fixedTime: number | null;
@@ -126,7 +129,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
   renderer.toneMappingExposure = 1.1;
   renderer.setClearColor(0x000000, 0);
   const scene = new Scene();
-  const camera = new PerspectiveCamera(35, 1, 0.1, 1800);
+  const camera = new PerspectiveCamera(solarCamera.fieldOfView, 1, 0.1, 1800);
   let defaultDistance = 190;
   let immersive = false;
   let highlighted: string | null = null;
@@ -553,7 +556,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       controls.update();
       controls.enableDamping = damping;
     }
-    const elevation = (Math.PI * 35) / 180;
+    const elevation = (Math.PI * solarCamera.elevation) / 180;
     camera.position.set(
       0,
       Math.sin(elevation) * defaultDistance,
@@ -745,7 +748,9 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     estimatedGpuBytes =
       textureBytes + Math.ceil(width * pixelRatio) * Math.ceil(height * pixelRatio) * 80;
     camera.aspect = width / height;
-    defaultDistance = (60 / Math.sin((Math.PI * 35) / 360)) * Math.max(1, 1 / camera.aspect);
+    defaultDistance =
+      (solarCamera.framingRadius / Math.sin((Math.PI * solarCamera.fieldOfView) / 360)) *
+      Math.max(1, 1 / camera.aspect);
     if (!immersive) resetView();
     camera.updateProjectionMatrix();
     for (const orbit of orbits) {
@@ -896,7 +901,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     solarTextureNames.map(async (name) => {
       let texture: Texture;
       try {
-        texture = await loader.loadAsync(solarTextureUrl(name));
+        texture = await loader.loadAsync(solarTextureUrl(name, options.textureVersions));
       } catch (error) {
         if (
           name === "earth-normal" ||

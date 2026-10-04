@@ -207,6 +207,16 @@ test("security headers are present on every route", () => {
   }
 });
 
+test("every route opts out of automatic phone, date and address links", () => {
+  for (const [route, { body }] of pages) {
+    const detection = body.match(/<meta name="format-detection" content="([^"]+)"\/>/);
+    assert.ok(detection, `${route} is missing format detection metadata`);
+    for (const type of ["telephone", "date", "address", "email", "url"]) {
+      assert.ok(detection[1].split(/,\s*/).includes(`${type}=no`), `${route}: ${type}`);
+    }
+  }
+});
+
 test("the server does not advertise its framework", () => {
   for (const [route, page] of pages) {
     assert.equal(page.headers.get("x-powered-by"), null, `${route} sends x-powered-by`);

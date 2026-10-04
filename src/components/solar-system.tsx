@@ -5,10 +5,42 @@ import { usePageMotionPaused } from "./motion-state";
 import { setSolarReady, solarExplorerSnapshot, useSolarExplorer } from "./solar-explorer-state";
 import styles from "./solar-system.module.css";
 import type { SolarEngine } from "./solar-system-engine";
-import { solarOrbitPoint, solarPhase, solarPlanets, solarTextureUrl } from "./solar-system-scene";
+import {
+  type SolarTextureVersions,
+  solarCameraPoint,
+  solarFallbackPerspective,
+  solarFallbackScale,
+  solarOrbitPoint,
+  solarPhase,
+  solarPlanets,
+  solarTextureUrl,
+} from "./solar-system-scene";
+
+function fallbackBodyStyle(
+  position: { x: number; y: number; z: number },
+  radius: number,
+  name: string,
+  versions: SolarTextureVersions,
+): CSSProperties {
+  const point = solarCameraPoint(position);
+  const unit = solarFallbackScale * 100;
+  return {
+    "--body-size": `${2 * radius * unit}cqmin`,
+    "--body-x": `${point.x * unit}cqmin`,
+    "--body-y": `${-point.y * unit}cqmin`,
+    "--body-depth": `${point.depth * unit}cqmin`,
+    "--surface": `url(${solarTextureUrl(name, versions)})`,
+  } as CSSProperties;
+}
 
 /** Decorative, compressed orbits; the complete SSR scene is also the reduced-motion fallback. */
-export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean) => void }) {
+export function SolarSystem({
+  onReadyChange,
+  textureVersions,
+}: {
+  onReadyChange: (ready: boolean) => void;
+  textureVersions: SolarTextureVersions;
+}) {
   const explorer = useSolarExplorer();
   const revisions = useRef({
     reset: explorer.resetRevision,
@@ -107,6 +139,7 @@ export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean)
               ? Math.max(0, Math.min(100_000, Number(requestedTime)))
               : null;
           engine.current = createSolarSystemEngine(surface, {
+            textureVersions,
             paused: pausedRef.current || document.hidden,
             light: light(),
             fixedTime,
@@ -164,12 +197,18 @@ export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean)
       reduced.removeEventListener("change", sync);
       document.removeEventListener("visibilitychange", visibility);
     };
-  }, [canvasEnabled, onReadyChange]);
+  }, [canvasEnabled, onReadyChange, textureVersions]);
 
   return (
     <div
       ref={root}
       className={styles.system}
+      style={
+        {
+          "--solar-perspective": `${solarFallbackPerspective * 100}cqh`,
+          "--sun-size": `${12 * solarFallbackScale * 100}cqmin`,
+        } as CSSProperties
+      }
       data-solar-system
       data-renderer="static"
       data-state="static"
@@ -179,20 +218,15 @@ export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean)
         <span
           className={styles.sun}
           data-sun
-          style={{ backgroundImage: `url(${solarTextureUrl("sun")})` }}
+          style={{ backgroundImage: `url(${solarTextureUrl("sun", textureVersions)})` }}
         />
         {solarPlanets.map((planet) => {
-          const desktop = solarOrbitPoint(planet, solarPhase(planet, false), 1, 1);
-          const mobile = solarOrbitPoint(planet, solarPhase(planet, true), 1, 1, true);
-          const style = {
-            "--body-size": `${planet.diameter}px`,
-            "--mobile-size": `${planet.mobileDiameter}px`,
-            "--body-left": `calc(50% + ${desktop.x * 0.72}vmin)`,
-            "--body-top": `calc(50% - ${(desktop.y * 0.819 - desktop.z * 0.574) * 0.72}vmin)`,
-            "--mobile-left": `calc(50% + ${mobile.x * 0.72}vmin)`,
-            "--mobile-top": `calc(50% - ${(mobile.y * 0.819 - mobile.z * 0.574) * 0.72}vmin)`,
-            "--surface": `url(${solarTextureUrl(planet.name)})`,
-          } as CSSProperties;
+          const style = fallbackBodyStyle(
+            solarOrbitPoint(planet, solarPhase(planet, false)),
+            planet.radius,
+            planet.name,
+            textureVersions,
+          );
           return (
             <span
               key={planet.name}
@@ -208,10 +242,33 @@ export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean)
               {planet.name === "saturn" && (
                 <span className={`${styles.rings} ${styles.ringsFront}`} />
               )}
-              {planet.name === "earth" && <span className={styles.moon} data-moon />}
             </span>
           );
         })}
+        {solarPlanets
+          .filter(({ name }) => name === "earth")
+          .map((earth) => {
+            const orbit = solarOrbitPoint(earth, solarPhase(earth, false));
+            return (
+              <span
+                key="moon"
+                className={styles.body}
+                data-moon
+                style={fallbackBodyStyle(
+                  {
+                    x: orbit.x + Math.cos(0.8) * earth.radius * 1.65,
+                    y: orbit.y + Math.sin(0.8) * earth.radius * 0.48,
+                    z: orbit.z + Math.sin(0.8) * earth.radius * 1.4,
+                  },
+                  0.22,
+                  "moon",
+                  textureVersions,
+                )}
+              >
+                <span className={styles.surface} />
+              </span>
+            );
+          })}
       </div>
       {canvasEnabled && <div ref={canvas} className={styles.canvasHost} data-solar-host />}
     </div>

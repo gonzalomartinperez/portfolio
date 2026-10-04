@@ -4,7 +4,7 @@
 
 Present the verified engineering scope clearly in US English and neutral Spanish,
 with an equally usable light and dark theme. Career Ops owns facts and PDF generation;
-the portfolio consumes reviewed revision `2026-10-03.11` without separate CV edits.
+the portfolio consumes reviewed revision `2026-10-04.1` without separate CV edits.
 
 ## Acceptance criteria
 
@@ -126,3 +126,17 @@ The owner's subsequent request replaces it with nine textured orbiting bodies
 (including Pluto), the Sun, an Earth-orbiting Moon and occasional shooting stars.
 The [cinematic solar specification](cinematic-solar-system.md) owns the new
 Three.js rendering, asset credits, shared performance budget and verification.
+
+## October 4 final corrections
+
+Career Ops release `2026-10-04.1` supplies the reviewed three-page bilingual PDFs
+and public CV projection. Rampy’s backoffice is implemented and being expanded;
+Privy connects to the backend and the backoffice belongs to the web frontend.
+Teamcubation’s Promotion Assistance System connects to the BFF, with the harness
+inside that system. Architectural node names describe the actual layer or role.
+
+All routes opt out of automatic phone, date, address, email and URL detection.
+An attribute-specific CSS rule suppresses pointer activation and decoration on
+anchors inserted by iOS data detectors; authored contact and navigation links
+retain their behavior. This does not disable text selection or browser search
+features. Device-level detection remains dependent on browser support.

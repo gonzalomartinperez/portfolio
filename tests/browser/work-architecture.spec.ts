@@ -117,54 +117,54 @@ for (const locale of ["", "/es"]) {
 }
 
 for (const locale of ["", "/es"]) {
-  test(`${locale || "en"} diagrams preserve page scrolling and support zoom and node details`, async ({
-    page,
-    isMobile,
-  }) => {
-    test.setTimeout(90_000);
-    const client = isMobile ? await page.context().newCDPSession(page) : null;
-    const settleScroll = () =>
-      page.evaluate(
-        () =>
-          new Promise<void>((resolve) => {
-            let previous = scrollY;
-            let stable = 0;
-            const check = () => {
-              stable = scrollY === previous ? stable + 1 : 0;
-              previous = scrollY;
-              if (stable >= 4) resolve();
-              else requestAnimationFrame(check);
-            };
-            requestAnimationFrame(check);
-          }),
-      );
-    const scrollOver = async (x: number, y: number) => {
-      const before = await page.evaluate(() => scrollY);
-      if (client) {
-        await client.send("Input.dispatchTouchEvent", {
-          type: "touchStart",
-          touchPoints: [{ x, y, id: 1 }],
-        });
-        for (let step = 1; step <= 8; step += 1) {
+  for (const kind of ["rampy", "teamcubation", "cooperativa-obrera", "filomena"]) {
+    test(`${locale || "en"} ${kind} diagram preserves page scrolling and supports zoom and node details`, async ({
+      page,
+      isMobile,
+    }) => {
+      test.setTimeout(90_000);
+      const client = isMobile ? await page.context().newCDPSession(page) : null;
+      const settleScroll = () =>
+        page.evaluate(
+          () =>
+            new Promise<void>((resolve) => {
+              let previous = scrollY;
+              let stable = 0;
+              const check = () => {
+                stable = scrollY === previous ? stable + 1 : 0;
+                previous = scrollY;
+                if (stable >= 4) resolve();
+                else requestAnimationFrame(check);
+              };
+              requestAnimationFrame(check);
+            }),
+        );
+      const scrollOver = async (x: number, y: number) => {
+        const before = await page.evaluate(() => scrollY);
+        if (client) {
           await client.send("Input.dispatchTouchEvent", {
-            type: "touchMove",
-            touchPoints: [{ x, y: y - step * 20, id: 1 }],
+            type: "touchStart",
+            touchPoints: [{ x, y, id: 1 }],
           });
-          await page.evaluate(() => new Promise(requestAnimationFrame));
+          for (let step = 1; step <= 8; step += 1) {
+            await client.send("Input.dispatchTouchEvent", {
+              type: "touchMove",
+              touchPoints: [{ x, y: y - step * 20, id: 1 }],
+            });
+            await page.evaluate(() => new Promise(requestAnimationFrame));
+          }
+          await client.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+        } else {
+          await page.mouse.move(x, y);
+          await page.mouse.wheel(0, 160);
         }
-        await client.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
-      } else {
-        await page.mouse.move(x, y);
-        await page.mouse.wheel(0, 160);
-      }
-      await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(before + 40);
-      await settleScroll();
-      await expect(
-        page.getByRole("region", { name: /Component details|Detalles del componente/ }),
-      ).toHaveCount(0);
-    };
-    try {
-      for (const kind of ["rampy", "teamcubation", "cooperativa-obrera", "filomena"]) {
+        await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(before + 40);
+        await settleScroll();
+        await expect(
+          page.getByRole("region", { name: /Component details|Detalles del componente/ }),
+        ).toHaveCount(0);
+      };
+      try {
         await page.goto(kind === "filomena" ? `${locale}/work/filomena` : `${locale}/work`);
         await page.evaluate(() => document.fonts.ready);
         // Inspect diagrams with the public motion pause; animation has its own coverage.
@@ -269,9 +269,9 @@ for (const locale of ["", "/es"]) {
         await page.keyboard.press("Escape");
         await expect(inspection).toHaveCount(0);
         await expect(node).toBeFocused();
+      } finally {
+        await client?.detach();
       }
-    } finally {
-      await client?.detach();
-    }
-  });
+    });
+  }
 }
