@@ -1,0 +1,114 @@
+.trigger {
+  display: none;
+}
+:global(body:has([data-solar-system][data-renderer="webgl"])) .trigger {
+  display: inline-flex;
+}
+.dialog {
+  position: fixed;
+  inset: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  transform: none;
+  translate: none;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  padding: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right))
+    max(1.25rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
+  background: #060b18;
+  color: #eef4ff;
+  --background: #060b18;
+  --foreground: #eef4ff;
+  --border: #77879b;
+  --accent: #8ed9ff;
+  --text-primary: #eef4ff;
+  --text-secondary: #c0ccdc;
+  --accent-foreground: #eef4ff;
+}
+.dialog > :global(button[data-slot="button"]) {
+  color: #eef4ff;
+  background: #111d30;
+  border-color: #77879b;
+}
+.viewport {
+  position: absolute;
+  inset: 0;
+}
+.viewport :global([data-solar-canvas]) {
+  opacity: 1;
+  pointer-events: auto;
+  touch-action: none;
+}
+.heading {
+  position: absolute;
+  left: max(1.25rem, env(safe-area-inset-left));
+  top: max(1.25rem, env(safe-area-inset-top));
+  right: 4.75rem;
+  pointer-events: none;
+}
+.description {
+  color: #c0ccdc;
+  max-width: 40rem;
+  margin-top: 0.5rem;
+  text-shadow: 0 1px 8px #060b18;
+}
+.controls {
+  position: absolute;
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  left: max(1.25rem, env(safe-area-inset-left));
+  right: max(1.25rem, env(safe-area-inset-right));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: end;
+  gap: 0.6rem;
+}
+.controls button {
+  min-height: 44px;
+  min-width: 44px;
+  background: #111d30;
+  color: #eef4ff;
+  border-color: #77879b;
+}
+.selection {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: #c0ccdc;
+}
+.selection select {
+  min-height: 44px;
+  max-width: 17rem;
+  border: 1px solid #77879b;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #111d30;
+  color: #eef4ff;
+}
+.selection select:focus-visible {
+  outline: 2px solid #8ed9ff;
+  outline-offset: 3px;
+}
+.status {
+  position: absolute;
+  inset: 40% 10% auto;
+  text-align: center;
+  color: #c0ccdc;
+}
+@media (width < 40rem) {
+  .description {
+    font-size: 0.8rem;
+  }
+  .controls {
+    gap: 0.4rem;
+  }
+  .selection {
+    flex-basis: 100%;
+    justify-items: center;
+  }
+}

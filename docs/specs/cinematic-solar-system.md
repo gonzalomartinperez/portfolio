@@ -1,6 +1,10 @@
 # Cinematic solar background
 
-Status: done
+Status: done (original release)
+
+The current extension and resource contracts are documented in
+[the solar explorer and toolkit specification](solar-explorer-and-toolkit.md).
+The verification and budgets below describe the original October 3 release.
 
 ## Objective
 

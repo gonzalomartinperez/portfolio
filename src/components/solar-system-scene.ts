@@ -101,7 +101,14 @@ export const solarPlanets = [
     tilt: 119.6,
     spin: 220,
   },
-] as const;
+].map((planet, index) => ({
+  ...planet,
+  orbitRadius: [10, 13, 16, 19, 25, 30, 35, 40, 45][index],
+  radius: [0.4, 0.65, 0.7, 0.55, 1.7, 1.45, 1, 1, 0.35][index],
+  eccentricity: [0.206, 0.007, 0.017, 0.093, 0.049, 0.057, 0.046, 0.011, 0.249][index],
+  inclination: [7, 3.4, 0, 1.85, 1.3, 2.49, 0.77, 1.77, 17.16][index],
+  ascendingNode: [48.3, 76.7, 0, 49.6, 100.5, 113.7, 74, 131.8, 110.3][index],
+}));
 
 export type SolarPlanet = (typeof solarPlanets)[number];
 export const solarTextureNames = [
@@ -111,21 +118,33 @@ export const solarTextureNames = [
   "earth-clouds",
   "earth-night",
   "saturn-rings",
+  "earth-normal",
+  "earth-specular",
 ] as const;
 export const solarTextureUrl = (name: string) => `/images/solar-system/${name}.webp`;
-export const solarPhase = (planet: SolarPlanet, mobile: boolean) =>
-  ((mobile && "mobilePhase" in planet ? planet.mobilePhase : planet.phase) * Math.PI) / 180;
+export const solarPhase = (planet: SolarPlanet, _mobile: boolean) => (planet.phase * Math.PI) / 180;
 
 export function solarOrbitPoint(
   planet: SolarPlanet,
   angle: number,
-  width: number,
-  height: number,
-  mobile = false,
+  _width = 0,
+  _height = 0,
+  _mobile = false,
 ) {
+  // Solve Kepler's equation; spatial and temporal scales are deliberately compressed.
+  let eccentricAnomaly = angle;
+  for (let iteration = 0; iteration < 5; iteration++)
+    eccentricAnomaly -=
+      (eccentricAnomaly - planet.eccentricity * Math.sin(eccentricAnomaly) - angle) /
+      (1 - planet.eccentricity * Math.cos(eccentricAnomaly));
+  const a = planet.orbitRadius;
+  const x = a * (Math.cos(eccentricAnomaly) - planet.eccentricity);
+  const z = a * Math.sqrt(1 - planet.eccentricity ** 2) * Math.sin(eccentricAnomaly);
+  const inclination = (planet.inclination * Math.PI) / 180;
+  const node = (planet.ascendingNode * Math.PI) / 180;
   return {
-    x: Math.cos(angle) * planet.x * width * (mobile ? 0.5 : 0.78),
-    y: Math.sin(angle) * planet.y * height,
-    z: Math.sin(angle + (planet.tilt * Math.PI) / 180) * Math.min(width, height) * planet.x * 0.45,
+    x: x * Math.cos(node) - z * Math.cos(inclination) * Math.sin(node),
+    y: z * Math.sin(inclination),
+    z: x * Math.sin(node) + z * Math.cos(inclination) * Math.cos(node),
   };
 }
