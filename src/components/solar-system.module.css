@@ -3,7 +3,7 @@
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  opacity: 0.62;
+  opacity: 0.5;
   mask-image: radial-gradient(ellipse at 50% 45%, rgb(0 0 0 / 65%) 15%, #000d 60%, #000 90%);
 }
 .canvas,
@@ -50,8 +50,8 @@
   background-image: var(--surface);
 }
 .sun {
-  left: 62%;
-  top: 46%;
+  left: 50%;
+  top: 50%;
   width: 90px;
   height: 90px;
   box-shadow:
@@ -102,7 +102,7 @@
   clip-path: inset(50% 0 0 0);
 }
 :global(:root[data-theme="light"]) .system {
-  opacity: 0.44;
+  opacity: 0.36;
 }
 @media (width < 40rem) {
   .body {
@@ -112,7 +112,7 @@
     top: var(--mobile-top);
   }
   .sun {
-    left: 72%;
+    left: 50%;
     width: 52px;
     height: 52px;
   }

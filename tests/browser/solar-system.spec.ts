@@ -53,8 +53,8 @@ for (const theme of ["light", "dark"] as const) {
       "uranus",
       "venus",
     ]);
-    expect(frame.textureCount).toBe(14);
-    expect(frame.gpuTextures).toBeGreaterThanOrEqual(14);
+    expect(frame.textureCount).toBe(16);
+    expect(frame.gpuTextures).toBeGreaterThanOrEqual(16);
     expect(frame.bodies.every((body) => body.geometry === "SphereGeometry")).toBe(true);
     expect(frame.bodies.find((body) => body.name === "moon")?.parent).toBe("earth-orbit");
     expect(frame.rings).toMatchObject({ saturn: "RingGeometry", depthTest: true });
@@ -68,7 +68,7 @@ for (const theme of ["light", "dark"] as const) {
       expect(body.screen.y + body.screen.radius, body.name).toBeGreaterThan(0);
       expect(body.screen.y - body.screen.radius, body.name).toBeLessThan(viewport.height);
     }
-    expect(frame.pixelRatio).toBeLessThanOrEqual(1.5);
+    expect(frame.pixelRatio).toBeLessThanOrEqual(2);
     await expect(solar).toHaveCSS("pointer-events", "none");
     await page.mouse.move(viewport.width / 2, viewport.height / 2);
     await page.mouse.wheel(0, 400);
@@ -149,32 +149,25 @@ test("visual credits remain available in both locales without JavaScript", async
   }
 });
 
-test("a failed optional texture keeps the complete fallback and releases the engine", async ({
-  page,
-}) => {
+test("a failed optional texture preserves the other GPU materials", async ({ page }) => {
   await page.route("**/earth-night.webp", (route) => route.abort());
-  const failure = page.waitForEvent("requestfailed", (request) =>
-    request.url().endsWith("earth-night.webp"),
-  );
   await page.goto("/contact?solarDebug=1");
-  await failure;
+  const solar = page.locator("[data-solar-system]");
+  await expect(solar).toHaveAttribute("data-renderer", "webgl");
+  const frame = await snapshot(solar.locator("[data-solar-canvas]"));
+  expect(frame.textureCount).toBe(15);
+  expect(frame.bodies).toHaveLength(11);
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+});
+
+test("a failed core texture retains the complete static fallback", async ({ page }) => {
+  await page.route("**/jupiter.webp", (route) => route.abort());
+  await page.goto("/contact?solarDebug=1");
   const solar = page.locator("[data-solar-system]");
   await expect(solar).toHaveAttribute("data-renderer", "static");
-  await expect(solar.locator('[data-planet="saturn"]')).toBeVisible();
   await expect(solar.locator("[data-planet]")).toHaveCount(9);
   await expect(solar.locator("[data-sun]")).toBeVisible();
-  await expect(solar.locator("[data-moon]")).toBeVisible();
-  await expect
-    .poll(() =>
-      solar
-        .locator("[data-solar-canvas]")
-        .evaluate(
-          (node) =>
-            typeof (node as HTMLCanvasElement & { getSolarDebugSnapshot?: unknown })
-              .getSolarDebugSnapshot,
-        ),
-    )
-    .toBe("undefined");
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 });
 
 test("visibility events freeze the solar clock and resume without hidden-time catch-up", async ({

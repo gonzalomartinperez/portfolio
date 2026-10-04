@@ -136,12 +136,13 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
   const bloom = new UnrealBloomPass(new Vector2(1, 1), 0.38, 0.55, 2.1);
   composer.addPass(bloom);
   const alphaPass = new ShaderPass({
-    uniforms: { tDiffuse: { value: null }, base: { value: baseTarget.texture } },
+    uniforms: { tDiffuse: { value: null }, base: { value: null } },
     vertexShader:
       "varying vec2 vUv; void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}",
     fragmentShader:
       "uniform sampler2D tDiffuse; uniform sampler2D base; varying vec2 vUv; void main(){vec4 lit=texture2D(tDiffuse,vUv); vec4 original=texture2D(base,vUv); vec3 halo=max(vec3(0.),lit.rgb-original.rgb); float alpha=max(original.a,min(.8,max(halo.r,max(halo.g,halo.b)))); gl_FragColor=vec4(lit.rgb,alpha);}",
   });
+  alphaPass.uniforms.base.value = baseTarget.texture;
   composer.addPass(alphaPass);
   composer.addPass(new OutputPass());
   const solarRoot = new Group();

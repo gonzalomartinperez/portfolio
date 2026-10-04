@@ -13,6 +13,7 @@ import { ContactIcons } from "./contact-links";
 import { Mark } from "./mark";
 import { setPageMotionPaused, usePageMotionPaused } from "./motion-state";
 import styles from "./site-footer.module.css";
+import { SolarExplorer } from "./solar-explorer";
 
 function localeFromPath(pathname: string): Locale {
   return pathname === "/es" || pathname.startsWith("/es/") ? "es" : defaultLocale;
@@ -87,6 +88,7 @@ export function SiteFooter() {
       <div className={`frame ${styles.colophon}`}>
         <span>© 2026 {profile.name}</span>
         <span>{copy.colophon}</span>
+        <SolarExplorer locale={locale} />
         <Button
           variant="ghost"
           size="sm"

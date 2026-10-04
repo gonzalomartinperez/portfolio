@@ -1,13 +1,13 @@
 import { expect, test } from "@playwright/test";
 
-test("the particle field drifts, pauses and survives localized client navigation", async ({
+test("the shared solar star field drifts, pauses and survives localized client navigation", async ({
   page,
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/about?solarDebug=1");
   const field = page.locator("[data-ambient-field]");
-  const canvas = field.locator("canvas:not([data-solar-canvas])");
+  const canvas = field.locator("canvas[data-solar-canvas]");
   await expect(field).toHaveAttribute("data-state", "running");
   await expect(canvas).toHaveCount(1);
   await expect(field).toHaveCSS("pointer-events", "none");
@@ -24,19 +24,24 @@ test("the particle field drifts, pauses and survives localized client navigation
   const initialOrbit = await solarTime();
   await expect.poll(solarTime).toBeGreaterThan(initialOrbit);
   const element = await canvas.elementHandle();
-  const firstFrame = await canvas.evaluate((node: HTMLCanvasElement) => node.toDataURL());
-  await expect
-    .poll(() => canvas.evaluate((node: HTMLCanvasElement) => node.toDataURL()))
-    .not.toBe(firstFrame);
+  const renderedFrames = () =>
+    solarCanvas.evaluate((node) => {
+      const target = node as HTMLCanvasElement & {
+        getSolarDebugSnapshot(): { framesRendered: number };
+      };
+      return target.getSolarDebugSnapshot().framesRendered;
+    });
+  const firstFrame = await renderedFrames();
+  await expect.poll(renderedFrames).toBeGreaterThan(firstFrame);
 
   const toggle = page.locator("[data-motion-toggle]");
   await toggle.click();
   await expect(field).toHaveAttribute("data-state", "paused");
   await page.waitForTimeout(150);
-  const pausedFrame = await canvas.evaluate((node: HTMLCanvasElement) => node.toDataURL());
+  const pausedFrame = await renderedFrames();
   const pausedOrbit = await solarTime();
   await page.waitForTimeout(400);
-  expect(await canvas.evaluate((node: HTMLCanvasElement) => node.toDataURL())).toBe(pausedFrame);
+  expect(await renderedFrames()).toBe(pausedFrame);
   expect(await solarTime()).toBe(pausedOrbit);
 
   await page
@@ -83,7 +88,7 @@ test("reduced motion keeps the static field and can remove an already loaded can
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await expect(field).toHaveAttribute("data-state", "running");
-  await expect(field.locator("canvas")).toHaveCount(2);
+  await expect(field.locator("canvas")).toHaveCount(1);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(field.locator("canvas")).toHaveCount(0);
   await expect(field).toHaveAttribute("data-state", "static");
