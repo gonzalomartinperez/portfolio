@@ -99,3 +99,15 @@ assertion deadlines, retries and fail-on-flaky behavior remain unchanged.
 Both Education locale cases pass twice in each viewport after the change: eight
 passes without retries, 13.4–15.9 seconds per case. Lint and the 21 repository
 checks also pass. The new complete remote run remains the delivery gate.
+
+The next integrated CI run completed all solar and Education checks, with
+270 browser passes and two total-deadline failures in the mobile four-diagram
+inspection cases. Those inspection cases now also exercise and assert the public
+shared pause on each document navigation. Real touch gestures, scrolling, zoom,
+focus, viewport bounds and panel-dismissal assertions remain intact; their
+90-second deadline is unchanged. Dedicated ambient/solar tests retain active
+animation. The complete remote suite remains mandatory before integration.
+
+The four-diagram inspection cases pass twice in both locales/viewports: eight
+passes without retries, 19.7–22.3 seconds each. Every native gesture, zoom, focus,
+scroll-position and dismissal assertion remains in place.

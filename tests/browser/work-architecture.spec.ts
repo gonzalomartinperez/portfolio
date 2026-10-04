@@ -155,6 +155,10 @@ for (const locale of ["", "/es"]) {
       for (const kind of ["rampy", "teamcubation", "cooperativa-obrera", "filomena"]) {
         await page.goto(kind === "filomena" ? `${locale}/work/filomena` : `${locale}/work`);
         await page.evaluate(() => document.fonts.ready);
+        // Inspect diagrams with the public motion pause; animation has its own coverage.
+        await page.locator("[data-motion-toggle]").click();
+        await expect(page.locator("[data-motion-toggle]")).toHaveAttribute("aria-pressed", "true");
+        await expect(page.locator("[data-ambient-field]")).toHaveAttribute("data-state", "paused");
         const figure =
           kind === "filomena"
             ? page.locator("figure").filter({ has: page.locator(".react-flow") })
