@@ -48,12 +48,12 @@
 
 .rampy .canvas,
 .rampy .loading {
-  height: 415px;
+  height: 2250px;
 }
 
 .teamcubation .canvas,
 .teamcubation .loading {
-  height: 800px;
+  height: 1450px;
 }
 
 .filomena .canvas,
@@ -135,12 +135,12 @@
 @media (width <= 620px) {
   .rampy .canvas,
   .rampy .loading {
-    height: 660px;
+    height: 2600px;
   }
 
   .teamcubation .canvas,
   .teamcubation .loading {
-    height: 1050px;
+    height: 1720px;
   }
 
   .filomena .canvas,
@@ -150,7 +150,7 @@
 
   .cooperativa-obrera .canvas,
   .cooperativa-obrera .loading {
-    height: 620px;
+    height: 860px;
   }
 
   .node {
@@ -250,4 +250,55 @@
   color: var(--accent);
   font: inherit;
   cursor: pointer;
+}
+
+.cooperativa-obrera .canvas,
+.cooperativa-obrera .loading {
+  height: 720px;
+}
+.enterpriseNode {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--surface-void) 18%, transparent);
+}
+.enterpriseNode.gateway {
+  background: var(--surface-base);
+}
+.group {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: 1rem;
+  padding: 0.8rem 0.9rem;
+  background: color-mix(in srgb, var(--accent-wash) 35%, transparent);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+.group strong {
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+.group span {
+  color: var(--text-secondary);
+  font-size: 0.66rem;
+  line-height: 1.3;
+  max-width: 100%;
+}
+.deployment {
+  border: 1.5px dashed var(--accent);
+  background: color-mix(in srgb, var(--accent-wash) 16%, transparent);
+}
+@media (width <= 620px) {
+  .cooperativa-obrera .canvas,
+  .cooperativa-obrera .loading {
+    height: 860px;
+  }
+  .teamcubation .enterpriseNode {
+    width: 100%;
+  }
 }
