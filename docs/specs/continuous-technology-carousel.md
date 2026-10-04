@@ -12,8 +12,8 @@ moving rows, complementing the home page without capturing native scrolling.
 - Every public catalog entry appears once; developing and excluded entries stay out.
 - Whole categories are balanced deterministically between rows, retaining category
   order and the shared alphabetical comparator inside each category.
-- The upper row moves left and the lower row right at 24 CSS pixels/second on
-  desktop and 18 on narrow screens. Loops have no blank intervals or resets.
+- The upper row moves left and the lower row right at 42 CSS pixels/second on
+  desktop and 30 on narrow screens. Loops have no blank intervals or resets.
 - Original linked tiles wrap individually through GSAP; there are no cloned links
   or duplicated accessible names. Keyboard focus exposes the full static grid.
 - Local/global pause, hover, touch, offscreen and hidden-document states stop work.
@@ -30,8 +30,9 @@ and a scoped no-script stylesheet expose the static grid before client code.
 A local control pauses both rows, while pointer interactions pause their own row.
 Keyboard focus changes the rows into their static layout until focus leaves.
 Center the next focused element after collapsing the grid so the fixed header
-does not hide it. Uniform 104-pixel cards fit the longest four-line public labels
-with padding at a 320-pixel viewport.
+does not hide it. Animated cards use natural widths and single-line labels, with 72-pixel minimum
+heights on desktop and 64 on mobile. Longer names use a smaller type size; the
+static grid wraps at word boundaries and expands vertically with text scaling.
 
 The opt-in `?carouselDebug=1` query exposes `setCarouselDebugProgress(cycles)`
 on each row only while its engine is mounted. It seeks a paused existing tween

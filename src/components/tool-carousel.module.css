@@ -34,7 +34,7 @@
 .rail {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
   gap: var(--space-3);
   margin: 0;
   padding: var(--space-1) 0;
@@ -59,7 +59,8 @@
 }
 .section[data-animated="true"] .rail li {
   flex: 0 0 auto;
-  width: clamp(10rem, 14vw, 12rem);
+  width: max-content;
+  min-width: 10rem;
   will-change: transform;
 }
 .tile {
@@ -67,14 +68,14 @@
   align-items: center;
   justify-content: flex-start;
   gap: var(--space-3);
-  height: 6.5rem;
+  min-height: 4.5rem;
   padding: var(--space-3);
   border: 1px solid var(--line-subtle);
   border-radius: var(--radius-md);
   background: var(--surface-raised);
   color: var(--text-primary);
   text-decoration: none;
-  font-size: var(--text-small);
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.25;
   transition: border-color 160ms ease;
@@ -83,7 +84,24 @@
   border-color: var(--accent);
 }
 .tile > span:last-child {
-  overflow-wrap: anywhere;
+  min-width: 0;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+.section[data-animated="false"] .tile {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.section[data-animated="true"] .tile > span:last-child {
+  white-space: nowrap;
+}
+.rail li[data-compact-label="true"] .tile {
+  font-size: 0.8125rem;
+}
+.word {
+  display: inline-block;
+  white-space: pre;
 }
 .mark {
   display: grid;
@@ -101,6 +119,20 @@
   margin-top: var(--space-4);
   color: var(--accent);
   text-underline-offset: 0.25em;
+}
+@media (max-width: 640px) {
+  .tile {
+    min-height: 4rem;
+    gap: var(--space-2);
+    font-size: 0.8125rem;
+  }
+  .rail li[data-compact-label="true"] .tile {
+    font-size: 0.75rem;
+  }
+  .mark {
+    flex-basis: 2rem;
+    height: 2rem;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .section[data-animated="true"] .viewport {
@@ -120,5 +152,12 @@
   }
   .tile {
     transition: none;
+  }
+  .section[data-animated="true"] .tile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .section[data-animated="true"] .tile > span:last-child {
+    white-space: normal;
   }
 }

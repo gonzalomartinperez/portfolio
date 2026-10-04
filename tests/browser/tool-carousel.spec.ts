@@ -62,6 +62,25 @@ for (const locale of ["en", "es"]) {
     const rows = section.locator("[data-tool-row]");
     await expect(rows.nth(0)).toHaveAttribute("data-motion", "running");
     await expect(rows.nth(1)).toHaveAttribute("data-motion", "running");
+    const labels = await section.locator("[data-tool-id] a").evaluateAll((links) =>
+      links.map((link) => {
+        const label = link.lastElementChild;
+        if (!label) throw new Error("A carousel card is missing its label");
+        const card = link.getBoundingClientRect();
+        const text = label.getBoundingClientRect();
+        const style = getComputedStyle(label);
+        return {
+          height: card.height,
+          lines: text.height / Number.parseFloat(style.lineHeight),
+          fits: text.left >= card.left && text.right <= card.right,
+        };
+      }),
+    );
+    for (const label of labels) {
+      expect(label.height).toBeLessThanOrEqual(info.project.name === "mobile" ? 65 : 73);
+      expect(label.lines).toBeLessThanOrEqual(1.05);
+      expect(label.fits).toBe(true);
+    }
     const positions = () =>
       rows.evaluateAll((elements) =>
         elements.map((element) => {

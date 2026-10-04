@@ -95,7 +95,7 @@ function TechnologyRow({
         const positions = new Map(
           items.map((item) => [item, { left: item.offsetLeft, width: item.offsetWidth }]),
         );
-        const speed = matchMedia("(max-width: 640px)").matches ? 18 : 24;
+        const speed = matchMedia("(max-width: 640px)").matches ? 30 : 42;
         tween.current = gsap.to(items, {
           x: direction * width,
           duration: width / speed,
@@ -158,12 +158,24 @@ function TechnologyRow({
     >
       <ul ref={rail} className={styles.rail} aria-label={label}>
         {tools.map((tool) => (
-          <li key={tool.id} data-tool-id={tool.id} data-category={tool.category}>
+          <li
+            key={tool.id}
+            data-tool-id={tool.id}
+            data-category={tool.category}
+            data-compact-label={tool.name.length > 20}
+          >
             <Link className={styles.tile} href={`${localePath(locale, "/stack")}#tech-${tool.id}`}>
               <span className={styles.mark}>
                 <TechnologyMark technology={tool} size={32} />
               </span>
-              <span>{tool.name}</span>
+              <span>
+                {tool.name.split(" ").map((word, index) => (
+                  <span key={word} className={styles.word}>
+                    {index > 0 ? " " : ""}
+                    {word}
+                  </span>
+                ))}
+              </span>
             </Link>
           </li>
         ))}
@@ -240,6 +252,8 @@ export function ToolCarousel({ locale }: { locale: Locale }) {
           .${styles.section}[data-animated="true"] .${styles.viewport} { overflow: visible; mask-image: none; }
           .${styles.section}[data-animated="true"] .${styles.rail} { display: grid; width: auto; }
           .${styles.section}[data-animated="true"] .${styles.rail} li { width: auto; will-change: auto; }
+          .${styles.section}[data-animated="true"] .${styles.tile} { flex-direction: column; align-items: flex-start; }
+          .${styles.section}[data-animated="true"] .${styles.tile} > span:last-child { white-space: normal; }
           .${styles.control} { display: none; }
         `}</style>
       </noscript>

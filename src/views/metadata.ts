@@ -33,6 +33,13 @@ export function layoutMetadata(locale: Locale): Metadata {
     },
     description: profile.intro,
     applicationName: profile.name,
+    formatDetection: {
+      telephone: false,
+      date: false,
+      address: false,
+      email: false,
+      url: false,
+    },
     authors: [{ name: profile.name, url: siteUrl }],
     creator: profile.name,
     alternates: alternatesFor(locale, "/"),

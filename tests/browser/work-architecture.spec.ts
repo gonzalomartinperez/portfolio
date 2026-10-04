@@ -6,7 +6,7 @@ for (const locale of ["", "/es"]) {
   }, info) => {
     await page.goto(`${locale}/work`);
     for (const [role, nodes, edges] of [
-      ["rampy", 7, 4],
+      ["rampy", 7, 6],
       ["teamcubation", 11, 11],
       ["cooperativa-obrera", 5, 4],
     ] as const) {
@@ -53,7 +53,45 @@ for (const locale of ["", "/es"]) {
     await expect(login).toContainText(locale ? "autenticación" : "authentication");
     await expect(login).toContainText("wallets");
     const backoffice = page.locator("#rampy .react-flow__node[data-id='backoffice']");
-    await expect(backoffice).toContainText(locale ? "en desarrollo" : "in development");
+    await expect(backoffice).toContainText(locale ? "en ampliación" : "expanding");
+    await expect(backoffice).not.toContainText(locale ? "en desarrollo" : "in development");
+    for (const connection of ["privy-backend", "web-backoffice"]) {
+      await expect(page.locator(`#rampy .react-flow__edge[data-id='${connection}']`)).toHaveCount(
+        1,
+      );
+    }
+    await expect(page.locator("#teamcubation .react-flow__node[data-id='agent']")).toContainText(
+      locale ? "Sistema de asistencia de promociones" : "Promotion Assistance System",
+    );
+    await expect(page.locator("#teamcubation .react-flow__node[data-id='agent']")).toContainText(
+      "Harness",
+    );
+    const clearLabels = await page.locator("#rampy figure").evaluate((figure) => {
+      const path = figure.querySelector<SVGPathElement>(
+        ".react-flow__edge[data-id='backend-ai'] .react-flow__edge-path",
+      );
+      const matrix = path?.getScreenCTM();
+      if (!path || !matrix) return false;
+      const obstacles = [...figure.querySelectorAll<HTMLElement>(".react-flow__node")]
+        .filter(({ dataset }) => !["backend", "ai"].includes(dataset.id ?? ""))
+        .map((node) => node.getBoundingClientRect());
+      const length = path.getTotalLength();
+      for (let distance = 0; distance <= length; distance += 2) {
+        const point = path.getPointAtLength(distance).matrixTransform(matrix);
+        if (
+          obstacles.some(
+            (bounds) =>
+              point.x > bounds.left + 3 &&
+              point.x < bounds.right - 3 &&
+              point.y > bounds.top + 3 &&
+              point.y < bounds.bottom - 3,
+          )
+        )
+          return false;
+      }
+      return true;
+    });
+    expect(clearLabels, "Backend-to-AI routing leaves other node labels clear").toBe(true);
     await expect(backoffice).toContainText(locale ? "telemetría" : "telemetry");
     await expect(page.locator("#teamcubation .react-flow__edge[data-id='source-sqs']")).toHaveCount(
       1,
@@ -105,54 +143,54 @@ for (const locale of ["", "/es"]) {
 }
 
 for (const locale of ["", "/es"]) {
-  test(`${locale || "en"} diagrams preserve page scrolling and support zoom and node details`, async ({
-    page,
-    isMobile,
-  }) => {
-    test.setTimeout(90_000);
-    const client = isMobile ? await page.context().newCDPSession(page) : null;
-    const settleScroll = () =>
-      page.evaluate(
-        () =>
-          new Promise<void>((resolve) => {
-            let previous = scrollY;
-            let stable = 0;
-            const check = () => {
-              stable = scrollY === previous ? stable + 1 : 0;
-              previous = scrollY;
-              if (stable >= 4) resolve();
-              else requestAnimationFrame(check);
-            };
-            requestAnimationFrame(check);
-          }),
-      );
-    const scrollOver = async (x: number, y: number) => {
-      const before = await page.evaluate(() => scrollY);
-      if (client) {
-        await client.send("Input.dispatchTouchEvent", {
-          type: "touchStart",
-          touchPoints: [{ x, y, id: 1 }],
-        });
-        for (let step = 1; step <= 8; step += 1) {
+  for (const kind of ["rampy", "teamcubation", "cooperativa-obrera", "filomena"]) {
+    test(`${locale || "en"} ${kind} diagram preserves page scrolling and supports zoom and node details`, async ({
+      page,
+      isMobile,
+    }) => {
+      test.setTimeout(90_000);
+      const client = isMobile ? await page.context().newCDPSession(page) : null;
+      const settleScroll = () =>
+        page.evaluate(
+          () =>
+            new Promise<void>((resolve) => {
+              let previous = scrollY;
+              let stable = 0;
+              const check = () => {
+                stable = scrollY === previous ? stable + 1 : 0;
+                previous = scrollY;
+                if (stable >= 4) resolve();
+                else requestAnimationFrame(check);
+              };
+              requestAnimationFrame(check);
+            }),
+        );
+      const scrollOver = async (x: number, y: number) => {
+        const before = await page.evaluate(() => scrollY);
+        if (client) {
           await client.send("Input.dispatchTouchEvent", {
-            type: "touchMove",
-            touchPoints: [{ x, y: y - step * 20, id: 1 }],
+            type: "touchStart",
+            touchPoints: [{ x, y, id: 1 }],
           });
-          await page.evaluate(() => new Promise(requestAnimationFrame));
+          for (let step = 1; step <= 8; step += 1) {
+            await client.send("Input.dispatchTouchEvent", {
+              type: "touchMove",
+              touchPoints: [{ x, y: y - step * 20, id: 1 }],
+            });
+            await page.evaluate(() => new Promise(requestAnimationFrame));
+          }
+          await client.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+        } else {
+          await page.mouse.move(x, y);
+          await page.mouse.wheel(0, 160);
         }
-        await client.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
-      } else {
-        await page.mouse.move(x, y);
-        await page.mouse.wheel(0, 160);
-      }
-      await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(before + 40);
-      await settleScroll();
-      await expect(
-        page.getByRole("region", { name: /Component details|Detalles del componente/ }),
-      ).toHaveCount(0);
-    };
-    try {
-      for (const kind of ["rampy", "teamcubation", "cooperativa-obrera", "filomena"]) {
+        await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(before + 40);
+        await settleScroll();
+        await expect(
+          page.getByRole("region", { name: /Component details|Detalles del componente/ }),
+        ).toHaveCount(0);
+      };
+      try {
         await page.goto(kind === "filomena" ? `${locale}/work/filomena` : `${locale}/work`);
         await page.evaluate(() => document.fonts.ready);
         // Inspect diagrams with the public motion pause; animation has its own coverage.
@@ -257,9 +295,9 @@ for (const locale of ["", "/es"]) {
         await page.keyboard.press("Escape");
         await expect(inspection).toHaveCount(0);
         await expect(node).toBeFocused();
+      } finally {
+        await client?.detach();
       }
-    } finally {
-      await client?.detach();
-    }
-  });
+    });
+  }
 }

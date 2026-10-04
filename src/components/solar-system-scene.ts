@@ -121,7 +121,27 @@ export const solarTextureNames = [
   "earth-normal",
   "earth-specular",
 ] as const;
-export const solarTextureUrl = (name: string) => `/images/solar-system/${name}.webp`;
+export type SolarTextureVersions = Readonly<Record<string, string>>;
+export const solarTextureUrl = (name: string, versions: SolarTextureVersions) => {
+  const version = versions[name];
+  if (!version) throw new Error(`Missing solar texture version: ${name}`);
+  return `/images/solar-system/${name}.webp?v=${version}`;
+};
+
+/** Shared initial camera projection, expressed in container units for server-rendered CSS. */
+export const solarCamera = { fieldOfView: 35, elevation: 35, framingRadius: 60 } as const;
+export const solarFallbackScale =
+  Math.cos((solarCamera.fieldOfView * Math.PI) / 360) / (2 * solarCamera.framingRadius);
+export const solarFallbackPerspective =
+  1 / (2 * Math.tan((solarCamera.fieldOfView * Math.PI) / 360));
+export function solarCameraPoint(point: { x: number; y: number; z: number }) {
+  const elevation = (solarCamera.elevation * Math.PI) / 180;
+  return {
+    x: point.x,
+    y: point.y * Math.cos(elevation) - point.z * Math.sin(elevation),
+    depth: point.y * Math.sin(elevation) + point.z * Math.cos(elevation),
+  };
+}
 export const solarPhase = (planet: SolarPlanet, _mobile: boolean) => (planet.phase * Math.PI) / 180;
 
 export function solarOrbitPoint(

@@ -1,4 +1,5 @@
 import { expect, type Locator, test } from "@playwright/test";
+import textureManifest from "../../public/images/solar-system/manifest.json" with { type: "json" };
 import { captureSettledPage } from "./capture";
 
 type SolarSnapshot = {
@@ -77,6 +78,9 @@ for (const theme of ["light", "dark"] as const) {
     );
     for (const body of frame.bodies) {
       expect(body.texture, body.name).toContain(`/images/solar-system/${body.name}.webp`);
+      expect(new URL(body.texture, page.url()).searchParams.get("v"), body.name).toBe(
+        textureManifest.assets.find(({ file }) => file === `${body.name}.webp`)?.sha256,
+      );
       expect(body.textureColorSpace, body.name).toBe("srgb");
       expect(body.screen.x + body.screen.radius, body.name).toBeGreaterThan(0);
       expect(body.screen.x - body.screen.radius, body.name).toBeLessThan(viewport.width);
@@ -100,6 +104,63 @@ for (const theme of ["light", "dark"] as const) {
     expect(errors).toEqual([]);
   });
 }
+
+test("cold load and reload preserve the initial solar composition", async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.addInitScript(() => localStorage.setItem("theme", "dark"));
+  for (let load = 0; load < 2; load++) {
+    let release!: () => void;
+    const loading = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    await page.route("**/images/solar-system/*.webp*", async (route) => {
+      await loading;
+      await route.continue();
+    });
+    if (load === 0)
+      await page.goto("/about?solarDebug=1&solarTime=0", { waitUntil: "domcontentloaded" });
+    else await page.reload({ waitUntil: "domcontentloaded" });
+    const solar = page.locator("[data-solar-system]");
+    await expect(solar).toHaveAttribute("data-renderer", "static");
+    const initial = await solar
+      .locator("[data-planet], [data-sun], [data-moon]")
+      .evaluateAll((nodes) =>
+        nodes.map((node) => {
+          const body = node as HTMLElement;
+          const bounds = body.getBoundingClientRect();
+          return {
+            name: body.dataset.planet ?? (body.hasAttribute("data-sun") ? "sun" : "moon"),
+            x: bounds.x + bounds.width / 2,
+            y: bounds.y + bounds.height / 2,
+            radius: bounds.width / 2,
+          };
+        }),
+      );
+    expect(initial).toHaveLength(11);
+    release();
+    await expect(solar).toHaveAttribute("data-renderer", "webgl", { timeout: 25_000 });
+    const canvas = solar.locator("[data-solar-canvas]");
+    const bounds = await canvas.boundingBox();
+    if (!bounds) throw new Error("Solar canvas requires bounds");
+    const rendered = await snapshot(canvas);
+    for (const body of initial) {
+      const settled = rendered.bodies.find(({ name }) => name === body.name);
+      if (!settled) throw new Error(`Missing rendered body: ${body.name}`);
+      expect(
+        Math.abs(body.x - bounds.x - settled.screen.x),
+        `${body.name} horizontal jump`,
+      ).toBeLessThan(1);
+      expect(
+        Math.abs(body.y - bounds.y - settled.screen.y),
+        `${body.name} vertical jump`,
+      ).toBeLessThan(1);
+      expect(Math.abs(body.radius - settled.screen.radius), `${body.name} size jump`).toBeLessThan(
+        1,
+      );
+    }
+    await page.unroute("**/images/solar-system/*.webp*");
+  }
+});
 
 test("a lost GPU context retains the complete fallback and can recover", async ({ page }) => {
   await page.goto("/contact?solarDebug=1");
@@ -165,7 +226,7 @@ test("visual credits remain available in both locales without JavaScript", async
 });
 
 test("a failed optional texture preserves the other GPU materials", async ({ page }) => {
-  await page.route("**/earth-night.webp", (route) => route.abort());
+  await page.route("**/earth-night.webp*", (route) => route.abort());
   await page.goto("/contact?solarDebug=1");
   const solar = page.locator("[data-solar-system]");
   await expect(solar).toHaveAttribute("data-renderer", "webgl", { timeout: 25_000 });
@@ -176,7 +237,7 @@ test("a failed optional texture preserves the other GPU materials", async ({ pag
 });
 
 test("a failed core texture retains the complete static fallback", async ({ page }) => {
-  await page.route("**/jupiter.webp", (route) => route.abort());
+  await page.route("**/jupiter.webp*", (route) => route.abort());
   await page.goto("/contact?solarDebug=1");
   const solar = page.locator("[data-solar-system]");
   await expect(solar).toHaveAttribute("data-renderer", "static");

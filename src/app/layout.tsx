@@ -5,6 +5,7 @@ import { PageMotion } from "@/components/page-motion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { defaultLocale } from "@/content/locales";
+import { solarTextureVersions } from "@/content/solar-textures";
 import { layoutMetadata, sharedViewport } from "@/views/metadata";
 import { ProfileJsonLd } from "@/views/profile-json-ld";
 import { fontClassName } from "./fonts";
@@ -34,7 +35,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         />
       </head>
       <body>
-        <AmbientField />
+        <AmbientField textureVersions={solarTextureVersions} />
         <SiteHeader />
         <main id="main">
           <PageMotion>{children}</PageMotion>
