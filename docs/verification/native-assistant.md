@@ -1,0 +1,98 @@
+# Native assistant verification
+
+Test environment: WSL Linux, Node 24.21.0, npm 11.19.0, Next.js 16.3.8,
+React 19.3.0, TypeScript 7.0.2 and Playwright 1.63.0. Tests use an isolated
+production server behind a loopback HTTPS fixture. OpenSSL is a test prerequisite;
+only Playwright ignores the ephemeral self-signed certificate. Browser fixtures call the real HTTP/SSE
+adapter and controller, but do not call OpenAI or prove production CORS/cookies.
+
+## Evidence and reproduction
+
+```sh
+npm ci
+npm run contract:generate
+npm run check
+npx playwright test tests/browser/assistant.spec.ts
+```
+
+`contract:generate` installs the independent frozen generator lockfile. The
+primary and scoped strict checks use TypeScript 7; only the generator's
+programmatic compiler peer remains TypeScript 5.9.3.
+
+The verification includes 23 repository checks, 31 assistant unit/network checks,
+32 content checks, identity/document validation, 19 rendered-route checks, the production smoke test,
+Biome, both type configurations,
+the production build and nine build-budget checks. Native browser coverage is
+17 scenarios in Chromium desktop/mobile, Firefox and WebKit: **68 passed in
+4.1 minutes**, with two workers and no retries. The managed server stopped both
+owned listeners and removed its ephemeral TLS directory after the run. These scenarios
+cover sources, persistence, rename/delete, guarded clipboard writes, rejected
+unsafe content, IME, rapid stop, failure/recovery, theme/locale, scrolling,
+minimize/navigation continuity and motion. Physical devices and screen readers
+remain separate verification steps.
+
+An additional keyboard walkthrough performed 20 successive Tab advances in the
+mobile modal and verified focus stayed inside it; Escape restored launcher focus.
+The visual walkthrough inspected the screenshots below and corrected a skip link
+that initially overlapped the consolidated toolbar.
+
+## Actual screenshots
+
+The historical screenshot comes from frontend revision
+`aed8ea710c8b847ddc9066aaef5ce48d3793b494`; it documents the former iframe
+presentation, not an equal-environment performance baseline. New screenshots
+show deterministic public fixture content, never personal visitor messages.
+
+![Former iframe conversation, retained as historical reference](native-assistant/before-iframe-conversation.png)
+
+![Native compact dark English conversation with sources and composer](native-assistant/compact-dark-en.png)
+
+![Expanded native conversation with a preserved draft](native-assistant/expanded-dark-en.png)
+
+![Native mobile light Spanish empty state and safe-area composer](native-assistant/mobile-light-es.png)
+
+![Expanded assistant route sharing the portfolio navigation and identity](native-assistant/page-dark-en.png)
+
+![Bounded decorative avatar depth response](native-assistant/avatar-depth.png)
+
+The local pointer/tap/rest recording is retained under `.artifacts/native-demo/`;
+that ignored artifact is not a production feature or a published recording.
+
+## Transfer and coverage mapping
+
+| Former frontend responsibility | Native portfolio responsibility |
+| --- | --- |
+| `src/features/assistant/domain` and `application` | Same feature layers with existing lifecycle and transport ports |
+| HTTP/SSE adapters and runtime guards | `src/features/assistant/adapters`, plus validated public starter catalog |
+| Message, Markdown, copy, composer and avatar | Shared feature presentation using owned portfolio buttons/tokens/avatar |
+| Standalone and embedded shells | Stable root-layout host and `/assistant` / `/es/assistant` |
+| Chat browser actions and failure coverage | `tests/browser/assistant.spec.ts` and actual adapter fixtures |
+| State, SSE and transport checks | `scripts/assistant-{state,sse,transport,network}.test.ts` |
+| API provenance | `src/contracts/source.json` and contract integrity checks |
+| Frame/postMessage protocol | Retired for the native architecture; no browser credentials cross a messaging protocol |
+
+The imported API revision is `c6012067c4a99db477bb6ddcf1f26dae095641ca`,
+with contract artifact handoff `15b6943f741ac80498a5fee611aa74d24250eb6b`.
+No mutable API working tree was consumed.
+
+## Measured build impact
+
+Final build: 2,789 bytes gzip deferred assistant CSS; 23,137 bytes gzip existing
+portfolio CSS; 25,926 bytes gzip total CSS. The assistant JavaScript dependency
+closure is 58,516 bytes gzip. The compilation graph reports one lazy root and
+`initial: false`; browser tests assert no API initialization before activation.
+The existing 24 KiB CSS budget remains unchanged, with an explicit reviewed
+4 KiB allowance for the new deferred feature. Every non-scene client chunk
+remains within the existing 80 KiB limit.
+
+The final incremental build compiled in 6.7 seconds and checked types in
+1.058 seconds under concurrent local work. These are observed timings, not a
+controlled speed improvement or field Core Web Vitals claim.
+
+## Remaining integration checks
+
+The API and vps-ops owners must verify exact allowed portfolio origins, credentialed
+CORS, cookie policy, exposed `X-Run-ID`, CSRF and reverse-proxy SSE behavior.
+Real backend integration, provider quality, production headers/TLS, physical mobile
+keyboards and assistive technology have not been established by these fixture tests.
+No deployment or production authentication change is authorized by this document.

@@ -143,3 +143,6 @@ guide before contributing.
 All rights reserved; no reuse license is granted. Dependencies retain their own
 licenses. This GitHub repository is public; `"private": true` in `package.json`
 only prevents accidental publication to npm.
+
+The native assistant uses a stable lazy panel and shared expanded routes. See
+[assistant architecture and verification](docs/native-assistant.md).

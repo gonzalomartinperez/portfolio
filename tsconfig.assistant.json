@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "incremental": false
+  },
+  "include": [
+    "src/features/assistant/**/*.ts",
+    "src/features/assistant/**/*.tsx",
+    "scripts/assistant-*.test.ts",
+    "next-env.d.ts"
+  ],
+  "exclude": ["node_modules"]
+}

@@ -53,6 +53,7 @@ export function SolarSystem({
   const engine = useRef<SolarEngine | null>(null);
   const paused = usePageMotionPaused();
   const pausedRef = useRef(paused);
+  const resumeInitialization = useRef<() => void>(() => {});
 
   useEffect(() => {
     const active = engine.current;
@@ -95,6 +96,7 @@ export function SolarSystem({
   useEffect(() => {
     pausedRef.current = paused;
     engine.current?.setPaused(paused || document.hidden);
+    if (!paused && !engine.current) resumeInitialization.current();
     if (root.current?.dataset.renderer === "webgl") {
       root.current.dataset.state = paused || document.hidden ? "paused" : "running";
     }
@@ -127,11 +129,11 @@ export function SolarSystem({
       engine.current?.dispose();
       engine.current = null;
       staticScene();
-      if (reduced.matches || disposed) return;
+      if (reduced.matches || disposed || pausedRef.current) return;
       const load = async () => {
         try {
           const { createSolarSystemEngine } = await import("./solar-system-engine");
-          if (disposed || token !== generation || reduced.matches) return;
+          if (disposed || token !== generation || reduced.matches || pausedRef.current) return;
           const query = new URLSearchParams(location.search);
           const requestedTime = query.get("solarTime");
           const fixedTime =
@@ -182,8 +184,10 @@ export function SolarSystem({
     theme.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     reduced.addEventListener("change", sync);
     document.addEventListener("visibilitychange", visibility);
+    resumeInitialization.current = sync;
     sync();
     return () => {
+      resumeInitialization.current = () => {};
       disposed = true;
       generation++;
       if (idle !== undefined) cancelIdleCallback(idle);

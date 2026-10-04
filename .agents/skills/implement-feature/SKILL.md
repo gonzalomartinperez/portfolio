@@ -25,3 +25,8 @@ description: Implement a requested portfolio feature or refactor with focused Ne
    [task-specific QA matrix](../../../docs/development.md#task-specific-qa), including
    both locales when layout or shared copy changes.
 7. Update affected documentation and spec verification. Finish with changed behavior, evidence, and remaining risks; commits and pushes require authorization in the task.
+
+For assistant changes, read [the native assistant guide](../../../docs/native-assistant.md)
+and its acceptance specification. Preserve the root-layout runtime; do not recreate
+controllers when resizing, minimizing or switching locale. Verify affected native
+browser cases alongside the scoped strict assistant check.
