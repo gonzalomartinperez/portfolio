@@ -187,6 +187,10 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     contextAvailable = true;
   let pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
   let averageFrameCost = 0;
+  let textureBytes = 0;
+  let estimatedGpuBytes = 0;
+  let starsMaterial: PointsMaterial | undefined;
+  let selectionHalo: Mesh | undefined;
   let drawing = false;
 
   const glow = (color: number, strength: number) =>
@@ -480,6 +484,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         }),
       ),
     );
+    starsMaterial = stars.material;
     stars.material.onBeforeCompile = (shader) => {
       shader.fragmentShader = shader.fragmentShader.replace(
         "#include <opaque_fragment>",
@@ -488,6 +493,12 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     };
     stars.name = "solar-stars";
     scene.add(stars);
+  };
+  const createSelectionHalo = () => {
+    selectionHalo = new Mesh(sphere, glow(0x8edbff, 0.35));
+    selectionHalo.name = "solar-selection";
+    selectionHalo.visible = false;
+    scene.add(selectionHalo);
   };
   const resetView = () => {
     const elevation = (Math.PI * 35) / 180;
@@ -544,6 +555,14 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       }
     }
     solarRoot.updateMatrixWorld(true);
+    if (selectionHalo) {
+      const selected = bodies.find((body) => body.name === highlighted);
+      selectionHalo.visible = !!selected;
+      if (selected) {
+        selected.mesh.getWorldPosition(selectionHalo.position);
+        selectionHalo.scale.setScalar(selected.mesh.scale.x * 1.25);
+      }
+    }
     for (const shadow of ringShadows) {
       shadow.mesh.getWorldPosition(shadow.center.value);
       shadow.radius.value = shadow.mesh.scale.x;
@@ -594,10 +613,12 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     if (bounds.width < 1 || bounds.height < 1) return;
     width = bounds.width;
     height = bounds.height;
+    const memoryLimit = (width < 640 ? 128 : 256) * 1024 * 1024;
+    const memoryPixels = Math.max(250_000, ((memoryLimit - textureBytes) * 0.98) / 40);
     pixelRatio = Math.min(
       pixelRatio,
       width < 640 ? 1.5 : 2,
-      Math.sqrt((width < 640 ? 1_500_000 : 3_500_000) / (width * height)),
+      Math.sqrt(Math.min(width < 640 ? 1_500_000 : 3_500_000, memoryPixels) / (width * height)),
     );
     renderer.setPixelRatio(pixelRatio);
     renderer.setSize(width, height, false);
@@ -605,6 +626,8 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     composer.setSize(width, height);
     bloom.setSize(Math.ceil(width * pixelRatio * 0.6), Math.ceil(height * pixelRatio * 0.6));
     baseTarget.setSize(Math.ceil(width * pixelRatio), Math.ceil(height * pixelRatio));
+    estimatedGpuBytes =
+      textureBytes + Math.ceil(width * pixelRatio) * Math.ceil(height * pixelRatio) * 40;
     camera.aspect = width / height;
     defaultDistance = (60 / Math.sin((Math.PI * 35) / 360)) * Math.max(1, 1 / camera.aspect);
     if (!immersive) resetView();
@@ -627,6 +650,8 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
   };
   const setLight = (value: boolean) => {
     light = value;
+    starsMaterial?.color.set(light && !immersive ? 0x29466a : 0xffffff);
+    if (starsMaterial) starsMaterial.opacity = light && !immersive ? 0.86 : 0.78;
     ambient.intensity = immersive ? 0.23 : light ? 0.32 : 0.23;
     for (const orbit of orbits)
       (orbit.line.material as LineBasicMaterial).opacity = light && !immersive ? 0.1 : 0.08;
@@ -691,7 +716,10 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
               2,
           },
           axialTilt: body.tilt.rotation.toArray(),
-          texture: image instanceof HTMLImageElement ? image.currentSrc || image.src : null,
+          texture:
+            image instanceof HTMLImageElement
+              ? image.currentSrc || image.src
+              : (texture?.userData.sourceUrl ?? null),
           textureColorSpace: texture?.colorSpace ?? null,
         };
       });
@@ -704,6 +732,8 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         highlighted,
         camera: { type: camera.type, target: [0, 0, 0], position: camera.position.toArray() },
         averageFrameCost,
+        estimatedGpuBytes,
+        textureBytes,
         framesRendered,
         paused,
         contextAvailable,
@@ -741,6 +771,32 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         texture.dispose();
         return;
       }
+      const source = texture.source.data;
+      if (source instanceof HTMLImageElement) {
+        texture.userData.sourceUrl = source.currentSrc || source.src;
+        const prominent = name === "sun" || name === "earth" || name === "jupiter";
+        const maxDimension = Math.min(
+          renderer.capabilities.maxTextureSize,
+          prominent ? (width < 640 ? 2048 : 4096) : 1024,
+        );
+        const factor = Math.min(
+          1,
+          maxDimension / Math.max(source.naturalWidth, source.naturalHeight),
+        );
+        if (factor < 1) {
+          const decoded = document.createElement("canvas");
+          decoded.width = Math.max(1, Math.round(source.naturalWidth * factor));
+          decoded.height = Math.max(1, Math.round(source.naturalHeight * factor));
+          const context = decoded.getContext("2d");
+          if (context) {
+            context.drawImage(source, 0, 0, decoded.width, decoded.height);
+            texture.image = decoded;
+          }
+        }
+        const decoded = texture.image;
+        if (decoded instanceof HTMLCanvasElement || decoded instanceof HTMLImageElement)
+          textureBytes += Math.ceil((decoded.width * decoded.height * 4 * 4) / 3);
+      }
       texture.colorSpace =
         name === "earth-normal" || name === "earth-specular" ? NoColorSpace : SRGBColorSpace;
       texture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
@@ -751,6 +807,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       if (disposed) return;
       createBodies();
       createStars();
+      createSelectionHalo();
       loaded = true;
       resize();
       setLight(light);
