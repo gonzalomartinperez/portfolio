@@ -1,44 +1,32 @@
 import type { Locale } from "./locales";
 
-export const toolCarouselIds = [
-  "react",
-  "typescript",
-  "python",
-  "fastapi",
-  "langchain",
-  "langgraph",
-  "neo4j",
-  "react-native",
-  "privy",
-  "hyperliquid",
-  "stripe",
-  "digitalocean",
-] as const;
-
 export const toolCarouselCopy: Record<
   Locale,
   {
     heading: string;
     description: string;
-    previous: string;
-    next: string;
+    pause: string;
+    resume: string;
     catalogue: string;
+    row: string;
   }
 > = {
   es: {
     heading: "Herramientas con las que construyo",
     description:
-      "Una selección de mi stack para construir productos web y móviles, sistemas de IA e integraciones.",
-    previous: "Ver herramientas anteriores",
-    next: "Ver más herramientas",
+      "Lenguajes, frameworks y herramientas que utilizo para desarrollar productos, sistemas de IA e integraciones.",
+    pause: "Pausar tecnologías",
+    resume: "Reanudar tecnologías",
     catalogue: "Explorar el stack completo",
+    row: "Tecnologías",
   },
   en: {
     heading: "Tools I build with",
     description:
-      "A selection from my stack for building web and mobile products, AI systems, and integrations.",
-    previous: "View previous tools",
-    next: "View more tools",
+      "Languages, frameworks, and tools I use to build products, AI systems, and integrations.",
+    pause: "Pause technologies",
+    resume: "Resume technologies",
     catalogue: "Explore the full stack",
+    row: "Technologies",
   },
 };
