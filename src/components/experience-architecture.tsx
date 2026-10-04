@@ -16,24 +16,24 @@ const descriptions: Record<ArchitectureKind, Record<Locale, { title: string; sum
     en: {
       title: "Product architecture",
       summary:
-        "The React/Next.js web app is organized by feature domains on a shared design system; it and the React Native mobile app connect to a hexagonal Python/FastAPI backend. Its API and AI capabilities include agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j GraphRAG, alongside DeFi integrations. This is a capability map, not an exact request trace.",
+        "The React/Next.js web app is organized by feature domains on a shared design system; it and the React Native mobile app connect to a hexagonal Python/FastAPI backend. The built back office is part of the web app and continues to expand; Privy login and wallets integrate with the backend. Its API and AI capabilities include agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j GraphRAG, alongside DeFi integrations. This is a capability map, not an exact request trace.",
     },
     es: {
       title: "Arquitectura del producto",
       summary:
-        "La web React/Next.js está organizada por dominios y features sobre un design system compartido; junto con la app mobile React Native, se conecta con un backend Python/FastAPI de arquitectura hexagonal. Sus capacidades de API e IA incluyen agentes con Agno, LangChain, LangGraph, OpenAI API y GraphRAG con Neo4j, además de integraciones DeFi. Es un mapa de capacidades, no una traza exacta de cada solicitud.",
+        "La web React/Next.js está organizada por dominios y features sobre un design system compartido; junto con la app mobile React Native, se conecta con un backend Python/FastAPI de arquitectura hexagonal. El backoffice ya implementado forma parte de la web y continúa ampliándose; el acceso y las wallets con Privy se integran con el backend. Sus capacidades de API e IA incluyen agentes con Agno, LangChain, LangGraph, OpenAI API y GraphRAG con Neo4j, además de integraciones DeFi. Es un mapa de capacidades, no una traza exacta de cada solicitud.",
     },
   },
   teamcubation: {
     en: {
       title: "Portal, ingestion and AI architecture",
       summary:
-        "The React/Single-SPA portal uses a Spring WebFlux BFF to access Java/Spring Boot and Node.js/NestJS microservices and an AI harness with LangChain, LangGraph and OpenAI API. The harness uses Neo4j GraphRAG to relate enterprise policies and promotion information, with agent orchestration, answer evaluation and domain guardrails. A bulk promotion pipeline runs from S3 through SQS and a Python/FastAPI Lambda to the microservices and their respective databases.",
+        "The React/Single-SPA portal uses a Spring WebFlux BFF to access Java/Spring Boot and Node.js/NestJS microservices and the Promotion Assistance System, built with LangChain, LangGraph and OpenAI API. Inside that agentic system, the harness handles agent orchestration, answer evaluation and domain guardrails, while Neo4j GraphRAG relates enterprise policies and promotion information. A bulk promotion pipeline runs from S3 through SQS and a Python/FastAPI Lambda to the microservices and their respective databases.",
     },
     es: {
       title: "Arquitectura del portal, la ingesta y la IA",
       summary:
-        "El portal React/Single-SPA accede mediante un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS, y a un harness agéntico con LangChain, LangGraph y OpenAI API. El harness usa GraphRAG sobre Neo4j para relacionar políticas empresariales y promociones, con orquestación, evaluación de respuestas y guardrails de dominio. El flujo masivo de promociones pasa de S3 a SQS y una Lambda Python/FastAPI, y desde allí a los microservicios y sus respectivas bases de datos.",
+        "El portal React/Single-SPA accede mediante un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS, y al Sistema de asistencia de promociones, construido con LangChain, LangGraph y OpenAI API. Dentro de este sistema agéntico, el harness coordina los agentes, evalúa las respuestas y aplica guardrails de dominio; GraphRAG sobre Neo4j relaciona políticas empresariales y promociones. El flujo masivo de promociones pasa de S3 a SQS y una Lambda Python/FastAPI, y desde allí a los microservicios y sus respectivas bases de datos.",
     },
   },
   "cooperativa-obrera": {

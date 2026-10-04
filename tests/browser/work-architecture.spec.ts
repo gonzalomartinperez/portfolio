@@ -6,7 +6,7 @@ for (const locale of ["", "/es"]) {
   }, info) => {
     await page.goto(`${locale}/work`);
     for (const [role, nodes, edges] of [
-      ["rampy", 7, 4],
+      ["rampy", 7, 6],
       ["teamcubation", 11, 11],
       ["cooperativa-obrera", 5, 4],
     ] as const) {
@@ -53,7 +53,19 @@ for (const locale of ["", "/es"]) {
     await expect(login).toContainText(locale ? "autenticación" : "authentication");
     await expect(login).toContainText("wallets");
     const backoffice = page.locator("#rampy .react-flow__node[data-id='backoffice']");
-    await expect(backoffice).toContainText(locale ? "en desarrollo" : "in development");
+    await expect(backoffice).toContainText(locale ? "en ampliación" : "expanding");
+    await expect(backoffice).not.toContainText(locale ? "en desarrollo" : "in development");
+    for (const connection of ["privy-backend", "web-backoffice"]) {
+      await expect(page.locator(`#rampy .react-flow__edge[data-id='${connection}']`)).toHaveCount(
+        1,
+      );
+    }
+    await expect(page.locator("#teamcubation .react-flow__node[data-id='agent']")).toContainText(
+      locale ? "Sistema de asistencia de promociones" : "Promotion Assistance System",
+    );
+    await expect(page.locator("#teamcubation .react-flow__node[data-id='agent']")).toContainText(
+      "Harness",
+    );
     await expect(backoffice).toContainText(locale ? "telemetría" : "telemetry");
     await expect(page.locator("#teamcubation .react-flow__edge[data-id='source-sqs']")).toHaveCount(
       1,

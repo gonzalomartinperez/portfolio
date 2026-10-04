@@ -22,7 +22,7 @@ export const roles: Role[] = [
       "Integrated Morpho, Aave and Compound across backend, frontend and transaction execution for positions, yields, deposits and withdrawals, with completeness checks and webhook-based status tracking; also worked with Hyperliquid and LI.FI, Privy authentication and wallets, and Stripe integrations in production.",
       "Built a consolidated portfolio experience for assets, vaults and 24-hour returns; reduced comparable vault, market and perpetual data retrieval from seconds into the millisecond range through prefetching, parallel provider calls and selective caching.",
       "Cut the validation, build and deployment pipeline from about one hour to ten minutes while retaining its checks; optimized application bundles, Docker images and development, staging and production environments on DigitalOcean.",
-      "I’m developing and expanding the enterprise back office to manage application operations and bring monitoring, telemetry, and operational status together.",
+      "Built the enterprise back office to manage application operations and centralize monitoring, telemetry and operational status; I continue to expand its capabilities.",
       "Added domain and malicious-instruction controls to agent workflows, checked with automated behavioral tests and human review.",
       "Centralized secrets with Infisical, per-user access, automated synchronization and on-demand rotation; worked across deployment, monitoring, backups, databases and server permissions.",
       "Standardized spec-driven engineering through an agent skills marketplace and repeatable local setup, connecting requirements, architecture, implementation, automated tests and human UI review.",

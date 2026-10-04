@@ -74,11 +74,11 @@ separately rather than inferred from an edited file.
 | Full frontend feature-domain refactor and complete design system; hexagonal backend | Work contributions and Rampy architecture diagram |
 | Production mobile React Native/Kotlin/Swift, Android Studio and startup improvement | Rampy evidence; no mobile claim for Cooperativa or Teamcubation |
 | Agno retained with LangChain/LangGraph, OpenAI API and Neo4j GraphRAG | Both Rampy and Teamcubation experience sources |
-| Agent harness orchestration, evaluation, performance and domain/security guardrails | Teamcubation achievements and BFF-connected agent diagram |
+| Agent harness orchestration, evaluation, performance and domain/security guardrails | Teamcubation achievements and BFF-connected Promotion Assistance System; harness remains an internal orchestration/evaluation component |
 | Fintech providers include Hyperliquid, LI.FI, Morpho, Aave and Compound | Catalog, Work diagram, CV skills and confirmed facts |
 | Privy authentication/wallets, Stripe integrations and E2EE | Rampy achievements and separated integration capabilities |
 | Full event tracking: Firebase/Google Analytics, Clarity Mobile and Singular/Meta | Confirmed Rampy achievement; no duplicate-event claim widened beyond scope |
-| Rampy enterprise back office is being developed and expanded | Current-tense operations contribution, diagram and CV/LinkedIn; no new metric |
+| Rampy enterprise back office is implemented and being expanded | Operations contribution and web-connected diagram; CV/LinkedIn follow the approved source correction; no new metric |
 | Cooperativa: React/Next.js → Python/FastAPI BFF → Java, Node and PHP services | Contracts/permissions achievements and architecture diagram |
 | Teamcubation portal: React/Single-SPA → Spring WebFlux BFF → services and GraphRAG | User-confirmed BFF connections; no disconnected assistant box |
 | Teamcubation ingestion: S3/SQS → Lambda Python/FastAPI → Java/Node services → their databases | User-confirmed ingestion branch, CV and LinkedIn descriptions |

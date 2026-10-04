@@ -50,11 +50,16 @@ const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
     en: [
       {
         id: "web",
-        title: "Web",
+        title: "Web frontend",
         detail: "React · Next.js · features · design system",
         tier: "surface",
       },
-      { id: "mobile", title: "Mobile", detail: "React Native · Kotlin · Swift", tier: "surface" },
+      {
+        id: "mobile",
+        title: "Mobile app",
+        detail: "React Native · Kotlin · Swift",
+        tier: "surface",
+      },
       { id: "backend", title: "Backend", detail: "Python · FastAPI · hexagonal", tier: "gateway" },
       {
         id: "ai",
@@ -76,19 +81,24 @@ const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
       },
       {
         id: "backoffice",
-        title: "Back office · in development",
-        detail: "App management · telemetry · operational status",
+        title: "Back office",
+        detail: "Built · expanding · management · telemetry · status",
         tier: "surface",
       },
     ],
     es: [
       {
         id: "web",
-        title: "Web",
+        title: "Frontend web",
         detail: "React · Next.js · features · design system",
         tier: "surface",
       },
-      { id: "mobile", title: "Mobile", detail: "React Native · Kotlin · Swift", tier: "surface" },
+      {
+        id: "mobile",
+        title: "App móvil",
+        detail: "React Native · Kotlin · Swift",
+        tier: "surface",
+      },
       { id: "backend", title: "Backend", detail: "Python · FastAPI · hexagonal", tier: "gateway" },
       {
         id: "ai",
@@ -110,27 +120,32 @@ const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
       },
       {
         id: "backoffice",
-        title: "Backoffice · en desarrollo",
-        detail: "Gestión de la app · telemetría · estado operativo",
+        title: "Backoffice",
+        detail: "Implementado · en ampliación · gestión · telemetría · estado",
         tier: "surface",
       },
     ],
   },
   teamcubation: {
     en: [
-      { id: "portal", title: "Merchant portal", detail: "React · Single-SPA", tier: "surface" },
+      { id: "portal", title: "Web frontend", detail: "React · Single-SPA", tier: "surface" },
       { id: "bff", title: "BFF", detail: "Spring WebFlux", tier: "gateway" },
-      { id: "java", title: "Services", detail: "Java · Spring Boot", tier: "service" },
-      { id: "node", title: "Services", detail: "Node.js · NestJS", tier: "service" },
+      { id: "java", title: "Microservices", detail: "Java · Spring Boot", tier: "service" },
+      { id: "node", title: "Microservices", detail: "Node.js · NestJS", tier: "service" },
       { id: "source", title: "Amazon S3", detail: "Promotion files", tier: "surface" },
       { id: "sqs", title: "Amazon SQS", detail: "Bulk ingestion queue", tier: "gateway" },
       { id: "java-db", title: "Service database", detail: "Java service data", tier: "service" },
       { id: "node-db", title: "Service database", detail: "Node.js service data", tier: "service" },
-      { id: "lambda", title: "Processing", detail: "Python · FastAPI Lambda", tier: "service" },
+      {
+        id: "lambda",
+        title: "Ingestion Lambda",
+        detail: "Python · FastAPI Lambda",
+        tier: "service",
+      },
       {
         id: "agent",
-        title: "Agent harness",
-        detail: "LangChain · LangGraph · OpenAI API",
+        title: "Promotion Assistance System",
+        detail: "Harness · LangChain · LangGraph · OpenAI API",
         tier: "gateway",
       },
       {
@@ -141,10 +156,10 @@ const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
       },
     ],
     es: [
-      { id: "portal", title: "Portal de comercios", detail: "React · Single-SPA", tier: "surface" },
+      { id: "portal", title: "Frontend web", detail: "React · Single-SPA", tier: "surface" },
       { id: "bff", title: "BFF", detail: "Spring WebFlux", tier: "gateway" },
-      { id: "java", title: "Servicios", detail: "Java · Spring Boot", tier: "service" },
-      { id: "node", title: "Servicios", detail: "Node.js · NestJS", tier: "service" },
+      { id: "java", title: "Microservicios", detail: "Java · Spring Boot", tier: "service" },
+      { id: "node", title: "Microservicios", detail: "Node.js · NestJS", tier: "service" },
       { id: "source", title: "Amazon S3", detail: "Archivos de promociones", tier: "surface" },
       { id: "sqs", title: "Amazon SQS", detail: "Cola de ingesta masiva", tier: "gateway" },
       {
@@ -159,11 +174,16 @@ const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
         detail: "Datos del servicio Node.js",
         tier: "service",
       },
-      { id: "lambda", title: "Procesamiento", detail: "Lambda Python · FastAPI", tier: "service" },
+      {
+        id: "lambda",
+        title: "Lambda de ingesta",
+        detail: "Lambda Python · FastAPI",
+        tier: "service",
+      },
       {
         id: "agent",
-        title: "Harness agéntico",
-        detail: "LangChain · LangGraph · OpenAI API",
+        title: "Sistema de asistencia de promociones",
+        detail: "Harness · LangChain · LangGraph · OpenAI API",
         tier: "gateway",
       },
       {
@@ -176,24 +196,24 @@ const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
   },
   "cooperativa-obrera": {
     en: [
-      { id: "web", title: "Admin views", detail: "React · Next.js", tier: "surface" },
-      { id: "bff", title: "Shared contract", detail: "Python · FastAPI BFF", tier: "gateway" },
-      { id: "java", title: "Services", detail: "Java · Spring Boot", tier: "service" },
-      { id: "node", title: "Services", detail: "Node.js · NestJS", tier: "service" },
-      { id: "php", title: "Services", detail: "PHP", tier: "service" },
+      { id: "web", title: "Web frontend", detail: "React · Next.js", tier: "surface" },
+      { id: "bff", title: "BFF", detail: "Python · FastAPI BFF", tier: "gateway" },
+      { id: "java", title: "Microservices", detail: "Java · Spring Boot", tier: "service" },
+      { id: "node", title: "Microservices", detail: "Node.js · NestJS", tier: "service" },
+      { id: "php", title: "Microservices", detail: "PHP", tier: "service" },
     ],
     es: [
-      { id: "web", title: "Vistas admin", detail: "React · Next.js", tier: "surface" },
-      { id: "bff", title: "Contrato común", detail: "BFF Python · FastAPI", tier: "gateway" },
-      { id: "java", title: "Servicios", detail: "Java · Spring Boot", tier: "service" },
-      { id: "node", title: "Servicios", detail: "Node.js · NestJS", tier: "service" },
-      { id: "php", title: "Servicios", detail: "PHP", tier: "service" },
+      { id: "web", title: "Frontend web", detail: "React · Next.js", tier: "surface" },
+      { id: "bff", title: "BFF", detail: "BFF Python · FastAPI", tier: "gateway" },
+      { id: "java", title: "Microservicios", detail: "Java · Spring Boot", tier: "service" },
+      { id: "node", title: "Microservicios", detail: "Node.js · NestJS", tier: "service" },
+      { id: "php", title: "Microservicios", detail: "PHP", tier: "service" },
     ],
   },
   filomena: {
     en: [
-      { id: "web", title: "Exam client", detail: "Next.js · React · TypeScript", tier: "surface" },
-      { id: "api", title: "Shared API", detail: "Laravel · REST", tier: "gateway" },
+      { id: "web", title: "Web frontend", detail: "Next.js · React · TypeScript", tier: "surface" },
+      { id: "api", title: "REST API", detail: "Laravel · REST", tier: "gateway" },
       { id: "data", title: "Exam data", detail: "MySQL · indexes · query tuning", tier: "service" },
       {
         id: "queues",
@@ -212,11 +232,11 @@ const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
     es: [
       {
         id: "web",
-        title: "Cliente de exámenes",
+        title: "Frontend web",
         detail: "Next.js · React · TypeScript",
         tier: "surface",
       },
-      { id: "api", title: "API compartida", detail: "Laravel · REST", tier: "gateway" },
+      { id: "api", title: "API REST", detail: "Laravel · REST", tier: "gateway" },
       {
         id: "data",
         title: "Datos de exámenes",
@@ -244,6 +264,8 @@ const connections: Record<ArchitectureKind, [string, string][]> = {
   rampy: [
     ["web", "backend"],
     ["mobile", "backend"],
+    ["privy", "backend"],
+    ["web", "backoffice"],
     ["backend", "ai"],
     ["backend", "defi"],
   ],
@@ -281,7 +303,7 @@ const desktopPositions: Record<ArchitectureKind, Record<string, { x: number; y: 
     ai: { x: 550, y: 0 },
     defi: { x: 550, y: 130 },
     privy: { x: 0, y: 260 },
-    backoffice: { x: 275, y: 260 },
+    backoffice: { x: 275, y: -130 },
   },
   teamcubation: {
     portal: { x: 120, y: 0 },
@@ -318,10 +340,10 @@ const mobilePositions: Record<ArchitectureKind, Record<string, { x: number; y: n
     web: { x: 0, y: 0 },
     mobile: { x: 170, y: 0 },
     backend: { x: 170, y: 145 },
-    privy: { x: 0, y: 145 },
-    backoffice: { x: 85, y: 445 },
-    ai: { x: 0, y: 295 },
-    defi: { x: 170, y: 295 },
+    privy: { x: 0, y: 295 },
+    backoffice: { x: 0, y: 145 },
+    ai: { x: 0, y: 445 },
+    defi: { x: 170, y: 445 },
   },
   teamcubation: {
     portal: { x: 0, y: 0 },
@@ -497,13 +519,16 @@ export default function DiagramCanvas({
           panelId,
           onInspect: inspect,
           sideSource:
-            kind === "teamcubation" && step.id === "bff"
-              ? Position.Left
-              : kind === "teamcubation" && step.id === "agent" && vertical
-                ? Position.Right
-                : undefined,
+            kind === "rampy" && vertical && step.id === "privy"
+              ? Position.Right
+              : kind === "teamcubation" && step.id === "bff"
+                ? Position.Left
+                : kind === "teamcubation" && step.id === "agent" && vertical
+                  ? Position.Right
+                  : undefined,
           sideTarget:
-            kind === "teamcubation" && (step.id === "agent" || (step.id === "graph" && vertical)),
+            (kind === "rampy" && vertical && step.id === "backend") ||
+            (kind === "teamcubation" && (step.id === "agent" || (step.id === "graph" && vertical))),
         },
         draggable: false,
         selectable: false,
@@ -520,15 +545,19 @@ export default function DiagramCanvas({
         ? { stepPosition: 0.9 }
         : undefined,
     sourceHandle:
-      kind === "teamcubation" &&
-      ((source === "bff" && target === "agent") || (source === "agent" && vertical))
+      kind === "rampy" && vertical && source === "privy"
         ? "side-source"
-        : undefined,
+        : kind === "teamcubation" &&
+            ((source === "bff" && target === "agent") || (source === "agent" && vertical))
+          ? "side-source"
+          : undefined,
     targetHandle:
-      kind === "teamcubation" &&
-      ((source === "bff" && target === "agent") || (target === "graph" && vertical))
+      kind === "rampy" && vertical && source === "privy"
         ? "side-target"
-        : undefined,
+        : kind === "teamcubation" &&
+            ((source === "bff" && target === "agent") || (target === "graph" && vertical))
+          ? "side-target"
+          : undefined,
     markerEnd: { type: MarkerType.ArrowClosed },
     style: { strokeWidth: 1.8 },
     animated: false,
