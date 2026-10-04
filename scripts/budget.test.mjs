@@ -35,13 +35,32 @@ test("the build output exists", () => {
   );
 });
 
-test("the deferred scene and its transitive chunks stay under 250 KiB gzip", () => {
+test("the deferred hero and solar scenes share a 250 KiB gzip dependency budget", () => {
   const report = JSON.parse(readFileSync(path.join(root, ".next/scene-budget.json"), "utf8"));
   assert.ok(report.roots > 0, "the scene entry is missing from the compilation graph");
   assert.equal(report.initial, false, "scene libraries must not enter the initial client bundle");
   assert.ok(report.files.length > 0);
+  assert.ok(report.heroEntryFiles.length > 0, "the hero renderer entry is missing");
+  assert.ok(report.solarEntryFiles.length > 0, "the solar renderer entry is missing");
   const size = totalGzippedKb(report.files.map((file) => path.join(root, ".next", file)));
   assert.ok(size <= 250, `scene dependency closure is ${size.toFixed(1)} KiB gzip (budget 250)`);
+});
+
+test("local solar texture maps stay under 600 KiB and match their reviewed manifest", async () => {
+  const { createHash } = await import("node:crypto");
+  const directory = path.join(root, "public", "images", "solar-system");
+  const manifest = JSON.parse(readFileSync(path.join(directory, "manifest.json"), "utf8"));
+  assert.equal(manifest.assets.length, 14);
+  let bytes = 0;
+  for (const asset of manifest.assets) {
+    assert.match(asset.file, /^[a-z-]+\.webp$/);
+    const content = readFileSync(path.join(directory, asset.file));
+    bytes += content.length;
+    assert.equal(content.length, asset.bytes, asset.file);
+    assert.equal(createHash("sha256").update(content).digest("hex"), asset.sha256, asset.file);
+  }
+  assert.equal(bytes, manifest.totalBytes);
+  assert.ok(bytes < 600 * 1024, `solar texture transfer is ${(bytes / 1024).toFixed(1)} KiB`);
 });
 
 test("stylesheets stay under 22 KiB gzipped in total", () => {
