@@ -1,6 +1,6 @@
 # Continuous technology carousel
 
-Status: in-progress
+Status: done
 
 ## Objective
 
@@ -29,11 +29,29 @@ Compact server-rendered rows avoid a hydration layout jump; reduced-motion CSS
 and a scoped no-script stylesheet expose the static grid before client code.
 A local control pauses both rows, while pointer interactions pause their own row.
 Keyboard focus changes the rows into their static layout until focus leaves.
+Center the next focused element after collapsing the grid so the fixed header
+does not hide it. Uniform 104-pixel cards fit the longest four-line public labels
+with padding at a 320-pixel viewport.
+
+The opt-in `?carouselDebug=1` query exposes `setCarouselDebugProgress(cycles)`
+on each row only while its engine is mounted. It seeks a paused existing tween
+to a finite value between zero and three cycles for deterministic seam checks.
+The method is removed during cleanup and is absent from ordinary visits.
 
 ## Verification
 
-Production build, mandatory TypeScript validation, lint, repository/content/asset
-checks pass. Complete-catalog HTML is 64.2 KiB gzip; the coordinator updates the
-shared limit to 70 KiB to preserve the approved accessible server-rendered catalog.
-Targeted desktop checks passed; mobile synchronization and lazy-image assertions
-were corrected. Final focused browser verification remains pending integration.
+Production builds, mandatory TypeScript validation, lint, repository/content/asset
+checks pass. Complete-catalog HTML is about 64.2 KiB gzip; the coordinator raises
+the shared limit to 70 KiB to preserve the approved linked server-rendered catalog.
+
+Focused production browser checks cover both locales, both themes, 320-pixel
+mobile, 200% text scaling, original logo decoding, catalog completeness and axe.
+Mobile's nine catalog/motion/education/concept/no-JavaScript/suspension cases pass.
+Follow-up desktop/mobile checks verify the centered keyboard exit and local,
+global, hover, touch, visibility and offscreen pause behavior.
+
+Deterministic tests seek both real GSAP rows through fractional phases and three
+complete cycles. Desktop and mobile pass with every visible gap between 11 and
+13 pixels, no blank viewport edges and every label inside its padded card.
+Final combined CI and deployment verification remain coordinator responsibilities;
+these browser checks are not measurements of physical-device frame rates.

@@ -103,6 +103,10 @@ for (const locale of ["en", "es"]) {
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
     await expect(section).toHaveAttribute("data-animated", "true");
+    const header = await page.locator("header").boundingBox();
+    await expect
+      .poll(() => page.evaluate(() => document.activeElement?.getBoundingClientRect().top ?? -1))
+      .toBeGreaterThan((header?.height ?? 0) + 8);
     await page.emulateMedia({ reducedMotion: "reduce" });
     await expect(section).toHaveAttribute("data-animated", "false");
   });
@@ -214,4 +218,65 @@ test("carousel suspends work when hidden or offscreen and respects global pause"
   await section.scrollIntoViewIfNeeded();
   await page.mouse.move(0, 0);
   await expect(row).toHaveAttribute("data-motion", "running");
+});
+
+test("carousel keeps both rows filled through multiple complete cycles", async ({ page }, info) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  if (info.project.name === "mobile") await page.setViewportSize({ width: 320, height: 650 });
+  await page.goto("/?carouselDebug=1");
+  const section = page.locator("[data-tool-carousel]");
+  await section.scrollIntoViewIfNeeded();
+  await section.getByRole("button").click();
+  const rows = section.locator("[data-tool-row]");
+  await expect
+    .poll(() =>
+      rows
+        .first()
+        .evaluate(
+          (node) =>
+            typeof (node as HTMLDivElement & { setCarouselDebugProgress?: unknown })
+              .setCarouselDebugProgress,
+        ),
+    )
+    .toBe("function");
+  for (const cycles of [0, 0.25, 0.5, 0.75, 0.99999, 1, 1.5, 1.99999, 2, 3]) {
+    const coverage = await rows.evaluateAll(
+      (elements, progress) =>
+        elements.map((node) => {
+          const row = node as HTMLDivElement & { setCarouselDebugProgress(cycles: number): void };
+          row.setCarouselDebugProgress(progress);
+          const bounds = row.getBoundingClientRect();
+          const visible = Array.from(row.querySelectorAll("li"))
+            .map((tile) => tile.getBoundingClientRect())
+            .filter((tile) => tile.right > bounds.left && tile.left < bounds.right)
+            .sort((a, b) => a.left - b.left);
+          const first = visible[0];
+          const last = visible.at(-1);
+          if (!first || !last) throw new Error("A carousel row has no visible tiles");
+          return {
+            leftGap: first.left - bounds.left,
+            rightGap: bounds.right - last.right,
+            gaps: visible.slice(1).map((tile, index) => tile.left - visible[index].right),
+            overflow: Array.from(row.querySelectorAll("a")).map((tile) => {
+              const label = tile.lastElementChild;
+              if (!label) throw new Error("A carousel tile has no visible label");
+              const text = label.getBoundingClientRect();
+              const card = tile.getBoundingClientRect();
+              const padding = Number.parseFloat(getComputedStyle(tile).paddingTop) + 1;
+              return Math.max(card.top + padding - text.top, text.bottom - card.bottom + padding);
+            }),
+          };
+        }),
+      cycles,
+    );
+    for (const row of coverage) {
+      expect(row.leftGap).toBeLessThanOrEqual(13);
+      expect(row.rightGap).toBeLessThanOrEqual(13);
+      for (const gap of row.gaps) {
+        expect(gap).toBeGreaterThanOrEqual(11);
+        expect(gap).toBeLessThanOrEqual(13);
+      }
+      for (const overflow of row.overflow) expect(overflow).toBeLessThanOrEqual(0);
+    }
+  }
 });

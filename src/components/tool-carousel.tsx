@@ -16,6 +16,10 @@ import { usePageMotionPaused } from "./motion-state";
 import { TechnologyMark } from "./technology-mark";
 import styles from "./tool-carousel.module.css";
 
+type CarouselViewport = HTMLDivElement & {
+  setCarouselDebugProgress?: (cycles: number) => void;
+};
+
 const rows: Technology[][] = [[], []];
 for (const group of technologyGroups) {
   const tools = publicTechnologyCatalog
@@ -39,7 +43,7 @@ function TechnologyRow({
   animated: boolean;
   label: string;
 }) {
-  const viewport = useRef<HTMLDivElement>(null);
+  const viewport = useRef<CarouselViewport>(null);
   const rail = useRef<HTMLUListElement>(null);
   const tween = useRef<gsap.core.Tween | null>(null);
   const canRun = useRef(false);
@@ -111,6 +115,13 @@ function TechnologyRow({
         if (canRun.current) tween.current.resume();
       };
       measure();
+      if (new URLSearchParams(window.location.search).get("carouselDebug") === "1") {
+        element.setCarouselDebugProgress = (cycles) => {
+          const animation = tween.current;
+          if (!Number.isFinite(cycles) || !animation?.paused()) return;
+          animation.totalTime(animation.duration() * Math.max(0, Math.min(3, cycles)), true);
+        };
+      }
       observer = new ResizeObserver(measure);
       observer.observe(element);
       reset = () => gsap.set(items, { clearProps: "transform" });
@@ -118,6 +129,7 @@ function TechnologyRow({
     return () => {
       disposed = true;
       observer?.disconnect();
+      delete element.setCarouselDebugProgress;
       tween.current?.kill();
       tween.current = null;
       reset?.();
@@ -163,12 +175,12 @@ function TechnologyRow({
 export function ToolCarousel({ locale }: { locale: Locale }) {
   const copy = toolCarouselCopy[locale];
   const id = useId();
-  const section = useRef<HTMLElement>(null);
   const globalPaused = usePageMotionPaused();
   const [localPaused, setLocalPaused] = useState(false);
   const [motionAllowed, setMotionAllowed] = useState(true);
   const [keyboardGrid, setKeyboardGrid] = useState(false);
   const keyboardInput = useRef(false);
+  const focusAfterGrid = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const preference = matchMedia("(prefers-reduced-motion: reduce)");
@@ -191,19 +203,17 @@ export function ToolCarousel({ locale }: { locale: Locale }) {
   }, []);
 
   useEffect(() => {
-    if (!keyboardGrid) return;
+    const focused = keyboardGrid ? document.activeElement : focusAfterGrid.current;
+    focusAfterGrid.current = null;
+    if (!(focused instanceof HTMLElement)) return;
     const frame = requestAnimationFrame(() => {
-      const focused = document.activeElement;
-      if (focused instanceof HTMLElement && section.current?.contains(focused)) {
-        focused.scrollIntoView({ block: "nearest", inline: "nearest" });
-      }
+      if (focused.isConnected) focused.scrollIntoView({ block: "center", inline: "nearest" });
     });
     return () => cancelAnimationFrame(frame);
   }, [keyboardGrid]);
 
   return (
     <section
-      ref={section}
       className={`section-tight frame ${styles.section}`}
       aria-labelledby={`${id}-heading`}
       data-tool-carousel
@@ -217,7 +227,12 @@ export function ToolCarousel({ locale }: { locale: Locale }) {
         }
       }}
       onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setKeyboardGrid(false);
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          if (keyboardGrid && event.relatedTarget instanceof HTMLElement) {
+            focusAfterGrid.current = event.relatedTarget;
+          }
+          setKeyboardGrid(false);
+        }
       }}
     >
       <noscript>
