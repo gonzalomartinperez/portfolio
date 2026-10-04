@@ -3,8 +3,10 @@
 import {
   Background,
   BackgroundVariant,
+  BaseEdge,
   Controls,
   type Edge,
+  type EdgeProps,
   type FitViewOptions,
   Handle,
   MarkerType,
@@ -25,6 +27,14 @@ import {
   useState,
 } from "react";
 import type { Locale } from "@/content/locales";
+import { roundedRoute, routeConnection } from "./architecture-edge-routing";
+import {
+  type ArchitectureGroup,
+  enterpriseConnections,
+  enterpriseLayout,
+  enterpriseSteps,
+  type Point,
+} from "./enterprise-architecture-layout";
 import type { ArchitectureKind } from "./experience-architecture";
 import styles from "./experience-architecture.module.css";
 
@@ -36,8 +46,7 @@ type DiagramNode = Node<
     vertical: boolean;
     locale: Locale;
     panelId: string;
-    sideSource?: Position;
-    sideTarget?: boolean;
+    enterprise?: boolean;
     onInspect: (title: string, detail: string, trigger: HTMLButtonElement) => void;
   },
   "architecture"
@@ -45,171 +54,7 @@ type DiagramNode = Node<
 
 type Step = { id: string; title: string; detail: string; tier: DiagramNode["data"]["tier"] };
 
-const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
-  rampy: {
-    en: [
-      {
-        id: "web",
-        title: "Web frontend",
-        detail: "React · Next.js · features · design system",
-        tier: "surface",
-      },
-      {
-        id: "mobile",
-        title: "Mobile app",
-        detail: "React Native · Kotlin · Swift",
-        tier: "surface",
-      },
-      { id: "backend", title: "Backend", detail: "Python · FastAPI · hexagonal", tier: "gateway" },
-      {
-        id: "ai",
-        title: "AI workflows",
-        detail: "Agno · LangChain · LangGraph · OpenAI API · Neo4j",
-        tier: "service",
-      },
-      {
-        id: "defi",
-        title: "Fintech",
-        detail: "Morpho · Aave · Compound · LI.FI · Hyperliquid",
-        tier: "service",
-      },
-      {
-        id: "privy",
-        title: "Login and wallets",
-        detail: "Privy · authentication · wallets",
-        tier: "gateway",
-      },
-      {
-        id: "backoffice",
-        title: "Back office",
-        detail: "Built · expanding · management · telemetry · status",
-        tier: "surface",
-      },
-    ],
-    es: [
-      {
-        id: "web",
-        title: "Frontend web",
-        detail: "React · Next.js · features · design system",
-        tier: "surface",
-      },
-      {
-        id: "mobile",
-        title: "App móvil",
-        detail: "React Native · Kotlin · Swift",
-        tier: "surface",
-      },
-      { id: "backend", title: "Backend", detail: "Python · FastAPI · hexagonal", tier: "gateway" },
-      {
-        id: "ai",
-        title: "Flujos de IA",
-        detail: "Agno · LangChain · LangGraph · OpenAI API · Neo4j",
-        tier: "service",
-      },
-      {
-        id: "defi",
-        title: "Fintech",
-        detail: "Morpho · Aave · Compound · LI.FI · Hyperliquid",
-        tier: "service",
-      },
-      {
-        id: "privy",
-        title: "Acceso y wallets",
-        detail: "Privy · autenticación · wallets",
-        tier: "gateway",
-      },
-      {
-        id: "backoffice",
-        title: "Backoffice",
-        detail: "Implementado · en ampliación · gestión · telemetría · estado",
-        tier: "surface",
-      },
-    ],
-  },
-  teamcubation: {
-    en: [
-      { id: "portal", title: "Web frontend", detail: "React · Single-SPA", tier: "surface" },
-      { id: "bff", title: "BFF", detail: "Spring WebFlux", tier: "gateway" },
-      { id: "java", title: "Microservices", detail: "Java · Spring Boot", tier: "service" },
-      { id: "node", title: "Microservices", detail: "Node.js · NestJS", tier: "service" },
-      { id: "source", title: "Amazon S3", detail: "Promotion files", tier: "surface" },
-      { id: "sqs", title: "Amazon SQS", detail: "Bulk ingestion queue", tier: "gateway" },
-      { id: "java-db", title: "Service database", detail: "Java service data", tier: "service" },
-      { id: "node-db", title: "Service database", detail: "Node.js service data", tier: "service" },
-      {
-        id: "lambda",
-        title: "Ingestion Lambda",
-        detail: "Python · FastAPI Lambda",
-        tier: "service",
-      },
-      {
-        id: "agent",
-        title: "Promotion Assistance System",
-        detail: "Harness · LangChain · LangGraph · OpenAI API",
-        tier: "gateway",
-      },
-      {
-        id: "graph",
-        title: "GraphRAG",
-        detail: "Neo4j · enterprise policies · promotions",
-        tier: "service",
-      },
-    ],
-    es: [
-      { id: "portal", title: "Frontend web", detail: "React · Single-SPA", tier: "surface" },
-      { id: "bff", title: "BFF", detail: "Spring WebFlux", tier: "gateway" },
-      { id: "java", title: "Microservicios", detail: "Java · Spring Boot", tier: "service" },
-      { id: "node", title: "Microservicios", detail: "Node.js · NestJS", tier: "service" },
-      { id: "source", title: "Amazon S3", detail: "Archivos de promociones", tier: "surface" },
-      { id: "sqs", title: "Amazon SQS", detail: "Cola de ingesta masiva", tier: "gateway" },
-      {
-        id: "java-db",
-        title: "BD del servicio",
-        detail: "Datos del servicio Java",
-        tier: "service",
-      },
-      {
-        id: "node-db",
-        title: "BD del servicio",
-        detail: "Datos del servicio Node.js",
-        tier: "service",
-      },
-      {
-        id: "lambda",
-        title: "Lambda de ingesta",
-        detail: "Lambda Python · FastAPI",
-        tier: "service",
-      },
-      {
-        id: "agent",
-        title: "Sistema de asistencia de promociones",
-        detail: "Harness · LangChain · LangGraph · OpenAI API",
-        tier: "gateway",
-      },
-      {
-        id: "graph",
-        title: "GraphRAG",
-        detail: "Neo4j · políticas empresariales · promociones",
-        tier: "service",
-      },
-    ],
-  },
-  "cooperativa-obrera": {
-    en: [
-      { id: "web", title: "Web frontend", detail: "React · Next.js", tier: "surface" },
-      { id: "bff", title: "BFF", detail: "Python · FastAPI BFF", tier: "gateway" },
-      { id: "java", title: "Microservices", detail: "Java · Spring Boot", tier: "service" },
-      { id: "node", title: "Microservices", detail: "Node.js · NestJS", tier: "service" },
-      { id: "php", title: "Microservices", detail: "PHP", tier: "service" },
-    ],
-    es: [
-      { id: "web", title: "Frontend web", detail: "React · Next.js", tier: "surface" },
-      { id: "bff", title: "BFF", detail: "BFF Python · FastAPI", tier: "gateway" },
-      { id: "java", title: "Microservicios", detail: "Java · Spring Boot", tier: "service" },
-      { id: "node", title: "Microservicios", detail: "Node.js · NestJS", tier: "service" },
-      { id: "php", title: "Microservicios", detail: "PHP", tier: "service" },
-    ],
-  },
+const labels: Record<"filomena", Record<Locale, Step[]>> = {
   filomena: {
     en: [
       { id: "web", title: "Web frontend", detail: "Next.js · React · TypeScript", tier: "surface" },
@@ -260,34 +105,7 @@ const labels: Record<ArchitectureKind, Record<Locale, Step[]>> = {
   },
 };
 
-const connections: Record<ArchitectureKind, [string, string][]> = {
-  rampy: [
-    ["web", "backend"],
-    ["mobile", "backend"],
-    ["privy", "backend"],
-    ["web", "backoffice"],
-    ["backend", "ai"],
-    ["backend", "defi"],
-  ],
-  teamcubation: [
-    ["portal", "bff"],
-    ["bff", "java"],
-    ["bff", "node"],
-    ["source", "sqs"],
-    ["sqs", "lambda"],
-    ["lambda", "java"],
-    ["lambda", "node"],
-    ["java", "java-db"],
-    ["node", "node-db"],
-    ["bff", "agent"],
-    ["agent", "graph"],
-  ],
-  "cooperativa-obrera": [
-    ["web", "bff"],
-    ["bff", "java"],
-    ["bff", "node"],
-    ["bff", "php"],
-  ],
+const connections: Record<"filomena", [string, string][]> = {
   filomena: [
     ["web", "api"],
     ["api", "data"],
@@ -295,36 +113,7 @@ const connections: Record<ArchitectureKind, [string, string][]> = {
   ],
 };
 
-const desktopPositions: Record<ArchitectureKind, Record<string, { x: number; y: number }>> = {
-  rampy: {
-    web: { x: 0, y: 0 },
-    mobile: { x: 0, y: 130 },
-    backend: { x: 275, y: 65 },
-    ai: { x: 550, y: 0 },
-    defi: { x: 550, y: 130 },
-    privy: { x: 0, y: 260 },
-    backoffice: { x: 275, y: -130 },
-  },
-  teamcubation: {
-    portal: { x: 120, y: 0 },
-    bff: { x: 120, y: 140 },
-    java: { x: 300, y: 440 },
-    node: { x: 550, y: 440 },
-    source: { x: 650, y: 0 },
-    sqs: { x: 650, y: 140 },
-    lambda: { x: 650, y: 280 },
-    "java-db": { x: 300, y: 620 },
-    "node-db": { x: 550, y: 620 },
-    agent: { x: 0, y: 440 },
-    graph: { x: 0, y: 620 },
-  },
-  "cooperativa-obrera": {
-    web: { x: 0, y: 65 },
-    bff: { x: 275, y: 65 },
-    java: { x: 550, y: -40 },
-    node: { x: 550, y: 65 },
-    php: { x: 550, y: 170 },
-  },
+const desktopPositions: Record<"filomena", Record<string, { x: number; y: number }>> = {
   filomena: {
     web: { x: 0, y: 65 },
     api: { x: 275, y: 65 },
@@ -335,36 +124,7 @@ const desktopPositions: Record<ArchitectureKind, Record<string, { x: number; y: 
   },
 };
 
-const mobilePositions: Record<ArchitectureKind, Record<string, { x: number; y: number }>> = {
-  rampy: {
-    web: { x: 0, y: 0 },
-    mobile: { x: 170, y: 0 },
-    backend: { x: 170, y: 145 },
-    privy: { x: 0, y: 295 },
-    backoffice: { x: 0, y: 145 },
-    ai: { x: 0, y: 445 },
-    defi: { x: 170, y: 445 },
-  },
-  teamcubation: {
-    portal: { x: 0, y: 0 },
-    bff: { x: 0, y: 140 },
-    java: { x: 0, y: 440 },
-    node: { x: 170, y: 440 },
-    source: { x: 170, y: 0 },
-    sqs: { x: 170, y: 140 },
-    lambda: { x: 170, y: 280 },
-    "java-db": { x: 0, y: 590 },
-    "node-db": { x: 170, y: 590 },
-    agent: { x: 0, y: 760 },
-    graph: { x: 170, y: 760 },
-  },
-  "cooperativa-obrera": {
-    web: { x: 85, y: 0 },
-    bff: { x: 85, y: 125 },
-    java: { x: 0, y: 255 },
-    node: { x: 170, y: 255 },
-    php: { x: 85, y: 390 },
-  },
+const mobilePositions: Record<"filomena", Record<string, { x: number; y: number }>> = {
   filomena: {
     web: { x: 85, y: 0 },
     api: { x: 85, y: 125 },
@@ -379,12 +139,16 @@ const SelectedNode = createContext<string | null>(null);
 function ArchitectureNode({ id, data }: NodeProps<DiagramNode>) {
   const selected = useContext(SelectedNode) === id;
   return (
-    <div className={`${styles.node} ${styles[data.tier]}`}>
-      <Handle
-        type="target"
-        position={data.vertical ? Position.Top : Position.Left}
-        className={styles.handle}
-      />
+    <div
+      className={`${styles.node} ${styles[data.tier]} ${data.enterprise ? styles.enterpriseNode : ""}`}
+    >
+      {!data.enterprise && (
+        <Handle
+          type="target"
+          position={data.vertical ? Position.Top : Position.Left}
+          className={styles.handle}
+        />
+      )}
       <button
         type="button"
         className={`${styles.nodeAction} nodrag nopan`}
@@ -396,27 +160,58 @@ function ArchitectureNode({ id, data }: NodeProps<DiagramNode>) {
         <strong>{data.title}</strong>
         <span>{data.detail}</span>
       </button>
-      <Handle
-        type="source"
-        position={data.vertical ? Position.Bottom : Position.Right}
-        className={styles.handle}
-      />
-      {data.sideSource && (
+      {!data.enterprise && (
         <Handle
           type="source"
-          id="side-source"
-          position={data.sideSource}
+          position={data.vertical ? Position.Bottom : Position.Right}
           className={styles.handle}
         />
       )}
-      {data.sideTarget && (
-        <Handle type="target" id="side-target" position={Position.Left} className={styles.handle} />
-      )}
+      {data.enterprise &&
+        [Position.Top, Position.Right, Position.Bottom, Position.Left].flatMap((position) => [
+          <Handle
+            key={`source-${position}`}
+            type="source"
+            id={`source-${position}`}
+            position={position}
+            className={styles.handle}
+          />,
+          <Handle
+            key={`target-${position}`}
+            type="target"
+            id={`target-${position}`}
+            position={position}
+            className={styles.handle}
+          />,
+        ])}
     </div>
   );
 }
 
-const nodeTypes = { architecture: ArchitectureNode };
+type GroupNode = Node<ArchitectureGroup & Record<string, unknown>, "architectureGroup">;
+function ArchitectureGroupNode({ data }: NodeProps<GroupNode>) {
+  return (
+    <div className={`${styles.group} ${data.deployment ? styles.deployment : ""}`}>
+      <strong>{data.title}</strong>
+      {data.detail && <span>{data.detail}</span>}
+    </div>
+  );
+}
+type RoutedEdge = Edge<{ points: Point[]; scale: number }, "architectureRoute">;
+function ArchitectureEdge({ id, data, markerStart, markerEnd, style }: EdgeProps<RoutedEdge>) {
+  if (!data) return null;
+  return (
+    <BaseEdge
+      id={id}
+      path={roundedRoute(data.points, data.scale)}
+      markerStart={markerStart}
+      markerEnd={markerEnd}
+      style={style}
+    />
+  );
+}
+const nodeTypes = { architecture: ArchitectureNode, architectureGroup: ArchitectureGroupNode };
+const edgeTypes = { architectureRoute: ArchitectureEdge };
 
 export default function DiagramCanvas({
   kind,
@@ -497,80 +292,91 @@ export default function DiagramCanvas({
     };
   }, [selected]);
 
-  const nodes = useMemo<DiagramNode[]>(
-    () =>
-      labels[kind][locale].map((step) => ({
+  const layout = useMemo(
+    () => (kind === "filomena" ? null : enterpriseLayout(kind, vertical, locale)),
+    [kind, vertical, locale],
+  );
+  const nodes = useMemo<(DiagramNode | GroupNode)[]>(() => {
+    const steps = kind === "filomena" ? labels.filomena[locale] : enterpriseSteps(kind, locale);
+    const cards: DiagramNode[] = steps.map((step) => {
+      const position =
+        layout?.positions[step.id] ??
+        (vertical ? mobilePositions.filomena[step.id] : desktopPositions.filomena[step.id]);
+      return {
         id: step.id,
         type: "architecture",
-        position: {
-          x:
-            (vertical ? mobilePositions[kind][step.id] : desktopPositions[kind][step.id]).x *
-            fontScale,
-          y:
-            (vertical ? mobilePositions[kind][step.id] : desktopPositions[kind][step.id]).y *
-            fontScale,
-        },
+        position: { x: position.x * fontScale, y: position.y * fontScale },
+        style: layout
+          ? { width: layout.width * fontScale, height: layout.height * fontScale }
+          : undefined,
         data: {
           title: step.title,
           detail: step.detail,
           tier: step.tier,
-          vertical: vertical || kind === "teamcubation",
+          vertical,
           locale,
           panelId,
           onInspect: inspect,
-          sideSource:
-            kind === "rampy" && vertical && step.id === "privy"
-              ? Position.Right
-              : kind === "teamcubation" && step.id === "bff"
-                ? Position.Left
-                : kind === "teamcubation" && step.id === "agent" && vertical
-                  ? Position.Right
-                  : undefined,
-          sideTarget:
-            (kind === "rampy" && vertical && step.id === "backend") ||
-            (kind === "teamcubation" && (step.id === "agent" || (step.id === "graph" && vertical))),
+          enterprise: !!layout,
         },
         draggable: false,
         selectable: false,
-      })),
-    [kind, locale, vertical, fontScale, panelId, inspect],
-  );
-  const edges: Edge[] = connections[kind].map(([source, target]) => ({
-    id: `${source}-${target}`,
-    source,
-    target,
-    type: "smoothstep",
-    pathOptions:
-      // Keep the AI branch in the gap below the wallet row.
-      kind === "rampy" && vertical && source === "backend" && target === "ai"
-        ? { stepPosition: 0.95 }
-        : kind === "teamcubation" && source === "bff" && target === "node" && vertical
-          ? { stepPosition: 0.9 }
+      };
+    });
+    const groups: GroupNode[] = (layout?.groups ?? []).map((group) => ({
+      id: group.id,
+      type: "architectureGroup",
+      position: { x: group.position.x * fontScale, y: group.position.y * fontScale },
+      style: { width: group.width * fontScale, height: group.height * fontScale },
+      data: { ...group },
+      zIndex: 0,
+      draggable: false,
+      selectable: false,
+    }));
+    return [...groups, ...cards];
+  }, [kind, locale, layout, vertical, fontScale, panelId, inspect]);
+  const edges = useMemo<Edge[]>(() => {
+    if (kind === "filomena" || !layout)
+      return connections.filomena.map(([source, target]) => ({
+        id: `${source}-${target}`,
+        source,
+        target,
+        type: "smoothstep",
+        markerEnd: { type: MarkerType.ArrowClosed },
+        style: { strokeWidth: 1.8 },
+        animated: false,
+      }));
+    return enterpriseConnections[kind].map((connection) => {
+      const route = routeConnection(
+        connection.source,
+        connection.target,
+        layout.positions,
+        layout.width,
+        layout.height,
+      );
+      return {
+        id: `${connection.source}-${connection.target}`,
+        source: connection.source,
+        target: connection.target,
+        sourceHandle: `source-${route.sourcePort}`,
+        targetHandle: `target-${route.targetPort}`,
+        type: "architectureRoute",
+        data: { points: route.points, scale: fontScale },
+        markerStart: connection.bidirectional
+          ? { type: MarkerType.ArrowClosed, orient: "auto-start-reverse" }
           : undefined,
-    sourceHandle:
-      kind === "rampy" && vertical && source === "privy"
-        ? "side-source"
-        : kind === "teamcubation" &&
-            ((source === "bff" && target === "agent") || (source === "agent" && vertical))
-          ? "side-source"
-          : undefined,
-    targetHandle:
-      kind === "rampy" && vertical && source === "privy"
-        ? "side-target"
-        : kind === "teamcubation" &&
-            ((source === "bff" && target === "agent") || (target === "graph" && vertical))
-          ? "side-target"
-          : undefined,
-    markerEnd: { type: MarkerType.ArrowClosed },
-    style: { strokeWidth: 1.8 },
-    animated: false,
-  }));
+        markerEnd: { type: MarkerType.ArrowClosed },
+        style: { strokeWidth: 1.6, strokeDasharray: connection.containment ? "5 4" : undefined },
+        animated: false,
+      };
+    });
+  }, [kind, layout, fontScale]);
 
   const fitViewOptions: FitViewOptions = {
     padding: {
       top: vertical ? "16px" : "32px",
       bottom: "56px",
-      left: vertical ? (kind === "teamcubation" ? "32px" : "8px") : "32px",
+      left: vertical ? "8px" : "32px",
       right: vertical ? "8px" : "32px",
     },
     maxZoom: vertical ? 1 : 1.1,
@@ -589,7 +395,9 @@ export default function DiagramCanvas({
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         fitView
+        minZoom={layout ? 0.1 : 0.5}
         fitViewOptions={fitViewOptions}
         nodesDraggable={false}
         nodesFocusable={false}

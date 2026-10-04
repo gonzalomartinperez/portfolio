@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-04.1",
+  "revision": "2026-10-04.2",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -95,7 +95,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", improving memory, retrieval, tool selection and evaluation. Optimized flows responded at least 2× faster by my estimate; removing redundant calls cut tokens in affected queries by an estimated 30%.",
+                      "text": ", using PostgreSQL/pgvector, Mem0, Vertex AI and DeepInfra for memory, retrieval and model access; improved tool selection and evaluation. Optimized flows responded at least 2× faster by my estimate; removing redundant calls cut tokens in affected queries by an estimated 30%.",
                       "bold": false,
                       "href": ""
                     }
@@ -238,7 +238,7 @@
                       "href": ""
                     },
                     {
-                      "text": ": connected a Single-SPA React/TypeScript microfrontend to Java/Spring Boot and Node.js/NestJS microservices through a Spring WebFlux BFF; Amazon API Gateway bridged the HTTPS portal to internal HTTP services.",
+                      "text": ": connected a Single-SPA React/TypeScript microfrontend, organized by feature and using a design system, to Java/Spring Boot and Node.js/NestJS microservices through a Spring WebFlux BFF; Amazon API Gateway bridged the HTTPS portal to internal HTTP services.",
                       "bold": false,
                       "href": ""
                     }
@@ -254,7 +254,7 @@
                       "href": ""
                     },
                     {
-                      "text": " using hexagonal or layered architecture, and developed and diagnosed containerized workloads running in Docker/Kubernetes-managed environments.",
+                      "text": " using layered architecture, and developed and diagnosed containerized workloads running in Docker/Kubernetes-managed environments.",
                       "bold": false,
                       "href": ""
                     }
@@ -488,7 +488,7 @@
                       "href": ""
                     },
                     {
-                      "text": " connected exclusively to a Python/FastAPI BFF, standardizing frontend views against its contract and integrations with Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger.",
+                      "text": ", organized by feature and using a design system, connected exclusively to a Python/FastAPI BFF. The backend used layered architecture; the BFF standardized frontend views and connected Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger.",
                       "bold": false,
                       "href": ""
                     }
@@ -548,6 +548,8 @@
                 "LangChain",
                 "LangGraph",
                 "Mem0",
+                "Vertex AI",
+                "DeepInfra",
                 "LLM Evaluation",
                 "Model Context Protocol (MCP)",
                 "pgvector",
@@ -603,7 +605,14 @@
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": ["React", "Next.js", "React Native", "Android Studio", "Design Systems"],
+              "keywords": [
+                "React",
+                "Next.js",
+                "React Native",
+                "Android Studio",
+                "Design Systems",
+                "Feature-Based Architecture"
+              ],
               "blocks": []
             },
             {
@@ -618,6 +627,7 @@
                 "MariaDB",
                 "Redis",
                 "Hexagonal Architecture",
+                "Layered Architecture",
                 "Event-Driven Architecture",
                 "SQL Tuning"
               ],
@@ -635,6 +645,7 @@
                 "Amazon API Gateway",
                 "Amazon S3",
                 "Amazon SQS",
+                "CloudWatch",
                 "Docker",
                 "Kubernetes",
                 "GitLab CI/CD",
@@ -1057,7 +1068,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", mejorando memoria, recuperación, selección de herramientas y evaluación. Según mi estimación, los flujos optimizados respondieron al menos 2× más rápido; eliminar llamadas redundantes redujo un 30% estimado de tokens en las consultas afectadas.",
+                      "text": ", con PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para memoria, recuperación y acceso a modelos; mejoré la selección de herramientas y evaluación. Según mi estimación, los flujos optimizados respondieron al menos 2× más rápido; eliminar llamadas redundantes redujo un 30% estimado de tokens en las consultas afectadas.",
                       "bold": false,
                       "href": ""
                     }
@@ -1200,7 +1211,7 @@
                       "href": ""
                     },
                     {
-                      "text": ": conecté un microfrontend React/TypeScript (Single-SPA) a microservicios Java/Spring Boot y Node.js/NestJS mediante un BFF Spring WebFlux; Amazon API Gateway enlazó el portal HTTPS con servicios HTTP internos.",
+                      "text": ": conecté un microfrontend React/TypeScript (Single-SPA), organizado por funcionalidades y con un design system, a microservicios Java/Spring Boot y Node.js/NestJS mediante un BFF Spring WebFlux; Amazon API Gateway enlazó el portal HTTPS con servicios HTTP internos.",
                       "bold": false,
                       "href": ""
                     }
@@ -1216,7 +1227,7 @@
                       "href": ""
                     },
                     {
-                      "text": " con arquitectura hexagonal o en capas, y desarrollé y diagnostiqué workloads contenerizados ejecutados en entornos gestionados con Docker/Kubernetes.",
+                      "text": " con arquitectura en capas, y desarrollé y diagnostiqué workloads contenerizados ejecutados en entornos gestionados con Docker/Kubernetes.",
                       "bold": false,
                       "href": ""
                     }
@@ -1445,7 +1456,7 @@
                       "href": ""
                     },
                     {
-                      "text": " conectado exclusivamente a un BFF Python/FastAPI, que estandarizaba las vistas y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante contratos OpenAPI/Swagger.",
+                      "text": ", organizado por funcionalidades y con un design system, conectado exclusivamente a un BFF Python/FastAPI. El backend seguía una arquitectura en capas; el BFF estandarizaba las vistas y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante contratos OpenAPI/Swagger.",
                       "bold": false,
                       "href": ""
                     }
@@ -1505,6 +1516,8 @@
                 "LangChain",
                 "LangGraph",
                 "Mem0",
+                "Vertex AI",
+                "DeepInfra",
                 "LLM Evaluation",
                 "Model Context Protocol (MCP)",
                 "pgvector",
@@ -1560,7 +1573,14 @@
               "subtitle": "",
               "details": [],
               "href": "",
-              "keywords": ["React", "Next.js", "React Native", "Android Studio", "Design Systems"],
+              "keywords": [
+                "React",
+                "Next.js",
+                "React Native",
+                "Android Studio",
+                "Design Systems",
+                "Feature-Based Architecture"
+              ],
               "blocks": []
             },
             {
@@ -1575,6 +1595,7 @@
                 "MariaDB",
                 "Redis",
                 "Hexagonal Architecture",
+                "Layered Architecture",
                 "Event-Driven Architecture",
                 "SQL Tuning"
               ],
@@ -1592,6 +1613,7 @@
                 "Amazon API Gateway",
                 "Amazon S3",
                 "Amazon SQS",
+                "CloudWatch",
                 "Docker",
                 "Kubernetes",
                 "GitLab CI/CD",
@@ -1919,11 +1941,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "ecf187a0793b8e2983f3e9f1509a14a7c43214b680f77251117a1d49ef732c81",
-    "factsSha256": "1e629b9e7e2dc33eb80a8d0f5d13d8b6233ee057a026c286bd7eb8ea4427cf2e",
+    "sourceSha256": "8757d72c8784d6f5029c82f7805d455c34a85586860be1ffe6754147beb638ce",
+    "factsSha256": "ca8a171bd548fe5522d83096246da1a89f85f59147553b66043ffc98226c970a",
     "pdfSha256": {
-      "en": "40d008f45695c9d96d08d806c0587cb38cffab4dd5e75423d00a2d0e007040c8",
-      "es": "8c289a930d48377de7c304978880923930f535bb61465a742492d1c43d8793dc"
+      "en": "7fc216cb69062f2cd7f2176dc5c13da91033d1e6782d7efe98e49ca48ed4e038",
+      "es": "7ce28c5bf796881f8e0e6a36c3c94ab7677b9844ed4c5a1085ed071ca0a1a7c4"
     }
   }
 }

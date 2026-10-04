@@ -140,3 +140,17 @@ An attribute-specific CSS rule suppresses pointer activation and decoration on
 anchors inserted by iOS data detectors; authored contact and navigation links
 retain their behavior. This does not disable text selection or browser search
 features. Device-level detection remains dependent on browser support.
+
+## v1.0.0 closing scope
+
+The [enterprise architecture specification](enterprise-architecture-maps.md)
+supersedes the compact October 4 diagrams with the approved service relationships
+and deployment envelopes. Career Ops revision `2026-10-04.2` corrects the backend
+patterns: Rampy uses hexagonal architecture; Teamcubation and Cooperativa Obrera
+use layered architecture. All three frontends are organized by feature and use
+design systems. These code organization facts belong in captions and CV copy,
+while visual nodes name system components.
+
+The closing slice also removes the transient static Hero frame during warm Home
+language changes, with desktop and mobile regression coverage. Publication of the
+requested v1.0.0 tag requires the final main commit's checks and public verification.

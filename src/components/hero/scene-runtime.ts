@@ -377,7 +377,11 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
         ? header.getBoundingClientRect().height
         : 0;
     const entryHeaderHeight = header?.getBoundingClientRect().height ?? 0;
-    const resting = engine.setRestingRegion(heroBottom + 24, height - entryHeaderHeight - 24);
+    const restingGap = compact.matches ? 20 : 24;
+    const resting = engine.setRestingRegion(
+      heroBottom + restingGap,
+      height - entryHeaderHeight - restingGap,
+    );
     viewport?.style.setProperty("--scene-core-y", `${resting.centerY}px`);
     viewport?.style.setProperty("--scene-sphere-radius", `${resting.radius}px`);
     readingHold = Math.round(Math.min(320, height * 0.35));
