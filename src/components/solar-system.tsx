@@ -17,7 +17,7 @@ export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean)
   });
   const [canvasEnabled, setCanvasEnabled] = useState(false);
   const root = useRef<HTMLDivElement>(null);
-  const canvas = useRef<HTMLCanvasElement>(null);
+  const canvas = useRef<HTMLDivElement>(null);
   const engine = useRef<SolarEngine | null>(null);
   const paused = usePageMotionPaused();
   const pausedRef = useRef(paused);
@@ -69,9 +69,15 @@ export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean)
   }, [paused]);
 
   useEffect(() => {
-    const element = root.current,
-      surface = canvas.current;
-    if (!element || !surface || !canvasEnabled) return;
+    const element = root.current;
+    const host = canvas.current;
+    if (!element || !host || !canvasEnabled) return;
+    // The engine owns this node; React can remove the host without reparenting conflicts.
+    const surface = document.createElement("canvas");
+    surface.className = styles.canvas;
+    surface.dataset.solarCanvas = "";
+    surface.setAttribute("aria-hidden", "true");
+    host.appendChild(surface);
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     let disposed = false,
       generation = 0;
@@ -153,6 +159,7 @@ export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean)
       engine.current = null;
       setSolarReady(false);
       onReadyChange(false);
+      surface.remove();
       theme.disconnect();
       reduced.removeEventListener("change", sync);
       document.removeEventListener("visibilitychange", visibility);
@@ -206,7 +213,7 @@ export function SolarSystem({ onReadyChange }: { onReadyChange: (ready: boolean)
           );
         })}
       </div>
-      {canvasEnabled && <canvas ref={canvas} className={styles.canvas} data-solar-canvas />}
+      {canvasEnabled && <div ref={canvas} className={styles.canvasHost} data-solar-host />}
     </div>
   );
 }

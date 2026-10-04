@@ -6,6 +6,7 @@
   opacity: 0.5;
   mask-image: radial-gradient(ellipse at 50% 45%, rgb(0 0 0 / 65%) 15%, #000d 60%, #000 90%);
 }
+.canvasHost,
 .canvas,
 .fallback {
   position: absolute;

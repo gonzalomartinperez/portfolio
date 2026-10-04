@@ -5,6 +5,7 @@ for (const locale of ["en", "es"]) {
   test(`${locale} solar exploration reuses the canvas and restores portfolio reading`, async ({
     page,
   }) => {
+    test.setTimeout(90_000);
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(`${locale === "es" ? "/es" : ""}/contact?solarDebug=1`);

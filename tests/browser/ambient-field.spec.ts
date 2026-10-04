@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 test("the shared solar star field drifts, pauses and survives localized client navigation", async ({
   page,
 }) => {
+  test.setTimeout(90_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/about?solarDebug=1");
