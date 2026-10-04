@@ -101,8 +101,8 @@ test("CI isolates browser shards and fails the protected gate for incomplete ver
   assert.match(read(".github/workflows/branch-policy.yml"), /name: Branch policy/);
   assert.match(browser, /needs: validate/);
   assert.match(browser, /fail-fast: false/);
-  assert.match(browser, /shard: \[1, 2, 3, 4\]/);
-  assert.match(browser, /npm run test:browser -- --shard=\$\{\{ matrix\.shard \}\}\/4/);
+  assert.match(browser, /shard: \[1, 2, 3, 4, 5, 6, 7, 8\]/);
+  assert.match(browser, /npm run test:browser -- --shard=\$\{\{ matrix\.shard \}\}\/8/);
   assert.match(read("playwright.config.ts"), /workers: 1,/);
   assert.match(read("playwright.config.ts"), /failOnFlakyTests: Boolean\(process\.env\.CI\)/);
   assert.match(gate, /if: always\(\)/);

@@ -49,14 +49,19 @@ The Hostinger compatibility job runs it too. It uses port 3100 by default; set
 `SMOKE_TEST_PORT` for parallel runs. Locally, `npm run test:site` uses one owned
 production server for rendered assertions and Playwright sequentially. In CI, `Quality (development)` runs
 `npm run check` and the server-rendered assertions once, then uploads its verified
-production build. Four isolated browser runners restore that same-run artifact
-and run the complete Playwright suite in four shards without rebuilding.
+production build. Eight isolated browser runners restore that same-run artifact
+and run the complete Playwright suite in eight shards without rebuilding.
 Rendered tests already cover the smoke assertions, so they are not repeated there.
 Browser tests default to one worker to avoid competing software-rendered scenes;
 see the [motion research](research/motion-performance.md) for measurements and rationale.
 Each browser shard retains one worker and has a 30-minute job ceiling, avoiding
 competition for a shared software-rendered GPU. Shards run on separate runners
 with fail-fast disabled so every shard can finish and retain diagnostics.
+Eight browser jobs plus compatibility fit below GitHub Free's standard-runner
+limit of 20 concurrent jobs; account-wide activity can still introduce queuing.
+Standard hosted runners are free for this public repository; this workflow uses
+no larger runners. See [Actions limits](https://docs.github.com/en/actions/reference/limits)
+and [billing and usage](https://docs.github.com/en/actions/concepts/billing-and-usage).
 Individual test deadlines, mandatory coverage, retries and failure on flaky tests
 remain unchanged. The build/rendered job has a 15-minute ceiling; the previous
 60-minute allowance covered the complete sequential browser suite.
