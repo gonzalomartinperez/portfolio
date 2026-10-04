@@ -302,3 +302,11 @@
     width: 100%;
   }
 }
+
+.group strong,
+.group span {
+  position: relative;
+  background: var(--surface-raised);
+  border-radius: 0.2rem;
+  padding: 0.1rem 0.2rem;
+}

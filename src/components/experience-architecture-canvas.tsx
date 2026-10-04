@@ -329,7 +329,7 @@ export default function DiagramCanvas({
       position: { x: group.position.x * fontScale, y: group.position.y * fontScale },
       style: { width: group.width * fontScale, height: group.height * fontScale },
       data: { ...group },
-      zIndex: -1,
+      zIndex: 0,
       draggable: false,
       selectable: false,
     }));
