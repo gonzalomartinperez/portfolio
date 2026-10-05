@@ -260,8 +260,9 @@ retired; do not mount a second conversation implementation.
 
 All eight browser shards keep their existing engine coverage and one worker for stable
 scene/focus tests. The pinned Playwright CLI installs full Chromium, its Headless Shell, Firefox and
-WebKit. Full Chromium remains necessary: gallery-native-navigation tests explicitly launch
-a headed browser to verify foreground/background tab behavior. An executed trial of
+WebKit. Full Chromium remains necessary: gallery-native-navigation tests explicitly select
+`channel: "chromium"` to verify foreground/background image tabs. They remain headless
+but require the full browser executable rather than Headless Shell. An executed trial of
 `--only-shell` failed those tests and was rejected without weakening their coverage. The verified
 build is archived once with gzip level1 and uploaded with artifact compression level0,
 avoiding repeated compression. Explicit bash defaults enforce pipefail so failed archive
