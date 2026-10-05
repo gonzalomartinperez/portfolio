@@ -7,9 +7,9 @@ for (const prefix of ["", "/es"]) {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(prefix || "/");
     await page.evaluate(() => document.fonts.ready);
-    await expect(page.getByRole("button", { name: /Ask AI|Preguntar/, exact: true })).toHaveCount(
-      0,
-    );
+    await expect(
+      page.locator("main").getByRole("button", { name: /Ask AI|Preguntar/, exact: true }),
+    ).toHaveCount(0);
     await expect(page.locator('[data-featured-project="filomena"]')).toHaveCount(1);
     for (const role of ["rampy", "teamcubation", "cooperativa-obrera"]) {
       await expect(page.locator(`main a[href="${prefix}/work#${role}"]`)).toHaveCount(1);

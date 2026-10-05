@@ -136,7 +136,7 @@ The existing 24 KiB CSS budget remains unchanged, with an explicit reviewed
 remains within the existing 80 KiB limit.
 
 The pre-integration incremental build compiled in 6.7 seconds and checked types in
-1.058 seconds; the integrated build compiled in23.2 seconds and checked types in
+1.058 seconds; the integrated build compiled in 23.2 seconds and checked types in
 1.803 seconds under concurrent local work. These are observed timings, not a
 controlled speed improvement or field Core Web Vitals claim.
 
@@ -147,3 +147,17 @@ CORS, cookie policy, exposed `X-Run-ID`, CSRF and reverse-proxy SSE behavior.
 Provider quality, production headers/TLS, physical mobile
 keyboards and assistive technology have not been established by these fixture tests.
 No deployment or production authentication change is authorized by this document.
+
+## Integration regression corrections
+
+The full GitHub matrix exposed an overlap between the assistant launcher and the existing
+hero pause control. Pause now uses the left edge and a separate mobile row; the small-height
+interaction checks both rectangles before clicking normally. The former mobile assertion
+still prevents duplicate hero CTA buttons while allowing the intentional global launcher.
+Localized 404 hydration now uses the installed Next.js recommended stable pathname fallback
+for the assistant host instead of rendering mismatched server/client locale labels.
+
+Five targeted mobile regression checks passed locally on the production build (55.2s):
+EN/ES header geometry, short portrait/landscape pause accessibility and EN/ES missing-page
+recovery with no hydration errors. Full current-head CI remains required; no force-click,
+accessibility suppression, weakened budget or ignored hydration error was introduced.

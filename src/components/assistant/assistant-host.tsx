@@ -15,7 +15,10 @@ const Assistant = dynamic(() => import("@/features/assistant/entry"), {
 });
 
 export function AssistantHost() {
-  const pathname = usePathname();
+  const routePathname = usePathname();
+  // A localized missing route can hydrate from a differently routed server fallback.
+  const [pathname, setPathname] = useState("");
+  useEffect(() => setPathname(routePathname), [routePathname]);
   const locale = pathname === "/es" || pathname.startsWith("/es/") ? "es" : "en";
   const page = pathname === "/assistant" || pathname === "/es/assistant";
   const [opened, setOpened] = useState(false);
