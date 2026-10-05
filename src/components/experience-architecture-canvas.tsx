@@ -194,6 +194,23 @@ function ArchitectureGroupNode({ data }: NodeProps<GroupNode>) {
     <div className={`${styles.group} ${data.deployment ? styles.deployment : ""}`}>
       <strong>{data.title}</strong>
       {data.detail && <span>{data.detail}</span>}
+      {!data.deployment &&
+        [Position.Top, Position.Right, Position.Bottom, Position.Left].flatMap((position) => [
+          <Handle
+            key={`source-${position}`}
+            type="source"
+            id={`source-${position}`}
+            position={position}
+            className={styles.groupHandle}
+          />,
+          <Handle
+            key={`target-${position}`}
+            type="target"
+            id={`target-${position}`}
+            position={position}
+            className={styles.groupHandle}
+          />,
+        ])}
     </div>
   );
 }
@@ -353,6 +370,14 @@ export default function DiagramCanvas({
         layout.positions,
         layout.width,
         layout.height,
+        Object.fromEntries(
+          layout.groups
+            .filter((group) => !group.deployment)
+            .map((group) => [
+              group.id,
+              { ...group.position, width: group.width, height: group.height },
+            ]),
+        ),
       );
       return {
         id: `${connection.source}-${connection.target}`,

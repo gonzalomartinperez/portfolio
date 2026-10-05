@@ -10,7 +10,7 @@ for (const locale of ["", "/es"]) {
       await page.goto(`${locale}/work`);
       await page.evaluate(() => document.fonts.ready);
       for (const [role, nodes, edges] of [
-        ["rampy", 20, 20],
+        ["rampy", 20, 10],
         ["teamcubation", 15, 14],
         ["cooperativa-obrera", 5, 4],
       ] as const) {
@@ -53,23 +53,13 @@ for (const locale of ["", "/es"]) {
               ["backoffice", "web"],
               ["web", "backend"],
               ["mobile", "backend"],
-              ["backend", "auth"],
-              ["backend", "wallets"],
-              ["auth", "privy"],
-              ["wallets", "privy"],
               ["backend", "backoffice-api"],
-              ["backend", "ai"],
+              ["backend", "agentic-group"],
               ["backend", "defi"],
-              ["ai", "vector"],
-              ["ai", "memory"],
-              ["ai", "graph"],
-              ["graph", "neo4j"],
-              ["ai", "vertex"],
-              ["ai", "deepinfra"],
-              ["ai", "openai"],
-              ["defi", "lending"],
-              ["defi", "swaps"],
-              ["defi", "perps"],
+              ["backend-group", "privy"],
+              ["agentic-group", "data-group"],
+              ["agentic-group", "models-group"],
+              ["defi", "protocols-group"],
             ],
             teamcubation: [
               ["portal", "gateway"],
@@ -131,6 +121,14 @@ for (const locale of ["", "/es"]) {
       for (const provider of ["Morpho", "Aave", "Compound", "LI.FI", "Hyperliquid"]) {
         await expect(providers).toContainText(provider);
       }
+      for (const service of ["java-db", "node-db"]) {
+        await expect(
+          page.locator(`#teamcubation .react-flow__node[data-id='${service}']`),
+        ).toContainText("PostgreSQL");
+      }
+      await expect(page.locator("#cooperativa-obrera figcaption")).toContainText(
+        /MySQL (?:or|o) MariaDB/,
+      );
       const login = page.locator("#rampy .react-flow__node[data-id='privy']");
       await expect(login).toContainText("Privy");
       await expect(page.locator("#rampy .react-flow__node[data-id='auth']")).toContainText(
@@ -143,26 +141,16 @@ for (const locale of ["", "/es"]) {
       );
       await expect(backoffice).not.toContainText(locale ? "en desarrollo" : "in development");
       for (const connection of [
+        "backoffice-web",
         "web-backend",
         "mobile-backend",
-        "backoffice-web",
-        "backend-auth",
-        "backend-wallets",
-        "auth-privy",
-        "wallets-privy",
         "backend-backoffice-api",
-        "backend-ai",
+        "backend-agentic-group",
         "backend-defi",
-        "ai-vector",
-        "ai-memory",
-        "ai-graph",
-        "graph-neo4j",
-        "ai-vertex",
-        "ai-deepinfra",
-        "ai-openai",
-        "defi-lending",
-        "defi-swaps",
-        "defi-perps",
+        "backend-group-privy",
+        "agentic-group-data-group",
+        "agentic-group-models-group",
+        "defi-protocols-group",
       ]) {
         await expect(page.locator(`#rampy .react-flow__edge[data-id='${connection}']`)).toHaveCount(
           1,
@@ -214,20 +202,10 @@ for (const locale of ["", "/es"]) {
         );
       }
       for (const connection of [
-        "backend-auth",
-        "backend-wallets",
-        "auth-privy",
-        "wallets-privy",
-        "ai-vector",
-        "ai-memory",
-        "ai-graph",
-        "graph-neo4j",
-        "ai-vertex",
-        "ai-deepinfra",
-        "ai-openai",
-        "defi-lending",
-        "defi-swaps",
-        "defi-perps",
+        "backend-group-privy",
+        "agentic-group-data-group",
+        "agentic-group-models-group",
+        "defi-protocols-group",
       ]) {
         const path = page.locator(
           `#rampy .react-flow__edge[data-id='${connection}'] .react-flow__edge-path`,
