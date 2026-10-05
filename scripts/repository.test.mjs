@@ -130,7 +130,7 @@ test("browser shards reuse the same workflow's verified build without rebuilding
   assert.match(development, /name: production-build/);
   assert.match(workflow, /defaults:\n {2}run:\n {4}shell: bash/);
   assert.match(development, /compression-level: 0/);
-  assert.match(browser, /playwright install --with-deps --only-shell chromium firefox webkit/);
+  assert.match(browser, /playwright install --with-deps chromium firefox webkit/);
   assert.match(browser, /actions\/download-artifact@[a-f0-9]{40}/);
   assert.match(browser, /name: production-build/);
   assert.doesNotMatch(browser, /run-id:|repository:|github-token:|npm run (check|build)/);

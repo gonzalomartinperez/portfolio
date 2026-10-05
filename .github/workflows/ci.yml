@@ -96,7 +96,7 @@ jobs:
       - name: Restore the production build
         run: tar -xzf /tmp/portfolio-build/portfolio-production-build.tar.gz
       - name: Install browser test runtime
-        run: npx --no-install playwright install --with-deps --only-shell chromium firefox webkit
+        run: npx --no-install playwright install --with-deps chromium firefox webkit
       - name: Verify interactions and accessibility on an isolated runner
         run: npm run test:browser -- --shard=${{ matrix.shard }}/8
       - name: Retain browser verification artifacts
