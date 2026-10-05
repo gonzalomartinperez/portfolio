@@ -1,9 +1,37 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cloudEntrance, layoutCloud } from "./cloud-layout";
-import { createFieldEngine } from "./field-engine";
+import { createFieldEngine, type FieldEngine } from "./field-engine";
 
-export type SceneRuntime = { sync(paused: boolean): void; activateAvatar(): void; dispose(): void };
+export type SceneRuntime = {
+  canvas: HTMLCanvasElement;
+  sync(paused: boolean): void;
+  activateAvatar(): void;
+  dispose(): void;
+  release(): void;
+};
+type Pulse = { age: number; avatar: boolean; origin: { x: number; y: number } };
+type Handoff = {
+  canvas: HTMLCanvasElement;
+  engine: FieldEngine;
+  elapsed: number;
+  quality: number;
+  progress: number;
+  pulse: Pulse | null;
+  pulseCount: string | undefined;
+};
+let pendingHandoff: Handoff | undefined;
+// A replacement Home in the same commit can claim GPU resources. Leaving Home
+// disposes them before the next event-loop turn, without a global canvas.
+function releaseEngine(handoff: Handoff) {
+  pendingHandoff = handoff;
+  queueMicrotask(() => {
+    if (pendingHandoff !== handoff) return;
+    pendingHandoff = undefined;
+    handoff.engine.dispose();
+    handoff.canvas.remove();
+  });
+}
 
 type VisualNode = { element: HTMLElement | null; opacity: number; transform: string };
 const visualNode = (element: HTMLElement | null): VisualNode => ({
@@ -31,21 +59,42 @@ function paint(node: VisualNode, opacity: number, transform = "") {
   }
 }
 
-export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): SceneRuntime {
-  const engine = createFieldEngine(canvas);
+export function mountScene(stage: HTMLElement, host: HTMLElement): SceneRuntime {
+  const previous = pendingHandoff;
+  pendingHandoff = undefined;
+  const canvas =
+    previous?.canvas ?? host.querySelector("canvas") ?? document.createElement("canvas");
+  canvas.setAttribute("aria-hidden", "true");
+  host.replaceChildren(canvas);
+  const engine = previous?.engine ?? createFieldEngine(canvas);
+  try {
+    return bindScene(stage, canvas, engine, previous);
+  } catch (error) {
+    engine.dispose();
+    throw error;
+  }
+}
+
+function bindScene(
+  stage: HTMLElement,
+  canvas: HTMLCanvasElement,
+  engine: FieldEngine,
+  previous: Handoff | undefined,
+): SceneRuntime {
   gsap.registerPlugin(ScrollTrigger);
   let paused = false;
   let onScreen = true;
   let frame = 0;
   let lastTime = 0;
-  let elapsed = 0;
-  let quality = 0;
+  let elapsed = previous?.elapsed ?? 0;
+  let quality = previous?.quality ?? 0;
+  if (previous && quality > 0) stage.dataset.sceneQuality = String(quality);
   let sampleTime = 0;
   let sampleFrames = 0;
   let slowWindows = 0;
   let fastWindows = 0;
-  let targetProgress = 0;
-  let visualProgress = 0;
+  let targetProgress = previous?.progress ?? 0;
+  let visualProgress = targetProgress;
   let appliedProgress = -1;
   let touch: {
     x: number;
@@ -56,7 +105,9 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     avatar: boolean;
   } | null = null;
   let impulseUntil = 0;
-  let pulse: { age: number; avatar: boolean; origin: { x: number; y: number } } | null = null;
+  let pulse: Pulse | null = previous?.pulse ?? null;
+  if (previous?.pulseCount) stage.dataset.scenePulseCount = previous.pulseCount;
+  if (pulse) stage.dataset.scenePulse = pulse.avatar ? "avatar" : "sphere";
   const compact = matchMedia("(max-width: 767px)");
   const viewport = stage.querySelector<HTMLElement>("[data-scene-viewport]");
   const header = document.querySelector<HTMLElement>("header");
@@ -85,6 +136,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   const fixedProgress = Math.min(1, Math.max(0, requestedProgress));
   const requestedTime = Number(parameters.get("sceneTime"));
   if (deterministic) engine.setTime(Number.isFinite(requestedTime) ? requestedTime : 0);
+  else if (previous) engine.setTime(null);
   const cloud = stage.querySelector<HTMLElement>("[data-logo-cloud]");
   const seenBrands = new Set<string>();
   const sourceMarks = [...stage.querySelectorAll<HTMLElement>("[data-tech-icon]")].filter(
@@ -193,6 +245,17 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
     sampleTime = 0;
     sampleFrames = 0;
   };
+  const paintPulse = (phase: number) => {
+    if (pulse?.avatar) {
+      const lift = Math.sin(phase * Math.PI) ** 2 * Math.exp(-phase * 1.4) * 2;
+      const tilt = Math.sin(phase * Math.PI * 2) * lift;
+      paint(
+        avatar,
+        1,
+        `perspective(500px) translate3d(${rounded(6 * tilt)}px,${rounded(-18 * lift)}px,${rounded(70 * lift)}px) rotateX(${rounded(-12 * lift)}deg) rotateY(${rounded(30 * tilt)}deg) rotateZ(${rounded(-3 * tilt)}deg) scale(${rounded(1 + 0.16 * lift)})`,
+      );
+    }
+  };
   const tick = (now: number) => {
     const rawDelta = lastTime ? (now - lastTime) / 1000 : 0;
     const delta = Math.min(rawDelta, 0.05);
@@ -215,15 +278,7 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       pulse.age += delta;
       const phase = clamp(pulse.age / (pulse.avatar ? 1.35 : 0.75));
       engine.setPulse(phase, pulse.avatar, pulse.origin);
-      if (pulse.avatar) {
-        const lift = Math.sin(phase * Math.PI) ** 2 * Math.exp(-phase * 1.4) * 2;
-        const tilt = Math.sin(phase * Math.PI * 2) * lift;
-        paint(
-          avatar,
-          1,
-          `perspective(500px) translate3d(${rounded(6 * tilt)}px,${rounded(-18 * lift)}px,${rounded(70 * lift)}px) rotateX(${rounded(-12 * lift)}deg) rotateY(${rounded(30 * tilt)}deg) rotateZ(${rounded(-3 * tilt)}deg) scale(${rounded(1 + 0.16 * lift)})`,
-        );
-      }
+      paintPulse(phase);
       if (phase === 1) {
         pulse = null;
         paint(avatar, 1);
@@ -450,11 +505,59 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
   hero.element?.addEventListener("focusin", focusIn);
   hero.element?.addEventListener("focusout", focusOut);
   document.addEventListener("visibilitychange", sync);
-  applyTheme();
-  update(deterministic ? fixedProgress : targetProgress);
-  resize();
-  sync();
+  let disposed = false;
+  const cleanup = () => {
+    if (disposed) return;
+    disposed = true;
+    stage.removeAttribute("data-scene-visible");
+    stage.removeAttribute("data-scene-settled");
+    journey?.style.removeProperty("--toolkit-overflow");
+    journey?.style.removeProperty("--scene-reading-hold");
+    viewport?.style.removeProperty("--toolkit-overflow");
+    viewport?.style.removeProperty("--scene-core-y");
+    viewport?.style.removeProperty("--scene-sphere-radius");
+    stage.removeAttribute("data-scene-quality");
+    stage.removeAttribute("data-scene-tap");
+    stage.removeAttribute("data-scene-pulse");
+    stage.removeAttribute("data-scene-pulse-count");
+    stage.removeAttribute("data-scene-hover");
+    stage.removeAttribute("data-scene-press");
+    if (viewport) viewport.style.removeProperty("cursor");
+    if (avatarButton) {
+      avatarButton.disabled = false;
+      avatarButton.style.removeProperty("visibility");
+    }
+    for (const node of [hero, core, avatar, backdrop]) {
+      node.element?.style.removeProperty("opacity");
+      node.element?.style.removeProperty("transform");
+    }
+    cancelAnimationFrame(frame);
+    observer.disconnect();
+    resizeObserver.disconnect();
+    themeObserver.disconnect();
+    trigger.kill();
+    stage.removeEventListener("pointermove", pointerMove);
+    stage.removeEventListener("pointerleave", pointerLeave);
+    stage.removeEventListener("pointerdown", pointerDown);
+    stage.removeEventListener("pointerup", pointerUp);
+    stage.removeEventListener("pointercancel", pointerCancel);
+    hero.element?.removeEventListener("focusin", focusIn);
+    hero.element?.removeEventListener("focusout", focusOut);
+    document.removeEventListener("visibilitychange", sync);
+    cloud?.replaceChildren();
+  };
+  try {
+    applyTheme();
+    update(deterministic ? fixedProgress : targetProgress);
+    resize();
+    if (pulse) paintPulse(clamp(pulse.age / (pulse.avatar ? 1.35 : 0.75)));
+    sync();
+  } catch (error) {
+    cleanup();
+    throw error;
+  }
   return {
+    canvas,
     activateAvatar,
     sync(value) {
       paused = value;
@@ -466,43 +569,23 @@ export function mountScene(stage: HTMLElement, canvas: HTMLCanvasElement): Scene
       sync();
     },
     dispose() {
-      stage.removeAttribute("data-scene-visible");
-      stage.removeAttribute("data-scene-settled");
-      journey?.style.removeProperty("--toolkit-overflow");
-      journey?.style.removeProperty("--scene-reading-hold");
-      viewport?.style.removeProperty("--toolkit-overflow");
-      viewport?.style.removeProperty("--scene-core-y");
-      viewport?.style.removeProperty("--scene-sphere-radius");
-      stage.removeAttribute("data-scene-quality");
-      stage.removeAttribute("data-scene-tap");
-      stage.removeAttribute("data-scene-pulse");
-      stage.removeAttribute("data-scene-pulse-count");
-      stage.removeAttribute("data-scene-hover");
-      stage.removeAttribute("data-scene-press");
-      if (viewport) viewport.style.removeProperty("cursor");
-      if (avatarButton) {
-        avatarButton.disabled = false;
-        avatarButton.style.removeProperty("visibility");
-      }
-      for (const node of [hero, core, avatar, backdrop]) {
-        node.element?.style.removeProperty("opacity");
-        node.element?.style.removeProperty("transform");
-      }
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-      resizeObserver.disconnect();
-      themeObserver.disconnect();
-      trigger.kill();
-      stage.removeEventListener("pointermove", pointerMove);
-      stage.removeEventListener("pointerleave", pointerLeave);
-      stage.removeEventListener("pointerdown", pointerDown);
-      stage.removeEventListener("pointerup", pointerUp);
-      stage.removeEventListener("pointercancel", pointerCancel);
-      hero.element?.removeEventListener("focusin", focusIn);
-      hero.element?.removeEventListener("focusout", focusOut);
-      document.removeEventListener("visibilitychange", sync);
-      cloud?.replaceChildren();
+      if (disposed) return;
+      cleanup();
       engine.dispose();
+    },
+    release() {
+      if (disposed) return;
+      const carried: Handoff = {
+        canvas,
+        engine,
+        elapsed,
+        quality,
+        progress: visualProgress,
+        pulse,
+        pulseCount: stage.dataset.scenePulseCount,
+      };
+      cleanup();
+      releaseEngine(carried);
     },
   };
 }
