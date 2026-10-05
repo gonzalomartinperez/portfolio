@@ -1,5 +1,16 @@
 # Native portfolio assistant
 
+The native assistant is **disabled by default**. Unset or `false`
+`ASSISTANT_ENABLED` removes the launcher and returns 404 for `/assistant` and
+`/es/assistant`. Activation is not part of this delivery. For isolated development
+or fixture verification only, run `ASSISTANT_ENABLED=true npm run dev` or
+`ASSISTANT_ENABLED=true npm run build`. Static production output captures this
+setting during the build; changing it on an existing build is not a rollout.
+CI verifies the enabled conversation suite and a separate disabled Hostinger build.
+After `ASSISTANT_ENABLED=false npm run build`, run `npm run test:smoke` and
+`npm run test:assistant-disabled` for HTTP and desktop/mobile browser acceptance.
+
+
 The portfolio owns the visitor conversation. A root-layout host lazily loads the
 feature on first use and preserves it across minimizing, expanding, locale changes
 and internal navigation. `/assistant` and `/es/assistant` use the same instance.

@@ -255,3 +255,18 @@ use and kept mounted when minimized. Read [the runtime/integration guide](native
 and [acceptance specification](specs/native-assistant.md) for transport, session,
 focus, security and verification responsibilities. The old dormant launcher is
 retired; do not mount a second conversation implementation.
+
+### Lean release CI transfers
+
+All eight browser shards keep their existing engine coverage and one worker for stable
+scene/focus tests. The pinned Playwright CLI installs full Chromium, its Headless Shell, Firefox and
+WebKit. Full Chromium remains necessary: gallery-native-navigation tests explicitly select
+`channel: "chromium"` to verify foreground/background image tabs. They remain headless
+but require the full browser executable rather than Headless Shell. An executed trial of
+`--only-shell` failed those tests and was rejected without weakening their coverage. The verified
+build is archived once with gzip level1 and uploaded with artifact compression level0,
+avoiding repeated compression. Explicit bash defaults enforce pipefail so failed archive
+creation cannot upload a partial successful gzip stream. Frozen installs skip implicit npm audit/funding requests;
+required explicit audits still cover both lockfiles. Cache paths identify the actual lockfile.
+See [Playwright installation](https://playwright.dev/docs/browsers#chromium). Verify current-head
+Actions results and record installation/upload timings; do not infer a speedup from one run.

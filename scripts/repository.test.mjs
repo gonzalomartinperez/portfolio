@@ -95,6 +95,9 @@ test("CI isolates browser shards and fails the protected gate for incomplete ver
   const development = jobs.get("validate");
   const browser = jobs.get("browser");
   const gate = jobs.get("check");
+  assert.match(development, /ASSISTANT_ENABLED: "true"/);
+  assert.match(jobs.get("legacy-linux"), /ASSISTANT_ENABLED: "false"/);
+  assert.match(jobs.get("legacy-linux"), /npm run test:smoke/);
   assert.match(development, /name: Quality \(development\)/);
   assert.match(jobs.get("legacy-linux"), /name: Compatibility \(Hostinger \/ GLIBC 2\.28\)/);
   assert.match(gate, /name: Quality checks/);
@@ -125,9 +128,12 @@ test("browser shards reuse the same workflow's verified build without rebuilding
   assert.match(development, /npm run test:rendered/);
   assert.match(
     development,
-    /tar --exclude=\.next\/cache -czf \/tmp\/portfolio-production-build\.tar\.gz \.next/,
+    /tar --exclude=\.next\/cache -cf - \.next \| gzip -1 > \/tmp\/portfolio-production-build\.tar\.gz/,
   );
   assert.match(development, /name: production-build/);
+  assert.match(workflow, /defaults:\n {2}run:\n {4}shell: bash/);
+  assert.match(development, /compression-level: 0/);
+  assert.match(browser, /playwright install --with-deps chromium firefox webkit/);
   assert.match(browser, /actions\/download-artifact@[a-f0-9]{40}/);
   assert.match(browser, /name: production-build/);
   assert.doesNotMatch(browser, /run-id:|repository:|github-token:|npm run (check|build)/);
