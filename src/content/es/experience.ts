@@ -15,7 +15,7 @@ export const roles: Role[] = [
       "AI Engineer con alcance de ingeniería de producto de punta a punta: colaboro directamente con tres fundadores para definir prioridades y entregar funcionalidades productivas de IA, fintech, web y mobile desde la arquitectura y la implementación hasta la evaluación y la operación.",
     contributions: [
       "Reconstruí la arquitectura del producto de Rampy en producción: refactoricé todo el backend hacia una arquitectura hexagonal coherente y el frontend React/Next.js hacia dominios separados por funcionalidades del usuario, con un design system completo y abstracciones de componentes reutilizables.",
-      "Desarrollé flujos agénticos productivos con Agno, LangChain, LangGraph, OpenAI API y GraphRAG sobre Neo4j, combinando recuperación, reranking, memoria selectiva y evaluación de recorridos completos y selección de herramientas. Los flujos optimizados respondieron al menos 2× más rápido según mi estimación; eliminar llamadas y contexto redundantes redujo los tokens de las consultas afectadas un 30% estimado.",
+      "Desarrollé flujos agénticos productivos con Agno, LangChain, LangGraph, OpenAI API y GraphRAG sobre Neo4j, con PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Combiné reranking con la evaluación de recorridos completos y selección de herramientas. Los flujos optimizados respondieron al menos 2× más rápido según mi estimación; eliminar llamadas y contexto redundantes redujo los tokens de las consultas afectadas un 30% estimado.",
       "Reduje el arranque promedio medido de la app móvil de unos 7–8 segundos a 1–2 segundos; entregué funcionalidades con React Native, Kotlin y Swift, usando Android Studio para Android y verificando en emuladores y teléfonos reales.",
       "Implementé cifrado de extremo a extremo (E2EE) para las conversaciones de usuarios en la app en producción, con mensajes almacenados cifrados en la base de datos.",
       "Implementé tracking de eventos móviles de punta a punta con Google Analytics mediante Firebase, Clarity Mobile en todas las pantallas y Singular SDK para Meta App Events, coordinando integraciones para evitar duplicados. Diseñé, desarrollé, probé y desplegué una landing page para campañas de descargas.",
@@ -37,6 +37,8 @@ export const roles: Role[] = [
       "LangChain",
       "LangGraph",
       "OpenAI API",
+      "Google Vertex AI",
+      "DeepInfra",
       "GraphRAG",
       "Neo4j",
       "RAG",
@@ -112,11 +114,11 @@ export const roles: Role[] = [
     contributions: [
       "Construí un agente GraphRAG y su harness, conectados al BFF Spring WebFlux para acceder desde el portal de comercios con LangChain, LangGraph, Neo4j y OpenAI API, relacionando políticas empresariales y promociones. El harness orquestaba agentes, evaluaba respuestas, permitía optimizar rendimiento y aplicaba guardrails de dominio y protección de datos; el asistente respondía consultas sin ejecutar operaciones comerciales.",
       "Contribuí a una carga histórica de 20M+ promociones en producción, seguida de miles de promociones nuevas por día; implementé un flujo event-driven y serverless con Amazon S3, SQS y una Lambda Python/FastAPI con estrategias de procesamiento ordenado, conectada con microservicios Java/Spring Boot y Node.js/NestJS para cargar sus respectivas bases de datos. La carga productiva completa se validó sin pérdida de datos.",
-      "Entregué la experiencia de promociones de punta a punta: un microfrontend React y TypeScript con Single-SPA embebido como sección nativa del portal de comercios, conectado mediante un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS y proveedores.",
+      "Entregué la experiencia de promociones de punta a punta: un microfrontend React y TypeScript con Single-SPA, organizado por funcionalidades y con un design system, embebido como sección nativa del portal de comercios y conectado mediante un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS y proveedores.",
       "Construí microservicios en Java/Spring Boot y TypeScript/Node.js/NestJS para ingerir, normalizar y procesar promociones de comercios, entidades financieras y proveedores, adaptando los contratos según cada integración.",
       "Construí herramientas en Python y Node.js para reejecutar cargas masivas de forma segura contra bases de datos locales aisladas, reconciliar resultados y exponer promociones fallidas y casos límite antes de cada release.",
       "Integré el portal HTTPS de comercios con los servicios HTTP internos de la empresa mediante Amazon API Gateway.",
-      "Apliqué arquitectura hexagonal en microservicios específicos y arquitectura en capas en otros componentes.",
+      "Organicé los servicios de backend con una arquitectura en capas y responsabilidades claras.",
       "Construí un entorno agéntico de ingeniería adaptado al proyecto para preservar contexto entre repositorios de integración y mantener consistencia en la entrega de funcionalidades.",
     ],
     attribution:
@@ -220,8 +222,8 @@ export const roles: Role[] = [
     contributions: [
       "Diseñé y construí un backoffice de permisos que integró 10+ sistemas empresariales; reemplacé búsquedas manuales de unos diez minutos por un flujo automatizado de menos de diez segundos, con una experiencia uniforme para administradores sobre distintas bases de datos y modelos de permisos.",
       "Estandaricé la incorporación de sistemas con estructuras, filtros y validaciones reutilizables, reduciendo los tickets de permisos al menos un 80% y eliminando al menos un 95% de los errores recurrentes de asignación, según tickets y logs comparados antes y después.",
-      "Construí un frontend responsive en Next.js y TypeScript cuya única interfaz era un BFF en Python/FastAPI, que estandarizaba las vistas frontend y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante contratos OpenAPI/Swagger.",
-      "Conecté personalmente sistemas mediante microservicios Java/Spring Boot y TypeScript/Node.js/NestJS, encapsulando sus bases de datos y modelos de permisos; también conecté servicios PHP y aplicaciones heredadas mediante el BFF.",
+      "Construí un frontend responsive en React/Next.js y TypeScript, organizado por funcionalidades y con un design system. Se comunicaba exclusivamente con un BFF Python/FastAPI, que estandarizaba las vistas y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante contratos OpenAPI/Swagger.",
+      "Conecté sistemas empresariales mediante microservicios Java/Spring Boot y TypeScript/Node.js/NestJS con arquitectura en capas, encapsulando sus bases de datos y modelos de permisos; también integré servicios PHP y aplicaciones heredadas mediante el BFF.",
       "Optimicé consultas SQL, índices y paginación; los endpoints críticos promediaron menos de 300 ms en pruebas repetibles en servidores empresariales on-premise, una medición separada del flujo automatizado de consulta de permisos.",
       "Automaticé cargas masivas y validación de datos con Python; combiné autenticación LDAP, acceso por roles y reportes de auditoría con MySQL, MariaDB y Redis. El equipo de desarrollo web continuó el mantenimiento después de mi salida.",
       "Construí un entorno agéntico personal de ingeniería para preservar contexto y trabajar en paralelo entre repositorios de integración independientes.",

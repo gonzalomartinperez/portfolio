@@ -144,13 +144,15 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
   let restingCenter = 0.68;
   let fittingDistance = 0;
   const minimumRestingDistance = 5;
+  const restingDistance = () =>
+    Math.max(minimumRestingDistance, (width < 768 ? 2.8 : 3) / camera.aspect, fittingDistance);
   const pointer = new Vector2(10, 10);
   const updateCamera = () => {
     const expansion = Math.min(1, Math.max(0, (progress - 0.2) / 0.35));
     material.uniforms.progress.value = progress;
     if (cameraExpansion === expansion) return;
     cameraExpansion = expansion;
-    const startDistance = Math.max(minimumRestingDistance, 3 / camera.aspect, fittingDistance);
+    const startDistance = restingDistance();
     camera.position.z = startDistance + (0.4 - startDistance) * expansion;
     camera.setViewOffset(
       width,
@@ -202,9 +204,7 @@ export function createFieldEngine(canvas: HTMLCanvasElement): FieldEngine {
       render();
       const actualRadius =
         height /
-        (2 *
-          Math.tan((camera.fov * Math.PI) / 360) *
-          Math.sqrt(Math.max(minimumRestingDistance, 3 / camera.aspect, fittingDistance) ** 2 - 1));
+        (2 * Math.tan((camera.fov * Math.PI) / 360) * Math.sqrt(restingDistance() ** 2 - 1));
       return { centerY, radius: actualRadius };
     },
     setQuality(level) {
