@@ -128,7 +128,7 @@ test("browser shards reuse the same workflow's verified build without rebuilding
     /tar --exclude=\.next\/cache -cf - \.next \| gzip -1 > \/tmp\/portfolio-production-build\.tar\.gz/,
   );
   assert.match(development, /name: production-build/);
-  assert.match(workflow, /defaults:\n  run:\n    shell: bash/);
+  assert.match(workflow, /defaults:\n {2}run:\n {4}shell: bash/);
   assert.match(development, /compression-level: 0/);
   assert.match(browser, /playwright install --with-deps --only-shell chromium firefox webkit/);
   assert.match(browser, /actions\/download-artifact@[a-f0-9]{40}/);
