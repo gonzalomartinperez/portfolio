@@ -119,9 +119,12 @@ export function enterpriseSteps(kind: EnterpriseKind, locale: Locale): Architect
       step(
         "graph",
         "GraphRAG",
-        t("Enterprise policies · promotions", "Políticas empresariales · promociones"),
+        t(
+          "Neo4j · enterprise policies · promotions",
+          "Neo4j · políticas empresariales · promociones",
+        ),
       ),
-      step("neo4j", "Neo4j", t("Knowledge graph", "Grafo de conocimiento")),
+      step("vector", "PostgreSQL · pgvector", t("Vector retrieval", "Recuperación vectorial")),
       step("cloudwatch", "Amazon CloudWatch", t("Observability", "Observabilidad"), "surface"),
     ];
   return [
@@ -165,7 +168,7 @@ export const enterpriseConnections: Record<EnterpriseKind, Connection[]> = {
     { source: "bff", target: "agent" },
     { source: "agent", target: "harness" },
     { source: "harness", target: "graph" },
-    { source: "graph", target: "neo4j" },
+    { source: "graph", target: "vector" },
   ],
   "cooperativa-obrera": [
     { source: "web", target: "bff" },
@@ -308,7 +311,7 @@ export function enterpriseLayout(kind: EnterpriseKind, vertical: boolean, locale
       place(["java", "node"], 24, 690, 184, 0);
       place(["java-db", "node-db"], 24, 890, 184, 0);
       place(["agent", "harness"], 24, 1220, 184, 0);
-      place(["graph", "neo4j"], 24, 1430, 184, 0);
+      place(["graph", "vector"], 24, 1430, 184, 0);
       place(["cloudwatch"], 116, 1670);
       group(
         "deployment",
@@ -333,7 +336,7 @@ export function enterpriseLayout(kind: EnterpriseKind, vertical: boolean, locale
       place(["source", "sqs", "lambda"], 580, 90, 0, 185);
       place(["java", "node"], 310, 720, 270, 0);
       place(["java-db", "node-db"], 310, 920, 270, 0);
-      place(["agent", "harness", "graph", "neo4j"], 40, 460, 0, 190);
+      place(["agent", "harness", "graph", "vector"], 40, 460, 0, 190);
       place(["cloudwatch"], 310, 1150);
       group(
         "deployment",

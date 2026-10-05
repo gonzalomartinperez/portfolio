@@ -69,7 +69,7 @@ for (const locale of ["", "/es"]) {
               ["bff", "agent"],
               ["agent", "harness"],
               ["harness", "graph"],
-              ["graph", "neo4j"],
+              ["graph", "vector"],
               ["source", "sqs"],
               ["sqs", "lambda"],
               ["lambda", "java"],
@@ -125,7 +125,20 @@ for (const locale of ["", "/es"]) {
         await expect(
           page.locator(`#teamcubation .react-flow__node[data-id='${service}']`),
         ).toContainText("PostgreSQL");
+        await expect(
+          page.locator(`#teamcubation .react-flow__node[data-id='${service}']`),
+        ).not.toContainText("pgvector");
       }
+      const teamRetrieval = page.locator("#teamcubation .react-flow__node[data-id='vector']");
+      await expect(teamRetrieval).toContainText("PostgreSQL");
+      await expect(teamRetrieval).toContainText("pgvector");
+      await expect(teamRetrieval).toContainText(
+        locale ? "Recuperación vectorial" : "Vector retrieval",
+      );
+      await expect(page.locator("#teamcubation .react-flow__node[data-id='graph']")).toContainText(
+        "Neo4j",
+      );
+      await expect(page.locator("#teamcubation figcaption")).toContainText("PostgreSQL/pgvector");
       await expect(page.locator("#cooperativa-obrera figcaption")).toContainText(
         /MySQL (?:or|o) MariaDB/,
       );
@@ -244,7 +257,7 @@ for (const locale of ["", "/es"]) {
         "gateway-bff",
         "agent-harness",
         "harness-graph",
-        "graph-neo4j",
+        "graph-vector",
       ]) {
         await expect(
           page.locator(`#teamcubation .react-flow__edge[data-id='${connection}']`),
