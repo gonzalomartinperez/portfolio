@@ -1,11 +1,13 @@
 "use client";
 
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { setPageMotionPaused, usePageMotionPaused } from "../motion-state";
 import styles from "./hero-stage.module.css";
 import type { SceneRuntime } from "./scene-runtime";
 
 type Mode = "static" | "running" | "paused";
+
+let cachedMountScene: typeof import("./scene-runtime").mountScene | undefined;
 
 export function HeroStage({
   still,
@@ -37,7 +39,7 @@ export function HeroStage({
     setMode((current) => (current === "static" ? current : paused ? "paused" : "running"));
   }, [paused]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const stage = stageRef.current;
     const canvas = canvasRef.current;
     if (!stage || !canvas) return;
@@ -50,19 +52,33 @@ export function HeroStage({
       runtimeRef.current = null;
       setMode("static");
     };
-    const initialize = async () => {
+    const initialize = () => {
       const token = ++generation;
       clear();
       if (motion.matches || shortViewport.matches) return;
-      try {
-        const { mountScene } = await import("./scene-runtime");
+      const mount = (mountScene: NonNullable<typeof cachedMountScene>) => {
         if (cancelled || token !== generation) return;
-        runtimeRef.current = mountScene(stage, canvas);
-        runtimeRef.current.sync(pausedRef.current);
-        setMode(pausedRef.current ? "paused" : "running");
-      } catch {
-        if (!cancelled) clear();
+        try {
+          runtimeRef.current = mountScene(stage, canvas);
+          runtimeRef.current.sync(pausedRef.current);
+          setMode(pausedRef.current ? "paused" : "running");
+        } catch {
+          clear();
+        }
+      };
+      // A warm Home navigation must draw before paint, without flashing the static layout.
+      if (cachedMountScene) {
+        mount(cachedMountScene);
+        return;
       }
+      void import("./scene-runtime")
+        .then(({ mountScene }) => {
+          cachedMountScene = mountScene;
+          mount(mountScene);
+        })
+        .catch(() => {
+          if (!cancelled && token === generation) clear();
+        });
     };
     const lost = (event: Event) => {
       event.preventDefault();
@@ -70,13 +86,13 @@ export function HeroStage({
       clear();
     };
     const restored = () => {
-      void initialize();
+      initialize();
     };
     canvas.addEventListener("webglcontextlost", lost);
     canvas.addEventListener("webglcontextrestored", restored);
     motion.addEventListener("change", restored);
     shortViewport.addEventListener("change", restored);
-    void initialize();
+    initialize();
     return () => {
       cancelled = true;
       generation += 1;

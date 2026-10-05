@@ -16,36 +16,36 @@ const descriptions: Record<ArchitectureKind, Record<Locale, { title: string; sum
     en: {
       title: "Product architecture",
       summary:
-        "The React/Next.js web app is organized by feature domains on a shared design system; it and the React Native mobile app connect to a hexagonal Python/FastAPI backend. The built back office is part of the web app and continues to expand; Privy login and wallets integrate with the backend. Its API and AI capabilities include agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j GraphRAG, alongside DeFi integrations. This is a capability map, not an exact request trace.",
+        "The web app, its expanding backoffice and the Python/FastAPI backend run on DigitalOcean; the mobile app connects from users’ devices. The backend separates authentication, wallets, backoffice, agent orchestration and DeFi services. Privy, model providers and DeFi protocols are external integrations. Data and memory are grouped by function, independently of hosting. Web code follows feature domains and a shared design system; the backend uses hexagonal architecture. Double arrows show exchange; dashed arrows show membership.",
     },
     es: {
       title: "Arquitectura del producto",
       summary:
-        "La web React/Next.js está organizada por dominios y features sobre un design system compartido; junto con la app mobile React Native, se conecta con un backend Python/FastAPI de arquitectura hexagonal. El backoffice ya implementado forma parte de la web y continúa ampliándose; el acceso y las wallets con Privy se integran con el backend. Sus capacidades de API e IA incluyen agentes con Agno, LangChain, LangGraph, OpenAI API y GraphRAG con Neo4j, además de integraciones DeFi. Es un mapa de capacidades, no una traza exacta de cada solicitud.",
+        "La web, su backoffice en ampliación y el backend Python/FastAPI se despliegan en DigitalOcean; la app móvil se conecta desde los dispositivos. El backend separa autenticación, wallets, backoffice, orquestación de agentes y servicios DeFi. Privy, los proveedores de modelos y los protocolos DeFi son integraciones externas. Datos y memoria se agrupan por función, independientemente de su alojamiento. El código web sigue dominios por features y un design system compartido; el backend aplica arquitectura hexagonal. Las flechas dobles indican intercambio; las punteadas, pertenencia.",
     },
   },
   teamcubation: {
     en: {
       title: "Portal, ingestion and AI architecture",
       summary:
-        "The React/Single-SPA portal uses a Spring WebFlux BFF to access Java/Spring Boot and Node.js/NestJS microservices and the Promotion Assistance System, built with LangChain, LangGraph and OpenAI API. Inside that agentic system, the harness handles agent orchestration, answer evaluation and domain guardrails, while Neo4j GraphRAG relates enterprise policies and promotion information. A bulk promotion pipeline runs from S3 through SQS and a Python/FastAPI Lambda to the microservices and their respective databases.",
+        "Deployed on AWS, the React/Single-SPA portal connects through an API Gateway to a Spring WebFlux BFF to access Java/Spring Boot and Node.js/NestJS microservices and the Promotion Assistance System, built with LangChain, LangGraph and OpenAI API. The frontend is organized by feature and uses a design system; the backend uses layered architecture. Inside that agentic system, the harness handles agent orchestration, answer evaluation and domain guardrails, while Neo4j GraphRAG relates enterprise policies and promotion information. A bulk promotion pipeline runs from S3 through SQS and a Python/FastAPI Lambda to the microservices and their respective databases. CloudWatch supports observability across the deployment.",
     },
     es: {
       title: "Arquitectura del portal, la ingesta y la IA",
       summary:
-        "El portal React/Single-SPA accede mediante un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS, y al Sistema de asistencia de promociones, construido con LangChain, LangGraph y OpenAI API. Dentro de este sistema agéntico, el harness coordina los agentes, evalúa las respuestas y aplica guardrails de dominio; GraphRAG sobre Neo4j relaciona políticas empresariales y promociones. El flujo masivo de promociones pasa de S3 a SQS y una Lambda Python/FastAPI, y desde allí a los microservicios y sus respectivas bases de datos.",
+        "Desplegado en AWS, el portal React/Single-SPA accede mediante un API Gateway y un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS, y al Sistema de asistencia de promociones, construido con LangChain, LangGraph y OpenAI API. El frontend se organiza por features y utiliza un design system; el backend aplica arquitectura en capas. Dentro de este sistema agéntico, el harness coordina los agentes, evalúa las respuestas y aplica guardrails de dominio; GraphRAG sobre Neo4j relaciona políticas empresariales y promociones. El flujo masivo de promociones pasa de S3 a SQS y una Lambda Python/FastAPI, y desde allí a los microservicios y sus respectivas bases de datos. CloudWatch aporta observabilidad al despliegue.",
     },
   },
   "cooperativa-obrera": {
     en: {
       title: "Permissions system architecture",
       summary:
-        "React/Next.js views followed the Python/FastAPI BFF contract. The BFF integrated Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger contracts, hiding different databases and permission models behind a consistent admin experience.",
+        "The backend used layered architecture within an on-premise deployment. The React/Next.js frontend was organized by feature and used a design system, with views following the Python/FastAPI BFF contract. The BFF integrated Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger contracts, hiding different databases and permission models behind a consistent admin experience.",
     },
     es: {
       title: "Arquitectura del sistema de permisos",
       summary:
-        "Las vistas React/Next.js seguían el contrato del BFF Python/FastAPI. El BFF integraba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante OpenAPI/Swagger, ocultando bases de datos y modelos de permisos distintos tras una experiencia uniforme para administradores.",
+        "El backend aplicaba arquitectura en capas dentro de un despliegue on-premise. El frontend React/Next.js se organizaba por features y utilizaba un design system, con vistas que seguían el contrato del BFF Python/FastAPI. El BFF integraba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante OpenAPI/Swagger, ocultando bases de datos y modelos de permisos distintos tras una experiencia uniforme para administradores.",
     },
   },
   filomena: {

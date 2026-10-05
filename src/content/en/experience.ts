@@ -15,7 +15,7 @@ export const roles: Role[] = [
       "AI Engineer with end-to-end product engineering scope: partnering directly with three founders to shape priorities and ship production AI, fintech, web and mobile features across architecture, implementation, evaluation and operations.",
     contributions: [
       "Rebuilt Rampy’s product architecture in production: refactored the entire backend into a cohesive hexagonal architecture and the React/Next.js frontend into feature-based domains, with a complete design system and reusable component abstractions.",
-      "Built production agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j-backed GraphRAG, combining retrieval, reranking, selective memory and evaluation of complete journeys and tool selection. Optimized workflows responded at least 2× faster by my estimate; removing redundant calls and context cut tokens in affected queries by an estimated 30%.",
+      "Built production agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j-backed GraphRAG, using PostgreSQL/pgvector, Mem0, Vertex AI and DeepInfra for retrieval, memory and model access. Combined reranking with evaluation of complete journeys and tool selection. Optimized workflows responded at least 2× faster by my estimate; removing redundant calls and context cut tokens in affected queries by an estimated 30%.",
       "Cut measured average mobile app startup from about 7–8 seconds to 1–2 seconds; shipped React Native, Kotlin and Swift features, using Android Studio for Android development and testing in emulators and on physical devices.",
       "Implemented end-to-end encryption (E2EE) for user conversations in the production app, with messages persisted encrypted in the database.",
       "Implemented end-to-end mobile event tracking with Google Analytics through Firebase, Clarity Mobile on every screen, and Singular SDK for Meta App Events, coordinating integrations to prevent duplicate events. Designed, built, tested and deployed a campaign landing page for app downloads.",
@@ -37,6 +37,8 @@ export const roles: Role[] = [
       "LangChain",
       "LangGraph",
       "OpenAI API",
+      "Google Vertex AI",
+      "DeepInfra",
       "GraphRAG",
       "Neo4j",
       "RAG",
@@ -112,11 +114,11 @@ export const roles: Role[] = [
     contributions: [
       "Built a GraphRAG agent and harness connected to the Spring WebFlux BFF for access through the merchant portal with LangChain, LangGraph, Neo4j and OpenAI API for merchant owners, relating enterprise policies and promotions. The harness orchestrated agents, evaluated answers, supported performance tuning and enforced promotion-domain and data-leakage guardrails; the assistant answered queries without executing commercial actions.",
       "Contributed to a historical production load of 20M+ promotions, followed by thousands of new promotions daily; implemented an event-driven, serverless flow with Amazon S3, SQS and a Python/FastAPI Lambda using ordered processing strategies, connected to Java/Spring Boot and Node.js/NestJS microservices that loaded their respective databases. The complete production load was validated with zero data loss.",
-      "Delivered the promotions experience end to end: a Single-SPA React and TypeScript microfrontend embedded as a native section of the merchant portal, connected through a Spring WebFlux BFF to Java/Spring Boot and Node.js/NestJS microservices and providers.",
+      "Delivered the promotions experience end to end: a Single-SPA React and TypeScript microfrontend, organized by feature and using a design system, embedded as a native section of the merchant portal and connected through a Spring WebFlux BFF to Java/Spring Boot and Node.js/NestJS microservices and providers.",
       "Built Java/Spring Boot and TypeScript/Node.js/NestJS microservices to ingest, normalize and process promotions from merchants, financial entities and providers, adapting contracts per integration.",
       "Built Python and Node.js tooling to replay bulk loads safely against isolated local databases, reconcile results and surface failed promotions and edge cases before release.",
       "Integrated the HTTPS merchant portal with internal HTTP enterprise services through Amazon API Gateway.",
-      "Applied hexagonal architecture in selected microservices and layered architecture in other components.",
+      "Structured backend services with layered architecture and clear responsibilities.",
       "Built a project-specific agentic engineering environment to preserve context across integration repositories and support consistent feature delivery.",
     ],
     attribution:
@@ -220,8 +222,8 @@ export const roles: Role[] = [
     contributions: [
       "Designed and built a permissions-management back office integrating 10+ enterprise systems; replaced roughly ten minutes of manual permission lookup with an automated workflow taking under ten seconds, giving administrators a consistent experience across different databases and permission models.",
       "Standardized system onboarding with reusable structures, filters and validation, reducing permission-related tickets by at least 80% and eliminating at least 95% of recurring assignment bugs, based on before/after tickets and logs.",
-      "Built a responsive Next.js and TypeScript frontend whose only interface was a Python/FastAPI BFF, standardizing frontend views against its contract and integrations with Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger contracts.",
-      "Personally connected systems through Java/Spring Boot and TypeScript/Node.js/NestJS microservices, encapsulating their databases and permission models; PHP services and legacy applications were also connected through the BFF.",
+      "Built a responsive React/Next.js and TypeScript frontend, organized by feature and using a design system. It communicated exclusively with a Python/FastAPI BFF, which standardized views and integrated Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger contracts.",
+      "Connected enterprise systems through Java/Spring Boot and TypeScript/Node.js/NestJS microservices using layered architecture, encapsulating their databases and permission models; PHP services and legacy applications were also integrated through the BFF.",
       "Tuned SQL queries, indexes and pagination; critical endpoints averaged below 300 ms in repeatable tests on enterprise on-premise servers, a separate measurement from the automated permission-lookup workflow.",
       "Automated bulk loads and data validation with Python; combined LDAP authentication, role-based access and exportable audit reports with MySQL, MariaDB and Redis. The web development team took over maintenance after my departure.",
       "Built a personal cross-system agentic engineering environment to preserve context and work in parallel across independent integration repositories.",
