@@ -2,6 +2,7 @@
 
 import { AssistantBudgetPlugin } from "./scripts/assistant-budget-plugin.ts";
 import { SceneBudgetPlugin } from "./scripts/scene-budget-plugin.mjs";
+import { resumeFilenames, resumeFiles } from "./src/content/site-config.ts";
 
 /**
  * Response headers.
@@ -48,7 +49,18 @@ const nextConfig = {
     return config;
   },
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      ...Object.entries(resumeFiles).map(([locale, source]) => ({
+        source,
+        headers: [
+          {
+            key: "Content-Disposition",
+            value: `inline; filename="${resumeFilenames[/** @type {keyof typeof resumeFilenames} */ (locale)]}"`,
+          },
+        ],
+      })),
+    ];
   },
 };
 

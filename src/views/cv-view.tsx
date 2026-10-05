@@ -6,7 +6,7 @@ import { buttonVariants } from "@/components/ui/button";
 import cv from "@/content/cv-public.json";
 import { type Locale, localePath } from "@/content/locales";
 import documents from "@/content/public-documents.json";
-import { resumeDownloads, resumeFiles } from "@/content/site-config";
+import { resumeDownloads, resumeFilenames, resumeFiles } from "@/content/site-config";
 import styles from "./cv.module.css";
 
 type Run = { text: string; bold: boolean; href: string };
@@ -80,7 +80,11 @@ export function CvView({ locale }: { locale: Locale }) {
             {spanish ? "Abrir CV · PDF" : "Open CV · PDF"}
             <span aria-hidden="true">↗</span>
           </a>
-          <a className={buttonVariants()} href={resumeDownloads[locale]} download>
+          <a
+            className={buttonVariants()}
+            href={resumeDownloads[locale]}
+            download={resumeFilenames[locale]}
+          >
             {spanish ? "Descargar CV · PDF" : "Download CV · PDF"}
           </a>
           <Link

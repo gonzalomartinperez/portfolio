@@ -187,6 +187,21 @@ test("published documents and assets are reachable", async () => {
   }
 });
 
+test("CV links and PDF responses use the approved bilingual filenames", async () => {
+  for (const locale of ["en", "es"]) {
+    const filename = `Gonzalo-Martin-Perez-CV-AI-Software-Engineer-${locale.toUpperCase()}.pdf`;
+    const prefix = locale === "es" ? "/es" : "";
+    assert.ok(pages.get(`${prefix}/cv`).body.includes(`download="${filename}"`));
+    for (const contactPrefix of ["", "/es"]) {
+      assert.ok(pages.get(`${contactPrefix}/contact`).body.includes(`download="${filename}"`));
+    }
+    const response = await fetch(
+      `${origin}/gonzalo-martin-perez-ai-software-engineer-${locale}.pdf`,
+    );
+    assert.equal(response.headers.get("content-disposition"), `inline; filename="${filename}"`);
+  }
+});
+
 test("security headers are present on every route", () => {
   // Production was verified to send none of these before they were added here, so the check
   // exists to stop them regressing silently.
