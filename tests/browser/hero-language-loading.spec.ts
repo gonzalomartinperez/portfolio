@@ -56,7 +56,20 @@ for (const theme of ["dark", "light"]) {
               result.frames += 1;
               if (canvas !== initialCanvas) result.replacedCanvasFrames += 1;
               if (stage?.dataset.mode === "static") result.staticFrames += 1;
-              if (!canvas || getComputedStyle(canvas).opacity !== "1") {
+              const canvasStyle = canvas && getComputedStyle(canvas);
+              const hostStyle = canvas?.parentElement && getComputedStyle(canvas.parentElement);
+              const bounds = canvas?.getBoundingClientRect();
+              if (
+                !canvas ||
+                canvasStyle?.opacity !== "1" ||
+                hostStyle?.opacity !== "1" ||
+                canvasStyle.visibility !== "visible" ||
+                hostStyle.visibility !== "visible" ||
+                !bounds?.width ||
+                !bounds.height ||
+                bounds.bottom <= 0 ||
+                bounds.top >= innerHeight
+              ) {
                 result.hiddenCanvasFrames += 1;
               }
               if (viewport?.clientHeight !== height) result.viewportHeightChanges += 1;
