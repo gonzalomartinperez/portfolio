@@ -161,3 +161,25 @@ Five targeted mobile regression checks passed locally on the production build (5
 EN/ES header geometry, short portrait/landscape pause accessibility and EN/ES missing-page
 recovery with no hydration errors. Full current-head CI remains required; no force-click,
 accessibility suppression, weakened budget or ignored hydration error was introduced.
+
+## Disabled rollout acceptance (2026-10-05)
+
+The owner keeps the assistant disabled. Default/unset `ASSISTANT_ENABLED` is false;
+only an explicit true value enables isolated fixtures or an approved future build.
+The root layout omits the host and both assistant page routes return 404.
+No promotion of this rollout change to main or activation is part of this delivery.
+
+`ASSISTANT_ENABLED=false npm run check` passed: 23 repository, 32 assistant,
+33 content and 9 budget tests, contract provenance, strict types, lint, documents,
+identity and production build. `npm run typecheck` also checked the full application.
+The default-off production smoke passed on isolated port 3266.
+`ASSISTANT_ENABLED=false BROWSER_TEST_PORT=3267 npm run test:assistant-disabled`
+passed both Chromium desktop and emulated Pixel 7 checks (58.2 seconds):
+no launcher or API requests across English/Spanish pages and actual 404 responses
+for both chat routes. This does not establish physical-device behavior.
+
+Inspected screenshots: [desktop](native-assistant/disabled-desktop.png) and
+[mobile](native-assistant/disabled-mobile.png). CI uses the existing Hostinger
+compatibility build for default-off HTTP smoke and explicitly enabled builds for
+the complete conversation browser suite. Those enabled test artifacts must not
+be interpreted as authorization to enable the live site.

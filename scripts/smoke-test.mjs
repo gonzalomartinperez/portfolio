@@ -41,7 +41,16 @@ try {
     signal: AbortSignal.timeout(10_000),
   });
   assert.equal(missing.status, 404);
-  console.log("Production smoke test passed: HTML, title, main landmark, and 404.");
+  if (process.env.ASSISTANT_ENABLED !== "true") {
+    assert.doesNotMatch(html, /data-assistant-host/);
+    for (const path of ["/assistant", "/es/assistant"]) {
+      const disabled = await fetch(`${origin}${path}`, {
+        signal: AbortSignal.timeout(10_000),
+      });
+      assert.equal(disabled.status, 404, `${path} must be unavailable while disabled`);
+    }
+  }
+  console.log("Production smoke test passed: HTML, title, main landmark, 404, and rollout gate.");
 } finally {
   if (server.exitCode === null && !startupError) {
     const stopped = once(server, "exit");
