@@ -31,6 +31,7 @@
     "test:documents": "node scripts/documents.ts",
     "cv:sync:check": "node scripts/export-cv.mjs --check",
     "test:smoke": "node scripts/smoke-test.mjs",
+    "test:assistant-disabled": "playwright test --config playwright.rollout.config.ts",
     "test:browser": "playwright test",
     "test:identity": "node scripts/generate-identity.mjs --check",
     "identity:build": "node scripts/generate-identity.mjs --write",

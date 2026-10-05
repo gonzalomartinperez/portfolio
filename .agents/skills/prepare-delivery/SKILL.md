@@ -12,6 +12,9 @@ description: Verify a portfolio change for handoff and prepare a Conventional Co
 2. Verify the relevant acceptance criteria and npm run check plus git diff --check. For dependency changes, also verify npm ci and npm audit.
    Reuse recorded passing checks only for the same source state, dependencies and
    runtime; follow docs/development.md instead of repeating unchanged builds.
+   Keep the native assistant disabled unless the current request explicitly authorizes
+   activation. Verify default-off launcher absence and both assistant routes returning
+   404; enabled fixture acceptance is not production activation.
    Include production smoke results for application, compiler or runtime changes.
 3. Inspect public content, tracked artifacts, metadata, and staged changes for credentials, private documents, unsupported claims, and machine-specific data. Never echo suspected secrets.
    For editorial or document changes, check [editorial guidelines](../../../docs/editorial-guidelines.md)

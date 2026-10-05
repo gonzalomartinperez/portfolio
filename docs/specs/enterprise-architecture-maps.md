@@ -146,3 +146,19 @@ its initial tag was published. Replace that annotated tag only after the final
 reviewed source passes task/release/main CI and public verification. Preserve
 the commit history and check the previous remote tag object before changing the
 specific tag reference; this does not authorize rewriting protected branches.
+
+## Final editorial and rollout follow-up
+
+Career Ops PR #10 prepares revision `2026-10-05.2`: a stronger bilingual
+professional summary, natural outcome-focused experience bullets, and the same
+approved three-page layout. All six pages were visually reviewed and promoted
+against their preview manifest hash; the portfolio projection and PDFs are
+exported from that promoted source. The manual LinkedIn packet includes the
+owner-requested 214-character headline, natural expanded About sections,
+experiences, education, certifications, languages and portfolio-based highlights.
+LinkedIn remains manual and is not published by this workflow.
+
+The owner confirmed that the assistant must stay disabled. PR #96 includes an
+explicit opt-in rollout gate: normal deployment has no launcher and assistant
+routes return 404. Enabled CI fixtures preserve native-assistant coverage, while
+compatibility smoke checks cover the disabled production default.
