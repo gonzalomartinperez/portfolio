@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-04.2",
+  "revision": "2026-10-05.1",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -222,7 +222,7 @@
                       "href": ""
                     },
                     {
-                      "text": ": S3 → SQS → Python/FastAPI Lambda → Java/Spring Boot and Node.js/NestJS microservices, each writing to its own database. Built Python/Node.js tooling to reproduce local loads, reconcile results and identify failed promotions.",
+                      "text": ": S3 → SQS → Python/FastAPI Lambda → Java/Spring Boot and Node.js/NestJS microservices, each writing to its own PostgreSQL database. Built Python/Node.js tooling to reproduce local loads, reconcile results and identify failed promotions.",
                       "bold": false,
                       "href": ""
                     }
@@ -488,7 +488,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", organized by feature and using a design system, connected exclusively to a Python/FastAPI BFF. The backend used layered architecture; the BFF standardized frontend views and connected Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger.",
+                      "text": ", organized by feature and using a design system, connected exclusively to a Python/FastAPI BFF. The backend used layered architecture; the BFF standardized frontend views and connected Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger; microservices used MySQL / MariaDB databases.",
                       "bold": false,
                       "href": ""
                     }
@@ -1195,7 +1195,7 @@
                       "href": ""
                     },
                     {
-                      "text": ": S3 → SQS → Lambda Python/FastAPI → microservicios Java/Spring Boot y Node.js/NestJS, cada uno con escritura en su base de datos. Desarrollé tooling Python/Node.js para reproducir cargas locales, reconciliar resultados y detectar promociones fallidas.",
+                      "text": ": S3 → SQS → Lambda Python/FastAPI → microservicios Java/Spring Boot y Node.js/NestJS, cada uno con escritura en su base de datos PostgreSQL. Desarrollé tooling Python/Node.js para reproducir cargas locales, reconciliar resultados y detectar promociones fallidas.",
                       "bold": false,
                       "href": ""
                     }
@@ -1456,7 +1456,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", organizado por funcionalidades y con un design system, conectado exclusivamente a un BFF Python/FastAPI. El backend seguía una arquitectura en capas; el BFF estandarizaba las vistas y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante contratos OpenAPI/Swagger.",
+                      "text": ", organizado por funcionalidades y con un design system, conectado exclusivamente a un BFF Python/FastAPI. El backend seguía una arquitectura en capas; el BFF estandarizaba las vistas y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante OpenAPI/Swagger; los microservicios utilizaban MySQL / MariaDB.",
                       "bold": false,
                       "href": ""
                     }
@@ -1941,11 +1941,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "8757d72c8784d6f5029c82f7805d455c34a85586860be1ffe6754147beb638ce",
-    "factsSha256": "ca8a171bd548fe5522d83096246da1a89f85f59147553b66043ffc98226c970a",
+    "sourceSha256": "4181c872db9851f0d08354273ff217f9988da0423f170376239fa32a188ef0be",
+    "factsSha256": "cbbadcd5f84673500e0ae4885c9cc03068d9199744b6253db2b33d99604f690a",
     "pdfSha256": {
-      "en": "7fc216cb69062f2cd7f2176dc5c13da91033d1e6782d7efe98e49ca48ed4e038",
-      "es": "7ce28c5bf796881f8e0e6a36c3c94ab7677b9844ed4c5a1085ed071ca0a1a7c4"
+      "en": "38edfe811e376ec4a9ad0cec2e7d201da8c2ee0924c9838abab497673d54fc80",
+      "es": "5895e0e03a3ecbf8e2953791bbf1d0a477012ee2f277f921e4f1b66f5b50ef98"
     }
   }
 }
