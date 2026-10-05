@@ -125,9 +125,11 @@ test("browser shards reuse the same workflow's verified build without rebuilding
   assert.match(development, /npm run test:rendered/);
   assert.match(
     development,
-    /tar --exclude=\.next\/cache -czf \/tmp\/portfolio-production-build\.tar\.gz \.next/,
+    /tar --exclude=\.next\/cache -cf - \.next \| gzip -1 > \/tmp\/portfolio-production-build\.tar\.gz/,
   );
   assert.match(development, /name: production-build/);
+  assert.match(development, /compression-level: 0/);
+  assert.match(browser, /playwright install --with-deps --only-shell chromium firefox webkit/);
   assert.match(browser, /actions\/download-artifact@[a-f0-9]{40}/);
   assert.match(browser, /name: production-build/);
   assert.doesNotMatch(browser, /run-id:|repository:|github-token:|npm run (check|build)/);
