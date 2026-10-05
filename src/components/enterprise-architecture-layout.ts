@@ -366,7 +366,7 @@ export function enterpriseLayout(kind: EnterpriseKind, vertical: boolean, locale
         0,
         382,
         910,
-        t("Enterprise deployment", "Despliegue empresarial"),
+        t("Microservices · MySQL / MariaDB", "Microservicios · MySQL / MariaDB"),
         true,
       );
     } else {
@@ -379,7 +379,7 @@ export function enterpriseLayout(kind: EnterpriseKind, vertical: boolean, locale
         0,
         820,
         720,
-        t("Enterprise deployment", "Despliegue empresarial"),
+        t("Microservices · MySQL / MariaDB", "Microservicios · MySQL / MariaDB"),
         true,
       );
     }
