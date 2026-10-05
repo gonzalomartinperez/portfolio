@@ -17,9 +17,9 @@ provider answer quality.
 
 The fixture used API revision `c6012067c4a99db477bb6ddcf1f26dae095641ca`
 and corpus revision `cb0b56baaa50a1521a4e02eee1d67f13c89d19a2` (version
-`cb0b56baaa50a1521a4e02eee1d67f13c89d19a2-v6`). The API owner built image
+`cb0b56baaa50a1521a4e02eee1d67f13c89d19a2-v6`). The isolated fixture image
 `sha256:b724a3c322304ee024bfd0e42a02749f6c479566d12a35a594e9b95ca59a250b`
-from a committed Git archive, with migrations 001–005, isolated PostgreSQL/pgvector
+was built from a committed Git archive, with migrations 001–005, isolated PostgreSQL/pgvector
 and Neo4j, and no Redis. Its bounded fixture index contained 12 public files,
 75 chunks and 268 graph facts; this is not a full production corpus evaluation.
 
@@ -37,7 +37,7 @@ primary and scoped strict checks use TypeScript 7; only the generator's
 programmatic compiler peer remains TypeScript 5.9.3.
 
 The verification includes 23 repository checks, 31 assistant unit/network checks,
-32 content checks, identity/document validation, 19 rendered-route checks, the production smoke test,
+content and identity/document validation, 19 rendered-route checks, the production smoke test,
 Biome, both type configurations,
 the production build and nine build-budget checks. Native browser coverage is
 17 scenarios in Chromium desktop/mobile, Firefox and WebKit: **68 passed in
@@ -123,16 +123,21 @@ performance improvement.
 
 ## Measured build impact
 
-Final build: 2,789 bytes gzip deferred assistant CSS; 23,137 bytes gzip existing
-portfolio CSS; 25,926 bytes gzip total CSS. The assistant JavaScript dependency
+After preserving newer portfolio content from develop `13a350f`, the complete
+repository check/build/budgets passed again: 2,789 bytes gzip deferred assistant CSS;
+23,336 bytes gzip existing portfolio CSS; 26,125 bytes gzip total CSS.
+The pre-integration acceptance build had 23,137 existing /25,926 total CSS bytes;
+the change includes other owners' portfolio styles, not an assistant performance gain.
+The assistant JavaScript dependency
 closure is 58,516 bytes gzip. The compilation graph reports one lazy root and
 `initial: false`; browser tests assert no API initialization before activation.
 The existing 24 KiB CSS budget remains unchanged, with an explicit reviewed
 4 KiB allowance for the new deferred feature. Every non-scene client chunk
 remains within the existing 80 KiB limit.
 
-The final incremental build compiled in 6.7 seconds and checked types in
-1.058 seconds under concurrent local work. These are observed timings, not a
+The pre-integration incremental build compiled in 6.7 seconds and checked types in
+1.058 seconds; the integrated build compiled in23.2 seconds and checked types in
+1.803 seconds under concurrent local work. These are observed timings, not a
 controlled speed improvement or field Core Web Vitals claim.
 
 ## Remaining integration checks
