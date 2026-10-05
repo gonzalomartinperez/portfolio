@@ -112,6 +112,13 @@ crowding the avatar or copy, or changing the settled technology-grid spacing.
   and desktop/mobile. They verify routing, deployment containment, reciprocal
   exchange markers, approved technologies and the complete ingestion path.
 - Clean installation and dependency audit pass with zero reported vulnerabilities.
+- The release gate rejected a legacy pulse-test timeout instead of accepting its
+  successful retry. The trace showed 2,350 ms of virtual animation replaying GPU
+  frames for about 40.45 seconds, exhausting the unchanged 45-second deadline.
+  Bounded 50 ms clock steps preserve the runtime delta cap, elapsed pulse durations,
+  both complete scenes and all shader/input/cleanup assertions without rendering
+  every intermediate frame. First-attempt stability and fresh exact-head CI are
+  required before promotion; the failed run is not waived.
 
 The associated task/release PRs record remaining interaction/hero acceptance,
 exact-head GitHub checks and public-deployment results before the release closes.
