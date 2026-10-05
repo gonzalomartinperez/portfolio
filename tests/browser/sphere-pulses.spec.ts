@@ -9,6 +9,13 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
   const scene = page.locator("[data-scene]");
   await expect(scene).toHaveAttribute("data-mode", "running");
   await page.clock.pauseAt(new Date("2026-01-01T01:00:00Z"));
+  // Exercise 20 fps frames within the runtime's 50 ms delta cap without replaying every GPU frame.
+  const advanceFrames = async (durationMs: number) => {
+    const frameMs = 50;
+    for (let elapsedMs = 0; elapsedMs < durationMs; elapsedMs += frameMs) {
+      await page.clock.fastForward(Math.min(frameMs, durationMs - elapsedMs));
+    }
+  };
   const avatar = scene.getByRole("button", { name: "Interact with Gonzalo’s avatar" });
   const position = await avatar.boundingBox();
   if (!position) throw new Error("Avatar is missing");
@@ -21,7 +28,7 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
   await expect(scene).toHaveAttribute("data-scene-pulse", "sphere");
   await expect(scene.locator("canvas")).toHaveCSS("z-index", "3");
   await expect(scene.locator("canvas")).toHaveCSS("pointer-events", "none");
-  await page.clock.runFor(300);
+  await advanceFrames(300);
   const uniform = (name: string) =>
     scene.locator("canvas").evaluate((canvas: HTMLCanvasElement, name) => {
       const gl = canvas.getContext("webgl2");
@@ -35,12 +42,12 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
   expect(await uniform("avatarPulse")).toBe(0);
   expect(await uniform("pulseReach")).toBeGreaterThan(0);
   expect(await uniform("pulseReach")).toBeLessThan(1.65);
-  await page.clock.runFor(600);
+  await advanceFrames(600);
   await expect(scene).toHaveAttribute("data-scene-pulse", "idle");
   await expect(scene.locator("canvas")).toHaveCSS("z-index", "auto");
   await avatar.focus();
   await avatar.press("Enter");
-  await page.clock.runFor(350);
+  await advanceFrames(350);
   await expect(scene).toHaveAttribute("data-scene-pulse", "avatar");
   await expect(scene.locator("canvas")).toHaveCSS("z-index", "3");
   const heroLink = scene.locator("[data-scene-hero] a").first();
@@ -59,7 +66,7 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
   await expect(scene).toHaveAttribute("data-scene-pulse-count", "2");
   await expect(scene).toHaveAttribute("data-scene-progress", "0.0000");
   await page.screenshot({ path: test.info().outputPath("avatar-pulse.png") });
-  await page.clock.runFor(1100);
+  await advanceFrames(1100);
   await expect(scene).toHaveAttribute("data-scene-pulse", "idle");
   await expect(scene.locator("[data-scene-avatar-art]")).toHaveCSS("transform", "none");
   await expect(scene.locator("canvas")).toHaveCSS("z-index", "auto");
