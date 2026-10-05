@@ -33,7 +33,10 @@ for (const theme of ["dark", "light"]) {
     await page.clock.runFor(500);
     await expect(art).toHaveCSS("transform", pausedTransform);
     await page.getByRole("button", { name: "Play animation", exact: true }).click();
-    await page.clock.runFor(1600);
+    // Keep each simulated recovery frame within the runtime's 50 ms delta cap.
+    for (let elapsedMs = 0; elapsedMs < 1600; elapsedMs += 50) {
+      await page.clock.fastForward(50);
+    }
     await expect(scene).toHaveAttribute("data-scene-pulse", "idle");
     await expect(art).toHaveCSS("transform", "none");
     await expect(scene.locator("[data-scene-core]")).toHaveCSS("z-index", "1");

@@ -17,6 +17,11 @@ export const resumeFiles = {
   es: "/gonzalo-martin-perez-ai-software-engineer-es.pdf",
 };
 
+export const resumeFilenames = {
+  en: "Gonzalo-Martin-Perez-CV-AI-Software-Engineer-EN.pdf",
+  es: "Gonzalo-Martin-Perez-CV-AI-Software-Engineer-ES.pdf",
+};
+
 function resumeDownload(locale: keyof typeof resumeFiles) {
   const href = resumeFiles[locale];
   const document = documents.find((entry) => entry.href === href);
