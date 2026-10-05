@@ -27,7 +27,7 @@ export function HeroStage({
   avatarLabel: string;
 }) {
   const stageRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasHostRef = useRef<HTMLDivElement>(null);
   const runtimeRef = useRef<SceneRuntime | null>(null);
   const paused = usePageMotionPaused();
   const pausedRef = useRef(paused);
@@ -41,8 +41,13 @@ export function HeroStage({
 
   useLayoutEffect(() => {
     const stage = stageRef.current;
-    const canvas = canvasRef.current;
-    if (!stage || !canvas) return;
+    const canvasHost = canvasHostRef.current;
+    if (!stage || !canvasHost) return;
+    let canvas: HTMLCanvasElement | null = null;
+    const detach = () => {
+      canvas?.removeEventListener("webglcontextlost", lost);
+      canvas?.removeEventListener("webglcontextrestored", restored);
+    };
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
     const shortViewport = matchMedia("(max-height: 649px)");
     let cancelled = false;
@@ -50,6 +55,7 @@ export function HeroStage({
     const clear = () => {
       runtimeRef.current?.dispose();
       runtimeRef.current = null;
+      stage.dataset.mode = "static";
       setMode("static");
     };
     const initialize = () => {
@@ -59,7 +65,14 @@ export function HeroStage({
       const mount = (mountScene: NonNullable<typeof cachedMountScene>) => {
         if (cancelled || token !== generation) return;
         try {
-          runtimeRef.current = mountScene(stage, canvas);
+          detach();
+          // Measure the final animated layout, rather than reallocating the GPU
+          // buffer for a transient static viewport during a warm route commit.
+          stage.dataset.mode = pausedRef.current ? "paused" : "running";
+          runtimeRef.current = mountScene(stage, canvasHost);
+          canvas = runtimeRef.current.canvas;
+          canvas.addEventListener("webglcontextlost", lost);
+          canvas.addEventListener("webglcontextrestored", restored);
           runtimeRef.current.sync(pausedRef.current);
           setMode(pausedRef.current ? "paused" : "running");
         } catch {
@@ -88,18 +101,15 @@ export function HeroStage({
     const restored = () => {
       initialize();
     };
-    canvas.addEventListener("webglcontextlost", lost);
-    canvas.addEventListener("webglcontextrestored", restored);
     motion.addEventListener("change", restored);
     shortViewport.addEventListener("change", restored);
     initialize();
     return () => {
       cancelled = true;
       generation += 1;
-      runtimeRef.current?.dispose();
+      runtimeRef.current?.release();
       runtimeRef.current = null;
-      canvas.removeEventListener("webglcontextlost", lost);
-      canvas.removeEventListener("webglcontextrestored", restored);
+      detach();
       motion.removeEventListener("change", restored);
       shortViewport.removeEventListener("change", restored);
     };
@@ -118,8 +128,7 @@ export function HeroStage({
             {hero}
           </div>
           <div className={styles.still}>{still}</div>
-          {/* biome-ignore lint/a11y/noAriaHiddenOnFocusable: the named avatar button provides keyboard access to this visual effect. */}
-          <canvas aria-hidden="true" className={styles.canvas} ref={canvasRef} />
+          <div className={styles.canvasHost} ref={canvasHostRef} />
           <div className={styles.core} data-scene-core>
             <button
               type="button"
