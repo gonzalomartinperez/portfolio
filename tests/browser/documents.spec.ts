@@ -10,14 +10,24 @@ test("CV and contact downloads use reviewed content hashes as cache keys", async
   for (const route of ["/cv", "/es/cv", "/contact", "/es/contact"]) {
     await page.goto(route);
     const links = page.locator('main a[href*="ai-software-engineer-"][href*=".pdf"]');
-    expect(await links.count()).toBeGreaterThan(0);
-    for (const link of await links.all()) {
-      const url = new URL((await link.getAttribute("href")) ?? "", page.url());
+    const attributes = await links.evaluateAll((elements) =>
+      elements.map((element) => ({
+        href: element.getAttribute("href"),
+        download: element.getAttribute("download"),
+      })),
+    );
+    expect(attributes.length).toBeGreaterThan(0);
+    for (const link of attributes) {
+      const url = new URL(link.href ?? "", page.url());
       const document = documents.find((entry) => entry.href === url.pathname);
       expect(document).toBeDefined();
       expect(url.searchParams.get("v")).toBe(document?.sha256);
       const response = await request.get(url.href);
       expect(response.status()).toBe(200);
+      const language = url.pathname.endsWith("-es.pdf") ? "ES" : "EN";
+      const filename = `Gonzalo-Martin-Perez-CV-AI-Software-Engineer-${language}.pdf`;
+      expect(response.headers()["content-disposition"]).toBe(`inline; filename="${filename}"`);
+      if (link.download !== null) expect(link.download).toBe(filename);
       expect(
         createHash("sha256")
           .update(await response.body())
@@ -27,11 +37,23 @@ test("CV and contact downloads use reviewed content hashes as cache keys", async
     if (route.endsWith("/cv")) {
       const open = page.getByRole("link", { name: /^(Open CV|Abrir CV)/ });
       const download = page.getByRole("link", { name: /^(Download CV|Descargar CV)/ });
-      await expect(open).toHaveAttribute("target", "_blank");
-      await expect(open).toHaveAttribute("rel", /noopener/);
-      expect(await open.getAttribute("download")).toBeNull();
-      await expect(download).toHaveAttribute("download", "");
-      await expect(open).toHaveAttribute("href", (await download.getAttribute("href")) ?? "");
+      const openAttributes = await open.evaluate((element) => ({
+        target: element.getAttribute("target"),
+        rel: element.getAttribute("rel"),
+        download: element.getAttribute("download"),
+        href: element.getAttribute("href"),
+      }));
+      const downloadAttributes = await download.evaluate((element) => ({
+        download: element.getAttribute("download"),
+        href: element.getAttribute("href"),
+      }));
+      expect(openAttributes.target).toBe("_blank");
+      expect(openAttributes.rel).toMatch(/noopener/);
+      expect(openAttributes.download).toBeNull();
+      expect(downloadAttributes.download).toBe(
+        `Gonzalo-Martin-Perez-CV-AI-Software-Engineer-${route.startsWith("/es/") ? "ES" : "EN"}.pdf`,
+      );
+      expect(openAttributes.href).toBe(downloadAttributes.href);
     }
   }
 });

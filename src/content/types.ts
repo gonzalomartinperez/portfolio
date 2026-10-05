@@ -16,6 +16,7 @@ export type Metric = {
 
 export type EvidenceLink = {
   label: string;
+  download?: string;
   href: string;
   /** Describes the destination for links that leave the site. */
   description?: string;

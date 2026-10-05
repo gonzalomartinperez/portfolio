@@ -45,7 +45,7 @@ export function ContactView({ locale }: { locale: Locale }) {
               {resumeLinks.map((link) => (
                 <a
                   className={buttonVariants({ variant: "outline" })}
-                  download
+                  download={link.download}
                   href={link.href}
                   key={link.href}
                 >

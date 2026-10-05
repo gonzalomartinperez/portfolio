@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-05.2",
+  "revision": "2026-10-05.3",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -196,7 +196,7 @@
                       "href": ""
                     },
                     {
-                      "text": " with LangChain/LangGraph, Neo4j and OpenAI API. GraphRAG related enterprise policies and promotions; its internal harness orchestrated agents, evaluated answers, tuned performance and enforced domain and data-leakage guardrails. Connected to the Spring WebFlux BFF for portal access, the assistant answered queries without executing commercial actions.",
+                      "text": " with LangChain/LangGraph, Neo4j, PostgreSQL/pgvector and OpenAI API. GraphRAG related enterprise policies and promotions; its internal harness orchestrated agents, evaluated answers, tuned performance and enforced domain and data-leakage guardrails. Connected to the Spring WebFlux BFF for portal access, the assistant answered queries without executing commercial actions.",
                       "bold": false,
                       "href": ""
                     }
@@ -1159,7 +1159,7 @@
                       "href": ""
                     },
                     {
-                      "text": " con LangChain/LangGraph, Neo4j y OpenAI API. GraphRAG relacionaba políticas empresariales y promociones; el harness interno orquestaba agentes, evaluaba respuestas, optimizaba rendimiento y aplicaba guardrails de dominio y protección de datos. Conectado al BFF Spring WebFlux para el acceso desde el portal, respondía consultas sin ejecutar operaciones comerciales.",
+                      "text": " con LangChain/LangGraph, Neo4j, PostgreSQL/pgvector y OpenAI API. GraphRAG relacionaba políticas empresariales y promociones; el harness interno orquestaba agentes, evaluaba respuestas, optimizaba rendimiento y aplicaba guardrails de dominio y protección de datos. Conectado al BFF Spring WebFlux para el acceso desde el portal, respondía consultas sin ejecutar operaciones comerciales.",
                       "bold": false,
                       "href": ""
                     }
@@ -1207,7 +1207,7 @@
                       "href": ""
                     },
                     {
-                      "text": " con arquitectura en capas, y desarrollé y diagnostiqué aplicaciones contenerizadas ejecutados en entornos gestionados con Docker/Kubernetes.",
+                      "text": " con arquitectura en capas, y desarrollé y diagnostiqué aplicaciones contenerizadas ejecutadas en entornos gestionados con Docker/Kubernetes.",
                       "bold": false,
                       "href": ""
                     }
@@ -1921,11 +1921,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "d088e67c2e7ec827041590bf160ed74bfa6eda736d8852c4ca6ca06df36ab382",
-    "factsSha256": "b65f4aa2c725f87dcdaa4993f4096793a010619d5859bd16ee478802b70237c1",
+    "sourceSha256": "9ea032cba1a261d0f8bd6b64e65d11e926cf0a1793e7a408ce992cbf8afb6a63",
+    "factsSha256": "a5dc3cae70f34bb7b436ca01a2e314f8a764cf31d2675f094137a55caae9bee6",
     "pdfSha256": {
-      "en": "a1305ca625a692548e8add160ba82f89089aaac33526e9c87432568d2a0b1a98",
-      "es": "26dd7a70d8faf8027bab5306f0cdecd9526e577f0f4d522ae575dc5fea2b49e1"
+      "en": "cac6d6d01e429a6699255631f5fff83408ba69fdee073d10e76b5dad59ef7056",
+      "es": "7e404216211e74a446eae766577b5746fb96b255fa626dcd2e5238565450b7f6"
     }
   }
 }

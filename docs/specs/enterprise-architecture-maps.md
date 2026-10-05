@@ -54,7 +54,9 @@ crowding the avatar or copy, or changing the settled technology-grid spacing.
 - The BFF accesses Java/Spring Boot and Node.js/NestJS microservices, each with
   its respective PostgreSQL database, and the complete Promotion Assistance System.
 - That system contains a harness for orchestration, evaluations and guardrails,
-  and Neo4j GraphRAG for enterprise policy and promotion context.
+  and Neo4j GraphRAG for enterprise policy and promotion context, complemented
+  by PostgreSQL/pgvector for vector retrieval. Do not assign the extension to
+  every transactional service database.
 - Preserve S3 -> SQS -> Python/FastAPI Lambda -> Java and Node services -> their
   respective databases; neither Lambda nor the BFF bypasses those service boundaries.
 - CloudWatch is an observability capability inside AWS, not an inline request hop.
@@ -169,3 +171,23 @@ Acceptance verifies zero drawing-buffer dimension writes on a warm switch,
 continuous visible frames, preserved progress and scroll, context recovery,
 fallbacks and disposal when leaving Home. These resource invariants are not
 a guarantee of fixed navigation latency or device refresh rate.
+
+
+## Final database and document naming clarification
+
+The owner reconfirmed PostgreSQL with pgvector in Teamcubation. The contextual
+map keeps its 15 cards and 14 connections: Neo4j is named within GraphRAG and
+a PostgreSQL/pgvector card identifies vector retrieval. Transactional service
+cards remain PostgreSQL without inferring extension use by every microservice.
+Eight focused topology checks passed across both languages, themes and devices.
+
+Career Ops PR #14 promotes reviewed revision `2026-10-05.3` with the same fact
+in the bilingual CV and manual LinkedIn experience. All six CV pages were
+reviewed; the baseline remains three pages per language. The portfolio uses the
+promoted PDF bytes and matching public projection. Download links and inline PDF
+responses use `Gonzalo-Martin-Perez-CV-AI-Software-Engineer-EN.pdf` and the `ES`
+equivalent. Stable document URLs and hash cache keys remain intact.
+
+The LinkedIn packet now has one Featured item, titled Portfolio, linking to
+the portfolio homepage. Its separate curated skills plan is a manual aid rather
+than a claim that every skill association is required for Recruiter searches.
