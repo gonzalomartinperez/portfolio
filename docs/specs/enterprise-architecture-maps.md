@@ -149,12 +149,12 @@ specific tag reference; this does not authorize rewriting protected branches.
 
 ## Final editorial and rollout follow-up
 
-Career Ops PR #10 prepares revision `2026-10-05.2`: a stronger bilingual
+Career Ops PR #10 promotes revision `2026-10-05.2`: a stronger bilingual
 professional summary, natural outcome-focused experience bullets, and the same
 approved three-page layout. All six pages were visually reviewed and promoted
 against their preview manifest hash; the portfolio projection and PDFs are
 exported from that promoted source. The manual LinkedIn packet includes the
-owner-requested 214-character headline, natural expanded About sections,
+owner-requested 220-character headline, natural expanded About sections,
 experiences, education, certifications, languages and portfolio-based highlights.
 LinkedIn remains manual and is not published by this workflow.
 
@@ -162,3 +162,10 @@ The owner confirmed that the assistant must stay disabled. PR #96 includes an
 explicit opt-in rollout gate: normal deployment has no launcher and assistant
 routes return 404. Enabled CI fixtures preserve native-assistant coverage, while
 compatibility smoke checks cover the disabled production default.
+
+The final Home locale fix retains the exact canvas and WebGL context across
+language navigation and measures the animated layout before initializing.
+Acceptance verifies zero drawing-buffer dimension writes on a warm switch,
+continuous visible frames, preserved progress and scroll, context recovery,
+fallbacks and disposal when leaving Home. These resource invariants are not
+a guarantee of fixed navigation latency or device refresh rate.
