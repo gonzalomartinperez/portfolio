@@ -17,6 +17,7 @@ type Handoff = {
   elapsed: number;
   quality: number;
   progress: number;
+  appliedProgress: number;
   pulse: Pulse | null;
   pulseCount: string | undefined;
 };
@@ -475,8 +476,13 @@ function bindScene(
         (Math.floor(index / columns) / Math.max(1, rows - 1)) * (gridBottom - gridTop) -
         height / 2;
     }
+    const progress = deterministic
+      ? fixedProgress
+      : appliedProgress < 0
+        ? visualProgress
+        : appliedProgress;
     appliedProgress = -1;
-    update(deterministic ? fixedProgress : visualProgress);
+    update(progress);
     // This unpinned scene can refresh its bounds without resetting the page scroll.
     trigger.refresh();
   };
@@ -548,7 +554,7 @@ function bindScene(
   };
   try {
     applyTheme();
-    update(deterministic ? fixedProgress : targetProgress);
+    update(deterministic ? fixedProgress : (previous?.appliedProgress ?? targetProgress));
     resize();
     if (pulse) paintPulse(clamp(pulse.age / (pulse.avatar ? 1.35 : 0.75)));
     sync();
@@ -581,6 +587,7 @@ function bindScene(
         elapsed,
         quality,
         progress: visualProgress,
+        appliedProgress,
         pulse,
         pulseCount: stage.dataset.scenePulseCount,
       };

@@ -102,3 +102,23 @@ test("locale navigation reuses the hero GPU context and releases it when leaving
   ).toBe(false);
   await resources.dispose();
 });
+
+test("locale handoff preserves the last drawn checkpoint when the target URL drops scene parameters", async ({
+  page,
+}) => {
+  await page.goto("/?sceneProgress=0.68585&sceneTime=0");
+  const scene = page.locator("[data-scene]");
+  await expect(scene).toHaveAttribute("data-mode", "running");
+  await scene.getByRole("button", { name: "Pause animation", exact: true }).click();
+  await expect(scene).toHaveAttribute("data-mode", "paused");
+  const progress = await scene.getAttribute("data-scene-progress");
+  expect(Number(progress)).toBeGreaterThan(0.6);
+  for (const locale of ["es", "en"]) {
+    await page
+      .locator(`header a[hreflang="${locale}"]`)
+      .evaluate((link: HTMLAnchorElement) => link.click());
+    await expect(page).toHaveURL(locale === "es" ? /\/es$/ : /\/$/);
+    await expect(scene).toHaveAttribute("data-mode", "paused");
+    await expect(scene).toHaveAttribute("data-scene-progress", progress ?? "");
+  }
+});
