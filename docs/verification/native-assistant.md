@@ -6,6 +6,23 @@ production server behind a loopback HTTPS fixture. OpenSSL is a test prerequisit
 only Playwright ignores the ephemeral self-signed certificate. Browser fixtures call the real HTTP/SSE
 adapter and controller, but do not call OpenAI or prove production CORS/cookies.
 
+An additional browser smoke exercised the committed API at
+`https://localhost:18118` from `https://localhost:3264`, without request interception.
+Chromium, Firefox and WebKit passed session bootstrap, Secure/HttpOnly cookies,
+credentialed cross-origin requests, CSRF, public catalog, SSE, source links,
+durable reload/history and conversation deletion. The backend used its isolated
+fixture provider and databases, not OpenAI. Each browser deleted its own test
+conversation. This proves local HTTPS integration, not production routing or
+provider answer quality.
+
+The fixture used API revision `c6012067c4a99db477bb6ddcf1f26dae095641ca`
+and corpus revision `cb0b56baaa50a1521a4e02eee1d67f13c89d19a2` (version
+`cb0b56baaa50a1521a4e02eee1d67f13c89d19a2-v6`). The API owner built image
+`sha256:b724a3c322304ee024bfd0e42a02749f6c479566d12a35a594e9b95ca59a250b`
+from a committed Git archive, with migrations 001–005, isolated PostgreSQL/pgvector
+and Neo4j, and no Redis. Its bounded fixture index contained 12 public files,
+75 chunks and 268 graph facts; this is not a full production corpus evaluation.
+
 ## Evidence and reproduction
 
 ```sh
@@ -75,6 +92,35 @@ The imported API revision is `c6012067c4a99db477bb6ddcf1f26dae095641ca`,
 with contract artifact handoff `15b6943f741ac80498a5fee611aa74d24250eb6b`.
 No mutable API working tree was consumed.
 
+### Reproduce the cross-service smoke
+
+Provision an isolated, committed fixture-provider API with no OpenAI credentials.
+Its HTTPS wrapper must permit the exact browser origin below and expose the
+session/CSRF/SSE contract. The API owner supplies that environment; this repository
+does not start or modify another agent's services. Build the public origin into
+the frontend, then start its test-only HTTPS wrapper in a separate terminal:
+
+```sh
+NEXT_PUBLIC_ASSISTANT_API_URL=https://localhost:18118 npm run build
+BROWSER_TEST_PORT=3264 BROWSER_TEST_UPSTREAM_PORT=3265 node scripts/browser-test-server.ts
+```
+
+Once the managed wrapper is ready:
+
+```sh
+ASSISTANT_API_FIXTURE=1 SITE_TEST_ORIGIN=https://localhost:3264 \
+  ASSISTANT_API_TEST_ORIGIN=https://localhost:18118 node tests/integration/native-api.ts
+```
+
+The smoke requires an explicit fixture acknowledgement and HTTPS localhost
+origins; it does not bypass authorization for a model-backed environment.
+Stop the owned wrapper with Ctrl+C afterward. Rebuild without the local origin
+before running the mocked browser suite. The first local-origin build exited
+with Node status 139 during trace collection after successful compilation/types;
+the identical retry completed successfully. The first build failure's root cause
+remains unverified; it is not reported as a successful build or an application
+performance improvement.
+
 ## Measured build impact
 
 Final build: 2,789 bytes gzip deferred assistant CSS; 23,137 bytes gzip existing
@@ -93,6 +139,6 @@ controlled speed improvement or field Core Web Vitals claim.
 
 The API and vps-ops owners must verify exact allowed portfolio origins, credentialed
 CORS, cookie policy, exposed `X-Run-ID`, CSRF and reverse-proxy SSE behavior.
-Real backend integration, provider quality, production headers/TLS, physical mobile
+Provider quality, production headers/TLS, physical mobile
 keyboards and assistive technology have not been established by these fixture tests.
 No deployment or production authentication change is authorized by this document.
