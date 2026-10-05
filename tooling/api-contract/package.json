@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-api-contract-tooling",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "openapi-typescript ../../src/contracts/openapi.json -o ../../src/contracts/types.d.ts"
+  },
+  "devDependencies": {
+    "openapi-typescript": "7.13.0",
+    "typescript": "5.9.3"
+  }
+}

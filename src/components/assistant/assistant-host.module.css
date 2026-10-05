@@ -1,0 +1,92 @@
+.host {
+  position: relative;
+  z-index: 110;
+}
+.launcher {
+  position: fixed;
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  right: max(1.25rem, env(safe-area-inset-right));
+  box-shadow: 0 8px 32px rgb(0 0 0 / 25%);
+}
+.surface {
+  position: fixed;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  right: 1rem;
+  width: min(440px, calc(100vw - 2rem));
+  height: min(720px, calc(var(--assistant-viewport-height, 100dvh) - 2rem));
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface-void);
+  color: var(--text-primary);
+  box-shadow: 0 16px 64px rgb(0 0 0 / 30%);
+  overflow: hidden;
+}
+.surface[hidden],
+.launcher[hidden] {
+  display: none;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 52px;
+  padding: 0.25rem 0.5rem 0.25rem 60px;
+  border-bottom: 1px solid var(--line-subtle);
+  background: var(--surface-base);
+  font-size: var(--text-small);
+}
+.toolbar > span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--text-primary);
+}
+.toolbar > div {
+  display: flex;
+  flex-shrink: 0;
+}
+.toolbar button {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 8px;
+}
+.toolbar svg {
+  width: 20px;
+  height: 20px;
+}
+.chat {
+  flex: 1;
+  min-height: 0;
+}
+.expanded {
+  inset: calc(var(--assistant-viewport-top, 0px) + 1rem) 1rem auto;
+  width: auto;
+  height: calc(var(--assistant-viewport-height, 100dvh) - 2rem);
+}
+.page {
+  inset: 5.5rem max(1rem, calc((100vw - 70rem) / 2)) 1rem;
+  width: auto;
+  height: auto;
+}
+@media (max-width: 620px) {
+  .surface {
+    top: var(--assistant-viewport-top, 0px);
+    right: 0;
+    bottom: auto;
+    width: 100%;
+    height: var(--assistant-viewport-height, 100dvh);
+    border-radius: 0;
+    border-width: 0;
+  }
+  .toolbar {
+    padding-top: env(safe-area-inset-top);
+  }
+  .page {
+    top: calc(var(--assistant-viewport-top, 0px) + 4.5rem);
+    height: calc(var(--assistant-viewport-height, 100dvh) - 4.5rem);
+  }
+}

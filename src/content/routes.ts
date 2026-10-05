@@ -11,9 +11,11 @@ export const siteRoutes = [
   { path: "/cv", priority: 0.8 },
 ] as const;
 
-const pagePaths = new Set(
-  siteRoutes.flatMap(({ path }) => locales.map((locale) => localePath(locale, path))),
-);
+const pagePaths = new Set([
+  ...siteRoutes.flatMap(({ path }) => locales.map((locale) => localePath(locale, path))),
+  "/assistant",
+  "/es/assistant",
+]);
 
 /** Unknown URLs share the prerendered English 404 shell and bilingual home recovery. */
 export function navigationPath(pathname: string): string {

@@ -31,8 +31,19 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tooling/api-contract/package-lock.json
       - name: Install locked dependencies
         run: npm ci
+      - name: Regenerate the committed assistant contract with frozen tooling
+        run: npm run contract:generate
+      - name: Audit both locked dependency graphs
+        run: |
+          npm audit --audit-level=moderate
+          npm audit --prefix tooling/api-contract --audit-level=moderate
+      - name: Reject generated contract drift
+        run: git diff --exit-code -- src/contracts
       - name: Check repository, lint, types, and production build
         run: npm run check
       - name: Verify server-rendered routes
@@ -79,7 +90,7 @@ jobs:
       - name: Restore the production build
         run: tar -xzf /tmp/portfolio-build/portfolio-production-build.tar.gz
       - name: Install browser test runtime
-        run: npx --no-install playwright install --with-deps chromium
+        run: npx --no-install playwright install --with-deps chromium firefox webkit
       - name: Verify interactions and accessibility on an isolated runner
         run: npm run test:browser -- --shard=${{ matrix.shard }}/8
       - name: Retain browser verification artifacts

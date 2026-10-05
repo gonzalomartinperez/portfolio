@@ -148,7 +148,7 @@
 .toggle {
   position: fixed;
   bottom: 1.5rem;
-  right: max(1.5rem, calc((100vw - 1280px) / 2));
+  left: max(1.5rem, calc((100vw - 1280px) / 2));
   display: flex;
   gap: 0.65rem;
   align-items: center;
@@ -271,8 +271,8 @@
     height: calc(225svh + var(--scene-reading-hold, 0px));
   }
   .toggle {
-    right: 1rem;
-    bottom: 1rem;
+    left: 1rem;
+    bottom: max(5rem, calc(env(safe-area-inset-bottom) + 4rem));
   }
   .logoCloud :global(.scene-logo) svg,
   .logoCloud :global(.scene-logo) img {
