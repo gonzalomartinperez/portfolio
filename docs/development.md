@@ -262,7 +262,8 @@ All eight browser shards keep their existing engine coverage and one worker for 
 scene/focus tests. The pinned Playwright CLI installs Chromium Headless Shell, Firefox and
 WebKit with `--only-shell`; no CI project uses a headed Chromium channel. The verified
 build is archived once with gzip level1 and uploaded with artifact compression level0,
-avoiding repeated compression. Frozen installs skip implicit npm audit/funding requests;
+avoiding repeated compression. Explicit bash defaults enforce pipefail so failed archive
+creation cannot upload a partial successful gzip stream. Frozen installs skip implicit npm audit/funding requests;
 required explicit audits still cover both lockfiles. Cache paths identify the actual lockfile.
 See [Playwright installation](https://playwright.dev/docs/browsers#chromium). Verify current-head
 Actions results and record installation/upload timings; do not infer a speedup from one run.
