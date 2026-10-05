@@ -254,7 +254,7 @@
 
 .cooperativa-obrera .canvas,
 .cooperativa-obrera .loading {
-  height: 720px;
+  height: 800px;
 }
 .enterpriseNode {
   width: 100%;
@@ -309,4 +309,9 @@
   background: var(--surface-raised);
   border-radius: 0.2rem;
   padding: 0.1rem 0.2rem;
+}
+
+.groupHandle {
+  opacity: 0;
+  pointer-events: none;
 }

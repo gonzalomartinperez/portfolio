@@ -22,7 +22,7 @@
     "lint": "biome check .",
     "format": "biome check --write .",
     "typecheck": "next typegen && tsc --noEmit",
-    "check": "npm run test:repository && npm run test:assistant-contract && npm run test:content && npm run test:identity && npm run test:documents && npm run lint && npm run build && npm run test:budget",
+    "check": "npm run test:repository && npm run test:assistant-contract && npm run test:assistant && npm run typecheck:assistant && npm run test:content && npm run test:identity && npm run test:documents && npm run lint && npm run build && npm run test:budget",
     "test:repository": "node --test scripts/repository.test.mjs scripts/scene-budget.test.mjs scripts/cloud-layout.test.mjs",
     "test:content": "node --test scripts/content.test.mjs scripts/catalogue.test.mjs scripts/academic.test.mjs scripts/content-migration.test.mjs scripts/cv-export.test.mjs",
     "test:budget": "node --test scripts/budget.test.mjs",
@@ -31,10 +31,14 @@
     "test:documents": "node scripts/documents.ts",
     "cv:sync:check": "node scripts/export-cv.mjs --check",
     "test:smoke": "node scripts/smoke-test.mjs",
+    "test:assistant-disabled": "playwright test --config playwright.rollout.config.ts",
     "test:browser": "playwright test",
     "test:identity": "node scripts/generate-identity.mjs --check",
     "identity:build": "node scripts/generate-identity.mjs --write",
-    "test:assistant-contract": "node scripts/check-assistant-contract.mjs"
+    "test:assistant-contract": "node scripts/check-assistant-contract.mjs",
+    "test:assistant": "node --test scripts/assistant-*.test.ts",
+    "typecheck:assistant": "next typegen && tsc --project tsconfig.assistant.json --noEmit",
+    "contract:generate": "npm ci --prefix tooling/api-contract && npm run generate --prefix tooling/api-contract"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "1.1.23",
@@ -47,6 +51,9 @@
     "next": "16.3.8",
     "react": "19.3.0",
     "react-dom": "19.3.0",
+    "react-markdown": "10.1.0",
+    "rehype-sanitize": "6.0.0",
+    "remark-gfm": "4.0.1",
     "tailwind-merge": "3.7.0",
     "three": "0.186.1"
   },

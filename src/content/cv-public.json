@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-04.2",
+  "revision": "2026-10-05.2",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -15,7 +15,17 @@
           "href": ""
         },
         {
-          "text": " with an Information Systems Engineering degree. I build production AI agents, RAG, web/mobile products and DeFi integrations. I combine product architecture and design systems with backend scale: I contributed to a historical load of ",
+          "text": " with an Information Systems Engineering degree. Build user-focused enterprise, fintech, and blockchain products end to end: AI agents and RAG/GraphRAG, distributed backends, web and mobile applications, and production operations. Reduced measured average mobile startup from about ",
+          "bold": false,
+          "href": ""
+        },
+        {
+          "text": "7–8 s to 1–2 s",
+          "bold": true,
+          "href": ""
+        },
+        {
+          "text": " and contributed to ingesting ",
           "bold": false,
           "href": ""
         },
@@ -25,17 +35,7 @@
           "href": ""
         },
         {
-          "text": " and built a back office integrating ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "10+ enterprise systems",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": ".",
+          "text": ". Combine product judgment, maintainable architecture, performance, and security to turn complex requirements into reliable software.",
           "bold": false,
           "href": ""
         }
@@ -63,7 +63,7 @@
                       "href": ""
                     },
                     {
-                      "text": " · Work directly with three founders to ship AI, fintech, web and mobile features through architecture, delivery and operations.",
+                      "text": " · Work with three founders to bring AI, fintech, web, and mobile features from technical decisions through delivery and production operations.",
                       "bold": false,
                       "href": ""
                     }
@@ -74,12 +74,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Rebuilt production product architecture",
+                      "text": "Modernized the production application end to end",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ": refactored the full backend into hexagonal architecture and the React/Next.js frontend into feature-based domains; built Rampy’s complete design system with reusable components. Implemented E2EE for user conversations with encrypted database storage.",
+                      "text": ": refactored the backend into hexagonal architecture and organized the React/Next.js frontend by domain and feature; built Rampy’s complete design system with reusable components. Implemented end-to-end encryption (E2EE) for user conversations, storing messages encrypted in the database.",
                       "bold": false,
                       "href": ""
                     }
@@ -90,12 +90,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Built production Agno, LangChain/LangGraph and OpenAI API agent workflows with Neo4j GraphRAG",
+                      "text": "Built and optimized production AI agents with Neo4j GraphRAG",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", using PostgreSQL/pgvector, Mem0, Vertex AI and DeepInfra for memory, retrieval and model access; improved tool selection and evaluation. Optimized flows responded at least 2× faster by my estimate; removing redundant calls cut tokens in affected queries by an estimated 30%.",
+                      "text": " using Agno, LangChain/LangGraph, and OpenAI API; integrated PostgreSQL/pgvector, Mem0, Vertex AI, and DeepInfra for retrieval, memory, and model access. Improved tool selection and evaluation: optimized flows ran at least 2× faster by my estimate, while removing redundant calls reduced token usage in affected queries by an estimated 30%.",
                       "bold": false,
                       "href": ""
                     }
@@ -180,17 +180,7 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Payway promotions platform: contributed to a production historical load of ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "20M+ promotions",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " plus thousands of new promotions daily, in a 13-country ecosystem.",
+                      "text": "Payway’s merchant promotions platform: delivered software in a 13-country ecosystem with thousands of new promotions daily.",
                       "bold": false,
                       "href": ""
                     }
@@ -217,12 +207,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Implemented event-driven ingestion for a production historical load of 20M+ promotions",
+                      "text": "Built event-driven ingestion for 20M+ historical promotions in production",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ": S3 → SQS → Python/FastAPI Lambda → Java/Spring Boot and Node.js/NestJS microservices, each writing to its own database. Built Python/Node.js tooling to reproduce local loads, reconcile results and identify failed promotions.",
+                      "text": ": S3 → SQS → Python/FastAPI Lambda → Java/Spring Boot and Node.js/NestJS microservices, each writing to its own PostgreSQL database. Built Python/Node.js tooling to reproduce local loads, reconcile results and identify failed promotions.",
                       "bold": false,
                       "href": ""
                     }
@@ -359,22 +349,22 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Designed and shipped digital products",
+                      "text": "Designed and shipped digital products, backoffices, and inventory/point-of-sale extensions",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", back offices, and stock/point-of-sale extensions that generated ",
+                      "text": " that generated ",
                       "bold": false,
                       "href": ""
                     },
                     {
-                      "text": "USD 10,000+ in cumulative client profit across historical projects",
+                      "text": "USD 10,000+ in cumulative client profit across multiple projects",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", connecting commercial needs with maintainable, scalable operations.",
+                      "text": ", translating business needs into maintainable software.",
                       "bold": false,
                       "href": ""
                     }
@@ -400,7 +390,7 @@
                       "href": ""
                     },
                     {
-                      "text": " · Principal design, architecture, and implementation of a back office for authorized personnel at an organization with ",
+                      "text": " · Took a primary role in designing and building an enterprise backoffice for authorized personnel at an organization with ",
                       "bold": false,
                       "href": ""
                     },
@@ -488,7 +478,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", organized by feature and using a design system, connected exclusively to a Python/FastAPI BFF. The backend used layered architecture; the BFF standardized frontend views and connected Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger.",
+                      "text": ", organized by feature and using a design system, connected exclusively to a Python/FastAPI BFF. The backend used layered architecture; the BFF standardized frontend views and connected Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger; microservices used MySQL / MariaDB databases.",
                       "bold": false,
                       "href": ""
                     }
@@ -504,7 +494,7 @@
                       "href": ""
                     },
                     {
-                      "text": " in tests on enterprise on-premise servers through SQL tuning, indexing and pagination; used an agentic engineering workspace to preserve context across integration repositories.",
+                      "text": " in repeatable tests on enterprise on-premise servers through SQL tuning, indexing, and pagination. Built an agentic engineering workspace to preserve context across integration repositories.",
                       "bold": false,
                       "href": ""
                     }
@@ -515,12 +505,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Implemented LDAP, RBAC, and exportable auditing",
+                      "text": "Implemented LDAP, RBAC, and an exportable audit trail",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " to restrict access to authorized personnel; automated Python validation and bulk loads for a MySQL/MariaDB and Redis system subsequently maintained by the web team.",
+                      "text": " to control access and trace permission changes; automated bulk data loading and validation with Python in a MySQL/MariaDB and Redis environment.",
                       "bold": false,
                       "href": ""
                     }
@@ -727,17 +717,7 @@
                       "href": ""
                     },
                     {
-                      "text": " from a 5-year accredited engineering program at one of Argentina's top-ranked public universities: ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "#10 nationally",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " in the 2026 SCImago Institutions Rankings and #8 nationally across five consecutive CWUR editions (2020–2024). Completed 34/34 courses, an ",
+                      "text": " from a 5-year accredited engineering program. Completed 34/34 courses, an ",
                       "bold": false,
                       "href": ""
                     },
@@ -757,7 +737,17 @@
                       "href": ""
                     },
                     {
-                      "text": ", and Supervised Professional Practice. Relevant coursework: Artificial Intelligence Systems, Systems Architecture & Design, Databases, Software Verification & Validation, Algorithms & Complexity, and Formal Methods for Software Engineering.",
+                      "text": ", and Supervised Professional Practice. UNS ranked ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "#10 nationally",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " in SCImago Institutions Rankings 2026 and #8 in five consecutive CWUR editions (2020–2024). Relevant coursework: Artificial Intelligence, Systems Architecture & Design, Databases, Software Verification & Validation, Algorithms & Complexity, and Formal Methods.",
                       "bold": false,
                       "href": ""
                     }
@@ -826,12 +816,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Supported 1,000+ simultaneous users observed in production",
+                      "text": "Supported 1,000+ concurrent users observed in production",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " with complete consistency and critical endpoints below ",
+                      "text": " while preserving data consistency and keeping critical endpoints below ",
                       "bold": false,
                       "href": ""
                     },
@@ -841,7 +831,7 @@
                       "href": ""
                     },
                     {
-                      "text": " through SQL tuning, Redis caching and queues.",
+                      "text": ", using SQL optimization, Redis caching, and queues.",
                       "bold": false,
                       "href": ""
                     }
@@ -988,7 +978,17 @@
           "href": ""
         },
         {
-          "text": " e Ingeniero en Sistemas de Información. Construyo agentes, RAG, productos web/móviles e integraciones DeFi en producción. Combino arquitectura y sistemas de diseño con backend a escala: contribuí a una carga histórica de ",
+          "text": " e Ingeniero en Sistemas de Información. Construyo productos centrados en los usuarios para software empresarial, fintech y blockchain: agentes con IA, RAG/GraphRAG, backends distribuidos y aplicaciones web y móviles, desde los requisitos hasta producción. Reduje el arranque promedio medido de una app de unos ",
+          "bold": false,
+          "href": ""
+        },
+        {
+          "text": "7–8 s a 1–2 s",
+          "bold": true,
+          "href": ""
+        },
+        {
+          "text": " y contribuí a la ingesta de ",
           "bold": false,
           "href": ""
         },
@@ -998,17 +998,7 @@
           "href": ""
         },
         {
-          "text": " y construí un backoffice que integra ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "10+ sistemas empresariales",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": ".",
+          "text": ". Combino criterio de producto, arquitectura mantenible, rendimiento y seguridad para convertir requisitos complejos en software confiable.",
           "bold": false,
           "href": ""
         }
@@ -1036,7 +1026,7 @@
                       "href": ""
                     },
                     {
-                      "text": " · Colaboro con tres fundadores para llevar IA, fintech, web y mobile desde la arquitectura hasta producción y operación.",
+                      "text": " · Colaboro con tres fundadores para llevar funcionalidades de IA, fintech, web y mobile desde las decisiones técnicas hasta producción.",
                       "bold": false,
                       "href": ""
                     }
@@ -1047,12 +1037,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Reconstruí la arquitectura del producto en producción",
+                      "text": "Modernicé la aplicación en producción de punta a punta",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ": refactoricé todo el backend con arquitectura hexagonal y el frontend React/Next.js por dominios y funcionalidades; desarrollé el design system completo con componentes reutilizables. Implementé E2EE para conversaciones con almacenamiento cifrado en la base de datos.",
+                      "text": ": refactoricé el backend con arquitectura hexagonal y organicé el frontend React/Next.js por dominios y funcionalidades; desarrollé el design system completo con componentes reutilizables. Implementé cifrado de extremo a extremo (E2EE) para las conversaciones, con mensajes almacenados cifrados en la base de datos.",
                       "bold": false,
                       "href": ""
                     }
@@ -1063,12 +1053,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Desarrollé agentes productivos con Agno, LangChain/LangGraph y OpenAI API, y GraphRAG con Neo4j",
+                      "text": "Desarrollé y optimicé agentes en producción con GraphRAG y Neo4j",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", con PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para memoria, recuperación y acceso a modelos; mejoré la selección de herramientas y evaluación. Según mi estimación, los flujos optimizados respondieron al menos 2× más rápido; eliminar llamadas redundantes redujo un 30% estimado de tokens en las consultas afectadas.",
+                      "text": ", usando Agno, LangChain/LangGraph y OpenAI API; integré PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Mejoré la selección de herramientas y la evaluación: según mi estimación, los flujos optimizados respondieron al menos 2× más rápido, mientras que eliminar llamadas redundantes redujo un 30% estimado de tokens en las consultas afectadas.",
                       "bold": false,
                       "href": ""
                     }
@@ -1084,7 +1074,7 @@
                       "href": ""
                     },
                     {
-                      "text": "; entregué funcionalidades React Native, Kotlin y Swift, usando Android Studio para Android. Implementé tracking de eventos de punta a punta con Firebase Analytics, Clarity Mobile en todas las pantallas, Singular SDK y Meta App Events, evitando duplicados.",
+                      "text": "; entregué funcionalidades React Native, Kotlin y Swift, usando Android Studio para Android. Implementé seguimiento de eventos de punta a punta con Firebase Analytics, Clarity Mobile en todas las pantallas, Singular SDK y Meta App Events, evitando duplicados.",
                       "bold": false,
                       "href": ""
                     }
@@ -1153,17 +1143,7 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Plataforma de promociones de Payway: contribuí a una carga histórica productiva de ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "20M+ promociones",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " y miles de altas diarias en un ecosistema de 13 países.",
+                      "text": "Plataforma de promociones de Payway para comercios: desarrollé software en un ecosistema de 13 países con miles de promociones nuevas por día.",
                       "bold": false,
                       "href": ""
                     }
@@ -1190,12 +1170,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Implementé ingesta event-driven para una carga histórica productiva de 20M+ promociones",
+                      "text": "Implementé ingesta por eventos para 20M+ promociones históricas en producción",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ": S3 → SQS → Lambda Python/FastAPI → microservicios Java/Spring Boot y Node.js/NestJS, cada uno con escritura en su base de datos. Desarrollé tooling Python/Node.js para reproducir cargas locales, reconciliar resultados y detectar promociones fallidas.",
+                      "text": ": S3 → SQS → Lambda Python/FastAPI → microservicios Java/Spring Boot y Node.js/NestJS, cada uno con escritura en su base de datos PostgreSQL. Desarrollé herramientas en Python/Node.js para reproducir cargas locales, reconciliar resultados y detectar promociones fallidas.",
                       "bold": false,
                       "href": ""
                     }
@@ -1227,7 +1207,7 @@
                       "href": ""
                     },
                     {
-                      "text": " con arquitectura en capas, y desarrollé y diagnostiqué workloads contenerizados ejecutados en entornos gestionados con Docker/Kubernetes.",
+                      "text": " con arquitectura en capas, y desarrollé y diagnostiqué aplicaciones contenerizadas ejecutados en entornos gestionados con Docker/Kubernetes.",
                       "bold": false,
                       "href": ""
                     }
@@ -1327,22 +1307,22 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Diseñé y entregué productos digitales",
+                      "text": "Diseñé y entregué productos digitales, backoffices y extensiones de inventario y caja",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", backoffices y extensiones de stock/caja que generaron ",
+                      "text": " que generaron ",
                       "bold": false,
                       "href": ""
                     },
                     {
-                      "text": "USD 10.000+ en ganancias acumuladas para clientes de distintos proyectos históricos",
+                      "text": "USD 10.000+ en ganancias acumuladas para clientes de distintos proyectos",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", conectando necesidades comerciales con operaciones mantenibles y escalables.",
+                      "text": ", convirtiendo necesidades comerciales en software mantenible.",
                       "bold": false,
                       "href": ""
                     }
@@ -1368,7 +1348,7 @@
                       "href": ""
                     },
                     {
-                      "text": " · Diseño, arquitectura e implementación principal del backoffice para personal autorizado de una organización con ",
+                      "text": " · Tuve un rol principal en el diseño y construcción del backoffice para personal autorizado de una organización con ",
                       "bold": false,
                       "href": ""
                     },
@@ -1415,7 +1395,7 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Estandaricé el onboarding de sistemas",
+                      "text": "Estandaricé la incorporación de sistemas",
                       "bold": true,
                       "href": ""
                     },
@@ -1456,7 +1436,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", organizado por funcionalidades y con un design system, conectado exclusivamente a un BFF Python/FastAPI. El backend seguía una arquitectura en capas; el BFF estandarizaba las vistas y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante contratos OpenAPI/Swagger.",
+                      "text": ", organizado por funcionalidades y con un design system, conectado exclusivamente a un BFF Python/FastAPI. El backend seguía una arquitectura en capas; el BFF estandarizaba las vistas y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante OpenAPI/Swagger; los microservicios utilizaban MySQL / MariaDB.",
                       "bold": false,
                       "href": ""
                     }
@@ -1472,7 +1452,7 @@
                       "href": ""
                     },
                     {
-                      "text": " en pruebas sobre servidores empresariales on-premise mediante SQL tuning, índices y paginación; usé un entorno agéntico de ingeniería para preservar contexto entre repositorios de integración.",
+                      "text": " en pruebas repetibles sobre servidores empresariales on-premise mediante optimización SQL, índices y paginación. Construí un entorno agéntico de ingeniería para preservar contexto entre repositorios de integración.",
                       "bold": false,
                       "href": ""
                     }
@@ -1483,12 +1463,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Implementé LDAP, RBAC y auditoría exportable",
+                      "text": "Implementé LDAP, RBAC y un registro de auditoría exportable",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " para restringir el acceso a personal autorizado; automaticé validaciones y cargas Python sobre un sistema con MySQL/MariaDB y Redis, luego mantenido por el equipo web.",
+                      "text": " para controlar el acceso y rastrear cambios de permisos; automaticé cargas masivas y validaciones de datos con Python en un entorno MySQL/MariaDB y Redis.",
                       "bold": false,
                       "href": ""
                     }
@@ -1691,17 +1671,7 @@
                       "href": ""
                     },
                     {
-                      "text": " de una carrera de ingeniería acreditada de 5 años en una de las universidades públicas mejor posicionadas de Argentina: ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "#10 nacional",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " en SCImago Institutions Rankings 2026 y #8 nacional en cinco ediciones consecutivas de CWUR (2020–2024). Completó 34/34 materias, promedio ",
+                      "text": " de una carrera de ingeniería acreditada de 5 años: 34/34 materias, promedio ",
                       "bold": false,
                       "href": ""
                     },
@@ -1721,7 +1691,17 @@
                       "href": ""
                     },
                     {
-                      "text": " y Práctica Profesional Supervisada. Materias relevantes: Sistemas Inteligentes Artificiales, Arquitectura y Diseño de Sistemas, Bases de Datos, Verificación y Validación de Software, Algoritmos y Complejidad y Métodos Formales para Ingeniería de Software.",
+                      "text": " y Práctica Profesional Supervisada completada. La UNS ocupó el ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "#10 nacional",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " en SCImago Institutions Rankings 2026 y el #8 en cinco ediciones de CWUR (2020–2024). Formación relevante: inteligencia artificial, arquitectura y diseño de sistemas, bases de datos, verificación y validación de software, algoritmos y complejidad y métodos formales.",
                       "bold": false,
                       "href": ""
                     }
@@ -1795,7 +1775,7 @@
                       "href": ""
                     },
                     {
-                      "text": " con consistencia completa y endpoints críticos por debajo de ",
+                      "text": ", preservando la consistencia de datos y manteniendo endpoints críticos por debajo de ",
                       "bold": false,
                       "href": ""
                     },
@@ -1805,7 +1785,7 @@
                       "href": ""
                     },
                     {
-                      "text": " mediante SQL tuning, caché y colas Redis.",
+                      "text": " mediante optimización SQL, caché y colas Redis.",
                       "bold": false,
                       "href": ""
                     }
@@ -1832,7 +1812,7 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Reduje el onboarding institucional de horas a minutos",
+                      "text": "Reduje la incorporación de instituciones de horas a minutos",
                       "bold": true,
                       "href": ""
                     },
@@ -1941,11 +1921,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "8757d72c8784d6f5029c82f7805d455c34a85586860be1ffe6754147beb638ce",
-    "factsSha256": "ca8a171bd548fe5522d83096246da1a89f85f59147553b66043ffc98226c970a",
+    "sourceSha256": "d088e67c2e7ec827041590bf160ed74bfa6eda736d8852c4ca6ca06df36ab382",
+    "factsSha256": "b65f4aa2c725f87dcdaa4993f4096793a010619d5859bd16ee478802b70237c1",
     "pdfSha256": {
-      "en": "7fc216cb69062f2cd7f2176dc5c13da91033d1e6782d7efe98e49ca48ed4e038",
-      "es": "7ce28c5bf796881f8e0e6a36c3c94ab7677b9844ed4c5a1085ed071ca0a1a7c4"
+      "en": "a1305ca625a692548e8add160ba82f89089aaac33526e9c87432568d2a0b1a98",
+      "es": "26dd7a70d8faf8027bab5306f0cdecd9526e577f0f4d522ae575dc5fea2b49e1"
     }
   }
 }

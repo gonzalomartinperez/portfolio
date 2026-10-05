@@ -17,7 +17,7 @@
   z-index: 4;
   grid-row: 1;
 }
-.canvas,
+.canvasHost,
 .still {
   position: absolute;
   inset: 0;
@@ -25,7 +25,11 @@
   height: 100%;
   pointer-events: none;
 }
-.canvas {
+.canvasHost > canvas {
+  width: 100%;
+  height: 100%;
+}
+.canvasHost {
   opacity: 0;
   mask-image: linear-gradient(
     #000 calc(100% - var(--scene-edge-fade)),
@@ -51,7 +55,7 @@
 .stage[data-mode="static"] .backdrop {
   display: none;
 }
-.stage:is([data-scene-pulse="sphere"], [data-scene-pulse="avatar"]) .canvas {
+.stage:is([data-scene-pulse="sphere"], [data-scene-pulse="avatar"]) .canvasHost {
   z-index: 3;
 }
 .still {
@@ -148,7 +152,7 @@
 .toggle {
   position: fixed;
   bottom: 1.5rem;
-  right: max(1.5rem, calc((100vw - 1280px) / 2));
+  left: max(1.5rem, calc((100vw - 1280px) / 2));
   display: flex;
   gap: 0.65rem;
   align-items: center;
@@ -193,7 +197,7 @@
   grid-row: auto;
   top: var(--scene-core-y, 68%);
 }
-.stage:is([data-mode="running"], [data-mode="paused"]) .canvas {
+.stage:is([data-mode="running"], [data-mode="paused"]) .canvasHost {
   opacity: 1;
 }
 .stage:is([data-mode="running"], [data-mode="paused"]) .still {
@@ -271,8 +275,8 @@
     height: calc(225svh + var(--scene-reading-hold, 0px));
   }
   .toggle {
-    right: 1rem;
-    bottom: 1rem;
+    left: 1rem;
+    bottom: max(5rem, calc(env(safe-area-inset-bottom) + 4rem));
   }
   .logoCloud :global(.scene-logo) svg,
   .logoCloud :global(.scene-logo) img {

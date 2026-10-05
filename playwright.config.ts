@@ -1,8 +1,10 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const port = 3160;
+const port = Number(process.env.BROWSER_TEST_PORT ?? 3160);
+if (!Number.isInteger(port) || port < 1024 || port > 65535)
+  throw new Error("Invalid browser test port");
 const externalOrigin = process.env.SITE_TEST_ORIGIN;
-if (externalOrigin && !/^http:\/\/127\.0\.0\.1:\d{4,5}$/.test(externalOrigin)) {
+if (externalOrigin && !/^https?:\/\/(?:127\.0\.0\.1|localhost):\d{4,5}$/.test(externalOrigin)) {
   throw new Error("Browser tests require a loopback production server");
 }
 
@@ -18,7 +20,8 @@ export default defineConfig({
   expect: { timeout: 10_000 },
   reporter: [["list"], ["html", { outputFolder: ".artifacts/playwright/report", open: "never" }]],
   use: {
-    baseURL: externalOrigin ?? `http://127.0.0.1:${port}`,
+    ignoreHTTPSErrors: true,
+    baseURL: externalOrigin ?? `https://127.0.0.1:${port}`,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },
@@ -28,13 +31,25 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 1000 } },
     },
     { name: "mobile", use: { ...devices["Pixel 7"] } },
+    {
+      name: "assistant-firefox",
+      testMatch: "assistant.spec.ts",
+      use: { ...devices["Desktop Firefox"], viewport: { width: 1440, height: 1000 } },
+    },
+    {
+      name: "assistant-webkit",
+      testMatch: "assistant.spec.ts",
+      use: { ...devices["Desktop Safari"], viewport: { width: 1440, height: 1000 } },
+    },
   ],
   webServer: externalOrigin
     ? undefined
     : {
-        command: `node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port ${port}`,
-        url: `http://127.0.0.1:${port}`,
+        command: "node scripts/browser-test-server.ts",
+        url: `https://127.0.0.1:${port}`,
+        ignoreHTTPSErrors: true,
         reuseExistingServer: false,
+        gracefulShutdown: { signal: "SIGTERM", timeout: 7000 },
         timeout: 45_000,
       },
 });

@@ -5,6 +5,8 @@ const source = JSON.parse(readFileSync("src/contracts/source.json", "utf8"));
 for (const [name, expected] of [
   ["openapi.json", source.openapi_sha256],
   ["sse.schema.json", source.sse_sha256],
+  ["sse.examples.json", source.sse_examples_sha256],
+  ["types.d.ts", source.types_sha256],
 ]) {
   const actual = createHash("sha256")
     .update(readFileSync(`src/contracts/${name}`))

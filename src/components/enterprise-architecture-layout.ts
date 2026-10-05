@@ -100,16 +100,8 @@ export function enterpriseSteps(kind: EnterpriseKind, locale: Locale): Architect
       step("bff", "BFF", "Spring WebFlux", "gateway"),
       step("java", t("Microservices", "Microservicios"), "Java · Spring Boot"),
       step("node", t("Microservices", "Microservicios"), "Node.js · NestJS"),
-      step(
-        "java-db",
-        t("Service database", "BD del servicio"),
-        t("Java service data", "Datos del servicio Java"),
-      ),
-      step(
-        "node-db",
-        t("Service database", "BD del servicio"),
-        t("Node.js service data", "Datos del servicio Node.js"),
-      ),
+      step("java-db", "PostgreSQL", t("Java service data", "Datos del servicio Java")),
+      step("node-db", "PostgreSQL", t("Node.js service data", "Datos del servicio Node.js")),
       step("source", "Amazon S3", t("Promotion files", "Archivos de promociones"), "surface"),
       step("sqs", "Amazon SQS", t("Bulk ingestion queue", "Cola de ingesta masiva"), "gateway"),
       step("lambda", t("Ingestion Lambda", "Lambda de ingesta"), "Python · FastAPI"),
@@ -151,23 +143,13 @@ export const enterpriseConnections: Record<EnterpriseKind, Connection[]> = {
     { source: "backoffice", target: "web", containment: true },
     { source: "web", target: "backend" },
     { source: "mobile", target: "backend" },
-    { source: "backend", target: "auth", bidirectional: true },
-    { source: "backend", target: "wallets", bidirectional: true },
-    { source: "auth", target: "privy", bidirectional: true },
-    { source: "wallets", target: "privy", bidirectional: true },
     { source: "backend", target: "backoffice-api" },
-    { source: "backend", target: "ai" },
+    { source: "backend", target: "agentic-group" },
     { source: "backend", target: "defi" },
-    { source: "ai", target: "vector", bidirectional: true },
-    { source: "ai", target: "memory", bidirectional: true },
-    { source: "ai", target: "graph", bidirectional: true },
-    { source: "graph", target: "neo4j", bidirectional: true },
-    { source: "ai", target: "vertex", bidirectional: true },
-    { source: "ai", target: "deepinfra", bidirectional: true },
-    { source: "ai", target: "openai", bidirectional: true },
-    { source: "defi", target: "lending", bidirectional: true },
-    { source: "defi", target: "swaps", bidirectional: true },
-    { source: "defi", target: "perps", bidirectional: true },
+    { source: "backend-group", target: "privy", bidirectional: true },
+    { source: "agentic-group", target: "data-group", bidirectional: true },
+    { source: "agentic-group", target: "models-group", bidirectional: true },
+    { source: "defi", target: "protocols-group", bidirectional: true },
   ],
   teamcubation: [
     { source: "portal", target: "gateway" },
@@ -384,20 +366,20 @@ export function enterpriseLayout(kind: EnterpriseKind, vertical: boolean, locale
         0,
         382,
         910,
-        t("Enterprise deployment", "Despliegue empresarial"),
+        t("Microservices · MySQL / MariaDB", "Microservicios · MySQL / MariaDB"),
         true,
       );
     } else {
-      place(["web", "bff"], 40, 290, 270, 0);
-      place(["java", "node", "php"], 580, 90, 0, 200);
+      place(["web", "bff"], 310, 90, 0, 210);
+      place(["java", "node", "php"], 40, 530, 270, 0);
       group(
         "deployment",
         t("On-premise infrastructure", "Infraestructura on-premise"),
         0,
         0,
         820,
-        680,
-        t("Enterprise deployment", "Despliegue empresarial"),
+        720,
+        t("Microservices · MySQL / MariaDB", "Microservicios · MySQL / MariaDB"),
         true,
       );
     }

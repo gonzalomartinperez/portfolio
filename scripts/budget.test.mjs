@@ -63,9 +63,25 @@ test("local solar texture maps stay under 8 MiB and match their reviewed manifes
   assert.ok(bytes < 8 * 1024 * 1024, `solar texture transfer is ${(bytes / 1024).toFixed(1)} KiB`);
 });
 
-test("stylesheets stay under 24 KiB gzipped in total", () => {
-  const size = totalGzippedKb(walk(staticDir, ".css"));
-  assert.ok(size < 24, `CSS is ${size.toFixed(1)} KiB gzipped, budget is 24 KiB`);
+test("existing portfolio styles retain their 24 KiB gzip budget", () => {
+  const assistant = JSON.parse(
+    readFileSync(path.join(root, ".next/assistant-budget.json"), "utf8"),
+  );
+  assert.ok(assistant.roots > 0, "assistant entry must be present in the compilation graph");
+  assert.equal(assistant.initial, false, "assistant rendering libraries must be deferred");
+  const deferred = new Set(assistant.css.map((file) => path.join(root, ".next", file)));
+  const files = walk(staticDir, ".css");
+  assert.ok(deferred.size > 0, "the lazy feature must have separately measurable CSS");
+  const size = totalGzippedKb(files.filter((file) => !deferred.has(file)));
+  assert.ok(size <= 24, `Portfolio CSS is ${size.toFixed(1)} KiB gzip, budget is 24 KiB`);
+});
+
+test("new deferred assistant styles have an explicit 4 KiB gzip allowance", () => {
+  const assistant = JSON.parse(
+    readFileSync(path.join(root, ".next/assistant-budget.json"), "utf8"),
+  );
+  const size = totalGzippedKb(assistant.css.map((file) => path.join(root, ".next", file)));
+  assert.ok(size <= 4, `Deferred assistant CSS is ${size.toFixed(1)} KiB gzip, budget is 4 KiB`);
 });
 
 test("the portrait stays under 80 KB", () => {

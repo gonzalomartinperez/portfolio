@@ -7,6 +7,7 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
   await page.clock.install({ time: new Date("2026-01-01T00:00:00Z") });
   await page.goto("/");
   const scene = page.locator("[data-scene]");
+  const canvasLayer = scene.locator("canvas").locator("..");
   await expect(scene).toHaveAttribute("data-mode", "running");
   await page.clock.pauseAt(new Date("2026-01-01T01:00:00Z"));
   // Exercise 20 fps frames within the runtime's 50 ms delta cap without replaying every GPU frame.
@@ -26,7 +27,7 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
     { type: "pointerup", clientX: x, clientY: y },
   ]);
   await expect(scene).toHaveAttribute("data-scene-pulse", "sphere");
-  await expect(scene.locator("canvas")).toHaveCSS("z-index", "3");
+  await expect(canvasLayer).toHaveCSS("z-index", "3");
   await expect(scene.locator("canvas")).toHaveCSS("pointer-events", "none");
   await advanceFrames(300);
   const uniform = (name: string) =>
@@ -44,12 +45,12 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
   expect(await uniform("pulseReach")).toBeLessThan(1.65);
   await advanceFrames(600);
   await expect(scene).toHaveAttribute("data-scene-pulse", "idle");
-  await expect(scene.locator("canvas")).toHaveCSS("z-index", "auto");
+  await expect(canvasLayer).toHaveCSS("z-index", "auto");
   await avatar.focus();
   await avatar.press("Enter");
   await advanceFrames(350);
   await expect(scene).toHaveAttribute("data-scene-pulse", "avatar");
-  await expect(scene.locator("canvas")).toHaveCSS("z-index", "3");
+  await expect(canvasLayer).toHaveCSS("z-index", "3");
   const heroLink = scene.locator("[data-scene-hero] a").first();
   expect(
     await heroLink.evaluate((link) => {
@@ -69,7 +70,7 @@ test("sphere and avatar have distinct bounded pulses without changing scroll pro
   await advanceFrames(1100);
   await expect(scene).toHaveAttribute("data-scene-pulse", "idle");
   await expect(scene.locator("[data-scene-avatar-art]")).toHaveCSS("transform", "none");
-  await expect(scene.locator("canvas")).toHaveCSS("z-index", "auto");
+  await expect(canvasLayer).toHaveCSS("z-index", "auto");
   await avatar.press("Space");
   await expect(scene).toHaveAttribute("data-scene-pulse-count", "3");
 });

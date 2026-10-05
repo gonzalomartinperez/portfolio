@@ -1,5 +1,14 @@
 # Gonzalo Martin Perez · Portfolio
 
+The native assistant is **disabled by default**. Unset or `false`
+`ASSISTANT_ENABLED` removes the launcher and returns 404 for `/assistant` and
+`/es/assistant`. Activation is not part of this delivery. For isolated development
+or fixture verification only, run `ASSISTANT_ENABLED=true npm run dev` or
+`ASSISTANT_ENABLED=true npm run build`. Static production output captures this
+setting during the build; changing it on an existing build is not a rollout.
+CI verifies the enabled conversation suite and a separate disabled Hostinger build.
+
+
 [![CI](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml)
 
 A personal portfolio focused on software engineering and applied AI: eight routes,
@@ -143,3 +152,6 @@ guide before contributing.
 All rights reserved; no reuse license is granted. Dependencies retain their own
 licenses. This GitHub repository is public; `"private": true` in `package.json`
 only prevents accidental publication to npm.
+
+The native assistant uses a stable lazy panel and shared expanded routes. See
+[assistant architecture and verification](docs/native-assistant.md).

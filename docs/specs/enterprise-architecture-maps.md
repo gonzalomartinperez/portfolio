@@ -31,16 +31,18 @@ crowding the avatar or copy, or changing the settled technology-grid spacing.
   to the APIs, alongside the React/Next.js web frontend.
 - The web backoffice points to the frontend as a module relationship, distinct
   from a request edge. Backend backoffice services form their own capability.
-- Backend APIs exchange with authentication and wallet services; both exchange
-  with the external Privy service. Use double arrowheads without duplicate paths.
+- Authentication and wallet services belong to the backend capability block.
+  Its exchange with external Privy is shown once at the block boundary, rather
+  than drawing every internal service exchange. Double arrowheads show exchange.
 - The agentic system includes its harness and Agno/LangChain/LangGraph
   orchestration. Context dependencies include PostgreSQL/pgvector, Mem0 and
   GraphRAG backed by Neo4j; model providers include Vertex AI, DeepInfra and OpenAI.
 - PostgreSQL/pgvector, Neo4j and Mem0 form a functional data/memory group. Their
   hosting is unspecified; the presentation must not imply confirmed DigitalOcean
   hosting or an external managed service.
-- DeFi services connect to Aave/Morpho/Compound lending and vaults, LI.FI swaps,
-  and Hyperliquid perpetuals. Keep protocol providers outside the hosting envelope.
+- DeFi services connect to the external protocol block containing
+  Aave/Morpho/Compound lending and vaults, LI.FI swaps and Hyperliquid perpetuals.
+  Keep protocol providers outside the hosting envelope.
 
 ### Teamcubation
 
@@ -50,7 +52,7 @@ crowding the avatar or copy, or changing the settled technology-grid spacing.
 - Backend code uses layered architecture; keep that fact in explanatory copy,
   not the node titles.
 - The BFF accesses Java/Spring Boot and Node.js/NestJS microservices, each with
-  its respective database, and the complete Promotion Assistance System.
+  its respective PostgreSQL database, and the complete Promotion Assistance System.
 - That system contains a harness for orchestration, evaluations and guardrails,
   and Neo4j GraphRAG for enterprise policy and promotion context.
 - Preserve S3 -> SQS -> Python/FastAPI Lambda -> Java and Node services -> their
@@ -64,6 +66,8 @@ crowding the avatar or copy, or changing the settled technology-grid spacing.
   Node.js/NestJS and PHP integrations in an on-premises deployment boundary.
 - Preserve the frontend/BFF contract and OpenAPI/Swagger integrations. Backend
   code uses layered architecture; keep that fact in explanatory copy.
+- The microservices use MySQL or MariaDB databases. The engine of each specific
+  service is unspecified; do not invent a service-to-engine mapping.
 
 ## Acceptance and verification
 
@@ -72,6 +76,12 @@ crowding the avatar or copy, or changing the settled technology-grid spacing.
 - Desktop and mobile layouts preserve hierarchy, avoid node overlap, and keep
   routed edges out of unrelated node labels. Containment and observability
   relationships are visually distinct from request/exchange edges.
+- The portfolio explains work context rather than exhaustive implementation.
+  Rampy keeps its twenty named components but uses ten high-level arrows,
+  connecting functional capability blocks for Privy, context, model providers
+  and protocols. Deployment boundaries never become request endpoints.
+- All three enterprise diagrams read from top to bottom on desktop and mobile;
+  Cooperativa's desktop layout follows frontend, BFF, then service branches.
 - Groups do not masquerade as services or obstruct clicks. Inspection panels,
   Escape/focus restoration, zoom and fit controls remain keyboard accessible.
 - Touch gestures over nodes, blank canvas and boundaries scroll the document;
@@ -122,3 +132,40 @@ crowding the avatar or copy, or changing the settled technology-grid spacing.
 
 The associated task/release PRs record remaining interaction/hero acceptance,
 exact-head GitHub checks and public-deployment results before the release closes.
+
+## October 5 follow-up
+
+The owner confirmed PostgreSQL in Teamcubation/Payway microservices and MySQL or
+MariaDB in Cooperativa Obrera microservices. Career Ops PR #9 promoted reviewed
+revision `2026-10-05.1`: six rendered pages reviewed, three pages per language,
+full local document/repository checks passed, and the manual LinkedIn packet
+updated. The portfolio export and PDF hashes match that reviewed release.
+
+The owner requested these contextual diagram refinements within `v1.0.0` after
+its initial tag was published. Replace that annotated tag only after the final
+reviewed source passes task/release/main CI and public verification. Preserve
+the commit history and check the previous remote tag object before changing the
+specific tag reference; this does not authorize rewriting protected branches.
+
+## Final editorial and rollout follow-up
+
+Career Ops PR #10 promotes revision `2026-10-05.2`: a stronger bilingual
+professional summary, natural outcome-focused experience bullets, and the same
+approved three-page layout. All six pages were visually reviewed and promoted
+against their preview manifest hash; the portfolio projection and PDFs are
+exported from that promoted source. The manual LinkedIn packet includes the
+owner-requested 220-character headline, natural expanded About sections,
+experiences, education, certifications, languages and portfolio-based highlights.
+LinkedIn remains manual and is not published by this workflow.
+
+The owner confirmed that the assistant must stay disabled. PR #96 includes an
+explicit opt-in rollout gate: normal deployment has no launcher and assistant
+routes return 404. Enabled CI fixtures preserve native-assistant coverage, while
+compatibility smoke checks cover the disabled production default.
+
+The final Home locale fix retains the exact canvas and WebGL context across
+language navigation and measures the animated layout before initializing.
+Acceptance verifies zero drawing-buffer dimension writes on a warm switch,
+continuous visible frames, preserved progress and scroll, context recovery,
+fallbacks and disposal when leaving Home. These resource invariants are not
+a guarantee of fixed navigation latency or device refresh rate.

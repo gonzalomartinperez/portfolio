@@ -35,12 +35,13 @@ export function routeConnection(
   positions: Record<string, Point>,
   width: number,
   height: number,
+  endpoints: Record<string, Box> = {},
 ) {
   const boxes = Object.fromEntries(
     Object.entries(positions).map(([id, position]) => [id, { ...position, width, height }]),
   );
-  const source = boxes[sourceId];
-  const target = boxes[targetId];
+  const source = endpoints[sourceId] ?? boxes[sourceId];
+  const target = endpoints[targetId] ?? boxes[targetId];
   const dx = target.x - source.x;
   const dy = target.y - source.y;
   const horizontal = Math.abs(dx) > Math.abs(dy);

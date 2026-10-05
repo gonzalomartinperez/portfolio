@@ -23,6 +23,7 @@ for (const theme of ["dark", "light"]) {
             frames: number;
             staticFrames: number;
             hiddenCanvasFrames: number;
+            replacedCanvasFrames: number;
             viewportHeightChanges: number;
             scrollChanges: number;
           }>((resolve, reject) => {
@@ -31,12 +32,14 @@ for (const theme of ["dark", "light"]) {
               `header a[hreflang="${locale}"]`,
             );
             if (!initial || !link) throw new Error("Hero or language control is missing");
+            const initialCanvas = document.querySelector("[data-scene] canvas");
             const height = initial.clientHeight;
             const position = scrollY;
             const result = {
               frames: 0,
               staticFrames: 0,
               hiddenCanvasFrames: 0,
+              replacedCanvasFrames: 0,
               viewportHeightChanges: 0,
               scrollChanges: 0,
             };
@@ -51,8 +54,22 @@ for (const theme of ["dark", "light"]) {
               const viewport = stage?.querySelector<HTMLElement>("[data-scene-viewport]");
               const canvas = stage?.querySelector("canvas");
               result.frames += 1;
+              if (canvas !== initialCanvas) result.replacedCanvasFrames += 1;
               if (stage?.dataset.mode === "static") result.staticFrames += 1;
-              if (!canvas || getComputedStyle(canvas).opacity !== "1") {
+              const canvasStyle = canvas && getComputedStyle(canvas);
+              const hostStyle = canvas?.parentElement && getComputedStyle(canvas.parentElement);
+              const bounds = canvas?.getBoundingClientRect();
+              if (
+                !canvas ||
+                canvasStyle?.opacity !== "1" ||
+                hostStyle?.opacity !== "1" ||
+                canvasStyle.visibility !== "visible" ||
+                hostStyle.visibility !== "visible" ||
+                !bounds?.width ||
+                !bounds.height ||
+                bounds.bottom <= 0 ||
+                bounds.top >= innerHeight
+              ) {
                 result.hiddenCanvasFrames += 1;
               }
               if (viewport?.clientHeight !== height) result.viewportHeightChanges += 1;
@@ -76,6 +93,7 @@ for (const theme of ["dark", "light"]) {
       expect(continuity.frames).toBeGreaterThanOrEqual(3);
       expect(continuity.staticFrames).toBe(0);
       expect(continuity.hiddenCanvasFrames).toBe(0);
+      expect(continuity.replacedCanvasFrames).toBe(0);
       expect(continuity.viewportHeightChanges).toBe(0);
       expect(continuity.scrollChanges).toBe(0);
       await expect(scene).toHaveAttribute("data-mode", mode);

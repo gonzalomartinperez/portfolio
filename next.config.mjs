@@ -1,5 +1,6 @@
 // @ts-check
 
+import { AssistantBudgetPlugin } from "./scripts/assistant-budget-plugin.ts";
 import { SceneBudgetPlugin } from "./scripts/scene-budget-plugin.mjs";
 
 /**
@@ -42,7 +43,8 @@ const securityHeaders = [
 const nextConfig = {
   poweredByHeader: false,
   webpack(config, { dev, isServer }) {
-    if (!dev && !isServer) config.plugins.push(new SceneBudgetPlugin());
+    if (!dev && !isServer)
+      config.plugins.push(new SceneBudgetPlugin(), new AssistantBudgetPlugin());
     return config;
   },
   async headers() {

@@ -227,6 +227,9 @@ test("short mobile viewports keep pause visible and use a static landscape fallb
   expect(box).not.toBeNull();
   expect((box?.y ?? -1) + (box?.height ?? 0)).toBeLessThanOrEqual(700);
   expect(box?.y).toBeGreaterThanOrEqual(0);
+  const launcher = await page.getByRole("button", { name: "Ask AI", exact: true }).boundingBox();
+  expect(launcher).not.toBeNull();
+  expect((box?.y ?? 0) + (box?.height ?? 0)).toBeLessThan(launcher?.y ?? 0);
   await button.click();
   await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "paused");
   await page.setViewportSize({ width: 844, height: 390 });
