@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { type KeyboardEvent, useEffect, useRef, useState } from "react";
 import { holdPageMotion } from "@/components/motion-state";
 import { Button } from "@/components/ui/button";
+import { type PortfolioPath, portfolioPath } from "@/features/assistant/domain/visitor-context";
 import styles from "./assistant-host.module.css";
 import { AssistantLoading } from "./assistant-loading";
 
@@ -19,9 +20,11 @@ export function AssistantHost() {
   // A localized missing route can hydrate from a differently routed server fallback.
   const [pathname, setPathname] = useState("");
   useEffect(() => setPathname(routePathname), [routePathname]);
+  const currentPath = portfolioPath(pathname);
   const locale = pathname === "/es" || pathname.startsWith("/es/") ? "es" : "en";
   const page = pathname === "/assistant" || pathname === "/es/assistant";
   const [opened, setOpened] = useState(false);
+  const [openedPath, setOpenedPath] = useState<PortfolioPath | undefined>(undefined);
   const [loaded, setLoaded] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
@@ -43,11 +46,12 @@ export function AssistantHost() {
   }, [visible]);
   useEffect(() => {
     if (page) {
+      if (!lastPage.current) setOpenedPath(portfolioPath(pathname));
       setLoaded(true);
       setFocus((value) => value + 1);
     } else if (lastPage.current) setOpened(false);
     lastPage.current = page;
-  }, [page]);
+  }, [page, pathname]);
   useEffect(() => {
     const root = document.documentElement;
     const update = () => setTheme(root.dataset.theme === "light" ? "light" : "dark");
@@ -108,6 +112,7 @@ export function AssistantHost() {
     };
   }, [modal]);
   function open() {
+    setOpenedPath(portfolioPath(pathname));
     setLoaded(true);
     setOpened(true);
     setFocus((value) => value + 1);
@@ -130,7 +135,11 @@ export function AssistantHost() {
     ).filter((element) => element.getClientRects().length && !element.closest("[inert]"));
     const first = controls[0];
     const last = controls.at(-1);
-    if (event.shiftKey && document.activeElement === first) {
+    const focusedControl = controls.some((control) => control === document.activeElement);
+    if (!focusedControl) {
+      event.preventDefault();
+      (event.shiftKey ? last : first)?.focus();
+    } else if (event.shiftKey && document.activeElement === first) {
       event.preventDefault();
       last?.focus();
     } else if (!event.shiftKey && document.activeElement === last) {
@@ -146,12 +155,13 @@ export function AssistantHost() {
           variant="default"
           className={styles.launcher}
           onClick={open}
+          aria-label={es ? "Preguntar a la IA" : "Ask AI"}
+          title={es ? "Preguntar a la IA" : "Ask AI"}
           aria-expanded={visible}
           aria-controls="portfolio-assistant"
           hidden={visible}
         >
           <Sparkles aria-hidden="true" />
-          {es ? "Preguntar a la IA" : "Ask AI"}
         </Button>
       )}
       {loaded && (
@@ -166,7 +176,17 @@ export function AssistantHost() {
           onKeyDown={keys}
         >
           <div className={styles.toolbar} inert={historyOpen}>
-            <span>{es ? "Asistente de Gonzalo" : "Gonzalo’s assistant"}</span>
+            <div className={styles.identity}>
+              <span className={styles.mark} aria-hidden="true">
+                <Sparkles />
+              </span>
+              <span className={styles.heading}>
+                <strong>{es ? "Asistente de Gonzalo" : "Gonzalo’s assistant"}</strong>
+                <span>
+                  {es ? "Experiencia, proyectos e ideas" : "Experience, projects & ideas"}
+                </span>
+              </span>
+            </div>
             {!page && (
               <div>
                 <Button
@@ -200,6 +220,15 @@ export function AssistantHost() {
             <Assistant
               presentation={{
                 preferences: { locale, theme },
+                context:
+                  openedPath && currentPath
+                    ? {
+                        theme,
+                        opened_path: openedPath,
+                        current_path: currentPath,
+                        presentation: page ? "page" : expanded || mobile ? "expanded" : "compact",
+                      }
+                    : undefined,
                 visible,
                 focus,
                 onMenuChange: setHistoryOpen,

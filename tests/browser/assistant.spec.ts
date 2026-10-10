@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
@@ -90,6 +91,7 @@ for (const mode of ["interrupted", "provider", "expired"] as const) {
           : "expired",
     );
     expect(backend.requests()).toBe(1);
+    await expect(page.locator("[data-assistant-waiting]")).toHaveCount(0);
     if (mode === "interrupted")
       await expect(page.getByText("Gonzalo builds software", { exact: true })).toBeVisible();
     await expect(page.locator("body")).not.toContainText("private data");
@@ -187,7 +189,7 @@ test("history rehydrates and conversation rename/delete restores keyboard focus"
   await page.getByRole("button", { name: "Delete conversation", exact: true }).click();
   await expect(page.getByRole("button", { name: "New chat", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("heading", { name: "Where would you like to start?" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "What would you like to know?" })).toBeVisible();
 });
 
 test("IME and rapid send/stop prevent accidental or duplicate generation", async ({ page }) => {
@@ -261,9 +263,23 @@ test("long output, text resizing and a reduced viewport keep reading and control
     element.dispatchEvent(new Event("scroll"));
   });
   await expect(page.getByRole("button", { name: "Jump to latest" })).toBeVisible();
+  async function sendInsideField() {
+    const field = await page.locator("#question").boundingBox();
+    const send = await page.getByRole("button", { name: "Send", exact: true }).boundingBox();
+    return Boolean(
+      field &&
+        send &&
+        send.x >= field.x &&
+        send.y >= field.y &&
+        send.x + send.width <= field.x + field.width &&
+        send.y + send.height <= field.y + field.height,
+    );
+  }
+  await expect.poll(sendInsideField).toBe(true);
   await page.evaluate(() => {
     document.documentElement.style.fontSize = "200%";
   });
+  await expect.poll(sendInsideField).toBe(true);
   await expect(page.locator("#question")).toBeInViewport();
   await expect(page.getByRole("button", { name: "Send", exact: true })).toBeInViewport();
   expect(
@@ -391,4 +407,131 @@ test("pending clipboard writes retain focus and prevent duplicate operations", a
       window.fixtureCopy.finish();
   });
   await expect(page.getByText("Copied", { exact: true })).toBeVisible();
+});
+
+for (const locale of ["en", "es"] as const) {
+  test(`${locale} icon launcher and waiting indicator follow real request lifecycle`, async ({
+    page,
+  }) => {
+    const backend = await fixture(page, "complete", -1);
+    await page.goto(locale === "es" ? "/es/about" : "/about");
+    const launcher = page.getByRole("button", {
+      name: locale === "es" ? "Preguntar a la IA" : "Ask AI",
+      exact: true,
+    });
+    await expect(launcher).toHaveText("");
+    await expect(launcher.locator("svg")).toHaveCount(1);
+    await launcher.click();
+    await page.locator("#question").fill("Tell me about your experience");
+    await page
+      .getByRole("button", { name: locale === "es" ? "Enviar" : "Send", exact: true })
+      .click();
+    const waiting = page.locator("[data-assistant-waiting]");
+    await expect(waiting).toHaveText(locale === "es" ? "Pensando…" : "Thinking…");
+    await expect(page.locator("#portfolio-assistant").getByRole("status")).toHaveText(
+      locale === "es" ? "Pensando…" : "Thinking…",
+    );
+    await expect(waiting.locator("i").first()).toHaveCSS("animation-name", "none");
+    await expect.poll(backend.requests).toBe(1);
+    backend.release();
+    await expect(page.getByText(answer, { exact: true })).toBeVisible();
+    await expect(waiting).toHaveCount(0);
+    expect(backend.requests()).toBe(1);
+  });
+}
+
+test("stopping a pending response clears waiting without retrying generation", async ({ page }) => {
+  const backend = await fixture(page, "complete", -1);
+  await open(page);
+  await page.locator("#question").fill("A pending question");
+  await page.getByRole("button", { name: "Send", exact: true }).click();
+  await expect(page.locator("[data-assistant-waiting]")).toBeVisible();
+  await expect.poll(backend.requests).toBe(1);
+  await page.getByRole("button", { name: "Stop", exact: true }).click();
+  await expect(page.locator("[data-assistant-waiting]")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Send", exact: true })).toBeVisible();
+  backend.release();
+  expect(backend.requests()).toBe(1);
+});
+
+test("send context follows route, theme and locale without transmitting URL parameters", async ({
+  page,
+}, testInfo) => {
+  const backend = await fixture(page);
+  await page.goto("/work?private=must-not-travel#rampy");
+  await page.getByRole("button", { name: "Ask AI", exact: true }).click();
+  await expect(page.locator("#question")).toBeFocused();
+  if (testInfo.project.name === "mobile")
+    await page.getByRole("button", { name: "Minimize assistant" }).click();
+  await page.getByRole("button", { name: "Switch to light theme", exact: true }).click();
+  if (testInfo.project.name === "mobile")
+    await page.getByRole("button", { name: "Ask AI", exact: true }).click();
+  await expect(page.locator("#portfolio-assistant")).toHaveCSS(
+    "background-color",
+    "rgb(250, 250, 251)",
+  );
+  if (testInfo.project.name === "mobile") {
+    await page.getByRole("button", { name: "Minimize assistant" }).click();
+    await page.getByRole("link", { name: "ES", exact: true }).click();
+    await page.getByRole("button", { name: "Preguntar a la IA", exact: true }).click();
+  } else {
+    await page.getByRole("link", { name: "ES", exact: true }).click();
+  }
+  await expect(page.getByRole("button", { name: "Enviar", exact: true })).toBeVisible();
+  await page.locator("#question").fill("¿Qué construiste en Rampy?");
+  await page.getByRole("button", { name: "Enviar", exact: true }).click();
+  await expect(page.getByText(answer, { exact: true })).toBeVisible();
+  expect(backend.submissions()).toEqual([
+    {
+      content: "¿Qué construiste en Rampy?",
+      locale: "es",
+      context: {
+        theme: "light",
+        opened_path: testInfo.project.name === "mobile" ? "/es/work" : "/work",
+        current_path: "/es/work",
+        presentation: testInfo.project.name === "mobile" ? "expanded" : "compact",
+      },
+    },
+  ]);
+  expect(JSON.stringify(backend.submissions())).not.toContain("must-not-travel");
+});
+
+test("cold mobile opening contains keyboard focus while the chat chunk loads", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await fixture(page);
+  await page.goto("/about");
+  const report = JSON.parse(readFileSync(".next/assistant-budget.json", "utf8")) as {
+    javascript: string[];
+  };
+  const gate = Promise.withResolvers<void>();
+  await page.route("**/_next/static/chunks/**", async (route) => {
+    if (
+      report.javascript.some((file) => new URL(route.request().url()).pathname === `/_next/${file}`)
+    )
+      await gate.promise;
+    await route.continue();
+  });
+  try {
+    await page.getByRole("button", { name: "Ask AI", exact: true }).click();
+    await expect(page.getByRole("status")).toHaveText("Loading the assistant…");
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("button", { name: "Expand panel" })).toBeFocused();
+    await page.keyboard.press("Shift+Tab");
+    await expect(page.getByRole("button", { name: "Minimize assistant" })).toBeFocused();
+    gate.resolve();
+    await expect(page.locator("#question")).toBeFocused();
+  } finally {
+    gate.resolve();
+  }
+});
+
+test("unknown routes omit optional metadata without blocking the question", async ({ page }) => {
+  const backend = await fixture(page);
+  await page.goto("/not-a-public-route?private=must-not-travel#private");
+  await page.getByRole("button", { name: "Ask AI", exact: true }).click();
+  await expect(page.locator("#question")).toBeEnabled();
+  await page.locator("#question").fill("What has Gonzalo built?");
+  await page.getByRole("button", { name: "Send", exact: true }).click();
+  await expect(page.getByText(answer, { exact: true })).toBeVisible();
+  expect(backend.submissions()).toEqual([{ content: "What has Gonzalo built?", locale: "en" }]);
 });

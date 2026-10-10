@@ -1,4 +1,5 @@
 import type { Conversation, Failure, Locale, Message, Progress } from "../domain/models.ts";
+import type { VisitorContext } from "../domain/visitor-context.ts";
 export class AssistantError extends Error {
   readonly reason: Failure;
   constructor(reason: Failure) {
@@ -22,6 +23,7 @@ export interface AssistantTransport {
     signal: AbortSignal,
     onProgress: (event: Progress) => void,
     key: string,
+    context?: VisitorContext,
   ): Promise<void>;
 }
 export interface Runtime {
