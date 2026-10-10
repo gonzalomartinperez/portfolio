@@ -1752,6 +1752,24 @@ export const technologyCatalog: Technology[] = [
     icon: "kubernetes",
   },
   {
+    id: "coolify",
+    name: "Coolify",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Professional focus", href: "/about" }],
+    icon: "coolify",
+  },
+  {
+    id: "reverse-proxy",
+    name: "Reverse proxy",
+    category: "cloud",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Professional focus", href: "/about" }],
+    aliases: ["Proxy inverso", "Reverse proxies"],
+  },
+  {
     id: "helm",
     name: "Helm",
     category: "cloud",
@@ -2538,8 +2556,8 @@ export const technologyGroups = [
       es: "Cloud y delivery",
     },
     evidence: {
-      en: "DigitalOcean infrastructure and delivery at Rampy; application integration on AWS and containerized workloads.",
-      es: "Infraestructura y despliegues en DigitalOcean en Rampy; integración de aplicaciones en AWS y contenedores.",
+      en: "DigitalOcean infrastructure and delivery at Rampy; application integration on AWS and containerized workloads. My developer infrastructure experience also includes Coolify and reverse proxies.",
+      es: "Infraestructura y despliegues en DigitalOcean en Rampy; integración de aplicaciones en AWS y contenedores. Mi experiencia en infraestructura para aplicaciones también incluye Coolify y proxies inversos.",
     },
   },
   {

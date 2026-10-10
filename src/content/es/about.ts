@@ -12,6 +12,7 @@ export const aboutCopy: AboutCopy = {
     "Construí sistemas para comercios y backoffices empresariales, conectando servicios e incorporando integraciones fintech y blockchain. Mi proyecto final, Filomena, fue el cierre de esa etapa y llegó a convertirse en una plataforma de exámenes utilizada por cinco instituciones argentinas. Lo desarrollamos en un equipo de tres personas.",
     "Hoy trabajo en ingeniería de IA en Rampy, una startup donde colaboro directamente con tres fundadores. Ayudo a dar forma a las ideas, tomo decisiones técnicas y acompaño las funcionalidades hasta las pruebas y el despliegue. Las prioridades cambian, así que busco equilibrar entregas útiles con un producto cada vez más fácil de mantener y preparado para crecer.",
     "Conecto IA aplicada con estándares de ingeniería de software: rendimiento, robustez, escalabilidad, mantenibilidad y seguridad. Los llevo a la práctica con contratos claros, pruebas automatizadas, evaluaciones de agentes, observabilidad y ejecución controlada de herramientas.",
+    "Mi experiencia en infraestructura para aplicaciones incluye Coolify para despliegues y proxies inversos para dirigir solicitudes a los servicios.",
     "Me gusta entender cómo encajan las piezas de un sistema, conversar sobre alternativas y dividir los problemas complejos en pasos pequeños para construir soluciones de punta a punta. Disfruto trabajar en equipo, aprender y aportar valor.",
   ],
   asideCurrently: "Actualmente",

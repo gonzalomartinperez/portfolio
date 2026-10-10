@@ -133,6 +133,7 @@ and hidden from assistive technology.
 | `stripe.svg` | [Official site icon](https://images.stripeassets.com/fzn2n1nzq965/1hgcBNd12BfT9VLgbId7By/01d91920114b124fb4cf6d448f9f06eb/favicon.svg) | Original white symbol on Stripe purple. |
 | `swift.svg` | [Devicon original](https://raw.githubusercontent.com/devicons/devicon/master/icons/swift/swift-original.svg) | Original color artwork; Devicon MIT license and brand conditions apply. |
 | `singular.svg` | [Official application logo](https://app.singular.net/static/dashboard/img/logos/singular_flat_logo_blue.svg) · [press guidelines](https://40235046.fs1.hubspotusercontent-na1.net/hubfs/40235046/Singular%20Press%20kit.pdf) | Original six symbol paths, without the wordmark; the guidelines permit independent symbol use. Original blue preserved, viewport includes clear space. |
+| `coolify.svg` | [Official repository mark](https://raw.githubusercontent.com/coollabsio/coolify/f55efc859dfcbbf79274c4907b3df89f9767c11d/public/coolify-logo.svg) | Unmodified 352×352 SVG, pinned to upstream commit `f55efc859dfcbbf79274c4907b3df89f9767c11d`; original `#452e72` and `#864ffc` colors. Upstream Apache License 2.0 included in `public/brands/coolify-LICENSE.txt`. |
 
 These vendor assets identify confirmed experience and do not imply endorsement.
 No broad reuse license is inferred from a public download. SVGs contain local
@@ -143,11 +144,14 @@ preserved without tracing or enlargement.
 Concepts now use the existing `lucide-react` library (ISC), with specific icons
 for GraphRAG, harnesses, evaluation, encryption, streaming, transaction controls,
 architecture, quality and delivery. No hand-drawn path dictionary remains.
+Reverse proxy uses the existing Lucide `Route` illustration rather than a brand
+identity. Its label describes general applied experience without attributing a
+proxy vendor or employer.
 Alphabetical order, category priority, applied evidence and hero selection are
 unchanged. Both themes retain readable icon backgrounds and equal icon heights.
 
 
-Verification for this revision: `npm run check` passes repository/content,
+Prior verification for the catalog mark revision: `npm run check` passes repository/content,
 identity/document checks, Biome, the production build with TypeScript, and all
 seven asset/client/scene budgets. The existing catalog tests verify alphabetical
 order in both languages, local safe resources, applied evidence and exactly 35
@@ -158,3 +162,6 @@ English and Spanish, dark and light: every image loads, every entry has a mark,
 there is no horizontal overflow, and all 32px marks occupy a 38px-high tile.
 The complete rendered contact sheets and narrow mobile fintech views were
 visually reviewed. This is browser QA, not a claim of physical-device testing.
+
+Verification for the subsequent Coolify and reverse proxy additions is recorded
+in the [feature specification](../specs/coolify-reverse-proxy.md).

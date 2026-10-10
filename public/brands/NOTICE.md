@@ -70,3 +70,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 - `slack.svg`: [source](https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/slack/slack-original.svg)
 - `discord.svg`: [source](https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/discord.svg)
 - `testinglibrary.svg`: [source](https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/testinglibrary.svg)
+
+## Coolify
+
+`coolify.svg` is the unmodified colored mark from the
+[official Coolify repository](https://raw.githubusercontent.com/coollabsio/coolify/f55efc859dfcbbf79274c4907b3df89f9767c11d/public/coolify-logo.svg),
+pinned to commit `f55efc859dfcbbf79274c4907b3df89f9767c11d`.
+The original viewport and colors `#452e72` and `#864ffc` are preserved.
+The upstream Apache License 2.0 is included in [coolify-LICENSE.txt](coolify-LICENSE.txt).
+The mark identifies confirmed experience; trademark rights remain with their
+owners and its use does not imply endorsement.

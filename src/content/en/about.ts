@@ -12,6 +12,7 @@ export const aboutCopy: AboutCopy = {
     "I built systems for merchants and enterprise back offices, connecting services and incorporating fintech and blockchain integrations. Filomena, my final-year project, marked the completion of my degree and grew into an exam platform used by five institutions in Argentina. We developed it as a three-person team.",
     "Today I’m an AI Engineer at Rampy, a fast-moving startup where I work directly with three founders. I help shape ideas, make technical decisions and carry features through testing and deployment. Priorities evolve, so I balance getting useful changes into users’ hands with making the product easier to maintain and grow.",
     "I connect applied AI with software engineering standards: performance, reliability, scalability, maintainability, and security. I put them into practice through clear contracts, automated tests, agent evaluations, observability, and controlled tool execution.",
+    "My developer infrastructure experience includes Coolify for application deployments and reverse proxies for routing requests to services.",
     "I enjoy understanding how the pieces of a system fit together, talking through alternatives, and breaking complex problems into smaller steps to build end-to-end solutions. I like working with a team, learning, and adding value.",
   ],
   asideCurrently: "Currently",

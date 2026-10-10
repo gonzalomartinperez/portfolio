@@ -1,5 +1,6 @@
 "use client";
 
+import { Pause, Play } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ExternalLink } from "@/components/external-link";
@@ -91,14 +92,15 @@ export function SiteFooter() {
         <SolarExplorer locale={locale} />
         <Button
           variant="ghost"
-          size="sm"
+          size="icon"
           className={styles.motionToggle}
+          aria-label={paused ? copy.resumeMotion : copy.pauseMotion}
+          title={paused ? copy.resumeMotion : copy.pauseMotion}
           aria-pressed={paused}
           data-motion-toggle
           onClick={() => setPageMotionPaused(!paused)}
         >
-          <span aria-hidden="true">{paused ? "▶" : "Ⅱ"}</span>
-          {paused ? copy.resumeMotion : copy.pauseMotion}
+          {paused ? <Play aria-hidden="true" size={18} /> : <Pause aria-hidden="true" size={18} />}
         </Button>
       </div>
       <p className={`frame ${styles.credits}`} data-visual-credits>
