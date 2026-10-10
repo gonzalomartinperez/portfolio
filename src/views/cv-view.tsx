@@ -61,9 +61,14 @@ function CopyBlocks({ blocks, locale }: { blocks: Block[]; locale: Locale }) {
 export function CvView({ locale }: { locale: Locale }) {
   const copy = cv.locales[locale];
   const spanish = locale === "es";
+  const headlineParts = copy.headline.split(" | ", 4);
+  const roles = headlineParts.slice(0, 3).join(" | ");
+  const focus = headlineParts[3];
   return (
     <div lang={locale}>
-      <PageHeader eyebrow="CV" title={copy.name} intro={copy.headline} />
+      <PageHeader eyebrow="CV" title={copy.name} intro={roles}>
+        {focus ? <p className={styles.focus}>{focus}</p> : null}
+      </PageHeader>
       <div className={`frame ${styles.resume}`}>
         <div className={styles.actions}>
           <a

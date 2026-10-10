@@ -28,6 +28,21 @@ reviewed bilingual CVs, while preserving accurate experience context.
 
 ## Verification
 
+### Technical headline and language-skill follow-up
+
+The reviewed career release 2026-10-10.4 adds Solidity to Languages & Runtimes,
+with limited hands-on usage recorded for Rampy. The public catalog assigns it
+only to Rampy and displays the original pinned Devicon mark. Both Rampy stacks
+include the skill; the experience achievements remain unchanged.
+
+The PDF technical line now starts directly with its first skill, without a
+leading pipe. The web CV likewise separates the three-role identity from its
+dot-separated technical focus. The canonical LinkedIn headline retains its
+approved terms. All six PDF pages were inspected and full document QA passed.
+The public projection, PDF bytes and manifest hashes match that reviewed release.
+
+### Previous profile release
+
 Reviewed career release 2026-10-10.3 retains three pages per language. All six
 renders were inspected; the public projection and both PDFs match its approved
 source, facts and PDF hashes. `npm run check` passes, including catalog context,

@@ -58,6 +58,7 @@ test("MongoDB has confirmed Teamcubation evidence in both experience translation
 
 test("confirmed toolkit additions retain their applied experience context", () => {
   const rampy = [
+    "solidity",
     "agent-harness",
     "pydantic-ai",
     "pytorch",
