@@ -118,13 +118,14 @@ export function createHttpTransport(
         body: "{}",
       });
     },
-    async send(id, content, locale, signal, onProgress, key) {
+    async send(id, content, locale, signal, onProgress, key, context) {
       const response = await request(`${path(id)}/messages/stream`, signal, {
         method: "POST",
         headers: { "Idempotency-Key": key },
         body: JSON.stringify({
           content,
           locale,
+          ...(context ? { context } : {}),
         } satisfies components["schemas"]["SendMessage"]),
       });
       const runId = response.headers.get("X-Run-ID");

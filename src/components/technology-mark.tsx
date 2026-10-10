@@ -64,6 +64,14 @@ const categoryIllustrations: Record<string, LucideIcon> = {
 };
 
 const specificIllustrations: Record<string, LucideIcon> = {
+  "ai-chains": Workflow,
+  "ai-testing": FileCheck2,
+  embeddings: Network,
+  chunking: Blocks,
+  "prompt-engineering": SlidersHorizontal,
+  "context-engineering": Layers,
+  "fine-tuning": SlidersHorizontal,
+  llmops: Activity,
   "server-sent-events": Send,
   "transaction-idempotency": Repeat2,
   "transaction-reconciliation": GitCompareArrows,
@@ -111,6 +119,7 @@ const specificIllustrations: Record<string, LucideIcon> = {
   microfrontends: PanelsTopLeft,
   "server-side-rendering": PanelsTopLeft,
   serverless: Cloud,
+  "reverse-proxy": Route,
   "structured-logging": FileText,
   rbac: KeyRound,
   "end-to-end-encryption": LockKeyhole,

@@ -271,6 +271,29 @@ export interface components {
              */
             rating: "up" | "down";
         };
+        /** MessageContext */
+        MessageContext: {
+            /**
+             * Current Path
+             * @enum {string}
+             */
+            current_path: "/" | "/about" | "/work" | "/work/filomena" | "/education" | "/cv" | "/contact" | "/stack" | "/assistant" | "/es" | "/es/about" | "/es/work" | "/es/work/filomena" | "/es/education" | "/es/cv" | "/es/contact" | "/es/stack" | "/es/assistant";
+            /**
+             * Opened Path
+             * @enum {string}
+             */
+            opened_path: "/" | "/about" | "/work" | "/work/filomena" | "/education" | "/cv" | "/contact" | "/stack" | "/assistant" | "/es" | "/es/about" | "/es/work" | "/es/work/filomena" | "/es/education" | "/es/cv" | "/es/contact" | "/es/stack" | "/es/assistant";
+            /**
+             * Presentation
+             * @enum {string}
+             */
+            presentation: "compact" | "expanded" | "page";
+            /**
+             * Theme
+             * @enum {string}
+             */
+            theme: "dark" | "light";
+        };
         /** MessagePage */
         MessagePage: {
             /** Items */
@@ -346,6 +369,7 @@ export interface components {
         SendMessage: {
             /** Content */
             content: string;
+            context?: components["schemas"]["MessageContext"] | null;
             /**
              * Locale
              * @default en

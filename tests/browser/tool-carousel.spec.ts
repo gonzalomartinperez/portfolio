@@ -89,11 +89,23 @@ for (const locale of ["en", "es"]) {
         }),
       );
     await expect.poll(async () => Math.abs((await positions())[0])).toBeGreaterThan(0.1);
+    const cycleWidths = await rows.evaluateAll((elements) =>
+      elements.map((element) => {
+        const list = element.querySelector("ul");
+        return list ? list.offsetWidth + Number.parseFloat(getComputedStyle(list).columnGap) : 0;
+      }),
+    );
     const before = await positions();
     await page.waitForTimeout(350);
     const after = await positions();
-    expect(after[0]).toBeLessThan(before[0]);
-    expect(after[1]).toBeGreaterThan(before[1]);
+    const movement = after.map((offset, index) => {
+      const cycleWidth = cycleWidths[index];
+      expect(cycleWidth).toBeGreaterThan(0);
+      const shift = offset - before[index];
+      return shift - Math.round(shift / cycleWidth) * cycleWidth;
+    });
+    expect(movement[0]).toBeLessThan(0);
+    expect(movement[1]).toBeGreaterThan(0);
     const pause = section.getByRole("button", {
       name: locale === "es" ? "Pausar tecnologías" : "Pause technologies",
     });

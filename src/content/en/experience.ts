@@ -135,6 +135,7 @@ export const roles: Role[] = [
       "React",
       "Single-SPA",
       "PostgreSQL",
+      "MongoDB",
       "pgvector",
       "LangChain",
       "LangGraph",

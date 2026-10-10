@@ -40,6 +40,7 @@ export async function fixture(
 ) {
   let session = false;
   let requests = 0;
+  const submissions: unknown[] = [];
   let saved = false;
   let releaseStream: () => void = () => {};
   const streamGate = new Promise<void>((resolve) => {
@@ -104,6 +105,7 @@ export async function fixture(
     if (method !== "GET") expect(request.headers()["x-csrf-token"]).toBe("fixture-token");
     if (url.pathname.endsWith("/messages/stream")) {
       requests += 1;
+      submissions.push(request.postDataJSON());
       if (mode === "rejected")
         return json({ code: "invalid_request", message: "private data" }, 422);
       if (mode === "expired") return json({ code: "unauthorized" }, 401);
@@ -151,7 +153,11 @@ export async function fixture(
       return json({ items: created ? [conversation] : [], next_cursor: null });
     return json({});
   });
-  return { requests: () => requests, release: () => releaseStream() };
+  return {
+    requests: () => requests,
+    submissions: () => submissions,
+    release: () => releaseStream(),
+  };
 }
 export async function open(page: Page, locale = "en") {
   await page.goto(locale === "es" ? "/es/about" : "/about");

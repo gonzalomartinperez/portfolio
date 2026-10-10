@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-05.3",
+  "revision": "2026-10-10.3",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
       "email": "gonzalomartinperez2002@gmail.com",
       "location": "Bahía Blanca, Argentina · 100% Remote (UTC-3)",
-      "headline": "AI Software Engineer | Applied AI · Product Engineering · Agentic & Distributed Systems",
+      "headline": "Software Engineer | AI Engineer | Product Engineer | Generative AI · AI Agents · LLM · RAG · GraphRAG · Python · FastAPI · LangChain · LangGraph · Neo4j · Java · Spring Boot · TypeScript · Node.js · React · Next.js · AWS",
       "summaryTitle": "Professional Summary",
       "summary": [
         {
@@ -180,7 +180,7 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Payway’s merchant promotions platform: delivered software in a 13-country ecosystem with thousands of new promotions daily.",
+                      "text": "Built software with PostgreSQL and MongoDB for Payway's merchant promotions platform, in a 13-country ecosystem with thousands of new promotions daily.",
                       "bold": false,
                       "href": ""
                     }
@@ -534,18 +534,22 @@
                 "AI Agents",
                 "RAG",
                 "GraphRAG",
-                "Agno",
                 "LangChain",
                 "LangGraph",
-                "Mem0",
-                "Vertex AI",
-                "DeepInfra",
-                "LLM Evaluation",
-                "Model Context Protocol (MCP)",
+                "Context Engineering",
+                "Prompt Engineering",
+                "Embeddings",
+                "Chunking",
                 "pgvector",
                 "Neo4j",
+                "LLM Evaluation",
+                "AI Testing",
                 "AI Guardrails",
+                "Fine Tuning",
+                "LLMOps",
+                "Model Context Protocol (MCP)",
                 "OpenAI API",
+                "Agno",
                 "Claude API"
               ],
               "blocks": []
@@ -615,6 +619,7 @@
                 "PostgreSQL",
                 "MySQL",
                 "MariaDB",
+                "MongoDB",
                 "Redis",
                 "Hexagonal Architecture",
                 "Layered Architecture",
@@ -747,7 +752,7 @@
                       "href": ""
                     },
                     {
-                      "text": " in SCImago Institutions Rankings 2026 and #8 in five consecutive CWUR editions (2020–2024). Relevant coursework: Artificial Intelligence, Systems Architecture & Design, Databases, Software Verification & Validation, Algorithms & Complexity, and Formal Methods.",
+                      "text": " in SCImago Institutions Rankings 2026. Relevant coursework: Artificial Intelligence, Systems Architecture & Design, Databases, Software Verification & Validation, Algorithms & Complexity, and Formal Methods.",
                       "bold": false,
                       "href": ""
                     }
@@ -969,7 +974,7 @@
       "name": "Gonzalo Martin Perez",
       "email": "gonzalomartinperez2002@gmail.com",
       "location": "Bahía Blanca, Argentina · 100% Remoto (UTC-3)",
-      "headline": "AI Software Engineer | IA aplicada · Product Engineering · Sistemas agénticos/distribuidos",
+      "headline": "Software Engineer | AI Engineer | Product Engineer | Generative AI · AI Agents · LLM · RAG · GraphRAG · Python · FastAPI · LangChain · LangGraph · Neo4j · Java · Spring Boot · TypeScript · Node.js · React · Next.js · AWS",
       "summaryTitle": "Resumen profesional",
       "summary": [
         {
@@ -1143,7 +1148,7 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Plataforma de promociones de Payway para comercios: desarrollé software en un ecosistema de 13 países con miles de promociones nuevas por día.",
+                      "text": "Desarrollé software con PostgreSQL y MongoDB para la plataforma de promociones de Payway para comercios, en un ecosistema de 13 países con miles de promociones nuevas por día.",
                       "bold": false,
                       "href": ""
                     }
@@ -1492,18 +1497,22 @@
                 "AI Agents",
                 "RAG",
                 "GraphRAG",
-                "Agno",
                 "LangChain",
                 "LangGraph",
-                "Mem0",
-                "Vertex AI",
-                "DeepInfra",
-                "LLM Evaluation",
-                "Model Context Protocol (MCP)",
+                "Context Engineering",
+                "Prompt Engineering",
+                "Embeddings",
+                "Chunking",
                 "pgvector",
                 "Neo4j",
+                "LLM Evaluation",
+                "AI Testing",
                 "AI Guardrails",
+                "Fine Tuning",
+                "LLMOps",
+                "Model Context Protocol (MCP)",
                 "OpenAI API",
+                "Agno",
                 "Claude API"
               ],
               "blocks": []
@@ -1573,6 +1582,7 @@
                 "PostgreSQL",
                 "MySQL",
                 "MariaDB",
+                "MongoDB",
                 "Redis",
                 "Hexagonal Architecture",
                 "Layered Architecture",
@@ -1701,7 +1711,7 @@
                       "href": ""
                     },
                     {
-                      "text": " en SCImago Institutions Rankings 2026 y el #8 en cinco ediciones de CWUR (2020–2024). Formación relevante: inteligencia artificial, arquitectura y diseño de sistemas, bases de datos, verificación y validación de software, algoritmos y complejidad y métodos formales.",
+                      "text": " en SCImago Institutions Rankings 2026. Formación relevante: inteligencia artificial, arquitectura y diseño de sistemas, bases de datos, verificación y validación de software, algoritmos y complejidad y métodos formales.",
                       "bold": false,
                       "href": ""
                     }
@@ -1921,11 +1931,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "9ea032cba1a261d0f8bd6b64e65d11e926cf0a1793e7a408ce992cbf8afb6a63",
-    "factsSha256": "a5dc3cae70f34bb7b436ca01a2e314f8a764cf31d2675f094137a55caae9bee6",
+    "sourceSha256": "6c7e75289e09ebd260187845cccc8a4bca63babb96fc3ba6efbdf3ad7f3d2ef5",
+    "factsSha256": "b17a4fb73bfd025f0e32b274964a94f89aee4f33aed846bef92af8f1eac027d1",
     "pdfSha256": {
-      "en": "cac6d6d01e429a6699255631f5fff83408ba69fdee073d10e76b5dad59ef7056",
-      "es": "7e404216211e74a446eae766577b5746fb96b255fa626dcd2e5238565450b7f6"
+      "en": "611eddaec185dc03cb921c2e3d554cad83655b9cd1ffeeb28e5d2bee710c15b5",
+      "es": "bc1c20c954e7240c4fbe044c23440e4ac4399a359118fad5bdfc64dc543d46fe"
     }
   }
 }

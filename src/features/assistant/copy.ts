@@ -27,9 +27,9 @@ const translations = {
     menu: "Conversations",
     close: "Close conversations",
     closeBackdrop: "Dismiss conversation menu overlay",
-    emptyTitle: "Where would you like to start?",
+    emptyTitle: "What would you like to know?",
     empty:
-      "Projects, experience, education. Choose a starting point, then make the question your own.",
+      "Explore Gonzalo’s experience, projects, and approach to engineering. Start with a question.",
     examples: ["What is Filomena?", "What did Gonzalo do at Rampy?", "Where did Gonzalo study?"],
     send: "Send",
     stop: "Stop",
@@ -65,7 +65,8 @@ const translations = {
     retry: "Check saved conversation",
     reconnect: "Reconnect",
     composerNote: "Enter to send · Shift+Enter for a new line · Public questions only",
-    thinking: "Waiting for a response…",
+    thinking: "Thinking…",
+    writing: "Writing a response…",
     noConversations: "Your conversations will appear here.",
   },
   es: {
@@ -95,8 +96,9 @@ const translations = {
     menu: "Conversaciones",
     close: "Cerrar conversaciones",
     closeBackdrop: "Cerrar el menú de conversaciones",
-    emptyTitle: "¿Por dónde quieres empezar?",
-    empty: "Proyectos, experiencia y formación. Elige un punto de partida y adapta la pregunta.",
+    emptyTitle: "¿Qué te gustaría saber?",
+    empty:
+      "Explora la experiencia, los proyectos y la forma de trabajar de Gonzalo. Empieza con una pregunta.",
     examples: ["¿Qué es Filomena?", "¿Qué hizo Gonzalo en Rampy?", "¿Dónde estudió Gonzalo?"],
     send: "Enviar",
     stop: "Detener",
@@ -134,7 +136,8 @@ const translations = {
     retry: "Revisar conversación guardada",
     reconnect: "Volver a conectarme",
     composerNote: "Enter para enviar · Mayús+Enter para una línea nueva · Solo preguntas públicas",
-    thinking: "Esperando una respuesta…",
+    thinking: "Pensando…",
+    writing: "Escribiendo la respuesta…",
     noConversations: "Tus conversaciones aparecerán aquí.",
   },
 } as const;
