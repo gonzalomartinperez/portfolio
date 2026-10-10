@@ -6,6 +6,7 @@ is added. Names remain visible beside each mark.
 
 | Local file under `public/brands/` | Source | Treatment |
 | --- | --- | --- |
+| `solidity.svg` | [Devicon original](https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/solidity/solidity-original.svg) | Original pinned MIT artwork; published faceted mark and colors preserved. |
 | `pytest.svg` | [Simple Icons](https://cdn.simpleicons.org/pytest) | Original upstream artwork and published brand color. |
 | `sentry.svg` | [Simple Icons](https://cdn.simpleicons.org/sentry) | Original upstream artwork and published brand color. |
 | `expo.svg` | [Simple Icons](https://cdn.simpleicons.org/expo) | Original upstream artwork and published brand color. |

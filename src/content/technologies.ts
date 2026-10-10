@@ -14,6 +14,15 @@ export type Technology = {
 
 export const technologyCatalog: Technology[] = [
   {
+    id: "solidity",
+    name: "Solidity",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+    icon: "solidity",
+  },
+  {
     id: "llmops",
     name: "LLMOps",
     category: "applied-ai",
