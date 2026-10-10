@@ -9,6 +9,7 @@ import {
   type Message,
   transition,
 } from "../domain/models.ts";
+import type { VisitorContext } from "../domain/visitor-context.ts";
 import { AssistantError, type AssistantTransport, type Runtime } from "./ports.ts";
 
 export function createAssistant(api: AssistantTransport, runtime: Runtime) {
@@ -164,7 +165,7 @@ export function createAssistant(api: AssistantTransport, runtime: Runtime) {
       });
     }
   }
-  async function submit(question: string, locale: Locale) {
+  async function submit(question: string, locale: Locale, context?: VisitorContext) {
     if (!question.trim() || !canSubmit(state) || generation) return false;
     const current = {
       controller: new AbortController(),
@@ -258,6 +259,7 @@ export function createAssistant(api: AssistantTransport, runtime: Runtime) {
           }
         },
         runtime.id(),
+        context,
       );
       if (signal.aborted) return true;
       if (!terminal) throw new AssistantError("interrupted");

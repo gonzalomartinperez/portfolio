@@ -56,6 +56,12 @@ The composer accepts Enter to send, Shift+Enter for a newline and ignores IME En
 No generation is retried automatically. Reconnect/recovery reads existing state.
 Partial answers remain labeled incomplete until durable completion is confirmed.
 
+The floating launcher is an icon-only Sparkles button with a localized accessible
+name. The rounded panel uses the portfolio palette; opening motion respects reduced
+motion. Waiting shows Thinking… / Pensando… until the first text arrives, then a
+polite status announces writing without reading every token. Connecting and history
+loading remain separate; there are no invented retrieval percentages or tool stages.
+
 The theme and language follow the portfolio. Changing language does not rewrite
 previous messages. Safe editorial starter prompts remain available if the public
 catalog cannot be loaded; they do not claim live model-generated relevance.
@@ -81,7 +87,7 @@ then adapts browser cases to native panels: no postMessage or framing tests rema
 applicable. The replacement suite covers continuity, locale, modal keyboard focus,
 recovery, history mutations, clipboard, IME, unsafe rendering, long output and motion.
 Public model calls, production TLS/CORS/cookies and physical keyboards are separate
-verification steps. Production deployment remains owned by vps-ops and unauthorized.
+verification steps. VPS API deployment and activation remain owned by vps-ops; this frontend delivery does neither.
 
 See [acceptance specification](specs/native-assistant.md) and
 [measured verification and screenshots](verification/native-assistant.md).
@@ -110,7 +116,8 @@ unknown backend payloads never become public error text.
 
 vps-ops must verify effective routing, exposed `X-Run-ID`, SSE flushing/timeouts,
 forwarded-header trust and the sibling-origin cookie flow before production approval.
-This change does not deploy the portfolio, configure CORS remotely or activate CD.
+This change does not configure CORS remotely or enable the assistant. The normal
+portfolio release pipeline remains unchanged.
 
 ## Browser test transport
 
@@ -122,3 +129,25 @@ child process. The fixture does not alter production CSP: WebKit correctly appli
 insufficient. Only Playwright accepts the temporary certificate. The default
 listeners are loopback HTTPS 3160 and private HTTP 3161; environment overrides
 `BROWSER_TEST_PORT` and `BROWSER_TEST_UPSTREAM_PORT` must be distinct.
+
+## Optional visitor interface context
+
+Native requests send top-level `locale` plus optional `context` with `theme`,
+`opened_path`, `current_path` and `presentation` (`compact`, `expanded`, `page`).
+Opening captures the public route; sending reads current route, theme and locale.
+Paths are allowlisted; unknown paths omit optional context. Query strings,
+fragments, referrers, page HTML and visitor attributes are excluded. Context must
+remain an untrusted interface hint, separate from question and authoritative evidence.
+
+The imported API implementation `61da393520014ed2c8b1f8a0635b3b4e615f9e53`
+defines optional validated context. OpenAPI and regenerated types match that
+immutable source; SSE schemas/examples remain unchanged. The backend passes the
+metadata separately as untrusted user data. Missing context preserves legacy
+requests; unknown frontend paths omit it to avoid the API's safe 422 rejection.
+See [the polish spec](specs/polished-ai-assistant.md).
+
+Before activation, reconcile API deployment handoff with native portfolio ownership:
+credentialed CORS must allow the exact portfolio HTTPS origin, and the assistant
+origin routes `/api/v1/*` to FastAPI while leaving private backoffice `/api/auth/*`
+and operations/health routes with their owner. These are deployment requirements,
+not configuration changes performed by this frontend delivery.

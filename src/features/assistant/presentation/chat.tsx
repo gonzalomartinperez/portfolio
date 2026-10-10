@@ -1,4 +1,14 @@
 "use client";
+import {
+  ArrowUp,
+  ArrowUpRight,
+  MessageSquare,
+  Pencil,
+  Plus,
+  Square,
+  Trash2,
+  X,
+} from "lucide-react";
 import Image from "next/image";
 import { type KeyboardEvent, useEffect, useRef, useState } from "react";
 import avatar from "@/assets/avatar.png";
@@ -137,6 +147,7 @@ export default function Chat({
   }
   const runningHere =
     chat.busy && (chat.runConversation === chat.active || chat.runConversation === null);
+  const waiting = runningHere && !chat.streamText;
   return (
     <div
       className={cx(`shell ${presentation ? "contained" : ""}`)}
@@ -175,7 +186,7 @@ export default function Chat({
             aria-label={t.close}
             onClick={closeMenu}
           >
-            ×
+            <X aria-hidden="true" />
           </Button>
         </div>
         <Button
@@ -189,7 +200,7 @@ export default function Chat({
           }}
           disabled={!chat.ready || chat.busy || chat.mutation}
         >
-          <span aria-hidden="true">＋</span> {t.new}
+          <Plus aria-hidden="true" /> {t.new}
         </Button>
         <div className={cx("list-heading")}>{t.menu}</div>
         <nav className={cx("conversation-list")} aria-label={t.menu}>
@@ -279,7 +290,7 @@ export default function Chat({
                     aria-label={`${t.rename} ${item.title === "New conversation" ? t.untitled : item.title}`}
                     onClick={() => startRename(item.id, item.title)}
                   >
-                    ✎
+                    <Pencil aria-hidden="true" />
                   </Button>
                   <Button
                     variant="outline"
@@ -293,7 +304,7 @@ export default function Chat({
                       setDeleting(item.id);
                     }}
                   >
-                    ×
+                    <Trash2 aria-hidden="true" />
                   </Button>
                 </>
               )}
@@ -320,7 +331,7 @@ export default function Chat({
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen(true)}
             >
-              ☰
+              <MessageSquare aria-hidden="true" />
             </Button>
             <div>
               <span className={cx("sr-only")}>{t.title}</span>
@@ -335,7 +346,9 @@ export default function Chat({
           {chat.lifecycle.kind === "initializing"
             ? t.initializing
             : chat.busy
-              ? t.thinking
+              ? waiting
+                ? t.thinking
+                : t.writing
               : chat.lifecycle.kind === "completed"
                 ? t.completed
                 : chat.lifecycle.kind === "cancelled"
@@ -357,6 +370,11 @@ export default function Chat({
               <p className={cx("eyebrow")}>GONZALO MARTIN PEREZ</p>
               <h2>{t.emptyTitle}</h2>
               <p>{t.empty}</p>
+              {chat.lifecycle.kind === "initializing" && (
+                <p className={cx("connection-status")} aria-hidden="true">
+                  {t.initializing}
+                </p>
+              )}
               <div className={cx("examples")}>
                 {(starters?.length ? starters : t.examples).map((example) => (
                   <Button
@@ -368,8 +386,8 @@ export default function Chat({
                       composer.current?.focus();
                     }}
                   >
-                    {example}
-                    <span aria-hidden="true">↗</span>
+                    <span>{example}</span>
+                    <ArrowUpRight aria-hidden="true" />
                   </Button>
                 ))}
               </div>
@@ -407,7 +425,18 @@ export default function Chat({
                     )}
                   </div>
                 )}
-                <pre>{chat.streamText || t.thinking}</pre>
+                {waiting ? (
+                  <div className={cx("thinking")} data-assistant-waiting aria-hidden="true">
+                    <span className={cx("thinking-dots")}>
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                    <span>{t.thinking}</span>
+                  </div>
+                ) : (
+                  <pre>{chat.streamText}</pre>
+                )}
               </div>
             </article>
           )}
@@ -449,35 +478,39 @@ export default function Chat({
             void chat.submit(event);
           }}
         >
-          <label className={cx("sr-only")} htmlFor="question">
-            {t.prompt}
-          </label>
-          <textarea
-            ref={composer}
-            id="question"
-            placeholder={t.prompt}
-            value={chat.draft}
-            onChange={(event) => chat.setDraft(event.target.value)}
-            onKeyDown={submitOnEnter}
-            rows={2}
-            maxLength={4000}
-          />
-          <Button
-            variant="outline"
-            className={cx("primary send-button")}
-            disabled={runningHere ? false : !chat.canSubmit || !chat.draft.trim()}
-            type={runningHere ? "button" : "submit"}
-            onClick={
-              runningHere
-                ? () => {
-                    void chat.stop();
-                  }
-                : undefined
-            }
-          >
-            {runningHere ? t.stop : t.send}
-            <span aria-hidden="true">{runningHere ? "■" : "↗"}</span>
-          </Button>
+          <div className={cx("composer-field")}>
+            <label className={cx("sr-only")} htmlFor="question">
+              {t.prompt}
+            </label>
+            <textarea
+              ref={composer}
+              id="question"
+              placeholder={t.prompt}
+              value={chat.draft}
+              onChange={(event) => chat.setDraft(event.target.value)}
+              onKeyDown={submitOnEnter}
+              rows={2}
+              maxLength={4000}
+            />
+            <Button
+              variant="outline"
+              className={cx("primary send-button")}
+              size="icon"
+              aria-label={runningHere ? t.stop : t.send}
+              title={runningHere ? t.stop : t.send}
+              disabled={runningHere ? false : !chat.canSubmit || !chat.draft.trim()}
+              type={runningHere ? "button" : "submit"}
+              onClick={
+                runningHere
+                  ? () => {
+                      void chat.stop();
+                    }
+                  : undefined
+              }
+            >
+              {runningHere ? <Square aria-hidden="true" /> : <ArrowUp aria-hidden="true" />}
+            </Button>
+          </div>
           <p className={cx("composer-note")}>{t.composerNote}</p>
         </form>
       </section>

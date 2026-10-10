@@ -54,7 +54,7 @@ test("the shared solar star field drifts, pauses and survives localized client n
   expect(await element?.evaluate((node) => node.isConnected)).toBe(true);
   await page.getByRole("link", { name: "ES", exact: true }).click();
   await expect(page).toHaveURL(/\/es\/work$/);
-  await expect(toggle).toHaveText(/Reanudar/);
+  await expect(toggle).toHaveAccessibleName("Reanudar movimiento de la página");
   await toggle.click();
   await expect(field).toHaveAttribute("data-state", "running", { timeout: 25_000 });
   await page

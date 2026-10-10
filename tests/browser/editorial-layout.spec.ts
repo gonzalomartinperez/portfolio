@@ -10,7 +10,11 @@ for (const locale of ["", "/es"]) {
     );
     const biography = page.locator("main .prose");
     await expect(page.locator("main h1 + p")).toContainText("Universidad Nacional del Sur");
-    await expect(biography.locator("p")).toHaveCount(4);
+    await expect(biography.locator("p")).toHaveCount(5);
+    await expect(biography.locator("p").nth(3)).toContainText("Coolify");
+    await expect(biography.locator("p").nth(3)).toContainText(
+      locale ? "proxies inversos" : "reverse proxies",
+    );
     await expect(biography).not.toContainText("Soy Gonzalo");
     await expect(biography).not.toContainText("I’m Gonzalo");
     await expect(page.locator("main aside dl")).toContainText("Bahía Blanca, Argentina");

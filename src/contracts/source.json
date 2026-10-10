@@ -1,10 +1,10 @@
 {
-  "api_commit": "c6012067c4a99db477bb6ddcf1f26dae095641ca",
-  "contract_snapshot": "15b6943f741ac80498a5fee611aa74d24250eb6b",
+  "api_commit": "61da393520014ed2c8b1f8a0635b3b4e615f9e53",
+  "contract_snapshot": "61da393520014ed2c8b1f8a0635b3b4e615f9e53",
   "repository": "https://github.com/gonzalomartinperez/portfolio-assistant-api",
-  "openapi_sha256": "f4ed0a3cb2608f6308ccf0af375dcfeaa18bbacfed14dd2efcc497b650a565f4",
+  "openapi_sha256": "1f51d12768b1d1808ce77081ffcb4e5a5cd80759aabc9031183007c44aee18d1",
   "sse_sha256": "6cc2a2eb99eb86532d455eeb9022142f969ff4b2365c21c11bd9139edf409aff",
-  "types_sha256": "d4c06deaa516468c89f33b12b6f495a9c9ae274be0649f1e8cbde02f41245533",
+  "types_sha256": "8ffc900c4e056f204b6a1d755ff815031d2293564fb14af9fffc1efe9f1e182d",
   "sse_examples_sha256": "bdaa9c20b3d20ac7f855416c1d3b4648aac825cd3d2af40162613b14db2e8358",
   "generator": {
     "name": "openapi-typescript",

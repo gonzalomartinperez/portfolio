@@ -49,7 +49,8 @@ export function useChat(assistant: Assistant, presentation?: NativePresentation)
       const question = draft;
       if (!canSubmit(state)) return;
       setDraft("");
-      if (!(await assistant.submit(question, preferences.locale))) setDraft(question);
+      if (!(await assistant.submit(question, preferences.locale, presentation?.context)))
+        setDraft(question);
     },
   };
 }

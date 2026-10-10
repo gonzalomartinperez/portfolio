@@ -58,9 +58,12 @@ test("real loopback HTTP transports split UTF-8 SSE without dropping durable com
   );
 });
 
-test("real loopback disconnect aborts the reader and does not retry generation", async (context) => {
+test("real loopback disconnect aborts the reader and does not retry generation", {
+  timeout: 5000,
+}, async (context) => {
   let requests = 0;
   let disconnected = false;
+  const closed = Promise.withResolvers<void>();
   const server = createServer((request, response) => {
     if (!request.url?.endsWith("/stream")) {
       response.end(JSON.stringify({ csrf_token: "fixture", retention_days: 7 }));
@@ -70,6 +73,7 @@ test("real loopback disconnect aborts the reader and does not retry generation",
     response.writeHead(200, { "Content-Type": "text/event-stream", "X-Run-ID": "run" });
     response.on("close", () => {
       disconnected = true;
+      closed.resolve();
     });
     response.write(event("run.started", 0, {}));
   });
@@ -97,7 +101,7 @@ test("real loopback disconnect aborts the reader and does not retry generation",
     "once",
   );
   await assert.rejects(result);
-  await new Promise((resolve) => setTimeout(resolve, 20));
+  await closed.promise;
   assert.equal(requests, 1);
   assert.equal(disconnected, true);
 });

@@ -119,6 +119,7 @@ const specificIllustrations: Record<string, LucideIcon> = {
   microfrontends: PanelsTopLeft,
   "server-side-rendering": PanelsTopLeft,
   serverless: Cloud,
+  "reverse-proxy": Route,
   "structured-logging": FileText,
   rbac: KeyRound,
   "end-to-end-encryption": LockKeyhole,

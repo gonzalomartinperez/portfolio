@@ -1,5 +1,6 @@
 "use client";
 
+import { Pause, Play } from "lucide-react";
 import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { setPageMotionPaused, usePageMotionPaused } from "../motion-state";
 import styles from "./hero-stage.module.css";
@@ -150,10 +151,15 @@ export function HeroStage({
               className={styles.toggle}
               onClick={toggle}
               type="button"
+              aria-label={mode === "paused" ? playLabel : pauseLabel}
+              title={mode === "paused" ? playLabel : pauseLabel}
               aria-pressed={mode === "paused"}
             >
-              <span aria-hidden="true">{mode === "paused" ? "▶" : "Ⅱ"}</span>
-              {mode === "paused" ? playLabel : pauseLabel}
+              {mode === "paused" ? (
+                <Play aria-hidden="true" size={18} />
+              ) : (
+                <Pause aria-hidden="true" size={18} />
+              )}
             </button>
           )}
           <div className={styles.scrollCue} aria-hidden="true">

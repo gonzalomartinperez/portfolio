@@ -135,3 +135,23 @@ test("committed API handoff examples map through the real stream boundary", asyn
     assert.equal(mapped.at(-1), terminal);
   }
 });
+
+test("optional visitor context accompanies locale while legacy callers keep their payload", async () => {
+  const bodies: unknown[] = [];
+  const api = createHttpTransport("https://example.test", async (_url, init) => {
+    bodies.push(JSON.parse(String(init?.body)));
+    return json({ code: "invalid_request" }, 422);
+  });
+  const context = {
+    theme: "light",
+    opened_path: "/work",
+    current_path: "/es/about",
+    presentation: "compact",
+  } as const;
+  await assert.rejects(api.send("id", "Question", "es", signal, () => {}, "key", context));
+  await assert.rejects(api.send("id", "Question", "en", signal, () => {}, "key"));
+  assert.deepEqual(bodies, [
+    { content: "Question", locale: "es", context },
+    { content: "Question", locale: "en" },
+  ]);
+});
