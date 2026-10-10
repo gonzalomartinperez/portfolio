@@ -24,7 +24,7 @@ for (const locale of ["", "/es"]) {
           theme,
         );
         await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
-        // A theme attribute can update before offscreen academic cards resolve their colors.
+        // Transparent actions inherit their backdrop from the body or a card, including offscreen.
         await expect
           .poll(() =>
             page.evaluate(() => {
@@ -35,19 +35,21 @@ for (const locale of ["", "/es"]) {
                 return probe.style.color;
               };
               const primary = color("--text-primary");
-              const surface = color("--surface-raised");
-              const cards = document.querySelectorAll(
-                'ul[aria-labelledby="evidence"] [data-slot="card"]',
-              );
-              return Array.from(cards).flatMap((card) => {
-                const style = getComputedStyle(card);
-                const actions = Array.from(card.querySelectorAll("a"));
-                return [
-                  style.backgroundColor === surface,
-                  style.color === primary,
-                  ...actions.map((action) => getComputedStyle(action).color === primary),
-                ].filter((matches) => !matches);
-              });
+              const body = getComputedStyle(document.body);
+              const cards = document.querySelectorAll('[data-slot="card"].bg-card');
+              const actions = document.querySelectorAll("main .ui-action.text-foreground");
+              return [
+                body.backgroundColor === color("--surface-void"),
+                body.color === primary,
+                ...Array.from(cards).flatMap((card) => {
+                  const style = getComputedStyle(card);
+                  return [
+                    style.backgroundColor === color("--surface-raised"),
+                    style.color === primary,
+                  ];
+                }),
+                ...Array.from(actions).map((action) => getComputedStyle(action).color === primary),
+              ].filter((matches) => !matches);
             }),
           )
           .toEqual([]);
