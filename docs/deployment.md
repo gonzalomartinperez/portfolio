@@ -124,3 +124,16 @@ regresses, use a focused fix or revert PR through the protected flow, not a rese
 
 See the [development guide](development.md) for branch conventions and the
 [technology guide](technology.md) for compiler compatibility and native packages.
+
+### Reviewed CV cache keys
+
+CV links use the reviewed PDF hash in the `sha256` query parameter. This replaces
+the older `v` namespace after a live check reproduced an old PDF cached under a
+new hash before the deployment had reached the origin. The PDF paths and
+EN/ES download filenames remain stable.
+
+Before checking published download links, probe deployment readiness with a
+separate, unique query parameter. Do not request the next release's canonical
+cache key while the origin still serves the previous PDF: a CDN can cache those
+old bytes even though the query contains a new hash. Once the origin is ready,
+verify the actual links and their byte hashes, including both CV and contact.

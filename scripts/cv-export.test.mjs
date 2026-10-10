@@ -13,7 +13,7 @@ test("CV download cache keys track reviewed PDF bytes while file paths stay stab
   for (const locale of ["en", "es"]) {
     const download = new URL(resumeDownloads[locale], "https://gonzalomartinperez.com");
     assert.equal(download.pathname, resumeFiles[locale]);
-    assert.equal(download.searchParams.get("v"), cv.provenance.pdfSha256[locale]);
+    assert.equal(download.searchParams.get("sha256"), cv.provenance.pdfSha256[locale]);
   }
 });
 
