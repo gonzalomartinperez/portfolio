@@ -42,3 +42,10 @@ no timeout or retry allowance was increased.
 Affected-route browser checks, responsive screenshots and required integration
 CI are recorded in the task and release PRs. Browser emulation does not establish
 physical-device frame rates or behavior across every browser installation.
+
+The required CI audit found newly published advisories in the existing lockfile.
+Update only Sharp 0.35.4 → 0.35.5 (including its matching image binaries) and
+source-map-js 1.2.1 → 1.2.2 within their existing dependency ranges. Keep both audit
+gates and hosting compatibility checks intact.
+[Sharp advisory](https://github.com/advisories/GHSA-wq5f-xc86-pv6w),
+[source-map-js advisory](https://github.com/advisories/GHSA-68fv-2mgg-jv7q).
