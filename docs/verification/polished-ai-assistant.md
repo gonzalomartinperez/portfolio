@@ -21,6 +21,9 @@ No API provider credentials were read, and no real model generation was requeste
   heading; theme changes use the real toggle rather than a hydration-racing DOM write.
 - Four final short-viewport tests passed across the same engines at 320×520,
   including 200% text resizing and containment of the send button within its field.
+- Four bilingual desktop/mobile editorial checks passed after updating the biography
+  expectation to five paragraphs and explicitly verifying the new Coolify/reverse-proxy
+  paragraph. Introduction, personal facts and biography remain separate.
 - Added deterministic bilingual pending/stop/error checks and cold-chunk mobile
   keyboard containment. A pending response has one polite status announcement;
   visual dots are decorative and stop animating under reduced motion.
