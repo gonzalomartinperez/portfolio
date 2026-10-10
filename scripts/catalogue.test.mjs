@@ -14,6 +14,48 @@ import {
 
 const read = (file) => readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
 
+test("confirmed AI concepts retain general evidence without inventing an employer", () => {
+  for (const id of [
+    "ai-chains",
+    "ai-testing",
+    "embeddings",
+    "chunking",
+    "prompt-engineering",
+    "context-engineering",
+    "fine-tuning",
+    "llmops",
+  ]) {
+    const technology = getTechnology(id);
+    assert.equal(technology?.kind, "concept", id);
+    assert.equal(technology?.status, "applied", id);
+    assert.equal(technology?.category, "applied-ai", id);
+    assert.ok(publicTechnologyCatalog.includes(technology), id);
+    assert.deepEqual(
+      technology.evidence.map(({ href }) => href),
+      ["/work"],
+      id,
+    );
+  }
+  assert.equal(getTechnology("Prompt optimization")?.id, "prompt-engineering");
+  assert.equal(getTechnology("Context optimization")?.id, "context-engineering");
+  assert.equal(getTechnology("Fine tuning")?.id, "fine-tuning");
+  assert.equal(getTechnology("Large Language Model Operations")?.id, "llmops");
+});
+
+test("MongoDB has confirmed Teamcubation evidence in both experience translations", () => {
+  assert.deepEqual(
+    getTechnology("mongodb")?.evidence.map(({ href }) => href),
+    ["/work#teamcubation"],
+  );
+  for (const locale of ["en", "es"]) {
+    const experience = read(`src/content/${locale}/experience.ts`);
+    const teamcubation = experience.split('slug: "teamcubation"')[1]?.split("slug:")[0];
+    assert.ok(teamcubation?.includes('"MongoDB"'), locale);
+    assert.ok(teamcubation?.includes('"PostgreSQL"'), locale);
+    assert.ok(teamcubation?.includes('"pgvector"'), locale);
+  }
+});
+
 test("confirmed toolkit additions retain their applied experience context", () => {
   const rampy = [
     "agent-harness",
@@ -112,7 +154,7 @@ test("the curated hero prioritizes applied AI while preserving source knowledge"
   assert.equal(getTechnology("spec-driven-development")?.status, "applied");
 });
 
-test("additional Rampy confirmations describe integrations without inventing model training", () => {
+test("additional Rampy confirmations retain their integration evidence", () => {
   for (const id of [
     "alembic",
     "pytest",
@@ -169,7 +211,10 @@ test("additional Rampy confirmations describe integrations without inventing mod
   ])
     assert.equal(getTechnology(alias)?.id, id);
   assert.equal(getTechnology("foundation-model-training"), undefined);
-  assert.equal(getTechnology("fine-tuning"), undefined);
+  assert.deepEqual(
+    getTechnology("fine-tuning")?.evidence.map(({ href }) => href),
+    ["/work"],
+  );
 });
 
 test("the hero fills seven desktop and five mobile columns with 35 unique marks", () => {

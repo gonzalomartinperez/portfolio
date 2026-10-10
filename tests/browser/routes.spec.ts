@@ -13,15 +13,50 @@ for (const locale of ["", "/es"]) {
       await page.goto(url);
       await expect(page.getByRole("main")).toBeVisible();
       await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+      if (route === "/education") {
+        await expect(page.locator('ul[aria-labelledby="evidence"] [data-slot="card"]')).toHaveCount(
+          2,
+        );
+      }
       for (const theme of ["dark", "light"]) {
         await page.evaluate(
           (value) => document.documentElement.setAttribute("data-theme", value),
           theme,
         );
         await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
-        // Color transitions can briefly mix the previous text color with the new surface.
-        // Audit the settled theme rather than an intermediate animation frame.
-        await page.waitForTimeout(350);
+        // A theme attribute can update before offscreen academic cards resolve their colors.
+        await expect
+          .poll(() =>
+            page.evaluate(() => {
+              const tokens = getComputedStyle(document.documentElement);
+              const color = (name: string) => {
+                const probe = document.createElement("span");
+                probe.style.color = tokens.getPropertyValue(name);
+                return probe.style.color;
+              };
+              const primary = color("--text-primary");
+              const surface = color("--surface-raised");
+              const cards = document.querySelectorAll(
+                'ul[aria-labelledby="evidence"] [data-slot="card"]',
+              );
+              return Array.from(cards).flatMap((card) => {
+                const style = getComputedStyle(card);
+                const actions = Array.from(card.querySelectorAll("a"));
+                return [
+                  style.backgroundColor === surface,
+                  style.color === primary,
+                  ...actions.map((action) => getComputedStyle(action).color === primary),
+                ].filter((matches) => !matches);
+              });
+            }),
+          )
+          .toEqual([]);
+        await page.evaluate(
+          () =>
+            new Promise<void>((resolve) => {
+              requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+            }),
+        );
         const result = await new AxeBuilder({ page })
           .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
           .analyze();
