@@ -32,6 +32,7 @@ export const roles: Role[] = [
       "Ingeniería de producto desde los requisitos hasta producción, en colaboración directa con los fundadores y sobre el trabajo previo del equipo.",
     stack: technologyNames([
       "Python",
+      "Solidity",
       "FastAPI",
       "Agno",
       "LangChain",

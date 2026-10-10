@@ -1,3 +1,10 @@
+.focus {
+  max-width: var(--measure-text);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
 .resume {
   padding-bottom: var(--space-8);
   line-height: 1.7;

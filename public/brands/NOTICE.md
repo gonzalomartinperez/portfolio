@@ -80,3 +80,4 @@ The original viewport and colors `#452e72` and `#864ffc` are preserved.
 The upstream Apache License 2.0 is included in [coolify-LICENSE.txt](coolify-LICENSE.txt).
 The mark identifies confirmed experience; trademark rights remain with their
 owners and its use does not imply endorsement.
+- `solidity.svg`: [source](https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/solidity/solidity-original.svg)
