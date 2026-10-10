@@ -27,7 +27,7 @@ function resumeDownload(locale: keyof typeof resumeFiles) {
   const document = documents.find((entry) => entry.href === href);
   if (!document) throw new Error(`Missing reviewed CV document: ${locale}`);
   // The CDN caches stable PDF paths across deployments; reviewed bytes define the cache key.
-  return `${href}?v=${document.sha256}`;
+  return `${href}?sha256=${document.sha256}`;
 }
 
 export const resumeDownloads = {

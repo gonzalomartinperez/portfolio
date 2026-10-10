@@ -21,7 +21,7 @@ test("CV and contact downloads use reviewed content hashes as cache keys", async
       const url = new URL(link.href ?? "", page.url());
       const document = documents.find((entry) => entry.href === url.pathname);
       expect(document).toBeDefined();
-      expect(url.searchParams.get("v")).toBe(document?.sha256);
+      expect(url.searchParams.get("sha256")).toBe(document?.sha256);
       const response = await request.get(url.href);
       expect(response.status()).toBe(200);
       const language = url.pathname.endsWith("-es.pdf") ? "ES" : "EN";
