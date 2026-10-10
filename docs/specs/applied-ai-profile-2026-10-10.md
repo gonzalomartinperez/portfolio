@@ -39,6 +39,12 @@ width: a recycled tile can move from the left edge to the right edge while the
 row continues moving left. Direction, pause and access assertions remain intact;
 no timeout or retry allowance was increased.
 
+Required browser CI exposed a transient theme mismatch on academic document
+cards: the links resolved light text while their card retained its dark surface.
+The route audit now checks the actual card and action colors against the resolved
+theme tokens and waits for paint frames before running the unchanged accessibility
+rules. It replaces a blind delay; persistent mismatches still fail the test.
+
 Affected-route browser checks, responsive screenshots and required integration
 CI are recorded in the task and release PRs. Browser emulation does not establish
 physical-device frame rates or behavior across every browser installation.
