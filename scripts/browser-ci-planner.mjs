@@ -70,7 +70,7 @@ export function parseDiscovery(report) {
           identity,
           project,
           file,
-          selector: `[${project}]${separator}${[file, ...titlePath].join(separator)}`,
+          selector: `[${project}]${separator}${[file.slice("tests/browser/".length), ...titlePath].join(separator)}`,
         });
       }
     }

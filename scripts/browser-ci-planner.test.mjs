@@ -41,7 +41,7 @@ test("native discovery preserves project, relative file and nested titles but ig
   const original = report(["first"], "webkit", "/workspace/tests/browser/example.spec.ts");
   const parsed = parseDiscovery(original);
   assert.equal(parsed[0].identity, "webkit › tests/browser/example.spec.ts › navigation › first");
-  assert.equal(parsed[0].selector, "[webkit] › tests/browser/example.spec.ts › navigation › first");
+  assert.equal(parsed[0].selector, "[webkit] › example.spec.ts › navigation › first");
   original.suites[0].suites[0].specs[0].line = 999;
   assert.deepEqual(parseDiscovery(original), parsed);
 });
@@ -152,7 +152,10 @@ test("discovery accepts native omitted leaf suites and testDir-relative files", 
   const native = report(["first"], "chromium", "example.spec.ts");
   native.config = { rootDir: "/workspace/tests/browser" };
   delete native.suites[0].suites[0].suites;
-  assert.equal(parseDiscovery(native)[0].file, "tests/browser/example.spec.ts");
+  const parsed = parseDiscovery(native);
+  assert.equal(parsed[0].file, "tests/browser/example.spec.ts");
+  assert.equal(parsed[0].selector, "[chromium] › example.spec.ts › navigation › first");
+  assert.equal(parsed[0].identity, "chromium › tests/browser/example.spec.ts › navigation › first");
   native.suites[0].suites[0].specs[0].file = "../outside.spec.ts";
   assert.throws(() => parseDiscovery(native), /Unexpected/);
 });
