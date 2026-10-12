@@ -24,7 +24,7 @@ const capacity = 192;
 /** The mask is smooth by construction, so a quarter-resolution target is enough. */
 const maskScale = 0.25;
 /** Feather in CSS pixels; narrow screens use less so the scene shows between paragraphs. */
-const featherCss = (width: number) => (width < 640 ? 30 : 48);
+const featherCss = (width: number) => (width < 640 ? 40 : 80);
 
 /**
  * GLSL shared by every solar material: `readingFactor()` returns how much of a fragment stays
@@ -103,7 +103,7 @@ export function createReadingShade() {
         vec2 outside = abs(vPoint - vRect.xy - vRect.zw * 0.5) - vRect.zw * 0.5;
         float edge = length(max(outside, 0.0)) + min(max(outside.x, outside.y), 0.0);
         float falloff = clamp(edge / feather, 0.0, 1.0);
-        gl_FragColor = vec4(exp(-falloff * falloff * 4.0) * (1.0 - falloff));
+        gl_FragColor = vec4(1.0 - falloff * falloff * (3.0 - 2.0 * falloff));
       }`,
   });
   const mesh = new Mesh(geometry, material);
