@@ -1,4 +1,5 @@
 import type { Locale } from "./locales";
+import { professionalHeadline } from "./site-config";
 
 /**
  * The shell strings, in both languages, as plain strings.
@@ -38,7 +39,7 @@ export type ChromeCopy = {
 export const chrome: Record<Locale, ChromeCopy> = {
   en: {
     skipToContent: "Skip to content",
-    roleSubtitle: "AI Software Engineer",
+    roleSubtitle: professionalHeadline,
     mainNavLabel: "Main",
     footerNavLabel: "Footer",
     themeToggleNeutral: "Switch theme",
@@ -64,7 +65,7 @@ export const chrome: Record<Locale, ChromeCopy> = {
   },
   es: {
     skipToContent: "Ir al contenido",
-    roleSubtitle: "AI Software Engineer",
+    roleSubtitle: professionalHeadline,
     mainNavLabel: "Principal",
     footerNavLabel: "Pie de página",
     themeToggleNeutral: "Cambiar el tema",

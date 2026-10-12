@@ -1,9 +1,15 @@
-import { email, externalLinks, resumeDownloads, resumeFilenames } from "../site-config";
+import {
+  email,
+  externalLinks,
+  professionalHeadline,
+  resumeDownloads,
+  resumeFilenames,
+} from "../site-config";
 import type { EvidenceLink } from "../types";
 
 export const profile = {
   name: "Gonzalo Martin Perez",
-  role: "AI Software Engineer",
+  role: professionalHeadline,
   currentPosition: "AI Engineer at Rampy",
   location: "Bahía Blanca, Argentina",
   timezone: "UTC-3",
@@ -15,7 +21,7 @@ export const profile = {
     "I turn complex AI, fintech, and blockchain systems into reliable, fast products built for users.",
 
   intro:
-    "I’m Gonzalo, an AI Software Engineer. I turn ideas into useful products, from AI agents and backend services to web and mobile apps.",
+    "I’m Gonzalo, a software engineer specializing in applied AI and end-to-end product development. I turn ideas into useful products, from AI agents and backend services to web and mobile apps.",
 
   summary:
     "At Rampy, a fintech and blockchain startup, I build an agentic system that connects users with digital assets, swaps, vaults, and perpetual markets. I develop the web and mobile experiences, APIs, and integrations behind it. In production, observed average app startup dropped from about 7–8 seconds to 1–2 seconds.",

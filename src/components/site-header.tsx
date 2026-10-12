@@ -43,7 +43,11 @@ export function SiteHeader() {
       </a>
       <header className={styles.header}>
         <div className={`frame ${styles.inner}`}>
-          <Link className={styles.brand} href={localePath(locale, "/")}>
+          <Link
+            aria-label={`Gonzalo Martin Perez — ${copy.roleSubtitle}`}
+            className={styles.brand}
+            href={localePath(locale, "/")}
+          >
             <Mark size={44} />
             <span className={styles.brandText}>
               <span className={styles.brandName}>Gonzalo Martin Perez</span>

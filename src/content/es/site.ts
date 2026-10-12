@@ -1,10 +1,11 @@
+import { professionalHeadline } from "../site-config";
 import type { SiteCopy } from "../site-copy";
 import { aboutCopy } from "./about";
 
 export const siteCopy: SiteCopy = {
   chrome: {
     skipToContent: "Saltar al contenido",
-    roleSubtitle: "AI Software Engineer",
+    roleSubtitle: professionalHeadline,
     mainNavLabel: "Principal",
     footerNavLabel: "Pie de página",
     themeToggleNeutral: "Cambiar el tema",
@@ -192,7 +193,7 @@ export const siteCopy: SiteCopy = {
   contact: {
     metaTitle: "Contacto",
     metaDescription:
-      "Contacta a Gonzalo Martin Perez — AI Software Engineer, abierto a nuevas oportunidades en " +
+      "Contacta a Gonzalo Martin Perez — ingeniería de software, IA y producto. Abierto a nuevas oportunidades en " +
       "roles remotos. Email, LinkedIn y GitHub.",
     eyebrow: "Contacto",
     title: "Hablemos",
