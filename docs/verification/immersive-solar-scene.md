@@ -61,11 +61,23 @@ the Sun. With the mask, 0 failures at scroll 0 and 2 viewports, and one 4.43:1 r
 viewport on desktop (minimum elsewhere 4.99:1). A browser regression now enforces 4.5:1
 (3:1 for large text) on `/about` in both themes.
 
+## Visual review
+
+Every route was reviewed on a hardware GPU in both themes at desktop and Pixel 7 sizes,
+including the hero at rest and with the toolkit settled, reading positions, the Filomena
+diagrams and gallery, and the explorer close-ups. Review found and fixed: labels over the Sun
+in the settled toolkit, an opaque receded Sun hiding stars, a hard mask edge across the
+corona, explorer close-ups facing the night side, and NaN-producing shader expressions
+(`pow` with negative bases, inverted `smoothstep` edges) that showed as a lighter square on
+D3D12. The [README gallery](../gallery/README.md) records the reviewed frames.
+
 ## Remaining limits
 
 - Physical mobile devices, Safari/WebKit and Firefox rendering of the scene were not tested
   locally; CI covers Chromium only for the scene.
 - Additive glows rely on browsers compositing premultiplied color brighter than its alpha,
   which current engines do but WebGL leaves implementation-defined.
-- Hero text is excluded from the reading mask because its container is pinned and animated;
-  initial orbital phases keep bodies clear of it at time zero.
+- Hero text is not measured into the reading mask because its container is pinned and
+  animated. Initial orbital phases keep bodies clear of it at time zero, and while the
+  technology cloud spreads over the screen the whole scene recedes using the progress the hero
+  already publishes, so labels such as the one over the Sun stay legible.
