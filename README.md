@@ -33,7 +33,7 @@ reviewed CVs, a focused technology catalog and a realistic, readable 3D solar sc
 | **Interactive architecture** | React Flow diagrams with keyboard-accessible detail panels explain the systems behind each role. |
 | **Hero identity** | A lazy Three.js particle sphere and GSAP native-scroll choreography that settles into the technology toolkit. |
 | **Solar scene** | A single-pass Three.js renderer with physically motivated shaders, a baked Milky Way and a reading mask that keeps text contrast on every page. |
-| **Engineered quality** | Strict TypeScript, Biome, budgets, rendered checks and eight Playwright shards gate every pull request. |
+| **Engineered quality** | Strict TypeScript, Biome, budgets, rendered checks and eight duration-balanced Playwright groups gate every pull request. |
 | **Reviewed delivery** | Task branch → `develop` → `main` through protected pull requests; native Hostinger deployment from `main`. |
 
 ## Gallery
@@ -312,6 +312,7 @@ updated without giving the public build access to private sources.
 | [Editorial guidelines](docs/editorial-guidelines.md) | Natural bilingual copy, evidence-aware claims, technology and brand presentation |
 | [Public-content contract](docs/public-content.md) | Approved data projection, generated CV and reviewed document releases |
 | [Technology guide](docs/technology.md) | Version policy, compatibility, and maintenance |
+| [CI efficiency](docs/research/ci-efficiency.md) | Measured timing, complete balanced coverage and package-cache strategy |
 | [Deployment guide](docs/deployment.md) | Hostinger setup and the CI/CD boundary |
 | [Native assistant guide](docs/native-assistant.md) | Lazy panel, imported API contract, session ownership and activation checks |
 | [AGENTS.md](AGENTS.md) / [CLAUDE.md](CLAUDE.md) | Shared agent contract and Claude entrypoint |
