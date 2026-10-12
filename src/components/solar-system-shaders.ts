@@ -514,5 +514,7 @@ void main() {
   float along = dot(planetCenter - vPosition, L);
   float miss = length(planetCenter - vPosition - L * along);
   float shadow = along > 0.0 ? smoothstep(planetRadius * 0.97, planetRadius * 1.04, miss) : 1.0;
-  gl_FragColor = cover(band.rgb * sunColor * (lit + scatter) * shadow, band.a * opacity);
+  // Shadowed ring particles still occlude, but thin gaps should not darken the sky behind them.
+  float coverage = band.a * opacity * mix(0.55, 1.0, shadow);
+  gl_FragColor = cover(band.rgb * sunColor * (lit + scatter) * shadow, coverage);
 }`;

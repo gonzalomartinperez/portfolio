@@ -16,10 +16,11 @@ import {
   WebGLRenderTarget,
 } from "three";
 
-/** Elements whose text the decorative scene must not compete with. */
+/** Elements whose text the decorative scene must not compete with, in content and footer. */
 const blockSelector =
   "h1, h2, h3, h4, h5, h6, p, li, dt, dd, figcaption, blockquote, label, th, td, summary";
-const textSelector = `main :is(${blockSelector})`;
+/** The footer sets short labels in spans and links rather than paragraphs. */
+const textSelector = `main :is(${blockSelector}), footer :is(${blockSelector}, span, a)`;
 const capacity = 192;
 /** The mask is smooth by construction, so a quarter-resolution target is enough. */
 const maskScale = 0.25;

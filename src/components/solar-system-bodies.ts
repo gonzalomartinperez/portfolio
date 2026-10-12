@@ -99,7 +99,8 @@ const ringExtents = {
 const coronaSpan = 6;
 const markerInner = 0.86;
 const cloudDriftPerSecond = 0.012;
-const darkAmbient = [0.006, 0.008, 0.014] as const;
+/** A faint bluish earthshine keeps night sides reading as spheres, not holes, on black. */
+const darkAmbient = [0.022, 0.026, 0.038] as const;
 const inkAmbient = [0.05, 0.06, 0.08] as const;
 
 /**

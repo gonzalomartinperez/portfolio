@@ -77,6 +77,9 @@ D3D12. The [README gallery](../gallery/README.md) records the reviewed frames.
 
 - Physical mobile devices, Safari/WebKit and Firefox rendering of the scene were not tested
   locally; CI covers Chromium only for the scene.
+- With classic (non-overlay) scrollbars, the root's stable scrollbar gutter stays visible as
+  a narrow strip beside the full-screen explorer. It comes from the global scroll layout,
+  not the scene, and is left for a layout change.
 - Additive glows rely on browsers compositing premultiplied color brighter than its alpha,
   which current engines do but WebGL leaves implementation-defined.
 - Hero text is not measured into the reading mask because its container is pinned and
