@@ -234,7 +234,6 @@ export function createSolarBodies({
       intensity: { value: 2.2 },
     },
     depthWrite: true,
-    transparent: false,
   });
   const sunMesh = new Mesh(detailed, sunMaterial);
   sunMesh.name = "sun";

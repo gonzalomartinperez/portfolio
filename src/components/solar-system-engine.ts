@@ -53,6 +53,8 @@ const compactWidth = 640;
 const memoryBudgetBytes = { compact: 128 * 1024 * 1024, wide: 256 * 1024 * 1024 } as const;
 const pixelBudget = { compact: 1_650_000, wide: 3_700_000 } as const;
 const maxDeltaSeconds = 0.05;
+/** Explorer close-ups look at the sunlit side, turned by this angle for a gibbous phase. */
+const sunlitViewAngle = 0.7;
 /** Largest uploaded dimension per map. Explorer close-ups decode finer detail on demand. */
 const textureLimits = {
   reading: { prominent: 2048, other: 1024 },
@@ -221,27 +223,35 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     }
   };
   /**
-   * Explorer: the orbit target follows the selected body and the camera flies in to frame it;
-   * clearing the selection flies back out to the full system.
+   * Explorer: the orbit target follows the selected body while the camera flies to a three-quarter
+   * sunlit view of it, keeping the Sun behind the camera; clearing the selection flies back to the
+   * full system. Once there, the visitor orbits freely.
    */
   const updateFocus = (delta: number) => {
     if (!immersive || !controls || !bodies) return;
     const selected = bodies.bodies.find((body) => body.name === highlighted && body.name !== "sun");
     const goal = scratch.goal.set(0, 0, 0);
     if (selected) selected.mesh.getWorldPosition(goal);
-    const ease = delta > 0 ? 1 - Math.exp(-delta * 3.2) : 1;
+    const ease = delta > 0 ? 1 - Math.exp(-delta * 2.4) : 1;
     const before = scratch.before.copy(controls.target);
     controls.target.lerp(goal, ease);
     camera.position.add(before.subVectors(controls.target, before));
     if (!flyToSelection) return;
-    const framing = selected
-      ? Math.max(selected.mesh.scale.x * 7, 5) * Math.max(1, 1 / camera.aspect)
-      : defaultDistance;
-    const offset = scratch.offset.subVectors(camera.position, controls.target);
-    const distance = offset.length();
-    const next = distance + (framing - distance) * ease;
-    camera.position.copy(controls.target).add(offset.multiplyScalar(next / distance));
-    if (Math.abs(next - framing) < 0.02) flyToSelection = false;
+    const destination = scratch.offset;
+    if (selected) {
+      const framing = Math.max(selected.mesh.scale.x * 7, 5) * Math.max(1, 1 / camera.aspect);
+      const sunward = Math.atan2(-goal.x, -goal.z) + sunlitViewAngle;
+      destination
+        .set(Math.sin(sunward), 0.45, Math.cos(sunward))
+        .normalize()
+        .multiplyScalar(framing)
+        .add(controls.target);
+    } else {
+      const elevation = (layoutCamera.elevation * Math.PI) / 180;
+      destination.set(0, Math.sin(elevation), Math.cos(elevation)).multiplyScalar(defaultDistance);
+    }
+    camera.position.lerp(destination, ease);
+    if (camera.position.distanceTo(destination) < 0.05) flyToSelection = false;
   };
 
   const draw = (delta = 0) => {
@@ -260,6 +270,10 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     drawCost = drawCost ? drawCost * 0.9 + cost * 0.1 : cost;
     framesRendered++;
     drawing = false;
+  };
+  /** Outside the animation loop draws at once; inside it, the next frame picks the change up. */
+  const redraw = () => {
+    if (!frame) draw();
   };
   const animate = (time: number) => {
     frame = 0;
@@ -310,10 +324,14 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     // Software rasterizers stay near one fragment per CSS pixel whatever the screen density.
     pixelRatio = Math.max(0.5, Math.min(software ? 0.75 : 2, ceiling * quality.scale));
     const key = `${width}x${height}@${pixelRatio}`;
-    if (key === bufferKey && !force) return;
+    const bufferChanged = key !== bufferKey;
+    if (!bufferChanged && !force) return;
     bufferKey = key;
-    renderer.setPixelRatio(pixelRatio);
-    renderer.setSize(width, height, false);
+    // Assigning canvas dimensions clears it, even to the same values.
+    if (bufferChanged) {
+      renderer.setPixelRatio(pixelRatio);
+      renderer.setSize(width, height, false);
+    }
     shared.pixelRatio.value = pixelRatio;
     estimatedGpuBytes =
       reserved + Math.ceil(width * pixelRatio) * Math.ceil(height * pixelRatio) * bytesPerPixel;
@@ -328,15 +346,19 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       controls.maxDistance = defaultDistance * 1.9;
     }
     quality.discard(300);
-    draw();
+    // A resized drawing buffer is cleared; repaint now so no blank frame reaches the screen.
+    if (bufferChanged) draw();
+    else redraw();
   };
 
   const applyTheme = () => {
     const ink = light && !immersive;
     shared.lightMode.value = ink ? 1 : 0;
+    // Gray body text on a light page has the least headroom; the scene recedes further there.
+    readingShade.uniforms.readingBoost.value = ink ? 0.5 : 0;
     bodies?.applyTheme(ink, immersive, highlighted);
     sky?.applyTheme(ink, immersive);
-    draw();
+    redraw();
   };
 
   /** Compiles every program and uploads every map before the first visible frame. */
@@ -550,7 +572,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
       offset.applyAxisAngle(new Vector3(0, 1, 0), delta);
       camera.position.copy(target).add(offset);
       camera.lookAt(target);
-      draw();
+      redraw();
     },
     zoomView(factor) {
       if (!Number.isFinite(factor) || factor <= 0 || !immersive) return;
@@ -562,7 +584,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         Math.min(controls?.maxDistance ?? defaultDistance * 1.9, distance * factor),
       );
       camera.position.copy(target).add(offset.multiplyScalar(next / distance));
-      draw();
+      redraw();
     },
     highlightBody(name) {
       highlighted = name;

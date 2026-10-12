@@ -35,16 +35,23 @@ export const readingChunk = /* glsl */ `
 uniform sampler2D readingMask;
 uniform vec2 readingViewport;
 uniform float readingEnabled;
+uniform float readingCover;
+uniform float readingBoost;
 uniform float readingStrength;
 float readingFactor() {
-  float mask = texture2D(readingMask, gl_FragCoord.xy / readingViewport).r;
-  return 1.0 - mask * readingStrength * readingEnabled;
+  float mask = max(texture2D(readingMask, gl_FragCoord.xy / readingViewport).r, readingCover);
+  float strength = 1.0 - (1.0 - readingStrength) * (1.0 - readingBoost);
+  return 1.0 - mask * strength * readingEnabled;
 }`;
 
 export type ReadingUniforms = {
   readingMask: { value: Texture };
   readingViewport: { value: Vector2 };
   readingEnabled: { value: number };
+  /** Uniform coverage for whole-screen text that cannot be cached, such as the hero toolkit. */
+  readingCover: { value: number };
+  /** Raises every material's strength toward full, for themes with less contrast headroom. */
+  readingBoost: { value: number };
 };
 
 /**
@@ -109,6 +116,8 @@ export function createReadingShade() {
     readingMask: { value: target.texture },
     readingViewport: { value: new Vector2(1, 1) },
     readingEnabled: { value: 0 },
+    readingCover: { value: 0 },
+    readingBoost: { value: 0 },
   };
 
   let measured = false;
@@ -162,6 +171,34 @@ export function createReadingShade() {
     geometry.instanceCount = count;
     rects.needsUpdate = true;
   };
+  /**
+   * The home hero is pinned and animated, so its labels are not measured. Its stage publishes a
+   * scroll progress; while the technology cloud spreads over the screen the whole scene recedes,
+   * and it returns once the stage leaves the viewport.
+   */
+  let heroStage: HTMLElement | null = null;
+  let heroVisibility = 0;
+  let coverUpdatedAt = performance.now();
+  const heroObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) heroVisibility = entry.intersectionRatio;
+    },
+    { threshold: [0, 0.25, 0.5, 0.75, 1] },
+  );
+  const trackHero = () => {
+    const stage = document.querySelector<HTMLElement>("main [data-scene]");
+    if (stage === heroStage) return;
+    heroObserver.disconnect();
+    heroStage = stage;
+    heroVisibility = 0;
+    const viewport = stage?.querySelector("[data-scene-viewport]");
+    if (viewport) heroObserver.observe(viewport);
+  };
+  const heroCover = () => {
+    const progress = Number(heroStage?.dataset.sceneProgress ?? 0);
+    const spread = Math.min(1, Math.max(0, (progress - 0.3) / 0.45));
+    return spread * spread * (3 - 2 * spread) * heroVisibility;
+  };
   const mutations = new MutationObserver(invalidate);
   const resizes = new ResizeObserver(invalidate);
   const main = document.querySelector("main");
@@ -180,9 +217,15 @@ export function createReadingShade() {
       if (!enabled) return;
       // Streaming text can mutate every frame; layout is read at most every 250 ms.
       if (!measured && performance.now() - measuredAt > 250) {
+        trackHero();
         measure();
         rendered.count = -1;
       }
+      const now = performance.now();
+      const seconds = Math.min(0.1, (now - coverUpdatedAt) / 1000);
+      coverUpdatedAt = now;
+      const cover = uniforms.readingCover.value;
+      uniforms.readingCover.value = cover + (heroCover() - cover) * (1 - Math.exp(-seconds * 7));
       renderer.getDrawingBufferSize(bufferSize);
       uniforms.readingViewport.value.copy(bufferSize);
       const scroll = window.scrollY;
@@ -220,6 +263,7 @@ export function createReadingShade() {
     dispose() {
       mutations.disconnect();
       resizes.disconnect();
+      heroObserver.disconnect();
       quad.dispose();
       geometry.dispose();
       material.dispose();
