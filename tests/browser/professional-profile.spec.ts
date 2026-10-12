@@ -7,9 +7,9 @@ for (const prefix of ["", "/es"]) {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(`${prefix}/work`);
     const rampy = page.locator("#rampy");
-    await expect(rampy.locator('a[href="https://rampyapp.com/"]')).toHaveAttribute(
+    await expect(rampy.locator('a[href="https://getrampy.com/"]')).toHaveAttribute(
       "href",
-      "https://rampyapp.com/",
+      "https://getrampy.com/",
     );
     await expect(rampy).toContainText("~1 h → 10 min");
     await expect(rampy).toContainText("~7–8 s → 1–2 s");

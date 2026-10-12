@@ -1,6 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { publicTechnologyCatalog } from "../../src/content/technologies";
+import { setDocumentHidden } from "./document-visibility";
 
 for (const locale of ["en", "es"]) {
   const prefix = locale === "es" ? "/es" : "";
@@ -241,11 +242,11 @@ test("carousel suspends work when hidden or offscreen and respects global pause"
   await expect(row).toHaveAttribute("data-motion", "running");
   await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
   await expect(row).toHaveAttribute("data-motion", "paused");
-  await page.locator("[data-motion-toggle]").click();
+  await setDocumentHidden(page, true);
   await section.scrollIntoViewIfNeeded();
   await page.mouse.move(0, 0);
   await expect(row).toHaveAttribute("data-motion", "paused");
-  await page.locator("[data-motion-toggle]").click();
+  await setDocumentHidden(page, false);
   await section.scrollIntoViewIfNeeded();
   await page.mouse.move(0, 0);
   await expect(row).toHaveAttribute("data-motion", "running");

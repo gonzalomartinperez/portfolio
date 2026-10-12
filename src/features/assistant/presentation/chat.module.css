@@ -52,7 +52,7 @@
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 1rem clamp(0.75rem, 3vw, 2rem);
+  padding: 1rem min(clamp(0.75rem, 3vw, 2rem), 32px);
 }
 .empty {
   position: relative;
@@ -261,7 +261,7 @@
   width: 100%;
   max-width: 50rem;
   margin-inline: auto;
-  padding: 0.75rem 0.85rem max(0.75rem, env(safe-area-inset-bottom));
+  padding: 0.75rem min(0.85rem, 14px) max(0.75rem, env(safe-area-inset-bottom));
   flex-shrink: 0;
   border-top: 1px solid var(--line-subtle);
   background: var(--surface-base);
@@ -278,7 +278,7 @@
   width: 100%;
   min-height: 3.8rem;
   max-height: 9rem;
-  padding: 0.8rem 3.75rem 0.8rem 0.9rem;
+  padding: 0.8rem 60px 0.8rem 0.9rem;
   border: 1px solid var(--line-control);
   border-radius: 18px;
   background: var(--surface-void);
@@ -309,17 +309,32 @@
 }
 .error {
   display: flex;
-  flex-shrink: 0;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.6rem 0.75rem;
+  width: 100%;
+  max-width: 48rem;
+  margin-inline: auto;
+  padding: 12px;
   color: var(--text-primary);
   background: var(--surface-base);
-  border-top: 1px solid var(--line-strong);
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
   font-size: 0.875rem;
+}
+.shell .error > span {
+  flex: 1 1 14rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .error button {
   flex-shrink: 0;
+  min-height: 44px;
+  max-width: 100%;
+  height: auto;
+  padding: 8px 12px;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .partial-label {
   color: var(--accent);
@@ -492,7 +507,17 @@
     padding-block: 0;
   }
   .messages {
-    padding-block: 0.5rem;
+    padding-block: 0.25rem;
+  }
+  .composer-note {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .composer {
     padding-block: 0.4rem;
@@ -500,7 +525,7 @@
   .composer textarea {
     height: 3.5rem;
     min-height: 56px;
-    padding: 0.65rem 3.75rem 0.65rem 0.9rem;
+    padding: 0.65rem 60px 0.65rem 0.9rem;
   }
   .send-button {
     min-height: 44px;

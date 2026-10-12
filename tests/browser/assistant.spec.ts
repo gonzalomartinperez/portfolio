@@ -37,13 +37,31 @@ test("native compact panel, sources and maximization preserve a single conversat
     return element.id;
   });
   expect(identity).toBe("question");
+  const panel = page.locator("#portfolio-assistant");
+  const portrait = page.viewportSize();
+  if (testInfo.project.name === "mobile") {
+    await expect(page.getByRole("button", { name: "Expand panel" })).toHaveCount(0);
+    await expect(panel).toHaveAttribute("role", "dialog");
+    await page.setViewportSize({ width: 844, height: 390 });
+  }
+  await expect(page.getByRole("button", { name: "Expand panel" })).toBeVisible();
+  await expect.poll(async () => (await panel.boundingBox())?.width).toBeLessThan(500);
+  const compact = await panel.boundingBox();
+  if (!compact) throw new Error("Compact panel is missing");
   await page.getByRole("button", { name: "Expand panel" }).click();
-  await expect(page.locator("#portfolio-assistant")).toHaveAttribute("role", "dialog");
+  await expect(panel).toHaveAttribute("role", "dialog");
+  const expanded = await panel.boundingBox();
+  if (!expanded) throw new Error("Expanded panel is missing");
+  expect(expanded.width).toBeGreaterThan(compact.width);
   if (testInfo.project.name === "desktop")
-    await page
-      .locator("#portfolio-assistant")
-      .screenshot({ path: testInfo.outputPath("expanded-dark-en.png") });
+    await panel.screenshot({ path: testInfo.outputPath("expanded-dark-en.png") });
   await page.getByRole("button", { name: "Restore panel" }).click();
+  await expect.poll(async () => (await panel.boundingBox())?.width).toBeCloseTo(compact.width, 0);
+  if (testInfo.project.name === "mobile" && portrait) {
+    await page.setViewportSize(portrait);
+    await expect(page.getByRole("button", { name: "Expand panel" })).toHaveCount(0);
+    await expect(panel).toHaveAttribute("role", "dialog");
+  }
   await page.getByRole("button", { name: "Minimize assistant" }).click();
   await expect(page.getByRole("button", { name: "Ask AI", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Ask AI", exact: true }).click();
@@ -51,8 +69,7 @@ test("native compact panel, sources and maximization preserve a single conversat
   await expect(textarea).toHaveAttribute("data-same-node", "yes");
   expect(backend.requests()).toBe(1);
   await page.getByRole("button", { name: "Minimize assistant" }).click();
-  const motion = page.locator("[data-motion-toggle]");
-  await expect(motion).toHaveAttribute("aria-pressed", "false");
+  await expect(page.locator("[data-ambient-field]")).toHaveAttribute("data-state", "static");
 });
 
 test("minimized authorized response finishes once and route changes retain draft", async ({
@@ -79,6 +96,7 @@ for (const mode of ["interrupted", "provider", "expired"] as const) {
   test(`${mode} is honest, preserves safe recovery and never retries generation`, async ({
     page,
   }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
     const backend = await fixture(page, mode);
     await open(page);
     await page.locator("#question").fill("Tell me about Gonzalo");
@@ -90,10 +108,39 @@ for (const mode of ["interrupted", "provider", "expired"] as const) {
           ? "unavailable right now"
           : "expired",
     );
+    const panel = page.locator("#portfolio-assistant");
+    expect(await panel.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(
+      true,
+    );
+    const recovery = panel.getByRole("alert").getByRole("button");
+    await expect(recovery).toBeInViewport();
+    await expect(recovery).toHaveCSS("min-height", "44px");
     expect(backend.requests()).toBe(1);
     await expect(page.locator("[data-assistant-waiting]")).toHaveCount(0);
     if (mode === "interrupted")
       await expect(page.getByText("Gonzalo builds software", { exact: true })).toBeVisible();
+    if (mode === "provider") {
+      await page.setViewportSize({ width: 320, height: 520 });
+      await page.evaluate(() => {
+        document.documentElement.style.fontSize = "200%";
+      });
+      await recovery.scrollIntoViewIfNeeded();
+      const panelBounds = await panel.boundingBox();
+      const fieldBounds = await page.locator("#question").boundingBox();
+      const actionBounds = await recovery.boundingBox();
+      if (!panelBounds || !fieldBounds || !actionBounds)
+        throw new Error("Recovery layout is missing");
+      expect(fieldBounds.y + fieldBounds.height).toBeLessThanOrEqual(
+        panelBounds.y + panelBounds.height,
+      );
+      expect(actionBounds.y).toBeGreaterThanOrEqual(panelBounds.y);
+      expect(actionBounds.y + actionBounds.height).toBeLessThanOrEqual(
+        panelBounds.y + panelBounds.height,
+      );
+      expect(await panel.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(
+        true,
+      );
+    }
     await expect(page.locator("body")).not.toContainText("private data");
   });
 }
@@ -257,6 +304,7 @@ test("long output, text resizing and a reduced viewport keep reading and control
   await page.locator("#question").fill("Long answer");
   await page.getByRole("button", { name: "Send", exact: true }).click();
   await expect(page.getByText("Paragraph 99:", { exact: false })).toBeAttached();
+  await expect(page.getByRole("button", { name: "Expand panel" })).toHaveCount(0);
   const log = page.getByRole("log");
   await log.evaluate((element) => {
     element.scrollTop = 0;
@@ -275,11 +323,40 @@ test("long output, text resizing and a reduced viewport keep reading and control
         send.y + send.height <= field.y + field.height,
     );
   }
+  async function toolbarControlsAligned() {
+    const toolbar = await page.locator("#portfolio-assistant > div").first().boundingBox();
+    const controls = await Promise.all(
+      ["Conversations", "Minimize assistant"].map((name) =>
+        page.getByRole("button", { name, exact: true }).evaluate((element) => {
+          const bounds = element.getBoundingClientRect();
+          const style = getComputedStyle(element);
+          return {
+            y: bounds.y,
+            height: bounds.height,
+            widthCss: Number.parseFloat(style.width),
+            heightCss: Number.parseFloat(style.height),
+          };
+        }),
+      ),
+    );
+    return Boolean(
+      toolbar &&
+        controls.every(
+          (control) =>
+            control &&
+            control.widthCss >= 44 &&
+            control.heightCss >= 44 &&
+            Math.abs(control.y + control.height / 2 - toolbar.y - toolbar.height / 2) <= 1,
+        ),
+    );
+  }
   await expect.poll(sendInsideField).toBe(true);
+  await expect.poll(toolbarControlsAligned).toBe(true);
   await page.evaluate(() => {
     document.documentElement.style.fontSize = "200%";
   });
   await expect.poll(sendInsideField).toBe(true);
+  await expect.poll(toolbarControlsAligned).toBe(true);
   await expect(page.locator("#question")).toBeInViewport();
   await expect(page.getByRole("button", { name: "Send", exact: true })).toBeInViewport();
   expect(
@@ -288,6 +365,31 @@ test("long output, text resizing and a reduced viewport keep reading and control
       .evaluate((element) => element.scrollWidth <= element.clientWidth),
   ).toBe(true);
   expect(await log.evaluate((element) => element.scrollTop)).toBe(0);
+  await page.evaluate(() => {
+    document.documentElement.style.fontSize = "100%";
+  });
+  await expect.poll(toolbarControlsAligned).toBe(true);
+  await page.route(
+    "https://assistant.gonzalomartinperez.com/api/v1/conversations/*/messages/stream",
+    (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        headers: {
+          "Access-Control-Allow-Origin": new URL(page.url()).origin,
+          "Access-Control-Allow-Credentials": "true",
+        },
+        body: JSON.stringify({ code: "provider_unavailable" }),
+      }),
+  );
+  await page.locator("#question").fill("A follow-up while reading earlier text");
+  await page.getByRole("button", { name: "Send", exact: true }).click();
+  await expect(page.locator("#portfolio-assistant").getByRole("alert")).toContainText(
+    "unavailable",
+  );
+  expect(await log.evaluate((element) => element.scrollTop)).toBe(0);
+  await page.getByRole("button", { name: "Jump to latest" }).click();
+  await expect(page.getByRole("button", { name: "Check saved conversation" })).toBeInViewport();
 });
 
 test("avatar is decorative and reduced motion leaves a calm complete experience", async ({
@@ -514,8 +616,9 @@ test("cold mobile opening contains keyboard focus while the chat chunk loads", a
   try {
     await page.getByRole("button", { name: "Ask AI", exact: true }).click();
     await expect(page.getByRole("status")).toHaveText("Loading the assistant…");
+    await expect(page.getByRole("button", { name: "Expand panel" })).toHaveCount(0);
     await page.keyboard.press("Tab");
-    await expect(page.getByRole("button", { name: "Expand panel" })).toBeFocused();
+    await expect(page.getByRole("button", { name: "Minimize assistant" })).toBeFocused();
     await page.keyboard.press("Shift+Tab");
     await expect(page.getByRole("button", { name: "Minimize assistant" })).toBeFocused();
     gate.resolve();

@@ -130,6 +130,7 @@ export function CvView({ locale }: { locale: Locale }) {
                     entry.href.startsWith("http") ? (
                       <ExternalLink href={entry.href} locale={locale}>
                         {entry.title}
+                        {section.id === "experience" && <span aria-hidden="true"> ↗</span>}
                       </ExternalLink>
                     ) : (
                       <a href={entry.href}>{entry.title}</a>

@@ -59,8 +59,6 @@ export function HeroView({ locale }: { locale: Locale }) {
           </span>
         }
         hero={hero}
-        pauseLabel={copy.hero.pauseAnimation}
-        playLabel={copy.hero.playAnimation}
         avatarLabel={copy.hero.avatarInteraction}
         still={<StaticConstellation />}
       />

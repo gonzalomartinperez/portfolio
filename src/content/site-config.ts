@@ -1,6 +1,8 @@
 import documents from "./public-documents.json" with { type: "json" };
 
 /** Values that do not change with language. */
+export const professionalHeadline = "Software Engineer | AI Engineer | Product Engineer";
+
 export const siteUrl = "https://gonzalomartinperez.com";
 
 export const email = "gonzalomartinperez2002@gmail.com";

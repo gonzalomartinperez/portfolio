@@ -65,7 +65,7 @@ export default function OpengraphImage() {
           width: 760,
         }}
       >
-        <div style={{ color: "#78849a", fontSize: 22, letterSpacing: 2 }}>
+        <div style={{ color: "#78849a", fontSize: 16, letterSpacing: 0.5 }}>
           {profile.role.toUpperCase()}
         </div>
         <div style={{ fontSize: 76, fontWeight: 700, letterSpacing: -2, lineHeight: 1.05 }}>

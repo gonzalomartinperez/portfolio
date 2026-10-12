@@ -49,7 +49,7 @@
   color: var(--text-muted);
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.6875rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
 }
 
@@ -92,7 +92,7 @@
   color: var(--accent);
 }
 
-@media (width < 52rem) {
+@media (width < 70rem) {
   .header {
     --gutter: clamp(16px, 5vw, 24px);
   }
@@ -150,7 +150,9 @@
   .brandName {
     overflow-wrap: anywhere;
   }
+}
 
+@media (width < 52rem) {
   .brandRole {
     display: none;
   }

@@ -54,6 +54,22 @@ PDFs before release. Keep the measurement's baseline and qualifier consistent.
 Never hand-edit the generated CV JSON or substitute an unreviewed PDF to make
 the outputs appear synchronized. Update the reviewed inputs and export instead.
 
+## Official company links
+
+Approved official websites provide context alongside the portfolio's experience and case-study pages:
+
+| Company | Official website |
+| --- | --- |
+| Rampy | [getrampy.com](https://getrampy.com/) |
+| Teamcubation | [teamcubation.com](https://teamcubation.com/) |
+| Cooperativa Obrera | [cooperativaobrera.coop](https://www.cooperativaobrera.coop/) |
+
+The experience description remains the source of the author's role, contribution, and results. An external company website supplies public context; it does not independently verify employment or metrics. Keep original company artwork and approved provenance, without implying sponsorship.
+
+Web links to external company sites use the shared external-link component, open a new tab with safe relationship attributes, and provide a localized accessible notice. Internal portfolio navigation stays in the same tab. PDF company links are normal HTTPS hyperlinks; their opening behavior belongs to the document viewer and cannot be guaranteed as a new tab.
+
+Company links in generated CV content must come from reviewed authoring inputs, then pass through the same projection and PDF release process. Do not patch generated JSON or PDF bytes directly. See the [architecture overview](architecture.md) for the publication boundary.
+
 ## Documents
 
 The explicit list in `scripts/documents.ts` contains six authorized assets: two

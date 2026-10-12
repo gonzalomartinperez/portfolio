@@ -45,7 +45,7 @@ export default function Chat({
   const nearBottom = useRef(true);
   const [showLatest, setShowLatest] = useState(false);
   const menuWasOpen = useRef(false);
-  const { history, streamText } = chat;
+  const { history, streamText, error } = chat;
   const editFocus = useRef<string | null>(null);
   const deleteCancel = useRef<HTMLButtonElement>(null);
   const newChatButton = useRef<HTMLButtonElement>(null);
@@ -86,10 +86,10 @@ export default function Chat({
       closeButton.current?.focus();
     } else if (menuWasOpen.current) menuButton.current?.focus();
   }, [mobileOpen]);
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Message and delta changes trigger conditional scrolling; the ref is the value read by the effect.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Message, delta and error changes trigger conditional scrolling; the ref is the value read by the effect.
   useEffect(() => {
     if (nearBottom.current) bottom.current?.scrollIntoView({ block: "end" });
-  }, [history, streamText]);
+  }, [history, streamText, error]);
   useEffect(() => {
     if (renaming) renameInput.current?.focus();
   }, [renaming]);
@@ -440,6 +440,22 @@ export default function Chat({
               </div>
             </article>
           )}
+          {chat.error && (
+            <div className={cx("error")} role="alert">
+              <span>{chat.error}</span>
+              <Button
+                variant="outline"
+                type="button"
+                onClick={() => {
+                  void chat.reload();
+                }}
+              >
+                {chat.lifecycle.kind === "expired" || chat.lifecycle.kind === "unavailable"
+                  ? t.reconnect
+                  : t.retry}
+              </Button>
+            </div>
+          )}
           <div ref={bottom} />
         </div>
         {showLatest && (
@@ -456,22 +472,6 @@ export default function Chat({
             {t.jump} ↓
           </Button>
         )}
-        {chat.error && (
-          <div className={cx("error")} role="alert">
-            <span>{chat.error}</span>
-            <Button
-              variant="outline"
-              type="button"
-              onClick={() => {
-                void chat.reload();
-              }}
-            >
-              {chat.lifecycle.kind === "expired" || chat.lifecycle.kind === "unavailable"
-                ? t.reconnect
-                : t.retry}
-            </Button>
-          </div>
-        )}
         <form
           className={cx("composer")}
           onSubmit={(event) => {
@@ -486,6 +486,7 @@ export default function Chat({
               ref={composer}
               id="question"
               placeholder={t.prompt}
+              aria-describedby="question-hint"
               value={chat.draft}
               onChange={(event) => chat.setDraft(event.target.value)}
               onKeyDown={submitOnEnter}
@@ -511,7 +512,9 @@ export default function Chat({
               {runningHere ? <Square aria-hidden="true" /> : <ArrowUp aria-hidden="true" />}
             </Button>
           </div>
-          <p className={cx("composer-note")}>{t.composerNote}</p>
+          <p id="question-hint" className={cx("composer-note")}>
+            {t.composerNote}
+          </p>
         </form>
       </section>
     </div>
