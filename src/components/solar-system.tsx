@@ -6,32 +6,55 @@ import { setSolarReady, solarExplorerSnapshot, useSolarExplorer } from "./solar-
 import styles from "./solar-system.module.css";
 import type { SolarEngine } from "./solar-system-engine";
 import {
+  type SolarLayout,
   type SolarTextureVersions,
   solarCameraPoint,
+  solarCameras,
   solarFallbackPerspective,
   solarFallbackScale,
+  solarMoon,
+  solarMoonOffset,
   solarOrbitPoint,
   solarPhase,
   solarPlanets,
+  solarSun,
   solarTextureUrl,
 } from "./solar-system-scene";
 
+type Point = { x: number; y: number; z: number };
+/** Fixed precision keeps server and browser math libraries from producing different markup. */
+const css = (value: number, unit: string) => `${value.toFixed(4)}${unit}`;
+const layouts = ["landscape", "portrait"] as const satisfies readonly SolarLayout[];
+
+/**
+ * Projects a body for both orientations; CSS picks the matching set with a container query.
+ * The terminator overlay points away from the Sun so the static scene keeps coherent lighting.
+ */
 function fallbackBodyStyle(
-  position: { x: number; y: number; z: number },
+  positions: Record<SolarLayout, Point>,
   radius: number,
   name: string,
   versions: SolarTextureVersions,
 ): CSSProperties {
-  const point = solarCameraPoint(position);
-  const unit = solarFallbackScale * 100;
-  return {
-    "--body-size": `${2 * radius * unit}cqmin`,
-    "--body-x": `${point.x * unit}cqmin`,
-    "--body-y": `${-point.y * unit}cqmin`,
-    "--body-depth": `${point.depth * unit}cqmin`,
-    "--surface": `url(${solarTextureUrl(name, versions)})`,
-  } as CSSProperties;
+  const style: Record<string, string> = { "--surface": `url(${solarTextureUrl(name, versions)})` };
+  for (const layout of layouts) {
+    const camera = solarCameras[layout];
+    const point = solarCameraPoint(camera, positions[layout]);
+    const unit = solarFallbackScale(camera) * 100;
+    const suffix = layout === "portrait" ? "-portrait" : "";
+    style[`--body-size${suffix}`] = css(2 * radius * unit, "cqmin");
+    style[`--body-x${suffix}`] = css(point.x * unit, "cqmin");
+    style[`--body-y${suffix}`] = css(-point.y * unit, "cqmin");
+    style[`--body-depth${suffix}`] = css(point.depth * unit, "cqmin");
+    style[`--light${suffix}`] = css((Math.atan2(point.x, point.y) * 180) / Math.PI, "deg");
+  }
+  return style as CSSProperties;
 }
+
+const planetPositions = (planet: (typeof solarPlanets)[number]) =>
+  Object.fromEntries(
+    layouts.map((layout) => [layout, solarOrbitPoint(planet, solarPhase(planet, layout))]),
+  ) as Record<SolarLayout, Point>;
 
 /** Decorative, compressed orbits; the complete SSR scene is also the reduced-motion fallback. */
 export function SolarSystem({
@@ -107,14 +130,18 @@ export function SolarSystem({
     const host = canvas.current;
     if (!element || !host || !canvasEnabled) return;
     // The engine owns this node; React can remove the host without reparenting conflicts.
-    const surface = document.createElement("canvas");
-    surface.className = styles.canvas;
-    surface.dataset.solarCanvas = "";
-    surface.setAttribute("aria-hidden", "true");
-    host.appendChild(surface);
+    const createSurface = () => {
+      const node = document.createElement("canvas");
+      node.className = styles.canvas;
+      node.dataset.solarCanvas = "";
+      node.setAttribute("aria-hidden", "true");
+      host.appendChild(node);
+      return node;
+    };
+    let surface = createSurface();
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-    let disposed = false,
-      generation = 0;
+    let disposed = false;
+    let generation = 0;
     let idle: number | undefined;
     const staticScene = () => {
       element.dataset.renderer = "static";
@@ -126,8 +153,13 @@ export function SolarSystem({
     const sync = () => {
       const token = ++generation;
       if (idle !== undefined) cancelIdleCallback(idle);
-      engine.current?.dispose();
-      engine.current = null;
+      if (engine.current) {
+        engine.current.dispose();
+        engine.current = null;
+        // A disposed engine forces its context loss, so the next one needs a fresh canvas.
+        surface.remove();
+        surface = createSurface();
+      }
       staticScene();
       if (reduced.matches || disposed || pausedRef.current) return;
       const load = async () => {
@@ -163,6 +195,8 @@ export function SolarSystem({
               if (reason === "texture") {
                 engine.current?.dispose();
                 engine.current = null;
+                surface.remove();
+                surface = createSurface();
               }
             },
           });
@@ -209,8 +243,19 @@ export function SolarSystem({
       className={styles.system}
       style={
         {
-          "--solar-perspective": `${solarFallbackPerspective * 100}cqh`,
-          "--sun-size": `${12 * solarFallbackScale * 100}cqmin`,
+          "--solar-perspective": css(solarFallbackPerspective(solarCameras.landscape) * 100, "cqh"),
+          "--solar-perspective-portrait": css(
+            solarFallbackPerspective(solarCameras.portrait) * 100,
+            "cqh",
+          ),
+          "--sun-size": css(
+            2 * solarSun.radius * solarFallbackScale(solarCameras.landscape) * 100,
+            "cqmin",
+          ),
+          "--sun-size-portrait": css(
+            2 * solarSun.radius * solarFallbackScale(solarCameras.portrait) * 100,
+            "cqmin",
+          ),
         } as CSSProperties
       }
       data-solar-system
@@ -224,50 +269,48 @@ export function SolarSystem({
           data-sun
           style={{ backgroundImage: `url(${solarTextureUrl("sun", textureVersions)})` }}
         />
-        {solarPlanets.map((planet) => {
-          const style = fallbackBodyStyle(
-            solarOrbitPoint(planet, solarPhase(planet, false)),
-            planet.radius,
-            planet.name,
-            textureVersions,
-          );
-          return (
-            <span
-              key={planet.name}
-              className={styles.body}
-              style={style}
-              data-planet={planet.name}
-              data-orbit={planet.name}
-            >
-              {planet.name === "saturn" && (
-                <span className={`${styles.rings} ${styles.ringsBack}`} />
-              )}
-              <span className={styles.surface} />
-              {planet.name === "saturn" && (
-                <span className={`${styles.rings} ${styles.ringsFront}`} />
-              )}
-            </span>
-          );
-        })}
+        <span className={styles.corona} />
+        {solarPlanets.map((planet) => (
+          <span
+            key={planet.name}
+            className={styles.body}
+            style={fallbackBodyStyle(
+              planetPositions(planet),
+              planet.radius,
+              planet.name,
+              textureVersions,
+            )}
+            data-planet={planet.name}
+            data-orbit={planet.name}
+          >
+            {planet.name === "saturn" && <span className={`${styles.rings} ${styles.ringsBack}`} />}
+            <span className={styles.surface} />
+            {planet.name === "saturn" && (
+              <span className={`${styles.rings} ${styles.ringsFront}`} />
+            )}
+          </span>
+        ))}
         {solarPlanets
           .filter(({ name }) => name === "earth")
           .map((earth) => {
-            const orbit = solarOrbitPoint(earth, solarPhase(earth, false));
+            const offset = solarMoonOffset(solarMoon.phase);
+            const earthPositions = planetPositions(earth);
+            const moonPositions = Object.fromEntries(
+              layouts.map((layout) => [
+                layout,
+                {
+                  x: earthPositions[layout].x + offset.x,
+                  y: earthPositions[layout].y + offset.y,
+                  z: earthPositions[layout].z + offset.z,
+                },
+              ]),
+            ) as Record<SolarLayout, Point>;
             return (
               <span
                 key="moon"
                 className={styles.body}
                 data-moon
-                style={fallbackBodyStyle(
-                  {
-                    x: orbit.x + Math.cos(0.8) * earth.radius * 1.65,
-                    y: orbit.y + Math.sin(0.8) * earth.radius * 0.48,
-                    z: orbit.z + Math.sin(0.8) * earth.radius * 1.4,
-                  },
-                  0.22,
-                  "moon",
-                  textureVersions,
-                )}
+                style={fallbackBodyStyle(moonPositions, solarMoon.radius, "moon", textureVersions)}
               >
                 <span className={styles.surface} />
               </span>

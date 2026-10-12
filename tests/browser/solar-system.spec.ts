@@ -11,7 +11,11 @@ type SolarSnapshot = {
   textureCount: number;
   gpuTextures: number;
   estimatedGpuBytes: number;
-  earthOceanRoughnessPatched: boolean;
+  glError: number | null;
+  software: boolean;
+  earthOceanGlint: boolean;
+  readingShadeBlocks: number;
+  veil: number;
   camera: { type: string };
   bodies: {
     name: string;
@@ -71,8 +75,10 @@ for (const theme of ["light", "dark"] as const) {
     expect(sun?.screen.x).toBeCloseTo(bounds.width / 2, 0);
     expect(sun?.screen.y).toBeCloseTo(bounds.height / 2, 0);
     expect(frame.camera.type).toBe("PerspectiveCamera");
-    expect(frame.earthOceanRoughnessPatched).toBe(true);
-    expect(sun?.textureWidth).toBe(bounds.width < 640 ? 2048 : 4096);
+    expect(frame.glError).toBe(0);
+    expect(frame.earthOceanGlint).toBe(true);
+    // Reading mode uploads the lighter maps; the explorer decodes finer detail on demand.
+    expect(sun?.textureWidth).toBe(bounds.width < 640 ? 1024 : 2048);
     expect(frame.estimatedGpuBytes).toBeLessThanOrEqual(
       (bounds.width < 640 ? 128 : 256) * 1024 * 1024,
     );
@@ -277,4 +283,153 @@ test("visibility events freeze the solar clock and resume without hidden-time ca
   expect(firstResume.elapsed - hidden.elapsed).toBeLessThanOrEqual(0.05);
   await expect(solar).toHaveAttribute("data-state", "running", { timeout: 25_000 });
   await expect.poll(async () => (await snapshot(canvas)).elapsed).toBeGreaterThan(hidden.elapsed);
+});
+
+test("scrolling orbits the camera around a centered Sun and recedes behind reading text", async ({
+  page,
+}) => {
+  await page.goto("/about?solarDebug=1&solarTime=0");
+  const solar = page.locator("[data-solar-system]");
+  const canvas = solar.locator("[data-solar-canvas]");
+  await expect(solar).toHaveAttribute("data-renderer", "webgl", { timeout: 25_000 });
+  const top = await snapshot(canvas);
+  expect(top.readingShadeBlocks).toBeGreaterThan(0);
+  const bounds = await canvas.boundingBox();
+  if (!bounds) throw new Error("Solar canvas requires bounds");
+  await page.evaluate(() => window.scrollTo({ top: innerHeight * 2, behavior: "instant" }));
+  await expect
+    .poll(async () => (await snapshot(canvas)).veil, { timeout: 10_000 })
+    .toBeLessThan(top.veil - 0.2);
+  const read = await snapshot(canvas);
+  const sun = read.bodies.find(({ name }) => name === "sun");
+  expect(sun?.screen.x).toBeCloseTo(bounds.width / 2, 0);
+  expect(sun?.screen.y).toBeCloseTo(bounds.height / 2, 0);
+  const jupiter = (frame: SolarSnapshot) => frame.bodies.find(({ name }) => name === "jupiter");
+  expect(
+    Math.hypot(
+      (jupiter(read)?.screen.x ?? 0) - (jupiter(top)?.screen.x ?? 0),
+      (jupiter(read)?.screen.y ?? 0) - (jupiter(top)?.screen.y ?? 0),
+    ),
+  ).toBeGreaterThan(10);
+});
+
+for (const theme of ["dark", "light"] as const) {
+  test(`reading text keeps WCAG contrast over the rendered scene in ${theme} mode`, async ({
+    page,
+  }) => {
+    await page.addInitScript((value) => localStorage.setItem("theme", value), theme);
+    await page.goto("/about?solarDebug=1&solarTime=0");
+    await expect(page.locator("[data-solar-system]")).toHaveAttribute("data-renderer", "webgl", {
+      timeout: 25_000,
+    });
+    await page.locator("main p").first().waitFor();
+    const runs = await page.evaluate(() =>
+      [...document.querySelectorAll("main :is(h1, p)")].flatMap((element) => {
+        const style = getComputedStyle(element);
+        const color = style.color.match(/[\d.]+/g)?.map(Number) ?? [0, 0, 0];
+        const large = Number.parseFloat(style.fontSize) >= 24;
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        return [...range.getClientRects()]
+          .filter((rect) => rect.width > 8 && rect.bottom > 0 && rect.top < innerHeight)
+          .map((rect) => ({
+            x: rect.x,
+            y: rect.y,
+            width: rect.width,
+            height: rect.height,
+            color,
+            large,
+          }));
+      }),
+    );
+    expect(runs.length).toBeGreaterThan(0);
+    // Hide only the text, then measure the brightest scene pixels behind each line.
+    await page.addStyleTag({
+      content:
+        "main * { color: transparent !important; -webkit-text-fill-color: transparent !important; }",
+    });
+    await page.waitForTimeout(300);
+    const background = (await page.screenshot()).toString("base64");
+    const ratios = await page.evaluate(
+      async ({ image, runs }) => {
+        const response = await fetch(`data:image/png;base64,${image}`);
+        const bitmap = await createImageBitmap(await response.blob());
+        const surface = new OffscreenCanvas(bitmap.width, bitmap.height);
+        const context = surface.getContext("2d");
+        if (!context) throw new Error("2D canvas is required");
+        context.drawImage(bitmap, 0, 0);
+        const scale = bitmap.width / innerWidth;
+        const channel = (value: number) => {
+          const linear = value / 255;
+          return linear <= 0.04045 ? linear / 12.92 : ((linear + 0.055) / 1.055) ** 2.4;
+        };
+        const luminance = ([r, g, b]: number[]) =>
+          0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
+        return runs.map((run) => {
+          const x = Math.max(0, Math.floor(run.x * scale));
+          const y = Math.max(0, Math.floor(run.y * scale));
+          const width = Math.max(1, Math.min(bitmap.width - x, Math.ceil(run.width * scale)));
+          const height = Math.max(1, Math.min(bitmap.height - y, Math.ceil(run.height * scale)));
+          const pixels = context.getImageData(x, y, width, height).data;
+          const samples: number[] = [];
+          for (let index = 0; index < pixels.length; index += 16)
+            samples.push(luminance([pixels[index], pixels[index + 1], pixels[index + 2]]));
+          samples.sort((a, b) => a - b);
+          const text = luminance(run.color);
+          const lightText = text > samples[Math.floor(samples.length / 2)];
+          const worst = samples[Math.floor(samples.length * (lightText ? 0.95 : 0.05))];
+          const ratio = (Math.max(text, worst) + 0.05) / (Math.min(text, worst) + 0.05);
+          return { ratio, required: run.large ? 3 : 4.5 };
+        });
+      },
+      { image: background, runs },
+    );
+    for (const { ratio, required } of ratios) expect(ratio).toBeGreaterThanOrEqual(required);
+  });
+}
+
+test("the explorer decodes detailed maps on demand and releases them afterwards", async ({
+  page,
+}) => {
+  test.setTimeout(90_000);
+  await page.goto("/contact?solarDebug=1");
+  const canvas = page.locator("[data-solar-canvas]");
+  await expect(page.locator("[data-solar-system]")).toHaveAttribute("data-renderer", "webgl", {
+    timeout: 25_000,
+  });
+  const earthWidth = async () =>
+    (await snapshot(canvas)).bodies.find(({ name }) => name === "earth")?.textureWidth;
+  const compact = (page.viewportSize()?.width ?? 0) < 640;
+  expect(await earthWidth()).toBe(compact ? 1024 : 2048);
+  // CPU rasterizers (CI) keep reading-size maps; the upgrade is verified on hardware GPUs.
+  test.skip((await snapshot(canvas)).software, "Software renderers keep reading-size maps");
+  await page.locator("[data-solar-explore]").click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await expect.poll(earthWidth, { timeout: 30_000 }).toBe(compact ? 2048 : 4096);
+  expect((await snapshot(canvas)).glError).toBe(0);
+  expect((await snapshot(canvas)).estimatedGpuBytes).toBeLessThanOrEqual(
+    (compact ? 128 : 256) * 1024 * 1024,
+  );
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toBeHidden();
+  await expect.poll(earthWidth, { timeout: 30_000 }).toBe(compact ? 1024 : 2048);
+  expect((await snapshot(canvas)).glError).toBe(0);
+});
+
+test("crossing the compact breakpoint refits maps without GPU errors", async ({ page }) => {
+  test.skip((page.viewportSize()?.width ?? 0) < 640, "Already compact");
+  await page.goto("/contact?solarDebug=1");
+  const canvas = page.locator("[data-solar-canvas]");
+  await expect(page.locator("[data-solar-system]")).toHaveAttribute("data-renderer", "webgl", {
+    timeout: 25_000,
+  });
+  const sunWidth = async () =>
+    (await snapshot(canvas)).bodies.find(({ name }) => name === "sun")?.textureWidth;
+  expect(await sunWidth()).toBe(2048);
+  await page.setViewportSize({ width: 600, height: 900 });
+  await expect.poll(sunWidth, { timeout: 30_000 }).toBe(1024);
+  expect((await snapshot(canvas)).glError).toBe(0);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await expect.poll(sunWidth, { timeout: 30_000 }).toBe(2048);
+  expect((await snapshot(canvas)).glError).toBe(0);
 });
