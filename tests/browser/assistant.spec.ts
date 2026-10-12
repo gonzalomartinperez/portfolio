@@ -51,7 +51,7 @@ test("native compact panel, sources and maximization preserve a single conversat
   await expect(textarea).toHaveAttribute("data-same-node", "yes");
   expect(backend.requests()).toBe(1);
   await page.getByRole("button", { name: "Minimize assistant" }).click();
-  await expect(page.locator("[data-ambient-field]")).toHaveAttribute("data-state", "running");
+  await expect(page.locator("[data-ambient-field]")).toHaveAttribute("data-state", "static");
 });
 
 test("minimized authorized response finishes once and route changes retain draft", async ({
