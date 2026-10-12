@@ -1,6 +1,6 @@
 # Immersive solar scene
 
-Status: in-progress
+Status: done
 
 ## Outcome and scope
 
@@ -83,4 +83,18 @@ Ownership: `solar-system*.ts`, `solar-system.tsx`, their CSS and
 
 ## Verification and handoff
 
-Recorded after the final integrated run; see [the verification record](../verification/immersive-solar-scene.md).
+Evidence and conditions are in [the verification record](../verification/immersive-solar-scene.md).
+
+| Criterion | Evidence |
+| --- | --- |
+| AC-1 | Debug snapshot assertions (eleven sphere bodies, Moon parented to Earth, ring geometry, Earth glint) and hardware-GPU visual review of every body and close-up |
+| AC-2 | Shooting-star window test; visual review of stars, belts and the Milky Way |
+| AC-3 | Contrast regression in both themes on `/about`; measured 17 → 0 failing runs; review of all routes |
+| AC-4 | `pointer-events: none` and native scroll/navigation assertions |
+| AC-5 | Cold-load and reload fallback match within one CSS pixel; visibility and locale-navigation tests |
+| AC-6 | Reduced-motion, no-JavaScript, texture-failure and context-loss tests |
+| AC-7 | Frame-pacing and memory measurements; refit and breakpoint tests assert no GPU errors; budgets pass |
+| AC-8 | Explorer tests in both locales and themes; map upgrade test on hardware GPUs |
+
+Physical phones, 120 Hz panels, Safari and Firefox rendering of the scene remain unverified;
+CI exercises Chromium with SwiftShader, which uses the light software configuration.

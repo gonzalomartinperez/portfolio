@@ -47,9 +47,11 @@ with the WebGL scene ready after 11.1 s versus 17.9 s.
 | Image assets | 16 maps, 7,187,952 bytes | unchanged |
 | Dependencies | — | unchanged |
 
-Memory figures are the engine's conservative estimates, not driver measurements. The
-explorer temporarily decodes Earth and Jupiter at 4096 texels on wide screens and stays
-within the 256 MiB estimate; closing it returns to reading sizes.
+Memory figures are the engine's conservative estimates, not driver measurements. On the
+hardware GPU the explorer re-decoded Earth and Jupiter at 4096 texels (184 MiB estimated,
+budget 256), closing it returned to 96 MiB, and narrowing the window below 640 px refitted
+every map to 1024 texels (51 MiB, budget 128), with `gl.getError()` reporting no error at
+each step.
 
 ## Readability
 
