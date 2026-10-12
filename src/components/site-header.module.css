@@ -92,7 +92,7 @@
   color: var(--accent);
 }
 
-@media (width < 52rem) {
+@media (width < 70rem) {
   .header {
     --gutter: clamp(16px, 5vw, 24px);
   }
