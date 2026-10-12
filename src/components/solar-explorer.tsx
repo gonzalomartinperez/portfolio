@@ -3,7 +3,6 @@
 import { Orbit, RotateCcw } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 import type { Locale } from "@/content/locales";
-import { setPageMotionPaused, usePageMotionPaused } from "./motion-state";
 import styles from "./solar-explorer.module.css";
 import {
   resetSolarView,
@@ -34,7 +33,6 @@ export function SolarExplorer({ locale }: { locale: Locale }) {
   const es = locale === "es";
   const [open, setOpen] = useState(false);
   const scroll = useRef(0);
-  const paused = usePageMotionPaused();
   const explorer = useSolarExplorer();
   const attach = useCallback((node: HTMLDivElement | null) => setSolarExplorerHost(node), []);
   function changeOpen(value: boolean) {
@@ -126,13 +124,6 @@ export function SolarExplorer({ locale }: { locale: Locale }) {
           <Button variant="outline" onClick={resetSolarView} disabled={!explorer.ready}>
             <RotateCcw aria-hidden="true" size={16} />
             {es ? "Restablecer" : "Reset view"}
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => setPageMotionPaused(!paused)}
-            aria-pressed={paused}
-          >
-            {paused ? (es ? "Reanudar" : "Resume") : es ? "Pausar" : "Pause"}
           </Button>
         </div>
       </DialogContent>

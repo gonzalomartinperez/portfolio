@@ -1,8 +1,7 @@
 "use client";
 
-import { Pause, Play } from "lucide-react";
 import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { setPageMotionPaused, usePageMotionPaused } from "../motion-state";
+import { usePageMotionPaused } from "../motion-state";
 import styles from "./hero-stage.module.css";
 import type { SceneRuntime } from "./scene-runtime";
 
@@ -15,16 +14,12 @@ export function HeroStage({
   core,
   hero,
   constellation,
-  pauseLabel,
-  playLabel,
   avatarLabel,
 }: {
   still: ReactNode;
   core: ReactNode;
   hero: ReactNode;
   constellation: ReactNode;
-  pauseLabel: string;
-  playLabel: string;
   avatarLabel: string;
 }) {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -116,10 +111,6 @@ export function HeroStage({
     };
   }, []);
 
-  const toggle = () => {
-    setPageMotionPaused(!paused);
-  };
-
   return (
     <div className={styles.stage} data-mode={mode} data-scene ref={stageRef}>
       <div className={styles.journey} data-scene-journey>
@@ -146,22 +137,6 @@ export function HeroStage({
             </button>
           </div>
           <div className={styles.logoCloud} data-logo-cloud aria-hidden="true" inert />
-          {mode !== "static" && (
-            <button
-              className={styles.toggle}
-              onClick={toggle}
-              type="button"
-              aria-label={mode === "paused" ? playLabel : pauseLabel}
-              title={mode === "paused" ? playLabel : pauseLabel}
-              aria-pressed={mode === "paused"}
-            >
-              {mode === "paused" ? (
-                <Play aria-hidden="true" size={18} />
-              ) : (
-                <Pause aria-hidden="true" size={18} />
-              )}
-            </button>
-          )}
           <div className={styles.scrollCue} aria-hidden="true">
             ↓
           </div>

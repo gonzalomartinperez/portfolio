@@ -113,7 +113,7 @@ test("content renders without JavaScript", () => {
   // The server HTML alone must carry the positioning, the actions and the evidence links.
   const home = pages.get("/").body;
   assert.match(home, /Gonzalo Martin Perez/);
-  assert.match(home, /AI Software Engineer/);
+  assert.match(home, /Software Engineer \| AI Engineer \| Product Engineer/);
   assert.match(home, /href="\/work"/);
   assert.match(home, /href="\/contact"/);
   assert.match(pages.get("/work/filomena").body, /github\.com\/gonzalomartinperez\/filomena/);

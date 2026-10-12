@@ -1,5 +1,7 @@
 # Native portfolio assistant
 
+[Portfolio architecture](architecture.md) documents the application and publication boundaries.
+
 The native assistant is **disabled by default**. Unset or `false`
 `ASSISTANT_ENABLED` removes the launcher and returns 404 for `/assistant` and
 `/es/assistant`. Activation is not part of this delivery. For isolated development
@@ -48,7 +50,9 @@ through `npm run typecheck:assistant`, without broad unrelated portfolio changes
 
 ## Interaction and design
 
-Compact desktop is a named non-modal region. Mobile and expanded panels are
+Compact desktop is a named non-modal region. Its expand/restore controls also
+work in wide landscape viewports. Narrow panels already fill the usable viewport,
+so they keep the minimize control without a redundant expand action. Mobile and expanded panels are
 modals with background inertness, focus containment, Escape and restoration.
 The page presentation remains a named region below the existing site header.
 An open conversation menu consumes Escape before the host minimizes.
@@ -62,6 +66,16 @@ motion. Waiting shows Thinking… / Pensando… until the first text arrives, th
 polite status announces writing without reading every token. Connecting and history
 loading remain separate; there are no invented retrieval percentages or tool stages.
 
+The toolbar measures its layout height so the conversation-menu button stays
+aligned with expand/minimize controls when translated labels wrap or text grows
+to 200%. Fixed 44 px action targets retain their input space without consuming
+extra text width as the font size increases. Recovery notices wrap their message
+and action into separate rows when needed inside the scrollable transcript.
+They follow the existing bottom-follow policy without displacing the composer
+or forcing visitors away from older messages. Short viewports omit the redundant
+header subtitle; the complete keyboard hint stays linked to the input for assistive
+technology while its visual footprint is removed to preserve reading and action space.
+
 The theme and language follow the portfolio. Changing language does not rewrite
 previous messages. Safe editorial starter prompts remain available if the public
 catalog cannot be loaded; they do not claim live model-generated relevance.
@@ -74,7 +88,9 @@ until a committed contextual payload exists.
 Design baseline: portfolio `b8298620305150d74e7cab3a17eecf5ad1653196`.
 Owned shadcn buttons, portfolio tokens/fonts and CSS Modules define composition.
 Covered background motion pauses in expanded/page views through a scoped hold;
-closing releases it without changing the visitor’s explicit pause preference.
+closing releases only that hold and restores the remaining motion policy.
+The hero, page background, and solar explorer have no visitor-facing pause buttons;
+reduced-motion preferences and hidden-document suspension still apply.
 Cold WebGL initialization waits until that hold is released. Avatar depth and halo
 are decorative, bounded and disabled for reduced motion;
 no new animation library is introduced. The VisualViewport host handles viewport
