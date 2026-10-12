@@ -1,5 +1,7 @@
 # Native portfolio assistant
 
+[Portfolio architecture](architecture.md) documents the application and publication boundaries.
+
 The native assistant is **disabled by default**. Unset or `false`
 `ASSISTANT_ENABLED` removes the launcher and returns 404 for `/assistant` and
 `/es/assistant`. Activation is not part of this delivery. For isolated development
@@ -74,7 +76,9 @@ until a committed contextual payload exists.
 Design baseline: portfolio `b8298620305150d74e7cab3a17eecf5ad1653196`.
 Owned shadcn buttons, portfolio tokens/fonts and CSS Modules define composition.
 Covered background motion pauses in expanded/page views through a scoped hold;
-closing releases it without changing the visitor’s explicit pause preference.
+closing releases only that hold and restores the remaining motion policy.
+The hero, page background, and solar explorer have no visitor-facing pause buttons;
+reduced-motion preferences and hidden-document suspension still apply.
 Cold WebGL initialization waits until that hold is released. Avatar depth and halo
 are decorative, bounded and disabled for reduced motion;
 no new animation library is introduced. The VisualViewport host handles viewport
