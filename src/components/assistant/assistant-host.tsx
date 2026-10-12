@@ -203,22 +203,24 @@ export function AssistantHost() {
             </div>
             {!page && (
               <div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  aria-label={
-                    expanded
-                      ? es
-                        ? "Restaurar panel"
-                        : "Restore panel"
-                      : es
-                        ? "Ampliar panel"
-                        : "Expand panel"
-                  }
-                  onClick={() => setExpanded((value) => !value)}
-                >
-                  {expanded ? <Minimize2 aria-hidden="true" /> : <Maximize2 aria-hidden="true" />}
-                </Button>
+                {!mobile && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    aria-label={
+                      expanded
+                        ? es
+                          ? "Restaurar panel"
+                          : "Restore panel"
+                        : es
+                          ? "Ampliar panel"
+                          : "Expand panel"
+                    }
+                    onClick={() => setExpanded((value) => !value)}
+                  >
+                    {expanded ? <Minimize2 aria-hidden="true" /> : <Maximize2 aria-hidden="true" />}
+                  </Button>
+                )}
                 <Button
                   variant="ghost"
                   size="icon"

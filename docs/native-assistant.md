@@ -50,7 +50,9 @@ through `npm run typecheck:assistant`, without broad unrelated portfolio changes
 
 ## Interaction and design
 
-Compact desktop is a named non-modal region. Mobile and expanded panels are
+Compact desktop is a named non-modal region. Its expand/restore controls also
+work in wide landscape viewports. Narrow panels already fill the usable viewport,
+so they keep the minimize control without a redundant expand action. Mobile and expanded panels are
 modals with background inertness, focus containment, Escape and restoration.
 The page presentation remains a named region below the existing site header.
 An open conversation menu consumes Escape before the host minimizes.

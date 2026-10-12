@@ -37,13 +37,31 @@ test("native compact panel, sources and maximization preserve a single conversat
     return element.id;
   });
   expect(identity).toBe("question");
+  const panel = page.locator("#portfolio-assistant");
+  const portrait = page.viewportSize();
+  if (testInfo.project.name === "mobile") {
+    await expect(page.getByRole("button", { name: "Expand panel" })).toHaveCount(0);
+    await expect(panel).toHaveAttribute("role", "dialog");
+    await page.setViewportSize({ width: 844, height: 390 });
+  }
+  await expect(page.getByRole("button", { name: "Expand panel" })).toBeVisible();
+  await expect.poll(async () => (await panel.boundingBox())?.width).toBeLessThan(500);
+  const compact = await panel.boundingBox();
+  if (!compact) throw new Error("Compact panel is missing");
   await page.getByRole("button", { name: "Expand panel" }).click();
-  await expect(page.locator("#portfolio-assistant")).toHaveAttribute("role", "dialog");
+  await expect(panel).toHaveAttribute("role", "dialog");
+  const expanded = await panel.boundingBox();
+  if (!expanded) throw new Error("Expanded panel is missing");
+  expect(expanded.width).toBeGreaterThan(compact.width);
   if (testInfo.project.name === "desktop")
-    await page
-      .locator("#portfolio-assistant")
-      .screenshot({ path: testInfo.outputPath("expanded-dark-en.png") });
+    await panel.screenshot({ path: testInfo.outputPath("expanded-dark-en.png") });
   await page.getByRole("button", { name: "Restore panel" }).click();
+  await expect.poll(async () => (await panel.boundingBox())?.width).toBeCloseTo(compact.width, 0);
+  if (testInfo.project.name === "mobile" && portrait) {
+    await page.setViewportSize(portrait);
+    await expect(page.getByRole("button", { name: "Expand panel" })).toHaveCount(0);
+    await expect(panel).toHaveAttribute("role", "dialog");
+  }
   await page.getByRole("button", { name: "Minimize assistant" }).click();
   await expect(page.getByRole("button", { name: "Ask AI", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Ask AI", exact: true }).click();
@@ -286,6 +304,7 @@ test("long output, text resizing and a reduced viewport keep reading and control
   await page.locator("#question").fill("Long answer");
   await page.getByRole("button", { name: "Send", exact: true }).click();
   await expect(page.getByText("Paragraph 99:", { exact: false })).toBeAttached();
+  await expect(page.getByRole("button", { name: "Expand panel" })).toHaveCount(0);
   const log = page.getByRole("log");
   await log.evaluate((element) => {
     element.scrollTop = 0;
@@ -307,7 +326,7 @@ test("long output, text resizing and a reduced viewport keep reading and control
   async function toolbarControlsAligned() {
     const toolbar = await page.locator("#portfolio-assistant > div").first().boundingBox();
     const controls = await Promise.all(
-      ["Conversations", "Expand panel", "Minimize assistant"].map((name) =>
+      ["Conversations", "Minimize assistant"].map((name) =>
         page.getByRole("button", { name, exact: true }).evaluate((element) => {
           const bounds = element.getBoundingClientRect();
           const style = getComputedStyle(element);

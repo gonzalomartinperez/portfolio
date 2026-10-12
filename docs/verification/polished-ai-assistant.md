@@ -95,6 +95,27 @@ original 1 px center-alignment tolerance and test deadlines remain unchanged.
 The final four-engine text-resize cases all passed. Initial traces remain retained
 as ignored local evidence rather than replacing that result with a retry claim.
 
+The portrait expansion audit measured identical before/after rectangles at 390 px
+and 320 px widths; only the icon changed. Desktop expansion changed 440 × 700
+to 1393 × 968 in the observed 1440 × 1000 viewport. The redundant narrow expand
+action is removed; wide landscape and desktop retain real expand/restore behavior.
+Draft, focus, sources, and one-runtime assertions remain in the existing continuity
+case, which now waits for the responsive mode before measuring actual geometry
+and checks landscape/portrait transitions.
+
+In the follow-up local batch, desktop continuity and text resizing passed, as did
+mobile text resizing. An initial mobile geometry assertion sampled the old
+portrait rectangle immediately after rotation; the test now waits for the compact
+responsive layout before measuring. Firefox exceeded the unchanged global
+deadline before reaching the new expansion assertions while other independent
+build/browser jobs were active. These initial traces are retained as ignored
+local evidence. The coordinated required CI remains the acceptance gate for the
+integrated commit; those local timeouts are not recorded as passing cases.
+The corrected mobile continuity case then passed in isolation, including real
+landscape expansion, portrait return, minimization, source/draft preservation,
+focus return, and a single generation request. The enabled full `npm run check`
+also passed after the presentation change.
+
 Nine final Desktop screenshots cover English/Spanish, light/dark, desktop/mobile,
 compact/expanded/minimized, waiting, failure, and the combined narrow text-resize
 case. The latter shows a native scroll to the recovery action with the composer
