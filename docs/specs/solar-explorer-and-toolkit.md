@@ -35,8 +35,9 @@ DOM instance. GSAP wraps positions; no inaccessible duplicate links are required
 
 ## Libraries and resource budgets
 
-Existing Three.js official OrbitControls and postprocessing addons provide the
-camera, selective HDR bloom and final color conversion. Existing GSAP provides
+Three.js OrbitControls provides the explorer camera. The
+[immersive solar scene](immersive-solar-scene.md) replaced the bloom post-processing
+with single-pass custom shaders. Existing GSAP provides
 carousel animation. Stars are integrated as Three.js Points into the solar renderer;
 the unused global tsParticles renderer and its three packages are removed.
 

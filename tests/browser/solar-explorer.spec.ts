@@ -32,6 +32,10 @@ for (const locale of ["en", "es"]) {
       expect(
         await page.evaluate(() => getComputedStyle(document.documentElement).backgroundColor),
       ).toBe(await dialog.evaluate((element) => getComputedStyle(element).backgroundColor));
+      // The dialog zooms in from 95 %; measure its settled geometry, not an animation frame.
+      await dialog.evaluate((element) =>
+        Promise.all(element.getAnimations().map((animation) => animation.finished)),
+      );
       const bounds = await dialog.boundingBox();
       expect(bounds?.x).toBeCloseTo(0, 0);
       expect(bounds?.y).toBeCloseTo(0, 0);

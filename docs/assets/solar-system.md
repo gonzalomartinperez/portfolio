@@ -31,6 +31,8 @@ Color maps use WebP quality 92 and sRGB in the renderer. Venus uses its cloud-co
 
 The reduced-motion and no-JavaScript Saturn fallback uses a concentric CSS radial gradient sampled from seventeen points of the original ring profile. This preserves its inner gap, band colors and alpha without stretching the horizontal image over a square. The animated Three.js renderer uses the full map.
 
+Since the immersive scene revision (2026-10-12) the runtime decodes these files off the main thread and uploads them at the size each view needs: reading mode uses 2048 texels for the Sun, Earth and Jupiter on wide screens and 1024 elsewhere; the explorer re-decodes Earth and Jupiter at 4096 (2048 on narrow screens) and a few other maps at 2048, then returns to the reading sizes on close. The Milky Way, stars, belts, corona and granulation are procedural shaders, not image assets, so they add no files, credits or licenses. No source file in this directory changed in that revision.
+
 Pluto is a dwarf planet, included as the ninth orbiting body in the requested composition. Decorative scales, speeds, spacing and orbital paths are not an astronomical simulation. Original map coverage and colors are preserved; no missing terrain was synthesized.
 
 ## Verification
