@@ -166,7 +166,7 @@ test("production profile preserves corrected scope and metric qualifications", (
     assert.match(source, /~1 h → 10 min/);
     assert.match(source, /~30%/);
     assert.doesNotMatch(source, /90[,.]000|\bSGA\b|\bIT Lead\b/);
-    assert.match(source, /https:\/\/rampyapp\.com\//);
+    assert.match(source, /https:\/\/getrampy\.com\//);
     assert.match(source, /https:\/\/pequeverso\.com\//);
     assert.match(source, /historical client projects|proyectos históricos/);
     const tokenMetric = source.slice(source.indexOf('value: "~30%"'));

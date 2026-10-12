@@ -6,7 +6,7 @@ export const roles: Role[] = [
   {
     slug: "rampy",
     company: "Rampy",
-    companyHref: "https://rampyapp.com/",
+    companyHref: "https://getrampy.com/",
     ...experienceFacts("en", "rampy"),
     startedOn: "2026-09-01",
     location: "United States",
