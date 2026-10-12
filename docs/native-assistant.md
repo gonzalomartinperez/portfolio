@@ -64,6 +64,16 @@ motion. Waiting shows Thinking… / Pensando… until the first text arrives, th
 polite status announces writing without reading every token. Connecting and history
 loading remain separate; there are no invented retrieval percentages or tool stages.
 
+The toolbar measures its layout height so the conversation-menu button stays
+aligned with expand/minimize controls when translated labels wrap or text grows
+to 200%. Fixed 44 px action targets retain their input space without consuming
+extra text width as the font size increases. Recovery notices wrap their message
+and action into separate rows when needed inside the scrollable transcript.
+They follow the existing bottom-follow policy without displacing the composer
+or forcing visitors away from older messages. Short viewports omit the redundant
+header subtitle; the complete keyboard hint stays linked to the input for assistive
+technology while its visual footprint is removed to preserve reading and action space.
+
 The theme and language follow the portfolio. Changing language does not rewrite
 previous messages. Safe editorial starter prompts remain available if the public
 catalog cannot be loaded; they do not claim live model-generated relevance.

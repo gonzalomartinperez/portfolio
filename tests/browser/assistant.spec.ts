@@ -78,6 +78,7 @@ for (const mode of ["interrupted", "provider", "expired"] as const) {
   test(`${mode} is honest, preserves safe recovery and never retries generation`, async ({
     page,
   }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
     const backend = await fixture(page, mode);
     await open(page);
     await page.locator("#question").fill("Tell me about Gonzalo");
@@ -89,10 +90,39 @@ for (const mode of ["interrupted", "provider", "expired"] as const) {
           ? "unavailable right now"
           : "expired",
     );
+    const panel = page.locator("#portfolio-assistant");
+    expect(await panel.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(
+      true,
+    );
+    const recovery = panel.getByRole("alert").getByRole("button");
+    await expect(recovery).toBeInViewport();
+    await expect(recovery).toHaveCSS("min-height", "44px");
     expect(backend.requests()).toBe(1);
     await expect(page.locator("[data-assistant-waiting]")).toHaveCount(0);
     if (mode === "interrupted")
       await expect(page.getByText("Gonzalo builds software", { exact: true })).toBeVisible();
+    if (mode === "provider") {
+      await page.setViewportSize({ width: 320, height: 520 });
+      await page.evaluate(() => {
+        document.documentElement.style.fontSize = "200%";
+      });
+      await recovery.scrollIntoViewIfNeeded();
+      const panelBounds = await panel.boundingBox();
+      const fieldBounds = await page.locator("#question").boundingBox();
+      const actionBounds = await recovery.boundingBox();
+      if (!panelBounds || !fieldBounds || !actionBounds)
+        throw new Error("Recovery layout is missing");
+      expect(fieldBounds.y + fieldBounds.height).toBeLessThanOrEqual(
+        panelBounds.y + panelBounds.height,
+      );
+      expect(actionBounds.y).toBeGreaterThanOrEqual(panelBounds.y);
+      expect(actionBounds.y + actionBounds.height).toBeLessThanOrEqual(
+        panelBounds.y + panelBounds.height,
+      );
+      expect(await panel.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(
+        true,
+      );
+    }
     await expect(page.locator("body")).not.toContainText("private data");
   });
 }
@@ -274,11 +304,40 @@ test("long output, text resizing and a reduced viewport keep reading and control
         send.y + send.height <= field.y + field.height,
     );
   }
+  async function toolbarControlsAligned() {
+    const toolbar = await page.locator("#portfolio-assistant > div").first().boundingBox();
+    const controls = await Promise.all(
+      ["Conversations", "Expand panel", "Minimize assistant"].map((name) =>
+        page.getByRole("button", { name, exact: true }).evaluate((element) => {
+          const bounds = element.getBoundingClientRect();
+          const style = getComputedStyle(element);
+          return {
+            y: bounds.y,
+            height: bounds.height,
+            widthCss: Number.parseFloat(style.width),
+            heightCss: Number.parseFloat(style.height),
+          };
+        }),
+      ),
+    );
+    return Boolean(
+      toolbar &&
+        controls.every(
+          (control) =>
+            control &&
+            control.widthCss >= 44 &&
+            control.heightCss >= 44 &&
+            Math.abs(control.y + control.height / 2 - toolbar.y - toolbar.height / 2) <= 1,
+        ),
+    );
+  }
   await expect.poll(sendInsideField).toBe(true);
+  await expect.poll(toolbarControlsAligned).toBe(true);
   await page.evaluate(() => {
     document.documentElement.style.fontSize = "200%";
   });
   await expect.poll(sendInsideField).toBe(true);
+  await expect.poll(toolbarControlsAligned).toBe(true);
   await expect(page.locator("#question")).toBeInViewport();
   await expect(page.getByRole("button", { name: "Send", exact: true })).toBeInViewport();
   expect(
@@ -287,6 +346,31 @@ test("long output, text resizing and a reduced viewport keep reading and control
       .evaluate((element) => element.scrollWidth <= element.clientWidth),
   ).toBe(true);
   expect(await log.evaluate((element) => element.scrollTop)).toBe(0);
+  await page.evaluate(() => {
+    document.documentElement.style.fontSize = "100%";
+  });
+  await expect.poll(toolbarControlsAligned).toBe(true);
+  await page.route(
+    "https://assistant.gonzalomartinperez.com/api/v1/conversations/*/messages/stream",
+    (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        headers: {
+          "Access-Control-Allow-Origin": new URL(page.url()).origin,
+          "Access-Control-Allow-Credentials": "true",
+        },
+        body: JSON.stringify({ code: "provider_unavailable" }),
+      }),
+  );
+  await page.locator("#question").fill("A follow-up while reading earlier text");
+  await page.getByRole("button", { name: "Send", exact: true }).click();
+  await expect(page.locator("#portfolio-assistant").getByRole("alert")).toContainText(
+    "unavailable",
+  );
+  expect(await log.evaluate((element) => element.scrollTop)).toBe(0);
+  await page.getByRole("button", { name: "Jump to latest" }).click();
+  await expect(page.getByRole("button", { name: "Check saved conversation" })).toBeInViewport();
 });
 
 test("avatar is decorative and reduced motion leaves a calm complete experience", async ({

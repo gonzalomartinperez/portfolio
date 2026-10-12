@@ -59,6 +59,50 @@ A bounded scan of source and emitted client assets found zero standalone OpenAI-
 literals; it did not open real environment files or print suspected credential values.
 This is static evidence, not a substitute for production configuration review.
 
+## Final interface audit — 2026-10-12
+
+The regular welcome, compact conversation, expanded panel, launcher, waiting, and
+failure views retained the approved blue palette and owned design system. The audit
+found two concrete small-screen defects: a fixed 72 px menu offset stopped matching
+a wrapped toolbar at 200% text, and a recovery action overflowed a 320 px panel.
+An enlarged recovery notice could also push the composer below the clipped surface.
+
+The host now measures toolbar layout height without following opening transforms.
+The input reserves fixed action space. Recovery notices use the existing callback
+inside the native scrollable transcript, with wrapping labels and a 44 px minimum
+height. Error updates follow the existing conditional bottom-follow behavior;
+reading older messages does not trigger a forced jump. Short viewports preserve the
+full assistant title and expose the complete input hint to assistive technology
+without allowing secondary chrome to displace the controls.
+
+`ASSISTANT_ENABLED=true npm run check` passed after the final changes, including
+strict types, lint, the production build, document checks, and all nine budgets.
+The final focused browser run passed **16 cases** across desktop/mobile Chromium,
+Firefox, and WebKit: interrupted/provider/session failures, 320 px recovery, combined
+320 × 520 / 200% text, long answers, and failure while reading older content.
+
+```sh
+BROWSER_TEST_PORT=3294 BROWSER_TEST_UPSTREAM_PORT=3295 node scripts/browser-test-server.ts
+# In another terminal, using the same owned local server:
+SITE_TEST_ORIGIN=https://127.0.0.1:3294 npm run test:browser -- tests/browser/assistant.spec.ts --grep 'is honest, preserves safe recovery|long output'
+```
+
+The preceding broader selection passed 39 cases covering compact/expanded/minimized
+continuity, bilingual accessibility, IME, cancellation, waiting, and cold focus.
+One new size assertion failed because Firefox represented a 44 px CSS target as
+43.999992 px in its rectangle. Target sizes now use computed CSS dimensions; the
+original 1 px center-alignment tolerance and test deadlines remain unchanged.
+The final four-engine text-resize cases all passed. Initial traces remain retained
+as ignored local evidence rather than replacing that result with a retry claim.
+
+Nine final Desktop screenshots cover English/Spanish, light/dark, desktop/mobile,
+compact/expanded/minimized, waiting, failure, and the combined narrow text-resize
+case. The latter shows a native scroll to the recovery action with the composer
+remaining visible. API replies, citations, waiting, failures, and suggestion fallback
+are simulated; no provider calls or production activation were performed. Reduced
+motion produced stable captures. Real mobile keyboards and the deployed VPS remain
+outside this local evidence.
+
 ## Rollout limits
 
 `ASSISTANT_ENABLED` remains unset/false for production. The normal CI also verifies

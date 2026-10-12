@@ -3,7 +3,7 @@
 import { Maximize2, Minimize2, Minus, Sparkles } from "lucide-react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { type KeyboardEvent, useEffect, useRef, useState } from "react";
+import { type KeyboardEvent, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { holdPageMotion } from "@/components/motion-state";
 import { Button } from "@/components/ui/button";
 import { type PortfolioPath, portfolioPath } from "@/features/assistant/domain/visitor-context";
@@ -33,6 +33,7 @@ export function AssistantHost() {
   const [focus, setFocus] = useState(0);
   const host = useRef<HTMLDivElement>(null);
   const surface = useRef<HTMLElement>(null);
+  const toolbar = useRef<HTMLDivElement>(null);
   const launcher = useRef<HTMLButtonElement>(null);
   const lastPage = useRef(page);
   const wasVisible = useRef(false);
@@ -40,6 +41,19 @@ export function AssistantHost() {
   const modal = visible && (historyOpen || (!page && (expanded || mobile)));
   const es = locale === "es";
 
+  useLayoutEffect(() => {
+    const element = toolbar.current;
+    const owner = host.current;
+    if (!loaded || !element || !owner) return;
+    const measure = () => {
+      const height = element.offsetHeight;
+      if (height > 0) owner.style.setProperty("--assistant-toolbar-height", `${height}px`);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [loaded]);
   useEffect(() => {
     if (wasVisible.current && !visible) launcher.current?.focus();
     wasVisible.current = visible;
@@ -175,7 +189,7 @@ export function AssistantHost() {
           aria-label={es ? "Asistente de Gonzalo" : "Gonzalo’s assistant"}
           onKeyDown={keys}
         >
-          <div className={styles.toolbar} inert={historyOpen}>
+          <div ref={toolbar} className={styles.toolbar} inert={historyOpen}>
             <div className={styles.identity}>
               <span className={styles.mark} aria-hidden="true">
                 <Sparkles />
