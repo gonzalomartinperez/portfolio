@@ -150,7 +150,9 @@
   .brandName {
     overflow-wrap: anywhere;
   }
+}
 
+@media (width < 52rem) {
   .brandRole {
     display: none;
   }
