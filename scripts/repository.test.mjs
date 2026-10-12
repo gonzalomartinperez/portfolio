@@ -89,7 +89,7 @@ test("CI isolates browser shards and fails the protected gate for incomplete ver
       ...workflow.matchAll(/^ {2}([a-z][a-z-]*):\n([\s\S]*?)(?=^ {2}[a-z][a-z-]*:|$(?![\s\S]))/gm),
     ].map(([, id, body]) => [id, body]),
   );
-  for (const id of ["validate", "browser", "legacy-linux", "check"]) {
+  for (const id of ["validate", "browser", "browser-engines", "legacy-linux", "check"]) {
     assert.ok(jobs.has(id), `Missing verification job: ${id}`);
   }
   const development = jobs.get("validate");
@@ -105,17 +105,31 @@ test("CI isolates browser shards and fails the protected gate for incomplete ver
   assert.match(browser, /needs: validate/);
   assert.match(browser, /fail-fast: false/);
   assert.match(browser, /shard: \[1, 2, 3, 4, 5, 6, 7, 8\]/);
-  assert.match(browser, /npm run test:browser -- --shard=\$\{\{ matrix\.shard \}\}\/8/);
+  assert.match(
+    browser,
+    /npm run test:browser -- --project=desktop --project=mobile --shard=\$\{\{ matrix\.shard \}\}\/8/,
+  );
+  const engines = jobs.get("browser-engines");
+  assert.match(engines, /needs: validate/);
+  assert.match(
+    engines,
+    /npm run test:browser -- --project=assistant-firefox --project=assistant-webkit/,
+  );
+  // Every Playwright project runs in exactly one of the two browser jobs.
+  const projects = [...read("playwright.config.ts").matchAll(/name: "([a-z-]+)"/g)].map(
+    ([, name]) => name,
+  );
+  assert.deepEqual(projects.sort(), ["assistant-firefox", "assistant-webkit", "desktop", "mobile"]);
   assert.match(read("playwright.config.ts"), /workers: 1,/);
   assert.match(read("playwright.config.ts"), /failOnFlakyTests: Boolean\(process\.env\.CI\)/);
   assert.match(gate, /if: always\(\)/);
-  assert.match(gate, /needs: \[validate, browser, legacy-linux\]/);
-  for (const id of ["validate", "browser", "legacy-linux"]) {
+  assert.match(gate, /needs: \[validate, browser, browser-engines, legacy-linux\]/);
+  for (const id of ["validate", "browser", "browser-engines", "legacy-linux"]) {
     assert.match(gate, new RegExp(`needs\\.${id}\\.result`));
   }
   assert.match(
     gate,
-    /test "\$RESULT" = success && test "\$BROWSER_RESULT" = success && test "\$LEGACY_RESULT" = success/,
+    /test "\$RESULT" = success && test "\$BROWSER_RESULT" = success && test "\$ENGINES_RESULT" = success && test "\$LEGACY_RESULT" = success/,
   );
   assert.doesNotMatch(workflow, /continue-on-error:|pull_request_target:/);
 });
@@ -123,7 +137,8 @@ test("CI isolates browser shards and fails the protected gate for incomplete ver
 test("browser shards reuse the same workflow's verified build without rebuilding", () => {
   const workflow = read(".github/workflows/ci.yml");
   const development = workflow.split("  validate:")[1].split("  browser:")[0];
-  const browser = workflow.split("  browser:")[1].split("  legacy-linux:")[0];
+  const browser = workflow.split("  browser:")[1].split("  browser-engines:")[0];
+  const engines = workflow.split("  browser-engines:")[1].split("  legacy-linux:")[0];
   assert.match(development, /npm run check/);
   assert.match(development, /npm run test:rendered/);
   assert.match(
@@ -133,9 +148,14 @@ test("browser shards reuse the same workflow's verified build without rebuilding
   assert.match(development, /name: production-build/);
   assert.match(workflow, /defaults:\n {2}run:\n {4}shell: bash/);
   assert.match(development, /compression-level: 0/);
-  assert.match(browser, /playwright install --with-deps chromium firefox webkit/);
-  assert.match(browser, /actions\/download-artifact@[a-f0-9]{40}/);
-  assert.match(browser, /name: production-build/);
-  assert.doesNotMatch(browser, /run-id:|repository:|github-token:|npm run (check|build)/);
+  // Chromium shards install one engine; the assistant's Firefox and WebKit runs install theirs.
+  assert.match(browser, /playwright install --with-deps chromium\n/);
+  assert.match(engines, /playwright install --with-deps firefox webkit\n/);
+  for (const job of [browser, engines]) {
+    assert.match(job, /actions\/download-artifact@[a-f0-9]{40}/);
+    assert.match(job, /name: production-build/);
+    assert.doesNotMatch(job, /run-id:|repository:|github-token:|npm run (check|build)/);
+  }
   assert.match(browser, /name: browser-verification-\$\{\{ matrix\.shard \}\}/);
+  assert.match(engines, /name: browser-verification-engines/);
 });

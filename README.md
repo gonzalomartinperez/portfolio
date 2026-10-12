@@ -33,7 +33,7 @@ reviewed CVs, a focused technology catalog and a realistic, readable 3D solar sc
 | **Interactive architecture** | React Flow diagrams with keyboard-accessible detail panels explain the systems behind each role. |
 | **Hero identity** | A lazy Three.js particle sphere and GSAP native-scroll choreography that settles into the technology toolkit. |
 | **Solar scene** | A single-pass Three.js renderer with physically motivated shaders, a baked Milky Way and a reading mask that keeps text contrast on every page. |
-| **Engineered quality** | Strict TypeScript, Biome, budgets, rendered checks and eight Playwright shards gate every pull request. |
+| **Engineered quality** | Strict TypeScript, Biome, budgets, rendered checks, eight Chromium shards and a Firefox/WebKit job gate every pull request. |
 | **Reviewed delivery** | Task branch → `develop` → `main` through protected pull requests; native Hostinger deployment from `main`. |
 
 ## Gallery
@@ -176,10 +176,12 @@ flowchart LR
     subgraph GATE["Required checks on every pull request"]
         direction TB
         QUALITY["Quality (development)<br/>Repository · Lint · Types · Build · Budgets · Rendered routes"]
-        BROWSER["Browser verification ×8<br/>Playwright · axe · Desktop & mobile"]
+        BROWSER["Browser verification ×8<br/>Chromium · axe · Desktop & mobile"]
+        ENGINES["Firefox and WebKit<br/>Assistant conversations"]
         COMPAT["Compatibility<br/>Hostinger GLIBC 2.28 build"]
         AGG["Quality checks<br/>Fails on any skipped or failed job"]
         QUALITY --> BROWSER --> AGG
+        QUALITY --> ENGINES --> AGG
         COMPAT --> AGG
     end
     TASK -.-> GATE
@@ -187,7 +189,7 @@ flowchart LR
     classDef branch fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e;
     classDef check fill:#dcfce7,stroke:#16a34a,color:#14532d;
     class TASK,DEV,MAIN,LIVE branch;
-    class QUALITY,BROWSER,COMPAT,AGG check;
+    class QUALITY,BROWSER,ENGINES,COMPAT,AGG check;
 ```
 
 - **Deliberate scope:** no CMS, database, analytics, or speculative layers — static routes,

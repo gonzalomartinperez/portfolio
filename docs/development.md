@@ -49,15 +49,17 @@ The Hostinger compatibility job runs it too. It uses port 3100 by default; set
 `SMOKE_TEST_PORT` for parallel runs. Locally, `npm run test:site` uses one owned
 production server for rendered assertions and Playwright sequentially. In CI, `Quality (development)` runs
 `npm run check` and the server-rendered assertions once, then uploads its verified
-production build. Eight isolated browser runners restore that same-run artifact
-and run the complete Playwright suite in eight shards without rebuilding.
+production build. Eight isolated Chromium runners restore that same-run artifact
+and run the desktop and mobile projects in eight shards without rebuilding; one more
+runner restores it for the assistant's Firefox and WebKit projects. Every Playwright
+project runs in exactly one of those jobs, and each installs only the engines it uses.
 Rendered tests already cover the smoke assertions, so they are not repeated there.
 Browser tests default to one worker to avoid competing software-rendered scenes;
 see the [motion research](research/motion-performance.md) for measurements and rationale.
 Each browser shard retains one worker and has a 30-minute job ceiling, avoiding
 competition for a shared software-rendered GPU. Shards run on separate runners
 with fail-fast disabled so every shard can finish and retain diagnostics.
-Eight browser jobs plus compatibility fit below GitHub Free's standard-runner
+Nine browser jobs plus compatibility fit below GitHub Free's standard-runner
 limit of 20 concurrent jobs; account-wide activity can still introduce queuing.
 Standard hosted runners are free for this public repository; this workflow uses
 no larger runners. See [Actions limits](https://docs.github.com/en/actions/reference/limits)
@@ -65,7 +67,7 @@ and [billing and usage](https://docs.github.com/en/actions/concepts/billing-and-
 Individual test deadlines, mandatory coverage, retries and failure on flaky tests
 remain unchanged. The build/rendered job has a 15-minute ceiling; the previous
 60-minute allowance covered the complete sequential browser suite.
-`Quality checks` requires every shard, the development checks
+`Quality checks` requires every shard, the Firefox and WebKit job, the development checks
 and Hostinger compatibility to succeed; skipped or cancelled jobs fail the gate.
 Native image-tab tests use the full Chromium channel instead of headless shell
 to exercise browser document navigation. Install Chromium without `--only-shell`;
@@ -258,9 +260,11 @@ retired; do not mount a second conversation implementation.
 
 ### Lean release CI transfers
 
-All eight browser shards keep their existing engine coverage and one worker for stable
-scene/focus tests. The pinned Playwright CLI installs full Chromium, its Headless Shell, Firefox and
-WebKit. Full Chromium remains necessary: gallery-native-navigation tests explicitly select
+Browser jobs keep their existing engine coverage and one worker for stable scene/focus
+tests. Chromium shards install full Chromium and its Headless Shell; the Firefox and WebKit
+job installs only those engines. Before this split every shard installed all three engines
+and their system packages (about 57 s, 39 s of them apt packages mostly needed by WebKit and
+Firefox), although only one shard ran their 46 tests. Full Chromium remains necessary: gallery-native-navigation tests explicitly select
 `channel: "chromium"` to verify foreground/background image tabs. They remain headless
 but require the full browser executable rather than Headless Shell. An executed trial of
 `--only-shell` failed those tests and was rejected without weakening their coverage. The verified

@@ -97,15 +97,60 @@ jobs:
           path: /tmp/portfolio-build
       - name: Restore the production build
         run: tar -xzf /tmp/portfolio-build/portfolio-production-build.tar.gz
-      - name: Install browser test runtime
-        run: npx --no-install playwright install --with-deps chromium firefox webkit
+      - name: Install the Chromium test runtime
+        run: npx --no-install playwright install --with-deps chromium
       - name: Verify interactions and accessibility on an isolated runner
-        run: npm run test:browser -- --shard=${{ matrix.shard }}/8
+        run: npm run test:browser -- --project=desktop --project=mobile --shard=${{ matrix.shard }}/8
       - name: Retain browser verification artifacts
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: browser-verification-${{ matrix.shard }}
+          path: |
+            .artifacts/playwright/report
+            .artifacts/playwright/results
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Verify tracked sources remain unchanged
+        run: git diff --exit-code
+
+  browser-engines:
+    name: Browser verification (Firefox and WebKit)
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      ASSISTANT_ENABLED: "true"
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Download this run's verified production build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: production-build
+          path: /tmp/portfolio-build
+      - name: Restore the production build
+        run: tar -xzf /tmp/portfolio-build/portfolio-production-build.tar.gz
+      - name: Install the Firefox and WebKit test runtimes
+        run: npx --no-install playwright install --with-deps firefox webkit
+      - name: Verify the assistant in Firefox and WebKit
+        run: npm run test:browser -- --project=assistant-firefox --project=assistant-webkit
+      - name: Retain browser verification artifacts
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: browser-verification-engines
           path: |
             .artifacts/playwright/report
             .artifacts/playwright/results
@@ -162,7 +207,7 @@ jobs:
   check:
     name: Quality checks
     if: always()
-    needs: [validate, browser, legacy-linux]
+    needs: [validate, browser, browser-engines, legacy-linux]
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
@@ -170,5 +215,6 @@ jobs:
         env:
           RESULT: ${{ needs.validate.result }}
           BROWSER_RESULT: ${{ needs.browser.result }}
+          ENGINES_RESULT: ${{ needs.browser-engines.result }}
           LEGACY_RESULT: ${{ needs.legacy-linux.result }}
-        run: test "$RESULT" = success && test "$BROWSER_RESULT" = success && test "$LEGACY_RESULT" = success
+        run: test "$RESULT" = success && test "$BROWSER_RESULT" = success && test "$ENGINES_RESULT" = success && test "$LEGACY_RESULT" = success
