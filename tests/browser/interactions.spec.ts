@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { setDocumentHidden } from "./document-visibility";
 
 for (const progress of [0, 0.25, 0.5, 0.75, 1]) {
   test(`the scene reproduces its ${progress} checkpoint`, async ({ page }, info) => {
@@ -17,18 +18,18 @@ for (const progress of [0, 0.25, 0.5, 0.75, 1]) {
   });
 }
 
-test("pause and reduced motion leave content available", async ({ page }, info) => {
+test("hidden-tab suspension and reduced motion leave content available", async ({ page }, info) => {
   await page.goto("/");
   await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "running");
-  await page.getByRole("button", { name: "Pause animation", exact: true }).click();
-  await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "paused");
+  await setDocumentHidden(page, true);
+  await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "running");
   const pausedProgress = await page.locator("[data-scene]").getAttribute("data-scene-progress");
   await page.evaluate(() => window.scrollTo(0, 500));
   await expect(page.locator("[data-scene]")).toHaveAttribute(
     "data-scene-progress",
     pausedProgress ?? "",
   );
-  await page.getByRole("button", { name: "Play animation", exact: true }).click();
+  await setDocumentHidden(page, false);
   await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "running");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "static");
@@ -216,22 +217,18 @@ test("the layout reflows at a 200 percent text scale", async ({ page }) => {
   );
 });
 
-test("short mobile viewports keep pause visible and use a static landscape fallback", async ({
+test("short mobile viewports omit motion controls and use a static landscape fallback", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 700 });
   await page.goto("/");
   await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "running");
-  const button = page.getByRole("button", { name: "Pause animation", exact: true });
-  const box = await button.boundingBox();
-  expect(box).not.toBeNull();
-  expect((box?.y ?? -1) + (box?.height ?? 0)).toBeLessThanOrEqual(700);
-  expect(box?.y).toBeGreaterThanOrEqual(0);
+  await expect(page.getByRole("button", { name: "Pause animation", exact: true })).toHaveCount(0);
+  await expect(page.locator("[data-motion-toggle]")).toHaveCount(0);
   const launcher = await page.getByRole("button", { name: "Ask AI", exact: true }).boundingBox();
   expect(launcher).not.toBeNull();
-  expect((box?.y ?? 0) + (box?.height ?? 0)).toBeLessThan(launcher?.y ?? 0);
-  await button.click();
-  await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "paused");
+  expect((launcher?.y ?? -1) + (launcher?.height ?? 0)).toBeLessThanOrEqual(700);
+  expect(launcher?.y).toBeGreaterThanOrEqual(0);
   await page.setViewportSize({ width: 844, height: 390 });
   await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "static");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();

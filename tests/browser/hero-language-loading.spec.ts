@@ -1,8 +1,10 @@
 import { expect, test } from "@playwright/test";
+import { setDocumentHidden } from "./document-visibility";
 
 for (const theme of ["dark", "light"]) {
-  const mode = theme === "dark" ? "paused" : "running";
-  test(`${theme} ${mode} warm language changes keep the hero visible without a static-layout flash`, async ({
+  const mode = "running";
+  const hidden = theme === "dark";
+  test(`${theme} ${hidden ? "hidden-tab" : "visible"} warm language changes keep the hero visible without a static-layout flash`, async ({
     page,
   }) => {
     test.setTimeout(90_000);
@@ -10,8 +12,8 @@ for (const theme of ["dark", "light"]) {
     await page.goto("/");
     const scene = page.locator("[data-scene]");
     await expect(scene).toHaveAttribute("data-mode", "running");
-    if (mode === "paused") {
-      await scene.getByRole("button", { name: "Pause animation", exact: true }).click();
+    if (hidden) {
+      await setDocumentHidden(page, true);
       await expect(scene).toHaveAttribute("data-mode", mode);
     }
     await page.evaluate(() => document.fonts.ready);
@@ -99,5 +101,6 @@ for (const theme of ["dark", "light"]) {
       await expect(scene).toHaveAttribute("data-mode", mode);
       await expect(page.locator("[data-scene-avatar]")).toBeVisible();
     }
+    if (hidden) await setDocumentHidden(page, false);
   });
 }

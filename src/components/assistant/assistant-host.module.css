@@ -60,7 +60,7 @@
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
-  min-height: var(--assistant-toolbar-height);
+  min-height: 72px;
   padding: 0.25rem 0.5rem 0.25rem 60px;
   border-bottom: 1px solid var(--line-subtle);
   background: linear-gradient(120deg, var(--accent-wash), transparent 85%), var(--surface-base);
@@ -211,5 +211,14 @@
   .launcher {
     background: var(--surface-raised);
     backdrop-filter: none;
+  }
+}
+
+@media (max-height: 540px) {
+  .toolbar {
+    min-height: 56px;
+  }
+  .heading > span {
+    display: none;
   }
 }

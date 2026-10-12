@@ -1,5 +1,62 @@
 # Gonzalo Martin Perez · Portfolio
 
+[![CI](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml)
+
+A bilingual portfolio for **Software Engineer · AI Engineer · Product Engineer** work: production experience, interactive architecture diagrams, reviewed CVs, and a focused technology catalog. Eight core routes share two languages, two themes, and one persistent application shell.
+
+**Live:** [gonzalomartinperez.com](https://gonzalomartinperez.com) — served from
+Hostinger's managed Node.js hosting, with the domain registered through Cloudflare.
+`main` is the branch connected to hosting; see the
+[deployment guide](docs/deployment.md) for the CI/CD boundary.
+
+[Explore the source](src/app/) · [Architecture](docs/architecture.md) · [Design system](docs/design.md) ·
+[Technology decisions](docs/technology.md) · [Development workflow](docs/development.md)
+
+## Built with
+
+**Application & interface**
+
+![Next.js](https://img.shields.io/badge/Next.js-F4F5F7?style=flat-square&logo=nextdotjs&logoColor=000000) ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-F4F5F7?style=flat-square&logo=typescript) ![Node.js](https://img.shields.io/badge/Node.js-F4F5F7?style=flat-square&logo=nodedotjs) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-20232A?style=flat-square&logo=tailwindcss) ![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-F4F5F7?style=flat-square&logo=shadcnui&logoColor=000000) ![Radix UI](https://img.shields.io/badge/Radix%20UI-F4F5F7?style=flat-square&logo=radixui&logoColor=000000)
+
+**Motion & diagrams**
+
+![Three.js](https://img.shields.io/badge/Three.js-F4F5F7?style=flat-square&logo=threedotjs&logoColor=000000) ![GSAP](https://img.shields.io/badge/GSAP-20232A?style=flat-square&logo=gsap&logoColor=88CE02) ![React Flow](https://img.shields.io/badge/React%20Flow-2563EB?style=flat-square)
+
+**Quality & delivery**
+
+![Biome](https://img.shields.io/badge/Biome-F4F5F7?style=flat-square&logo=biome) ![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat-square) ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-F4F5F7?style=flat-square&logo=githubactions)
+
+These badges describe this repository's implementation. The [professional technology catalog](https://gonzalomartinperez.com/stack) separately documents tools used across my work, with experience evidence. Badge artwork is served by Shields.io; technology names and marks belong to their respective owners and do not imply endorsement.
+
+## Architecture at a glance
+
+```mermaid
+flowchart TB
+    CONTENT["Typed EN / ES content<br/>Approved CV projection · Public assets"]
+    APP["Next.js App Router<br/>Server-rendered pages · Metadata"]
+    SHELL["Persistent root layout<br/>Navigation · Theme · Locale"]
+    VIEWS["Focused client views<br/>Hero · Solar scene · Architecture diagrams"]
+    CHAT["Lazy native assistant<br/>One controller · Draft & conversation continuity"]
+    API["Separate assistant API<br/>REST + SSE · Session & CSRF"]
+    HOST["Hostinger Node.js hosting<br/>Protected main → Native deployment"]
+    CONTENT --> APP
+    APP --> SHELL
+    SHELL --> VIEWS
+    SHELL -. "Only when build gate is enabled" .-> CHAT
+    CHAT -. "Credentialed HTTPS" .-> API
+    APP --> HOST
+    classDef source fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e;
+    classDef app fill:#dbeafe,stroke:#2563eb,color:#1e3a8a;
+    classDef boundary fill:#ede9fe,stroke:#7c3aed,color:#4c1d95;
+    class CONTENT source;
+    class APP,SHELL,VIEWS app;
+    class CHAT,API,HOST boundary;
+```
+
+The portfolio has no application database or model-provider key. Reviewed content and documents are committed inputs; the optional assistant talks directly to a separately deployed API. [Explore the application, CV publication, and assistant boundaries](docs/architecture.md).
+
+### Assistant availability
+
 The native assistant is **disabled by default**. Unset or `false`
 `ASSISTANT_ENABLED` removes the launcher and returns 404 for `/assistant` and
 `/es/assistant`. Activation is not part of this delivery. For isolated development
@@ -7,20 +64,6 @@ or fixture verification only, run `ASSISTANT_ENABLED=true npm run dev` or
 `ASSISTANT_ENABLED=true npm run build`. Static production output captures this
 setting during the build; changing it on an existing build is not a rollout.
 CI verifies the enabled conversation suite and a separate disabled Hostinger build.
-
-
-[![CI](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml)
-
-A personal portfolio focused on software engineering and applied AI: eight routes,
-two languages, and two themes.
-
-**Live:** [gonzalomartinperez.com](https://gonzalomartinperez.com) — served from
-Hostinger's managed Node.js hosting, with the domain registered through Cloudflare.
-`main` is the branch connected to hosting; see the
-[deployment guide](docs/deployment.md) for the CI/CD boundary.
-
-[Explore the source](src/app/) · [Design system](docs/design.md) ·
-[Technology decisions](docs/technology.md) · [Development workflow](docs/development.md)
 
 ## What the site contains
 
@@ -131,6 +174,7 @@ updated without giving the public build access to private sources.
 | [src/app](src/app/) | Routes, layouts, metadata, and global styles |
 | [src/components](src/components/) | Shell, identity mark, theme toggle, language switcher, hero |
 | [src/content](src/content/) | Typed per-locale content and the shared interface-copy contract |
+| [Architecture](docs/architecture.md) | Application boundaries, reviewed CV publication, and the disabled assistant integration |
 | [Design system](docs/design.md) | Direction, tokens for both themes, typography, motion, the hero field |
 | [Initial release spec](docs/specs/portfolio-initial-release.md) | Scope, acceptance criteria, and decisions |
 | [Research note](docs/research/portfolio-2026-09-12.md) | Sources behind those decisions, including the weak ones |
@@ -153,5 +197,4 @@ All rights reserved; no reuse license is granted. Dependencies retain their own
 licenses. This GitHub repository is public; `"private": true` in `package.json`
 only prevents accidental publication to npm.
 
-The native assistant uses a stable lazy panel and shared expanded routes. See
-[assistant architecture and verification](docs/native-assistant.md).
+The [native assistant guide](docs/native-assistant.md) documents its stable lazy panel, imported API contract, session ownership, and activation checks.

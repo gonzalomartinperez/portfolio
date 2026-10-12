@@ -64,7 +64,7 @@ export function WorkView({ locale }: { locale: Locale }) {
                   <span className={styles.company}>
                     {role.companyHref ? (
                       <ExternalLink href={role.companyHref} locale={locale}>
-                        {role.company}
+                        {role.company} <span aria-hidden="true">↗</span>
                       </ExternalLink>
                     ) : (
                       role.company

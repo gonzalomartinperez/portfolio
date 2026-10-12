@@ -1,9 +1,15 @@
-import { email, externalLinks, resumeDownloads, resumeFilenames } from "../site-config";
+import {
+  email,
+  externalLinks,
+  professionalHeadline,
+  resumeDownloads,
+  resumeFilenames,
+} from "../site-config";
 import type { EvidenceLink } from "../types";
 
 export const profile = {
   name: "Gonzalo Martin Perez",
-  role: "AI Software Engineer",
+  role: professionalHeadline,
   currentPosition: "AI Engineer en Rampy",
   location: "Bahía Blanca, Argentina",
   timezone: "UTC-3",

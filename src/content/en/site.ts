@@ -1,10 +1,11 @@
+import { professionalHeadline } from "../site-config";
 import type { SiteCopy } from "../site-copy";
 import { aboutCopy } from "./about";
 
 export const siteCopy: SiteCopy = {
   chrome: {
     skipToContent: "Skip to content",
-    roleSubtitle: "AI Software Engineer",
+    roleSubtitle: professionalHeadline,
     mainNavLabel: "Main",
     footerNavLabel: "Footer",
     themeToggleNeutral: "Switch theme",
@@ -186,7 +187,7 @@ export const siteCopy: SiteCopy = {
   contact: {
     metaTitle: "Contact",
     metaDescription:
-      "Get in touch with Gonzalo Martin Perez — AI Software Engineer, open to " +
+      "Get in touch with Gonzalo Martin Perez — software, AI and product engineer, open to " +
       "remote roles. Email, LinkedIn and GitHub.",
     eyebrow: "Contact",
     title: "Let's talk",

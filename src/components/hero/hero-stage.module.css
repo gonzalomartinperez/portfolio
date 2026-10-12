@@ -149,34 +149,6 @@
   z-index: 2;
   padding-block: 4rem;
 }
-.toggle {
-  position: fixed;
-  bottom: 1.5rem;
-  left: max(1.5rem, calc((100vw - 1280px) / 2));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--line-subtle);
-  background: var(--surface-void);
-  color: var(--text-secondary);
-  border-radius: 999px;
-  padding: 0.7rem;
-  min-height: 44px;
-  width: 44px;
-  height: 44px;
-  cursor: pointer;
-  z-index: 5;
-}
-.toggle:hover {
-  border-color: var(--accent);
-  color: var(--text-primary);
-}
-.stage[data-scene-settled="true"] .toggle {
-  position: absolute;
-}
-.stage[data-scene-visible="false"] .toggle {
-  display: none;
-}
 .scrollCue {
   position: absolute;
   bottom: 1.5rem;
@@ -274,10 +246,6 @@
   }
   .stage:is([data-mode="running"], [data-mode="paused"]) .journey {
     height: calc(225svh + var(--scene-reading-hold, 0px));
-  }
-  .toggle {
-    left: 1rem;
-    bottom: max(5rem, calc(env(safe-area-inset-bottom) + 4rem));
   }
   .logoCloud :global(.scene-logo) svg,
   .logoCloud :global(.scene-logo) img {

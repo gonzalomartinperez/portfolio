@@ -100,7 +100,7 @@ updates. There is no synthetic scrolling, React Three Fiber or second animation 
 
 The reverse scroll retraces the same progression. Pointer displacement eases back with elapsed
 time, not a fixed per-frame step. Mobile uses fewer particles and a shorter scroll interval.
-Pause, reduced motion, unavailable WebGL and context loss preserve readable content. Rendering
+Automatic suspension, reduced motion, unavailable WebGL and context loss preserve readable content. Rendering
 stops when offscreen or hidden and resources are released on navigation.
 
 The deferred scene closure has a **250 KiB gzip** budget, measured from Webpack's actual chunk

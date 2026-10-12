@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { setDocumentHidden } from "./document-visibility";
 import { dispatchTouchSequence } from "./touch-sequence";
 
 test("sphere and avatar have distinct bounded pulses without changing scroll progress", async ({
@@ -114,7 +115,7 @@ test("real pointer activation works on avatar and the sphere shows a hand only i
   await expect(scene).toHaveAttribute("data-scene-pulse-count", isMobile ? "1" : "2");
 });
 
-test("drag, outside taps, secondary pointers and paused activation do not pulse", async ({
+test("drag, outside taps, secondary pointers and hidden-tab activation do not pulse", async ({
   page,
 }) => {
   await page.goto("/");
@@ -140,10 +141,11 @@ test("drag, outside taps, secondary pointers and paused activation do not pulse"
   ]);
   await expect(scene).not.toHaveAttribute("data-scene-pulse-count");
   await expect(scene).not.toHaveAttribute("data-scene-press");
-  await page.getByRole("button", { name: "Pause animation", exact: true }).click();
+  await setDocumentHidden(page, true);
   await avatar.focus();
   await avatar.press("Enter");
   await expect(scene).not.toHaveAttribute("data-scene-pulse-count");
+  await setDocumentHidden(page, false);
 });
 
 test("reduced motion keeps static focus feedback and scroll hides the avatar hit target", async ({

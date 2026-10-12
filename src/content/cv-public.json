@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-10.4",
+  "revision": "2026-10-12.1",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -50,7 +50,7 @@
               "title": "Rampy",
               "subtitle": "AI Engineer",
               "details": ["Sep 2026 – Present", "United States · Remote"],
-              "href": "https://rampyapp.com/",
+              "href": "https://getrampy.com/",
               "keywords": [],
               "blocks": [
                 {
@@ -1019,7 +1019,7 @@
               "title": "Rampy",
               "subtitle": "AI Engineer",
               "details": ["Sep 2026 – Actualidad", "Estados Unidos · Remoto"],
-              "href": "https://rampyapp.com/",
+              "href": "https://getrampy.com/",
               "keywords": [],
               "blocks": [
                 {
@@ -1933,11 +1933,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "1867a4638cfdfaf65266b2f643357b7ce58e14510e8d20cb1ba0bdf41ad70bf4",
-    "factsSha256": "2a9ae71182a26ff5f899aaf5e4a21cf053389c867c0205fef1efa5abd37863cb",
+    "sourceSha256": "859c29747c01b1913a54d13a54b0f35344e633625abb0ec47954b7a6584a2a52",
+    "factsSha256": "8d0eb9e5b80798cffb805eb57097edc8a51aeee4935b9ef40e84d40160b518c3",
     "pdfSha256": {
-      "en": "d6c8905bc9b8c00bc5bab8d5e5790c7d478b80b4139ff4978afa2aa26a2e3156",
-      "es": "4feb14a1698d6bf4e33443cfbb3fc80c1cb34f313bbf1c6fb71cb3c963a20d07"
+      "en": "d5b20e87d13188aedb85619e01d58d213557c1a465990a61a2e285bb90f9c28e",
+      "es": "d07c6ec96e4ca91d065b92eb6b1b1ba8071f0f796d47ae3e0e17e528f5ad098f"
     }
   }
 }

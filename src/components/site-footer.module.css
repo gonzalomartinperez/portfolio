@@ -81,11 +81,6 @@
   padding-top: var(--space-5);
 }
 
-.motionToggle {
-  display: none;
-  color: var(--text-secondary);
-}
-
 .credits {
   align-items: center;
   color: var(--text-secondary);
@@ -101,15 +96,4 @@
   display: inline-flex;
   min-height: 44px;
   overflow-wrap: anywhere;
-}
-
-:global(body:has([data-ambient-field][data-state="running"])) .motionToggle,
-:global(body:has([data-ambient-field][data-state="paused"])) .motionToggle {
-  display: inline-flex;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .motionToggle {
-    display: none;
-  }
 }
