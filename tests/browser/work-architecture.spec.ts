@@ -369,12 +369,10 @@ for (const locale of ["", "/es"]) {
         ).toHaveCount(0);
       };
       try {
+        await page.emulateMedia({ reducedMotion: "reduce" });
         await page.goto(kind === "filomena" ? `${locale}/work/filomena` : `${locale}/work`);
         await page.evaluate(() => document.fonts.ready);
-        // Inspect diagrams with the public motion pause; animation has its own coverage.
-        await page.locator("[data-motion-toggle]").click();
-        await expect(page.locator("[data-motion-toggle]")).toHaveAttribute("aria-pressed", "true");
-        await expect(page.locator("[data-ambient-field]")).toHaveAttribute("data-state", "paused");
+        await expect(page.locator("[data-ambient-field]")).toHaveAttribute("data-state", "static");
         const figure =
           kind === "filomena"
             ? page.locator("figure").filter({ has: page.locator(".react-flow") })

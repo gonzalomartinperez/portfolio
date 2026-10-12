@@ -25,6 +25,10 @@ for (const locale of ["en", "es"]) {
       await trigger.click();
       const dialog = page.getByRole("dialog");
       await expect(dialog).toBeVisible();
+      await expect(
+        dialog.getByRole("button", { name: /^(Pause|Resume|Pausar|Reanudar)$/ }),
+      ).toHaveCount(0);
+      await expect(page.locator("[data-motion-toggle]")).toHaveCount(0);
       expect(
         await page.evaluate(() => getComputedStyle(document.documentElement).backgroundColor),
       ).toBe(await dialog.evaluate((element) => getComputedStyle(element).backgroundColor));

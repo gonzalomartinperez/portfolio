@@ -123,7 +123,7 @@ test("focused hero links remain readable while the scene is expanded", async ({ 
   await hero.locator("a").first().focus();
   await expect(hero).toHaveCSS("opacity", "1");
   await expect(hero).toHaveCSS("transform", "none");
-  await page.getByRole("button", { name: "Pause animation", exact: true }).focus();
+  await page.locator("header a").first().focus();
   await expect(hero).toHaveCSS("opacity", "0");
 });
 

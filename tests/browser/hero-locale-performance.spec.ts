@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { setDocumentHidden } from "./document-visibility";
 
 test("locale navigation reuses the hero GPU context and releases it when leaving Home", async ({
   page,
@@ -25,8 +26,8 @@ test("locale navigation reuses the hero GPU context and releases it when leaving
   await expect
     .poll(async () => Number(await scene.getAttribute("data-scene-progress")))
     .toBeGreaterThan(0.1);
-  await scene.getByRole("button", { name: "Pause animation", exact: true }).click();
-  await expect(scene).toHaveAttribute("data-mode", "paused");
+  await setDocumentHidden(page, true);
+  await expect(scene).toHaveAttribute("data-mode", "running");
   const progress = await scene.getAttribute("data-scene-progress");
   const position = await page.evaluate(() => scrollY);
   const resources = await page.evaluateHandle(() => {
@@ -56,7 +57,7 @@ test("locale navigation reuses the hero GPU context and releases it when leaving
       .locator(`header a[hreflang="${locale}"]`)
       .evaluate((link: HTMLAnchorElement) => link.click());
     await expect(page).toHaveURL(locale === "es" ? /\/es$/ : /\/$/);
-    await expect(scene).toHaveAttribute("data-mode", "paused");
+    await expect(scene).toHaveAttribute("data-mode", "running");
     await expect(scene).toHaveAttribute("data-scene-progress", progress ?? "");
     expect(await page.evaluate(() => scrollY)).toBe(position);
     expect(
@@ -82,7 +83,7 @@ test("locale navigation reuses the hero GPU context and releases it when leaving
   await extension.evaluate((value) => value?.loseContext());
   await expect(scene).toHaveAttribute("data-mode", "static");
   await extension.evaluate((value) => value?.restoreContext());
-  await expect(scene).toHaveAttribute("data-mode", "paused");
+  await expect(scene).toHaveAttribute("data-mode", "running");
   await extension.dispose();
   const deletedBeforeDeparture = await resources.evaluate((resources) => resources.deletedPrograms);
   await page.locator('header a[href="/work"]').click();
@@ -94,13 +95,14 @@ test("locale navigation reuses the hero GPU context and releases it when leaving
   expect(await resources.evaluate(({ canvas }) => canvas.isConnected)).toBe(false);
   await page.locator('header a[href="/"]').click();
   await expect(page).toHaveURL(/\/$/);
-  await expect(scene).toHaveAttribute("data-mode", "paused");
+  await expect(scene).toHaveAttribute("data-mode", "running");
   expect(
     await resources.evaluate(
       ({ canvas }) => canvas === document.querySelector("[data-scene] canvas"),
     ),
   ).toBe(false);
   await resources.dispose();
+  await setDocumentHidden(page, false);
 });
 
 test("locale handoff preserves the last drawn checkpoint when the target URL drops scene parameters", async ({
@@ -109,8 +111,8 @@ test("locale handoff preserves the last drawn checkpoint when the target URL dro
   await page.goto("/?sceneProgress=0.68585&sceneTime=0");
   const scene = page.locator("[data-scene]");
   await expect(scene).toHaveAttribute("data-mode", "running");
-  await scene.getByRole("button", { name: "Pause animation", exact: true }).click();
-  await expect(scene).toHaveAttribute("data-mode", "paused");
+  await setDocumentHidden(page, true);
+  await expect(scene).toHaveAttribute("data-mode", "running");
   const progress = await scene.getAttribute("data-scene-progress");
   expect(Number(progress)).toBeGreaterThan(0.6);
   for (const locale of ["es", "en"]) {
@@ -118,7 +120,8 @@ test("locale handoff preserves the last drawn checkpoint when the target URL dro
       .locator(`header a[hreflang="${locale}"]`)
       .evaluate((link: HTMLAnchorElement) => link.click());
     await expect(page).toHaveURL(locale === "es" ? /\/es$/ : /\/$/);
-    await expect(scene).toHaveAttribute("data-mode", "paused");
+    await expect(scene).toHaveAttribute("data-mode", "running");
     await expect(scene).toHaveAttribute("data-scene-progress", progress ?? "");
   }
+  await setDocumentHidden(page, false);
 });

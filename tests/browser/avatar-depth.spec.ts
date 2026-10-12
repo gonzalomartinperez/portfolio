@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { setDocumentHidden } from "./document-visibility";
 
 for (const theme of ["dark", "light"]) {
   test(`${theme} avatar depth rises, pauses and recovers without moving the page`, async ({
@@ -28,11 +29,11 @@ for (const theme of ["dark", "light"]) {
     await expect(scene).toHaveAttribute("data-scene-pulse", "avatar");
     await expect(scene.locator("[data-scene-core]")).toHaveCSS("z-index", "4");
     await page.screenshot({ path: test.info().outputPath("avatar-shell-wave.png") });
-    await page.getByRole("button", { name: "Pause animation", exact: true }).click();
+    await setDocumentHidden(page, true);
     const pausedTransform = await art.evaluate((element) => getComputedStyle(element).transform);
     await page.clock.runFor(500);
     await expect(art).toHaveCSS("transform", pausedTransform);
-    await page.getByRole("button", { name: "Play animation", exact: true }).click();
+    await setDocumentHidden(page, false);
     // Keep each simulated recovery frame within the runtime's 50 ms delta cap.
     for (let elapsedMs = 0; elapsedMs < 1600; elapsedMs += 50) {
       await page.clock.fastForward(50);

@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
+import { setDocumentHidden } from "./document-visibility";
 
-test("the shared solar star field drifts, pauses and survives localized client navigation", async ({
+test("the shared solar star field drifts, suspends in hidden tabs and survives localized client navigation", async ({
   page,
 }) => {
   test.setTimeout(90_000);
@@ -35,9 +36,9 @@ test("the shared solar star field drifts, pauses and survives localized client n
   const firstFrame = await renderedFrames();
   await expect.poll(renderedFrames).toBeGreaterThan(firstFrame);
 
-  const toggle = page.locator("[data-motion-toggle]");
-  await toggle.click();
-  await expect(field).toHaveAttribute("data-state", "paused");
+  await expect(page.locator("[data-motion-toggle]")).toHaveCount(0);
+  await setDocumentHidden(page, true);
+  await expect(solar).toHaveAttribute("data-state", "paused");
   await page.waitForTimeout(150);
   const pausedFrame = await renderedFrames();
   const pausedOrbit = await solarTime();
@@ -50,12 +51,11 @@ test("the shared solar star field drifts, pauses and survives localized client n
     .getByRole("link", { name: "Work", exact: true })
     .click();
   await expect(page).toHaveURL(/\/work$/);
-  await expect(field).toHaveAttribute("data-state", "paused");
+  await expect(solar).toHaveAttribute("data-state", "paused");
   expect(await element?.evaluate((node) => node.isConnected)).toBe(true);
   await page.getByRole("link", { name: "ES", exact: true }).click();
   await expect(page).toHaveURL(/\/es\/work$/);
-  await expect(toggle).toHaveAccessibleName("Reanudar movimiento de la página");
-  await toggle.click();
+  await setDocumentHidden(page, false);
   await expect(field).toHaveAttribute("data-state", "running", { timeout: 25_000 });
   await page
     .getByRole("link", { name: /Gonzalo Martin Perez/ })
@@ -63,9 +63,13 @@ test("the shared solar star field drifts, pauses and survives localized client n
     .click();
   await expect(page).toHaveURL(/\/es$/);
   await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "running");
-  await page.getByRole("button", { name: "Pausar la animación", exact: true }).click();
-  await expect(field).toHaveAttribute("data-state", "paused");
-  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await setDocumentHidden(page, true);
+  await expect(solar).toHaveAttribute("data-state", "paused");
+  await expect(page.getByRole("button", { name: "Pausar la animación", exact: true })).toHaveCount(
+    0,
+  );
+  await setDocumentHidden(page, false);
+  await expect(solar).toHaveAttribute("data-state", "running");
   await expect(canvas).toHaveCount(1);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(
     true,
@@ -85,7 +89,7 @@ test("reduced motion keeps the static field and can remove an already loaded can
   await expect(field.locator("[data-sun]")).toHaveCount(1);
   await expect(field.locator("[data-moon]")).toHaveCount(1);
   await expect(field.locator("[data-solar-system]")).toHaveAttribute("data-renderer", "static");
-  await expect(page.locator("[data-motion-toggle]")).toBeHidden();
+  await expect(page.locator("[data-motion-toggle]")).toHaveCount(0);
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await expect(field).toHaveAttribute("data-state", "running", { timeout: 25_000 });
@@ -105,7 +109,7 @@ test("without JavaScript the background remains decorative and the CV remains us
     await page.goto("/cv");
     await expect(page.locator("[data-ambient-field]")).toHaveAttribute("data-state", "static");
     await expect(page.locator("[data-ambient-field] canvas")).toHaveCount(0);
-    await expect(page.locator("[data-motion-toggle]")).toBeHidden();
+    await expect(page.locator("[data-motion-toggle]")).toHaveCount(0);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.locator("a[download]").first()).toBeVisible();
   } finally {

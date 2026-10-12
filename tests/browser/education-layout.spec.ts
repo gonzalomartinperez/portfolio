@@ -5,10 +5,9 @@ for (const locale of ["en", "es"]) {
   test(`${locale} academic evidence and grade chips stay readable in both themes`, async ({
     page,
   }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(locale === "es" ? "/es/education" : "/education");
-    // Static evidence captures use the same motion control available to readers.
-    await page.locator("[data-motion-toggle]").click();
-    await expect(page.locator("[data-ambient-field]")).toHaveAttribute("data-state", "paused");
+    await expect(page.locator("[data-ambient-field]")).toHaveAttribute("data-state", "static");
     for (const summary of await page.locator("details > summary").all()) await summary.click();
     const grades = page.locator("[data-academic-grade]");
     expect(await grades.count()).toBeGreaterThan(34);
