@@ -355,7 +355,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     const ink = light && !immersive;
     shared.lightMode.value = ink ? 1 : 0;
     // Gray body text on a light page has the least headroom; the scene recedes further there.
-    readingShade.uniforms.readingBoost.value = ink ? 0.5 : 0;
+    readingShade.uniforms.readingBoost.value = ink ? 0.75 : 0;
     bodies?.applyTheme(ink, immersive, highlighted);
     sky?.applyTheme(ink, immersive);
     redraw();
