@@ -616,8 +616,9 @@ test("cold mobile opening contains keyboard focus while the chat chunk loads", a
   try {
     await page.getByRole("button", { name: "Ask AI", exact: true }).click();
     await expect(page.getByRole("status")).toHaveText("Loading the assistant…");
+    await expect(page.getByRole("button", { name: "Expand panel" })).toHaveCount(0);
     await page.keyboard.press("Tab");
-    await expect(page.getByRole("button", { name: "Expand panel" })).toBeFocused();
+    await expect(page.getByRole("button", { name: "Minimize assistant" })).toBeFocused();
     await page.keyboard.press("Shift+Tab");
     await expect(page.getByRole("button", { name: "Minimize assistant" })).toBeFocused();
     gate.resolve();
