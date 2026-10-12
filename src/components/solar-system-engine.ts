@@ -307,7 +307,8 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     const memoryPixels = Math.max(250_000, (budget - reserved) / bytesPerPixel);
     const pixels = Math.min(compact ? pixelBudget.compact : pixelBudget.wide, memoryPixels);
     const ceiling = Math.min(devicePixelRatio, 2, Math.sqrt(pixels / (width * height)));
-    pixelRatio = Math.max(0.5, ceiling * quality.scale);
+    // Software rasterizers stay near one fragment per CSS pixel whatever the screen density.
+    pixelRatio = Math.max(0.5, Math.min(software ? 0.75 : 2, ceiling * quality.scale));
     const key = `${width}x${height}@${pixelRatio}`;
     if (key === bufferKey && !force) return;
     bufferKey = key;
@@ -484,7 +485,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
         lite: software,
         twinkle: options.fixedTime === null,
       });
-      bodies = createSolarBodies({ root, shared, tracker, textures });
+      bodies = createSolarBodies({ root, shared, tracker, textures, lite: software });
       return start();
     })
     .catch((error: unknown) => {

@@ -95,7 +95,8 @@ const ringExtents = {
   saturn: { inner: 1.24, outer: 2.27 },
   uranus: { inner: 1.6, outer: 2.0 },
 } as const;
-const coronaSpan = 9;
+/** Corona quad half-size in solar radii; beyond it the falloff is imperceptible. */
+const coronaSpan = 6;
 const markerInner = 0.86;
 const cloudDriftPerSecond = 0.012;
 const darkAmbient = [0.006, 0.008, 0.014] as const;
@@ -168,13 +169,18 @@ export function createSolarBodies({
   shared,
   tracker,
   textures,
+  lite,
 }: {
   root: Group;
   shared: SharedUniforms;
   tracker: ResourceTracker;
   textures: SolarTextures;
+  /** CPU rasterizers transform every vertex in software; large bodies share the lighter mesh. */
+  lite: boolean;
 }) {
-  const detailed = tracker.geometry(new SphereGeometry(1, 128, 72));
+  const detailed = tracker.geometry(
+    lite ? new SphereGeometry(1, 64, 36) : new SphereGeometry(1, 128, 72),
+  );
   const standard = tracker.geometry(new SphereGeometry(1, 64, 36));
   const bodies: SolarBody[] = [];
   const surfacesMaterials: ShaderMaterial[] = [];

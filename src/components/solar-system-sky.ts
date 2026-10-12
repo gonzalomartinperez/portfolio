@@ -63,10 +63,10 @@ type Belt = {
   color: number;
   seed: number;
 };
-const belts = (compact: boolean): Belt[] => [
+const belts = (sparse: boolean): Belt[] => [
   {
     name: "asteroid-belt",
-    count: compact ? 1400 : 2600,
+    count: sparse ? 1400 : 2600,
     inner: 21.6,
     outer: 24.6,
     thickness: 0.9,
@@ -77,7 +77,7 @@ const belts = (compact: boolean): Belt[] => [
   },
   {
     name: "kuiper-belt",
-    count: compact ? 700 : 1300,
+    count: sparse ? 700 : 1300,
     inner: 51,
     outer: 62,
     thickness: 4.5,
@@ -228,7 +228,7 @@ export function createSolarSky({
   stars.frustumCulled = false;
   scene.add(stars);
 
-  const beltMaterials = belts(compact).map((belt) => {
+  const beltMaterials = belts(compact || lite).map((belt) => {
     const value = tracker.shader({
       readingStrength: 0.35,
       vertexShader: beltVertex,
