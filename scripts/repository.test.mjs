@@ -137,7 +137,18 @@ test("browser shards reuse the same workflow's verified build without rebuilding
   assert.match(development, /name: production-build/);
   assert.match(workflow, /defaults:\n {2}run:\n {4}shell: bash/);
   assert.match(development, /compression-level: 0/);
-  assert.match(browser, /playwright install --with-deps chromium firefox webkit/);
+  const version = JSON.parse(read("package.json")).devDependencies["@playwright/test"];
+  const image = browser.match(
+    /image: mcr\.microsoft\.com\/playwright:v([^\s]+)-noble@sha256:([a-f0-9]{64})/,
+  );
+  assert.ok(image, "Browser runtime must use an immutable official Noble image");
+  assert.equal(image[1], version, "Image and Playwright package versions must match");
+  assert.match(browser, /options: --init --ipc=host/);
+  assert.match(browser, /node scripts\/check-browser-runtime\.mjs/);
+  assert.doesNotMatch(browser, /playwright install|--privileged|SYS_ADMIN/);
+  for (const job of [development, browser]) {
+    assert.match(job, /NPM_CONFIG_CACHE: \/tmp\/portfolio-npm-cache/);
+  }
   assert.match(browser, /actions\/download-artifact@[a-f0-9]{40}/);
   assert.match(browser, /name: production-build/);
   assert.doesNotMatch(browser, /run-id:|repository:|github-token:|npm run (check|build)/);

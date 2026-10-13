@@ -23,6 +23,10 @@ outside this change.
 - Bound slow DNF transfers while retaining official repositories, signature validation
   and strict errors. Retain timing evidence for future workload adjustments.
 
+- Use a digest-pinned official Noble browser image matching the exact Playwright
+  package version. Verify all four runtime variants before testing, without privileged
+  capabilities, and measure image preparation plus full coverage in Actions.
+
 ## Verification
 
 The [research record](../research/ci-efficiency.md) documents three successful baseline
