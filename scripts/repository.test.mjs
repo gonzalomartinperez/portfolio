@@ -105,7 +105,10 @@ test("CI isolates browser shards and fails the protected gate for incomplete ver
   assert.match(browser, /needs: validate/);
   assert.match(browser, /fail-fast: false/);
   assert.match(browser, /shard: \[1, 2, 3, 4, 5, 6, 7, 8\]/);
-  assert.match(browser, /npm run test:browser -- --shard=\$\{\{ matrix\.shard \}\}\/8/);
+  assert.match(
+    browser,
+    /npm run test:browser -- --test-list=\.artifacts\/ci\/shards\/\$\{\{ matrix\.shard \}\}\.txt/,
+  );
   assert.match(read("playwright.config.ts"), /workers: 1,/);
   assert.match(read("playwright.config.ts"), /failOnFlakyTests: Boolean\(process\.env\.CI\)/);
   assert.match(gate, /if: always\(\)/);
@@ -128,8 +131,9 @@ test("browser shards reuse the same workflow's verified build without rebuilding
   assert.match(development, /npm run test:rendered/);
   assert.match(
     development,
-    /tar --exclude=\.next\/cache -cf - \.next \| gzip -1 > \/tmp\/portfolio-production-build\.tar\.gz/,
+    /tar --exclude=\.next\/cache -cf - \.next \.artifacts\/ci \| gzip -1 > \/tmp\/portfolio-production-build\.tar\.gz/,
   );
+  assert.match(development, /node scripts\/browser-ci-planner\.mjs/);
   assert.match(development, /name: production-build/);
   assert.match(workflow, /defaults:\n {2}run:\n {4}shell: bash/);
   assert.match(development, /compression-level: 0/);

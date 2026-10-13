@@ -50,7 +50,10 @@ The Hostinger compatibility job runs it too. It uses port 3100 by default; set
 production server for rendered assertions and Playwright sequentially. In CI, `Quality (development)` runs
 `npm run check` and the server-rendered assertions once, then uploads its verified
 production build. Eight isolated browser runners restore that same-run artifact
-and run the complete Playwright suite in eight shards without rebuilding.
+and run the complete Playwright suite in eight duration-balanced groups without rebuilding.
+The planner verifies every current test-list selection and their exact union before
+sharing the build. See the [CI efficiency record](research/ci-efficiency.md) for
+measured baselines, new-test handling and timing maintenance.
 Rendered tests already cover the smoke assertions, so they are not repeated there.
 Browser tests default to one worker to avoid competing software-rendered scenes;
 see the [motion research](research/motion-performance.md) for measurements and rationale.
@@ -116,8 +119,9 @@ skill checks without claiming that application or hosting QA was repeated.
 
 The modern quality job owns lint, content checks, one type-checked build, budgets
 and rendered checks. The browser matrix consumes that build and owns interaction
-and accessibility checks. Build artifacts are scoped to their workflow run, omit
-build caches and expire after one day; browser diagnostics expire after seven
+and accessibility checks. Build artifacts include that workflow's verified browser
+selection plan, are scoped to their workflow run, omit build caches and expire after
+one day; browser diagnostics expire after seven
 days. The separate Hostinger job owns the GLIBC 2.28
 baseline, observed runtime, SWC WASM fallback, build and smoke check. Do not add
 Biome to the hosting build or duplicate the full browser suite there. Preserve
@@ -267,6 +271,9 @@ but require the full browser executable rather than Headless Shell. An executed 
 build is archived once with gzip level1 and uploaded with artifact compression level0,
 avoiding repeated compression. Explicit bash defaults enforce pipefail so failed archive
 creation cannot upload a partial successful gzip stream. Frozen installs skip implicit npm audit/funding requests;
-required explicit audits still cover both lockfiles. Cache paths identify the actual lockfile.
+required explicit audits still cover both lockfiles. Modern jobs share both lockfiles
+in their cache key so the quality job warms the
+browser runners' package cache. Frozen installs prefer local package data; explicit
+audits still check current advisories. JSON timing reports retain per-test measurements.
 See [Playwright installation](https://playwright.dev/docs/browsers#chromium). Verify current-head
 Actions results and record installation/upload timings; do not infer a speedup from one run.
