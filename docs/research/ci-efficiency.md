@@ -113,3 +113,22 @@ native JSON report matched its planned group, and the complete union contained
 434 unique identities with no omissions or duplicates: 423 passed, 11 existing
 conditional skips, no unexpected results and no flaky tests. Those same skips
 were present before optimization. Application and test behavior were unchanged.
+
+## Browser runtime measurement
+
+The [successful pinned-container trial](https://github.com/gonzalomartinperez/portfolio/actions/runs/38329551391)
+completed in 7m05s, compared with 7m04s for the first duration-balanced run and
+8m19s for the same application before balancing. There is no measured additional
+overall speedup from the container in this sample. Container initialization took
+26–41 seconds (median 29.5 seconds), and the four-runtime preflight took 3–6 seconds.
+The slowest browser job took 351 seconds, versus 367 seconds in the first balanced
+run. Runner queueing and network variance remain outside those step comparisons.
+
+The container is retained to remove the repeated browser-CDN installation that
+caused the observed 245-second delay, while preserving reproducible runtime versions.
+The first trial failed closed on Firefox's session-home ownership; the second ran
+the full browser suite but failed the final checkout check. Both environment issues
+were corrected before the fully successful trial. The complete browser union remains
+434 identities: 423 passed, 11 existing conditional skips, no omissions, duplicates,
+unexpected results or flaky tests. Final integration still requires checks against
+the current develop head, including concurrent visual changes.
