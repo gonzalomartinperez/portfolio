@@ -31,7 +31,7 @@ reviewed CVs, a focused technology catalog and a realistic, readable 3D solar sc
 | --- | --- |
 | **Production evidence** | Eight routes in English and Spanish: experience, the Filomena case study, education, a typed technology catalog and a self-contained CV with reviewed PDF downloads. |
 | **Interactive architecture** | React Flow diagrams with keyboard-accessible detail panels explain the systems behind each role. |
-| **Hero identity** | A lazy Three.js particle sphere and GSAP native-scroll choreography that settles into the technology toolkit. |
+| **Hero identity** | A lazy Three.js particle sphere with perspective depth and rim light; the camera flies through it and the logos settle into the toolkit as a staggered wave. |
 | **Solar scene** | A single-pass Three.js renderer with physically motivated shaders, a baked Milky Way and a reading mask that keeps text contrast on every page. |
 | **Engineered quality** | Strict TypeScript, Biome, budgets, rendered checks and eight duration-balanced Playwright groups gate every pull request. |
 | **Reviewed delivery** | Task branch → `develop` → `main` through protected pull requests; native Hostinger deployment from `main`. |
@@ -43,7 +43,10 @@ mobile) on a hardware GPU. The scene animates continuously; these are single fra
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/gallery/home-toolkit-dark.webp" alt="Home technology toolkit settled into a labeled grid over the receding solar scene"><br><sub><b>Home · technology toolkit.</b> The hero sphere settles into a labeled grid; the scene recedes behind it.</sub></td>
+    <td colspan="2"><img src="docs/gallery/home-flythrough-dark.webp" alt="The camera flying through the particle sphere toward the Sun, with near points growing into soft sprites over the solar system"><br><sub><b>Home · fly-through.</b> Scrolling carries the camera through the sphere; near points gain real parallax before the toolkit settles.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/gallery/home-toolkit-dark.webp" alt="Home technology toolkit settled into a labeled grid over the receding solar scene"><br><sub><b>Home · technology toolkit.</b> Logos settle into a labeled grid as a wave; the scene recedes behind it.</sub></td>
     <td width="50%"><img src="docs/gallery/home-featured-project-dark.webp" alt="Featured Filomena project card with product screenshots, technologies and production metrics"><br><sub><b>Home · featured project.</b> Product screenshots, stack and production outcomes.</sub></td>
   </tr>
   <tr>
@@ -65,6 +68,9 @@ mobile) on a hardware GPU. The scene animates continuously; these are single fra
 </table>
 
 ### Solar explorer
+
+A glass dock steps through every body, zooms, rotates and resets; the caption names and
+classifies the current selection.
 
 <table>
   <tr>
@@ -133,7 +139,7 @@ The portfolio has no application database or model-provider key. Reviewed conten
 ```mermaid
 flowchart LR
     SSR["Server-rendered fallback<br/>Same camera and orbits · CSS terminators"]
-    LOAD["Deferred engine<br/>Off-main-thread texture decode"]
+    LOAD["Deferred engine<br/>Size-matched map variants · Off-main-thread decode"]
     PREP["Before the first frame<br/>Upload maps · Compile programs · Place bodies"]
     MASK["Reading mask<br/>Cached text blocks · Quarter resolution"]
     PASS["Single render pass<br/>Bodies · Corona · Stars · Belts · Milky Way"]
@@ -152,7 +158,10 @@ Custom shaders give airless bodies Lommel–Seeliger photometry, gas giants limb
 Earth its oceans, clouds and night lights, and Saturn's rings shadows in both directions.
 Bright bodies recede behind reading text so it keeps WCAG contrast, enforced by a browser
 test. Reduced motion, missing WebGL, texture failure and context loss keep the complete
-static scene; hidden tabs suspend rendering. See the
+static scene; hidden tabs suspend rendering. Each view downloads the smallest map variant
+that covers it, full-resolution maps load only when the explorer opens, and content-hashed
+maps are cached immutably: about 2.4 MB of textures on desktop and 1.5 MB on phones, down
+from 7.2 MB. See the
 [specification](docs/specs/immersive-solar-scene.md) and its
 [verification record](docs/verification/immersive-solar-scene.md).
 
@@ -240,7 +249,7 @@ covers sphere pulses, the keyboard-accessible avatar and restrained depth on int
 | Runtime | Node.js 24 LTS and Next.js 16 Active LTS |
 | Interface | Owned shadcn/ui primitives, Tailwind utilities and CSS Modules; existing design tokens and focused client boundaries |
 | Languages | American English and neutral Latin American Spanish, backed by a shared typed copy contract |
-| Hero identity | Owner-selected caricature, lazy Three.js particle scene and GSAP native-scroll choreography |
+| Hero identity | Owner-selected caricature, lazy Three.js particle scene with perspective depth and GSAP native-scroll choreography |
 | Solar scene | Single-pass Three.js with custom GLSL, reading mask, adaptive resolution and complete static fallbacks |
 | Technology catalog | Shared typed inventory, original-color local marks and linked experience context |
 | Code quality | Biome linting and formatting, locked dependency installation |
