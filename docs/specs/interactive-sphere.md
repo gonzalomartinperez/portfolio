@@ -19,6 +19,16 @@ Status: done
   retain static avatar focus/pressed feedback, without loading the scene.
 - Controls gain subtle CSS depth on fine-pointer hover and press, without altering
   native select behavior, focus visibility, layout or reduced-motion preferences.
+- Points gain perspective depth: at rest the shell keeps a subtle near/far size
+  difference, its silhouette catches a soft rim light and the grain scintillates
+  deterministically. Only while the camera flies through the shell (about 0.2–0.58
+  of scroll progress) do near points grow into soft round sprites; the growth recedes
+  before the toolkit copy appears, so its background stays calm.
+- The hover dent fades in and out in place, and pulse waves tint points toward the
+  near colour instead of only raising their alpha.
+- Toolkit logos settle as a wave ordered by grid row and distance from the centre
+  column, each on a shallow arc beside its straight path, with C2-continuous easing.
+  Every settle window ends before the scene reports settled (progress 0.98).
 
 ## Implementation and verification
 
