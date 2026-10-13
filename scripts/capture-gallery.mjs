@@ -29,6 +29,7 @@ const shots = [
   { name: "home-hero-dark", device: "desktop", theme: "dark", route: `/${hero(0)}` },
   { name: "home-hero-light", device: "desktop", theme: "light", route: `/${hero(0)}` },
   { name: "home-hero-es-light", device: "desktop", theme: "light", route: `/es${hero(0)}` },
+  { name: "home-flythrough-dark", device: "desktop", theme: "dark", route: `/${hero(0.42)}` },
   { name: "home-toolkit-dark", device: "desktop", theme: "dark", route: `/${hero(1)}` },
   {
     name: "home-featured-project-dark",
