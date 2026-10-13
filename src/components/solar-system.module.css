@@ -25,10 +25,16 @@
 .canvasHost {
   will-change: opacity;
 }
+/*
+ * The static scene has no reading mask, and it also shows while the canvas fades in over it. Its
+ * tones are compressed toward the page so reading text keeps AA contrast: dimmed ink at night,
+ * lifted pale ink on paper.
+ */
 .fallback {
   perspective: var(--solar-perspective);
   perspective-origin: 50% 50%;
-  opacity: 0.55;
+  opacity: 0.5;
+  filter: brightness(0.26) saturate(1.2);
   transition:
     opacity 900ms ease,
     visibility 0s;
@@ -156,7 +162,8 @@
   }
 }
 :global(:root[data-theme="light"]) .fallback {
-  opacity: 0.4;
+  opacity: 0.32;
+  filter: contrast(0.2) brightness(1.9);
 }
 :global(:root[data-theme="light"]) .surface::after {
   background: linear-gradient(
