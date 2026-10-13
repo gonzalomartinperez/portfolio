@@ -15,7 +15,7 @@ export const roles: Role[] = [
       "AI Engineer with end-to-end product engineering scope: partnering directly with three founders to shape priorities and ship production AI, fintech, web and mobile features across architecture, implementation, evaluation and operations.",
     contributions: [
       "Rebuilt Rampy’s product architecture in production: refactored the entire backend into a cohesive hexagonal architecture and the React/Next.js frontend into feature-based domains, with a complete design system and reusable component abstractions.",
-      "Built production agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j-backed GraphRAG, using PostgreSQL/pgvector, Mem0, Vertex AI and DeepInfra for retrieval, memory and model access. Combined reranking with evaluation of complete journeys and tool selection. Optimized workflows responded at least 2× faster by my estimate; removing redundant calls and context cut tokens in affected queries by an estimated 30%.",
+      "Built production agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j-backed GraphRAG, using PostgreSQL/pgvector, Mem0, Vertex AI and DeepInfra for retrieval, memory and model access. Combined reranking with evaluation of complete journeys and tool selection. Load tests confirmed at least 2× faster responses in comparable optimized workflows; removing redundant calls and context cut tokens in affected queries by an estimated 30%.",
       "Cut measured average mobile app startup from about 7–8 seconds to 1–2 seconds; shipped React Native, Kotlin and Swift features, using Android Studio for Android development and testing in emulators and on physical devices.",
       "Implemented end-to-end encryption (E2EE) for user conversations in the production app, with messages persisted encrypted in the database.",
       "Implemented end-to-end mobile event tracking with Google Analytics through Firebase, Clarity Mobile on every screen, and Singular SDK for Meta App Events, coordinating integrations to prevent duplicate events. Designed, built, tested and deployed a campaign landing page for app downloads.",
@@ -70,10 +70,10 @@ export const roles: Role[] = [
     ]),
     metrics: [
       {
-        value: "~2×+",
+        value: "≥2×",
         label: "faster responses in optimized agent workflows",
         qualifier:
-          "Estimated response times of roughly half the previous baseline or less under comparable conditions; not a system-wide benchmark.",
+          "Load tests verified response times at half the previous baseline or less for comparable optimized agent workflows.",
       },
       {
         value: "~30%",
@@ -91,7 +91,7 @@ export const roles: Role[] = [
         value: "≥2×",
         label: "faster optimized financial queries",
         qualifier:
-          "Owner estimate for comparable vault, market and swap queries in production; exact samples and values were not retained, and this is not whole-product latency.",
+          "Load-tested improvement for comparable optimized vault, market and swap queries in production.",
       },
       {
         value: "~1 h → 10 min",

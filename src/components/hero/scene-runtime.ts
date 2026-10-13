@@ -45,7 +45,17 @@ const ease = (value: number) => {
   const t = clamp(value);
   return t * t * (3 - 2 * t);
 };
+/** C2-continuous easing: zero velocity and acceleration at both ends of a settle. */
+const smoother = (value: number) => {
+  const t = clamp(value);
+  return t * t * t * (t * (t * 6 - 15) + 10);
+};
 const rounded = (value: number) => Math.round(value * 1000) / 1000;
+/**
+ * Logos settle in a wave, ordered by grid row and distance from the centre column. Every
+ * window lies within 0.86–0.97, so the grid is complete before the scene reports settled.
+ */
+const toolkitSettle = { start: 0.86, spread: 0.04, duration: 0.07 } as const;
 
 function paint(node: VisualNode, opacity: number, transform = "") {
   if (!node.element) return;
@@ -130,6 +140,7 @@ function bindScene(
     settledX: number;
     settledY: number;
     revealAt: number;
+    settleAt: number;
   }[] = [];
   const parameters = new URLSearchParams(location.search);
   const requestedProgress = Number(parameters.get("sceneProgress"));
@@ -158,6 +169,7 @@ function bindScene(
       orbitY: 0,
       settledX: 0,
       settledY: 0,
+      settleAt: toolkitSettle.start,
       revealAt: cloudEntrance.start + (index / sourceMarks.length) * cloudEntrance.stagger,
     });
     item.append(source.cloneNode(true));
@@ -174,11 +186,17 @@ function bindScene(
     cloud.append(copy);
     copyView = visualNode(copy);
   }
+  // Last written values: unchanged attributes and styles are not rewritten every frame.
+  const written = { settled: "", avatarDisabled: false, avatarVisibility: "" };
   const update = (value: number) => {
     if (appliedProgress === value) return;
     appliedProgress = value;
     stage.dataset.sceneProgress = value.toFixed(4);
-    stage.dataset.sceneSettled = String(value >= 0.98);
+    const settled = String(value >= 0.98);
+    if (written.settled !== settled) {
+      written.settled = settled;
+      stage.dataset.sceneSettled = settled;
+    }
     engine.setExpansion(value);
     paint(backdrop, ease((value - 0.35) / 0.2));
     paint(
@@ -188,21 +206,34 @@ function bindScene(
     );
     paint(core, 1 - clamp((value - 0.2) / 0.2));
     if (avatarButton) {
-      avatarButton.disabled = value >= 0.38;
-      avatarButton.style.visibility = value >= 0.4 ? "hidden" : "visible";
+      const disabled = value >= 0.38;
+      const visibility = value >= 0.4 ? "hidden" : "visible";
+      if (written.avatarDisabled !== disabled || avatarButton.disabled !== disabled) {
+        written.avatarDisabled = disabled;
+        avatarButton.disabled = disabled;
+      }
+      if (written.avatarVisibility !== visibility) {
+        written.avatarVisibility = visibility;
+        avatarButton.style.visibility = visibility;
+      }
     }
-    if (viewport) viewport.style.cursor = "";
+    if (viewport?.style.cursor) viewport.style.cursor = "";
     paint(
       copyView,
       ease((value - 0.55) / 0.15) * (1 - ease((value - 0.8) / 0.1)),
       `translate(-50%,-50%) translate3d(0,${rounded(cloudCenterY)}px,0)`,
     );
-    const settle = ease((value - 0.86) / 0.14);
     for (const logo of logos) {
       const reveal = ease((value - logo.revealAt) / cloudEntrance.duration);
-      const x = rounded(logo.orbitX * (1 - settle) + logo.settledX * settle);
+      const settle = smoother((value - logo.settleAt) / toolkitSettle.duration);
+      // A shallow arc to the side of the straight path keeps neighbouring flights apart.
+      const dx = logo.settledX - logo.orbitX;
+      const dy = logo.settledY - logo.orbitY;
+      const distance = Math.hypot(dx, dy) || 1;
+      const arc = Math.sin(settle * Math.PI) * Math.min(36, distance * 0.12);
+      const x = rounded(logo.orbitX + dx * settle - (dy / distance) * arc);
       const y = rounded(
-        logo.orbitY * (1 - settle) + logo.settledY * settle + (1 - reveal) * cloudEntrance.offset,
+        logo.orbitY + dy * settle + (dx / distance) * arc + (1 - reveal) * cloudEntrance.offset,
       );
       paint(
         logo.view,
@@ -467,14 +498,18 @@ function bindScene(
     const gridOverflow = Math.max(0, gridBottom + logoHeight / 2 + 96 - height);
     journey?.style.setProperty("--toolkit-overflow", `${gridOverflow}px`);
     viewport?.style.setProperty("--toolkit-overflow", `${gridOverflow}px`);
+    const middle = (columns - 1) / 2;
     for (const [index, logo] of logos.entries()) {
+      const column = index % columns;
+      const row = Math.floor(index / columns);
       logo.orbitX = layout.positions[index].x;
       logo.orbitY = layout.positions[index].y;
-      logo.settledX = ((index % columns) / (columns - 1) - 0.5) * width * 0.88;
-      logo.settledY =
-        gridTop +
-        (Math.floor(index / columns) / Math.max(1, rows - 1)) * (gridBottom - gridTop) -
-        height / 2;
+      logo.settledX = (column / (columns - 1) - 0.5) * width * 0.88;
+      logo.settledY = gridTop + (row / Math.max(1, rows - 1)) * (gridBottom - gridTop) - height / 2;
+      const rank =
+        (row / Math.max(1, rows - 1)) * 0.7 +
+        (Math.abs(column - middle) / Math.max(1, middle)) * 0.3;
+      logo.settleAt = toolkitSettle.start + rank * toolkitSettle.spread;
     }
     const progress = deterministic
       ? fixedProgress
