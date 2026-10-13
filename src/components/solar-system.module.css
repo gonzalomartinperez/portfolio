@@ -138,7 +138,8 @@
 .ringsFront {
   clip-path: inset(50% 0 0 0);
 }
-@container (orientation: portrait) {
+/* Phone-like portrait only: extreme strips such as full-page captures keep the landscape set. */
+@container (aspect-ratio < 1) and (aspect-ratio > 0.3) {
   .fallback {
     perspective: var(--solar-perspective-portrait);
   }
