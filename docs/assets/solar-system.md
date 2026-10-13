@@ -31,15 +31,57 @@ Color maps use WebP quality 92 and sRGB in the renderer. Venus uses its cloud-co
 
 The reduced-motion and no-JavaScript Saturn fallback uses a concentric CSS radial gradient sampled from seventeen points of the original ring profile. This preserves its inner gap, band colors and alpha without stretching the horizontal image over a square. The animated Three.js renderer uses the full map.
 
-Since the immersive scene revision (2026-10-12) the runtime decodes these files off the main thread and uploads them at the size each view needs: reading mode uses 2048 texels for the Sun, Earth and Jupiter on wide screens and 1024 elsewhere; the explorer re-decodes Earth and Jupiter at 4096 (2048 on narrow screens) and a few other maps at 2048, then returns to the reading sizes on close. The Milky Way, stars, belts, corona and granulation are procedural shaders, not image assets, so they add no files, credits or licenses. No source file in this directory changed in that revision.
+Since the immersive scene revision (2026-10-12) the runtime decodes these files off the main thread and uploads them at the size each view needs: reading mode uses 2048 texels for the Sun, Earth and Jupiter on wide screens and 1024 elsewhere; the explorer re-decodes Earth and Jupiter at 4096 (2048 on narrow screens) and a few other maps at 2048, then returns to the reading sizes on close. The Milky Way, stars, belts, corona and granulation are procedural shaders, not image assets, so they add no files, credits or licenses.
+
+## Delivery variants
+
+Since 2026-10-13 smaller copies sit beside the reviewed originals as `<name>-<width>.webp`, so a view downloads only the detail it uploads. The loader fetches the smallest variant that covers the current upload size and requests a larger one only when the explorer or a wider layout needs it; originals are fetched only when the explorer uploads more than the reading size (Earth and Jupiter at 4096; Mars, Saturn, the Moon and the clouds at 2048 on wide screens). The 4096 Sun original is kept as the reviewed master but no current view requests it. Software renderers keep the reading sizes and never request the originals. Each variant is recorded in the manifest beside its original with dimensions, bytes, SHA-256 and encoding; the attribution and licenses above apply unchanged.
+
+Variants were produced by an ignored helper in `.artifacts/solar-system/` with sharp 0.35 (libvips 8.18) Lanczos-3 resampling, shrink-on-load disabled, from the official downloads (source SHA-256 verified against the manifest), using the same encoding as their original: WebP quality 92 (effort 6) for color maps, lossless for the normal and specular data maps. The cloud variant is resampled from `earth-clouds.webp`, whose alpha is lossless and keeps white RGB; the normal and specular variants from their lossless originals. `saturn-rings.webp` (8.5 KB) has no variant.
+
+- Reading sizes: 2048 for the Sun, Earth and Jupiter, 1024 for every 2048 map.
+- Static-scene thumbnails: the CSS fallback shows half a map across each body (`background-size: 200%`), so a thumbnail needs twice the body's diameter in device pixels. The largest measured diameters (CSS px, 1280–3840 px wide desktops, 768/1024 px tablets and 360–412 px phones) were Sun 270 at 3840 × 2160 and 180 at 2560 × 1440, Jupiter 122, Saturn 121, Uranus 88, Neptune 73, Earth 69, Venus 62, Mars 54, Mercury 36, Moon 19 and Pluto 17. Widths were chosen to cover the 1920 × 1080 sizes at 3× density (and the larger desktops at their real density): Sun, Jupiter and Saturn use their 1024 reading maps; Uranus and Neptune 512; Earth, Venus and Mars 256; Mercury, Pluto and the Moon 128.
+
+Map URLs carry `?v=` with the first 16 hexadecimal characters (64 bits) of the file's SHA-256; every page embeds one per published map, so the full digest would add markup to each route. They are served with `Cache-Control: public, max-age=31536000, immutable` only when the query equals the version of the file that build serves (`src/content/solar-texture-cache.ts`); any other query, an unversioned path or the manifest keeps the default revalidating response. The production host must pass this header through unchanged.
+
+| Variant | Dimensions | Bytes |
+| --- | --- | ---: |
+| `mercury-128.webp` | 128 × 64 | 2,352 |
+| `mercury-1024.webp` | 1024 × 512 | 167,160 |
+| `venus-256.webp` | 256 × 128 | 3,910 |
+| `venus-1024.webp` | 1024 × 512 | 26,416 |
+| `earth-256.webp` | 256 × 128 | 8,232 |
+| `earth-1024.webp` | 1024 × 512 | 75,660 |
+| `earth-2048.webp` | 2048 × 1024 | 241,236 |
+| `earth-night-1024.webp` | 1024 × 512 | 32,390 |
+| `earth-clouds-1024.webp` | 1024 × 512 | 352,986 |
+| `mars-256.webp` | 256 × 128 | 9,920 |
+| `mars-1024.webp` | 1024 × 512 | 121,494 |
+| `jupiter-1024.webp` | 1024 × 512 | 85,944 |
+| `jupiter-2048.webp` | 2048 × 1024 | 259,952 |
+| `saturn-1024.webp` | 1024 × 512 | 22,952 |
+| `uranus-512.webp` | 512 × 256 | 1,316 |
+| `uranus-1024.webp` | 1024 × 512 | 4,304 |
+| `neptune-512.webp` | 512 × 256 | 3,770 |
+| `neptune-1024.webp` | 1024 × 512 | 10,964 |
+| `pluto-128.webp` | 128 × 64 | 2,082 |
+| `pluto-1024.webp` | 1024 × 512 | 87,086 |
+| `sun-1024.webp` | 1024 × 512 | 147,732 |
+| `sun-2048.webp` | 2048 × 1024 | 425,704 |
+| `moon-128.webp` | 128 × 64 | 2,972 |
+| `moon-1024.webp` | 1024 × 512 | 196,010 |
+| `earth-normal-1024.webp` | 1024 × 512 | 65,736 |
+| `earth-specular-1024.webp` | 1024 × 512 | 66,376 |
+
+Variants add **2,424,656 bytes** to the repository; none is requested together with its original in reading mode.
 
 Pluto is a dwarf planet, included as the ninth orbiting body in the requested composition. Decorative scales, speeds, spacing and orbital paths are not an astronomical simulation. Original map coverage and colors are preserved; no missing terrain was synthesized.
 
 ## Verification
 
-The [manifest](../../public/images/solar-system/manifest.json) records official download URLs, source and output SHA-256, actual source and output dimensions, bytes, credits, licenses, color-space semantics, encoding and alpha ranges. All sixteen outputs decode successfully; none exceeds its source resolution. Cloud and ring alpha spans zero to at least 200. No JPEG/PNG/TIFF originals are committed. Integration owns runtime loading, memory-aware texture sizing, browser rendering and the final site checks.
+The [manifest](../../public/images/solar-system/manifest.json) records official download URLs, source and output SHA-256, actual source and output dimensions, bytes, credits, licenses, color-space semantics, encoding and alpha ranges. All sixteen originals and twenty-six variants decode successfully; none exceeds its source resolution. Cloud and ring alpha spans zero to at least 200. No JPEG/PNG/TIFF originals are committed. Integration owns runtime loading, memory-aware texture sizing, browser rendering and the final site checks.
 
-Total image transfer: **7,187,952 bytes (6.85 MiB)**, excluding the small manifest; below the 8 MiB high-quality asset budget. Runtime GPU memory depends on decoded texture dimensions, mipmaps and renderer sizing, not these compressed transfer sizes.
+The full-resolution originals total **7,187,952 bytes (6.85 MiB)**, excluding the small manifest; below the 8 MiB high-quality asset budget. Browsers download only part of this set; the budget tests also cap the static-scene thumbnails (320 KiB) and the wide reading set (2.5 MiB). Runtime GPU memory depends on decoded texture dimensions, mipmaps and renderer sizing, not these compressed transfer sizes.
 
 | Asset | Dimensions | Bytes | Alpha |
 | --- | --- | ---: | --- |

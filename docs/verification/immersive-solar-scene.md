@@ -86,3 +86,59 @@ D3D12. The [README gallery](../gallery/README.md) records the reviewed frames.
   animated. Initial orbital phases keep bodies clear of it at time zero, and while the
   technology cloud spreads over the screen the whole scene recedes using the progress the hero
   already publishes, so labels such as the one over the Sun stay legible.
+
+## Texture delivery (2026-10-13)
+
+Before this change every route downloaded the full-resolution maps: the static fallback
+requested eleven originals (5.27 MB) right after first paint, and the engine then requested
+all sixteen originals (revalidated with `max-age=0`) to decode reading mode down to 2048 and
+1024 texels. Reading mode now downloads reading-size variants, the fallback uses thumbnails
+sized from measured body diameters, and the explorer fetches originals only when it uploads
+more than the reading size. Variant provenance and sizing are in the
+[texture asset record](../assets/solar-system.md#delivery-variants).
+
+Measured on the local production server (`next start`) with Playwright Chromium, fresh
+context, CDP `encodedDataLength` until the scene was ready plus 6 s; desktop is 1440 × 1000,
+mobile is the Pixel 7 profile. "Static" disables `getContext("webgl*")` in an init script.
+
+| Route, profile, renderer | Total before | Total after | Textures before | Textures after |
+| --- | ---: | ---: | ---: | ---: |
+| `/`, desktop, WebGL | 8,265,963 | 3,438,612 | 7,206,649 | 2,376,380 |
+| `/about`, desktop, WebGL | 7,990,672 | 3,164,127 | 7,206,649 | 2,376,380 |
+| `/`, Pixel 7, WebGL | 8,181,075 | 2,501,044 | 7,206,649 | 1,523,693 |
+| `/about`, Pixel 7, WebGL | 7,984,744 | 2,305,512 | 7,206,649 | 1,523,693 |
+| `/`, desktop, static | 6,327,546 | 1,360,709 | 5,268,909 | 299,146 |
+| `/about`, desktop, static | 6,052,932 | 1,086,893 | 5,268,909 | 299,146 |
+| `/`, Pixel 7, static | 6,214,962 | 1,248,125 | 5,268,909 | 299,146 |
+| `/about`, Pixel 7, static | 6,047,004 | 1,080,965 | 5,268,909 | 299,146 |
+
+Bytes include response headers. Repeat visits now reuse every map without revalidation:
+`?v=` carries a 64-bit SHA-256 prefix and the server answers `public, max-age=31536000,
+immutable` only for the exact version of the bytes it serves (rendered test). Hostinger must
+pass this header through; it was verified on the local server only.
+
+The explorer was exercised with the renderer name spoofed as a hardware GPU, so SwiftShader
+took the hardware path. Uploaded widths matched the previous build at every step: desktop
+Earth and Jupiter 4096, Sun, Moon, Mars, Saturn and clouds 2048; Pixel 7 Earth and Jupiter
+2048. Opening it fetched the originals on demand (desktop: Earth, Jupiter, Mars, Saturn, Moon
+and clouds, 4.38 MB; Pixel 7: the 2048 Earth and Jupiter variants, 0.50 MB). The
+browser regression asserts that reading mode never requests the Earth or Jupiter originals,
+that software renderers keep reading sizes in the explorer, and, on hardware GPUs, that the
+explorer's Earth samples the original.
+
+Visual equivalence, before against after, at identical scene time (PSNR over the full
+capture; maximum channel difference in parentheses):
+
+| Capture | Desktop | Pixel 7 |
+| --- | --- | --- |
+| Static fallback, dark | 67.4 dB (14) | 68.7 dB (8) |
+| Static fallback, light | 69.1 dB (10) | 70.2 dB (6) |
+| Reading mode, WebGL | 80.1 dB (2) | 82.6 dB (1) |
+| Explorer, Earth close-up | 62.6 dB | 56.0 dB |
+| Explorer, Saturn close-up | 49.1 dB | 56.9 dB |
+
+Explorer differences are confined to under 0.2 % of pixels along ring and limb edges, where
+the camera flight settles on slightly different sub-pixel positions between runs; the
+Saturn close-up samples the same original before and after. Every capture was also
+inspected side by side. The homepage HTML stays at 68,643 bytes gzip: shortening the
+version from 64 to 16 hexadecimal characters offsets the 26 added variant entries.
