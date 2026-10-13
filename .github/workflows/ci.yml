@@ -26,6 +26,7 @@ jobs:
     env:
       NEXT_TELEMETRY_DISABLED: "1"
       ASSISTANT_ENABLED: "true"
+      NPM_CONFIG_CACHE: /tmp/portfolio-npm-cache
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -71,6 +72,9 @@ jobs:
     name: Browser verification (${{ matrix.shard }}/8)
     needs: validate
     runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
+      options: --init --ipc=host
     timeout-minutes: 30
     strategy:
       fail-fast: false
@@ -79,6 +83,7 @@ jobs:
     env:
       NEXT_TELEMETRY_DISABLED: "1"
       ASSISTANT_ENABLED: "true"
+      NPM_CONFIG_CACHE: /tmp/portfolio-npm-cache
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -101,8 +106,13 @@ jobs:
           path: /tmp/portfolio-build
       - name: Restore the production build
         run: tar -xzf /tmp/portfolio-build/portfolio-production-build.tar.gz
-      - name: Install browser test runtime
-        run: npx --no-install playwright install --with-deps chromium firefox webkit
+      - name: Align the ephemeral browser session and checkout
+        run: |
+          chown -- "$(id -u):$(id -g)" "$HOME"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git rev-parse --show-toplevel
+      - name: Verify every preinstalled browser runtime
+        run: node scripts/check-browser-runtime.mjs
       - name: Verify interactions and accessibility on an isolated runner
         run: npm run test:browser -- --test-list=.artifacts/ci/shards/${{ matrix.shard }}.txt
       - name: Retain browser verification artifacts
