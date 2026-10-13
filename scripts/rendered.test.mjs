@@ -222,6 +222,26 @@ test("security headers are present on every route", () => {
   }
 });
 
+test("content-addressed solar maps are immutable; other hashes revalidate", async () => {
+  const head = async (path) =>
+    (await fetch(origin + path, { method: "HEAD", signal: AbortSignal.timeout(15_000) })).headers;
+  const urls = new Set(
+    pages.get("/").body.match(/\/images\/solar-system\/[a-z0-9-]+\.webp\?v=[0-9a-f]{16}\b/g),
+  );
+  assert.ok(urls.size > 0, "the static solar scene references no hashed maps");
+  for (const url of urls) {
+    const cache = (await head(url)).get("cache-control");
+    assert.equal(cache, "public, max-age=31536000, immutable", url);
+    // A hash this build does not serve, such as the next release's, must not pin these bytes.
+    const stale = url.replace(/v=[0-9a-f]{16}/, `v=${"0".repeat(16)}`);
+    assert.doesNotMatch((await head(stale)).get("cache-control") ?? "", /immutable/, stale);
+    const unversioned = url.replace(/\?.*$/, "");
+    assert.doesNotMatch((await head(unversioned)).get("cache-control") ?? "", /immutable/);
+  }
+  const manifest = (await head("/images/solar-system/manifest.json")).get("cache-control");
+  assert.doesNotMatch(manifest ?? "", /immutable/);
+});
+
 test("every route opts out of automatic phone, date and address links", () => {
   for (const [route, { body }] of pages) {
     const detection = body.match(/<meta name="format-detection" content="([^"]+)"\/>/);

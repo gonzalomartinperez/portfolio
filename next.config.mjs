@@ -3,6 +3,7 @@
 import { AssistantBudgetPlugin } from "./scripts/assistant-budget-plugin.ts";
 import { SceneBudgetPlugin } from "./scripts/scene-budget-plugin.mjs";
 import { resumeFilenames, resumeFiles } from "./src/content/site-config.ts";
+import { solarTextureCacheRules } from "./src/content/solar-texture-cache.ts";
 
 /**
  * Response headers.
@@ -51,6 +52,7 @@ const nextConfig = {
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },
+      ...solarTextureCacheRules,
       ...Object.entries(resumeFiles).map(([locale, source]) => ({
         source,
         headers: [

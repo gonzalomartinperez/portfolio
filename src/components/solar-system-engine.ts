@@ -298,6 +298,12 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
 
   let textureClass = "";
   let bufferKey = "";
+  const refitTextures = () =>
+    void textures
+      .refit(() => quality.discard(700))
+      .then(() => {
+        if (!disposed) resize(true);
+      });
   /** Recomputes layout, resolution and texture sizes; skips work when nothing changed. */
   const resize = (force = false) => {
     const bounds = canvas.getBoundingClientRect();
@@ -309,12 +315,7 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     layoutCamera = solarCameras[layout];
     const compact = width < compactWidth;
     const nextClass = `${compact}-${immersive}`;
-    if (loaded && textureClass && nextClass !== textureClass)
-      void textures
-        .refit(() => quality.discard(700))
-        .then(() => {
-          if (!disposed) resize(true);
-        });
+    if (loaded && textureClass && nextClass !== textureClass) refitTextures();
     textureClass = nextClass;
     const reserved = textures.bytes() + (sky?.bytes ?? 0);
     const budget = compact ? memoryBudgetBytes.compact : memoryBudgetBytes.wide;
@@ -384,6 +385,8 @@ export function createSolarSystemEngine(canvas: SolarCanvas, options: SolarOptio
     startup.firstFrame = performance.now() - startup.created;
     if (contextAvailable) options.onReady();
     sync();
+    // The layout may have changed while the first variants were downloading.
+    refitTextures();
   };
 
   const onContextLost = (event: Event) => {
