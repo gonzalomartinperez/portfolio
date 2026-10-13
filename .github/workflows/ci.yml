@@ -106,6 +106,8 @@ jobs:
           path: /tmp/portfolio-build
       - name: Restore the production build
         run: tar -xzf /tmp/portfolio-build/portfolio-production-build.tar.gz
+      - name: Align ephemeral session ownership for Firefox
+        run: chown -- "$(id -u):$(id -g)" "$HOME"
       - name: Verify every preinstalled browser runtime
         run: node scripts/check-browser-runtime.mjs
       - name: Verify interactions and accessibility on an isolated runner

@@ -62,7 +62,9 @@ Browser jobs use the official Noble image pinned to the exact installed Playwrig
 version and immutable registry digest. It includes all browser binaries and system
 dependencies; frozen npm installation remains mandatory. A preflight launches and
 renders a document in Chromium headless shell, full Chromium, Firefox and WebKit.
-The container uses `--init --ipc=host`, without privileged capabilities. Both modern
+The container uses `--init --ipc=host`, without privileged capabilities. GitHub injects
+a session home owned by the image user; its ownership is aligned with the current
+job user before Firefox starts, without replacing the `HOME` variable. Both modern
 jobs configure the same npm cache path, including across the container boundary.
 No browser-result or production-build cache is introduced.
 
