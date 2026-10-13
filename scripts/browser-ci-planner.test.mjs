@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  engineInstallSeconds,
   parseDiscovery,
   planShards,
   rejectSerialSource,
@@ -158,4 +159,42 @@ test("discovery accepts native omitted leaf suites and testDir-relative files", 
   assert.equal(parsed[0].identity, "chromium › tests/browser/example.spec.ts › navigation › first");
   native.suites[0].suites[0].specs[0].file = "../outside.spec.ts";
   assert.throws(() => parseDiscovery(native), /Unexpected/);
+});
+
+test("engine-aware loads include each needed install and list exactly the engines used", () => {
+  const chromium = parseDiscovery(report(["a", "b", "c", "d"], "desktop"));
+  const webkit = parseDiscovery(report(["e", "f"], "assistant-webkit"));
+  const engines = { desktop: "chromium", "assistant-webkit": "webkit" };
+  const tests = [...chromium, ...webkit];
+  const seconds = Object.fromEntries(tests.map((item, index) => [item.identity, 10 + index]));
+  const plan = planShards(tests, seconds, 3, engines);
+  verifySelection(
+    tests,
+    plan.flatMap((shard) => shard.tests),
+  );
+  for (const shard of plan) {
+    const used = [...new Set(shard.tests.map((item) => engines[item.project]))].sort();
+    assert.deepEqual(shard.engines, used);
+    const work = shard.tests.reduce((sum, item) => sum + item.seconds, 0);
+    const installs = used.reduce((sum, engine) => sum + engineInstallSeconds[engine], 0);
+    assert.equal(shard.seconds, work + installs);
+  }
+  // When one shard has spare capacity, both short WebKit tests share its single install.
+  const heavy = parseDiscovery(report(["x", "y"], "desktop", "tests/browser/heavy.spec.ts"));
+  const short = parseDiscovery(
+    report(["g", "h"], "assistant-webkit", "tests/browser/short.spec.ts"),
+  );
+  const quick = Object.fromEntries([
+    ...heavy.map((item) => [item.identity, 30]),
+    ...short.map((item) => [item.identity, 1]),
+  ]);
+  const grouped = planShards([...heavy, ...short], quick, 3, engines);
+  assert.equal(grouped.filter((shard) => shard.engines.includes("webkit")).length, 1);
+});
+
+test("a project without a configured engine fails planning instead of skipping installs", () => {
+  assert.throws(
+    () => planShards(discovered, weights, 2, { desktop: "chromium" }),
+    /No browser engine is configured/,
+  );
 });

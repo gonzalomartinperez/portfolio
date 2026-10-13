@@ -101,8 +101,11 @@ jobs:
           path: /tmp/portfolio-build
       - name: Restore the production build
         run: tar -xzf /tmp/portfolio-build/portfolio-production-build.tar.gz
-      - name: Install browser test runtime
-        run: npx --no-install playwright install --with-deps chromium firefox webkit
+      - name: Install the browser engines this shard's plan uses
+        run: |
+          engines="$(cat .artifacts/ci/shards/${{ matrix.shard }}.engines)"
+          test -n "$engines"
+          npx --no-install playwright install --with-deps $engines
       - name: Verify interactions and accessibility on an isolated runner
         run: npm run test:browser -- --test-list=.artifacts/ci/shards/${{ matrix.shard }}.txt
       - name: Retain browser verification artifacts

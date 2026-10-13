@@ -58,6 +58,17 @@ Rocky retains its pinned image, official repositories and signature verification
 DNF's 20-second connection/low-speed interval, 500,000-byte/s minimum rate and three
 package retries make slow or failed transfers move on without weakening failure
 handling. Build, SWC WASM fallback, GLIBC assertion and smoke coverage stay mandatory.
+Each shard installs only the browser engines its plan uses. The planner reads every
+project's engine from its device descriptor in `playwright.config.ts`, writes it next to
+the shard's test list, and fails planning for a project without one. Before this, all
+eight shards installed Chromium, Firefox and WebKit with their system packages (about
+57 seconds, 39 of them apt packages mostly for Firefox and WebKit), although the 46
+Firefox and WebKit assistant cases ran on one shard. The scheduler also counts estimated
+install time ([`engineInstallSeconds`](../../scripts/browser-ci-planner.mjs)) in each shard's
+load, so engines are spread only when that balances the critical path better. With the
+current baseline the slowest planned shard falls from about 445 to 417 estimated seconds,
+including installs, and three shards install Chromium alone.
+
 Browser binaries are installed normally: Playwright recommends against caching
 them because restore time is comparable to download time and Linux dependencies
 still need installation.

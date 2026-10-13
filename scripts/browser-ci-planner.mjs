@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const separator = " › ";
 const compare = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
@@ -87,7 +87,19 @@ function median(values) {
   return ordered.length % 2 ? ordered[middle] : (ordered[middle - 1] + ordered[middle]) / 2;
 }
 
-export function planShards(discovered, timings, shardCount = 8) {
+/**
+ * Approximate seconds to download a browser and install its system packages on a hosted
+ * Ubuntu runner, measured from CI logs on 2026-10-12. WebKit and Firefox account for most
+ * of the apt payload, so the scheduler prefers keeping their tests together.
+ */
+export const engineInstallSeconds = { chromium: 15, firefox: 15, webkit: 25 };
+
+/**
+ * Assigns tests longest-first to the least-loaded shard. With `engines` (project name to
+ * browser engine), a shard's load includes installing each engine its tests need, so tests
+ * gather on shards that already install their engine unless spreading them is cheaper.
+ */
+export function planShards(discovered, timings, shardCount = 8, engines = undefined) {
   if (!Number.isInteger(shardCount) || shardCount < 1) throw new Error("Invalid shard count");
   if (
     !discovered.length ||
@@ -129,23 +141,37 @@ export function planShards(discovered, timings, shardCount = 8) {
       };
     })
     .sort((left, right) => right.seconds - left.seconds || compare(left.identity, right.identity));
+  const engineOf = (project) => {
+    if (!engines) return undefined;
+    const engine = engines[project];
+    if (!engine) throw new Error(`No browser engine is configured for project: ${project}`);
+    return engine;
+  };
+  const installCost = (shard, engine) =>
+    engine && !shard.engines.includes(engine) ? (engineInstallSeconds[engine] ?? 30) : 0;
   const shards = Array.from({ length: shardCount }, (_, index) => ({
     shard: index + 1,
     seconds: 0,
+    engines: [],
     tests: [],
   }));
   for (const test of weighted) {
+    const engine = engineOf(test.project);
+    const cost = (shard) => shard.seconds + installCost(shard, engine);
     const target = [...shards].sort(
       (left, right) =>
-        left.seconds - right.seconds ||
+        cost(left) - cost(right) ||
         left.tests.length - right.tests.length ||
         left.shard - right.shard,
     )[0];
+    target.seconds += test.seconds + installCost(target, engine);
+    if (engine && !target.engines.includes(engine)) target.engines.push(engine);
     target.tests.push(test);
-    target.seconds += test.seconds;
   }
-  for (const shard of shards)
+  for (const shard of shards) {
     shard.tests.sort((left, right) => compare(left.identity, right.identity));
+    shard.engines.sort(compare);
+  }
   return shards;
 }
 
@@ -163,7 +189,20 @@ export function rejectSerialSource(source) {
   }
 }
 
-function main() {
+/** Reads each Playwright project's browser engine from its device descriptor. */
+async function projectEngines(repository) {
+  const { default: config } = await import(
+    pathToFileURL(path.join(repository, "playwright.config.ts")).href
+  );
+  return Object.fromEntries(
+    config.projects.map((project) => [
+      project.name,
+      project.use?.browserName ?? project.use?.defaultBrowserType ?? "chromium",
+    ]),
+  );
+}
+
+async function main() {
   const repository = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
   const cli = path.join(repository, "node_modules/@playwright/test/cli.js");
   const discover = (extra = []) =>
@@ -181,7 +220,7 @@ function main() {
   const timings = JSON.parse(
     readFileSync(path.join(repository, "scripts/browser-ci-timings.json"), "utf8"),
   );
-  const shards = planShards(discovered, timings);
+  const shards = planShards(discovered, timings, 8, await projectEngines(repository));
   const destination = path.join(repository, ".artifacts/ci/shards");
   mkdirSync(destination, { recursive: true });
   const verified = [];
@@ -189,6 +228,8 @@ function main() {
     if (!shard.tests.length) throw new Error("Every CI shard must select at least one test");
     const list = path.join(destination, `${shard.shard}.txt`);
     writeFileSync(list, `${shard.tests.map((test) => test.selector).join("\n")}\n`);
+    // The runner installs only these engines (and their system packages).
+    writeFileSync(path.join(destination, `${shard.shard}.engines`), `${shard.engines.join(" ")}\n`);
     const selected = parseDiscovery(discover(["--test-list", list]));
     verifySelection(shard.tests, selected);
     verified.push(...selected);
@@ -205,4 +246,5 @@ function main() {
   console.log(`Verified ${discovered.length} tests in ${shards.length} duration-balanced shards.`);
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url))
+  await main();
