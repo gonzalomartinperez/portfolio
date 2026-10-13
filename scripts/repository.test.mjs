@@ -105,7 +105,10 @@ test("CI isolates browser shards and fails the protected gate for incomplete ver
   assert.match(browser, /needs: validate/);
   assert.match(browser, /fail-fast: false/);
   assert.match(browser, /shard: \[1, 2, 3, 4, 5, 6, 7, 8\]/);
-  assert.match(browser, /npm run test:browser -- --shard=\$\{\{ matrix\.shard \}\}\/8/);
+  assert.match(
+    browser,
+    /npm run test:browser -- --test-list=\.artifacts\/ci\/shards\/\$\{\{ matrix\.shard \}\}\.txt/,
+  );
   assert.match(read("playwright.config.ts"), /workers: 1,/);
   assert.match(read("playwright.config.ts"), /failOnFlakyTests: Boolean\(process\.env\.CI\)/);
   assert.match(gate, /if: always\(\)/);
@@ -128,12 +131,24 @@ test("browser shards reuse the same workflow's verified build without rebuilding
   assert.match(development, /npm run test:rendered/);
   assert.match(
     development,
-    /tar --exclude=\.next\/cache -cf - \.next \| gzip -1 > \/tmp\/portfolio-production-build\.tar\.gz/,
+    /tar --exclude=\.next\/cache -cf - \.next \.artifacts\/ci \| gzip -1 > \/tmp\/portfolio-production-build\.tar\.gz/,
   );
+  assert.match(development, /node scripts\/browser-ci-planner\.mjs/);
   assert.match(development, /name: production-build/);
   assert.match(workflow, /defaults:\n {2}run:\n {4}shell: bash/);
   assert.match(development, /compression-level: 0/);
-  assert.match(browser, /playwright install --with-deps chromium firefox webkit/);
+  const version = JSON.parse(read("package.json")).devDependencies["@playwright/test"];
+  const image = browser.match(
+    /image: mcr\.microsoft\.com\/playwright:v([^\s]+)-noble@sha256:([a-f0-9]{64})/,
+  );
+  assert.ok(image, "Browser runtime must use an immutable official Noble image");
+  assert.equal(image[1], version, "Image and Playwright package versions must match");
+  assert.match(browser, /options: --init --ipc=host/);
+  assert.match(browser, /node scripts\/check-browser-runtime\.mjs/);
+  assert.doesNotMatch(browser, /playwright install|--privileged|SYS_ADMIN/);
+  for (const job of [development, browser]) {
+    assert.match(job, /NPM_CONFIG_CACHE: \/tmp\/portfolio-npm-cache/);
+  }
   assert.match(browser, /actions\/download-artifact@[a-f0-9]{40}/);
   assert.match(browser, /name: production-build/);
   assert.doesNotMatch(browser, /run-id:|repository:|github-token:|npm run (check|build)/);

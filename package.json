@@ -23,7 +23,7 @@
     "format": "biome check --write .",
     "typecheck": "next typegen && tsc --noEmit",
     "check": "npm run test:repository && npm run test:assistant-contract && npm run test:assistant && npm run typecheck:assistant && npm run test:content && npm run test:identity && npm run test:documents && npm run lint && npm run build && npm run test:budget",
-    "test:repository": "node --test scripts/repository.test.mjs scripts/scene-budget.test.mjs scripts/cloud-layout.test.mjs",
+    "test:repository": "node --test scripts/repository.test.mjs scripts/scene-budget.test.mjs scripts/cloud-layout.test.mjs scripts/browser-ci-planner.test.mjs",
     "test:content": "node --test scripts/content.test.mjs scripts/catalogue.test.mjs scripts/academic.test.mjs scripts/content-migration.test.mjs scripts/cv-export.test.mjs",
     "test:budget": "node --test scripts/budget.test.mjs",
     "test:rendered": "node --test scripts/rendered.test.mjs",
@@ -38,7 +38,7 @@
     "test:assistant-contract": "node scripts/check-assistant-contract.mjs",
     "test:assistant": "node --test scripts/assistant-*.test.ts",
     "typecheck:assistant": "next typegen && tsc --project tsconfig.assistant.json --noEmit",
-    "contract:generate": "npm ci --prefix tooling/api-contract && npm run generate --prefix tooling/api-contract"
+    "contract:generate": "npm ci --prefix tooling/api-contract --prefer-offline --no-audit --no-fund && npm run generate --prefix tooling/api-contract"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "1.2.0",

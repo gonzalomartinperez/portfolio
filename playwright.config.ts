@@ -18,7 +18,13 @@ export default defineConfig({
   workers: 1,
   timeout: 45_000,
   expect: { timeout: 10_000 },
-  reporter: [["list"], ["html", { outputFolder: ".artifacts/playwright/report", open: "never" }]],
+  reporter: process.env.CI
+    ? [
+        ["list"],
+        ["html", { outputFolder: ".artifacts/playwright/report", open: "never" }],
+        ["json", { outputFile: ".artifacts/playwright/timing-report.json" }],
+      ]
+    : [["list"], ["html", { outputFolder: ".artifacts/playwright/report", open: "never" }]],
   use: {
     ignoreHTTPSErrors: true,
     baseURL: externalOrigin ?? `https://127.0.0.1:${port}`,
