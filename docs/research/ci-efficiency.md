@@ -58,9 +58,20 @@ Rocky retains its pinned image, official repositories and signature verification
 DNF's 20-second connection/low-speed interval, 500,000-byte/s minimum rate and three
 package retries make slow or failed transfers move on without weakening failure
 handling. Build, SWC WASM fallback, GLIBC assertion and smoke coverage stay mandatory.
-Browser binaries are installed normally: Playwright recommends against caching
-them because restore time is comparable to download time and Linux dependencies
-still need installation.
+Browser jobs use the official Noble image pinned to the exact installed Playwright
+version and immutable registry digest. It includes all browser binaries and system
+dependencies; frozen npm installation remains mandatory. A preflight launches and
+renders a document in Chromium headless shell, full Chromium, Firefox and WebKit.
+The container uses `--init --ipc=host`, without privileged capabilities. GitHub injects
+a session home owned by the image user; its ownership is aligned with the current
+job user before Firefox starts, without replacing the `HOME` variable. Both modern
+jobs configure the same npm cache path, including across the container boundary.
+No browser-result or production-build cache is introduced.
+
+The follow-up was triggered by a measured 245-second Chrome Headless Shell CDN
+attempt before a successful 3.7-second retry in run 38326710682. This delay occurred
+before tests. Container preparation must be measured on Actions before acceptance;
+its image transfer is also subject to network variation.
 
 ## Maintaining measurements
 
@@ -80,6 +91,7 @@ browsers. Run a generated group with
 
 - [Playwright test lists](https://playwright.dev/docs/test-cli#test-list)
 - [Playwright sharding](https://playwright.dev/docs/test-sharding)
+- [Official Playwright containers](https://playwright.dev/docs/docker)
 - [Playwright browser caching guidance](https://playwright.dev/docs/ci#caching-browsers)
 - [GitHub dependency caching](https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching)
 - [npm frozen installs](https://docs.npmjs.com/cli/v11/commands/npm-ci/)
@@ -101,3 +113,22 @@ native JSON report matched its planned group, and the complete union contained
 434 unique identities with no omissions or duplicates: 423 passed, 11 existing
 conditional skips, no unexpected results and no flaky tests. Those same skips
 were present before optimization. Application and test behavior were unchanged.
+
+## Browser runtime measurement
+
+The [successful pinned-container trial](https://github.com/gonzalomartinperez/portfolio/actions/runs/38329551391)
+completed in 7m05s, compared with 7m04s for the first duration-balanced run and
+8m19s for the same application before balancing. There is no measured additional
+overall speedup from the container in this sample. Container initialization took
+26–41 seconds (median 29.5 seconds), and the four-runtime preflight took 3–6 seconds.
+The slowest browser job took 351 seconds, versus 367 seconds in the first balanced
+run. Runner queueing and network variance remain outside those step comparisons.
+
+The container is retained to remove the repeated browser-CDN installation that
+caused the observed 245-second delay, while preserving reproducible runtime versions.
+The first trial failed closed on Firefox's session-home ownership; the second ran
+the full browser suite but failed the final checkout check. Both environment issues
+were corrected before the fully successful trial. The complete browser union remains
+434 identities: 423 passed, 11 existing conditional skips, no omissions, duplicates,
+unexpected results or flaky tests. Final integration still requires checks against
+the current develop head, including concurrent visual changes.
