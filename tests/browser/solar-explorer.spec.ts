@@ -104,13 +104,18 @@ test("the explorer dock steps through bodies and announces the selection", async
   await expect(caption).toContainText("Dwarf planet");
   await dock.getByRole("button", { name: "Reset view", exact: true }).click();
   await expect(picker).toHaveValue("");
-  // Measure at rest, after the pressed buttons have scaled back.
-  await dock.evaluate((node) =>
-    Promise.all(node.getAnimations({ subtree: true }).map((animation) => animation.finished)),
-  );
-  for (const button of await dock.getByRole("button").all()) {
-    const box = await button.boundingBox();
-    expect(box?.width ?? 0).toBeGreaterThanOrEqual(44);
-    expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
+  // Layout size: the transient press scale is feedback, not the target.
+  const targets = await dock
+    .getByRole("button")
+    .evaluateAll((buttons) =>
+      buttons.map((button) => [
+        (button as HTMLElement).offsetWidth,
+        (button as HTMLElement).offsetHeight,
+      ]),
+    );
+  expect(targets.length).toBeGreaterThan(0);
+  for (const [width, height] of targets) {
+    expect(width).toBeGreaterThanOrEqual(44);
+    expect(height).toBeGreaterThanOrEqual(44);
   }
 });
