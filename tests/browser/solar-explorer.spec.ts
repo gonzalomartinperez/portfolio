@@ -81,3 +81,32 @@ for (const locale of ["en", "es"]) {
     });
   }
 }
+
+test("the explorer dock steps through bodies and announces the selection", async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.goto("/contact");
+  await expect(page.locator("[data-solar-system]")).toHaveAttribute("data-renderer", "webgl", {
+    timeout: 25_000,
+  });
+  await page.locator("[data-solar-explore]").click();
+  const dialog = page.getByRole("dialog");
+  const dock = dialog.getByRole("toolbar", { name: "Solar system controls" });
+  const picker = dock.getByRole("combobox");
+  const caption = dialog.locator("[data-solar-caption]");
+  await expect(caption).toContainText("Solar system");
+  await dock.getByRole("button", { name: "Next body", exact: true }).click();
+  await expect(picker).toHaveValue("sun");
+  await expect(caption).toContainText("Sun");
+  await expect(caption).toContainText("Star");
+  await dock.getByRole("button", { name: "Previous body", exact: true }).click();
+  await dock.getByRole("button", { name: "Previous body", exact: true }).click();
+  await expect(picker).toHaveValue("pluto");
+  await expect(caption).toContainText("Dwarf planet");
+  await dock.getByRole("button", { name: "Reset view", exact: true }).click();
+  await expect(picker).toHaveValue("");
+  for (const button of await dock.getByRole("button").all()) {
+    const box = await button.boundingBox();
+    expect(box?.width ?? 0).toBeGreaterThanOrEqual(44);
+    expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
+  }
+});
