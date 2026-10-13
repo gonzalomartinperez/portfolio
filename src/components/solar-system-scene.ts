@@ -151,11 +151,30 @@ export const solarTextureNames = [
   "earth-specular",
 ] as const;
 export type SolarTextureName = (typeof solarTextureNames)[number];
-export type SolarTextureVersions = Readonly<Record<string, string>>;
-export const solarTextureUrl = (name: string, versions: SolarTextureVersions) => {
-  const version = versions[name];
-  if (!version) throw new Error(`Missing solar texture version: ${name}`);
-  return `/images/solar-system/${name}.webp?v=${version}`;
+/**
+ * Content version (a SHA-256 prefix) of every published width of each map. The largest width is the reviewed original
+ * (`<name>.webp`); smaller ones are downscaled delivery variants (`<name>-<width>.webp`).
+ */
+export type SolarTextureVersions = Readonly<Record<string, Readonly<Record<number, string>>>>;
+
+/** Published widths of a map, ascending; the last one is the original. */
+export const solarTextureWidths = (name: string, versions: SolarTextureVersions) => {
+  const widths = Object.keys(versions[name] ?? {})
+    .map(Number)
+    .sort((a, b) => a - b);
+  if (widths.length === 0) throw new Error(`Missing solar texture version: ${name}`);
+  return widths;
+};
+
+/** The content-addressed URL of a map at a published width; the original when omitted. */
+export const solarTextureUrl = (name: string, versions: SolarTextureVersions, width?: number) => {
+  const widths = solarTextureWidths(name, versions);
+  const original = widths[widths.length - 1];
+  const selected = width ?? original;
+  const version = versions[name]?.[selected];
+  if (!version) throw new Error(`Missing solar texture version: ${name} at ${selected}`);
+  const file = selected === original ? name : `${name}-${selected}`;
+  return `/images/solar-system/${file}.webp?v=${version}`;
 };
 
 /**

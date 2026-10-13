@@ -1,6 +1,8 @@
 {
   "reviewedOn": "2026-10-04",
+  "variantsReviewedOn": "2026-10-13",
   "totalBytes": 7187952,
+  "variantBytes": 2424656,
   "assets": [
     {
       "file": "mercury.webp",
@@ -16,7 +18,25 @@
       "sourceWidth": 2048,
       "sourceHeight": 1024,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "mercury-128.webp",
+          "width": 128,
+          "height": 64,
+          "bytes": 2352,
+          "sha256": "81d6dbe4506fdec4defc8dfafb76556c150a1299e6276a57cf636243c63f3cd2",
+          "encoding": "WebP quality 92"
+        },
+        {
+          "file": "mercury-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 167160,
+          "sha256": "7dce83b9432398904dcd8d3e0d0dc147d5c6deb1e83bdd103a288030bb64237e",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "venus.webp",
@@ -32,7 +52,25 @@
       "sourceWidth": 2048,
       "sourceHeight": 1024,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "venus-256.webp",
+          "width": 256,
+          "height": 128,
+          "bytes": 3910,
+          "sha256": "edd2258e34286d3716dc9c5995b738629753a8c41f234611b658657b4bcead31",
+          "encoding": "WebP quality 92"
+        },
+        {
+          "file": "venus-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 26416,
+          "sha256": "3c8603ab2c76a56bfc59b272bb24b5f74be5b59b19c5fe8754180dc88a24647d",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "earth.webp",
@@ -48,7 +86,33 @@
       "sourceWidth": 8192,
       "sourceHeight": 4096,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "earth-256.webp",
+          "width": 256,
+          "height": 128,
+          "bytes": 8232,
+          "sha256": "af0ccea83b907e86d76e56d21f47de27eaa38ce2bacc2168c18933e85997bd58",
+          "encoding": "WebP quality 92"
+        },
+        {
+          "file": "earth-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 75660,
+          "sha256": "8de2f0b01fdae5ccd0113ba7a0ea95673c19b568c9b036d2d12c2317e5eebda1",
+          "encoding": "WebP quality 92"
+        },
+        {
+          "file": "earth-2048.webp",
+          "width": 2048,
+          "height": 1024,
+          "bytes": 241236,
+          "sha256": "9ce94a9b2cfacea5d3d2ec5be4d16301d061b37859230ebc98f00587e2ea4694",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "earth-night.webp",
@@ -64,7 +128,17 @@
       "sourceWidth": 2048,
       "sourceHeight": 1024,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "earth-night-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 32390,
+          "sha256": "e60c7d432aa4fa2f625b8556367583ac78c82c3d0b3baf500aa82af1d1409080",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "earth-clouds.webp",
@@ -84,7 +158,17 @@
       "sourceWidth": 2048,
       "sourceHeight": 1024,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "earth-clouds-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 352986,
+          "sha256": "89ec6ee428302d2c08d1d373c649655c4dbccf98397213d9d8ed2e6a0105225f",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "mars.webp",
@@ -100,7 +184,25 @@
       "sourceWidth": 2048,
       "sourceHeight": 1024,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "mars-256.webp",
+          "width": 256,
+          "height": 128,
+          "bytes": 9920,
+          "sha256": "9bdadd4ae3d07103458b84ea3958f52a6a833241abab97e1c814b2ad19056ba0",
+          "encoding": "WebP quality 92"
+        },
+        {
+          "file": "mars-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 121494,
+          "sha256": "fa2b5e70792d6f36c6b46f5a39b06f169ce0cc5864eb04c357ea4b9c039032d7",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "jupiter.webp",
@@ -116,7 +218,25 @@
       "sourceWidth": 4096,
       "sourceHeight": 2048,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "jupiter-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 85944,
+          "sha256": "f7c652b14f728ba0cef025c0efdc7c9818b07c1baf26e936fdc1d539145c4043",
+          "encoding": "WebP quality 92"
+        },
+        {
+          "file": "jupiter-2048.webp",
+          "width": 2048,
+          "height": 1024,
+          "bytes": 259952,
+          "sha256": "0c6f942c4d8187fd8124c97f4bdec5c14c97ef28fa746d1d157fb5f41072594b",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "saturn.webp",
@@ -132,7 +252,17 @@
       "sourceWidth": 2048,
       "sourceHeight": 1024,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "saturn-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 22952,
+          "sha256": "dc2c26276520a0f3a7dd4a037433c2dcaa205ee0a39fb393cc2102a252faa223",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "saturn-rings.webp",
@@ -168,7 +298,25 @@
       "sourceWidth": 2048,
       "sourceHeight": 1024,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "uranus-512.webp",
+          "width": 512,
+          "height": 256,
+          "bytes": 1316,
+          "sha256": "fb45d50a852b28f9a01f3e11e53fa3bdc380b365450ea14c2aa1751c3614de73",
+          "encoding": "WebP quality 92"
+        },
+        {
+          "file": "uranus-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 4304,
+          "sha256": "8eabd7fc66634e9b29372e998b36eefd37c020fb1b4f0a6a2823634f3c5ffa53",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "neptune.webp",
@@ -184,7 +332,25 @@
       "sourceWidth": 2048,
       "sourceHeight": 1024,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "neptune-512.webp",
+          "width": 512,
+          "height": 256,
+          "bytes": 3770,
+          "sha256": "260c8fb700a8ded050fbbd30b1841589a6b6f88b2248a9ebbc1ee6763d3f4557",
+          "encoding": "WebP quality 92"
+        },
+        {
+          "file": "neptune-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 10964,
+          "sha256": "edf5e538a0a8d5d50c436c6955b50d09f10183e023e73b24a2735c109aedab29",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "pluto.webp",
@@ -200,7 +366,25 @@
       "sourceWidth": 5926,
       "sourceHeight": 2963,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "pluto-128.webp",
+          "width": 128,
+          "height": 64,
+          "bytes": 2082,
+          "sha256": "dcea3a1242d071df81c505e1094670e233222161e05ced3bbb1fa95af29becbb",
+          "encoding": "WebP quality 92"
+        },
+        {
+          "file": "pluto-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 87086,
+          "sha256": "309d97f38e34979a5279db315f1f29af3a6a63dbe4a746a610901e81aa977488",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "sun.webp",
@@ -216,7 +400,25 @@
       "sourceWidth": 4096,
       "sourceHeight": 2048,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "sun-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 147732,
+          "sha256": "a6d8026a417d4ab2f699834fd1d22ebe9447dd8a2969f81243ba69cb22734e42",
+          "encoding": "WebP quality 92"
+        },
+        {
+          "file": "sun-2048.webp",
+          "width": 2048,
+          "height": 1024,
+          "bytes": 425704,
+          "sha256": "3569a1092fd64e55ce9b83d05bda8d9cd219ac24e3bfa998393d3d35e1cbe05c",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "moon.webp",
@@ -232,7 +434,25 @@
       "sourceWidth": 2048,
       "sourceHeight": 1024,
       "colorSpace": "sRGB",
-      "encoding": "WebP quality 92"
+      "encoding": "WebP quality 92",
+      "variants": [
+        {
+          "file": "moon-128.webp",
+          "width": 128,
+          "height": 64,
+          "bytes": 2972,
+          "sha256": "41b6c5ddd559ee562170c2ce0d7e40aafc1e367ecc0fbebe180cc45be61d022a",
+          "encoding": "WebP quality 92"
+        },
+        {
+          "file": "moon-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 196010,
+          "sha256": "58defb1a0a2b8e5973ae9c3cbddb30cae1180304165dfc712759241e87a6d8d9",
+          "encoding": "WebP quality 92"
+        }
+      ]
     },
     {
       "file": "earth-normal.webp",
@@ -248,7 +468,17 @@
       "sourceWidth": 2048,
       "sourceHeight": 1024,
       "colorSpace": "linear-data",
-      "encoding": "WebP lossless"
+      "encoding": "WebP lossless",
+      "variants": [
+        {
+          "file": "earth-normal-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 65736,
+          "sha256": "7e72944e431e329264f8471f7f235162071e6cc63aae1770b603743babd36b59",
+          "encoding": "WebP lossless"
+        }
+      ]
     },
     {
       "file": "earth-specular.webp",
@@ -264,7 +494,17 @@
       "sourceWidth": 2048,
       "sourceHeight": 1024,
       "colorSpace": "linear-data",
-      "encoding": "WebP lossless"
+      "encoding": "WebP lossless",
+      "variants": [
+        {
+          "file": "earth-specular-1024.webp",
+          "width": 1024,
+          "height": 512,
+          "bytes": 66376,
+          "sha256": "6350739c2601510bc240e5ac75568135bde0304acf3cd32755728ed81b8b7703",
+          "encoding": "WebP lossless"
+        }
+      ]
     }
   ]
 }

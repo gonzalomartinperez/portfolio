@@ -7,6 +7,7 @@ import styles from "./solar-system.module.css";
 import type { SolarEngine } from "./solar-system-engine";
 import {
   type SolarLayout,
+  type SolarPlanet,
   type SolarTextureVersions,
   solarCameraPoint,
   solarCameras,
@@ -25,6 +26,27 @@ type Point = { x: number; y: number; z: number };
 /** Fixed precision keeps server and browser math libraries from producing different markup. */
 const css = (value: number, unit: string) => `${value.toFixed(4)}${unit}`;
 const layouts = ["landscape", "portrait"] as const satisfies readonly SolarLayout[];
+/**
+ * Static-scene thumbnail widths. Each covers twice (the surface shows half the map) the body's
+ * largest measured diameter at 3x density; see docs/assets/solar-system.md. The Sun, Jupiter and
+ * Saturn reuse the compact reading maps, so phones download them once.
+ */
+const fallbackTextureWidths = {
+  sun: 1024,
+  mercury: 128,
+  venus: 256,
+  earth: 256,
+  mars: 256,
+  jupiter: 1024,
+  saturn: 1024,
+  uranus: 512,
+  neptune: 512,
+  pluto: 128,
+  moon: 128,
+} as const satisfies Record<SolarPlanet["name"] | "sun" | "moon", number>;
+type FallbackBody = keyof typeof fallbackTextureWidths;
+const fallbackTextureUrl = (name: FallbackBody, versions: SolarTextureVersions) =>
+  solarTextureUrl(name, versions, fallbackTextureWidths[name]);
 
 /**
  * Projects a body for both orientations; CSS picks the matching set with a container query.
@@ -33,10 +55,12 @@ const layouts = ["landscape", "portrait"] as const satisfies readonly SolarLayou
 function fallbackBodyStyle(
   positions: Record<SolarLayout, Point>,
   radius: number,
-  name: string,
+  name: FallbackBody,
   versions: SolarTextureVersions,
 ): CSSProperties {
-  const style: Record<string, string> = { "--surface": `url(${solarTextureUrl(name, versions)})` };
+  const style: Record<string, string> = {
+    "--surface": `url(${fallbackTextureUrl(name, versions)})`,
+  };
   for (const layout of layouts) {
     const camera = solarCameras[layout];
     const point = solarCameraPoint(camera, positions[layout]);
@@ -267,7 +291,7 @@ export function SolarSystem({
         <span
           className={styles.sun}
           data-sun
-          style={{ backgroundImage: `url(${solarTextureUrl("sun", textureVersions)})` }}
+          style={{ backgroundImage: `url(${fallbackTextureUrl("sun", textureVersions)})` }}
         />
         <span className={styles.corona} />
         {solarPlanets.map((planet) => (

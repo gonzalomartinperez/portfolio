@@ -11,6 +11,7 @@ import {
   type SolarTextureVersions,
   solarTextureNames,
   solarTextureUrl,
+  solarTextureWidths,
 } from "./solar-system-scene";
 
 export type TextureSource = ImageBitmap | HTMLCanvasElement | HTMLImageElement;
@@ -31,10 +32,13 @@ const release = (source: TextureSource) => {
   if ("close" in source) source.close();
 };
 
+type RetainedMap = { blob: Blob; url: string; width: number };
+
 /**
- * Loads the local maps and keeps their compressed bytes, so a layout or explorer change can
- * re-decode at another size without another request. `limit` returns the largest dimension to
- * upload for a map under the current conditions.
+ * Loads the smallest published variant of each map that covers its current upload size, and
+ * keeps the compressed bytes, so a layout or explorer change can re-decode at another size. A
+ * refit that needs more detail than any retained variant fetches the next larger one first.
+ * `limit` returns the largest dimension to upload for a map under the current conditions.
  */
 export function createSolarTextures(
   renderer: WebGLRenderer,
@@ -42,18 +46,56 @@ export function createSolarTextures(
   limit: (name: SolarTextureName) => number,
 ) {
   const textures = new Map<SolarTextureName, Texture>();
-  const blobs = new Map<SolarTextureName, Blob>();
+  /** Retained compressed maps per published width. */
+  const retained = new Map<SolarTextureName, Map<number, RetainedMap>>();
+  const pending = new Map<string, Promise<RetainedMap>>();
   let disposed = false;
   let generation = 0;
   const requests = new AbortController();
 
+  const largestUpload = (name: SolarTextureName) =>
+    Math.min(renderer.capabilities.maxTextureSize, limit(name));
   const targetSize = (name: SolarTextureName, width: number, height: number) => {
-    const largest = Math.min(renderer.capabilities.maxTextureSize, limit(name));
-    const factor = Math.min(1, largest / Math.max(width, height));
+    const factor = Math.min(1, largestUpload(name) / Math.max(width, height));
     return {
       width: Math.max(1, Math.round(width * factor)),
       height: Math.max(1, Math.round(height * factor)),
     };
+  };
+  /** Every map is at least as wide as it is tall, so its width is its largest dimension. */
+  const variantWidth = (name: SolarTextureName) => {
+    const widths = solarTextureWidths(name, versions);
+    const needed = largestUpload(name);
+    return widths.find((width) => width >= needed) ?? widths[widths.length - 1];
+  };
+  /** The smallest retained variant that covers the current upload size, else the largest. */
+  const retainedFor = (name: SolarTextureName) => {
+    const maps = [...(retained.get(name) ?? [])].sort(([a], [b]) => a - b);
+    const needed = largestUpload(name);
+    return (maps.find(([width]) => width >= needed) ?? maps[maps.length - 1])?.[1];
+  };
+
+  const fetchVariant = (name: SolarTextureName, width: number) => {
+    const url = new URL(solarTextureUrl(name, versions, width), location.href).href;
+    const existing = retained.get(name)?.get(width);
+    if (existing) return Promise.resolve(existing);
+    let request = pending.get(url);
+    if (!request) {
+      request = fetch(url, { signal: requests.signal })
+        .then(async (response) => {
+          if (!response.ok) throw new Error(`Solar texture request failed: ${name}`);
+          const map = { blob: await response.blob(), url, width };
+          if (!disposed) {
+            const maps = retained.get(name) ?? new Map<number, RetainedMap>();
+            maps.set(width, map);
+            retained.set(name, maps);
+          }
+          return map;
+        })
+        .finally(() => pending.delete(url));
+      pending.set(url, request);
+    }
+    return request;
   };
 
   /** Decodes off the main thread when supported. No Y flip: the shaders sample top-down UVs. */
@@ -109,23 +151,30 @@ export function createSolarTextures(
   };
 
   const loadOne = async (name: SolarTextureName) => {
-    const url = new URL(solarTextureUrl(name, versions), location.href).href;
     try {
-      const response = await fetch(url, { signal: requests.signal });
-      if (!response.ok) throw new Error(`Solar texture request failed: ${name}`);
-      const blob = await response.blob();
-      const source = await decode(name, blob);
+      const map = await fetchVariant(name, variantWidth(name));
+      const source = await decode(name, map.blob);
       if (disposed) {
         release(source);
         return;
       }
       const texture = new Texture(source);
-      texture.userData.sourceUrl = url;
+      texture.userData.sourceUrl = map.url;
       configure(texture, name);
       textures.set(name, texture);
-      blobs.set(name, blob);
     } catch (error) {
       if (!disposed && !optionalTextures.has(name)) throw error;
+    }
+  };
+
+  /** Fetches a larger variant when the retained ones are too small; failures keep what exists. */
+  const ensureCoverage = async (name: SolarTextureName) => {
+    const width = variantWidth(name);
+    if ([...(retained.get(name)?.keys() ?? [])].some((known) => known >= width)) return;
+    try {
+      await fetchVariant(name, width);
+    } catch {
+      // An aborted or failed upgrade leaves the retained detail in place.
     }
   };
 
@@ -150,16 +199,25 @@ export function createSolarTextures(
       return total;
     },
     /**
-     * Re-decodes maps whose upload size changed. A newer call supersedes an older one; `onUpload`
-     * runs after each replacement so callers can discount the one-frame upload stall.
+     * Re-decodes maps whose upload size changed, fetching larger variants first when needed. A
+     * newer call supersedes an older one; `onUpload` runs after each replacement so callers can
+     * discount the one-frame upload stall. Disposal aborts in-flight variant requests.
      */
     async refit(onUpload: () => void) {
       const current = ++generation;
+      const coverage = new Map([...textures.keys()].map((name) => [name, ensureCoverage(name)]));
       for (const [name, texture] of textures) {
-        const blob = blobs.get(name);
-        if (!blob) continue;
+        await coverage.get(name);
+        if (disposed || current !== generation) return;
+        const map = retainedFor(name);
         const previous = texture.image as TextureSource;
-        const decoded = await decode(name, blob);
+        if (
+          !map ||
+          (texture.userData.sourceUrl === map.url &&
+            sourceWidth(previous) === Math.min(map.width, largestUpload(name)))
+        )
+          continue;
+        const decoded = await decode(name, map.blob);
         if (disposed || current !== generation) {
           release(decoded);
           return;
@@ -173,6 +231,7 @@ export function createSolarTextures(
         // needs the old storage released first.
         texture.dispose();
         texture.image = decoded;
+        texture.userData.sourceUrl = map.url;
         texture.needsUpdate = true;
         onUpload();
       }
@@ -186,7 +245,7 @@ export function createSolarTextures(
         release(source);
       }
       textures.clear();
-      blobs.clear();
+      retained.clear();
     },
   };
 }

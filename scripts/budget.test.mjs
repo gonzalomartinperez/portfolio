@@ -4,6 +4,7 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { gzipSync } from "node:zlib";
+import { solarTextureFiles, solarTextureVersion } from "../src/content/solar-texture-cache.ts";
 
 /**
  * Performance budgets, measured against the real build output.
@@ -46,21 +47,71 @@ test("the deferred hero and solar scenes share a 250 KiB gzip dependency budget"
   assert.ok(size <= 250, `scene dependency closure is ${size.toFixed(1)} KiB gzip (budget 250)`);
 });
 
+const solarDirectory = path.join(root, "public", "images", "solar-system");
+const solarManifest = () =>
+  JSON.parse(readFileSync(path.join(solarDirectory, "manifest.json"), "utf8"));
+
 test("local solar texture maps stay under 8 MiB and match their reviewed manifest", async () => {
   const { createHash } = await import("node:crypto");
-  const directory = path.join(root, "public", "images", "solar-system");
-  const manifest = JSON.parse(readFileSync(path.join(directory, "manifest.json"), "utf8"));
+  const manifest = solarManifest();
   assert.equal(manifest.assets.length, 16);
+  const verify = (entry) => {
+    const content = readFileSync(path.join(solarDirectory, entry.file));
+    assert.equal(content.length, entry.bytes, entry.file);
+    assert.equal(createHash("sha256").update(content).digest("hex"), entry.sha256, entry.file);
+    return content.length;
+  };
   let bytes = 0;
+  let variantBytes = 0;
   for (const asset of manifest.assets) {
     assert.match(asset.file, /^[a-z-]+\.webp$/);
-    const content = readFileSync(path.join(directory, asset.file));
-    bytes += content.length;
-    assert.equal(content.length, asset.bytes, asset.file);
-    assert.equal(createHash("sha256").update(content).digest("hex"), asset.sha256, asset.file);
+    bytes += verify(asset);
+    for (const variant of asset.variants ?? []) {
+      const name = asset.file.replace(/\.webp$/, "");
+      assert.equal(variant.file, `${name}-${variant.width}.webp`);
+      assert.ok(variant.width < asset.width, `${variant.file} must be a downscale`);
+      assert.equal(variant.height, Math.round((asset.height * variant.width) / asset.width));
+      assert.equal(variant.encoding, asset.encoding, variant.file);
+      variantBytes += verify(variant);
+    }
   }
   assert.equal(bytes, manifest.totalBytes);
+  assert.equal(variantBytes, manifest.variantBytes);
   assert.ok(bytes < 8 * 1024 * 1024, `solar texture transfer is ${(bytes / 1024).toFixed(1)} KiB`);
+});
+
+/** Every hashed map URL that the prerendered static scene references. */
+function fallbackTextures() {
+  const html = readFileSync(path.join(root, ".next", "server", "app", "about.html"), "utf8");
+  const urls = new Set(html.match(/\/images\/solar-system\/[a-z0-9-]+\.webp\?v=[0-9a-f]{16}\b/g));
+  return [...urls].map((url) => {
+    const [file, version] = url.replace("/images/solar-system/", "").split("?v=");
+    const entry = solarTextureFiles.find((candidate) => candidate.file === file);
+    assert.ok(entry, `${file} is not a reviewed map`);
+    assert.equal(solarTextureVersion(entry.sha256), version, `${file} must use its current hash`);
+    return entry;
+  });
+}
+
+test("the static solar scene uses thumbnails within a 320 KiB allowance", () => {
+  const maps = fallbackTextures();
+  assert.equal(maps.length, 11, "one map per fallback body");
+  const bytes = maps.reduce((sum, map) => sum + map.bytes, 0);
+  assert.ok(bytes <= 320 * 1024, `fallback textures are ${(bytes / 1024).toFixed(1)} KiB`);
+});
+
+test("wide reading mode downloads at most 2.5 MiB of solar textures", () => {
+  // Mirrors textureLimits.reading in solar-system-engine.ts: 2048 texels for the prominent maps
+  // on wide screens, 1024 for every other map; the loader picks the smallest covering variant.
+  const prominent = new Set(["sun.webp", "earth.webp", "jupiter.webp"]);
+  const reading = solarManifest().assets.map((asset) => {
+    const needed = prominent.has(asset.file) ? 2048 : 1024;
+    const widths = [...(asset.variants ?? []), asset].sort((a, b) => a.width - b.width);
+    return widths.find((entry) => entry.width >= needed) ?? asset;
+  });
+  const files = new Map([...reading, ...fallbackTextures()].map((map) => [map.file, map.bytes]));
+  const bytes = [...files.values()].reduce((sum, size) => sum + size, 0);
+  assert.ok(bytes <= 2.5 * 1024 * 1024, `reading textures are ${(bytes / 1024).toFixed(1)} KiB`);
 });
 
 test("existing portfolio styles retain their 24 KiB gzip budget", () => {

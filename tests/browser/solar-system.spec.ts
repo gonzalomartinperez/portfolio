@@ -17,6 +17,7 @@ type SolarSnapshot = {
   readingShadeBlocks: number;
   veil: number;
   camera: { type: string };
+  immersive: boolean;
   bodies: {
     name: string;
     texture: string;
@@ -30,6 +31,15 @@ type SolarSnapshot = {
   rings: { saturn: string; depthTest: boolean };
   meteorVisible: boolean;
 };
+/** The published map a body samples at an uploaded width: the original or a downscaled variant. */
+function expectedMap(name: string, width: number) {
+  const asset = textureManifest.assets.find(({ file }) => file === `${name}.webp`);
+  if (!asset) throw new Error(`Missing texture manifest entry: ${name}`);
+  const covering = [...(asset.variants ?? []), asset]
+    .sort((a, b) => a.width - b.width)
+    .find((entry) => entry.width >= width);
+  return covering ?? asset;
+}
 const snapshot = (canvas: Locator) =>
   canvas.evaluate((node) => {
     const target = node as HTMLCanvasElement & { getSolarDebugSnapshot(): SolarSnapshot };
@@ -83,10 +93,12 @@ for (const theme of ["light", "dark"] as const) {
       (bounds.width < 640 ? 128 : 256) * 1024 * 1024,
     );
     for (const body of frame.bodies) {
-      expect(body.texture, body.name).toContain(`/images/solar-system/${body.name}.webp`);
-      expect(new URL(body.texture, page.url()).searchParams.get("v"), body.name).toBe(
-        textureManifest.assets.find(({ file }) => file === `${body.name}.webp`)?.sha256,
-      );
+      // Reading mode downloads the variant that matches its upload size, not the original.
+      const map = expectedMap(body.name, body.textureWidth);
+      expect(map.width, body.name).toBe(body.textureWidth);
+      const url = new URL(body.texture, page.url());
+      expect(url.pathname, body.name).toBe(`/images/solar-system/${map.file}`);
+      expect(url.searchParams.get("v"), body.name).toBe(map.sha256.slice(0, 16));
       expect(body.textureColorSpace, body.name).toBe("srgb");
       expect(body.screen.x + body.screen.radius, body.name).toBeGreaterThan(0);
       expect(body.screen.x - body.screen.radius, body.name).toBeLessThan(viewport.width);
@@ -232,7 +244,7 @@ test("visual credits remain available in both locales without JavaScript", async
 });
 
 test("a failed optional texture preserves the other GPU materials", async ({ page }) => {
-  await page.route("**/earth-night.webp*", (route) => route.abort());
+  await page.route("**/earth-night*.webp*", (route) => route.abort());
   await page.goto("/contact?solarDebug=1");
   const solar = page.locator("[data-solar-system]");
   await expect(solar).toHaveAttribute("data-renderer", "webgl", { timeout: 25_000 });
@@ -243,7 +255,7 @@ test("a failed optional texture preserves the other GPU materials", async ({ pag
 });
 
 test("a failed core texture retains the complete static fallback", async ({ page }) => {
-  await page.route("**/jupiter.webp*", (route) => route.abort());
+  await page.route("**/jupiter*.webp*", (route) => route.abort());
   await page.goto("/contact?solarDebug=1");
   const solar = page.locator("[data-solar-system]");
   await expect(solar).toHaveAttribute("data-renderer", "static");
@@ -403,20 +415,38 @@ test("the explorer decodes detailed maps on demand and releases them afterwards"
   page,
 }) => {
   test.setTimeout(90_000);
+  const requested: string[] = [];
+  page.on("request", (request) => {
+    const { pathname } = new URL(request.url());
+    if (pathname.startsWith("/images/solar-system/")) requested.push(pathname);
+  });
   await page.goto("/contact?solarDebug=1");
   const canvas = page.locator("[data-solar-canvas]");
   await expect(page.locator("[data-solar-system]")).toHaveAttribute("data-renderer", "webgl", {
     timeout: 25_000,
   });
-  const earthWidth = async () =>
-    (await snapshot(canvas)).bodies.find(({ name }) => name === "earth")?.textureWidth;
+  const earth = async () => (await snapshot(canvas)).bodies.find(({ name }) => name === "earth");
+  const earthWidth = async () => (await earth())?.textureWidth;
   const compact = (page.viewportSize()?.width ?? 0) < 640;
   expect(await earthWidth()).toBe(compact ? 1024 : 2048);
-  // CPU rasterizers (CI) keep reading-size maps; the upgrade is verified on hardware GPUs.
-  test.skip((await snapshot(canvas)).software, "Software renderers keep reading-size maps");
+  // Reading mode downloads reading-size variants only; the originals wait for the explorer.
+  expect(requested).not.toContain("/images/solar-system/earth.webp");
+  expect(requested).not.toContain("/images/solar-system/jupiter.webp");
+  const software = (await snapshot(canvas)).software;
   await page.locator("[data-solar-explore]").click();
   await expect(page.getByRole("dialog")).toBeVisible();
+  if (software) {
+    // CPU rasterizers (CI) keep reading-size maps and never fetch the larger variants.
+    await expect.poll(async () => (await snapshot(canvas)).immersive).toBe(true);
+    await page.waitForTimeout(1_000);
+    expect(await earthWidth()).toBe(compact ? 1024 : 2048);
+    expect(requested).not.toContain("/images/solar-system/earth.webp");
+    return;
+  }
   await expect.poll(earthWidth, { timeout: 30_000 }).toBe(compact ? 2048 : 4096);
+  expect(new URL((await earth())?.texture ?? "", page.url()).pathname).toBe(
+    `/images/solar-system/${compact ? "earth-2048" : "earth"}.webp`,
+  );
   expect((await snapshot(canvas)).glError).toBe(0);
   expect((await snapshot(canvas)).estimatedGpuBytes).toBeLessThanOrEqual(
     (compact ? 128 : 256) * 1024 * 1024,
