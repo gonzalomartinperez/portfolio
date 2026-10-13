@@ -108,22 +108,29 @@ test("the hero presents engineering principles rather than unattributed figures"
   }
 });
 
-test("Rampy response improvements stay scoped and approximate in both locales", () => {
+test("Rampy response improvements retain load-test evidence and comparable workflow scope", () => {
   for (const locale of ["en", "es"]) {
     const source = read(`src/content/${locale}/experience.ts`);
-    assert.match(source, /value: "~2×\+"/);
-    assert.match(
-      source,
-      locale === "en" ? /optimized agent workflows/ : /flujos agénticos optimizados/,
+    assert.match(source, /value: "≥2×"/);
+    const agentMetric = source.slice(
+      source.indexOf('value: "≥2×"'),
+      source.indexOf('value: "~30%"'),
     );
+    assert.match(agentMetric, locale === "en" ? /[Ll]oad tests/ : /pruebas de carga/);
     assert.match(
-      source,
-      locale === "en" ? /under comparable conditions/ : /condiciones comparables/,
+      agentMetric,
+      locale === "en"
+        ? /comparable optimized agent workflows/
+        : /flujos agénticos optimizados comparables/,
     );
-    assert.match(
-      source,
-      locale === "en" ? /not a system-wide benchmark/ : /no es un benchmark de todo el sistema/,
+    assert.doesNotMatch(agentMetric, /estimat|estimación/i);
+    const financialMetric = source.slice(
+      source.lastIndexOf('value: "≥2×"'),
+      source.indexOf('value: "~1 h'),
     );
+    assert.match(financialMetric, locale === "en" ? /[Ll]oad-tested/ : /pruebas de carga/);
+    assert.match(financialMetric, /vault|mercados/);
+    assert.doesNotMatch(financialMetric, /estimat|estimación/i);
   }
 });
 

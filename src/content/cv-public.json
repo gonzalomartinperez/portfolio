@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-12.1",
+  "revision": "2026-10-13.2",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -95,7 +95,7 @@
                       "href": ""
                     },
                     {
-                      "text": " using Agno, LangChain/LangGraph, and OpenAI API; integrated PostgreSQL/pgvector, Mem0, Vertex AI, and DeepInfra for retrieval, memory, and model access. Improved tool selection and evaluation: optimized flows ran at least 2× faster by my estimate, while removing redundant calls reduced token usage in affected queries by an estimated 30%.",
+                      "text": " using Agno, LangChain/LangGraph, and OpenAI API; integrated PostgreSQL/pgvector, Mem0, Vertex AI, and DeepInfra for retrieval, memory, and model access. Improved tool selection and evaluation: load tests confirmed at least 2× faster responses in comparable optimized flows, while removing redundant calls reduced token usage in affected queries by an estimated 30%.",
                       "bold": false,
                       "href": ""
                     }
@@ -644,6 +644,10 @@
                 "CloudWatch",
                 "Docker",
                 "Kubernetes",
+                "Coolify",
+                "Nginx",
+                "Traefik",
+                "Caddy",
                 "GitLab CI/CD",
                 "GitHub Actions"
               ],
@@ -1064,7 +1068,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", usando Agno, LangChain/LangGraph y OpenAI API; integré PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Mejoré la selección de herramientas y la evaluación: según mi estimación, los flujos optimizados respondieron al menos 2× más rápido, mientras que eliminar llamadas redundantes redujo un 30% estimado de tokens en las consultas afectadas.",
+                      "text": ", usando Agno, LangChain/LangGraph y OpenAI API; integré PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Mejoré la selección de herramientas y la evaluación: las pruebas de carga confirmaron respuestas al menos 2× más rápidas en flujos optimizados comparables, mientras que eliminar llamadas redundantes redujo un 30% estimado de tokens en las consultas afectadas.",
                       "bold": false,
                       "href": ""
                     }
@@ -1608,6 +1612,10 @@
                 "CloudWatch",
                 "Docker",
                 "Kubernetes",
+                "Coolify",
+                "Nginx",
+                "Traefik",
+                "Caddy",
                 "GitLab CI/CD",
                 "GitHub Actions"
               ],
@@ -1933,11 +1941,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "859c29747c01b1913a54d13a54b0f35344e633625abb0ec47954b7a6584a2a52",
-    "factsSha256": "8d0eb9e5b80798cffb805eb57097edc8a51aeee4935b9ef40e84d40160b518c3",
+    "sourceSha256": "374211084d832a7a136632bb0c3915d1993e8ba5100eb7d4047aeacc5afcb196",
+    "factsSha256": "5addb8c0ac460498a6be3525d92e9ea3d5001bde589a8bea78402da142e0bbce",
     "pdfSha256": {
-      "en": "d5b20e87d13188aedb85619e01d58d213557c1a465990a61a2e285bb90f9c28e",
-      "es": "d07c6ec96e4ca91d065b92eb6b1b1ba8071f0f796d47ae3e0e17e528f5ad098f"
+      "en": "6333d72954a633539bf8463d6ee1ffb63b9f8bf09fb73498038f4a99ef95b67c",
+      "es": "899d2b1d696b9b836bd08475a2f22098ca50e0963d297636bc64d52ef3743c9e"
     }
   }
 }
