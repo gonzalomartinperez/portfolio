@@ -104,6 +104,10 @@ test("the explorer dock steps through bodies and announces the selection", async
   await expect(caption).toContainText("Dwarf planet");
   await dock.getByRole("button", { name: "Reset view", exact: true }).click();
   await expect(picker).toHaveValue("");
+  // Measure at rest, after the pressed buttons have scaled back.
+  await dock.evaluate((node) =>
+    Promise.all(node.getAnimations({ subtree: true }).map((animation) => animation.finished)),
+  );
   for (const button of await dock.getByRole("button").all()) {
     const box = await button.boundingBox();
     expect(box?.width ?? 0).toBeGreaterThanOrEqual(44);
