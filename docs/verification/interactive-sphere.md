@@ -55,6 +55,27 @@ screenshot shows particles crossing the availability line instead of flattening
 against it. This is an intentional temporary visual overlap, not a change to layout
 or input handling. No dependencies, timings, particle counts or budgets changed.
 
+## Depth, light and settle follow-up
+
+- Visual review compared develop with this branch at scroll progress 0, 0.3, 0.45, 0.6,
+  0.75, 0.94 and 1, on desktop 1440×900 and Pixel 7, in both themes. At 0.3–0.45 the
+  shell gains real parallax and a rim light. The first draft let near points keep
+  growing inside the shell, which turned the toolkit background at 0.6 into large
+  uniform dots. The growth is now limited to the fly-through window, and the
+  background at 0.6 and later matches develop's fine grain again.
+- The settle wave was reviewed at 0.94. Upper and central rows land first, while lower
+  rows are still arriving on their arcs. At 1, the grid matches the previous settled
+  layout.
+- The theme switch no longer marks the material for a program update; only uniforms
+  and blending change. The whole-site audit had attributed a theme-toggle stall
+  partly to shader recompilation (`getShaderInfoLog`/`getProgramInfoLog`).
+- Particle counts, DPR limits, draw ranges, the quality ladder and the bundle budget
+  are unchanged.
+- `test:repository` (scene budget and cloud layout) and `test:budget` passed. The local
+  browser run was stopped: with the host at a load average of about 30 on 4 cores, it
+  timed out on settling predicates. The PR's CI shards are the browser evidence for this
+  change.
+
 ## Limits
 
 Browser tests use Chromium desktop and Pixel 7 emulation on Windows. They verify
