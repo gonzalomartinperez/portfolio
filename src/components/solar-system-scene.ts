@@ -169,8 +169,9 @@ export const solarCameras = {
 } as const;
 export type SolarLayout = keyof typeof solarCameras;
 export type SolarCamera = (typeof solarCameras)[SolarLayout];
+/** Phone-like portrait aspect ratios; extreme strips keep the landscape composition. */
 export const solarLayout = (width: number, height: number): SolarLayout =>
-  width < height ? "portrait" : "landscape";
+  width < height && width / height > 0.3 ? "portrait" : "landscape";
 
 /** CSS units per scene unit for `cqmin`, and the CSS perspective in `cqh`, for one camera. */
 export const solarFallbackScale = (camera: SolarCamera) =>
