@@ -84,3 +84,20 @@ browsers. Run a generated group with
 - [GitHub dependency caching](https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching)
 - [npm frozen installs](https://docs.npmjs.com/cli/v11/commands/npm-ci/)
 - [DNF connection and low-speed settings](https://dnf.readthedocs.io/en/latest/conf_ref.html)
+
+## First measured result
+
+A fair comparison uses the same application and the exact same 434 discovered
+identities, including the solar changes that followed the initial baseline:
+
+| Run | Total | Quality | Slowest browser job |
+| --- | ---: | ---: | ---: |
+| [Same application before optimization](https://github.com/gonzalomartinperez/portfolio/actions/runs/38322601654) | 8m19s | 59s | 7m09s |
+| [First optimized run](https://github.com/gonzalomartinperez/portfolio/actions/runs/38324711501) | 7m04s | 47s | 6m07s |
+
+The observed total reduction is 75 seconds, approximately 15%, in one execution.
+Runner and network variation still matter; this is not a guaranteed speedup. Every
+native JSON report matched its planned group, and the complete union contained
+434 unique identities with no omissions or duplicates: 423 passed, 11 existing
+conditional skips, no unexpected results and no flaky tests. Those same skips
+were present before optimization. Application and test behavior were unchanged.
