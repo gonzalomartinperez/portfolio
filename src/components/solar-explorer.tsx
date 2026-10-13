@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   LocateFixed,
@@ -157,6 +158,7 @@ export function SolarExplorer({ locale }: { locale: Locale }) {
                   </option>
                 ))}
               </select>
+              <ChevronDown className={styles.chevron} aria-hidden="true" size={16} />
             </label>
             <Button
               variant="ghost"
