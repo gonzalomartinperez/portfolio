@@ -312,6 +312,7 @@ updated without giving the public build access to private sources.
 | [Editorial guidelines](docs/editorial-guidelines.md) | Natural bilingual copy, evidence-aware claims, technology and brand presentation |
 | [Public-content contract](docs/public-content.md) | Approved data projection, generated CV and reviewed document releases |
 | [Technology guide](docs/technology.md) | Version policy, compatibility, and maintenance |
+| [LinkedIn branding](docs/linkedin-branding.md) | Reviewed Featured thumbnail, provenance and manual-upload assets |
 | [CI efficiency](docs/research/ci-efficiency.md) | Measured timing, complete balanced coverage and package-cache strategy |
 | [Deployment guide](docs/deployment.md) | Hostinger setup and the CI/CD boundary |
 | [Native assistant guide](docs/native-assistant.md) | Lazy panel, imported API contract, session ownership and activation checks |
