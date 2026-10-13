@@ -361,7 +361,7 @@ for (const renderer of ["webgl", "static"] as const)
           "main * { color: transparent !important; -webkit-text-fill-color: transparent !important; }",
       });
       await page.waitForTimeout(300);
-      const background = (await page.screenshot()).toString("base64");
+      const background = (await captureSettledPage(page, {})).toString("base64");
       const ratios = await page.evaluate(
         async ({ image, runs }) => {
           const response = await fetch(`data:image/png;base64,${image}`);
