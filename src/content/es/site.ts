@@ -155,7 +155,7 @@ export const siteCopy: SiteCopy = {
     noteScope:
       "En Rampy trabajo con infraestructura y despliegues en DigitalOcean. En otros roles utilicé AWS y Kubernetes para integrar servicios, desarrollar aplicaciones y diagnosticar problemas.",
     noteApproach:
-      "Mi enfoque está en el desarrollo de aplicaciones y su entrega a producción. Ese trabajo también incluye Coolify para despliegues y proxies inversos para dirigir solicitudes a los servicios.",
+      "Mi enfoque está en el desarrollo de aplicaciones y su entrega a producción. Complemento ese trabajo con Coolify para despliegues y conocimientos de NGINX, Traefik y Caddy para servir aplicaciones y enrutar solicitudes.",
   },
   education: {
     metaTitle: "Educación",

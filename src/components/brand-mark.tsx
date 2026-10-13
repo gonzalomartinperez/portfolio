@@ -5,6 +5,9 @@ import styles from "./brand-mark.module.css";
 const localMarks = new Set([
   "solidity",
   "coolify",
+  "nginx",
+  "traefikproxy",
+  "caddy",
   "singular",
   "neo4j",
   "android-studio",
