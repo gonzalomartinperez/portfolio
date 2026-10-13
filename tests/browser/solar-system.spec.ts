@@ -325,80 +325,91 @@ test("scrolling orbits the camera around a centered Sun and recedes behind readi
   ).toBeGreaterThan(10);
 });
 
-for (const theme of ["dark", "light"] as const) {
-  test(`reading text keeps WCAG contrast over the rendered scene in ${theme} mode`, async ({
-    page,
-  }) => {
-    await page.addInitScript((value) => localStorage.setItem("theme", value), theme);
-    await page.goto("/about?solarDebug=1&solarTime=0");
-    await expect(page.locator("[data-solar-system]")).toHaveAttribute("data-renderer", "webgl", {
-      timeout: 25_000,
-    });
-    await page.locator("main p").first().waitFor();
-    const runs = await page.evaluate(() =>
-      [...document.querySelectorAll("main :is(h1, p)")].flatMap((element) => {
-        const style = getComputedStyle(element);
-        const color = style.color.match(/[\d.]+/g)?.map(Number) ?? [0, 0, 0];
-        const large = Number.parseFloat(style.fontSize) >= 24;
-        const range = document.createRange();
-        range.selectNodeContents(element);
-        return [...range.getClientRects()]
-          .filter((rect) => rect.width > 8 && rect.bottom > 0 && rect.top < innerHeight)
-          .map((rect) => ({
-            x: rect.x,
-            y: rect.y,
-            width: rect.width,
-            height: rect.height,
-            color,
-            large,
-          }));
-      }),
-    );
-    expect(runs.length).toBeGreaterThan(0);
-    // Hide only the text, then measure the brightest scene pixels behind each line.
-    await page.addStyleTag({
-      content:
-        "main * { color: transparent !important; -webkit-text-fill-color: transparent !important; }",
-    });
-    await page.waitForTimeout(300);
-    const background = (await page.screenshot()).toString("base64");
-    const ratios = await page.evaluate(
-      async ({ image, runs }) => {
-        const response = await fetch(`data:image/png;base64,${image}`);
-        const bitmap = await createImageBitmap(await response.blob());
-        const surface = new OffscreenCanvas(bitmap.width, bitmap.height);
-        const context = surface.getContext("2d");
-        if (!context) throw new Error("2D canvas is required");
-        context.drawImage(bitmap, 0, 0);
-        const scale = bitmap.width / innerWidth;
-        const channel = (value: number) => {
-          const linear = value / 255;
-          return linear <= 0.04045 ? linear / 12.92 : ((linear + 0.055) / 1.055) ** 2.4;
-        };
-        const luminance = ([r, g, b]: number[]) =>
-          0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
-        return runs.map((run) => {
-          const x = Math.max(0, Math.floor(run.x * scale));
-          const y = Math.max(0, Math.floor(run.y * scale));
-          const width = Math.max(1, Math.min(bitmap.width - x, Math.ceil(run.width * scale)));
-          const height = Math.max(1, Math.min(bitmap.height - y, Math.ceil(run.height * scale)));
-          const pixels = context.getImageData(x, y, width, height).data;
-          const samples: number[] = [];
-          for (let index = 0; index < pixels.length; index += 16)
-            samples.push(luminance([pixels[index], pixels[index + 1], pixels[index + 2]]));
-          samples.sort((a, b) => a - b);
-          const text = luminance(run.color);
-          const lightText = text > samples[Math.floor(samples.length / 2)];
-          const worst = samples[Math.floor(samples.length * (lightText ? 0.95 : 0.05))];
-          const ratio = (Math.max(text, worst) + 0.05) / (Math.min(text, worst) + 0.05);
-          return { ratio, required: run.large ? 3 : 4.5 };
+// The static scene has no reading mask; it is also what shows while the canvas fades in.
+for (const renderer of ["webgl", "static"] as const)
+  for (const theme of ["dark", "light"] as const)
+    test(`reading text keeps WCAG contrast over the ${renderer} scene in ${theme} mode`, async ({
+      page,
+    }) => {
+      await page.addInitScript((value) => localStorage.setItem("theme", value), theme);
+      if (renderer === "static")
+        await page.addInitScript(() => {
+          const original = HTMLCanvasElement.prototype.getContext;
+          Object.defineProperty(HTMLCanvasElement.prototype, "getContext", {
+            value(this: HTMLCanvasElement, type: string, ...args: unknown[]) {
+              if (type.startsWith("webgl")) return null;
+              return Reflect.apply(original, this, [type, ...args]);
+            },
+          });
         });
-      },
-      { image: background, runs },
-    );
-    for (const { ratio, required } of ratios) expect(ratio).toBeGreaterThanOrEqual(required);
-  });
-}
+      await page.goto("/about?solarDebug=1&solarTime=0");
+      await expect(page.locator("[data-solar-system]")).toHaveAttribute("data-renderer", renderer, {
+        timeout: 25_000,
+      });
+      await page.locator("main p").first().waitFor();
+      const runs = await page.evaluate(() =>
+        [...document.querySelectorAll("main :is(h1, p)")].flatMap((element) => {
+          const style = getComputedStyle(element);
+          const color = style.color.match(/[\d.]+/g)?.map(Number) ?? [0, 0, 0];
+          const large = Number.parseFloat(style.fontSize) >= 24;
+          const range = document.createRange();
+          range.selectNodeContents(element);
+          return [...range.getClientRects()]
+            .filter((rect) => rect.width > 8 && rect.bottom > 0 && rect.top < innerHeight)
+            .map((rect) => ({
+              x: rect.x,
+              y: rect.y,
+              width: rect.width,
+              height: rect.height,
+              color,
+              large,
+            }));
+        }),
+      );
+      expect(runs.length).toBeGreaterThan(0);
+      // Hide only the text, then measure the brightest scene pixels behind each line.
+      await page.addStyleTag({
+        content:
+          "main * { color: transparent !important; -webkit-text-fill-color: transparent !important; }",
+      });
+      await page.waitForTimeout(300);
+      const background = (await captureSettledPage(page, {})).toString("base64");
+      const ratios = await page.evaluate(
+        async ({ image, runs }) => {
+          const response = await fetch(`data:image/png;base64,${image}`);
+          const bitmap = await createImageBitmap(await response.blob());
+          const surface = new OffscreenCanvas(bitmap.width, bitmap.height);
+          const context = surface.getContext("2d");
+          if (!context) throw new Error("2D canvas is required");
+          context.drawImage(bitmap, 0, 0);
+          const scale = bitmap.width / innerWidth;
+          const channel = (value: number) => {
+            const linear = value / 255;
+            return linear <= 0.04045 ? linear / 12.92 : ((linear + 0.055) / 1.055) ** 2.4;
+          };
+          const luminance = ([r, g, b]: number[]) =>
+            0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
+          return runs.map((run) => {
+            const x = Math.max(0, Math.floor(run.x * scale));
+            const y = Math.max(0, Math.floor(run.y * scale));
+            const width = Math.max(1, Math.min(bitmap.width - x, Math.ceil(run.width * scale)));
+            const height = Math.max(1, Math.min(bitmap.height - y, Math.ceil(run.height * scale)));
+            const pixels = context.getImageData(x, y, width, height).data;
+            const samples: number[] = [];
+            for (let index = 0; index < pixels.length; index += 16)
+              samples.push(luminance([pixels[index], pixels[index + 1], pixels[index + 2]]));
+            samples.sort((a, b) => a - b);
+            const text = luminance(run.color);
+            const lightText = text > samples[Math.floor(samples.length / 2)];
+            const worst = samples[Math.floor(samples.length * (lightText ? 0.95 : 0.05))];
+            const ratio = (Math.max(text, worst) + 0.05) / (Math.min(text, worst) + 0.05);
+            return { ratio, required: run.large ? 3 : 4.5 };
+          });
+        },
+        { image: background, runs },
+      );
+      for (const { ratio, required } of ratios) expect(ratio).toBeGreaterThanOrEqual(required);
+    });
 
 test("the explorer decodes detailed maps on demand and releases them afterwards", async ({
   page,

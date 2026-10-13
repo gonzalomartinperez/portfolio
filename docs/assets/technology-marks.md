@@ -146,8 +146,8 @@ Concepts now use the existing `lucide-react` library (ISC), with specific icons
 for GraphRAG, harnesses, evaluation, encryption, streaming, transaction controls,
 architecture, quality and delivery. No hand-drawn path dictionary remains.
 Reverse proxy uses the existing Lucide `Route` illustration rather than a brand
-identity. Its label describes general applied experience without attributing a
-proxy vendor or employer.
+identity. Its label describes general applied experience without attributing an
+employer. Named proxy tools are documented below as general infrastructure knowledge.
 Alphabetical order, category priority, applied evidence and hero selection are
 unchanged. Both themes retain readable icon backgrounds and equal icon heights.
 
@@ -166,3 +166,27 @@ visually reviewed. This is browser QA, not a claim of physical-device testing.
 
 Verification for the subsequent Coolify and reverse proxy additions is recorded
 in the [feature specification](../specs/coolify-reverse-proxy.md).
+
+## Infrastructure knowledge marks, October 13, 2026
+
+The author confirmed NGINX, Traefik, Caddy, and Coolify as infrastructure
+knowledge supporting application development and delivery. The three new entries
+link to the bilingual About page, without attributing a vendor to an employer or
+claiming specialist infrastructure administration. Coolify retains its existing
+original artwork and provenance above. The shared catalog keeps alphabetical
+ordering in both languages; these additions do not change the curated hero scene.
+
+| Local file under `public/brands/` | Pinned source | Treatment |
+| --- | --- | --- |
+| `nginx.svg` | [Simple Icons 16.20.0](https://raw.githubusercontent.com/simple-icons/simple-icons/5184ced624d8a8bc9695a95df51c16b15fbd1b01/icons/nginx.svg) | Original path and 24×24 viewport; published NGINX green `#009639`. |
+| `traefikproxy.svg` | [Simple Icons 16.20.0](https://raw.githubusercontent.com/simple-icons/simple-icons/5184ced624d8a8bc9695a95df51c16b15fbd1b01/icons/traefikproxy.svg) | Original Traefik Proxy symbol and viewport; published blue `#24A1C1`. |
+| `caddy.svg` | [Simple Icons 16.20.0](https://raw.githubusercontent.com/simple-icons/simple-icons/5184ced624d8a8bc9695a95df51c16b15fbd1b01/icons/caddy.svg) | Original Caddy symbol and viewport; published blue `#1F88C0`. |
+
+Colors come from the same pinned [upstream metadata](https://raw.githubusercontent.com/simple-icons/simple-icons/5184ced624d8a8bc9695a95df51c16b15fbd1b01/data/simple-icons.json).
+Simple Icons artwork is [CC0](https://github.com/simple-icons/simple-icons/blob/5184ced624d8a8bc9695a95df51c16b15fbd1b01/LICENSE.md);
+its [trademark disclaimer](https://github.com/simple-icons/simple-icons/blob/5184ced624d8a8bc9695a95df51c16b15fbd1b01/DISCLAIMER.md)
+continues to apply. Only a fill matching that metadata was added; geometry was
+not redrawn. The shared white logo tile preserves the original colors in both
+themes, and adjacent text supplies each tool's accessible name. SVGs contain
+local geometry without scripts, event handlers, embedded images, or external
+references. No runtime CDN, new icon dependency, or employer attribution is added.

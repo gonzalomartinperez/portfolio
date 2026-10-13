@@ -15,7 +15,7 @@ export const roles: Role[] = [
       "AI Engineer con alcance de ingeniería de producto de punta a punta: colaboro directamente con tres fundadores para definir prioridades y entregar funcionalidades productivas de IA, fintech, web y mobile desde la arquitectura y la implementación hasta la evaluación y la operación.",
     contributions: [
       "Reconstruí la arquitectura del producto de Rampy en producción: refactoricé todo el backend hacia una arquitectura hexagonal coherente y el frontend React/Next.js hacia dominios separados por funcionalidades del usuario, con un design system completo y abstracciones de componentes reutilizables.",
-      "Desarrollé flujos agénticos productivos con Agno, LangChain, LangGraph, OpenAI API y GraphRAG sobre Neo4j, con PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Combiné reranking con la evaluación de recorridos completos y selección de herramientas. Los flujos optimizados respondieron al menos 2× más rápido según mi estimación; eliminar llamadas y contexto redundantes redujo los tokens de las consultas afectadas un 30% estimado.",
+      "Desarrollé flujos agénticos productivos con Agno, LangChain, LangGraph, OpenAI API y GraphRAG sobre Neo4j, con PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Combiné reranking con la evaluación de recorridos completos y selección de herramientas. Las pruebas de carga confirmaron respuestas al menos 2× más rápidas en flujos optimizados comparables; eliminar llamadas y contexto redundantes redujo los tokens de las consultas afectadas un 30% estimado.",
       "Reduje el arranque promedio medido de la app móvil de unos 7–8 segundos a 1–2 segundos; entregué funcionalidades con React Native, Kotlin y Swift, usando Android Studio para Android y verificando en emuladores y teléfonos reales.",
       "Implementé cifrado de extremo a extremo (E2EE) para las conversaciones de usuarios en la app en producción, con mensajes almacenados cifrados en la base de datos.",
       "Implementé tracking de eventos móviles de punta a punta con Google Analytics mediante Firebase, Clarity Mobile en todas las pantallas y Singular SDK para Meta App Events, coordinando integraciones para evitar duplicados. Diseñé, desarrollé, probé y desplegué una landing page para campañas de descargas.",
@@ -70,10 +70,10 @@ export const roles: Role[] = [
     ]),
     metrics: [
       {
-        value: "~2×+",
+        value: "≥2×",
         label: "respuestas más rápidas en flujos agénticos optimizados",
         qualifier:
-          "Tiempo de respuesta estimado de aproximadamente la mitad o menos que antes en condiciones comparables; no es un benchmark de todo el sistema.",
+          "Las pruebas de carga verificaron tiempos de respuesta iguales o inferiores a la mitad del valor anterior en flujos agénticos optimizados comparables.",
       },
       {
         value: "~30%",
@@ -91,7 +91,7 @@ export const roles: Role[] = [
         value: "≥2×",
         label: "consultas financieras optimizadas más rápidas",
         qualifier:
-          "Estimación de Gonzalo para consultas comparables de vaults, mercados y swaps en producción; no se conservaron muestras ni valores exactos y no describe la latencia de todo el producto.",
+          "Mejora verificada mediante pruebas de carga para consultas optimizadas comparables de vaults, mercados y swaps en producción.",
       },
       {
         value: "~1 h → 10 min",

@@ -161,6 +161,28 @@ test("prerendered HTML stays under 70 KB gzipped per page", () => {
   }
 });
 
+test("technology illustrations reference one shared sprite generated from lucide-react", async () => {
+  const { renderTechnologyIllustrationSprite, spriteFile } = await import(
+    "./technology-illustrations.mjs"
+  );
+  const sprite = readFileSync(spriteFile, "utf8");
+  assert.equal(
+    sprite,
+    renderTechnologyIllustrationSprite(),
+    "run `node scripts/technology-illustrations.mjs --write` to regenerate the sprite",
+  );
+  const home = readFileSync(path.join(root, ".next", "server", "app", "index.html"), "utf8");
+  const marks = home.match(/<svg[^>]*data-representation="illustration"[^>]*>.*?<\/svg>/g) ?? [];
+  assert.ok(marks.length > 0, "the home page renders no technology illustrations");
+  for (const mark of marks) {
+    const symbol = mark.match(
+      /^<svg[^>]*><use href="\/technology-illustrations\.svg#([a-z0-9-]+)"><\/use><\/svg>$/,
+    )?.[1];
+    assert.ok(symbol, `illustration is not a sprite reference: ${mark.slice(0, 120)}`);
+    assert.ok(sprite.includes(`<symbol id="${symbol}"`), `sprite has no "${symbol}" symbol`);
+  }
+});
+
 test("no source map is published to the client", () => {
   const maps = walk(staticDir, ".map");
   assert.equal(maps.length, 0, `client source maps published: ${maps.length}`);
