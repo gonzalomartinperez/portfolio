@@ -218,6 +218,9 @@ activate collection on the public site or call a model provider.
 
 ## Delivery and quality
 
+[Release history](docs/release-history.md) records the public-launch labeling policy
+and preserves the source anchors behind earlier preparation labels.
+
 <p align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/delivery-flow-dark.svg">
