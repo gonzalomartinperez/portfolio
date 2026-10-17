@@ -246,3 +246,22 @@ test("inner logic keeps direct environment I/O behind its ports", () => {
     [],
   );
 });
+
+test("alternative module extensions cannot hide layer or client/server violations", () => {
+  for (const extension of ["mts", "cts", "mjs", "cjs"]) {
+    rejects(
+      {
+        "src/features/hero/domain/value.ts": `import "./opaque.${extension}";`,
+        [`src/features/hero/domain/opaque.${extension}`]: 'import "react";',
+      },
+      /domain modules cannot depend/,
+    );
+    rejects(
+      {
+        "src/components/client.ts": `"use client"; import "./opaque.${extension}";`,
+        [`src/components/opaque.${extension}`]: 'import "server-only";',
+      },
+      /Client runtime reaches/,
+    );
+  }
+});

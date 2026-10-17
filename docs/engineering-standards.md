@@ -9,19 +9,20 @@ principles do not authorize one session to change another repository or deploy i
 | --- | --- | --- |
 | Portfolio | Public `portfolio`, task `refactor/clean-architecture` | Site architecture, client integration, quality rules and public documentation. No API, infrastructure or private career edits in this task. |
 | Portfolio assistant | `portfolio-assistant-api`, `portfolio-assistant-backoffice` | API, security and backoffice use cases. Existing public API contracts stay stable; changes require a reviewed contract handoff. |
-| Pequeverso | Product session; repository confirmation pending | Product web/API/backoffice remain outside portfolio ownership. No changes from this session. |
+| Pequeverso | `pequeverso`, `pequeverso-assistant-api`, `pequeverso-assistant-backoffice` | Product storefront, assistant API and backoffice. No portfolio, career or infrastructure writes and no implicit assistant activation. |
 | VPS operations | Private `vps-ops`, task `refactor/clean-architecture` | Inventory, runtime baseline, Coolify/reverse proxies, operations CLI, Ansible and recovery procedures. No application writes or implicit deployment. |
 
 The other owners were contacted directly through the session messaging interface.
-Confirmations from the assistant and VPS owners agree on these boundaries. The ops
+Confirmations from the assistant and VPS owners agree on these boundaries. The
+Pequeverso scope was confirmed through the coordinating assistant session handoff. The ops
 owner maintains its cross-repository record at
 `vps-ops/docs/handoffs/engineering-coordination.md` and its runtime ledger at
 `vps-ops/inventory/baseline.json`; these are private operator references, not public
 build dependencies. The operations handoff is
 [vps-ops PR #31](https://github.com/gonzalomartinperez/vps-ops/pull/31), reported
 by its owner at source `6a99d0657b6deddf1e0cbb395b5cccc45997fab6`; its CI and
-validation belong to that session. Update pending confirmations when received, not
-by assumption.
+validation belong to that session. No session adopts another repository's reported
+checks as its own verification.
 
 Each writer uses a separate registered worktree and a task branch. One coordinator
 owns manifests, lockfiles, source integration and protected PR promotion for this

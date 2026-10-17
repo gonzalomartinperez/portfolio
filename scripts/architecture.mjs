@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse } from "@babel/parser";
 
-const codePattern = /\.(?:[cm]?js|jsx|tsx?)$/;
+const codePattern = /\.(?:[cm]?[jt]s|[jt]sx)$/;
 const nodeModules = new Set(builtinModules.map((name) => name.replace(/^node:/, "")));
 const publicEntries = new Set([
   "solar-system/presentation/ambient-field.tsx",
@@ -158,10 +158,23 @@ function resolveInternal(from, specifier, sources) {
     : path.posix.normalize(path.posix.join(path.posix.dirname(from), specifier));
   const candidates = [
     base,
-    ...[".ts", ".tsx", ".d.ts", ".js", ".jsx", ".mjs", ".json"].map(
-      (extension) => base + extension,
+    ...[
+      ".ts",
+      ".tsx",
+      ".mts",
+      ".cts",
+      ".d.ts",
+      ".d.mts",
+      ".d.cts",
+      ".js",
+      ".jsx",
+      ".mjs",
+      ".cjs",
+      ".json",
+    ].map((extension) => base + extension),
+    ...[".ts", ".tsx", ".mts", ".cts", ".js", ".jsx", ".mjs", ".cjs"].map(
+      (extension) => `${base}/index${extension}`,
     ),
-    ...[".ts", ".tsx", ".js", ".jsx"].map((extension) => `${base}/index${extension}`),
   ];
   return candidates.find((candidate) => sources.has(candidate));
 }

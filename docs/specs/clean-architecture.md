@@ -56,9 +56,9 @@ See [research](../research/clean-architecture.md) and
 | AC-1 | Integrated module map, independent source review and seven owned feature directories. Fifteen relocated CSS files are byte-identical. |
 | AC-2 | Parsed audit of all 152 source modules passes without cycles or reversed dependencies; 16 graph integrity tests cover both locales and orientations. |
 | AC-3 | Production build and 21 rendered checks pass; independent review confirms explicit server-only figures/content registry/carousel composition and type-only carousel display contracts. |
-| AC-4 | Fifteen architecture fixture tests pass, including negative dependency, runtime/type cycle, transport, client/server and environment I/O cases. Repository checks require this command in the mandatory quality chain. |
-| AC-5 | Final `ASSISTANT_ENABLED=true npm run check` passes all 151 tests, lint, strict builds, document verification and budgets. Contract regeneration has no drift; both dependency audits report zero vulnerabilities. Existing CI browser/compatibility/aggregate requirements and limits are unchanged. |
-| AC-6 | Research, module contract, engineering standards and confirmed session ownership are documented. Exact Pequeverso repository/branch confirmation remains explicitly pending; this session does not modify those repositories. |
+| AC-4 | Sixteen architecture fixture tests pass, including negative dependency, runtime/type cycle, transport, client/server and environment I/O cases. Repository checks require this command in the mandatory quality chain. |
+| AC-5 | Final `ASSISTANT_ENABLED=true npm run check` passes all 152 tests, lint, strict builds, document verification and budgets. Contract regeneration has no drift; both dependency audits report zero vulnerabilities. Existing CI browser/compatibility/aggregate requirements and limits are unchanged. |
+| AC-6 | Research, module contract, engineering standards and confirmed session ownership are documented. All four session scopes are confirmed in the coordination record; this session does not modify the other owners' repositories. |
 
 Browser evidence: the scoped desktop/mobile, EN/ES, light/dark run exercised 20
 existing cases: 19 passed and mobile English carousel accessibility hit the existing
@@ -72,3 +72,9 @@ presentation-only explorer-state placement. Full native browser and GLIBC 2.28
 verification run on the exact PR head before protected integration; follow those
 Actions results for release evidence. Public API contracts, PDFs, content claims,
 hosting configuration and default-off assistant activation are unchanged.
+
+
+A cross-session read-only review reproduced an extension coverage gap: `.mts` and
+`.cts` source could be treated as non-code. The final guard recognizes all supported
+JS/TS module suffixes and a negative fixture verifies layer and transitive
+client/server rejection for `.mts`, `.cts`, `.mjs` and `.cjs`.

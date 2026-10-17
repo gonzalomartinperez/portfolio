@@ -19,6 +19,7 @@ folder layout is universally best.
 ## Scope of enforcement
 
 The guard audits repository source modules and their explicit dependency edges.
+It audits `.ts`, `.tsx`, `.mts`, `.cts`, `.js`, `.jsx`, `.mjs` and `.cjs` modules.
 It resolves the project's `@/` alias, relative imports, declaration files, JSON,
 CSS and owned image resources. It follows runtime edges from every `use client`
 entrypoint to detect reachable `server-only` markers and Node builtins; type-only
