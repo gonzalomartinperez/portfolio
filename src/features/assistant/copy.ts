@@ -1,4 +1,6 @@
-export type Locale = "en" | "es";
+import type { Locale } from "./domain/models";
+
+export type { Locale } from "./domain/models";
 
 const translations = {
   en: {

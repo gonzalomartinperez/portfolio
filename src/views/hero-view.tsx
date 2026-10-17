@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { HeroStage } from "@/components/hero/hero-stage";
-import { StaticConstellation } from "@/components/hero/static-constellation";
-import { TechConstellation } from "@/components/hero/tech-constellation";
 import { Mark } from "@/components/mark";
 import { buttonVariants } from "@/components/ui/button";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
+import { HeroStage } from "@/features/hero/presentation/hero-stage";
+import { StaticConstellation } from "@/features/hero/presentation/static-constellation";
+import { TechConstellation } from "@/features/hero/presentation/tech-constellation";
 import styles from "./hero.module.css";
 
 export function HeroView({ locale }: { locale: Locale }) {

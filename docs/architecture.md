@@ -41,6 +41,54 @@ flowchart TB
 | Decorative motion | Three.js provides the hero and solar scenes; GSAP coordinates the hero with native scrolling. Static fallbacks, reduced motion, visibility suspension, context recovery, and scoped motion holds remain separate from content. |
 | Build and hosting | One locked npm installation and a type-checked Next.js build produce prerendered routes for managed Node.js hosting. Native Hostinger deployment follows `main`; repository CI does not configure the hosting account. |
 
+## Source module contract
+
+```mermaid
+flowchart TB
+    APP["app · Next.js composition"] --> VIEWS["views · Server page composition"]
+    APP --> SHELL["shell · Persistent navigation and presentation"]
+    VIEWS --> FEATURE["features · Explicit named entrypoints"]
+    SHELL --> FEATURE
+    FEATURE --> MODEL["Feature domain · Models and pure policies"]
+    FEATURE --> ADAPTER["Feature adapters · Rendering or transport"]
+    ADAPTER --> MODEL
+    MODEL --> CONTENT["content · Reviewed inputs and neutral contracts"]
+    FEATURE --> SHARED["components · Shared presentation and owned UI"]
+    SHARED --> CONTENT
+    SHARED --> LIB["lib · Shared utilities and motion coordination"]
+    classDef composition fill:#dbeafe,stroke:#2563eb,color:#1e3a8a;
+    classDef domain fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e;
+    classDef shared fill:#ede9fe,stroke:#7c3aed,color:#4c1d95;
+    class APP,VIEWS,SHELL,FEATURE composition;
+    class MODEL,CONTENT domain;
+    class ADAPTER,SHARED,LIB shared;
+```
+
+| Module | Responsibility and allowed dependencies |
+| --- | --- |
+| `src/app` | Framework routes, metadata and root composition; never imported by lower layers. |
+| `src/views` | Server-rendered page composition using reviewed content, shared components and feature entry files. |
+| `src/shell` | Persistent header/footer, locale/theme controls and page motion. Features do not import it. |
+| `src/features/hero` | Pure geometry and visual curation in `domain`, Three.js/GSAP in `adapters`, React/CSS in `presentation`. The OG image may use the explicit geometry entry. |
+| `src/features/solar-system` | Scene model in `domain`, browser renderers in `adapters`, React explorer state and scene/explorer UI in `presentation`. |
+| `src/features/architecture-diagrams` | Framework-free graph contracts, layout and routing in `domain`; server figure and narrow lazy canvas in `presentation`. |
+| `src/features/technology-catalogue` | Pure search policy and interactive catalogue; selected data comes from server page composition. |
+| `src/features/tool-carousel` | Server selection passes minimal display fields to client motion and controls. |
+| `src/features/project-gallery` | Gallery interaction and its owned styles. |
+| `src/features/assistant` | Independent domain and application ports, concrete API adapters, presentation and an explicit runtime composition entry. |
+| `src/components` | Reused presentation; owned `ui` primitives cannot import content or product features. |
+| `src/content` | Reviewed bilingual inputs and neutral data contracts. No dependency on features or rendering. |
+| `src/lib` | Shared utilities and scoped motion coordination; no content, features or composition imports. |
+
+Feature entries are deliberately named files rather than broad export barrels.
+The full bilingual content registry, diagram figure and carousel composition use
+`server-only` markers so client imports cannot silently expand their runtime.
+`npm run test:architecture` enforces dependency direction, public entries, all-import
+cycles and transitive client/server boundaries through parsed source. Contract types
+are included in layering checks; only runtime edges participate in client traversal.
+See [engineering standards](engineering-standards.md) for CI, toolchain ownership and
+cross-session coordination, and [research](research/clean-architecture.md) for tradeoffs.
+
 ### Motion and navigation
 
 There are no visitor-facing pause buttons for the hero, page background, or immersive solar explorer. Motion still respects `prefers-reduced-motion`, stops in hidden documents, and recovers from WebGL context loss. The assistant can temporarily hold covered decorative motion through a scoped release mechanism. The technology carousel retains its own pause control and hover, focus, visibility, and touch behavior.
@@ -77,7 +125,7 @@ The exporter excludes private notes, evidence paths, phone numbers, vacancies, a
 
 ## Native assistant integration
 
-The assistant frontend is part of this application; its backend is not. The [assistant feature](../src/features/assistant/) separates domain models, an application controller, transport adapters, and presentation. [The root-layout host](../src/components/assistant/assistant-host.tsx) creates one lazy conversation runtime and preserves it across minimizing, resizing, locale changes, and internal navigation.
+The assistant frontend is part of this application; its backend is not. The [assistant feature](../src/features/assistant/) separates domain models, an application controller, transport adapters, and presentation. [The root-layout host](../src/features/assistant/presentation/assistant-host.tsx) creates one lazy conversation runtime and preserves it across minimizing, resizing, locale changes, and internal navigation.
 
 ```mermaid
 sequenceDiagram

@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { ExperienceArchitecture } from "@/components/experience-architecture";
 import { ExternalLink } from "@/components/external-link";
-import { GalleryCarousel } from "@/components/gallery-carousel";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +9,8 @@ import { getContent } from "@/content";
 import { filomenaGallery } from "@/content/filomena-gallery";
 import imageDimensions from "@/content/filomena-image-dimensions.json";
 import { type Locale, localePath } from "@/content/locales";
+import { ExperienceArchitecture } from "@/features/architecture-diagrams/presentation/experience-architecture";
+import { GalleryCarousel } from "@/features/project-gallery/gallery-carousel";
 import { cn } from "@/lib/utils";
 import styles from "./filomena.module.css";
 

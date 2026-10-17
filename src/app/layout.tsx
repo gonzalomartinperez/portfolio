@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { AmbientField } from "@/components/ambient-field";
-import { AssistantHost } from "@/components/assistant/assistant-host";
-import { PageMotion } from "@/components/page-motion";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
 import { defaultLocale } from "@/content/locales";
 import { solarTextureVersions } from "@/content/solar-textures";
 import { isAssistantEnabled } from "@/features/assistant/application/availability";
+import { AssistantHost } from "@/features/assistant/presentation/assistant-host";
+import { AmbientField } from "@/features/solar-system/presentation/ambient-field";
+import { PageMotion } from "@/shell/page-motion";
+import { SiteFooter } from "@/shell/site-footer";
+import { SiteHeader } from "@/shell/site-header";
 import { layoutMetadata, sharedViewport } from "@/views/metadata";
 import { ProfileJsonLd } from "@/views/profile-json-ld";
 import { fontClassName } from "./fonts";

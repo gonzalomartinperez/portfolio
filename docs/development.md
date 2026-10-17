@@ -22,8 +22,11 @@ comments, JSDoc and the final clarity review. It is shared by both agent hosts.
 For public text and visual evidence, read [editorial guidelines](editorial-guidelines.md)
 and the relevant section of the [public-content contract](public-content.md).
 
-- Keep routes in `src/app/`. Colocate feature code first; extract shared components
-  or utilities when actual reuse or a meaningful boundary justifies it.
+- Keep routes in `src/app/`, page composition in `src/views/`, and persistent
+  navigation in `src/shell/`. Colocate feature code under `src/features/`; extract
+  shared components only for real reuse. Follow the enforced
+  [module contract](architecture.md#source-module-contract) and
+  [engineering standards](engineering-standards.md).
 - Prefer focused functions, explicit inputs, descriptive names, composition, and
   small modules. Avoid generic repositories, service layers, or dependency injection
   frameworks for a static portfolio.
@@ -41,7 +44,8 @@ and the relevant section of the [public-content contract](public-content.md).
 ## Verification
 
 Run `npm ci` after dependency changes, then `npm run check` and `git diff --check`.
-`check` covers repository invariants, lint, formatting of Biome-supported files,
+`check` starts with `test:architecture`: negative fixtures and a complete parsed
+source dependency audit. It also covers repository invariants, lint, formatting of Biome-supported files,
 and one build with mandatory TypeScript validation;
 it does not provide a security audit or visual accessibility QA. After building,
 `npm run test:smoke` checks the production server, HTML landmarks, and 404 handling;

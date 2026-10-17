@@ -8,7 +8,7 @@ import {
   buildStaticLayers,
   POINT_COUNT_STATIC,
   projectConstellation,
-} from "../src/components/hero/constellation.ts";
+} from "../src/features/hero/domain/constellation.ts";
 import { SceneBudgetPlugin } from "./scene-budget-plugin.mjs";
 
 test("static scene batches every deterministic square without changing its position", () => {
@@ -63,7 +63,10 @@ test("scene budget counts shared vendors once across both deferred scenes", () =
           getChunkModulesIterable: (chunk) => {
             if (chunk === scene)
               return [
-                { identifier: () => "C:/src/components/hero/scene-runtime.ts|app-pages-browser" },
+                {
+                  identifier: () =>
+                    "C:/src/features/hero/adapters/scene-runtime.ts|app-pages-browser",
+                },
               ];
             if (chunk === solar)
               return [
@@ -71,7 +74,8 @@ test("scene budget counts shared vendors once across both deferred scenes", () =
                   identifier: () => "concatenated",
                   modules: [
                     {
-                      identifier: () => "/src/components/solar-system-engine.ts|app-pages-browser",
+                      identifier: () =>
+                        "/src/features/solar-system/adapters/solar-system-engine.ts|app-pages-browser",
                     },
                   ],
                 },

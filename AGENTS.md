@@ -52,7 +52,10 @@ unmerged work. Dependabot's own standard branch names are reserved for its bot P
 
 ## Code review rules
 
-For code changes and reviews, read [the code-quality standard](docs/code-quality.md).
+For code changes and reviews, read [the code-quality standard](docs/code-quality.md)
+and [engineering standards](docs/engineering-standards.md). Preserve the enforced
+[module contract](docs/architecture.md#source-module-contract); run
+`npm run test:architecture` before integrating new dependencies between modules.
 Prefer self-explanatory code and necessary comments; preserve meaningful API docs,
 compatibility rationale, type annotations and tool directives.
 
