@@ -831,6 +831,18 @@ export const technologyCatalog: Technology[] = [
     icon: "langgraph",
   },
   {
+    id: "langsmith",
+    name: "LangSmith",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      { label: "Rampy", href: "/work#rampy" },
+      { label: "Teamcubation", href: "/work#teamcubation" },
+    ],
+    icon: "langsmith",
+  },
+  {
     id: "rag",
     name: "RAG",
     category: "applied-ai",

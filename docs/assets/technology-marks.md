@@ -190,3 +190,18 @@ not redrawn. The shared white logo tile preserves the original colors in both
 themes, and adjacent text supplies each tool's accessible name. SVGs contain
 local geometry without scripts, event handlers, embedded images, or external
 references. No runtime CDN, new icon dependency, or employer attribution is added.
+
+## LangSmith
+
+The confirmed Rampy and Teamcubation catalog entry uses the official LangSmith
+symbol from [LangChain brand assets](https://www.langchain.com/brand-assets),
+reviewed 2026-10-17. The local `public/brands/langsmith.svg` is the unmodified
+[light-background SVG](https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/6a9936e596131f0a19b2c18d_Clip%20path%20group.svg):
+63 × 63 viewport, original `#030710` fill and proportions. SHA-256:
+`7b59bcb805b0637f25fb36f1c6638ce4e850758e17e5930e6906304dfa70c99f`.
+
+The brand page permits documentation and community use subject to its usage
+guidelines; this is not a claim of a CC0 license. The shared white tile supplies
+contrast in both themes, with the visible LangSmith name alongside the mark.
+No remote requests, SDK integration, tracing activation or customer-data export
+are introduced by this catalog addition.
