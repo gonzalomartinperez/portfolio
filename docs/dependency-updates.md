@@ -27,7 +27,9 @@ branch list is not a reason to delete unmerged work.
 
 The metadata workflow checks out only trusted default-branch policy scripts with
 credentials disabled, never a PR checkout. It installs no dependencies and executes
-no PR scripts. Permissions are contents/pull-requests/Actions/checks **read only**.
+no PR scripts. Permissions are limited to contents and pull-requests **read only**. The trusted
+`.nvmrc` selects the same Node.js baseline as ordinary CI; no package installation
+or cache is needed.
 Its optional GitHub GraphQL POST is a fixed read query; mutations are not exposed
 by the transport. Untrusted titles, bodies, names and payloads are not interpolated
 into shell commands. API errors produce fixed messages without response bodies.
@@ -87,3 +89,6 @@ merge and does not change the source classifier's behavior.
 
 References: [Dependabot options](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)
 and [secure Actions use](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions).
+
+The [implementation specification](specs/manual-dependency-review.md) records scope
+and local verification; the delivery PR records protected CI and publication.

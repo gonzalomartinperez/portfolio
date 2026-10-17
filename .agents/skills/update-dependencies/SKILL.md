@@ -6,6 +6,9 @@ description: Evaluate or apply requested dependency upgrades using supported sta
 # Update Dependencies
 
 1. Read AGENTS.md, package.json, the lockfile, and .nvmrc. Distinguish evaluation from authorized upgrades.
+   For Dependabot proposals, follow [the manual dependency policy](../../../docs/dependency-updates.md):
+   metadata assessment and `dependencies:manual` never authorize a merge. Preserve
+   pending proposals and use the current head’s required CI and actual human review.
 2. Read [the compatibility procedure](references/compatibility.md) for runtime,
    compiler or browser upgrades; it identifies this repository's coupled files and
    evidence requirements without freezing version numbers in the skill.

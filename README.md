@@ -332,6 +332,7 @@ On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 | `npm run typecheck` | Fast standalone type validation without a production build |
 | `npm run test:secrets` | Scan tracked files/history with verified Gitleaks and synthetic regression probes |
 | `npm run test:secrets:artifacts` | Scan the sanitized CI transfer; see the development guide |
+| `npm run test:dependency-policy` | Verify read-only dependency assessment and negative update fixtures |
 | `npm run test:analytics` | Check the frozen ingest schema, closed dimensions and bounded delivery failures |
 | `npm run test:architecture` | Check negative fixtures, module boundaries, cycles and client/server separation |
 | `npm run test:repository` | Check UTF-8, local links, skill adapters, and compiler version alignment |
@@ -379,6 +380,7 @@ updated without giving the public build access to private sources.
 | [Code-quality standard](docs/code-quality.md) | Readable code, necessary comments, useful API documentation |
 | [Editorial guidelines](docs/editorial-guidelines.md) | Natural bilingual copy, evidence-aware claims, technology and brand presentation |
 | [Public-content contract](docs/public-content.md) | Approved data projection, generated CV and reviewed document releases |
+| [Dependency updates](docs/dependency-updates.md) | Manual Dependabot review, trusted metadata assessment and operator inspection |
 | [Technology guide](docs/technology.md) | Version policy, compatibility, and maintenance |
 | [LinkedIn branding](docs/linkedin-branding.md) | Reviewed Featured thumbnail, provenance and manual-upload assets |
 | [CI efficiency](docs/research/ci-efficiency.md) | Measured timing, complete balanced coverage and package-cache strategy |

@@ -414,6 +414,10 @@ test("published workflow remains read-only and executes only trusted policy sour
   assert.doesNotMatch(workflow, /:\s*write\b|pull_request\.head|npm (?:ci|install)|gh pr merge/);
   assert.match(workflow, /ref: \$\{\{ github\.event\.repository\.default_branch \}\}/);
   assert.match(workflow, /persist-credentials: false/);
+  assert.match(workflow, /node-version-file: \.nvmrc/);
+  assert.doesNotMatch(workflow, /actions: read|checks: read/);
+  const manifest = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
+  assert.match(manifest.scripts.check, /npm run test:dependency-policy/);
   const config = readFileSync(new URL("../.github/dependabot.yml", import.meta.url), "utf8");
   assert.equal((config.match(/labels: \["dependencies:manual"\]/g) ?? []).length, 3);
   assert.equal((config.match(/rebase-strategy: auto/g) ?? []).length, 3);

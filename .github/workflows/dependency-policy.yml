@@ -19,8 +19,6 @@ on:
 permissions:
   contents: read
   pull-requests: read
-  actions: read
-  checks: read
 
 jobs:
   assess:
@@ -35,11 +33,17 @@ jobs:
           ref: ${{ github.event.repository.default_branch }}
           persist-credentials: false
           sparse-checkout: |
+            .nvmrc
+            package.json
             scripts/dependency-policy.mjs
             scripts/dependency-policy.test.mjs
             .github/dependabot.yml
             .github/workflows/dependency-policy.yml
           sparse-checkout-cone-mode: false
+      - name: Use the repository Node.js baseline
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
       - name: Verify trusted policy fixtures
         run: node --test scripts/dependency-policy.test.mjs
       - name: Assess metadata without mutation
