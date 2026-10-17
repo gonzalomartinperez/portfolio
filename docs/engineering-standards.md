@@ -58,7 +58,7 @@ Restore with `nvm use` and `npm ci`; never share `node_modules` across worktrees
 Runtime and development compatibility are distinct: current application hosting
 also verifies Node 24.6 on GLIBC 2.28, while development uses Node 24.22.
 
-At this review the portfolio locks Next/SWC 16.4.2, React 19.3.0, TypeScript 7.0.2,
+At this review the portfolio locks Next/SWC 16.4.2, React 19.3.1, TypeScript 7.0.2,
 Biome 2.5.15 and Playwright 1.64.1. The browser package and official Noble image
 are updated together, with the registry manifest digest pinned in CI. These are
 verified repository selections, not universal cross-repository pins or permanent

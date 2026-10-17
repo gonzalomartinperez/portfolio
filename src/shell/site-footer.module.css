@@ -81,6 +81,13 @@
   padding-top: var(--space-5);
 }
 
+.privacyNote {
+  color: var(--text-secondary);
+  font-size: var(--text-small);
+  line-height: 1.6;
+  padding-top: var(--space-3);
+}
+
 .credits {
   align-items: center;
   color: var(--text-secondary);
