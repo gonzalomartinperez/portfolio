@@ -27,7 +27,7 @@ Prefer supported, compatible stable releases over automatically adopting every
 new major. TypeScript 7 is a stable compiler release, not an LTS claim.
 Major upgrades require a clean dependency installation and all project checks.
 
-Next.js 16.3.5 uses the project-local TypeScript CLI by default. This enables TS7
+Next.js 16.4.2 uses the project-local TypeScript CLI by default. This enables TS7
 without its missing JavaScript compiler API. Next.js still labels this integration
 experimental; its adoption here is an explicit, tested compatibility decision,
 not a claim that every tool supports TS7. No extra experimental flags or ignored
@@ -52,8 +52,8 @@ by Dependabot PR #49: Biome 2.5.14 and `@types/node` 24.13.5. That PR was closed
 at the owner's request so these versions are validated with the whole migration.
 No independent major upgrade is implied by the consolidation.
 
-`package-lock.json` is the only dependency lockfile. The original npm snapshot
-was restored with updated root engine metadata, preserving application versions.
+The application and isolated API-contract generator have separate committed npm
+lockfiles; the latter retains its own compatible compiler-API dependency.
 `.npmrc` enforces exact saves, strict peers and runtime engines. Install
 lifecycle scripts remain disabled; native optional packages remain enabled.
 Review script requirements explicitly when adding dependencies. Strict peers
@@ -65,16 +65,17 @@ does not provide that same policy. Review release dates and advisories in depend
 PRs, run `npm audit`, and do not force audit fixes. Exact versions and integrity
 hashes improve repeatability; they do not establish that a dependency is safe.
 
-CI uses SHA-pinned actions, read-only permissions, two complementary jobs,
-the npm bundled with each Node version, and an npm download cache keyed by the lockfile.
+CI uses SHA-pinned actions, read-only permissions, complementary quality, browser
+and hosting jobs, the npm bundled with each Node version, and an npm download cache keyed by the lockfile.
 The development lane reads `.nvmrc`; the hosting lane pins the observed Node 24.6.0.
 Corepack is not invoked. The required `Quality checks`
-gate fails if either job fails or is skipped/cancelled. CI never caches
-`node_modules` or shares build output across operating systems. Obsolete runs are
-cancelled and each run has a timeout. Local and development CI use the same `check`:
+gate fails if any required lane fails or is skipped/cancelled. CI never caches
+`node_modules`. The eight isolated browser groups reuse the quality lane's
+production build on compatible Linux runners; the hosting lane builds independently.
+Obsolete runs are cancelled and each run has a timeout. Local and development CI use the same `check`:
 repository invariants, lint and one production build with mandatory TypeScript
-validation. Standalone `typecheck` remains available for fast iteration. No compiler
-is invoked twice in the full check. `build` invokes only Next.js,
+validation. Standalone `typecheck` remains available for fast iteration. No redundant standalone whole-application type check precedes the build; the
+assistant retains its additional strict scoped check. `build` invokes only Next.js,
 so Hostinger does not need to execute Biome's incompatible native binary. Next.js
 type validation remains enabled. Production uses the supported Webpack build option;
 development retains Turbopack. The JavaScript module `next.config.mjs` retains
@@ -101,3 +102,6 @@ References: [npm clean installation](https://docs.npmjs.com/cli/v11/commands/npm
 Dependencies are pinned and reviewed through Dependabot PRs into `develop`.
 Updates never merge automatically. Node type definitions stay on the runtime's
 major version; reevaluate that constraint when intentionally upgrading Node.
+
+The [2026-10-17 toolchain review](research/toolchain-2026-10-17.md) records the
+current selected patches, official evidence and retained hosting exception.

@@ -11,7 +11,14 @@ description: Implement a requested portfolio feature or refactor with focused Ne
    and [public-content boundaries](../../../docs/public-content.md); generated CV
    outputs must come from reviewed source, not independent edits.
 3. Use App Router and Server Components by default. Keep client boundaries narrow, validate external input, and never expose secrets through props or public environment variables.
-4. Colocate code, use clear types and composition, and extract reusable components only for actual shared behavior or a useful boundary. Avoid speculative generalization and unrelated refactors.
+4. Before adding imports, use the [module contract](../../../docs/architecture.md#source-module-contract)
+   to choose ownership. Keep pure policy in the feature's domain, environment I/O in
+   adapters and React state in presentation. Compose through existing named entry
+   files; adding a generic barrel or weakening the guard is not a boundary fix.
+   Run `npm run test:architecture` after dependency changes, including type-only ones.
+   Do not import the complete bilingual content registry into client components;
+   pass the smallest serializable display data from server composition.
+   Colocate code, use clear types and composition, and extract reusable components only for actual shared behavior or a useful boundary. Avoid speculative generalization and unrelated refactors.
    Apply [the shared code-quality standard](../../../docs/code-quality.md), then
    inspect the diff for narration comments and unnecessary doc blocks. Preserve
    comments that carry real constraints; simplify unclear code before explaining it.
