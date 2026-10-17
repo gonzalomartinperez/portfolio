@@ -42,6 +42,7 @@ export const filomena: Project = {
     "React",
     "Next.js",
     "TypeScript",
+    "MariaDB",
     "MySQL",
     "Redis",
     "Docker",
@@ -145,7 +146,8 @@ export const filomenaCaseStudy = {
     { layer: "API", detail: "Una API REST Laravel como contrato único para cada cliente." },
     {
       layer: "Datos",
-      detail: "MySQL, con diseño de índices y tuning de consultas en los caminos de examen.",
+      detail:
+        "MariaDB fue la elección final de base de datos; también utilizamos MySQL durante el proyecto. El diseño de índices y la optimización de consultas acompañaron los flujos de examen.",
     },
     { layer: "Caché y colas", detail: "Redis para caché y para trabajo asincrónico." },
     {
