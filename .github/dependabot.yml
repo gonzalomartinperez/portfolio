@@ -3,6 +3,8 @@ updates:
   - package-ecosystem: npm
     directory: /
     target-branch: develop
+    rebase-strategy: auto
+    labels: ["dependencies:manual"]
     ignore:
       - dependency-name: "@types/node"
         update-types: [version-update:semver-major]
@@ -10,11 +12,25 @@ updates:
       interval: weekly
     open-pull-requests-limit: 3
     groups:
-      compatible-updates:
+      type-patches:
+        patterns: ["@types/react", "@types/react-dom"]
+        update-types: [patch]
+      reviewed-updates:
+        exclude-patterns: ["@types/react", "@types/react-dom"]
         update-types: [minor, patch]
+  - package-ecosystem: npm
+    directory: /tooling/api-contract
+    target-branch: develop
+    rebase-strategy: auto
+    labels: ["dependencies:manual"]
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 2
   - package-ecosystem: github-actions
     directory: /
     target-branch: develop
+    rebase-strategy: auto
+    labels: ["dependencies:manual"]
     schedule:
       interval: weekly
     open-pull-requests-limit: 3

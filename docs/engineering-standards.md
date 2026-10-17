@@ -101,3 +101,7 @@ actual served routes separately when an authorized release is deployed.
 
 Task PRs target `develop`; only `develop` releases to `main`. Assistant activation,
 VPS deployment, account changes and secret management remain separate decisions.
+
+Dependency proposals follow the [manual review policy](dependency-updates.md).
+The trusted metadata assessment has read-only permissions and cannot merge or
+approve proposals; dependency-policy fixtures run inside the ordinary source gate.
