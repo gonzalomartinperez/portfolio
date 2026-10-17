@@ -21,6 +21,7 @@ reviewed CVs, a focused technology catalog and a realistic, readable 3D solar sc
 
 **[gonzalomartinperez.com](https://gonzalomartinperez.com)** ·
 [Gallery](#gallery) · [Architecture](docs/architecture.md) · [Design system](docs/design.md) ·
+[Engineering standards](docs/engineering-standards.md) ·
 [Development workflow](docs/development.md) · [Technology decisions](docs/technology.md)
 
 </div>
@@ -131,6 +132,10 @@ flowchart TB
     class APP,SHELL,VIEWS app;
     class CHAT,API,HOST boundary;
 ```
+
+Feature modules have explicit entry files, pure models and narrow client boundaries.
+CI rejects dependency cycles, reversed layers, private module imports and client paths
+to server-only code. See the [source module contract](docs/architecture.md#source-module-contract).
 
 The portfolio has no application database or model-provider key. Reviewed content and documents are committed inputs; the optional assistant talks directly to a separately deployed API. [Explore the application, CV publication, and assistant boundaries](docs/architecture.md).
 

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { cloudEntrance, layoutCloud } from "../src/components/hero/cloud-layout.ts";
+import { cloudEntrance, layoutCloud } from "../src/features/hero/domain/cloud-layout.ts";
 
 for (const [width, height] of [
   [320, 650],

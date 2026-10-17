@@ -1,0 +1,90 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { chrome } from "@/content/chrome";
+import { defaultLocale, htmlLang, type Locale, localePath } from "@/content/locales";
+import { navigationPath } from "@/content/routes";
+import { Mark } from "../components/mark";
+import { LocaleSwitcher } from "./locale-switcher";
+import styles from "./site-header.module.css";
+import { ThemeToggle } from "./theme-toggle";
+
+function localeFromPath(pathname: string): Locale {
+  return pathname === "/es" || pathname.startsWith("/es/") ? "es" : defaultLocale;
+}
+
+export function SiteHeader() {
+  const pathname = navigationPath(usePathname());
+  const locale = localeFromPath(pathname);
+  const copy = chrome[locale];
+
+  // The document is served as English so both languages share one layout tree, which is what
+  // makes switching a client-side navigation. Correct the root language once mounted; the
+  // Spanish content itself already carries `lang` in the server HTML for assistive technology.
+  useEffect(() => {
+    document.documentElement.lang = htmlLang[locale];
+  }, [locale]);
+
+  const routes = [
+    { path: "/about", label: copy.nav.about },
+    { path: "/work", label: copy.nav.work },
+    { path: "/stack", label: copy.nav.stack },
+    { path: "/education", label: copy.nav.education },
+    { path: "/cv", label: copy.nav.cv },
+    { path: "/contact", label: copy.nav.contact },
+  ];
+
+  return (
+    <>
+      <a className="skip-link" href="#main" lang={htmlLang[locale]}>
+        {copy.skipToContent}
+      </a>
+      <header className={styles.header}>
+        <div className={`frame ${styles.inner}`}>
+          <Link
+            aria-label={`Gonzalo Martin Perez — ${copy.roleSubtitle}`}
+            className={styles.brand}
+            href={localePath(locale, "/")}
+          >
+            <Mark size={44} />
+            <span className={styles.brandText}>
+              <span className={styles.brandName}>Gonzalo Martin Perez</span>
+              <span className={styles.brandRole}>{copy.roleSubtitle}</span>
+            </span>
+          </Link>
+
+          <nav aria-label={copy.mainNavLabel} className={styles.nav}>
+            <ul className={styles.list}>
+              {routes.map((route) => {
+                const href = localePath(locale, route.path);
+                const active = pathname === href || pathname.startsWith(`${href}/`);
+                return (
+                  <li key={route.path}>
+                    <Link
+                      aria-current={active ? "page" : undefined}
+                      className={styles.link}
+                      href={href}
+                    >
+                      {route.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <div className={styles.controls}>
+            <LocaleSwitcher label={copy.languageLabel} locale={locale} pathname={pathname} />
+            <ThemeToggle
+              neutralLabel={copy.themeToggleNeutral}
+              toDarkLabel={copy.themeToDark}
+              toLightLabel={copy.themeToLight}
+            />
+          </div>
+        </div>
+      </header>
+    </>
+  );
+}

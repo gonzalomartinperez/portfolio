@@ -154,3 +154,41 @@ test("browser shards reuse the same workflow's verified build without rebuilding
   assert.doesNotMatch(browser, /run-id:|repository:|github-token:|npm run (check|build)/);
   assert.match(browser, /name: browser-verification-\$\{\{ matrix\.shard \}\}/);
 });
+
+test("architecture enforcement remains in the mandatory development check", () => {
+  const manifest = JSON.parse(read("package.json"));
+  assert.match(manifest.scripts.check, /^npm run test:architecture && /);
+  assert.equal(
+    manifest.scripts["test:architecture"],
+    "node --test scripts/architecture.test.mjs && node scripts/architecture.mjs",
+  );
+  assert.match(read(".github/workflows/ci.yml"), /run: npm run check/);
+});
+
+test("direct toolchain versions are reproducible and aligned with the lockfile", () => {
+  const manifest = JSON.parse(read("package.json"));
+  const lock = JSON.parse(read("package-lock.json"));
+  for (const group of ["dependencies", "devDependencies"]) {
+    assert.deepEqual(manifest[group], lock.packages[""][group]);
+    for (const [name, version] of Object.entries(manifest[group])) {
+      assert.match(version, /^\d+\.\d+\.\d+$/, `Pin a stable exact version: ${name}`);
+      assert.equal(lock.packages[`node_modules/${name}`].version, version, name);
+    }
+  }
+  assert.match(read(".nvmrc").trim(), /^\d+\.\d+\.\d+$/);
+  assert.match(manifest.packageManager, /^npm@\d+\.\d+\.\d+$/);
+});
+
+test("module aliases remain supported by the architecture resolver", () => {
+  const config = JSON.parse(read("tsconfig.json"));
+  assert.deepEqual(
+    config.compilerOptions.paths,
+    { "@/*": ["./src/*"] },
+    "Extend architecture resolution and its negative fixtures before adding aliases",
+  );
+  assert.equal(
+    config.extends,
+    undefined,
+    "Inherited compiler aliases need explicit architecture support",
+  );
+});

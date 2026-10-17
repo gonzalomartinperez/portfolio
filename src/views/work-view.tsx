@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { CompanyMark } from "@/components/company-mark";
-import { ExperienceArchitecture } from "@/components/experience-architecture";
 import { ExternalLink } from "@/components/external-link";
 import { MetricList } from "@/components/metric-list";
 import { PageHeader } from "@/components/page-header";
@@ -10,6 +9,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
+import { ExperienceArchitecture } from "@/features/architecture-diagrams/presentation/experience-architecture";
 import { cn } from "@/lib/utils";
 import styles from "./work.module.css";
 

@@ -50,7 +50,7 @@ jobs:
           npm audit --prefix tooling/api-contract --audit-level=moderate
       - name: Reject generated contract drift
         run: git diff --exit-code -- src/contracts
-      - name: Check repository, lint, types, and production build
+      - name: Check architecture, repository, lint, types, and production build
         run: npm run check
       - name: Verify server-rendered routes
         run: npm run test:rendered
