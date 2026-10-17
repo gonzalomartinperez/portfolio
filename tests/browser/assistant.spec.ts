@@ -21,6 +21,15 @@ test("native compact panel, sources and maximization preserve a single conversat
   expect(backend.requests()).toBe(0);
   await page.getByRole("button", { name: "Send", exact: true }).click();
   await expect(page.getByText(answer, { exact: true })).toBeVisible();
+  const response = page.locator("#portfolio-assistant article").filter({ hasText: answer });
+  const responseWidth = await response.evaluate((element) => {
+    const body = element.lastElementChild;
+    return {
+      message: element.getBoundingClientRect().width,
+      body: body?.getBoundingClientRect().width ?? 0,
+    };
+  });
+  expect(responseWidth.body).toBeCloseTo(responseWidth.message, 0);
   if (testInfo.project.name === "desktop")
     await page
       .locator("#portfolio-assistant")

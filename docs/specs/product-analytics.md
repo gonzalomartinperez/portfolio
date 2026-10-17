@@ -281,12 +281,12 @@ records final commit and protected CI receipts separately.
 ### Client implementation verification — 2026-10-17
 
 The default-off public client is implemented against the immutable contract receipt
-above. `npm run check` passed with 174 Node tests across architecture, analytics,
+above. `npm run check` passed with 175 Node tests across architecture, analytics,
 repository/models, assistant, content and budgets, plus lint, strict production
 compilation, approved document/identity checks and the frozen assistant contract.
-The runtime code was unchanged during subsequent focused test/document refinements.
+The final pass includes the refined EN/ES privacy copy and bounded architecture guard.
 All 22 rendered assertions passed on the enabled synthetic build. The browser
-planner preserves all 440 pre-existing identities and includes 18 new ones: 458
+planner preserves all 440 pre-existing identities and includes 22 new ones: 462
 identities across the existing eight groups, without new build jobs or weaker
 retries, deadlines or budgets.
 
@@ -320,11 +320,11 @@ fixture on. They measure transfer sizes, not physical-device rendering or a spee
 | Measurement | Before | Candidate |
 | --- | ---: | ---: |
 | Non-assistant CSS | 24,521 bytes | 24,541 bytes (24 KiB budget unchanged) |
-| Largest prerendered HTML | 62,250 bytes | 63,286 bytes (70 KiB budget unchanged) |
-| Home initial script tags, distinct gzip files | 234,413 bytes | 237,374 bytes |
-| Contact initial script tags, distinct gzip files | 225,853 bytes | 228,815 bytes |
+| Largest prerendered HTML | 62,250 bytes | 63,338 bytes (70 KiB budget unchanged) |
+| Home initial script tags, distinct gzip files | 234,413 bytes | 237,466 bytes |
+| Contact initial script tags, distinct gzip files | 225,853 bytes | 228,907 bytes |
 
-The roughly 2.9 KiB initial-script increase covers the combined analytics/privacy
+The roughly 3.0 KiB initial-script increase covers the combined analytics/privacy
 increment, not an isolated attribution to one module. These sums are build artifacts,
 not proof every script is fetched simultaneously or a field Core Web Vitals result.
 Eight theme/locale/viewport privacy captures were visually inspected; oversized
@@ -359,3 +359,46 @@ framework convention was renamed. Kebab-case modules, PascalCase React component
 and Next.js reserved filenames remain intact; small features are not forced into
 empty layers. This tooling-only follow-up does not change the measured runtime
 build above; the delivery CI verifies the final complete source.
+
+
+### Final privacy and documentation review
+
+The refined notice invites useful question context, identifies OpenAI processing and
+session/history behavior, and points to the actual conversation list for removal.
+Synthetic EN/ES transport cases verify that optional identifying context reaches
+only the conversation operation, never the closed website event payload. These
+fixtures do not prove backend minimization, provider retention or model behavior.
+Assistant message bodies retain their full available width without a side avatar
+column; compact/expanded continuity and narrow reflow remain covered. A global
+academic-disclosure test selector was scoped to `main` after protected CI correctly
+found that the independent footer disclosure increased its unrelated count.
+
+The three public README diagrams and the private career workflow diagram parsed and
+rendered in light and dark themes using isolated official Mermaid 12.2.0 tooling.
+All eight captures were visually inspected, with non-loopback requests blocked and
+none attempted. No application dependency or private-source diagram service was
+added. This local audit does not establish GitHub's deployed renderer version.
+Badges retain text alternatives and flat-square styling with technology logos where
+available. The private README and its diagram remain private.
+
+The reviewed improvement process is documented separately from delivered functions:
+bounded usage aggregates and explicit feedback inform human review, synthetic or
+reviewed de-identified regression fixtures, and protected source/content releases.
+There is no automatic training claim or raw-conversation analytics pipeline. The
+API/backoffice owner controls any separate feedback aggregate delivery and access.
+
+
+On the final enabled candidate, the full check passed with 175 Node tests; all 22
+rendered assertions, 12 privacy browser cases, 20 selected assistant flows across
+Chromium desktop/mobile, Firefox and WebKit, and both no-JavaScript academic cases
+passed. The final source/history guard passed all 15 regression probes and the
+tracked snapshot; its sanitized build-artifact scan passed 544 files. The frozen
+planner verified all 462 current test identities across the existing eight groups.
+These are local results; exact-head protected CI and public rollout checks remain
+separate delivery receipts. No provider request or production collection was used.
+
+The final disabled build independently passed its unchanged budgets and the combined
+local helper: all 22 rendered assertions followed by both desktop/mobile rollout
+cases, with no assistant/analytics requests, launcher, cookies or fresh-context
+storage. The disabled sanitized artifact was also scanned before restoring its
+normal runtime manifests. Public rollout flags remain false.

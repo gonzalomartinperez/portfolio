@@ -1,8 +1,43 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { fixture, open } from "./helpers/assistant-fixture";
+import { answer, fixture, open } from "./helpers/assistant-fixture";
 
 for (const locale of ["en", "es"] as const) {
+  test(`${locale} voluntary question context goes only to the conversation API`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    const events: unknown[] = [];
+    await page.route("**/api/v1/analytics/events", async (route) => {
+      events.push(route.request().postDataJSON());
+      await route.fulfill({ status: 204 });
+    });
+    const backend = await fixture(page);
+    await open(page, locale);
+    const question =
+      locale === "en"
+        ? "I am Synthetic Example, qa-context@example.invalid. How does Gonzalo approach software quality?"
+        : "Soy Persona de Ejemplo, qa-context@example.invalid. ¿Cómo aborda Gonzalo la calidad del software?";
+    await page.locator("#question").fill(question);
+    await page
+      .getByRole("button", { name: locale === "en" ? "Send" : "Enviar", exact: true })
+      .click();
+    await expect(page.getByText(answer, { exact: true })).toBeVisible();
+    expect(backend.submissions()).toEqual([expect.objectContaining({ content: question, locale })]);
+    await expect.poll(() => events.length).toBe(1);
+    expect(JSON.stringify(events)).not.toContain("qa-context@example.invalid");
+    expect(JSON.stringify(events)).not.toContain(question);
+    const privacy = page.locator("[data-assistant-privacy]");
+    await privacy.locator("summary").click();
+    await expect(privacy).toContainText("OpenAI");
+    await expect(privacy).not.toContainText(
+      /do not share|do not include|no compartas|no incluyas/i,
+    );
+    await expect(page.locator("#portfolio-assistant")).not.toContainText(
+      /public questions only|solo preguntas públicas/i,
+    );
+  });
+
   test(`${locale} privacy disclosures are keyboard accessible and match enabled features`, async ({
     page,
   }) => {
