@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, realpathSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
@@ -36,6 +37,44 @@ test("inline Markdown file links resolve", () => {
       );
     }
   }
+});
+
+test("software licensing preserves the MIT text, metadata and separate content scope", () => {
+  const license = read("LICENSE").replaceAll("\r\n", "\n").trim();
+  const heading = /^MIT License\n\nCopyright \(c\) \d{4}(?:-\d{4})? [^\n]+\n\n/;
+  assert.match(license, heading);
+  const terms = license.replace(heading, "").replace(/\s+/g, " ");
+  // The official MIT terms stay intact; scope and third-party notices belong outside LICENSE.
+  assert.equal(
+    createHash("sha256").update(terms).digest("hex"),
+    "fe2a9817987f862eaced948f0468c7f51d2fedfc48c5c505b246a49a3870e9a5",
+  );
+  for (const directory of ["", "tooling/api-contract/"]) {
+    const manifest = JSON.parse(read(`${directory}package.json`));
+    const lock = JSON.parse(read(`${directory}package-lock.json`));
+    assert.equal(manifest.license, "MIT", directory);
+    assert.equal(lock.packages[""].license, manifest.license, directory);
+    assert.equal(manifest.private, true, "Licensing does not authorize npm publication");
+  }
+  const readme = read("README.md");
+  assert.match(readme, /^## Software license$/m);
+  assert.match(readme, /\[MIT License\]\(LICENSE\)/);
+  assert.match(readme, /\[content scope and third-party notices\]\(NOTICE\.md\)/);
+  const notice = read("NOTICE.md");
+  for (const section of [
+    "Original software",
+    "Personal content and media",
+    "Third-party materials",
+  ])
+    assert.ok(notice.includes(`## ${section}`), section);
+  for (const location of [
+    "src/content/",
+    "public/documents/",
+    "public/brands/",
+    "public/images/solar-system/",
+    "docs/gallery/",
+  ])
+    assert.ok(notice.includes(location), location);
 });
 
 test("Claude skill adapters match canonical metadata and targets", () => {

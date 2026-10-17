@@ -376,9 +376,16 @@ English and Spanish. Task branches follow `type/kebab-case-description` naming a
 deleted after integration; `main` and `develop` remain protected. See the development
 guide and [contribution guide](CONTRIBUTING.md) before contributing.
 
-## Rights
+## Software license
 
-All rights reserved; no reuse license is granted. Dependencies retain their own
-licenses; planet textures are credited on the site and in the
-[solar asset record](docs/assets/solar-system.md). This GitHub repository is public;
-`"private": true` in `package.json` only prevents accidental publication to npm.
+The original application code, build/test tooling and technical documentation are
+licensed under the [MIT License](LICENSE), copyright 2026 Gonzalo Martin Perez.
+The separate [content scope and third-party notices](NOTICE.md) identify personal
+content, media and third-party materials that are not relicensed by that grant.
+
+`"private": true` in both package manifests continues to prevent accidental npm
+publication; this repository is public and its software license is MIT. The
+existing repository checks enforce the license text, package metadata and notice links.
+
+References: [official MIT text](https://opensource.org/license/mit) ·
+[GitHub repository licensing guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository).
