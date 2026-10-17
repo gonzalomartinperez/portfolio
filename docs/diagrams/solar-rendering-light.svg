@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1578" viewBox="0 0 640 1578" role="img" aria-labelledby="title description">
+<title id="title">A scene that protects the page.</title><desc id="description">The server renders a complete fallback with matching camera and orbits. Deferred texture loading and pre-frame preparation feed a single render pass; a cached quarter-resolution reading mask feeds that pass independently. Adaptive quality feeds back into rendering. The fallback crossfades only once the first frame is ready. Reduced motion, missing WebGL, failed textures and context loss retain the static scene; hidden tabs suspend rendering.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#526A88" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="640" height="1578" rx="24" fill="#F7F9FC"/>
+<g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+<text x="32" y="43" font-size="17" font-weight="700" fill="#0A6E9B" letter-spacing="2">SOLAR SCENE / RENDERING</text>
+<text x="32" y="84" font-size="30" font-weight="700" fill="#132238">A scene that protects the page.</text>
+<text x="32" y="117" font-size="20" font-weight="400" fill="#40526B">Complete fallback → prepared first frame → adaptive rendering</text>
+<rect x="72" y="150" width="536" height="190" rx="18" fill="#EEF3FA" stroke="#CBD5E1" stroke-width="1.5"/>
+<text x="94" y="184" font-size="17" font-weight="650" fill="#40526B" letter-spacing="1">ALWAYS AVAILABLE · SERVER RENDERED</text>
+<rect x="96" y="208" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="228" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="242" font-size="25" font-weight="650" fill="#132238">Complete static scene</text>
+<text x="118" y="272" font-size="20" font-weight="400" fill="#40526B">Matching camera and orbital positions</text>
+<text x="118" y="298" font-size="20" font-weight="400" fill="#40526B">CSS terminators · Content remains readable</text>
+<text x="545" y="241" font-size="16" font-weight="650" fill="#0A6E9B">01</text>
+<rect x="72" y="386" width="536" height="956" rx="18" fill="#EEF3FA" stroke="#CBD5E1" stroke-width="1.5"/>
+<text x="94" y="420" font-size="17" font-weight="650" fill="#40526B" letter-spacing="1">DEFERRED BROWSER ENGINE · THREE.JS</text>
+<rect x="96" y="444" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="464" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="478" font-size="25" font-weight="650" fill="#132238">Load only the detail needed</text>
+<text x="118" y="508" font-size="20" font-weight="400" fill="#40526B">Size-matched texture variants</text>
+<text x="118" y="534" font-size="20" font-weight="400" fill="#40526B">Off-main-thread image decode</text>
+<text x="545" y="477" font-size="16" font-weight="650" fill="#0A6E9B">02</text>
+<path d="M 340 552 V 586" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="96" y="586" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="606" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="620" font-size="25" font-weight="650" fill="#132238">Prepare before revealing</text>
+<text x="118" y="650" font-size="20" font-weight="400" fill="#40526B">Upload maps · Compile shader programs</text>
+<text x="118" y="676" font-size="20" font-weight="400" fill="#40526B">Place every body before the first frame</text>
+<text x="545" y="619" font-size="16" font-weight="650" fill="#0A6E9B">03</text>
+<rect x="96" y="742" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="762" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="776" font-size="25" font-weight="650" fill="#132238">Protect the reading area</text>
+<text x="118" y="806" font-size="20" font-weight="400" fill="#40526B">Cached text-block geometry</text>
+<text x="118" y="832" font-size="20" font-weight="400" fill="#40526B">Quarter-resolution reading mask</text>
+<text x="545" y="775" font-size="16" font-weight="650" fill="#0A6E9B">04</text>
+<path d="M 96 640 H 52 V 1008 H 96" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M 340 850 V 916" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="362" y="886" font-size="18" font-weight="400" fill="#40526B">Mask input</text>
+<rect x="96" y="916" width="488" height="144" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="936" width="4" height="104" rx="2" fill="#0A6E9B"/>
+<text x="118" y="950" font-size="25" font-weight="650" fill="#132238">One render pass</text>
+<text x="118" y="980" font-size="20" font-weight="400" fill="#40526B">Bodies · Corona · Stars · Belts</text>
+<text x="118" y="1006" font-size="20" font-weight="400" fill="#40526B">Baked Milky Way</text>
+<text x="118" y="1032" font-size="20" font-weight="400" fill="#40526B">Crossfade with the aligned static scene</text>
+<text x="545" y="949" font-size="16" font-weight="650" fill="#0A6E9B">05</text>
+<path d="M 584 262 H 624 V 988 H 584" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="7 6"/>
+<rect x="96" y="1210" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="1230" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="1244" font-size="25" font-weight="650" fill="#132238">Adapt without quality thrashing</text>
+<text x="118" y="1274" font-size="20" font-weight="400" fill="#40526B">Calibrated display refresh · Hysteresis</text>
+<text x="118" y="1300" font-size="20" font-weight="400" fill="#40526B">Hidden tabs suspend rendering</text>
+<text x="545" y="1243" font-size="16" font-weight="650" fill="#0A6E9B">06</text>
+<path d="M 340 1060 V 1210" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M 96 1264 H 24 V 1036 H 96" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="96" y="1365" font-size="17" font-weight="650" fill="#0A6E9B" letter-spacing="1">FALLBACK IS A COMPLETE SCENE</text>
+<text x="96" y="1398" font-size="20" font-weight="400" fill="#40526B">Reduced motion · Missing WebGL</text>
+<text x="96" y="1427" font-size="20" font-weight="400" fill="#40526B">Texture failure · Context loss</text>
+<path d="M 34 1480 H 70" fill="none" stroke="#526A88" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="84" y="1487" font-size="19" font-weight="400" fill="#40526B">Flow / dependency</text>
+<path d="M 34 1516 H 70" fill="none" stroke="#526A88" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="84" y="1523" font-size="19" font-weight="400" fill="#40526B">Dashed = first-frame crossfade</text>
+<text x="34" y="1552" font-size="19" font-weight="400" fill="#40526B">Conceptual pipeline · Not a frame-rate or timing guarantee.</text>
+</g>
+</svg>
