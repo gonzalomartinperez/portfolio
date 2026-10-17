@@ -51,10 +51,10 @@ reuse it to link events or describe the entire site as storage-free. The persist
 footer is `src/shell/site-footer.tsx`, already using the shared locale/chrome contract.
 The assistant remains disabled under the existing deployment contract.
 
-The coordinated ops draft is an attributed private operator handoff at
-`vps-ops/docs/handoffs/analytics-and-dashboards.md`, source `55955bc`; it is not a
-public-build dependency. The API owner's current operations counters are best-effort
-observations, not audited visitor, generation or billing totals.
+Earlier operations proposals provide context only; the accepted public contract
+and client limits are reproduced here without requiring access to private runbooks.
+The API owner's existing operations counters are best-effort observations, not
+audited visitor, generation or billing totals.
 
 ```mermaid
 flowchart TB

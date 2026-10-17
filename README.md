@@ -364,6 +364,9 @@ updated without giving the public build access to private sources.
 | [src/features](src/features/) | Feature-owned models, adapters and interactive presentation |
 | [src/components](src/components/) | Reusable presentation, identity marks and owned UI primitives |
 | [src/content](src/content/) | Typed per-locale content and the shared interface-copy contract |
+| [tests](tests/) / [scripts](scripts/) | Browser/rollout cases, source and contract tests, build/QA tooling |
+| [.github](.github/) | Trusted workflows and repository maintenance configuration |
+| [.agents/skills](.agents/skills/) | Canonical procedures; Claude adapters link to these |
 | [Architecture](docs/architecture.md) | Application boundaries, reviewed CV publication, and the disabled assistant integration |
 | [Design system](docs/design.md) | Direction, tokens for both themes, typography, motion, the hero field |
 | [Solar scene spec](docs/specs/immersive-solar-scene.md) | Acceptance criteria, rendering decisions and measured verification |
@@ -384,6 +387,12 @@ updated without giving the public build access to private sources.
 | [AGENTS.md](AGENTS.md) / [CLAUDE.md](CLAUDE.md) | Shared agent contract and Claude entrypoint |
 
 </details>
+
+Place route conventions in `src/app`, server composition in views/shell and
+cohesive behavior in its owned feature. Tests and build tooling stay separate from
+application code; documentation records decisions and bounded evidence. Names
+follow existing TypeScript/React conventions and Next.js reserved filenames; small
+features do not need empty layers. See the [enforced module map](docs/architecture.md#source-module-contract).
 
 Code, documentation, and commit messages are English; the published interface ships in
 English and Spanish. Task branches follow `type/kebab-case-description` naming and are
