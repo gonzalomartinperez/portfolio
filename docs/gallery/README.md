@@ -18,4 +18,7 @@ node scripts/capture-gallery.mjs
 profile, then has Chromium downscale them with high-quality smoothing and encode WebP at
 quality 0.86 (1920 px wide for desktop, 780 px for mobile). The hero is frozen with its
 `sceneProgress` parameter; the solar scene runs normally, so each capture is one frame of a
-continuous animation. Captured on 2026-10-13 from the `develop` build that became release v1.1.0.
+continuous animation. Captured on 2026-10-13 from `develop` during the preparation
+cohort originally labeled `v1.1.0`. The [release history](../release-history.md#historical-source-anchors)
+preserves that label's original source anchor. Relabeling a later cut does not
+regenerate these captures or transfer their verification to the newer source.
