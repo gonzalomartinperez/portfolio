@@ -21,6 +21,7 @@ export type ChromeCopy = {
   footerSite: string;
   footerElsewhere: string;
   colophon: string;
+  footerPrivacyNote: string;
   pauseMotion: string;
   resumeMotion: string;
   planetTextureCredit: string;
@@ -49,6 +50,8 @@ export const chrome: Record<Locale, ChromeCopy> = {
     footerSite: "Site",
     footerElsewhere: "Profiles",
     colophon: "Built with Next.js, React and TypeScript.",
+    footerPrivacyNote:
+      "Privacy: no tracking cookies. Your theme preference is saved on this device.",
     pauseMotion: "Pause page motion",
     resumeMotion: "Resume page motion",
     planetTextureCredit: "Planet textures adapted from",
@@ -75,6 +78,8 @@ export const chrome: Record<Locale, ChromeCopy> = {
     footerSite: "Sitio",
     footerElsewhere: "Perfiles",
     colophon: "Desarrollado con Next.js, React y TypeScript.",
+    footerPrivacyNote:
+      "Privacidad: sin cookies de seguimiento. Tu preferencia de tema se guarda en este dispositivo.",
     pauseMotion: "Pausar movimiento de la página",
     resumeMotion: "Reanudar movimiento de la página",
     planetTextureCredit: "Texturas planetarias adaptadas de",

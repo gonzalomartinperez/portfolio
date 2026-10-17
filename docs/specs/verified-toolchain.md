@@ -1,6 +1,6 @@
 # Verified toolchain and agent procedures
 
-Status: implemented; protected acceptance is recorded on the delivery PR.
+Status: done
 
 ## Outcome and scope
 
@@ -53,3 +53,12 @@ hash/path pairs are reviewed false positives, not blanket path or rule exclusion
 No actual credentials, matched values or raw reports were printed or published.
 Community/link, metadata, strict lint and diff checks were run on the integrated
 candidate; live publication remains distinct from these source checks.
+
+
+Protected task PR #142 accepted source `ee49600f9f030d9dce44165c91a4665624ccbc3b`
+with [CI 39053092065](https://github.com/gonzalomartinperez/portfolio/actions/runs/39053092065).
+Release PR #143 accepted `ba1788065d5b72976efbfc6fcae86f1eae2bc7b9` with
+[CI 39053666179](https://github.com/gonzalomartinperez/portfolio/actions/runs/39053666179),
+including quality, all eight browser groups and Hostinger/GLIBC 2.28. The resulting
+main source is `6e0fcd1c8925dd788ae1d2433355fe514fd1ae73`. These are source/CI
+receipts; post-merge CI and actual hosting publication are separate observations.

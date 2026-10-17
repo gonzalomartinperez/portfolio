@@ -13,12 +13,16 @@ hosting settings and other repositories remain outside scope.
 | Playwright | 1.63.0 | 1.64.1 | Stable browser tooling, package and official Noble image updated together |
 | Node types | 24.19.1 | 24.19.2 | Runtime-major-aligned type definitions |
 | PostCSS | 8.5.29 | 8.5.30 | Compatible source-map escaping fix |
+| React / DOM | 19.3.0 | 19.3.1 | Separately verified stable transport-protocol patch at the finite review cut |
 | TypeScript | 7.0.2 | 7.0.2 | Retain supported tested compiler |
 | Biome | 2.5.15 | 2.5.15 | Retain supported tested formatter |
 
-React stays at 19.3.0. Runtime library feature updates are not implicitly adopted
-with toolchain patches. Dependabot PR #139 also proposes Radix and Lucide changes;
-those remain independently reviewable rather than broadening this increment.
+The initial toolchain increment retained React 19.3.0 and kept runtime-library
+updates separate. The finite 17:35 UTC follow-up reviewed React/DOM 19.3.1, Radix
+Dialog 1.3.1, Radix Slot 1.5.0 and Lucide 1.57.0 through Dependabot PR #144.
+That PR passed every required gate before merging; it changes only the application
+manifest and lockfile. This is a dated tested selection, not an open-ended promise
+to chase every later release.
 The isolated contract generator retains its own compiler-compatible lockfile.
 Babel Parser 7.29.9 stays dev-only and supports the older hosting runtime; the
 architecture guard does not require every repository to use the same parser.
@@ -74,3 +78,13 @@ maintainer ownership, feedback, authorized development, CI acceptance and observ
 publication. GitHub private reporting was observed disabled; the existing private
 email channel is documented without changing settings, license or visibility.
 The repository description now matches the reviewed three-role positioning.
+
+
+The [React 19.3.1 release](https://github.com/react/react/releases/tag/v19.3.1)
+documents a Server Components transport-protocol improvement; React DOM requires
+the matching React line. Review of the
+[Radix release notes](https://www.radix-ui.com/primitives/docs/overview/releases)
+and the precise bot diff preserves owned component adaptations and accessibility
+checks. No new framework, provider SDK or generated visual asset was introduced.
+The initial PR #142/#143 receipts remain historical evidence; the follow-up's
+head is `433234bfc9072f5f8932d0d0641d50e86e2ab446` in PR #144.

@@ -87,6 +87,9 @@ export function SiteFooter() {
         <span>{copy.colophon}</span>
         <SolarExplorer locale={locale} />
       </div>
+      <p className={`frame ${styles.privacyNote}`} data-privacy-note>
+        {copy.footerPrivacyNote}
+      </p>
       <p className={`frame ${styles.credits}`} data-visual-credits>
         <span>{copy.planetTextureCredit}</span>
         <ExternalLink href="https://www.solarsystemscope.com/textures/" locale={locale}>
