@@ -17,6 +17,10 @@ description: Verify a portfolio change for handoff and prepare a Conventional Co
    404; enabled fixture acceptance is not production activation.
    Include production smoke results for application, compiler or runtime changes.
 3. Inspect public content, tracked artifacts, metadata, and staged changes for credentials, private documents, unsupported claims, and machine-specific data. Never echo suspected secrets.
+   Use the [redacted secret-review procedure](references/secret-review.md) when
+   checking source, Git history or built client output. Record scan coverage and
+   sanitized findings, not matched values or surrounding source. A failed scan
+   does not authorize key creation, provider access or live credential rotation.
    For editorial or document changes, check [editorial guidelines](../../../docs/editorial-guidelines.md)
    and the [public-content release boundary](../../../docs/public-content.md): matching
    facts, reviewed generated outputs and hash-versioned downloads. Select remaining
@@ -26,5 +30,8 @@ description: Verify a portfolio change for handoff and prepare a Conventional Co
 6. Push only when authorized and the remote and target match the task. Task branches use PRs into develop; only this repository's develop may use a release PR into main. Never push directly to protected branches, force-push, bypass checks, or push a local integration merge. Verify remote visibility and synchronization; check CI when available.
 7. Report commit, repository state, validation evidence, and limits. A successful push does not prove deployment or DNS configuration, and a clean lint does not prove security.
    For release PRs, confirm checks belong to the latest head before merging;
-   immediately after a push, GitHub can still display the previous run. Record
+   compare the checked SHA with the current PR head and verify every required job,
+   including browser groups, hosting compatibility and the aggregate gate. A green
+   earlier run or another repository's reported checks cannot establish acceptance.
+   Immediately after a push, GitHub can still display the previous run. Record
    Hostinger's deployed source separately from GitHub CI and live HTTP checks.

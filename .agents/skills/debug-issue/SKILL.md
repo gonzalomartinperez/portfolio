@@ -11,7 +11,11 @@ description: Reproduce and diagnose a portfolio defect, then fix it only when re
    and OS/architecture/system-library constraints. Read docs/deployment.md before
    changing the working Hostinger build. A warning followed by successful WASM
    compilation is not the same as a failed native compiler with no fallback.
-3. Separate symptoms from hypotheses. Use the smallest read-only experiment that distinguishes competing causes; do not change unrelated dependencies or kill unrelated processes.
+3. If the source guard fails after a move, follow its reported dependency path.
+   Decide which module owns the behavior before changing an import or adding an
+   entrypoint. For a guard defect, preserve a minimal failing fixture; do not exempt
+   a whole feature to get the source tree green.
+   Separate symptoms from hypotheses. Use the smallest read-only experiment that distinguishes competing causes; do not change unrelated dependencies or kill unrelated processes.
 4. For an authorized fix, add a focused regression check that exposes the defect, change the underlying cause, and verify the check now passes.
    Follow [the shared code-quality standard](../../../docs/code-quality.md) for
    fixes and workaround comments; keep only verified rationale and a useful removal
@@ -22,4 +26,9 @@ description: Reproduce and diagnose a portfolio defect, then fix it only when re
    use [task-specific QA](../../../docs/development.md#task-specific-qa) for regression coverage.
    For stale CV downloads, compare the rendered hash-versioned link and response
    bytes with the manifest before changing caching or hosting configuration.
-6. Use the verification and warning policy in docs/development.md. Report the cause, evidence, correction if authorized, and unresolved uncertainty. Stop when further action needs a new account, destructive reset, or expanded scope.
+6. If a failure suggests exposed credentials, follow the
+   [secret-review procedure](../prepare-delivery/references/secret-review.md).
+   Use sanitized finding metadata rather than reading `.env` or dumping request,
+   response, cookie, process-environment or provider logs. Separate diagnosis,
+   proposed remediation and any separately authorized rotation execution.
+   Use the verification and warning policy in docs/development.md. Report the cause, evidence, correction if authorized, and unresolved uncertainty. Stop when further action needs a new account, destructive reset, or expanded scope.

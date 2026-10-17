@@ -7,7 +7,7 @@ principles do not authorize one session to change another repository or deploy i
 
 | Session | Exclusive scope | Coordination boundary |
 | --- | --- | --- |
-| Portfolio | Public `portfolio`, task `refactor/clean-architecture` | Site architecture, client integration, quality rules and public documentation. No API, infrastructure or private career edits in this task. |
+| Portfolio | Public `portfolio`, task `build/verified-toolchain-2026-10-17` | Site architecture, client integration, quality rules and public documentation. No API, infrastructure or private career edits in this task. |
 | Portfolio assistant | `portfolio-assistant-api`, `portfolio-assistant-backoffice` | API, security and backoffice use cases. Existing public API contracts stay stable; changes require a reviewed contract handoff. |
 | Pequeverso | `pequeverso`, `pequeverso-assistant-api`, `pequeverso-assistant-backoffice` | Product storefront, assistant API and backoffice. No portfolio, career or infrastructure writes and no implicit assistant activation. |
 | VPS operations | Private `vps-ops`, task `refactor/clean-architecture` | Inventory, runtime baseline, Coolify/reverse proxies, operations CLI, Ansible and recovery procedures. No application writes or implicit deployment. |
@@ -56,13 +56,14 @@ The executable authorities are `.nvmrc`, `package.json`, both committed lockfile
 `playwright.config.ts`, and the pinned browser image in `.github/workflows/ci.yml`.
 Restore with `nvm use` and `npm ci`; never share `node_modules` across worktrees.
 Runtime and development compatibility are distinct: current application hosting
-also verifies Node 24.6 on GLIBC 2.28, while development uses Node 24.21.
+also verifies Node 24.6 on GLIBC 2.28, while development uses Node 24.22.
 
-At this review the portfolio locks Next 16.4.0, React 19.3.0, TypeScript 7.0.2,
-Biome 2.5.15 and Playwright 1.63.0. The coordinated backoffice baseline uses
-Playwright 1.64.0; the portfolio retains its tested CLI/browser/image combination.
-Upgrade them together through a separate compatibility-verified task, rather than
-silently changing this architecture refactor's browser runtime. Babel Parser
+At this review the portfolio locks Next/SWC 16.4.2, React 19.3.0, TypeScript 7.0.2,
+Biome 2.5.15 and Playwright 1.64.1. The browser package and official Noble image
+are updated together, with the registry manifest digest pinned in CI. These are
+verified repository selections, not universal cross-repository pins or permanent
+claims of latest versions. See the [toolchain review](research/toolchain-2026-10-17.md).
+Babel Parser
 7.29.9 is dev-only and compatible with both retained Node baselines.
 
 Direct dependencies use exact versions and lockfiles; CI tests that contract.

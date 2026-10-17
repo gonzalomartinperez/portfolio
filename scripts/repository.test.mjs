@@ -192,3 +192,27 @@ test("module aliases remain supported by the architecture resolver", () => {
     "Inherited compiler aliases need explicit architecture support",
   );
 });
+
+test("quality scans tracked history and uploaded build artifacts with verified tooling", () => {
+  const workflow = read(".github/workflows/ci.yml");
+  const quality = workflow.split("  validate:")[1].split("  browser:")[0];
+  assert.match(quality, /fetch-depth: 0/);
+  assert.match(quality, /gitleaks\/releases\/download\/v8\.30\.1/);
+  assert.match(quality, /sha256sum --check --status/);
+  assert.match(quality, /run: node scripts\/ci-build-artifact\.mjs prepare/);
+  assert.match(
+    workflow.split("  browser:")[1].split("  legacy-linux:")[0],
+    /run: node scripts\/ci-build-artifact\.mjs restore/,
+  );
+  assert.match(quality, /run: npm run test:secrets\n/);
+  assert.match(quality, /run: npm run test:secrets:artifacts\n/);
+  const commands = JSON.parse(read("package.json")).scripts;
+  assert.equal(
+    commands["test:secrets"],
+    "node --test scripts/secret-scan.test.mjs && node scripts/secret-scan.mjs",
+  );
+  assert.equal(commands["test:secrets:artifacts"], "node scripts/secret-scan.mjs --artifacts");
+  assert.ok(
+    quality.indexOf("run: npm run test:secrets:artifacts") > quality.indexOf("run: npm run check"),
+  );
+});

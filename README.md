@@ -22,6 +22,7 @@ reviewed CVs, a focused technology catalog and a realistic, readable 3D solar sc
 **[gonzalomartinperez.com](https://gonzalomartinperez.com)** ·
 [Gallery](#gallery) · [Architecture](docs/architecture.md) · [Design system](docs/design.md) ·
 [Engineering standards](docs/engineering-standards.md) ·
+[Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) ·
 [Development workflow](docs/development.md) · [Technology decisions](docs/technology.md)
 
 </div>
@@ -36,6 +37,24 @@ reviewed CVs, a focused technology catalog and a realistic, readable 3D solar sc
 | **Solar scene** | A single-pass Three.js renderer with physically motivated shaders, a baked Milky Way and a reading mask that keeps text contrast on every page. |
 | **Engineered quality** | Strict TypeScript, Biome, budgets, rendered checks and eight duration-balanced Playwright groups gate every pull request. |
 | **Reviewed delivery** | Task branch → `develop` → `main` through protected pull requests; native Hostinger deployment from `main`. |
+
+## Delivery status and ownership
+
+Developed and maintained exclusively by Gonzalo Martín Pérez, this public portfolio
+is live on managed Hostinger Node.js hosting. Suggestions, bug reports and constructive
+feedback are welcome through the existing [contact channels](https://gonzalomartinperez.com/contact);
+priorities, implementation, review and releases remain the maintainer's responsibility.
+
+This repository
+owns its website, reviewed public content and optional assistant client. The assistant
+API, private backoffice and VPS operations have separate owners and release gates;
+this application does not provision or operate them.
+
+The assistant remains **disabled** in the public delivery. Its implemented client
+and fixture-tested flows are not evidence of an activated production service.
+Specifications record intended behavior; [verification records](docs/verification/)
+record tested conditions. Required CI checks and an observed deployment are separate
+pieces of evidence, as described in [deployment](docs/deployment.md).
 
 ## Gallery
 
@@ -115,7 +134,7 @@ flowchart TB
     CONTENT["Typed EN / ES content<br/>Approved CV projection · Public assets"]
     APP["Next.js App Router<br/>Server-rendered pages · Metadata"]
     SHELL["Persistent root layout<br/>Navigation · Theme · Locale"]
-    VIEWS["Focused client views<br/>Hero · Solar scene · Architecture diagrams"]
+    VIEWS["Server page composition<br/>Narrow interactive feature boundaries"]
     CHAT["Lazy native assistant<br/>One controller · Draft & conversation continuity"]
     API["Separate assistant API<br/>REST + SSE · Session & CSRF"]
     HOST["Hostinger Node.js hosting<br/>Protected main → Native deployment"]
@@ -267,17 +286,23 @@ the compatibility decision and fallback.
 
 ## Run locally
 
-Use the Node.js version in [.nvmrc](.nvmrc) and its bundled npm 11.
-The hosting compatibility baseline is Node 24.6.0 with npm 11.5.1; CI also tests
-the newer local baseline. No Corepack setup or separate package-manager download
-is required. See [technology decisions](docs/technology.md) for the version policy.
+Use the exact Node.js version in [.nvmrc](.nvmrc), with an npm version satisfying
+[package.json](package.json). The committed [lockfile](package-lock.json) is the
+installation source of truth. Local tool versions and the separate managed-hosting
+compatibility baseline are documented in [technology decisions](docs/technology.md);
+a local upgrade does not change the hosting environment.
 
 ```sh
+nvm install
+nvm use
 npm ci
 npm run dev
 ```
 
-Open `http://localhost:3000`. No database, credentials, or external services are required.
+Open `http://localhost:3000`. No database, credentials, or external services are required
+for the default assistant-disabled site. Keep local configuration out of version control;
+see [configuration and assistant activation](docs/native-assistant.md)
+and the [deployment guide](docs/deployment.md) before changing deployment settings.
 On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 
 <details>
@@ -288,6 +313,9 @@ On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 | `npm run build` | Compile Next.js with Webpack for hosting compatibility; no Biome invocation |
 | `npm run check` | Repository checks, formatting, lint, and one production build with type validation |
 | `npm run typecheck` | Fast standalone type validation without a production build |
+| `npm run test:secrets` | Scan tracked files/history with verified Gitleaks and synthetic regression probes |
+| `npm run test:secrets:artifacts` | Scan the sanitized CI transfer; see the development guide |
+| `npm run test:architecture` | Check negative fixtures, module boundaries, cycles and client/server separation |
 | `npm run test:repository` | Check UTF-8, local links, skill adapters, and compiler version alignment |
 | `npm run test:smoke` | After `build`, check the production server responds correctly |
 | `npm run test:browser` | After `build`, exercise desktop/mobile routes, axe and scene fallbacks |
@@ -313,7 +341,10 @@ updated without giving the public build access to private sources.
 | Location | Contents |
 | --- | --- |
 | [src/app](src/app/) | Routes, layouts, metadata, and global styles |
-| [src/components](src/components/) | Shell, identity mark, theme toggle, language switcher, hero and solar scene |
+| [src/views](src/views/) | Server page composition |
+| [src/shell](src/shell/) | Persistent layout, navigation, locale and theme controls |
+| [src/features](src/features/) | Feature-owned models, adapters and interactive presentation |
+| [src/components](src/components/) | Reusable presentation, identity marks and owned UI primitives |
 | [src/content](src/content/) | Typed per-locale content and the shared interface-copy contract |
 | [Architecture](docs/architecture.md) | Application boundaries, reviewed CV publication, and the disabled assistant integration |
 | [Design system](docs/design.md) | Direction, tokens for both themes, typography, motion, the hero field |
@@ -321,6 +352,8 @@ updated without giving the public build access to private sources.
 | [Solar assets](docs/assets/solar-system.md) | Texture provenance, licenses and runtime sizes |
 | [Initial release spec](docs/specs/portfolio-initial-release.md) | Scope, acceptance criteria, and decisions |
 | [Research note](docs/research/portfolio-2026-09-12.md) | Sources behind those decisions, including the weak ones |
+| [Contributing](CONTRIBUTING.md) | Reproducible setup, focused checks, review and coordination |
+| [Security policy](SECURITY.md) | Private vulnerability reporting and safe evidence handling |
 | [Development guide](docs/development.md) | Code conventions, SDD, branches, agents, and review |
 | [Code-quality standard](docs/code-quality.md) | Readable code, necessary comments, useful API documentation |
 | [Editorial guidelines](docs/editorial-guidelines.md) | Natural bilingual copy, evidence-aware claims, technology and brand presentation |
@@ -337,7 +370,7 @@ updated without giving the public build access to private sources.
 Code, documentation, and commit messages are English; the published interface ships in
 English and Spanish. Task branches follow `type/kebab-case-description` naming and are
 deleted after integration; `main` and `develop` remain protected. See the development
-guide before contributing.
+guide and [contribution guide](CONTRIBUTING.md) before contributing.
 
 ## Rights
 

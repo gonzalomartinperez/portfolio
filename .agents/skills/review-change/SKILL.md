@@ -14,11 +14,21 @@ description: Review a portfolio diff for concrete correctness, security, accessi
    to check claim scope and locale consistency; compare affected CV and PDF outputs
    through the [public-content contract](../../../docs/public-content.md). Distinguish
    a factual divergence from a stylistic preference.
-3. Check whether new abstractions and dependencies solve an existing need. Do not demand complexity as a style preference or restate automated formatting findings.
+3. For moved modules or new imports, inspect the actual transitive graph with
+   `npm run test:architecture` and the [module contract](../../../docs/architecture.md#source-module-contract).
+   Review dynamic imports, re-exports and type dependencies, not just static imports
+   in the entry file. The guard does not certify third-party internals or arbitrary
+   runtime behavior. Changes to its policy need meaningful rejected-code fixtures
+   alongside valid cases; a green current source tree alone cannot prove enforcement.
+   Check whether new abstractions and dependencies solve an existing need. Do not demand complexity as a style preference or restate automated formatting findings.
    Use [the shared code-quality standard](../../../docs/code-quality.md) to review
    readability and comments. Distinguish missing rationale or misleading contracts
    from optional wording preferences; do not request blanket comment removal.
-4. Run safe checks where useful without editing tracked files. Separate verified findings from hypotheses and testing gaps.
+4. For secret-exposure review, follow the [redacted Git and build procedure](../prepare-delivery/references/secret-review.md).
+   Review the tracked source and the declared history range, not local environment
+   files or provider accounts. Keep detection evidence separate from remediation
+   and credential rotation; a review-only task authorizes neither.
+   Run safe checks where useful without editing tracked files. Separate verified findings from hypotheses and testing gaps.
    Review the applicable [QA matrix](../../../docs/development.md#task-specific-qa)
    cases; passing one locale or viewport does not establish the others.
 5. Report each actionable finding with severity, file and line, a concrete trigger, impact, and a focused suggested correction.
