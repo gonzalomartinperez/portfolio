@@ -85,6 +85,7 @@ const localMarks = new Set([
   "hibernate",
   "junit",
   "langgraph",
+  "langsmith",
   "modelcontextprotocol",
   "openapi",
   "python",

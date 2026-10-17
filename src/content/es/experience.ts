@@ -15,7 +15,7 @@ export const roles: Role[] = [
       "AI Engineer con alcance de ingeniería de producto de punta a punta: colaboro directamente con tres fundadores para definir prioridades y entregar funcionalidades productivas de IA, fintech, web y mobile desde la arquitectura y la implementación hasta la evaluación y la operación.",
     contributions: [
       "Reconstruí la arquitectura del producto de Rampy en producción: refactoricé todo el backend hacia una arquitectura hexagonal coherente y el frontend React/Next.js hacia dominios separados por funcionalidades del usuario, con un design system completo y abstracciones de componentes reutilizables.",
-      "Desarrollé flujos agénticos productivos con Agno, LangChain, LangGraph, OpenAI API y GraphRAG sobre Neo4j, con PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Combiné reranking con la evaluación de recorridos completos y selección de herramientas. Las pruebas de carga confirmaron respuestas al menos 2× más rápidas en flujos optimizados comparables; eliminar llamadas y contexto redundantes redujo los tokens de las consultas afectadas un 30% estimado.",
+      "Desarrollé flujos agénticos productivos con Agno, LangChain, LangGraph, OpenAI API y GraphRAG sobre Neo4j, con PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Combiné reranking con la evaluación de recorridos completos y selección de herramientas, con apoyo de LangSmith. Las pruebas de carga confirmaron respuestas al menos 2× más rápidas en flujos optimizados comparables; eliminar llamadas y contexto redundantes redujo los tokens de las consultas afectadas un 30% estimado.",
       "Reduje el arranque promedio medido de la app móvil de unos 7–8 segundos a 1–2 segundos; entregué funcionalidades con React Native, Kotlin y Swift, usando Android Studio para Android y verificando en emuladores y teléfonos reales.",
       "Implementé cifrado de extremo a extremo (E2EE) para las conversaciones de usuarios en la app en producción, con mensajes almacenados cifrados en la base de datos.",
       "Implementé tracking de eventos móviles de punta a punta con Google Analytics mediante Firebase, Clarity Mobile en todas las pantallas y Singular SDK para Meta App Events, coordinando integraciones para evitar duplicados. Diseñé, desarrollé, probé y desplegué una landing page para campañas de descargas.",
@@ -37,6 +37,7 @@ export const roles: Role[] = [
       "Agno",
       "LangChain",
       "LangGraph",
+      "LangSmith",
       "OpenAI API",
       "Google Vertex AI",
       "DeepInfra",
@@ -113,7 +114,7 @@ export const roles: Role[] = [
       "La plataforma de promociones de Payway, una fintech líder en América Latina, al servicio " +
       "de un ecosistema de 350.000+ comercios, 70+ emisores de tarjetas y 13 países.",
     contributions: [
-      "Construí un agente GraphRAG y su harness, conectados al BFF Spring WebFlux para acceder desde el portal de comercios. Combiné el contexto del grafo Neo4j con recuperación vectorial en PostgreSQL/pgvector mediante LangChain, LangGraph y OpenAI API para relacionar políticas empresariales y promociones. El harness orquestaba agentes, evaluaba respuestas, permitía optimizar rendimiento y aplicaba guardrails de dominio y protección de datos; el asistente respondía consultas sin ejecutar operaciones comerciales.",
+      "Construí un agente GraphRAG y su harness, conectados al BFF Spring WebFlux para acceder desde el portal de comercios. Combiné el contexto del grafo Neo4j con recuperación vectorial en PostgreSQL/pgvector mediante LangChain, LangGraph y OpenAI API para relacionar políticas empresariales y promociones. El harness orquestaba agentes, evaluaba respuestas con apoyo de LangSmith, permitía optimizar el rendimiento y aplicaba guardrails de dominio y protección de datos; el asistente respondía consultas sin ejecutar operaciones comerciales.",
       "Contribuí a una carga histórica de 20M+ promociones en producción, seguida de miles de promociones nuevas por día; implementé un flujo event-driven y serverless con Amazon S3, SQS y una Lambda Python/FastAPI con estrategias de procesamiento ordenado, conectada con microservicios Java/Spring Boot y Node.js/NestJS para cargar sus respectivas bases de datos PostgreSQL. La carga productiva completa se validó sin pérdida de datos.",
       "Entregué la experiencia de promociones de punta a punta: un microfrontend React y TypeScript con Single-SPA, organizado por funcionalidades y con un design system, embebido como sección nativa del portal de comercios y conectado mediante un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS y proveedores.",
       "Construí microservicios en Java/Spring Boot y TypeScript/Node.js/NestJS para ingerir, normalizar y procesar promociones de comercios, entidades financieras y proveedores, adaptando los contratos según cada integración.",
@@ -140,6 +141,7 @@ export const roles: Role[] = [
       "pgvector",
       "LangChain",
       "LangGraph",
+      "LangSmith",
       "OpenAI API",
       "GraphRAG",
       "Neo4j",

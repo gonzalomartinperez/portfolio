@@ -15,7 +15,7 @@ export const roles: Role[] = [
       "AI Engineer with end-to-end product engineering scope: partnering directly with three founders to shape priorities and ship production AI, fintech, web and mobile features across architecture, implementation, evaluation and operations.",
     contributions: [
       "Rebuilt Rampy’s product architecture in production: refactored the entire backend into a cohesive hexagonal architecture and the React/Next.js frontend into feature-based domains, with a complete design system and reusable component abstractions.",
-      "Built production agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j-backed GraphRAG, using PostgreSQL/pgvector, Mem0, Vertex AI and DeepInfra for retrieval, memory and model access. Combined reranking with evaluation of complete journeys and tool selection. Load tests confirmed at least 2× faster responses in comparable optimized workflows; removing redundant calls and context cut tokens in affected queries by an estimated 30%.",
+      "Built production agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j-backed GraphRAG, using PostgreSQL/pgvector, Mem0, Vertex AI and DeepInfra for retrieval, memory and model access. Combined reranking with LangSmith-assisted evaluation of complete journeys and tool selection. Load tests confirmed at least 2× faster responses in comparable optimized workflows; removing redundant calls and context cut tokens in affected queries by an estimated 30%.",
       "Cut measured average mobile app startup from about 7–8 seconds to 1–2 seconds; shipped React Native, Kotlin and Swift features, using Android Studio for Android development and testing in emulators and on physical devices.",
       "Implemented end-to-end encryption (E2EE) for user conversations in the production app, with messages persisted encrypted in the database.",
       "Implemented end-to-end mobile event tracking with Google Analytics through Firebase, Clarity Mobile on every screen, and Singular SDK for Meta App Events, coordinating integrations to prevent duplicate events. Designed, built, tested and deployed a campaign landing page for app downloads.",
@@ -37,6 +37,7 @@ export const roles: Role[] = [
       "Agno",
       "LangChain",
       "LangGraph",
+      "LangSmith",
       "OpenAI API",
       "Google Vertex AI",
       "DeepInfra",
@@ -113,7 +114,7 @@ export const roles: Role[] = [
       "The promotions platform for Payway, a leading Latin American fintech, serving an " +
       "ecosystem of 350,000+ merchants, 70+ card issuers and 13 countries.",
     contributions: [
-      "Built a GraphRAG agent and harness connected to the Spring WebFlux BFF for access through the merchant portal. Combined Neo4j graph context with PostgreSQL/pgvector retrieval using LangChain, LangGraph and OpenAI API to relate enterprise policies and promotions. The harness orchestrated agents, evaluated answers, supported performance tuning and enforced promotion-domain and data-leakage guardrails; the assistant answered queries without executing commercial actions.",
+      "Built a GraphRAG agent and harness connected to the Spring WebFlux BFF for access through the merchant portal. Combined Neo4j graph context with PostgreSQL/pgvector retrieval using LangChain, LangGraph and OpenAI API to relate enterprise policies and promotions. The harness orchestrated agents, evaluated answers with LangSmith support, enabled performance tuning and enforced promotion-domain and data-leakage guardrails; the assistant answered queries without executing commercial actions.",
       "Contributed to a historical production load of 20M+ promotions, followed by thousands of new promotions daily; implemented an event-driven, serverless flow with Amazon S3, SQS and a Python/FastAPI Lambda using ordered processing strategies, connected to Java/Spring Boot and Node.js/NestJS microservices that loaded their respective PostgreSQL databases. The complete production load was validated with zero data loss.",
       "Delivered the promotions experience end to end: a Single-SPA React and TypeScript microfrontend, organized by feature and using a design system, embedded as a native section of the merchant portal and connected through a Spring WebFlux BFF to Java/Spring Boot and Node.js/NestJS microservices and providers.",
       "Built Java/Spring Boot and TypeScript/Node.js/NestJS microservices to ingest, normalize and process promotions from merchants, financial entities and providers, adapting contracts per integration.",
@@ -140,6 +141,7 @@ export const roles: Role[] = [
       "pgvector",
       "LangChain",
       "LangGraph",
+      "LangSmith",
       "OpenAI API",
       "GraphRAG",
       "Neo4j",
