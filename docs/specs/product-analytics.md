@@ -29,7 +29,7 @@ Sites remain on managed Business hosting; VPS operations are separately owned.
 | AC-2 | Only reviewed event/section/locale combinations and bounded schema fields leave the browser; synthetic forbidden text/URL/cookie/token fields are rejected | Pending accepted API contract |
 | AC-3 | Explicit link interactions are counted by their actual meaning; hydration, prefetch, theme changes, re-renders and bfcache do not create duplicate views | Pending implementation/tests |
 | AC-4 | No credentials, referrer, session/conversation/run ID or persistent visitor ID accompanies an event; network rejection/offline cannot delay navigation or contact/CV links | Pending browser/network tests |
-| AC-5 | Footer notice is bilingual, discreet and truthful to the enabled behavior; keyboard focus, contrast, zoom and mobile wrapping remain usable without a banner | Copy proposal below; not rendered |
+| AC-5 | Footer notice is bilingual, discreet and truthful to the enabled behavior; keyboard focus, contrast, zoom and mobile wrapping remain usable without a banner | Current-state notice implemented; metrics-specific copy remains pending |
 | AC-6 | Country is trusted-edge-derived or unknown; spoofed client country is rejected and small aggregates are suppressed under an approved rule | Pending API/ops ownership decisions |
 | AC-7 | Model counts come from persisted terminal run transitions, once per defined generation; retry, SSE reconnect/chunk and cancelled/failed outcomes are distinct | Pending API implementation; not existing ops counters |
 | AC-8 | Private aggregate reads are authenticated and isolated by product; charts have labels, sample counts, UTC filters, table alternatives and distinct empty/unavailable states | Backoffice owner; pending |
@@ -128,6 +128,11 @@ the API owner must define body/rate/storage bounds and abuse handling.
 
 ### Footer proposal and privacy gate
 
+The current-state notice is implemented in both locales: no tracking cookies, with
+the theme preference saved on the device. It adds no collector, privacy modal,
+cookie banner, network request or storage behavior. This is not an announcement
+that aggregate metrics already exist.
+
 For an accepted, enabled minimal implementation:
 
 - EN: “Privacy: aggregate usage metrics, without tracking cookies.”
@@ -180,9 +185,10 @@ No migration or collector allocation is justified until these are resolved.
 
 ## Verification and handoff
 
-This increment reviews source boundaries and primary evidence only; no collector,
-footer change, dashboard or performance claim is marked implemented. All feature
-acceptance above remains pending until its owner supplies reproducible evidence.
+This increment implements the current-state EN/ES footer notice and reviews source
+boundaries and primary evidence. No collector, aggregate dashboard or performance
+improvement is marked implemented. Analytics acceptance above remains pending
+until its owner supplies reproducible evidence.
 Document/link checks apply to this handoff; they cannot establish runtime/privacy
 acceptance. No real credentials, event content or provider calls are used.
 
@@ -198,3 +204,21 @@ Primary sources reviewed 2026-10-17:
   measurement exemptions; no automatic cross-jurisdiction conclusion is drawn.
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/): accessible interaction criteria, without
   claiming automated checks alone establish conformance.
+
+
+### Current-state footer verification
+
+The implemented notice was checked in Chromium at 1440×1000 and 390×844,
+in English/Spanish and light/dark themes (eight combinations), using local HTTPS
+and reduced motion. Footer-scoped axe checks reported zero violations, the notice
+fit without horizontal overflow, and fresh controlled contexts contained no cookies,
+no external requests and only the existing theme storage key. All eight screenshots
+were visually inspected. This is bounded fixture evidence, not a WCAG certificate
+or a verification of every production edge/storage behavior.
+
+`npm run check` and 21 rendered route checks passed on the integrated candidate.
+The local QA build enables the assistant fixture so its launcher is visible in
+screenshots; this is not production activation, and external requests were blocked.
+No collector, provider call or event storage was exercised. Screenshots and the
+structured result live under ignored `.artifacts/privacy-review/`; the delivery PR
+records final commit and protected CI receipts separately.
