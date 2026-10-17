@@ -29,7 +29,8 @@ The metadata workflow checks out only trusted default-branch policy scripts with
 credentials disabled, never a PR checkout. It installs no dependencies and executes
 no PR scripts. Permissions are limited to contents and pull-requests **read only**. The trusted
 `.nvmrc` selects the same Node.js baseline as ordinary CI; no package installation
-or cache is needed.
+or cache is needed. Automatic npm caching in setup-node is explicitly disabled: the
+checked-out package.json is fixture data, not a request to restore dependencies.
 Its optional GitHub GraphQL POST is a fixed read query; mutations are not exposed
 by the transport. Untrusted titles, bodies, names and payloads are not interpolated
 into shell commands. API errors produce fixed messages without response bodies.

@@ -46,12 +46,12 @@ const descriptions: Record<ArchitectureKind, Record<Locale, { title: string; sum
     en: {
       title: "Exam platform architecture",
       summary:
-        "The Next.js/React client uses one Laravel REST API backed by MySQL and Redis for caching and asynchronous work. Prometheus and Grafana observe the database, queues and workers; Docker images are built and deployed through GitHub Actions. The diagram groups request handling and operational capabilities; the layer descriptions below explain each responsibility.",
+        "The Next.js/React client uses one Laravel REST API backed by MariaDB and Redis for caching and asynchronous work. Prometheus and Grafana observe the database, queues and workers; Docker images are built and deployed through GitHub Actions. The diagram groups request handling and operational capabilities; the layer descriptions below explain each responsibility.",
     },
     es: {
       title: "Arquitectura de la plataforma de exámenes",
       summary:
-        "El cliente Next.js/React usa una API REST Laravel respaldada por MySQL y Redis para caché y trabajo asíncrono. Prometheus y Grafana observan la base de datos, las colas y los workers; las imágenes Docker se construyen y despliegan mediante GitHub Actions. El gráfico agrupa solicitudes y capacidades operativas; las descripciones siguientes explican cada responsabilidad.",
+        "El cliente Next.js/React usa una API REST Laravel respaldada por MariaDB y Redis para caché y trabajo asíncrono. Prometheus y Grafana observan la base de datos, las colas y los workers; las imágenes Docker se construyen y despliegan mediante GitHub Actions. El gráfico agrupa solicitudes y capacidades operativas; las descripciones siguientes explican cada responsabilidad.",
     },
   },
 };

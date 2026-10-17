@@ -5,7 +5,7 @@ export const filomenaSteps: Record<Locale, ArchitectureStep[]> = {
   en: [
     { id: "web", title: "Web frontend", detail: "Next.js · React · TypeScript", tier: "surface" },
     { id: "api", title: "REST API", detail: "Laravel · REST", tier: "gateway" },
-    { id: "data", title: "Exam data", detail: "MySQL · indexes · query tuning", tier: "service" },
+    { id: "data", title: "Exam data", detail: "MariaDB · indexes · query tuning", tier: "service" },
     {
       id: "queues",
       title: "Cache and queues",
@@ -31,7 +31,7 @@ export const filomenaSteps: Record<Locale, ArchitectureStep[]> = {
     {
       id: "data",
       title: "Datos de exámenes",
-      detail: "MySQL · índices · consultas",
+      detail: "MariaDB · índices · consultas",
       tier: "service",
     },
     {

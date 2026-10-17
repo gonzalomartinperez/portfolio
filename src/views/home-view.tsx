@@ -29,7 +29,7 @@ export function HomeView({ locale }: { locale: Locale }) {
     },
   ];
   const showcaseStack = filomena.stack.filter((item) =>
-    ["Laravel", "Next.js", "React", "TypeScript", "MySQL", "Redis"].includes(item),
+    ["Laravel", "Next.js", "React", "TypeScript", "MariaDB", "Redis"].includes(item),
   );
 
   return (
