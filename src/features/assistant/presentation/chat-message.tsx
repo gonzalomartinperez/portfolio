@@ -46,6 +46,7 @@ export const ChatMessage = memo(function ChatMessage({
                 href ? (
                   <a href={href} target="_blank" rel="noopener noreferrer">
                     {children}
+                    <span className={cx("sr-only")}>{t.newTab}</span>
                   </a>
                 ) : (
                   <span>{children}</span>
@@ -73,6 +74,7 @@ export const ChatMessage = memo(function ChatMessage({
                         L{citation.start_line ?? ""}–{citation.end_line ?? ""} ↗
                       </span>
                     )}
+                    <span className={cx("sr-only")}>{t.newTab}</span>
                   </a>
                 </li>
               ))}

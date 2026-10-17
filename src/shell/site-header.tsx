@@ -46,6 +46,8 @@ export function SiteHeader() {
           <Link
             aria-label={`Gonzalo Martin Perez — ${copy.roleSubtitle}`}
             className={styles.brand}
+            data-analytics-event="navigation_click"
+            data-analytics-destination={localePath(locale, "/")}
             href={localePath(locale, "/")}
           >
             <Mark size={44} />
@@ -65,6 +67,8 @@ export function SiteHeader() {
                     <Link
                       aria-current={active ? "page" : undefined}
                       className={styles.link}
+                      data-analytics-event="navigation_click"
+                      data-analytics-destination={href}
                       href={href}
                     >
                       {route.label}

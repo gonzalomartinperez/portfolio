@@ -7,22 +7,22 @@ principles do not authorize one session to change another repository or deploy i
 
 | Session | Exclusive scope | Coordination boundary |
 | --- | --- | --- |
-| Portfolio | Public `portfolio`, task `build/verified-toolchain-2026-10-17` | Site architecture, client integration, quality rules and public documentation. No API, infrastructure or private career edits in this task. |
-| Portfolio assistant | `portfolio-assistant-api`, `portfolio-assistant-backoffice` | API, security and backoffice use cases. Existing public API contracts stay stable; changes require a reviewed contract handoff. |
-| Pequeverso | `pequeverso`, `pequeverso-assistant-api`, `pequeverso-assistant-backoffice` | Product storefront, assistant API and backoffice. No portfolio, career or infrastructure writes and no implicit assistant activation. |
-| VPS operations | Private `vps-ops`, task `refactor/clean-architecture` | Inventory, runtime baseline, Coolify/reverse proxies, operations CLI, Ansible and recovery procedures. No application writes or implicit deployment. |
+| Portfolio | Public website | Site architecture, client integration, quality rules and public documentation. No API or infrastructure edits. Private career authoring requires separate scope. |
+| Portfolio services | Separately maintained API and project backoffice | Project aggregates, authorization and assistant operations. Public client changes require a committed contract handoff; no browser access to private tokens, databases or infrastructure controls. |
+| Pequeverso | Separately maintained storefront, API and project backoffice | Independent product data, credentials, collection and consent decisions. No portfolio, career or infrastructure writes and no implicit assistant activation. |
+| VPS operations | Private operations tooling | Inventory, runtime baseline, Coolify/reverse proxies, recovery and deployment acceptance. No application writes or implicit deployment. |
 
-The other owners were contacted directly through the session messaging interface.
-Confirmations from the assistant and VPS owners agree on these boundaries. The
-Pequeverso scope was confirmed through the coordinating assistant session handoff. The ops
-owner maintains its cross-repository record at
-`vps-ops/docs/handoffs/engineering-coordination.md` and its runtime ledger at
-`vps-ops/inventory/baseline.json`; these are private operator references, not public
-build dependencies. The operations handoff is
-[vps-ops PR #31](https://github.com/gonzalomartinperez/vps-ops/pull/31), reported
-by its owner at source `6a99d0657b6deddf1e0cbb395b5cccc45997fab6`; its CI and
-validation belong to that session. No session adopts another repository's reported
-checks as its own verification.
+The owners confirmed these boundaries through direct coordination. Private operator
+records are maintained by their owner and are not prerequisites for reading,
+building or verifying this public repository. Architecture, contracts and acceptance
+evidence are documented here. Other repositories' reported checks remain attributed
+handoffs, not this repository's verification.
+
+Project backoffices can present website metrics and assistant operations as distinct
+bounded areas. This public site supplies only its closed, default-off event contract;
+it neither implements those private dashboards nor exposes their read credentials.
+Renaming a repository does not change a wire schema, persistent service name,
+production setting or activation decision.
 
 Each writer uses a separate registered worktree and a task branch. One coordinator
 owns manifests, lockfiles, source integration and protected PR promotion for this
@@ -101,3 +101,7 @@ actual served routes separately when an authorized release is deployed.
 
 Task PRs target `develop`; only `develop` releases to `main`. Assistant activation,
 VPS deployment, account changes and secret management remain separate decisions.
+
+Dependency proposals follow the [manual review policy](dependency-updates.md).
+The trusted metadata assessment has read-only permissions and cannot merge or
+approve proposals; dependency-policy fixtures run inside the ordinary source gate.

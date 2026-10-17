@@ -315,7 +315,9 @@ export default function Chat({
           <p>{t.intro}</p>
           <span className={cx("status-dot")} aria-hidden="true" />
           <p>
-            {chat.retentionDays ? retentionText(chat.locale, chat.retentionDays) : t.initializing}
+            {chat.retentionDays
+              ? retentionText(chat.locale, chat.retentionDays)
+              : t.retentionUnavailable}
           </p>
         </div>
       </aside>
@@ -363,6 +365,15 @@ export default function Chat({
           aria-label={t.title}
           aria-live="off"
         >
+          <details className={cx("sources")} data-assistant-privacy>
+            <summary>{t.conversationPrivacy}</summary>
+            <p>{t.privacyInfo}</p>
+            <p>
+              {chat.retentionDays
+                ? retentionText(chat.locale, chat.retentionDays)
+                : t.retentionUnavailable}
+            </p>
+          </details>
           {chat.historyLoading && <p role="status">{t.historyLoading}</p>}
           {chat.history.length === 0 && !runningHere && !chat.historyLoading && (
             <section className={cx("empty")}>

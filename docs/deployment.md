@@ -137,3 +137,21 @@ separate, unique query parameter. Do not request the next release's canonical
 cache key while the origin still serves the previous PDF: a CDN can cache those
 old bytes even though the query contains a new hash. Once the origin is ready,
 verify the actual links and their byte hashes, including both CV and contact.
+
+## Independent analytics gate
+
+Leave `ANALYTICS_ENABLED` unset or `false`. The public client is built without its
+analytics host and requires no ingest URL while disabled. An enabled build also
+requires `ANALYTICS_INGEST_URL` with the reviewed HTTPS ingestion endpoint; that
+address is public configuration, never a provider credential. Do not copy CI's
+loopback fixture URL into hosting settings. Like the assistant switch, this setting
+is captured during static generation: changing an environment value on an existing
+build does not change the served feature state.
+
+A code merge is not approval to collect events. Before enabling, reconcile the
+committed API contract and backend gate, trusted ingress/Origin behavior, approved
+retention and backup expiry, operator rights/contact and applicable privacy basis.
+The no-banner requirement means consent-dependent optional measurements remain
+omitted. Do not enable analytics or the assistant as part of ordinary maintenance.
+The footer disclosure follows the actual build flags; it does not certify legal
+compliance or establish a consent exemption.

@@ -1,0 +1,52 @@
+name: Dependency review policy
+
+on:
+  pull_request_target:
+    branches: [develop]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Read-only assessment mode
+        type: choice
+        options: [inspect, review]
+        default: inspect
+      number:
+        description: Dependabot PR number, required only for review
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  assess:
+    name: Manual dependency assessment
+    if: github.repository == 'gonzalomartinperez/portfolio'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      # Trusted default-branch source only; never PR source or dependency installation.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+          sparse-checkout: |
+            .nvmrc
+            package.json
+            scripts/dependency-policy.mjs
+            scripts/dependency-policy.test.mjs
+            .github/dependabot.yml
+            .github/workflows/dependency-policy.yml
+          sparse-checkout-cone-mode: false
+      - name: Use the repository Node.js baseline
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      - name: Verify trusted policy fixtures
+        run: node --test scripts/dependency-policy.test.mjs
+      - name: Assess metadata without mutation
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/dependency-policy.mjs

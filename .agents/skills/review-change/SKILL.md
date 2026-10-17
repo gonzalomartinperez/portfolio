@@ -32,4 +32,8 @@ description: Review a portfolio diff for concrete correctness, security, accessi
    Review the applicable [QA matrix](../../../docs/development.md#task-specific-qa)
    cases; passing one locale or viewport does not establish the others.
 5. Report each actionable finding with severity, file and line, a concrete trigger, impact, and a focused suggested correction.
+   For privacy or metrics, compare payloads and public notices with actual gates,
+   session/storage behavior and the versioned contract. Do not claim anonymity,
+   provider retention, legal compliance or unique-visitor counts from implementation
+   labels. Keyboard evidence requires key actions, not only programmatic selection.
 6. When no defects are found, say so and state review coverage and remaining risks. Do not implement, stage, commit, approve a release, or publish as part of a review-only request.

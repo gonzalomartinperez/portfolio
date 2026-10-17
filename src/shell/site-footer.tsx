@@ -7,7 +7,9 @@ import { chrome } from "@/content/chrome";
 import { contactChannels, contactLinks, profile } from "@/content/en/profile";
 import { contactChannels as spanishContactChannels } from "@/content/es/profile";
 import { defaultLocale, type Locale, localePath } from "@/content/locales";
+import { privacy } from "@/content/privacy";
 import { navigationPath } from "@/content/routes";
+import { email } from "@/content/site-config";
 import { ContactIcons } from "../components/contact-links";
 import { Mark } from "../components/mark";
 import { SolarExplorer } from "../features/solar-system/presentation/solar-explorer";
@@ -21,9 +23,16 @@ function localeFromPath(pathname: string): Locale {
  * Shares one layout tree with the header, for the same reason: a language switch stays a
  * client-side navigation. Contact links and the identity line are language-independent.
  */
-export function SiteFooter() {
+export function SiteFooter({
+  assistantEnabled = false,
+  analyticsEnabled = false,
+}: {
+  assistantEnabled?: boolean;
+  analyticsEnabled?: boolean;
+}) {
   const locale = localeFromPath(navigationPath(usePathname()));
   const copy = chrome[locale];
+  const privacyCopy = privacy[locale];
 
   const routes = [
     { path: "/about", label: copy.nav.about },
@@ -54,7 +63,12 @@ export function SiteFooter() {
           <ul className={styles.list}>
             {routes.map((route) => (
               <li key={route.path}>
-                <Link className={styles.link} href={localePath(locale, route.path)}>
+                <Link
+                  className={styles.link}
+                  data-analytics-event="navigation_click"
+                  data-analytics-destination={localePath(locale, route.path)}
+                  href={localePath(locale, route.path)}
+                >
                   {route.label}
                 </Link>
               </li>
@@ -90,6 +104,26 @@ export function SiteFooter() {
       <p className={`frame ${styles.privacyNote}`} data-privacy-note>
         {copy.footerPrivacyNote}
       </p>
+      <div className="frame">
+        <details className={styles.privacyNote} data-privacy-disclosure>
+          <summary>{privacyCopy.title}</summary>
+          <div className="prose">
+            <p>{privacyCopy.introduction}</p>
+            <p>{privacyCopy.theme}</p>
+            <p>{privacyCopy.hosting}</p>
+            <p>{privacyCopy.external}</p>
+            <p data-privacy-assistant={assistantEnabled ? "enabled" : "disabled"}>
+              {assistantEnabled ? privacyCopy.assistantOn : privacyCopy.assistantOff}
+            </p>
+            <p data-privacy-analytics={analyticsEnabled ? "enabled" : "disabled"}>
+              {analyticsEnabled ? privacyCopy.analyticsOn : privacyCopy.analyticsOff}
+            </p>
+            <p>
+              {privacyCopy.contact} <a href={`mailto:${email}`}>{email}</a>.
+            </p>
+          </div>
+        </details>
+      </div>
       <p className={`frame ${styles.credits}`} data-visual-credits>
         <span>{copy.planetTextureCredit}</span>
         <ExternalLink href="https://www.solarsystemscope.com/textures/" locale={locale}>

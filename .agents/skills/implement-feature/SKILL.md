@@ -28,6 +28,11 @@ description: Implement a requested portfolio feature or refactor with focused Ne
    a registry update must not overwrite local accessibility or visual contracts.
    Loading skeletons require an actual pending resource, not an artificial delay.
 6. Add targeted tests when behavior is introduced. Run npm run check and git diff --check, plus relevant production and visual checks. Record what could not be verified.
+   For analytics/privacy changes, use the committed [event contract](../../../docs/specs/product-analytics.md)
+   and [isolated verification commands](../../../docs/development.md#isolated-analytics-verification).
+   Keep independent build gates off in production; use only synthetic loopback sinks
+   for enabled QA. Notices must follow actual flags, storage and known processors,
+   without treating a cookieless configuration as a consent exemption.
    Select responsive, document and motion cases from the
    [task-specific QA matrix](../../../docs/development.md#task-specific-qa), including
    both locales when layout or shared copy changes.

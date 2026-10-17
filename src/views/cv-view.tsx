@@ -73,6 +73,8 @@ export function CvView({ locale }: { locale: Locale }) {
         <div className={styles.actions}>
           <a
             className={buttonVariants({ variant: "outline" })}
+            data-analytics-event="cv_link_open"
+            data-analytics-target={locale}
             href={resumeDownloads[locale]}
             target="_blank"
             rel="noopener noreferrer"
@@ -87,6 +89,8 @@ export function CvView({ locale }: { locale: Locale }) {
           </a>
           <a
             className={buttonVariants()}
+            data-analytics-event="cv_link_open"
+            data-analytics-target={locale}
             href={resumeDownloads[locale]}
             download={resumeFilenames[locale]}
           >

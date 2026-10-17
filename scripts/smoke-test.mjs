@@ -37,6 +37,10 @@ try {
   const html = await response.text();
   assert.match(html, /<title>[^<]+<\/title>/);
   assert.match(html, /<main[\s>]/);
+  if (process.env.ANALYTICS_ENABLED !== "true") {
+    assert.match(html, /data-privacy-analytics="disabled"/);
+    assert.doesNotMatch(html, /\/api\/v1\/analytics\/events/);
+  }
   const missing = await fetch(`${origin}/__smoke_missing__`, {
     signal: AbortSignal.timeout(10_000),
   });

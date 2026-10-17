@@ -7,6 +7,9 @@ import { parse } from "@babel/parser";
 const codePattern = /\.(?:[cm]?[jt]s|[jt]sx)$/;
 const nodeModules = new Set(builtinModules.map((name) => name.replace(/^node:/, "")));
 const publicEntries = new Set([
+  "analytics/entry.tsx",
+  "analytics/application/availability.ts",
+  "analytics/config.ts",
   "solar-system/presentation/ambient-field.tsx",
   "solar-system/presentation/solar-explorer.tsx",
   "hero/presentation/hero-stage.tsx",
@@ -269,6 +272,8 @@ export function auditArchitecture(sources) {
   const modules = new Map();
   for (const [file, source] of sources) {
     if (!codePattern.test(file) || typeof source !== "string") continue;
+    if (/^src\/features\/[^/]+$/.test(file))
+      violations.push(`${file}: feature code must live in an owned feature directory`);
     try {
       modules.set(file, dependencies(source, file));
     } catch (error) {
