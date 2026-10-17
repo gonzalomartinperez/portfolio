@@ -3,7 +3,6 @@ import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import {
   compareTechnologyNames,
-  getSceneMarkIdentity,
   getStackGroups,
   getTechnology,
   publicTechnologyCatalog,
@@ -11,6 +10,7 @@ import {
   technologyCatalog,
   technologyGroups,
 } from "../src/content/technologies.ts";
+import { getSceneMarkIdentity } from "../src/features/hero/domain/scene-technologies.ts";
 
 const read = (file) => readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
 

@@ -1,3 +1,5 @@
+import "server-only";
+
 import * as en from "./en";
 import * as es from "./es";
 import type { Locale } from "./locales";

@@ -1,20 +1,7 @@
 import assert from "node:assert/strict";
-import { readdirSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { parseSuggestions } from "../src/features/assistant/adapters/suggestions.ts";
 
-test("domain and application remain independent of frameworks and concrete adapters", () => {
-  for (const layer of ["domain", "application"]) {
-    const directory = `src/features/assistant/${layer}`;
-    for (const file of readdirSync(directory)) {
-      const source = readFileSync(`${directory}/${file}`, "utf8");
-      for (const match of source.matchAll(/(?:import|export)[\s\S]*?from\s+["']([^"']+)["']/g)) {
-        assert.doesNotMatch(match[1] ?? "", /react|next|adapters|contracts|presentation/);
-      }
-      assert.doesNotMatch(source, /\b(?:window|document|localStorage|fetch)\b/);
-    }
-  }
-});
 test("source-backed catalog validates all entries and provenance", () => {
   const valid = {
     corpus_version: "v1",

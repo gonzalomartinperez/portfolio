@@ -23,7 +23,7 @@ export class SceneBudgetPlugin {
             containsEntry(module, pattern),
           ),
         );
-      const heroRoots = findRoots(/[/\\]hero[/\\]scene-runtime\.ts(?:[?|]|$)/);
+      const heroRoots = findRoots(/[/\\]hero[/\\]adapters[/\\]scene-runtime\.ts(?:[?|]|$)/);
       const solarRoots = findRoots(/[/\\]solar-system-engine\.ts(?:[?|]|$)/);
       const roots = [...new Set([...heroRoots, ...solarRoots])];
       const threeChunks = [...compilation.chunks].filter((chunk) =>
@@ -45,10 +45,10 @@ export class SceneBudgetPlugin {
         path.join(compiler.context, ".next", "scene-budget.json"),
         `${JSON.stringify(
           {
-            entry: "src/components/hero/scene-runtime.ts",
+            entry: "src/features/hero/adapters/scene-runtime.ts",
             entries: [
-              "src/components/hero/scene-runtime.ts",
-              "src/components/solar-system-engine.ts",
+              "src/features/hero/adapters/scene-runtime.ts",
+              "src/features/solar-system/adapters/solar-system-engine.ts",
             ],
             roots: roots.length,
             initial: [...chunks].some((chunk) => chunk.canBeInitial()),

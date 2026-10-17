@@ -1,10 +1,10 @@
 import { ImageResponse } from "next/og";
+import { getContent } from "@/content";
 import {
   buildConstellation,
   POINT_COUNT_STATIC,
   projectConstellation,
-} from "@/components/hero/constellation";
-import { getContent } from "@/content";
+} from "@/features/hero/domain/constellation";
 
 const { profile } = getContent("en");
 
