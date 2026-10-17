@@ -281,3 +281,70 @@ browser runners' package cache. Frozen installs prefer local package data; expli
 audits still check current advisories. JSON timing reports retain per-test measurements.
 See [Playwright installation](https://playwright.dev/docs/browsers#chromium). Verify current-head
 Actions results and record installation/upload timings; do not infer a speedup from one run.
+
+## Redacted secret checks
+
+Install the official Gitleaks **8.30.1** Linux x64 archive from its
+[release](https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1), verify SHA-256
+`551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb`, then place
+its binary on PATH or set `GITLEAKS_BIN` to that verified executable. CI repeats
+this verification before executing it; no authenticated scanner service is used.
+Twenty-four reviewed historical fingerprints are public provenance hashes. Their exact
+commit/path/rule/line fingerprints are documented in the scanner and excluded
+only from history. Two current references to the same public Git provenance use
+exact value-and-path exceptions; changing the value still triggers detection.
+Build artifacts retain the default detector without these source exceptions.
+Gitleaks is feature-complete and upstream currently maintains security patches;
+this pin is reviewed tooling, not a universal or permanent latest-version claim.
+
+Run `npm run test:secrets` before delivery. It tests enforcement with synthetic
+markers, scans an isolated snapshot of Git-tracked files (including tracked files
+that now match `.gitignore`) and scans all available Git refs. It rejects shallow
+history: fetch complete history first. It never reads untracked `.env.local`.
+The snapshot uses working-tree bytes,
+not separate index blobs: an overwritten staged-only value needs staged-diff
+review or a committed candidate scan; CI checks the actual committed checkout.
+For a CI transfer, run `node scripts/ci-build-artifact.mjs prepare` after the build,
+then `npm run test:secrets:artifacts` to scan `.next`
+excluding its cache, plus `.artifacts/ci` when present: the same generated trees
+packaged by CI. This includes browser JS and prerendered HTML/RSC/server output.
+Run `node scripts/ci-build-artifact.mjs restore` before starting that sanitized
+local build again. The scanner commands suppress output, redact findings,
+and do not upload reports. A failure is evidence to investigate privately, not
+permission to print a matched value, weaken detection or rotate a live credential.
+
+The scan does not prove that encoded values, unknown secret formats, remote-only
+refs, released artifacts or provider-side state are safe. Review the actual public
+configuration and data flow too. `NEXT_PUBLIC_*`, client props, HTML and static
+assets are public. Session cookies, CSRF tokens and conversations do not belong
+in screenshots, error messages, logs or retained CI artifacts. Browser fixtures
+use synthetic local data and do not call paid providers.
+
+This application has no Dockerfile or image build context. If containerization is
+separately requested, exclude environment files, keys and local artifacts with a
+reviewed `.dockerignore`; never carry secrets via build ARG/ENV or image layers.
+Use BuildKit secret mounts only if an authorized build actually needs a credential.
+Do not introduce a secret manager, create keys, dump resolved configuration or
+inspect live containers as part of an ordinary source check. Follow
+[SECURITY.md](../SECURITY.md) for suspected exposure and private escalation.
+
+
+### Ephemeral Next runtime material in CI transfers
+
+Next generates preview signing/encryption keys and a Server Actions encryption key
+in every build, even though this portfolio has no Server Actions. These are actual
+runtime cryptographic values, not provider keys or detector false positives. CI
+runs `node scripts/ci-build-artifact.mjs prepare` after rendered verification and
+browser planning, before the artifact scan and upload. It replaces only the three
+verified fields in their known JSON manifests with inert transfer markers. It
+preserves the public preview identifier, rejects unexpected embeddings and symlinks,
+and fails if Server Actions appear. This is deliberately version-specific.
+
+Each isolated browser runner calls `node scripts/ci-build-artifact.mjs restore`
+after unpacking to generate fresh, runner-local ephemeral values. They are never
+printed or re-uploaded. The transferred build remains covered by the strict scanner,
+including all HTML/RSC/server files and CI planner output. This is not an exception
+that lets a detected runtime key travel in an artifact. Unit tests cover roundtrips,
+unexpected embeddings, invalid manifests, future actions and symlink refusal.
+The normal Hostinger `npm run build`/`npm start` commands never invoke this CI-only
+transfer helper. No persistent credentials or provider accounts are created or rotated.

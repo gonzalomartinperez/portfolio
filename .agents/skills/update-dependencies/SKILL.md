@@ -6,7 +6,10 @@ description: Evaluate or apply requested dependency upgrades using supported sta
 # Update Dependencies
 
 1. Read AGENTS.md, package.json, the lockfile, and .nvmrc. Distinguish evaluation from authorized upgrades.
-2. Check official support policies, release notes, security advisories, engines, and peer dependency ranges for the proposed versions.
+2. Read [the compatibility procedure](references/compatibility.md) for runtime,
+   compiler or browser upgrades; it identifies this repository's coupled files and
+   evidence requirements without freezing version numbers in the skill.
+   Check official support policies, release notes, security advisories, engines, and peer dependency ranges for the proposed versions.
 3. Prefer Node and Next supported LTS lines. Read README.md for the validated TypeScript baseline and integration caveats; recommend major migrations separately with evidence. Check compiler-API consumers and native optional packages when evaluating TypeScript changes.
    Consult docs/technology.md and docs/deployment.md for the tested host contract.
    Keep Next.js and SWC WASM versions aligned; preserve existing lockfile platform

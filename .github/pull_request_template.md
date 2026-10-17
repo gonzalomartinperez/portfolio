@@ -1,18 +1,32 @@
-## Summary
+## Problem and result
 
-Describe the change and why it is needed.
+Describe the concrete problem and resulting behavior. Include a short before/after
+example when useful; write for a reviewer who has not seen the conversation.
+
+## Scope and boundaries
+
+Link the issue, task or acceptance specification. Identify changed module or API
+boundaries, affected locales and any cross-owner handoff. For a small change, keep
+this brief. Do not paste private discussions, keys or conversations.
 
 ## Validation
 
 - [ ] Task PR targets `develop`, or release PR is same-repository `develop` into `main`.
+- [ ] Relevant local checks pass; list commands and results below.
+- [ ] Architecture rules and documented contracts remain satisfied.
+- [ ] Application changes pass `npm run check` and relevant production verification.
+- [ ] UI changes were checked on mobile and desktop, including relevant locales,
+      themes, keyboard interactions and failure states; or this is not a UI change.
+- [ ] The diff contains no secrets, private documents, generated builds or unrelated work.
+- [ ] Documentation follows the final behavior; code follows `docs/code-quality.md`.
 
-- [ ] `npm run check` passes.
-- [ ] Production smoke test passes for application, dependency, or build changes.
-- [ ] UI changes were checked on mobile and desktop, or this is not a UI change.
-- [ ] No secrets, private documents, or generated builds are included.
-- [ ] Code and documentation follow `docs/code-quality.md`; comments add necessary context.
+Record the tested source revision, runtime, commands, results and meaningful limits.
+For documentation-only work, say which repository/link checks ran; do not imply
+application tests ran. Required CI remains mandatory before integration.
 
-## Evidence and limits
+## Release evidence and recovery
 
-Record the tested commit/source state, runtime, results, and any remaining risks.
-For releases, distinguish required CI success from the actual Hostinger deployment.
+For a release or operationally relevant change, state the intended deployment and
+safe recovery path. Distinguish required CI success from observed Hostinger
+publication. Leave assistant activation and infrastructure unchanged unless
+explicitly authorized. Mark this section not applicable when appropriate.

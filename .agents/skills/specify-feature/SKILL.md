@@ -12,7 +12,12 @@ description: Define a portfolio feature specification and delivery plan when the
    outputs using [editorial guidelines](../../../docs/editorial-guidelines.md) and
    [public content](../../../docs/public-content.md), including CV exports when applicable.
 4. Write observable acceptance criteria with stable IDs, including relevant keyboard, responsive, loading, and failure behavior.
-5. Compare the simplest viable design with alternatives only where the tradeoff matters. Identify server/client boundaries and justify any new dependency.
+5. Map the changed behavior to existing modules using the
+   [source contract](../../../docs/architecture.md#source-module-contract). Name the
+   composition point, pure policy, browser/transport effects and any new public
+   entrypoint; do not create layers that have no distinct responsibility. For an
+   enforcement change, include an invalid dependency case that must be rejected.
+   Compare the simplest viable design with alternatives only where the tradeoff matters. Identify server/client boundaries and justify any new dependency.
 6. Plan small vertical slices, map criteria to verification, and identify public-data and deployment risks.
    Use the [task-specific QA matrix](../../../docs/development.md#task-specific-qa)
    to cover affected locale, viewport, motion and document states without inventing
