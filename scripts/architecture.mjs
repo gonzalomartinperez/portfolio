@@ -272,6 +272,8 @@ export function auditArchitecture(sources) {
   const modules = new Map();
   for (const [file, source] of sources) {
     if (!codePattern.test(file) || typeof source !== "string") continue;
+    if (/^src\/features\/[^/]+$/.test(file))
+      violations.push(`${file}: feature code must live in an owned feature directory`);
     try {
       modules.set(file, dependencies(source, file));
     } catch (error) {

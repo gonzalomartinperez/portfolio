@@ -5,6 +5,27 @@ import { auditArchitecture } from "./architecture.mjs";
 const audit = (sources) => auditArchitecture(new Map(Object.entries(sources)));
 const rejects = (sources, reason) => assert.match(audit(sources).join("\n"), reason);
 
+test("flat feature code cannot escape the ownership and entrypoint contract", () => {
+  for (const file of ["hidden.ts", "hidden.tsx", "hidden.mjs", "hidden.d.ts"]) {
+    rejects(
+      {
+        "src/app/page.tsx": `import { value } from "@/features/${file}"; export default value;`,
+        [`src/features/${file}`]: file.endsWith(".d.ts")
+          ? "export declare const value: number;"
+          : "export const value = 1;",
+      },
+      /owned feature directory/,
+    );
+  }
+  assert.deepEqual(
+    audit({
+      "src/features/tool-carousel/tool-carousel.tsx": "export const Carousel = () => null;",
+      "src/features/readme.md": null,
+    }),
+    [],
+  );
+});
+
 test("analytics exposes composition entries while its concrete delivery stays private", () => {
   assert.deepEqual(
     audit({

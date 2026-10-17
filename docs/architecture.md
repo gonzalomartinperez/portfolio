@@ -82,6 +82,11 @@ flowchart TB
 | `src/lib` | Shared utilities and scoped motion coordination; no content, features or composition imports. |
 
 Feature entries are deliberately named files rather than broad export barrels.
+Code must belong to a directory under `src/features`; flat feature files cannot
+bypass ownership or the entrypoint map. Small cohesive features need not create
+empty domain/application/adapters folders. The analytics `config.ts` is a narrow
+server-only facade for validating enabled configuration; it does not expose its
+delivery adapter as a general public API.
 The full bilingual content registry, diagram figure and carousel composition use
 `server-only` markers so client imports cannot silently expand their runtime.
 `npm run test:architecture` enforces dependency direction, public entries, all-import

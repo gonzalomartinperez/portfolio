@@ -350,3 +350,12 @@ The combined local helper was also verified on the disabled candidate: 22 render
 assertions followed by both rollout browser cases using separate owned HTTP/TLS
 lifecycles and the same build. Final disabled browser cases additionally assert no
 cookies, localStorage or sessionStorage entries in fresh contexts.
+
+A final bounded folder-ownership audit added a placement guard against code files
+directly under `src/features`, where they would have no feature owner. Its negative
+TS/TSX/MJS/declaration fixtures and valid small-feature/resource fixtures passed;
+architecture now has 18 tests. No runtime file, dependency, public entrypoint or
+framework convention was renamed. Kebab-case modules, PascalCase React components
+and Next.js reserved filenames remain intact; small features are not forced into
+empty layers. This tooling-only follow-up does not change the measured runtime
+build above; the delivery CI verifies the final complete source.
