@@ -129,10 +129,12 @@ These badges describe this repository's implementation. The [professional techno
 
 ## Architecture at a glance
 
+<p align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/architecture-overview-dark.svg">
   <img src="docs/diagrams/architecture-overview-light.svg" alt="Portfolio architecture: reviewed content feeds server-rendered pages and a persistent shell, with separate deployment and optional assistant boundaries." width="640">
 </picture>
+</p>
 
 [Full-size light](docs/diagrams/architecture-overview-light.svg) · [Full-size dark](docs/diagrams/architecture-overview-dark.svg) ·
 [Editable Mermaid source](docs/diagrams/architecture-overview.mmd) · [Diagram guide](docs/diagrams/README.md)
@@ -145,10 +147,12 @@ The portfolio has no application database or model-provider key. Reviewed conten
 
 ### Solar scene
 
+<p align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/solar-rendering-dark.svg">
   <img src="docs/diagrams/solar-rendering-light.svg" alt="Solar rendering pipeline: a complete static scene remains available while a deferred engine prepares a single render pass, with reading protection and adaptive quality." width="640">
 </picture>
+</p>
 
 [Full-size light](docs/diagrams/solar-rendering-light.svg) · [Full-size dark](docs/diagrams/solar-rendering-dark.svg) ·
 [Editable Mermaid source](docs/diagrams/solar-rendering.mmd) · [Diagram guide](docs/diagrams/README.md)
@@ -193,27 +197,14 @@ activate collection on the public site or call a model provider.
 
 ## Delivery and quality
 
-```mermaid
-flowchart LR
-    TASK["Task branch<br/>type/kebab-case"] -->|"Pull request"| DEV["develop"]
-    DEV -->|"Release pull request"| MAIN["main"]
-    MAIN -->|"Native deployment"| LIVE["Hostinger"]
-    subgraph GATE["Required checks on every pull request"]
-        direction TB
-        QUALITY["Quality (development)<br/>Repository · Lint · Types · Build · Budgets · Rendered routes"]
-        BROWSER["Browser verification ×8<br/>Playwright · axe · Desktop & mobile"]
-        COMPAT["Compatibility<br/>Hostinger GLIBC 2.28 build"]
-        AGG["Quality checks<br/>Fails on any skipped or failed job"]
-        QUALITY --> BROWSER --> AGG
-        COMPAT --> AGG
-    end
-    TASK -.-> GATE
-    DEV -.-> GATE
-    classDef branch fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e;
-    classDef check fill:#dcfce7,stroke:#16a34a,color:#14532d;
-    class TASK,DEV,MAIN,LIVE branch;
-    class QUALITY,BROWSER,COMPAT,AGG check;
-```
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/delivery-flow-dark.svg">
+  <img src="docs/diagrams/delivery-flow-light.svg" alt="Protected delivery: task pull requests enter develop, release pull requests promote to main, and Hostinger deploys. Each pull request requires quality, browser and hosting compatibility checks." width="640">
+</picture>
+</p>
+
+[Full-size light](docs/diagrams/delivery-flow-light.svg) · [Full-size dark](docs/diagrams/delivery-flow-dark.svg) · [Editable Mermaid source](docs/diagrams/delivery-flow.mmd)
 
 - **Deliberate scope:** no CMS, application database or third-party tracking SDK — static routes,
   typed content, and client boundaries only where interaction actually requires them.

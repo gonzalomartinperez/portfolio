@@ -2,7 +2,7 @@
 
 [Portfolio overview](../../README.md#architecture-at-a-glance) · [Application architecture](../architecture.md) · [Design system](../design.md)
 
-These first-party illustrations explain two different questions. They are conceptual
+These first-party illustrations explain three different questions. They are conceptual
 views of this repository, not UML deployment specifications, employer infrastructure
 maps or evidence that an optional service is active.
 
@@ -10,6 +10,7 @@ maps or evidence that an optional service is active.
 | --- | --- | --- | --- |
 | Application context | What does this site own, and where does it connect? Top-to-bottom layers separate reviewed inputs, application composition, deployment and an independently gated API integration. | [Mermaid](architecture-overview.mmd) | [Light](architecture-overview-light.svg) · [Dark](architecture-overview-dark.svg) |
 | Solar rendering | How does the scene become ready while protecting reading? A top-to-bottom pipeline distinguishes preparation, independent mask input, the first-frame crossfade and quality feedback. | [Mermaid](solar-rendering.mmd) | [Light](solar-rendering-light.svg) · [Dark](solar-rendering-dark.svg) |
+| Delivery and quality | How does reviewed code reach the site? Task and release pull requests pass quality, browser and hosting checks before protected integration. Native hosting remains separate from assistant activation. | [Mermaid](delivery-flow.mmd) | [Light](delivery-flow-light.svg) · [Dark](delivery-flow-dark.svg) |
 
 ## Reading the diagrams
 
@@ -33,6 +34,12 @@ unavailable WebGL, texture failure or context loss; hidden tabs suspend renderin
 The [solar specification](../specs/immersive-solar-scene.md) holds the detailed behavior.
 
 ## Editing and review
+
+Center each README illustration with `<p align="center">` around its existing
+`<picture>` and meaningful fallback `<img>`. Keep captions and Markdown source
+links outside that HTML block. Link the editable Mermaid source rather than
+rendering a second, uncentered copy of the same graph. Do not depend on custom CSS
+classes that GitHub may strip. This is README presentation, not a website change.
 
 The `.mmd` files retain the compact semantic graph; the SVGs are hand-editable,
 publication-ready views of that graph. Keep their nodes, connections and conditional
