@@ -415,6 +415,7 @@ test("published workflow remains read-only and executes only trusted policy sour
   assert.match(workflow, /ref: \$\{\{ github\.event\.repository\.default_branch \}\}/);
   assert.match(workflow, /persist-credentials: false/);
   assert.match(workflow, /node-version-file: \.nvmrc/);
+  assert.match(workflow, /package-manager-cache: false/);
   assert.doesNotMatch(workflow, /actions: read|checks: read/);
   const manifest = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
   assert.match(manifest.scripts.check, /npm run test:dependency-policy/);
