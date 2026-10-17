@@ -1,0 +1,15 @@
+flowchart LR
+    SSR["Server-rendered fallback<br/>Same camera and orbits · CSS terminators"]
+    LOAD["Deferred engine<br/>Size-matched map variants · Off-main-thread decode"]
+    PREP["Before the first frame<br/>Upload maps · Compile programs · Place bodies"]
+    MASK["Reading mask<br/>Cached text blocks · Quarter resolution"]
+    PASS["Single render pass<br/>Bodies · Corona · Stars · Belts · Milky Way"]
+    ADAPT["Adaptive quality<br/>Calibrated refresh · Hysteresis"]
+    SSR -->|"crossfade, no jump"| PASS
+    LOAD --> PREP --> PASS
+    MASK --> PASS
+    PASS --> ADAPT --> PASS
+    classDef render fill:#dbeafe,stroke:#2563eb,color:#1e3a8a;
+    classDef guard fill:#dcfce7,stroke:#16a34a,color:#14532d;
+    class LOAD,PREP,PASS render;
+    class SSR,MASK,ADAPT guard;

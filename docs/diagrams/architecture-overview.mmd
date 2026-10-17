@@ -1,0 +1,20 @@
+flowchart TB
+    CONTENT["Typed EN / ES content<br/>Approved CV projection · Public assets"]
+    APP["Next.js App Router<br/>Server-rendered pages · Metadata"]
+    SHELL["Persistent root layout<br/>Navigation · Theme · Locale"]
+    VIEWS["Server page composition<br/>Narrow interactive feature boundaries"]
+    CHAT["Lazy native assistant<br/>One controller · Draft & conversation continuity"]
+    API["Separate assistant API<br/>REST + SSE · Session & CSRF"]
+    HOST["Hostinger Node.js hosting<br/>Protected main → Native deployment"]
+    CONTENT --> APP
+    APP --> SHELL
+    SHELL --> VIEWS
+    SHELL -. "Only when build gate is enabled" .-> CHAT
+    CHAT -. "Credentialed HTTPS" .-> API
+    APP --> HOST
+    classDef source fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e;
+    classDef app fill:#dbeafe,stroke:#2563eb,color:#1e3a8a;
+    classDef boundary fill:#ede9fe,stroke:#7c3aed,color:#4c1d95;
+    class CONTENT source;
+    class APP,SHELL,VIEWS app;
+    class CHAT,API,HOST boundary;

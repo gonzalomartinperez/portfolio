@@ -129,28 +129,13 @@ These badges describe this repository's implementation. The [professional techno
 
 ## Architecture at a glance
 
-```mermaid
-flowchart TB
-    CONTENT["Typed EN / ES content<br/>Approved CV projection · Public assets"]
-    APP["Next.js App Router<br/>Server-rendered pages · Metadata"]
-    SHELL["Persistent root layout<br/>Navigation · Theme · Locale"]
-    VIEWS["Server page composition<br/>Narrow interactive feature boundaries"]
-    CHAT["Lazy native assistant<br/>One controller · Draft & conversation continuity"]
-    API["Separate assistant API<br/>REST + SSE · Session & CSRF"]
-    HOST["Hostinger Node.js hosting<br/>Protected main → Native deployment"]
-    CONTENT --> APP
-    APP --> SHELL
-    SHELL --> VIEWS
-    SHELL -. "Only when build gate is enabled" .-> CHAT
-    CHAT -. "Credentialed HTTPS" .-> API
-    APP --> HOST
-    classDef source fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e;
-    classDef app fill:#dbeafe,stroke:#2563eb,color:#1e3a8a;
-    classDef boundary fill:#ede9fe,stroke:#7c3aed,color:#4c1d95;
-    class CONTENT source;
-    class APP,SHELL,VIEWS app;
-    class CHAT,API,HOST boundary;
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/architecture-overview-dark.svg">
+  <img src="docs/diagrams/architecture-overview-light.svg" alt="Portfolio architecture: reviewed content feeds server-rendered pages and a persistent shell, with separate deployment and optional assistant boundaries." width="640">
+</picture>
+
+[Full-size light](docs/diagrams/architecture-overview-light.svg) · [Full-size dark](docs/diagrams/architecture-overview-dark.svg) ·
+[Editable Mermaid source](docs/diagrams/architecture-overview.mmd) · [Diagram guide](docs/diagrams/README.md)
 
 Feature modules have explicit entry files, pure models and narrow client boundaries.
 CI rejects dependency cycles, reversed layers, private module imports and client paths
@@ -160,23 +145,13 @@ The portfolio has no application database or model-provider key. Reviewed conten
 
 ### Solar scene
 
-```mermaid
-flowchart LR
-    SSR["Server-rendered fallback<br/>Same camera and orbits · CSS terminators"]
-    LOAD["Deferred engine<br/>Size-matched map variants · Off-main-thread decode"]
-    PREP["Before the first frame<br/>Upload maps · Compile programs · Place bodies"]
-    MASK["Reading mask<br/>Cached text blocks · Quarter resolution"]
-    PASS["Single render pass<br/>Bodies · Corona · Stars · Belts · Milky Way"]
-    ADAPT["Adaptive quality<br/>Calibrated refresh · Hysteresis"]
-    SSR -->|"crossfade, no jump"| PASS
-    LOAD --> PREP --> PASS
-    MASK --> PASS
-    PASS --> ADAPT --> PASS
-    classDef render fill:#dbeafe,stroke:#2563eb,color:#1e3a8a;
-    classDef guard fill:#dcfce7,stroke:#16a34a,color:#14532d;
-    class LOAD,PREP,PASS render;
-    class SSR,MASK,ADAPT guard;
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/solar-rendering-dark.svg">
+  <img src="docs/diagrams/solar-rendering-light.svg" alt="Solar rendering pipeline: a complete static scene remains available while a deferred engine prepares a single render pass, with reading protection and adaptive quality." width="640">
+</picture>
+
+[Full-size light](docs/diagrams/solar-rendering-light.svg) · [Full-size dark](docs/diagrams/solar-rendering-dark.svg) ·
+[Editable Mermaid source](docs/diagrams/solar-rendering.mmd) · [Diagram guide](docs/diagrams/README.md)
 
 Custom shaders give airless bodies Lommel–Seeliger photometry, gas giants limb darkening,
 Earth its oceans, clouds and night lights, and Saturn's rings shadows in both directions.

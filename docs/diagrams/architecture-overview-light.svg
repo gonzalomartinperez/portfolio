@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1508" viewBox="0 0 640 1508" role="img" aria-labelledby="title description">
+<title id="title">One portfolio. Clear boundaries.</title><desc id="description">Reviewed content feeds the App Router, persistent shell and server page composition. The App Router also produces a deployment for managed Hostinger hosting. The shell can lazily start one assistant controller only when the build gate is enabled; it uses credentialed HTTPS with REST, SSE, sessions and CSRF against a separate API. The portfolio has no application database or provider key.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#526A88" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="640" height="1508" rx="24" fill="#F7F9FC"/>
+<g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+<text x="32" y="43" font-size="17" font-weight="700" fill="#0A6E9B" letter-spacing="2">APPLICATION / CONTEXT</text>
+<text x="32" y="84" font-size="30" font-weight="700" fill="#132238">One portfolio. Clear boundaries.</text>
+<text x="32" y="117" font-size="20" font-weight="400" fill="#40526B">Reviewed inputs → composed pages → focused interaction</text>
+<rect x="72" y="150" width="536" height="620" rx="18" fill="#EEF3FA" stroke="#CBD5E1" stroke-width="1.5"/>
+<text x="94" y="184" font-size="17" font-weight="650" fill="#40526B" letter-spacing="1">PUBLIC PORTFOLIO · OWNED APPLICATION</text>
+<rect x="96" y="210" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="230" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="244" font-size="25" font-weight="650" fill="#132238">Reviewed content</text>
+<text x="118" y="274" font-size="20" font-weight="400" fill="#40526B">Typed EN / ES copy · Approved CV projection</text>
+<text x="118" y="300" font-size="20" font-weight="400" fill="#40526B">Committed public documents and assets</text>
+<text x="545" y="243" font-size="16" font-weight="650" fill="#0A6E9B">01</text>
+<path d="M 340 318 V 350" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="96" y="350" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="370" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="384" font-size="25" font-weight="650" fill="#132238">Next.js App Router</text>
+<text x="118" y="414" font-size="20" font-weight="400" fill="#40526B">Server-rendered pages</text>
+<text x="118" y="440" font-size="20" font-weight="400" fill="#40526B">Metadata and route composition</text>
+<text x="545" y="383" font-size="16" font-weight="650" fill="#0A6E9B">02</text>
+<path d="M 340 458 V 490" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="96" y="490" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="510" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="524" font-size="25" font-weight="650" fill="#132238">Persistent root layout</text>
+<text x="118" y="554" font-size="20" font-weight="400" fill="#40526B">Navigation · Theme · Locale</text>
+<text x="118" y="580" font-size="20" font-weight="400" fill="#40526B">One shell across internal navigation</text>
+<text x="545" y="523" font-size="16" font-weight="650" fill="#0A6E9B">03</text>
+<path d="M 340 598 V 630" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="96" y="630" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="650" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="664" font-size="25" font-weight="650" fill="#132238">Server page composition</text>
+<text x="118" y="694" font-size="20" font-weight="400" fill="#40526B">Readable content first</text>
+<text x="118" y="720" font-size="20" font-weight="400" fill="#40526B">Narrow interactive feature boundaries</text>
+<text x="545" y="663" font-size="16" font-weight="650" fill="#0A6E9B">04</text>
+<path d="M 96 404 H 40 V 866 H 96" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="96" y="810" font-size="17" font-weight="650" fill="#40526B" letter-spacing="1">DELIVERY · PROTECTED MAIN</text>
+<rect x="96" y="828" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="848" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="862" font-size="25" font-weight="650" fill="#132238">Managed Hostinger hosting</text>
+<text x="118" y="892" font-size="20" font-weight="400" fill="#40526B">Node.js application deployment</text>
+<text x="118" y="918" font-size="20" font-weight="400" fill="#40526B">Repository CI ≠ observed deployment</text>
+<text x="545" y="861" font-size="16" font-weight="650" fill="#0A6E9B">05</text>
+<rect x="72" y="1000" width="536" height="360" rx="18" fill="#EEF3FA" stroke="#53668B" stroke-width="1.5" stroke-dasharray="7 6"/>
+<text x="94" y="1034" font-size="17" font-weight="650" fill="#53668B" letter-spacing="1">OPTIONAL ASSISTANT · BUILD GATE OFF</text>
+<path d="M 584 544 H 624 V 1108 H 584" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="7 6"/>
+<rect x="96" y="1054" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="1074" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="1088" font-size="25" font-weight="650" fill="#132238">Lazy native assistant</text>
+<text x="118" y="1118" font-size="20" font-weight="400" fill="#40526B">One application controller</text>
+<text x="118" y="1144" font-size="20" font-weight="400" fill="#40526B">Draft and conversation continuity</text>
+<text x="545" y="1087" font-size="16" font-weight="650" fill="#0A6E9B">06</text>
+<path d="M 340 1162 V 1222" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="7 6"/>
+<rect x="108" y="1177" width="440" height="29" rx="6" fill="#EEF3FA"/>
+<text x="116" y="1199" font-size="19" font-weight="400" fill="#40526B">Credentialed HTTPS · REST + SSE</text>
+<rect x="96" y="1222" width="488" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="96" y="1242" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="1256" font-size="25" font-weight="650" fill="#132238">Separate assistant API</text>
+<text x="118" y="1286" font-size="20" font-weight="400" fill="#40526B">Session and CSRF ownership</text>
+<text x="118" y="1312" font-size="20" font-weight="400" fill="#40526B">Outside the portfolio deployment</text>
+<text x="545" y="1255" font-size="16" font-weight="650" fill="#0A6E9B">07</text>
+<path d="M 34 1410 H 70" fill="none" stroke="#526A88" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="84" y="1417" font-size="19" font-weight="400" fill="#40526B">Flow / dependency</text>
+<path d="M 34 1446 H 70" fill="none" stroke="#526A88" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="84" y="1453" font-size="19" font-weight="400" fill="#40526B">Dashed = optional boundary</text>
+<text x="34" y="1480" font-size="19" font-weight="400" fill="#40526B">No application database or model-provider key in this site.</text>
+</g>
+</svg>
