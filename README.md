@@ -139,9 +139,30 @@ These badges describe this repository's implementation. The [professional techno
 [Full-size light](docs/diagrams/architecture-overview-light.svg) · [Full-size dark](docs/diagrams/architecture-overview-dark.svg) ·
 [Editable Mermaid source](docs/diagrams/architecture-overview.mmd) · [Diagram guide](docs/diagrams/README.md)
 
-Feature modules have explicit entry files, pure models and narrow client boundaries.
-CI rejects dependency cycles, reversed layers, private module imports and client paths
-to server-only code. See the [source module contract](docs/architecture.md#source-module-contract).
+### Architecture status and enforcement
+
+Implemented as feature-owned modules with inward dependencies: routes and views
+compose the interface; pure policies stay separate from rendering and transport.
+The assistant owns its application ports and receives concrete adapters at its entry.
+The [module contract](docs/architecture.md#source-module-contract) is the source of truth.
+
+- **Enforced in CI:** `npm run test:architecture` audits parsed imports, aliases,
+  re-exports, dynamic imports and type-only edges. It rejects reversed dependencies,
+  private feature imports, cycles and client paths to server-only code. The
+  [negative fixtures](scripts/architecture.test.mjs) must reject representative
+  violations while valid composition passes; this runs inside `npm run check`.
+- **Deliberate adaptations:** small features do not need empty layers. Named public
+  entries and the narrow server-only analytics configuration facade are documented
+  in the module contract. Static content needs no generic repository or DI framework.
+- **Pending operational acceptance:** the assistant and analytics remain disabled.
+  Effective TLS, CORS, cookies, CSRF, proxy streaming and VPS readiness require their
+  owners' verification. Passing source checks does not establish production readiness.
+
+The [decision record and primary bibliography](docs/research/clean-architecture.md)
+explain how the dependency rule and Microsoft architecture guidance apply here.
+Google's engineering practices inform review and quality, not an architecture
+certification. The guard's [scope and limits](docs/research/clean-architecture.md#scope-of-enforcement)
+remain explicit; no universal folder layout or complete security audit is claimed.
 
 The portfolio has no application database or model-provider key. Reviewed content and documents are committed inputs; the optional assistant talks directly to a separately deployed API. [Explore the application, CV publication, and assistant boundaries](docs/architecture.md).
 

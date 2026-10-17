@@ -7,6 +7,7 @@ folder layout is universally best.
 | Evidence | Local decision |
 | --- | --- |
 | [Clean Architecture dependency rule](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) | Domain models do not import views or adapters. Ports belong to the assistant application; concrete transports stay outside it. Static content does not need repository abstractions. |
+| [Microsoft common web application architectures](https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures) | Keep implementation details outside application-owned policy and interfaces. The examples target .NET server applications; their projects, persistence layers and deployment topology are not a frontend folder template. |
 | [Next.js project organization](https://nextjs.org/docs/app/getting-started/project-structure) | Keep framework routes in `app`, compose pages in `views`, and colocate cohesive feature internals outside the router. URLs do not change. |
 | [Next.js server/client boundary](https://nextjs.org/docs/app/getting-started/server-and-client-components) | Keep captions and carousel selection on the server; use narrow client entrypoints for canvas, controls and animation. Retain the persistent root layout and lazy scene imports. |
 | [React custom hooks](https://react.dev/learn/reusing-logic-with-custom-hooks) | Preserve the existing controller and shared motion store. Extract pure filtering separately; do not replace every function with a hook. |
