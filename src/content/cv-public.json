@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-13.2",
+  "revision": "2026-10-17.1",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
@@ -95,7 +95,7 @@
                       "href": ""
                     },
                     {
-                      "text": " using Agno, LangChain/LangGraph, and OpenAI API; integrated PostgreSQL/pgvector, Mem0, Vertex AI, and DeepInfra for retrieval, memory, and model access. Improved tool selection and evaluation: load tests confirmed at least 2× faster responses in comparable optimized flows, while removing redundant calls reduced token usage in affected queries by an estimated 30%.",
+                      "text": " using Agno, LangChain/LangGraph, LangSmith, and OpenAI API; integrated PostgreSQL/pgvector, Mem0, Vertex AI, and DeepInfra for retrieval, memory, and model access. Improved tool selection and evaluation: load tests confirmed at least 2× faster responses in comparable optimized flows, while removing redundant calls reduced token usage in affected queries by an estimated 30%.",
                       "bold": false,
                       "href": ""
                     }
@@ -196,7 +196,7 @@
                       "href": ""
                     },
                     {
-                      "text": " with LangChain/LangGraph, Neo4j, PostgreSQL/pgvector and OpenAI API. GraphRAG related enterprise policies and promotions; its internal harness orchestrated agents, evaluated answers, tuned performance and enforced domain and data-leakage guardrails. Connected to the Spring WebFlux BFF for portal access, the assistant answered queries without executing commercial actions.",
+                      "text": " with LangChain/LangGraph, LangSmith, Neo4j, PostgreSQL/pgvector and OpenAI API. GraphRAG related enterprise policies and promotions; its internal harness orchestrated agents, evaluated answers, tuned performance and enforced domain and data-leakage guardrails. Connected to the Spring WebFlux BFF for portal access, the assistant answered queries without executing commercial actions.",
                       "bold": false,
                       "href": ""
                     }
@@ -536,6 +536,7 @@
                 "GraphRAG",
                 "LangChain",
                 "LangGraph",
+                "LangSmith",
                 "Context Engineering",
                 "Prompt Engineering",
                 "Embeddings",
@@ -1068,7 +1069,7 @@
                       "href": ""
                     },
                     {
-                      "text": ", usando Agno, LangChain/LangGraph y OpenAI API; integré PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Mejoré la selección de herramientas y la evaluación: las pruebas de carga confirmaron respuestas al menos 2× más rápidas en flujos optimizados comparables, mientras que eliminar llamadas redundantes redujo un 30% estimado de tokens en las consultas afectadas.",
+                      "text": ", usando Agno, LangChain/LangGraph, LangSmith y OpenAI API; integré PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Mejoré la selección de herramientas y la evaluación: las pruebas de carga confirmaron respuestas al menos 2× más rápidas en flujos optimizados comparables, mientras que eliminar llamadas redundantes redujo un 30% estimado de tokens en las consultas afectadas.",
                       "bold": false,
                       "href": ""
                     }
@@ -1169,7 +1170,7 @@
                       "href": ""
                     },
                     {
-                      "text": " con LangChain/LangGraph, Neo4j, PostgreSQL/pgvector y OpenAI API. GraphRAG relacionaba políticas empresariales y promociones; el harness interno orquestaba agentes, evaluaba respuestas, optimizaba rendimiento y aplicaba guardrails de dominio y protección de datos. Conectado al BFF Spring WebFlux para el acceso desde el portal, respondía consultas sin ejecutar operaciones comerciales.",
+                      "text": " con LangChain/LangGraph, LangSmith, Neo4j, PostgreSQL/pgvector y OpenAI API. GraphRAG relacionaba políticas empresariales y promociones; el harness interno orquestaba agentes, evaluaba respuestas, optimizaba rendimiento y aplicaba guardrails de dominio y protección de datos. Conectado al BFF Spring WebFlux para el acceso desde el portal, respondía consultas sin ejecutar operaciones comerciales.",
                       "bold": false,
                       "href": ""
                     }
@@ -1504,6 +1505,7 @@
                 "GraphRAG",
                 "LangChain",
                 "LangGraph",
+                "LangSmith",
                 "Context Engineering",
                 "Prompt Engineering",
                 "Embeddings",
@@ -1941,11 +1943,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "374211084d832a7a136632bb0c3915d1993e8ba5100eb7d4047aeacc5afcb196",
-    "factsSha256": "5addb8c0ac460498a6be3525d92e9ea3d5001bde589a8bea78402da142e0bbce",
+    "sourceSha256": "09248c6f28e7126d49c791e1ee423f037ee44246536f523fc14608f8bd3795d6",
+    "factsSha256": "25be242db504579441929f01cdaed4e4a0baf2f65b6aaf54a6957b0108b0a6f7",
     "pdfSha256": {
-      "en": "6333d72954a633539bf8463d6ee1ffb63b9f8bf09fb73498038f4a99ef95b67c",
-      "es": "899d2b1d696b9b836bd08475a2f22098ca50e0963d297636bc64d52ef3743c9e"
+      "en": "bb6971f7ab0e7aa1dec27f849ddcd90b94d5cea74891ed55bf3152319e3ae9b5",
+      "es": "59d7fd6be8f0c4726b4f97f865d2b988bdaaa985d69cb3d424624746b1b52fdf"
     }
   }
 }
