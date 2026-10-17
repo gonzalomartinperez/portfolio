@@ -1,14 +1,14 @@
 # Minimal product analytics and privacy notice
 
-Status: draft
+Status: in-progress
 
 ## Outcome and scope
 
-Owner-requested design handoff, reviewed 2026-10-17. Give the maintainer useful,
+Owner-requested implementation and design handoff, reviewed 2026-10-17. Give the maintainer useful,
 coarse product-usage information in the private backoffice without introducing a
-visitor-tracking identity or interrupting the public portfolio. This document is
-not a shipped collector, accepted API schema, privacy-law determination or
-activation approval. Existing assistant and analytics collection remain disabled.
+visitor-tracking identity or interrupting the public portfolio. The bounded client implementation follows the committed ingestion contract below.
+This is not a privacy-law determination or activation approval. Production assistant
+and analytics collection remain disabled; enabled tests use synthetic local sinks.
 
 The owner explicitly chooses **no accept-cookies banner on the portfolio**, with a
 discreet, accurate footer/privacy notice. If a proposed measure requires consent,
@@ -25,16 +25,16 @@ Sites remain on managed Business hosting; VPS operations are separately owned.
 
 | ID | Observable requirement | Current result |
 | --- | --- | --- |
-| AC-1 | Collection is off by default, independently of assistant rollout; off means no analytics requests, identifiers, cookies or storage writes | Planned; no collector implemented |
-| AC-2 | Only reviewed event/section/locale combinations and bounded schema fields leave the browser; synthetic forbidden text/URL/cookie/token fields are rejected | Pending accepted API contract |
-| AC-3 | Explicit link interactions are counted by their actual meaning; hydration, prefetch, theme changes, re-renders and bfcache do not create duplicate views | Pending implementation/tests |
-| AC-4 | No credentials, referrer, session/conversation/run ID or persistent visitor ID accompanies an event; network rejection/offline cannot delay navigation or contact/CV links | Pending browser/network tests |
-| AC-5 | Footer notice is bilingual, discreet and truthful to the enabled behavior; keyboard focus, contrast, zoom and mobile wrapping remain usable without a banner | Current-state notice implemented; metrics-specific copy remains pending |
+| AC-1 | Collection is off by default, independently of assistant rollout; off means no analytics requests, identifiers, cookies or storage writes | Verified unit, disabled browser and smoke fixtures |
+| AC-2 | Only reviewed event/section/locale combinations and bounded schema fields leave the browser; synthetic forbidden text/URL/cookie/token fields are rejected | Schema-bound negative tests and browser payload checks passed |
+| AC-3 | Explicit link interactions are counted by their actual meaning; hydration, prefetch, theme changes, re-renders and bfcache do not create duplicate views | Unit deduplication and browser interaction fixtures passed; cache-admission limits below |
+| AC-4 | No credentials, referrer, session/conversation/run ID or persistent visitor ID accompanies an event; network rejection/offline cannot delay navigation or contact/CV links | Header/cookie, 429/500/offline and navigation checks passed |
+| AC-5 | Footer notice is bilingual, discreet and truthful to the enabled behavior; keyboard focus, contrast, zoom and mobile wrapping remain usable without a banner | EN/ES, both themes, real-key focus/200% text and scoped axe passed |
 | AC-6 | Country is trusted-edge-derived or unknown; spoofed client country is rejected and small aggregates are suppressed under an approved rule | Pending API/ops ownership decisions |
 | AC-7 | Model counts come from persisted terminal run transitions, once per defined generation; retry, SSE reconnect/chunk and cancelled/failed outcomes are distinct | Pending API implementation; not existing ops counters |
 | AC-8 | Private aggregate reads are authenticated and isolated by product; charts have labels, sample counts, UTC filters, table alternatives and distinct empty/unavailable states | Backoffice owner; pending |
-| AC-9 | Existing JS/HTML/CSS budgets, reduced-motion behavior and keyboard flows remain satisfied; record comparable request/JS/render measurements, not an unmeasured speedup | Existing site baseline only; new feature untested |
-| AC-10 | Source/history/build secret guards pass, all payload fixtures are synthetic and logs/artifacts exclude event content and credentials | Future increment must verify exact source |
+| AC-9 | Existing JS/HTML/CSS budgets, reduced-motion behavior and keyboard flows remain satisfied; record comparable request/JS/render measurements, not an unmeasured speedup | Unchanged budgets passed; comparable transfer measurements below |
+| AC-10 | Source/history/build secret guards pass, all payload fixtures are synthetic and logs/artifacts exclude event content and credentials | Source/history plus sanitized enabled transfer passed; final CI belongs to PR |
 
 ## Design and decisions
 
@@ -51,10 +51,10 @@ reuse it to link events or describe the entire site as storage-free. The persist
 footer is `src/shell/site-footer.tsx`, already using the shared locale/chrome contract.
 The assistant remains disabled under the existing deployment contract.
 
-The coordinated ops draft is an attributed private operator handoff at
-`vps-ops/docs/handoffs/analytics-and-dashboards.md`, source `55955bc`; it is not a
-public-build dependency. The API owner's current operations counters are best-effort
-observations, not audited visitor, generation or billing totals.
+Earlier operations proposals provide context only; the accepted public contract
+and client limits are reproduced here without requiring access to private runbooks.
+The API owner's existing operations counters are best-effort observations, not
+audited visitor, generation or billing totals.
 
 ```mermaid
 flowchart TB
@@ -75,38 +75,51 @@ flowchart TB
   class INGEST,RUN,COUNTRY,DATA,BO owned
 ```
 
-### Proposed vocabulary and envelope
+### Committed ingestion contract
 
-Schema names are proposals to reconcile with the API owner, not generated contract
-changes. One random event ID belongs to one event solely for deduplication; do not
-add a redundant request ID or reuse it across navigation/assistant events.
+The API owner committed the candidate contract at
+`59a5ccec1b38bb1a3679497deffd02749c0e8d49`, with the public ingest route
+`POST /api/v1/analytics/events`. The exact upstream JSON Schema is vendored at
+[src/contracts/product-event.schema.json](../../src/contracts/product-event.schema.json),
+SHA-256 `8203591a5b8768ffaa8bfa13399c50de1802be9075a8f78808e61c94aaa9f6ca`.
+A unit check binds these bytes and separately verifies the event-specific semantic
+restrictions documented by the upstream contract. API CI/promotion remains owned by
+that session and is not established by importing its contract.
+
+One random event ID belongs to one event solely for duplicate detection. The client
+never persists it or reuses it across navigation/assistant events.
 
 | Field | Proposed boundary |
 | --- | --- |
 | schema_version | Explicit accepted version; no silent reinterpretation of ops telemetry |
 | event_id | Random per-event ID, no browser persistence or visitor meaning |
 | project / source | Fixed portfolio/site values at this composition point; strict backend enums |
-| event_name | Reviewed enum below; reject source/event mismatches |
-| section | home, about, work, filomena, stack, education, cv or contact |
+| event_name | Six reviewed names below; reject invalid section/target combinations |
+| section | home, about, work, filomena, stack, education, cv or contact; navigation_click uses destination |
 | locale | en or es; not a country signal |
 | target | Optional event-specific reviewed enum; never arbitrary labels, URLs or properties |
 | received_at | Authoritative server UTC receipt time; not supplied by browser |
-| occurred_at | Optional only if justified, bounded and untrusted; omit by default |
-| country | Server-only trusted ISO country or unknown; never accept browser claims |
+| occurred_at | Forbidden in the browser payload |
+| country | Forbidden in browser payload; current backend contract uses unknown only |
 
-Candidate events: `page_view`, `navigation_click`, `section_open`, `cv_link_open`,
+Accepted event names: `page_view`, `navigation_click`, `section_open`, `cv_link_open`,
 `contact_link_open`, and `company_link_open`. A CV click does not prove a completed
 download, and a contact click does not prove a sent message. `section_open` means
-an explicit expansion/action, not automatic visibility while scrolling.
+an explicit primary/keyboard opening of a work contribution disclosure, never a
+visibility observation, closing action, programmatic expansion or middle-click.
+`company_link_open` is limited to work and the three named employers;
+`section_open` also accepts independent work. `cv_link_open` is limited to the CV
+page and target en/es: PDF links on contact are intentionally outside this contract.
+Contact targets are email/linkedin/github. Page/navigation events omit target.
 
-Before implementing `page_view`, define initial document loads and actual client-side
-navigation commits. Prefetch, component remounts, repeated effects, locale-independent
+`page_view` follows initial document loads and actual client-side
+route commits through one controller retained per document. Prefetch, component remounts, repeated effects, locale-independent
 theme changes and bfcache restoration must not create additional views. Counts are
 accepted events, never unique people; bots and dropped deliveries remain limitations.
 
 ### Browser and architecture boundary
 
-If accepted, place a cohesive analytics feature under `src/features/`, with pure
+The analytics feature lives under `src/features/analytics/`, with pure
 vocabulary/validation in domain, a small application-owned transport port and a
 browser fetch adapter. Shell/page composition owns deliberate named entrypoints.
 Do not import assistant transport/session logic, introduce generic DI or add a
@@ -126,14 +139,20 @@ provider error bodies, conversation text or session/run identifiers. A public
 browser cannot hold an ingest secret. CORS/Origin checks do not authenticate bots:
 the API owner must define body/rate/storage bounds and abuse handling.
 
-### Footer proposal and privacy gate
+### Footer disclosure and activation gate
 
-The current-state notice is implemented in both locales: no tracking cookies, with
+The current-state note remains in both locales: no tracking cookies, with
 the theme preference saved on the device. It adds no collector, privacy modal,
-cookie banner, network request or storage behavior. This is not an announcement
-that aggregate metrics already exist.
+cookie banner, network request or storage behavior. An additional native disclosure describes actual feature flags, local preference
+storage, external links/mail, hosting technical requests and the public contact.
+It creates no consent action or identifier. There is no claim that aggregate
+metrics are active in production.
 
-For an accepted, enabled minimal implementation:
+The enabled synthetic fixture describes event names, coarse dimensions, reviewed
+targets and per-event IDs without claiming persistent visitor identities. The brief
+note can remain accurate because neither build uses tracking cookies. A later
+activation still requires approved retention and processor/log facts; possible
+metrics-specific short copy is:
 
 - EN: “Privacy: aggregate usage metrics, without tracking cookies.”
 - ES: “Privacidad: métricas de uso agregadas, sin cookies de seguimiento.”
@@ -151,7 +170,8 @@ activation; do not infer an exception from personal/showcase status.
 
 ### Country, counters and dashboards
 
-Country-only edge enrichment is optional. Cloudflare documents `CF-IPCountry` on
+The current committed ingestion contract fixes country to unknown. Future
+country-only edge enrichment is optional and is not implemented by this client. Cloudflare documents `CF-IPCountry` on
 all plans, but neither its presence nor a browser-supplied header proves a trusted
 edge path. Ops must verify origin restrictions/header replacement before use.
 No account toggle, city/coordinates transform or external lookup is requested here.
@@ -166,9 +186,42 @@ cost are not settled provider billing. Do not join website and assistant identit
 Retention, deduplication window, late events, small-cell suppression, quotas, indexing,
 cleanup, backup expiry and restore behavior need accepted owner decisions. The ops
 7-day dedupe / 30-day aggregate draft is explicitly unapproved, not a runtime default.
-No migration or collector allocation is justified until these are resolved.
+The later API candidate uses local test limits of 24-hour deduplication and seven
+UTC days of aggregates in existing PostgreSQL; these supersede that earlier ops
+proposal for local fixtures only. Production retention, backup expiry and rights
+handling still require owner/ops decisions. This frontend does not run migrations
+or allocate services.
 
 ## Delivery plan
+
+### Authorized default-off client increment
+
+The owner authorized implementation on 2026-10-17 through the coordinating ops
+handoff. This does not authorize activation, hosted settings changes or consent-
+dependent measurements. The API/backoffice owner first commits the exact ingestion
+contract; the public client must reference that receipt before adding its transport.
+The committed upstream receipt above supplies the executable integration contract;
+the broader country/generation/activation proposals remain outside this slice.
+
+The client lane owns an independent `ANALYTICS_ENABLED` build-time switch, default
+off, and narrow analytics feature boundaries. Exact public route mapping rejects
+unknown paths, query strings, fragments and assistant routes. An initial page view
+and each committed route change are distinct from prefetch or rerender activity.
+Only deliberately marked links/disclosures can produce interaction events; the
+collector must not scrape labels, URLs, text or arbitrary DOM properties.
+
+The same increment adds a native bilingual privacy disclosure without a banner or
+modal. Its assistant and analytics availability text follows actual build flags.
+It describes local theme storage, explicit external links and public email contact;
+it does not invent hosting log retention, processor regions, a legal address or a
+jurisdiction. The assistant's optional enabled fixture must describe a browser
+session rather than promise anonymity and make API-provided retention discoverable
+on mobile. Updated documentation records those unresolved activation prerequisites.
+
+Verification must exercise both enabled synthetic fixtures and the disabled
+production configuration. No enabled fixture contacts a live analytics/provider
+service. Reuse existing CI builds/gates where possible; do not weaken test selection
+or add a redundant full build merely for the new feature.
 
 1. Reconcile this handoff with versioned API/backoffice and ops contracts. Resolve
    endpoint/schema/CORS, privacy applicability, retention and trusted country.
@@ -185,9 +238,10 @@ No migration or collector allocation is justified until these are resolved.
 
 ## Verification and handoff
 
-This increment implements the current-state EN/ES footer notice and reviews source
-boundaries and primary evidence. No collector, aggregate dashboard or performance
-improvement is marked implemented. Analytics acceptance above remains pending
+This increment implements the default-off public client and the EN/ES native
+privacy explanation. API/backoffice validation and deployment are owned separately.
+No production analytics activation, legal certification, unique-visitor accounting
+or performance improvement is claimed. Analytics acceptance above remains pending
 until its owner supplies reproducible evidence.
 Document/link checks apply to this handoff; they cannot establish runtime/privacy
 acceptance. No real credentials, event content or provider calls are used.
@@ -206,7 +260,7 @@ Primary sources reviewed 2026-10-17:
   claiming automated checks alone establish conformance.
 
 
-### Current-state footer verification
+### Earlier current-state footer verification (before this client increment)
 
 The implemented notice was checked in Chromium at 1440×1000 and 390×844,
 in English/Spanish and light/dark themes (eight combinations), using local HTTPS
@@ -222,3 +276,129 @@ screenshots; this is not production activation, and external requests were block
 No collector, provider call or event storage was exercised. Screenshots and the
 structured result live under ignored `.artifacts/privacy-review/`; the delivery PR
 records final commit and protected CI receipts separately.
+
+
+### Client implementation verification — 2026-10-17
+
+The default-off public client is implemented against the immutable contract receipt
+above. `npm run check` passed with 175 Node tests across architecture, analytics,
+repository/models, assistant, content and budgets, plus lint, strict production
+compilation, approved document/identity checks and the frozen assistant contract.
+The final pass includes the refined EN/ES privacy copy and bounded architecture guard.
+All 22 rendered assertions passed on the enabled synthetic build. The browser
+planner preserves all 440 pre-existing identities and includes 22 new ones: 462
+identities across the existing eight groups, without new build jobs or weaker
+retries, deadlines or budgets.
+
+- Fourteen analytics unit tests cover closed dimensions, forbidden payload fields,
+  exact schema bytes, route deduplication, endpoint restrictions, omitted credentials,
+  referrer/cache policy, asynchronous errors, bounded concurrency and no retry queue.
+- All 18 new EN/ES desktop/mobile browser cases passed. They exercise actual
+  keyboard/click/download actions, per-event IDs, the absence of analytics cookies
+  even when a synthetic response attempts `Set-Cookie`, pre-existing cookie omission,
+  429/500/offline navigation, invalid targets and native disclosure semantics.
+- Privacy keyboard coverage includes Enter/Space, Shift+Tab back to the summary,
+  visible focus below the sticky header at 200% text, both themes and no horizontal
+  overflow. Footer-scoped axe checks passed. The refined eight privacy cases passed
+  separately after adding that explicit focus-obscuration check.
+- A repeatable mixed-palette axe failure was retained in ignored QA artifacts.
+  Assertions for actual body/link colors and a render frame before the scan resolved
+  all three controlled repetitions, without changing colors or disabling a rule.
+  Independent source review also found a middle-click falsely counted as a details
+  opening; the corrected adapter and browser regression distinguish it from links.
+- The independent disabled build passed budgets, smoke and both desktop/mobile
+  rollout cases: no launcher, no assistant or analytics requests, no cookies/new
+  identity storage, matching disabled notices and both assistant routes returning 404.
+- The redacted guard passed 15 regression probes, the 653 tracked-file snapshot and
+  all available full Git history. The sanitized enabled CI-transfer scan passed
+  across 526 uploaded files; the normal runtime manifests were restored afterward.
+
+Comparable Node gzip measurements use the preceding React 19.3.1 build with the
+assistant fixture on and analytics off, versus the same toolchain with this client
+fixture on. They measure transfer sizes, not physical-device rendering or a speedup:
+
+| Measurement | Before | Candidate |
+| --- | ---: | ---: |
+| Non-assistant CSS | 24,521 bytes | 24,541 bytes (24 KiB budget unchanged) |
+| Largest prerendered HTML | 62,250 bytes | 63,338 bytes (70 KiB budget unchanged) |
+| Home initial script tags, distinct gzip files | 234,413 bytes | 237,466 bytes |
+| Contact initial script tags, distinct gzip files | 225,853 bytes | 228,907 bytes |
+
+The roughly 3.0 KiB initial-script increase covers the combined analytics/privacy
+increment, not an isolated attribution to one module. These sums are build artifacts,
+not proof every script is fetched simultaneously or a field Core Web Vitals result.
+Eight theme/locale/viewport privacy captures were visually inspected; oversized
+locator captures can include the existing sticky header. The separate real-key
+assertion verifies the focused summary remains below that header.
+
+Source audits found no need for a new dependency, action upgrade, parser, framework,
+cache, build matrix or credential scope. Existing SHA-pinned Actions/read-only
+permissions, same-run build sharing and full-history secret checking remain intact.
+Three updated canonical skills passed their metadata validator and adapter/link
+checks; they now route to the exact isolated QA commands and separate activation
+from code integration. Public README, contributing, security, architecture, deployment
+and assistant boundaries were reviewed for the actual behavior.
+
+Not established by this evidence: physical-device screen-reader behavior, universal
+WCAG conformance, production cross-origin/edge/provider privacy settings, approved
+retention/backup expiry or a legal exemption. No provider call, live ingest, hosting
+configuration change or activation took place. Final exact-head protected CI and
+observed publication receipts belong to the delivery PR. API/backoffice acceptance,
+coarse country handling and durable generation accounting remain their owners’ scope.
+
+The combined local helper was also verified on the disabled candidate: 22 rendered
+assertions followed by both rollout browser cases using separate owned HTTP/TLS
+lifecycles and the same build. Final disabled browser cases additionally assert no
+cookies, localStorage or sessionStorage entries in fresh contexts.
+
+A final bounded folder-ownership audit added a placement guard against code files
+directly under `src/features`, where they would have no feature owner. Its negative
+TS/TSX/MJS/declaration fixtures and valid small-feature/resource fixtures passed;
+architecture now has 18 tests. No runtime file, dependency, public entrypoint or
+framework convention was renamed. Kebab-case modules, PascalCase React components
+and Next.js reserved filenames remain intact; small features are not forced into
+empty layers. This tooling-only follow-up does not change the measured runtime
+build above; the delivery CI verifies the final complete source.
+
+
+### Final privacy and documentation review
+
+The refined notice invites useful question context, identifies OpenAI processing and
+session/history behavior, and points to the actual conversation list for removal.
+Synthetic EN/ES transport cases verify that optional identifying context reaches
+only the conversation operation, never the closed website event payload. These
+fixtures do not prove backend minimization, provider retention or model behavior.
+Assistant message bodies retain their full available width without a side avatar
+column; compact/expanded continuity and narrow reflow remain covered. A global
+academic-disclosure test selector was scoped to `main` after protected CI correctly
+found that the independent footer disclosure increased its unrelated count.
+
+The three public README diagrams and the private career workflow diagram parsed and
+rendered in light and dark themes using isolated official Mermaid 12.2.0 tooling.
+All eight captures were visually inspected, with non-loopback requests blocked and
+none attempted. No application dependency or private-source diagram service was
+added. This local audit does not establish GitHub's deployed renderer version.
+Badges retain text alternatives and flat-square styling with technology logos where
+available. The private README and its diagram remain private.
+
+The reviewed improvement process is documented separately from delivered functions:
+bounded usage aggregates and explicit feedback inform human review, synthetic or
+reviewed de-identified regression fixtures, and protected source/content releases.
+There is no automatic training claim or raw-conversation analytics pipeline. The
+API/backoffice owner controls any separate feedback aggregate delivery and access.
+
+
+On the final enabled candidate, the full check passed with 175 Node tests; all 22
+rendered assertions, 12 privacy browser cases, 20 selected assistant flows across
+Chromium desktop/mobile, Firefox and WebKit, and both no-JavaScript academic cases
+passed. The final source/history guard passed all 15 regression probes and the
+tracked snapshot; its sanitized build-artifact scan passed 544 files. The frozen
+planner verified all 462 current test identities across the existing eight groups.
+These are local results; exact-head protected CI and public rollout checks remain
+separate delivery receipts. No provider request or production collection was used.
+
+The final disabled build independently passed its unchanged budgets and the combined
+local helper: all 22 rendered assertions followed by both desktop/mobile rollout
+cases, with no assistant/analytics requests, launcher, cookies or fresh-context
+storage. The disabled sanitized artifact was also scanned before restoring its
+normal runtime manifests. Public rollout flags remain false.

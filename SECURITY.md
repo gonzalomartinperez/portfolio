@@ -25,7 +25,10 @@ finding. This policy does not authorize testing systems owned by other parties.
 The current `main` branch is the maintained public website. Historical tags are
 not separately supported release lines. The assistant client is implemented but
 remains disabled in the public delivery; the API, private backoffice and VPS have
-separate owners. Report a cross-boundary concern privately so it can be routed
+separate owners. Product analytics is also independently disabled by default; its
+optional transport omits credentials and has no persistent visitor identity. These
+technical choices do not establish anonymity or a privacy-law exemption. Report a
+cross-boundary concern privately so it can be routed
 without copying sensitive evidence across public repositories.
 
 See the [architecture](docs/architecture.md),

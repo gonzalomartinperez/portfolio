@@ -84,7 +84,7 @@ test("all academic outcomes and CV content remain usable without JavaScript", as
     const page = await context.newPage();
     for (const locale of ["", "/es"]) {
       await page.goto(`${locale}/education`);
-      const summaries = page.locator("details > summary");
+      const summaries = page.locator("main details > summary");
       await expect(summaries).toHaveCount(6);
       for (const summary of await summaries.all()) {
         await summary.focus();

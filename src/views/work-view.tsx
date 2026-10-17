@@ -63,7 +63,12 @@ export function WorkView({ locale }: { locale: Locale }) {
                   {role.position}
                   <span className={styles.company}>
                     {role.companyHref ? (
-                      <ExternalLink href={role.companyHref} locale={locale}>
+                      <ExternalLink
+                        href={role.companyHref}
+                        locale={locale}
+                        data-analytics-event="company_link_open"
+                        data-analytics-target={role.slug}
+                      >
                         {role.company} <span aria-hidden="true">↗</span>
                       </ExternalLink>
                     ) : (
@@ -89,7 +94,7 @@ export function WorkView({ locale }: { locale: Locale }) {
 
                 {role.contributions.length > 2 && (
                   <details className={styles.details}>
-                    <summary>
+                    <summary data-analytics-event="section_open" data-analytics-target={role.slug}>
                       {locale === "es" ? "Más contribuciones" : "More contributions"}{" "}
                       <span>({role.contributions.length - 2})</span>
                     </summary>

@@ -25,7 +25,7 @@ npm run dev
 ```
 
 The default site runs at `http://localhost:3000` without credentials, a database or
-a model provider. Keep the assistant disabled for normal work. Optional integration
+a model provider. Keep the assistant and analytics disabled for normal work. Optional integration
 configuration and contract ownership are explained in the
 [native assistant guide](docs/native-assistant.md); do not add provider keys to this
 frontend. Local `.env.local` is ignored, but ignoring a file does not remove it if
@@ -64,7 +64,9 @@ git diff --check
 
 `check` includes architecture fixtures and source analysis, repository/content
 invariants, assistant contract checks, lint, a type-checked production build and
-budgets. Select production, browser and visual checks from the
+budgets, including the default-off analytics policy and transport checks. Enabled
+full-browser QA requires the [synthetic analytics configuration](docs/development.md#isolated-analytics-verification),
+not a live API or provider key. Select production, browser and visual checks from the
 [task-specific QA matrix](docs/development.md#task-specific-qa). Install the matching
 Playwright browsers with
 `PLAYWRIGHT_SKIP_BROWSER_GC=1 npx playwright install --with-deps chromium firefox webkit`

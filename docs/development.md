@@ -50,8 +50,8 @@ and one build with mandatory TypeScript validation;
 it does not provide a security audit or visual accessibility QA. After building,
 `npm run test:smoke` checks the production server, HTML landmarks, and 404 handling;
 The Hostinger compatibility job runs it too. It uses port 3100 by default; set
-`SMOKE_TEST_PORT` for parallel runs. Locally, `npm run test:site` uses one owned
-production server for rendered assertions and Playwright sequentially. In CI, `Quality (development)` runs
+`SMOKE_TEST_PORT` for parallel runs. Locally, `npm run test:site` reuses one build
+with sequential owned HTTP rendered assertions and HTTPS browser fixtures. In CI, `Quality (development)` runs
 `npm run check` and the server-rendered assertions once, then uploads its verified
 production build. Eight isolated browser runners restore that same-run artifact
 and run the complete Playwright suite in eight duration-balanced groups without rebuilding.
@@ -77,8 +77,10 @@ and Hostinger compatibility to succeed; skipped or cancelled jobs fail the gate.
 Native image-tab tests use the full Chromium channel instead of headless shell
 to exercise browser document navigation. Install Chromium without `--only-shell`;
 the CI installation already provides both binaries. Other tests retain their runtime.
-Use `SITE_TEST_PORT` to isolate this combined run; standalone browser tests retain
-their own managed server. Document hashes and signature checks run before the build.
+Use `SITE_TEST_PORT` to choose the combined run’s rendered/TLS listener and the
+following port for its browser upstream; explicit rendered/browser overrides remain
+available. The rendered server stops before the HTTPS fixture starts. Browser CLI
+arguments after `--` can select targeted coverage without rebuilding. Document hashes and signature checks run before the build.
 Use `npm run typecheck` for a quick standalone type check during development;
 there is no need to run it immediately before `check`. Reuse successful verification
 for an unchanged source state, dependencies and runtime; rerun affected checks
@@ -348,3 +350,34 @@ that lets a detected runtime key travel in an artifact. Unit tests cover roundtr
 unexpected embeddings, invalid manifests, future actions and symlink refusal.
 The normal Hostinger `npm run build`/`npm start` commands never invoke this CI-only
 transfer helper. No persistent credentials or provider accounts are created or rotated.
+
+## Isolated analytics verification
+
+`npm run test:analytics` checks the closed vocabulary, exact upstream schema bytes,
+route-view deduplication and bounded delivery failures. It is part of `npm run check`.
+The public default remains off. Enabled browser QA uses only the existing loopback
+TLS fixture, which discards analytics request bodies instead of proxying or storing
+those events. For owned local ports, build and run consistently:
+
+```bash
+ASSISTANT_ENABLED=true ANALYTICS_ENABLED=true \
+  ANALYTICS_INGEST_URL=https://127.0.0.1:3381/api/v1/analytics/events npm run check
+BROWSER_TEST_PORT=3381 BROWSER_TEST_UPSTREAM_PORT=3382 \
+  npm run test:browser -- tests/browser/analytics.spec.ts tests/browser/privacy.spec.ts
+```
+
+The flags must match the built candidate when running rendered checks. To combine
+rendered checks and selected browser cases against that enabled build:
+
+```bash
+ASSISTANT_ENABLED=true ANALYTICS_ENABLED=true SITE_TEST_PORT=3381 \
+  npm run test:site -- tests/browser/analytics.spec.ts tests/browser/privacy.spec.ts
+```
+
+Reserve ports/resources before running this alongside another session. These tests
+mock external destinations and assistant replies; no provider key or model call is
+needed. Existing CI reuses its enabled quality build across eight browser groups;
+the separate Hostinger build explicitly keeps both feature flags false. Disabled
+rollout browser tests must use a separately built disabled candidate, not a runtime
+flag applied to previously enabled static output. No browser install may garbage-
+collect another session's shared cache.

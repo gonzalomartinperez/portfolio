@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { defaultLocale } from "@/content/locales";
 import { solarTextureVersions } from "@/content/solar-textures";
+import { isAnalyticsEnabled } from "@/features/analytics/application/availability";
+import { analyticsEndpoint } from "@/features/analytics/config";
+import { AnalyticsHost } from "@/features/analytics/entry";
 import { isAssistantEnabled } from "@/features/assistant/application/availability";
 import { AssistantHost } from "@/features/assistant/presentation/assistant-host";
 import { AmbientField } from "@/features/solar-system/presentation/ambient-field";
@@ -28,6 +31,11 @@ export const viewport: Viewport = sharedViewport;
 const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){document.documentElement.dataset.theme=t}}catch(e){}`;
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const assistantEnabled = isAssistantEnabled(process.env.ASSISTANT_ENABLED);
+  const analyticsEnabled = isAnalyticsEnabled(process.env.ANALYTICS_ENABLED);
+  const analyticsUrl = analyticsEnabled
+    ? analyticsEndpoint(process.env.ANALYTICS_INGEST_URL)
+    : null;
   return (
     <html className={fontClassName} lang={defaultLocale} suppressHydrationWarning>
       <head>
@@ -42,9 +50,10 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <main id="main">
           <PageMotion>{children}</PageMotion>
         </main>
-        <SiteFooter />
+        <SiteFooter assistantEnabled={assistantEnabled} analyticsEnabled={analyticsEnabled} />
         <ProfileJsonLd />
-        {isAssistantEnabled(process.env.ASSISTANT_ENABLED) ? <AssistantHost /> : null}
+        {assistantEnabled ? <AssistantHost /> : null}
+        {analyticsUrl ? <AnalyticsHost endpoint={analyticsUrl} /> : null}
       </body>
     </html>
   );

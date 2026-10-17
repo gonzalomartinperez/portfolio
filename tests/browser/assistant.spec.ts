@@ -21,6 +21,15 @@ test("native compact panel, sources and maximization preserve a single conversat
   expect(backend.requests()).toBe(0);
   await page.getByRole("button", { name: "Send", exact: true }).click();
   await expect(page.getByText(answer, { exact: true })).toBeVisible();
+  const response = page.locator("#portfolio-assistant article").filter({ hasText: answer });
+  const responseWidth = await response.evaluate((element) => {
+    const body = element.lastElementChild;
+    return {
+      message: element.getBoundingClientRect().width,
+      body: body?.getBoundingClientRect().width ?? 0,
+    };
+  });
+  expect(responseWidth.body).toBeCloseTo(responseWidth.message, 0);
   if (testInfo.project.name === "desktop")
     await page
       .locator("#portfolio-assistant")
@@ -415,7 +424,9 @@ test("landing visit does not initialize the assistant before explicit activation
 }) => {
   const requests: string[] = [];
   page.on("request", (request) => {
-    if (request.url().includes("/api/v1/")) requests.push(request.url());
+    const path = new URL(request.url()).pathname;
+    if (path.startsWith("/api/v1/") && path !== "/api/v1/analytics/events")
+      requests.push(request.url());
   });
   await page.goto("/about");
   await expect(page.getByRole("button", { name: "Ask AI", exact: true })).toBeVisible();

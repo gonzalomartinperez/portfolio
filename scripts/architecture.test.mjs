@@ -5,6 +5,61 @@ import { auditArchitecture } from "./architecture.mjs";
 const audit = (sources) => auditArchitecture(new Map(Object.entries(sources)));
 const rejects = (sources, reason) => assert.match(audit(sources).join("\n"), reason);
 
+test("flat feature code cannot escape the ownership and entrypoint contract", () => {
+  for (const file of ["hidden.ts", "hidden.tsx", "hidden.mjs", "hidden.d.ts"]) {
+    rejects(
+      {
+        "src/app/page.tsx": `import { value } from "@/features/${file}"; export default value;`,
+        [`src/features/${file}`]: file.endsWith(".d.ts")
+          ? "export declare const value: number;"
+          : "export const value = 1;",
+      },
+      /owned feature directory/,
+    );
+  }
+  assert.deepEqual(
+    audit({
+      "src/features/tool-carousel/tool-carousel.tsx": "export const Carousel = () => null;",
+      "src/features/readme.md": null,
+    }),
+    [],
+  );
+});
+
+test("analytics exposes composition entries while its concrete delivery stays private", () => {
+  assert.deepEqual(
+    audit({
+      "src/app/layout.tsx":
+        'import { AnalyticsHost } from "@/features/analytics/entry"; export const Host = AnalyticsHost;',
+      "src/features/analytics/entry.tsx": '"use client"; export const AnalyticsHost = () => null;',
+    }),
+    [],
+  );
+  rejects(
+    {
+      "src/shell/header.tsx": 'export { send } from "@/features/analytics/adapters/http";',
+      "src/features/analytics/adapters/http.ts": "export const send = 1;",
+    },
+    /explicit entry file/,
+  );
+  rejects(
+    {
+      "src/features/analytics/application/visits.ts": 'export { send } from "../adapters/http";',
+      "src/features/analytics/adapters/http.ts": "export const send = 1;",
+    },
+    /own ports and domain/,
+  );
+  rejects(
+    {
+      "src/features/analytics/entry.tsx":
+        '"use client"; import { endpoint } from "./config"; export default endpoint;',
+      "src/features/analytics/config.ts":
+        'import "server-only"; export const endpoint = "synthetic";',
+    },
+    /server-only/,
+  );
+});
+
 test("legitimate composition, independent domain, adapters and resource imports pass", () => {
   assert.deepEqual(
     audit({

@@ -255,7 +255,12 @@ export function HomeView({ locale }: { locale: Locale }) {
             <p>{copy.home.closingAvailability}</p>
           </div>
           <div className="actions">
-            <a className={buttonVariants()} href={`mailto:${email}`}>
+            <a
+              className={buttonVariants()}
+              data-analytics-event="contact_link_open"
+              data-analytics-target="email"
+              href={`mailto:${email}`}
+            >
               {copy.actions.emailMe}
             </a>
             <Link

@@ -96,7 +96,13 @@ test("CI isolates browser shards and fails the protected gate for incomplete ver
   const browser = jobs.get("browser");
   const gate = jobs.get("check");
   assert.match(development, /ASSISTANT_ENABLED: "true"/);
+  assert.match(development, /ANALYTICS_ENABLED: "true"/);
+  assert.match(
+    development,
+    /ANALYTICS_INGEST_URL: "https:\/\/127\.0\.0\.1:3160\/api\/v1\/analytics\/events"/,
+  );
   assert.match(jobs.get("legacy-linux"), /ASSISTANT_ENABLED: "false"/);
+  assert.match(jobs.get("legacy-linux"), /ANALYTICS_ENABLED: "false"/);
   assert.match(jobs.get("legacy-linux"), /npm run test:smoke/);
   assert.match(development, /name: Quality \(development\)/);
   assert.match(jobs.get("legacy-linux"), /name: Compatibility \(Hostinger \/ GLIBC 2\.28\)/);

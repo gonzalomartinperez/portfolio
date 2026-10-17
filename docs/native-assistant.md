@@ -167,3 +167,49 @@ credentialed CORS must allow the exact portfolio HTTPS origin, and the assistant
 origin routes `/api/v1/*` to FastAPI while leaving private backoffice `/api/auth/*`
 and operations/health routes with their owner. These are deployment requirements,
 not configuration changes performed by this frontend delivery.
+
+## Privacy and reviewed improvement
+
+The assistant and product analytics remain independently disabled in public
+builds. In an enabled fixture, conversation messages and relevant interface
+context go to the assistant service, which uses OpenAI. The visible disclosure
+states that processing, session cookies and the API-provided history period in
+natural language. Visitors may provide useful context; the UI does not silently
+remove or reject their question because it contains identifying information.
+Removing a conversation from history is not a promise of immediate physical erasure
+from providers or backups. No automatic model training or learning is represented.
+
+Website analytics accepts only its closed event dimensions. Messages, prompts,
+feedback text and conversation IDs never become website-event properties. A
+voluntary rating uses the existing conversation feedback operation, not an analytics
+payload or another generation request. Backend minimization of unnecessary repeats,
+third-party/sensitive information and logging belongs to the API owner; frontend
+mock coverage does not establish that model behavior.
+
+The owner-requested improvement loop has these distinct boundaries:
+
+1. Review available bounded aggregates in the private project backoffice. Explicit
+   ratings are retained by the assistant service; an aggregate feedback view is a
+   separate backend/backoffice increment, not a shipped raw-transcript review.
+2. A human chooses a concrete content, prompt or engineering issue to investigate.
+3. Reproduce it with synthetic or reviewed de-identified fixtures, without copying
+   raw conversation content into analytics, public issues, CI logs or test artifacts.
+4. Propose a focused source/content change through its owner's protected PR process,
+   run appropriate offline checks/evaluations and review the resulting release.
+
+This describes the authorized review process, not an autonomous training pipeline.
+API/backoffice delivery determines which aggregate views are actually available;
+conversation-level analysis requires separately defined access, purpose, retention,
+deletion and transparency. Real provider-backed evaluations need their own spending
+and execution authority. Website collection and the assistant remain off in public
+builds; no consent-dependent measure is activated through this process.
+
+Response bodies already occupy their message's full width, with the avatar in a
+metadata row rather than a persistent side column. Wide reading layouts retain a
+readable line-length cap. Browser coverage checks compact/expanded continuity,
+320-CSS-pixel reflow, 200% text, composer access, polite streaming states, real stop,
+explicit recovery, source links and reading-position preservation. These are bounded
+fixture checks, not physical-device or screen-reader certification. Design review
+uses [Microsoft's Human-AI Interaction guidance](https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/)
+and [WAI status-message guidance](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html)
+without replacing the portfolio's own design system or claiming conformance.

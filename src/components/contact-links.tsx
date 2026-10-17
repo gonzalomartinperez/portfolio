@@ -34,6 +34,8 @@ export function ContactLinks({ channels }: { channels: readonly ContactChannel[]
                 : `${channel.name}: ${channel.detail}`
             }
             className={cn(buttonVariants({ variant: "outline" }), styles.link)}
+            data-analytics-event="contact_link_open"
+            data-analytics-target={channel.icon === "gmail" ? "email" : channel.icon}
             href={channel.href}
             rel={channel.external ? "noopener noreferrer me" : undefined}
             target={channel.external ? "_blank" : undefined}
@@ -73,6 +75,8 @@ export function ContactIcons({ channels }: { channels: readonly ContactChannel[]
           <a
             aria-label={channel.external ? `${channel.name} (${channel.newTabHint})` : channel.name}
             className={cn(buttonVariants({ variant: "outline", size: "icon" }), styles.iconOnly)}
+            data-analytics-event="contact_link_open"
+            data-analytics-target={channel.icon === "gmail" ? "email" : channel.icon}
             href={channel.href}
             rel={channel.external ? "noopener noreferrer me" : undefined}
             target={channel.external ? "_blank" : undefined}

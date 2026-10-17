@@ -26,6 +26,8 @@ jobs:
     env:
       NEXT_TELEMETRY_DISABLED: "1"
       ASSISTANT_ENABLED: "true"
+      ANALYTICS_ENABLED: "true"
+      ANALYTICS_INGEST_URL: "https://127.0.0.1:3160/api/v1/analytics/events"
       NPM_CONFIG_CACHE: /tmp/portfolio-npm-cache
     steps:
       - name: Check out source
@@ -100,6 +102,8 @@ jobs:
     env:
       NEXT_TELEMETRY_DISABLED: "1"
       ASSISTANT_ENABLED: "true"
+      ANALYTICS_ENABLED: "true"
+      ANALYTICS_INGEST_URL: "https://127.0.0.1:3160/api/v1/analytics/events"
       NPM_CONFIG_CACHE: /tmp/portfolio-npm-cache
     steps:
       - name: Check out source
@@ -161,6 +165,7 @@ jobs:
     env:
       NEXT_TELEMETRY_DISABLED: "1"
       ASSISTANT_ENABLED: "false"
+      ANALYTICS_ENABLED: "false"
     steps:
       - name: Install container prerequisites
         run: dnf --setopt=timeout=20 --setopt=minrate=500000 --setopt=retries=3 install -y git tar gzip xz

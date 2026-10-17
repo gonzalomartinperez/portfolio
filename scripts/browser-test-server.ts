@@ -87,6 +87,15 @@ try {
     proxy = createServer(
       { key: readFileSync(key), cert: readFileSync(cert) },
       (incoming, outgoing) => {
+        if (incoming.url === "/api/v1/analytics/events") {
+          // Loopback-only synthetic sink; never persist or proxy browser event bodies.
+          incoming.resume();
+          outgoing.writeHead(incoming.method === "POST" ? 204 : 405, {
+            "Cache-Control": "no-store",
+          });
+          outgoing.end();
+          return;
+        }
         const forwarded = request(
           {
             hostname: "127.0.0.1",

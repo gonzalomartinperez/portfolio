@@ -76,11 +76,17 @@ flowchart TB
 | `src/features/tool-carousel` | Server selection passes minimal display fields to client motion and controls. |
 | `src/features/project-gallery` | Gallery interaction and its owned styles. |
 | `src/features/assistant` | Independent domain and application ports, concrete API adapters, presentation and an explicit runtime composition entry. |
+| `src/features/analytics` | Closed route/event policies, per-document visit state, bounded credential-free delivery and explicit root-layout composition. Independently disabled by default. |
 | `src/components` | Reused presentation; owned `ui` primitives cannot import content or product features. |
 | `src/content` | Reviewed bilingual inputs and neutral data contracts. No dependency on features or rendering. |
 | `src/lib` | Shared utilities and scoped motion coordination; no content, features or composition imports. |
 
 Feature entries are deliberately named files rather than broad export barrels.
+Code must belong to a directory under `src/features`; flat feature files cannot
+bypass ownership or the entrypoint map. Small cohesive features need not create
+empty domain/application/adapters folders. The analytics `config.ts` is a narrow
+server-only facade for validating enabled configuration; it does not expose its
+delivery adapter as a general public API.
 The full bilingual content registry, diagram figure and carousel composition use
 `server-only` markers so client imports cannot silently expand their runtime.
 `npm run test:architecture` enforces dependency direction, public entries, all-import
@@ -88,6 +94,28 @@ cycles and transitive client/server boundaries through parsed source. Contract t
 are included in layering checks; only runtime edges participate in client traversal.
 See [engineering standards](engineering-standards.md) for CI, toolchain ownership and
 cross-session coordination, and [research](research/clean-architecture.md) for tradeoffs.
+
+### Minimal product analytics
+
+Root composition resolves `ANALYTICS_ENABLED` separately from the assistant gate.
+When off, it renders no analytics host and does not require an ingest URL. The named
+server `config.ts` entry validates an enabled HTTPS ingest destination; client
+`entry.tsx` composes the document-lifetime route controller and browser adapters.
+The schema snapshot belongs to the API boundary, not presentation or domain.
+
+Pure policy accepts exact public routes and closed event/target combinations.
+The delegated interaction adapter reads only deliberate semantic data attributes,
+not URL strings, text or arbitrary properties. Navigation clicks describe the
+reviewed destination; a separate committed route produces a view. Native details
+openings are distinct from closings, programmatic changes and middle-clicks.
+Delivery omits credentials and referrer, limits in-flight requests to four with a
+five-second timeout and drops failures without storage, retries or blocking links.
+One per-event UUID is not a visitor ID; a WeakMap retains only document-local
+controller state across effect restarts and back/forward-cache restoration.
+
+No analytics code reuses assistant sessions, cookies, CSRF or model requests.
+The [feature specification](specs/product-analytics.md) records upstream provenance,
+the limits of these counts and the production activation prerequisites.
 
 ### Motion and navigation
 
