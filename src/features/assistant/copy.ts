@@ -17,7 +17,12 @@ const translations = {
     skip: "Skip to question",
     partial: "Incomplete response",
     retentionInfo:
-      "History is stored by the service for {days} days, linked to this browser’s anonymous session.",
+      "History is stored by the service for {days} days, linked to this browser’s session.",
+    retentionUnavailable: "The history retention period is not available yet.",
+    conversationPrivacy: "AI and conversation privacy",
+    privacyInfo:
+      "This service uses session cookies and receives your questions, language and limited page context. Do not share sensitive or confidential information. AI answers may be incomplete or incorrect.",
+    newTab: " (opens in a new tab)",
     brand: "GMP / Assistant",
     collection: "PUBLIC WORK · AI ASSISTANT",
     subtitle: "Explore projects, experience, and how this portfolio was built.",
@@ -86,7 +91,12 @@ const translations = {
     skip: "Ir a la pregunta",
     partial: "Respuesta incompleta",
     retentionInfo:
-      "El servicio guarda el historial durante {days} días, asociado a la sesión anónima de este navegador.",
+      "El servicio guarda el historial durante {days} días, asociado a la sesión de este navegador.",
+    retentionUnavailable: "El plazo de conservación del historial aún no está disponible.",
+    conversationPrivacy: "IA y privacidad de la conversación",
+    privacyInfo:
+      "Este servicio utiliza cookies de sesión y recibe tus preguntas, el idioma y un contexto limitado de la página. No compartas información sensible o confidencial. Las respuestas de IA pueden ser incompletas o incorrectas.",
+    newTab: " (se abre en una pestaña nueva)",
     brand: "GMP / Asistente",
     collection: "TRABAJO PÚBLICO · ASISTENTE DE IA",
     subtitle: "Explora proyectos, experiencia y cómo se construyó este portafolio.",

@@ -7,6 +7,9 @@ import { parse } from "@babel/parser";
 const codePattern = /\.(?:[cm]?[jt]s|[jt]sx)$/;
 const nodeModules = new Set(builtinModules.map((name) => name.replace(/^node:/, "")));
 const publicEntries = new Set([
+  "analytics/entry.tsx",
+  "analytics/application/availability.ts",
+  "analytics/config.ts",
   "solar-system/presentation/ambient-field.tsx",
   "solar-system/presentation/solar-explorer.tsx",
   "hero/presentation/hero-stage.tsx",

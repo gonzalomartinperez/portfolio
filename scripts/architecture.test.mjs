@@ -5,6 +5,40 @@ import { auditArchitecture } from "./architecture.mjs";
 const audit = (sources) => auditArchitecture(new Map(Object.entries(sources)));
 const rejects = (sources, reason) => assert.match(audit(sources).join("\n"), reason);
 
+test("analytics exposes composition entries while its concrete delivery stays private", () => {
+  assert.deepEqual(
+    audit({
+      "src/app/layout.tsx":
+        'import { AnalyticsHost } from "@/features/analytics/entry"; export const Host = AnalyticsHost;',
+      "src/features/analytics/entry.tsx": '"use client"; export const AnalyticsHost = () => null;',
+    }),
+    [],
+  );
+  rejects(
+    {
+      "src/shell/header.tsx": 'export { send } from "@/features/analytics/adapters/http";',
+      "src/features/analytics/adapters/http.ts": "export const send = 1;",
+    },
+    /explicit entry file/,
+  );
+  rejects(
+    {
+      "src/features/analytics/application/visits.ts": 'export { send } from "../adapters/http";',
+      "src/features/analytics/adapters/http.ts": "export const send = 1;",
+    },
+    /own ports and domain/,
+  );
+  rejects(
+    {
+      "src/features/analytics/entry.tsx":
+        '"use client"; import { endpoint } from "./config"; export default endpoint;',
+      "src/features/analytics/config.ts":
+        'import "server-only"; export const endpoint = "synthetic";',
+    },
+    /server-only/,
+  );
+});
+
 test("legitimate composition, independent domain, adapters and resource imports pass", () => {
   assert.deepEqual(
     audit({

@@ -415,7 +415,9 @@ test("landing visit does not initialize the assistant before explicit activation
 }) => {
   const requests: string[] = [];
   page.on("request", (request) => {
-    if (request.url().includes("/api/v1/")) requests.push(request.url());
+    const path = new URL(request.url()).pathname;
+    if (path.startsWith("/api/v1/") && path !== "/api/v1/analytics/events")
+      requests.push(request.url());
   });
   await page.goto("/about");
   await expect(page.getByRole("button", { name: "Ask AI", exact: true })).toBeVisible();

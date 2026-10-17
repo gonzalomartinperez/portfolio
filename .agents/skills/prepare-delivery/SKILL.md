@@ -15,6 +15,11 @@ description: Verify a portfolio change for handoff and prepare a Conventional Co
    Keep the native assistant disabled unless the current request explicitly authorizes
    activation. Verify default-off launcher absence and both assistant routes returning
    404; enabled fixture acceptance is not production activation.
+   Keep product analytics independently off unless activation is authorized. Verify
+   zero preactivation requests/storage and harmless delivery failure; `npm run test:analytics`
+   is already part of `check`. Match the enabled loopback fixture to its built URL,
+   and record disabled-build browser evidence separately. Preserve owned ports,
+   resource leases and other sessions' Playwright browsers.
    Include production smoke results for application, compiler or runtime changes.
 3. Inspect public content, tracked artifacts, metadata, and staged changes for credentials, private documents, unsupported claims, and machine-specific data. Never echo suspected secrets.
    Use the [redacted secret-review procedure](references/secret-review.md) when

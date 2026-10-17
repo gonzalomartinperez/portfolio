@@ -55,6 +55,18 @@ test("every route returns HTML", () => {
   }
 });
 
+test("rendered privacy states follow the independent build gates", () => {
+  for (const [route, page] of pages) {
+    const analytics = process.env.ANALYTICS_ENABLED === "true" ? "enabled" : "disabled";
+    const assistant = process.env.ASSISTANT_ENABLED === "true" ? "enabled" : "disabled";
+    assert.match(page.body, new RegExp(`data-privacy-analytics="${analytics}"`), route);
+    assert.match(page.body, new RegExp(`data-privacy-assistant="${assistant}"`), route);
+    assert.match(page.body, /data-privacy-disclosure/, route);
+    if (analytics === "disabled")
+      assert.doesNotMatch(page.body, /\/api\/v1\/analytics\/events/, route);
+  }
+});
+
 test("an unknown path returns 404 with the site shell", async () => {
   const missing = await get("/definitely-not-a-page");
   assert.equal(missing.status, 404);

@@ -199,6 +199,23 @@ or fixture verification only, run `ASSISTANT_ENABLED=true npm run dev` or
 setting during the build; changing it on an existing build is not a rollout.
 CI verifies the enabled conversation suite and a separate disabled Hostinger build.
 
+### Product metrics and privacy
+
+Product analytics has its own **default-off** build gate, `ANALYTICS_ENABLED`.
+The optional client sends only reviewed event names, coarse page sections, language,
+allowlisted interaction targets and a fresh per-event duplicate-detection ID to the
+owned API. It uses no visitor identity, tracking cookie, persistent retry queue or
+credentialed assistant transport. Off means the analytics host is absent and no
+analytics requests or storage operations occur.
+
+The footer provides a native EN/ES privacy disclosure with actual feature states,
+local theme storage, external links and public contact. It is not a consent banner
+or a claim of legal compliance. Optional measurements needing consent stay off.
+Activation, retention approval and effective hosting/proxy log policies remain
+separate readiness decisions. See the [analytics contract and limits](docs/specs/product-analytics.md).
+CI's enabled analytics build uses only a loopback synthetic sink; it does not
+activate collection on the public site or call a model provider.
+
 ## Delivery and quality
 
 ```mermaid
@@ -223,7 +240,7 @@ flowchart LR
     class QUALITY,BROWSER,COMPAT,AGG check;
 ```
 
-- **Deliberate scope:** no CMS, database, analytics, or speculative layers — static routes,
+- **Deliberate scope:** no CMS, application database or third-party tracking SDK — static routes,
   typed content, and client boundaries only where interaction actually requires them.
 - **Decisions written down:** the [design system](docs/design.md), specifications in
   [docs/specs](docs/specs/) and the [research note](docs/research/portfolio-2026-09-12.md)
@@ -300,7 +317,7 @@ npm run dev
 ```
 
 Open `http://localhost:3000`. No database, credentials, or external services are required
-for the default assistant-disabled site. Keep local configuration out of version control;
+for the default assistant- and analytics-disabled site. Keep local configuration out of version control;
 see [configuration and assistant activation](docs/native-assistant.md)
 and the [deployment guide](docs/deployment.md) before changing deployment settings.
 On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
@@ -315,11 +332,12 @@ On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 | `npm run typecheck` | Fast standalone type validation without a production build |
 | `npm run test:secrets` | Scan tracked files/history with verified Gitleaks and synthetic regression probes |
 | `npm run test:secrets:artifacts` | Scan the sanitized CI transfer; see the development guide |
+| `npm run test:analytics` | Check the frozen ingest schema, closed dimensions and bounded delivery failures |
 | `npm run test:architecture` | Check negative fixtures, module boundaries, cycles and client/server separation |
 | `npm run test:repository` | Check UTF-8, local links, skill adapters, and compiler version alignment |
 | `npm run test:smoke` | After `build`, check the production server responds correctly |
 | `npm run test:browser` | After `build`, exercise desktop/mobile routes, axe and scene fallbacks |
-| `npm run test:site` | Run rendered and browser verification with one production-server lifecycle |
+| `npm run test:site` | Reuse one build with sequential rendered HTTP and browser HTTPS fixtures |
 | `npm run test:documents` | Verify approved local document signatures, sizes and hashes |
 | `npm run test:identity` | Verify favicon and PNG outputs match the approved avatar source |
 | `npm run identity:build` | Regenerate compatibility icons after an approved avatar change |
