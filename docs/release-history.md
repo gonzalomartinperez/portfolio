@@ -2,11 +2,11 @@
 
 [Repository overview](../README.md#delivery-and-quality) · [Delivery workflow](development.md) · [Deployment ownership](deployment.md)
 
-## Requested launch label and current authority
+## Release policy
 
-The owner requested `1.0.0` for the public-launch cohort. The package and root lock metadata identify that release line. However, both `v1.0.0` and `v1.1.0` already exist as annotated tags. They remain unchanged; a request to complete source work does not by itself decide how to replace an occupied public reference.
+The current release line is `1.2.0`, recorded in the application manifest and root lock metadata. Existing annotated tags `v1.0.0` and `v1.1.0` retain their exact published objects and targets. The new minor version captures the reviewed portfolio, architecture, assistant interface and delivery improvements without replacing historical references.
 
-The coordinator requested a specific choice between preserving the existing labels and publishing a new version, or replacing `v1.0.0` with the verified launch cut. That decision is pending. No permission to delete `v1.1.0`, overwrite tags, weaken protections or rewrite source history is inferred from this document. This repository's instructions and verification records cannot grant that authority.
+The original launch request used `1.0.0`; that name was already occupied. The non-destructive version increment follows the existing published sequence. It does not imply authorization to overwrite or delete either historical label, weaken protections, rewrite source history or relabel verification performed on an earlier commit.
 
 The repository does not publish an npm package. Its development tool versions and
 dependency versions remain governed by their existing manifests and lock entries;
@@ -24,12 +24,12 @@ links remain the references for historical screenshots and verification evidence
 
 The exact raw annotated objects were archived with their verified object IDs. Both source commits remain available. Archiving records is not execution of a label transition; no rollback artifact, backup, release asset or source commit was removed.
 
-## Conditional procedure after the owner's decision
+## Publishing the new release
 
-1. Obtain the specific version/label decision. If existing labels are to be preserved, create only the selected new tag. If replacement is authorized, restrict it to the exact named reference; do not also retire other labels.
-2. Recheck releases/assets, tag-triggered automation, protection rules and exact remote objects. Stop if the expected reference changed; do not bypass protection.
-3. Finish source review and required CI on the chosen main commit. Preserve older test and smoke results with their actual SHAs; a new tag does not rerun them.
-4. Annotate the validated source and record execution in the release receipt. An explicitly authorized replacement must use an exact expected-object lease and verify the remote result. This conditional procedure does not claim that a tag was created or moved.
+1. Recheck releases/assets, tag-triggered automation, tag protection and exact remote objects. Confirm `v1.2.0` does not exist and both historical refs still match the table. Stop on a collision; never force-push or remove an existing tag to make space.
+2. Finish normal task/release pull requests and required CI on the final main commit. Match the checked head to the current main SHA. Preserve older test and smoke results with their actual SHAs; a tag does not rerun them.
+3. Create the new annotated `v1.2.0` on that validated commit and push only its explicit tag ref. Its annotation records the actual source and successful verification, not a claim of production activation.
+4. Verify the remote tag object and peeled commit, confirm both historical refs are unchanged, and preserve the execution receipt. The annotation identifies the final source; this document describes the publication policy without claiming that CI proves deployment.
 
 Repository CI runs for branch pushes and pull requests, not tag pushes. Hosting
 continues to follow the configured `main` integration described in the deployment
