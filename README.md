@@ -13,6 +13,7 @@ A bilingual portfolio with production experience, interactive architecture diagr
 reviewed CVs, a focused technology catalog and a realistic, readable 3D solar scene.
 
 [![CI](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml)
+[![Nightly](https://github.com/gonzalomartinperez/portfolio/actions/workflows/nightly.yml/badge.svg?branch=main)](https://github.com/gonzalomartinperez/portfolio/actions/workflows/nightly.yml)
 ![Next.js 16 LTS](https://img.shields.io/badge/Next.js-16%20LTS-000000?style=flat-square&logo=nextdotjs)
 ![TypeScript strict](https://img.shields.io/badge/TypeScript-7%20strict-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Node.js 24 LTS](https://img.shields.io/badge/Node.js-24%20LTS-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white)
@@ -23,7 +24,7 @@ reviewed CVs, a focused technology catalog and a realistic, readable 3D solar sc
 [Gallery](#gallery) · [Architecture](docs/architecture.md) · [Design system](docs/design.md) ·
 [Engineering standards](docs/engineering-standards.md) ·
 [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) ·
-[Development workflow](docs/development.md) · [Technology decisions](docs/technology.md)
+[Development workflow](docs/development.md) · [Automatic skills](docs/skill-discovery.md) · [Technology decisions](docs/technology.md)
 
 </div>
 

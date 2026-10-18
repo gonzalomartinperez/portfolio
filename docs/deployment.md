@@ -104,8 +104,8 @@ stored selection. Clearing a CDN cache does not fix package installation.
 
 The hPanel connection, auto-deployment and domain are now active. For each new
 release, verify its source commit and result in hPanel, then check the live URL.
-HTTP success alone cannot prove which commit is deployed. Require the `Quality checks` status on PRs
-before merging into `main`; this repository does not bypass those protections.
+HTTP success alone cannot prove which commit is deployed. Require the full protected CI aggregate (`Required checks` after the documented
+context migration) and `Branch policy` on the exact PR head before merging into `main`; this repository does not bypass those protections.
 The required flow is task branch -> PR into `develop` -> release PR into `main`.
 Direct pushes and merges outside PRs are prohibited on both long-lived branches.
 Only same-repository `develop` may target `main`; see the development workflow

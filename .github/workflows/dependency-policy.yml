@@ -1,4 +1,4 @@
-name: Dependency review policy
+name: Dependency policy
 
 on:
   pull_request_target:

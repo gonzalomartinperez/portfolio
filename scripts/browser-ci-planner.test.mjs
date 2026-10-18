@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   parseDiscovery,
+  partitionNightly,
   planShards,
   rejectSerialSource,
   verifySelection,
@@ -158,4 +159,19 @@ test("discovery accepts native omitted leaf suites and testDir-relative files", 
   assert.equal(parsed[0].identity, "chromium › tests/browser/example.spec.ts › navigation › first");
   native.suites[0].suites[0].specs[0].file = "../outside.spec.ts";
   assert.throws(() => parseDiscovery(native), /Unexpected/);
+});
+
+test("nightly separates visual cases without dropping new files or projects", () => {
+  const visual = parseDiscovery(report(["layout"], "desktop", "tests/browser/routes.spec.ts"));
+  const fresh = parseDiscovery(
+    report(["new case"], "future-project", "tests/browser/future.spec.ts"),
+  );
+  const input = [...discovered, ...visual, ...fresh];
+  const partition = partitionNightly(input);
+  assert.deepEqual(partition.visual, visual);
+  verifySelection(input, [...partition.browser, ...partition.visual]);
+  assert.ok(partition.browser.some((item) => item.project === "future-project"));
+  assert.throws(() => partitionNightly(visual), /nonempty/);
+  assert.throws(() => partitionNightly(discovered), /nonempty/);
+  assert.throws(() => partitionNightly([...input, visual[0]]), /unique/);
 });
