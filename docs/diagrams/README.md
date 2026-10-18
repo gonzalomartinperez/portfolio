@@ -36,7 +36,7 @@ The [solar specification](../specs/immersive-solar-scene.md) holds the detailed 
 ## Delivery dependency graph
 
 The delivery view follows `.github/workflows/ci.yml`: **Workflow validation**,
-**Secret scan** and **Quality (development)** start independently. Quality unlocks
+**Secret scan** and **Quality checks** start independently. Quality unlocks
 **Build** and **Hosting contract**; Build unlocks **Browser tests** (eight groups)
 and **Performance checks** (bundle budgets and server-rendered routes). The build
 archive is normalized and scanned before transfer, then its provenance is verified
@@ -48,9 +48,9 @@ Solid arrows within the CI panel are job dependencies. The dashed collector on t
 left represents seven separate `needs` edges into **Required checks**, including
 the upstream jobs as well as the leaf jobs. It is not a sequential job chain.
 The aggregate always runs and requires every result to be `success`; skipped,
-cancelled or failed prerequisites cannot satisfy it. The temporary **Quality checks**
-job only forwards that aggregate result under the legacy check name; it is omitted
-from the artwork rather than drawn as another validation layer.
+cancelled or failed prerequisites cannot satisfy it. **Quality checks** is the source-quality job. **Required checks** is the full
+protected aggregate; the temporary legacy forwarding job has been retired after
+the aggregate was added to both protected branches.
 
 Branch arrows describe the protected task → develop → release → main workflow and
 native Hostinger delivery, not CI jobs or automatic permission to deploy. Nightly

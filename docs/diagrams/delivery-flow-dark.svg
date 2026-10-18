@@ -36,7 +36,7 @@
 <text x="118" y="1124" font-size="20" font-weight="400" fill="#C0CEE1">Tracked files · Complete history</text>
 <text x="118" y="1150" font-size="20" font-weight="400" fill="#C0CEE1">Independent source scan</text>
 <rect x="96" y="1200" width="448" height="108" rx="18" fill="#142238" stroke="#32455F" stroke-width="1.5"/><rect x="96" y="1220" width="4" height="68" rx="2" fill="#72D3FF"/>
-<text x="118" y="1234" font-size="25" font-weight="650" fill="#F0F6FF">Quality (development)</text>
+<text x="118" y="1234" font-size="25" font-weight="650" fill="#F0F6FF">Quality checks</text>
 <text x="118" y="1264" font-size="20" font-weight="400" fill="#C0CEE1">Architecture · Contracts · Units</text>
 <text x="118" y="1290" font-size="20" font-weight="400" fill="#C0CEE1">Lint · Types · Dependency audit</text>
 <rect x="96" y="1400" width="448" height="108" rx="18" fill="#142238" stroke="#32455F" stroke-width="1.5"/><rect x="96" y="1420" width="4" height="68" rx="2" fill="#72D3FF"/>

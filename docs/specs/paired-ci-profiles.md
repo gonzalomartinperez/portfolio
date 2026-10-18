@@ -19,13 +19,13 @@ Keep required PR validation complete while separating independent work and reusi
 
 ## Design
 
-Core IDs: workflows, secrets, quality, build, hosting, browser, performance, checks. Nightly IDs: prepare, quality, browser, visual, links, bundle, checks. Nightly human names have a unique prefix. Extra legacy-checks is a temporary full-gate bridge during phase A.
+Core IDs: workflows, secrets, quality, build, hosting, browser, performance, checks. Nightly IDs: prepare, quality, browser, visual, links, bundle, checks. Nightly human names have a unique prefix. Phase A retained an extra legacy-checks full-gate bridge until Required checks was enforced on both branches. Phase B uses the exact canonical Core IDs and restores Quality checks as the source-quality job.
 
 A dev-only YAML 1.2 parser validates workflow structure. A small Node helper validates build provenance against trusted producer outputs; it is integrity/context binding, not a signed attestation. The candidate helper validates Git reachability without interpolating untrusted inputs into shell commands. Existing duration scheduling owns test selection.
 
 ## Verification and limits
 
-Implementation and exact-head hosted evidence pending. Record original failures and limits; do not infer deployment, physical-device frame rate or production capacity from CI. Initial Nightly dispatch requires publication of its workflow on the default branch. Existing assistant screenshots are refreshed separately with synthetic fixtures under an explicit local resource lease.
+Phase A source 525588cf659e9d065b148214e3c9d41cd426fc3a passed all 16 Core jobs in run 39097851981 and merged through PR #165. Both protected branches then required the old and new full aggregates plus Branch policy, with strict mode and all other protections preserved. Phase B exact-head execution, final context retirement, main integration and a real default-branch Nightly dispatch remain pending. Local frozen installs, full check, both dependency audits, unchanged contract regeneration, both 498-test discovery plans, 15 scanner fixtures, 703-file/history and 412-file artifact scans, and 22 rendered checks passed. Record original failures and limits; do not infer deployment, physical-device frame rate or production capacity from CI. Initial Nightly dispatch requires publication of its workflow on the default branch. Existing assistant screenshots are refreshed separately with synthetic fixtures under an explicit local resource lease.
 
 ## Primary references
 

@@ -45,7 +45,7 @@
     "test:secrets:artifacts": "node scripts/secret-scan.mjs --artifacts",
     "test:dependency-policy": "node --test scripts/dependency-policy.test.mjs",
     "check:quality": "npm run test:architecture && npm run test:analytics && npm run test:dependency-policy && npm run test:repository && npm run test:assistant-contract && npm run test:assistant && npm run typecheck && npm run typecheck:assistant && npm run test:content && npm run test:identity && npm run test:documents && npm run test:ci-policy && npm run lint",
-    "test:ci-policy": "node --test scripts/workflow-policy.test.mjs scripts/ci-build-provenance.test.mjs scripts/nightly-candidate.test.mjs && node scripts/workflow-policy.mjs"
+    "test:ci-policy": "node --test scripts/workflow-policy.test.mjs scripts/ci-build-provenance.test.mjs scripts/nightly-candidate.test.mjs && node scripts/workflow-policy.mjs --phase=B"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "1.3.1",
