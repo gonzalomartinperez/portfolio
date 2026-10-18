@@ -71,7 +71,11 @@ export function EducationView({ locale }: { locale: Locale }) {
         </nav>
       </PageHeader>
 
-      <section className="section-tight frame">
+      <section
+        className="section-tight frame"
+        data-analytics-region="education-degree"
+        data-analytics-exposure="education-degree"
+      >
         <article data-slot="card" className={cn(cardVariants(), styles.degree)}>
           <ExternalLink
             className={styles.institutionLogo}
@@ -109,7 +113,7 @@ export function EducationView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="section-tight frame">
+      <section className="section-tight frame" data-analytics-exposure="education-curriculum">
         <div className="section-head">
           <p className="eyebrow">{copy.education.curriculumEyebrow}</p>
           <h2 id="curriculum">{copy.education.curriculumHeading}</h2>
@@ -232,7 +236,10 @@ export function EducationView({ locale }: { locale: Locale }) {
 
       <section className="section-tight frame">
         <div className={styles.columns}>
-          <div>
+          <div
+            data-analytics-region="education-credentials"
+            data-analytics-exposure="education-credentials"
+          >
             <div className="section-head">
               <p className="eyebrow">{copy.education.certificationsEyebrow}</p>
               <h2 id="credentials">{copy.education.certificationsHeading}</h2>
@@ -294,7 +301,11 @@ export function EducationView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="section-tight frame">
+      <section
+        className="section-tight frame"
+        data-analytics-exposure="education-evidence"
+        data-analytics-region="education-evidence"
+      >
         <div className="section-head">
           <p className="eyebrow">{copy.education.evidenceEyebrow}</p>
           <h2 id="evidence">{copy.education.evidenceHeading}</h2>

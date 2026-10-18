@@ -60,7 +60,11 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           {prose(study.overview.body)}
         </section>
 
-        <section className={styles.block}>
+        <section
+          className={styles.block}
+          data-analytics-region="filomena-problem"
+          data-analytics-exposure="filomena-problem"
+        >
           <h2>{study.problem.heading}</h2>
           {prose(study.problem.body)}
         </section>
@@ -75,7 +79,11 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           {prose(study.role.body)}
         </section>
 
-        <section className={styles.block}>
+        <section
+          className={styles.block}
+          data-analytics-region="filomena-approach"
+          data-analytics-exposure="filomena-approach"
+        >
           <h2>{study.approach.heading}</h2>
           {prose(study.approach.body)}
         </section>
@@ -164,7 +172,11 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           {prose(study.delivery.body)}
         </section>
 
-        <section className={styles.block}>
+        <section
+          className={styles.block}
+          data-analytics-region="filomena-outcomes"
+          data-analytics-exposure="filomena-outcomes"
+        >
           <h2>{study.outcomes.heading}</h2>
           {prose(study.outcomes.body)}
         </section>
@@ -174,7 +186,11 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           {prose(study.lessons.body)}
         </section>
 
-        <section className={styles.block}>
+        <section
+          className={styles.block}
+          data-analytics-region="filomena-evidence"
+          data-analytics-exposure="filomena-evidence"
+        >
           <h2>{copy.filomena.evidenceHeading}</h2>
           <div className={styles.evidence}>
             {filomena.links.map((link) =>

@@ -92,6 +92,9 @@ try {
           incoming.resume();
           outgoing.writeHead(incoming.method === "POST" ? 204 : 405, {
             "Cache-Control": "no-store",
+            ...(incoming.method === "POST"
+              ? { "Set-Cookie": "qa-native-challenge=synthetic; Secure; SameSite=Lax; Path=/" }
+              : {}),
           });
           outgoing.end();
           return;

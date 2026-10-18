@@ -1,0 +1,19 @@
+{
+  "repository": "gonzalomartinperez/portfolio-assistant-api",
+  "commit": "284bc0474f66326ffa79082fd9fa53523e0ba27c",
+  "status": "Reviewed candidate for client development; API promotion and operational acceptance are separate",
+  "files": [
+    {
+      "path": "contracts/product-interaction.schema.json",
+      "local": "product-interaction.schema.json",
+      "sha256": "1397c486b1160e80be92ecce269888cd2eb3cfbce8f3aec3c367de58487363b9"
+    },
+    {
+      "path": "contracts/product-interaction.examples.json",
+      "local": "product-interaction.examples.json",
+      "sha256": "5251876e0b493e175df98aec515eda2436008cfd27edb93c1e33cd4472d1456e"
+    }
+  ],
+  "scope": "Public anonymous ingest schema v2 only; private reporting schema is not vendored",
+  "preserved": "Existing v1 and assistant contract snapshots are unchanged"
+}

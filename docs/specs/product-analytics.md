@@ -21,6 +21,11 @@ analytics SaaS, collector/container, queue, GeoIP database, paid call or provide
 is selected. Prefer a bounded extension of existing owned application capabilities.
 Sites remain on managed Business hosting; VPS operations are separately owned.
 
+The [aggregate interaction extension](aggregate-interaction-analytics.md) adds a
+separately pinned public v2 contract for coarse clicks and geometric exposure.
+Historical v1 verification below remains attributed to its original source; it does
+not certify the extension or its pending integrated API/backoffice demonstration.
+
 ## Acceptance criteria
 
 | ID | Observable requirement | Current result |

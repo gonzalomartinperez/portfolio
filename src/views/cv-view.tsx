@@ -70,7 +70,11 @@ export function CvView({ locale }: { locale: Locale }) {
         {focus ? <p className={styles.focus}>{focus}</p> : null}
       </PageHeader>
       <div className={`frame ${styles.resume}`}>
-        <div className={styles.actions}>
+        <div
+          className={styles.actions}
+          data-analytics-region="cv-downloads"
+          data-analytics-exposure="cv-downloads"
+        >
           <a
             className={buttonVariants({ variant: "outline" })}
             data-analytics-event="cv_link_open"
@@ -118,7 +122,12 @@ export function CvView({ locale }: { locale: Locale }) {
             </a>
           ))}
         </nav>
-        <section className={styles.section} aria-labelledby="cv-summary">
+        <section
+          className={styles.section}
+          aria-labelledby="cv-summary"
+          data-analytics-region="cv-summary"
+          data-analytics-exposure="cv-summary"
+        >
           <h2 id="cv-summary">{copy.summaryTitle}</h2>
           <p>
             <InlineCopy runs={copy.summary} locale={locale} />
