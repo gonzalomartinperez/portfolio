@@ -354,7 +354,10 @@ transfer helper. No persistent credentials or provider accounts are created or r
 ## Isolated analytics verification
 
 `npm run test:analytics` checks the closed vocabulary, exact upstream schema bytes,
-route-view deduplication and bounded delivery failures. It is part of `npm run check`.
+route-view deduplication, optional measurement budgets, dwell/observer cleanup
+and bounded delivery failures. Both public v1 and v2 schema snapshots have exact
+hash/provenance assertions; private reporting schemas are never vendored. It is
+part of `npm run check`.
 The public default remains off. Enabled browser QA uses only the existing loopback
 TLS fixture, which discards analytics request bodies instead of proxying or storing
 those events. For owned local ports, build and run consistently:
@@ -363,7 +366,7 @@ those events. For owned local ports, build and run consistently:
 ASSISTANT_ENABLED=true ANALYTICS_ENABLED=true \
   ANALYTICS_INGEST_URL=https://127.0.0.1:3381/api/v1/analytics/events npm run check
 BROWSER_TEST_PORT=3381 BROWSER_TEST_UPSTREAM_PORT=3382 \
-  npm run test:browser -- tests/browser/analytics.spec.ts tests/browser/privacy.spec.ts
+  npm run test:browser -- tests/browser/analytics.spec.ts tests/browser/analytics-interactions.spec.ts tests/browser/privacy.spec.ts
 ```
 
 The flags must match the built candidate when running rendered checks. To combine
@@ -371,7 +374,7 @@ rendered checks and selected browser cases against that enabled build:
 
 ```bash
 ASSISTANT_ENABLED=true ANALYTICS_ENABLED=true SITE_TEST_PORT=3381 \
-  npm run test:site -- tests/browser/analytics.spec.ts tests/browser/privacy.spec.ts
+  npm run test:site -- tests/browser/analytics.spec.ts tests/browser/analytics-interactions.spec.ts tests/browser/privacy.spec.ts
 ```
 
 Reserve ports/resources before running this alongside another session. These tests
@@ -381,3 +384,21 @@ the separate Hostinger build explicitly keeps both feature flags false. Disabled
 rollout browser tests must use a separately built disabled candidate, not a runtime
 flag applied to previously enabled static output. No browser install may garbage-
 collect another session's shared cache.
+
+The interaction suite covers EN/ES, private descendants, keyboard activation,
+coarse cells, route revisits, viewport boundaries and ordinary scrolling. It runs
+in desktop/mobile Chromium and dedicated Firefox/WebKit projects through the same
+eight-group CI planner. A synthetic route sink proves browser behavior only. The
+actual API persistence and authenticated backoffice demo require separately owned
+services, exact local CORS, synthetic data and explicit resource leases; retain
+that receipt separately and never describe interception as an end-to-end result.
+
+Cookie isolation also has a native-network regression in all four interaction
+projects. The loopback sink challenges POST responses with a synthetic cookie;
+ordinary app delivery must omit a seeded cookie and ignore the response cookie.
+A separate explicit credentialed positive control proves the challenge is valid.
+Intercepted responses are not the evidence for this guarantee: Firefox and WebKit
+stored a cookie injected through `route.fulfill` in the initial fixture, while the
+native response tests passed. Preserve those original failures when reporting the
+fixture correction. The credentialed control is test-only and never reaches the
+actual analytics API.

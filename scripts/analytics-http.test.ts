@@ -147,3 +147,54 @@ test("invalid dimensions and invalid per-event IDs never reach fetch", async () 
   await tick();
   assert.equal(calls, 0);
 });
+
+test("optional interaction delivery reserves two slots for unchanged semantic requests", async () => {
+  const requests: RequestInit[] = [];
+  let release: (() => void) | undefined;
+  const waiting = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const transport = createAnalyticsTransport(
+    endpoint,
+    options(async (_url, init) => {
+      requests.push(init ?? {});
+      await waiting;
+      return new Response(null, { status: 204 });
+    }),
+  );
+  const measurement = {
+    event_name: "public_click",
+    section: "home",
+    locale: "en",
+    region_id: "home-featured",
+    layout_revision: "portfolio-v1",
+    viewport: "desktop",
+    cell_x: 3,
+    cell_y: 4,
+  } as const;
+  for (let index = 0; index < 20; index += 1) transport.record(measurement);
+  transport.record(intent);
+  transport.record({ ...intent, event_name: "navigation_click", section: "work" });
+  await tick();
+  assert.equal(requests.length, 4);
+  assert.deepEqual(
+    requests.map((request) => JSON.parse(String(request.body)).schema_version),
+    [2, 2, 1, 1],
+  );
+  assert.deepEqual(JSON.parse(String(requests[0].body)), {
+    schema_version: 2,
+    project: "portfolio",
+    source: "site",
+    event_id: id,
+    ...measurement,
+  });
+  assert.equal(requests[0].credentials, "omit");
+  assert.equal(requests[0].referrerPolicy, "no-referrer");
+  release?.();
+  await tick();
+  await tick();
+  assert.equal(requests.length, 4, "dropped measurements are never queued or retried");
+  transport.record(measurement);
+  await tick();
+  assert.equal(requests.length, 5);
+});

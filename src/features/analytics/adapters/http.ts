@@ -1,6 +1,8 @@
 import { type EventIntent, eventIntent } from "../domain/events.ts";
+import { type InteractionIntent, interactionIntent } from "../domain/interactions.ts";
 
 const maxInFlight = 4;
+const maxInteractionInFlight = 2;
 const maxBodyBytes = 1_024;
 
 export function analyticsEndpoint(value: string | undefined): string {
@@ -29,16 +31,19 @@ type Options = { fetch: typeof fetch; id: () => string; signal: () => AbortSigna
 export function createAnalyticsTransport(endpoint: string, options: Options) {
   const url = analyticsEndpoint(endpoint);
   let inFlight = 0;
+  let interactionsInFlight = 0;
   return {
-    record(intent: EventIntent) {
-      const reviewed = eventIntent(intent);
+    record(intent: EventIntent | InteractionIntent) {
+      const reviewed = eventIntent(intent) ?? interactionIntent(intent);
       if (!reviewed || inFlight >= maxInFlight) return;
+      const interaction = "region_id" in reviewed;
+      if (interaction && interactionsInFlight >= maxInteractionInFlight) return;
       try {
         const id = options.id();
         if (!/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(id))
           return;
         const body = JSON.stringify({
-          schema_version: 1,
+          schema_version: interaction ? 2 : 1,
           project: "portfolio",
           source: "site",
           event_id: id,
@@ -47,6 +52,7 @@ export function createAnalyticsTransport(endpoint: string, options: Options) {
         if (new TextEncoder().encode(body).byteLength > maxBodyBytes) return;
         const signal = options.signal();
         inFlight += 1;
+        if (interaction) interactionsInFlight += 1;
         void Promise.resolve()
           .then(() =>
             options.fetch(url, {
@@ -65,6 +71,7 @@ export function createAnalyticsTransport(endpoint: string, options: Options) {
           .catch(() => {})
           .finally(() => {
             inFlight -= 1;
+            if (interaction) interactionsInFlight -= 1;
           });
       } catch {
         // Delivery must not interfere with the interaction when browser facilities fail.

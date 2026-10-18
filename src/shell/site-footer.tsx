@@ -46,7 +46,11 @@ export function SiteFooter({
 
   return (
     <footer className={styles.footer}>
-      <div className={`frame ${styles.inner}`}>
+      <div
+        className={`frame ${styles.inner}`}
+        data-analytics-region="site-footer"
+        data-analytics-exposure="site-footer"
+      >
         <div className={styles.identity}>
           <span className={styles.identityTop}>
             <Mark size={24} />

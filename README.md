@@ -204,7 +204,9 @@ CI verifies the enabled conversation suite and a separate disabled Hostinger bui
 Product analytics has its own **default-off** build gate, `ANALYTICS_ENABLED`.
 The optional client sends only reviewed event names, coarse page sections, language,
 allowlisted interaction targets and a fresh per-event duplicate-detection ID to the
-owned API. It uses no visitor identity, tracking cookie, persistent retry queue or
+owned API. The reviewed v2 extension adds closed public regions, 8×8 click cells,
+coarse viewport cohorts and geometric section exposure. It excludes forms,
+conversations, dynamic canvases and private controls; exposure does not mean reading. It uses no visitor identity, tracking cookie, persistent retry queue or
 credentialed assistant transport. Off means the analytics host is absent and no
 analytics requests or storage operations occur.
 
@@ -214,7 +216,10 @@ or a claim of legal compliance. Optional measurements needing consent stay off.
 Activation, retention approval and effective hosting/proxy log policies remain
 separate readiness decisions. See the [analytics contract and limits](docs/specs/product-analytics.md).
 CI's enabled analytics build uses only a loopback synthetic sink; it does not
-activate collection on the public site or call a model provider.
+activate collection on the public site or call a model provider. The
+[aggregate interaction specification](docs/specs/aggregate-interaction-analytics.md)
+records the pinned public contract, client bounds and separate real API/backoffice
+acceptance requirements.
 
 ## Delivery and quality
 

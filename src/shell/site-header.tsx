@@ -42,7 +42,11 @@ export function SiteHeader() {
         {copy.skipToContent}
       </a>
       <header className={styles.header}>
-        <div className={`frame ${styles.inner}`}>
+        <div
+          className={`frame ${styles.inner}`}
+          data-analytics-region="site-header"
+          data-analytics-exposure="site-header"
+        >
           <Link
             aria-label={`Gonzalo Martin Perez — ${copy.roleSubtitle}`}
             className={styles.brand}

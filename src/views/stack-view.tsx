@@ -53,10 +53,14 @@ export function StackView({ locale }: { locale: Locale }) {
   return (
     <>
       <PageHeader eyebrow={copy.stack.eyebrow} intro={copy.stack.intro} title={copy.stack.title} />
-      <section className="section-tight frame">
+      <section className="section-tight frame" data-analytics-exposure="stack-catalogue">
         <TechnologyCatalogue groups={groups} copy={labels} />
       </section>
-      <section className="section-tight frame">
+      <section
+        className="section-tight frame"
+        data-analytics-region="stack-scope"
+        data-analytics-exposure="stack-scope"
+      >
         <div className={styles.note}>
           <h2>{copy.stack.noteHeading}</h2>
           <p>{copy.stack.noteScope}</p>

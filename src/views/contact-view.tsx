@@ -21,7 +21,7 @@ export function ContactView({ locale }: { locale: Locale }) {
 
       <section className="section-tight frame">
         <div className={styles.columns}>
-          <div>
+          <div data-analytics-region="contact-channels" data-analytics-exposure="contact-channels">
             <ContactLinks channels={contactChannels} />
 
             <div className="prose flow">
@@ -33,7 +33,12 @@ export function ContactView({ locale }: { locale: Locale }) {
             </div>
           </div>
 
-          <aside data-slot="card" className={cn(cardVariants(), styles.panel)}>
+          <aside
+            data-slot="card"
+            className={cn(cardVariants(), styles.panel)}
+            data-analytics-region="contact-resume"
+            data-analytics-exposure="contact-resume"
+          >
             <h2 className={styles.panelTitle}>{copy.contact.resumeHeading}</h2>
             <div className={styles.downloads}>
               <Link

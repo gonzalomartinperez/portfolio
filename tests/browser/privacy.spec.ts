@@ -24,7 +24,13 @@ for (const locale of ["en", "es"] as const) {
       .click();
     await expect(page.getByText(answer, { exact: true })).toBeVisible();
     expect(backend.submissions()).toEqual([expect.objectContaining({ content: question, locale })]);
-    await expect.poll(() => events.length).toBe(1);
+    await expect
+      .poll(
+        () =>
+          events.filter((event) => (event as { schema_version?: number }).schema_version === 1)
+            .length,
+      )
+      .toBe(1);
     expect(JSON.stringify(events)).not.toContain("qa-context@example.invalid");
     expect(JSON.stringify(events)).not.toContain(question);
     const privacy = page.locator("[data-assistant-privacy]");

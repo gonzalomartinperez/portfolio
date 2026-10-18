@@ -73,7 +73,12 @@ export function TechnologyCatalogue({
           {copy.clear}
         </Button>
       </Card>
-      <p className={styles.count} role="status" aria-live="polite">
+      <p
+        className={styles.count}
+        role="status"
+        aria-live="polite"
+        data-analytics-exposure-target=""
+      >
         {count} {copy.results}
       </p>
       <div id="technology-results" className={styles.groups}>

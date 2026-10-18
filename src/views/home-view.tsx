@@ -36,7 +36,7 @@ export function HomeView({ locale }: { locale: Locale }) {
     <>
       <HeroView locale={locale} />
 
-      <section className="section-tight frame">
+      <section className="section-tight frame" data-analytics-exposure="home-featured">
         <div className="section-head">
           <p className="eyebrow">{copy.home.workEyebrow}</p>
           <h2>{copy.home.workHeading}</h2>
@@ -85,7 +85,7 @@ export function HomeView({ locale }: { locale: Locale }) {
               </div>
             </div>
 
-            <div className={styles.productStory}>
+            <div className={styles.productStory} data-analytics-region="home-featured">
               <div className={styles.featureTop}>
                 <Badge variant="outline">
                   {locale === "es" ? "Producto en producción" : "Production product"}
@@ -138,7 +138,11 @@ export function HomeView({ locale }: { locale: Locale }) {
         </article>
       </section>
 
-      <section className="section-tight frame">
+      <section
+        className="section-tight frame"
+        data-analytics-region="home-experience"
+        data-analytics-exposure="home-experience"
+      >
         <div className="section-head">
           <p className="eyebrow">{copy.home.experienceEyebrow}</p>
           <h2>{copy.home.experienceHeading}</h2>
@@ -177,7 +181,11 @@ export function HomeView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="section frame">
+      <section
+        className="section frame"
+        data-analytics-region="home-about"
+        data-analytics-exposure="home-about"
+      >
         <div className={styles.split}>
           <div className="portrait-frame">
             <Image
@@ -227,7 +235,11 @@ export function HomeView({ locale }: { locale: Locale }) {
 
       <ToolCarousel locale={locale} />
 
-      <section className="section-tight frame">
+      <section
+        className="section-tight frame"
+        data-analytics-region="home-education"
+        data-analytics-exposure="home-education"
+      >
         <div className="section-head">
           <p className="eyebrow">{copy.home.educationEyebrow}</p>
           <h2>{copy.home.educationHeading}</h2>
@@ -246,7 +258,11 @@ export function HomeView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="section-tight frame">
+      <section
+        className="section-tight frame"
+        data-analytics-region="home-contact"
+        data-analytics-exposure="home-contact"
+      >
         <div data-slot="card" className={cn(cardVariants(), styles.closing)}>
           <h2>{copy.home.closingHeading}</h2>
           <div className={styles.closingMessage}>
