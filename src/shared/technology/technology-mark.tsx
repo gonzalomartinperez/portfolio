@@ -1,5 +1,5 @@
 import type { Technology } from "@/content/technologies";
-import { BrandMark } from "./brand-mark";
+import { BrandMark } from "../identity/brand-mark";
 import {
   getTechnologyIllustration,
   technologyIllustrationSprite,

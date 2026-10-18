@@ -1,5 +1,5 @@
 import Image from "next/image";
-import privyMark from "../../public/brands/privy.png";
+import privyMark from "../../../public/brands/privy.png";
 import styles from "./brand-mark.module.css";
 
 const localMarks = new Set([

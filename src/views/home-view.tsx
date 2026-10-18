@@ -1,19 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import portrait from "@/assets/portrait.avif";
-import { CompanyMark } from "@/components/company-mark";
-import { ExternalLink } from "@/components/external-link";
-import { MetricList } from "@/components/metric-list";
-import { TechnologyMark } from "@/components/technology-mark";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import { email, externalLinks } from "@/content/site-config";
 import { publicTechnologyCatalog } from "@/content/technologies";
-import { ToolCarousel } from "@/features/tool-carousel/tool-carousel";
-import { cn } from "@/lib/utils";
+import { ToolCarousel } from "@/features/tool-carousel/presentation/tool-carousel";
+import { MetricList } from "@/shared/editorial/metric-list";
+import { CompanyMark } from "@/shared/identity/company-mark";
+import { ExternalLink } from "@/shared/navigation/external-link";
+import { cn } from "@/shared/styles/cn";
+import { TechnologyMark } from "@/shared/technology/technology-mark";
+import { Badge } from "@/shared/ui/badge";
+import { buttonVariants } from "@/shared/ui/button";
+import { cardVariants } from "@/shared/ui/card";
 import { HeroView } from "./hero-view";
 import styles from "./home.module.css";
 

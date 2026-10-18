@@ -13,7 +13,7 @@ blocks, analytics, account configuration or new business features are included.
 ## Decisions
 
 - Use the supported Radix flavor of shadcn/ui, Tailwind 4 utilities and local
-  source in `src/components/ui/`. Keep server-safe variants for semantic links.
+  source in `src/shared/ui/`. Keep server-safe variants for semantic links.
 - Bridge semantic UI colors to existing tokens and `data-theme`; preserve dark
   default, theme persistence and the pre-paint script. Do not apply a second reset.
 - Keep CSS Modules for page geometry, brand presentation and motion. Tailwind is

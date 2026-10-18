@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/shared/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/shared/ui/dialog";
+import { Skeleton } from "@/shared/ui/skeleton";
 import styles from "./gallery-carousel.module.css";
 
 export type GallerySlide = { id: string; src: string; alt: string; width: number; height: number };

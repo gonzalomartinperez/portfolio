@@ -1,6 +1,6 @@
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { BrandMark } from "./brand-mark";
+import { cn } from "@/shared/styles/cn";
+import { buttonVariants } from "@/shared/ui/button";
+import { BrandMark } from "../identity/brand-mark";
 import styles from "./contact-links.module.css";
 
 export type ContactChannel = {

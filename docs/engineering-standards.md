@@ -37,7 +37,9 @@ Use the [module map](architecture.md#source-module-contract) and run
 
 - Routes, views and shell compose features; lower layers cannot import composition.
 - Reviewed content does not import components, features or framework presentation.
-- Shared UI and utilities do not depend on product content or features.
+- Named shared capabilities do not import features or page composition. Shared UI,
+  styles and motion do not depend on product content. Editorial and identity
+  renderers retain only their reviewed neutral content dependencies.
 - Feature internals are private outside the feature; add a deliberate named entry
   and its rationale when a new integration is needed.
 - Domain dependencies point inward, without direct environment I/O. Renderers and

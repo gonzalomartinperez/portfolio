@@ -4,7 +4,7 @@ import {
   getPageMotionPaused,
   holdPageMotion,
   setPageMotionPaused,
-} from "../src/lib/motion-state.ts";
+} from "../src/shared/motion/motion-state.ts";
 
 test("foreground motion holds release independently and preserve the visitor's pause choice", () => {
   setPageMotionPaused(false);

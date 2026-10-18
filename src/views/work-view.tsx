@@ -1,16 +1,16 @@
 import Link from "next/link";
-import { CompanyMark } from "@/components/company-mark";
-import { ExternalLink } from "@/components/external-link";
-import { MetricList } from "@/components/metric-list";
-import { PageHeader } from "@/components/page-header";
-import { ProductionBadge } from "@/components/production-badge";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import { ExperienceArchitecture } from "@/features/architecture-diagrams/presentation/experience-architecture";
-import { cn } from "@/lib/utils";
+import { MetricList } from "@/shared/editorial/metric-list";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { ProductionBadge } from "@/shared/editorial/production-badge";
+import { CompanyMark } from "@/shared/identity/company-mark";
+import { ExternalLink } from "@/shared/navigation/external-link";
+import { cn } from "@/shared/styles/cn";
+import { Badge } from "@/shared/ui/badge";
+import { buttonVariants } from "@/shared/ui/button";
+import { cardVariants } from "@/shared/ui/card";
 import styles from "./work.module.css";
 
 export function WorkView({ locale }: { locale: Locale }) {

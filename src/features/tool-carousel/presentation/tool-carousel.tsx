@@ -2,7 +2,7 @@ import "server-only";
 
 import type { Locale } from "@/content/locales";
 import { publicTechnologyCatalog, technologyGroups } from "@/content/technologies";
-import { buildCarouselRows } from "./domain/rows";
+import { buildCarouselRows } from "../domain/rows";
 import { ToolCarouselClient } from "./tool-carousel-client";
 
 export function ToolCarousel({ locale }: { locale: Locale }) {

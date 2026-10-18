@@ -1,8 +1,8 @@
 "use client";
 import { type FormEvent, useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import type { Assistant } from "../application/assistant";
-import { copy } from "../copy";
 import { canSubmit, isRunning } from "../domain/models";
+import { copy } from "./copy";
 
 import type { NativePresentation } from "./presentation";
 export function useChat(assistant: Assistant, presentation?: NativePresentation) {

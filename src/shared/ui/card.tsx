@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ComponentProps } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/styles/cn";
 
 const cardVariants = cva(
   "min-w-0 rounded-[var(--radius-lg)] border border-solid border-border bg-card text-card-foreground",

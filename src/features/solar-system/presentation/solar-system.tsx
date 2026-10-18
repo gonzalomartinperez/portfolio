@@ -1,7 +1,7 @@
 "use client";
 
 import { type CSSProperties, useEffect, useRef, useState } from "react";
-import { usePageMotionPaused } from "../../../lib/motion-state";
+import { usePageMotionPaused } from "../../../shared/motion/motion-state";
 import type { SolarEngine } from "../adapters/solar-system-engine";
 import {
   type SolarLayout,
