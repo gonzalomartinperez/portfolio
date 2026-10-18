@@ -1,39 +1,56 @@
-# Public-launch labeling and historical source anchors
+# Public-launch label and historical source anchors
 
 [Repository overview](../README.md#delivery-and-quality) · [Delivery workflow](development.md) · [Deployment ownership](deployment.md)
 
 ## Release policy
 
-The current release line is `1.2.0`, recorded in the application manifest and root lock metadata. Existing annotated tags `v1.0.0` and `v1.1.0` retain their exact published objects and targets. The new minor version captures the reviewed portfolio, architecture, assistant interface and delivery improvements without replacing historical references.
+The final launch label is `v1.0.0`, with application version `1.0.0` in the manifest
+and root lock metadata. On 2026-10-18 the owner explicitly requested a single final
+`v1.0.0` tag across the repositories and removal of the other tags. This one-time
+normalization supersedes the earlier policy of preserving occupied tag names and
+publishing `v1.2.0`; it does not rewrite source commits or historical verification.
 
-The original launch request used `1.0.0`; that name was already occupied. The non-destructive version increment follows the existing published sequence. It does not imply authorization to overwrite or delete either historical label, weaken protections, rewrite source history or relabel verification performed on an earlier commit.
+Before changing any reference, retain the exact old tag objects and targets in a
+private backup, restore them into an isolated repository and verify connectivity.
+The final tag must point to the exact final `main` commit after protected integration
+and successful required CI. Do not describe the transition as completed before its
+remote object and peeled target have been verified.
 
-The repository does not publish an npm package. Its development tool versions and
-dependency versions remain governed by their existing manifests and lock entries;
-changing the root application version does not upgrade or downgrade dependencies.
+This instruction does not authorize future tag replacement, branch history rewrites,
+protection bypasses, image publication or assistant activation. A new relabeling
+requires a new explicit owner decision. Dependency and development tool versions are
+unchanged; the repository does not publish an npm package.
 
 ## Historical source anchors
 
-These are the existing remote associations, verified on 2026-10-18. The commit
-links remain the references for historical screenshots and verification evidence.
+These are the associations observed before normalization on 2026-10-18. The commit
+links, original annotated objects and dated receipts remain historical evidence;
+the table does not claim that the corresponding remote labels remain present.
 
-| Existing label | Original source commit | Original annotated tag object |
+| Previous label | Original source commit | Original annotated tag object |
 | --- | --- | --- |
 | `v1.0.0` | [`ccd4dd3b0a7d222b2fed384578cc847b7dddd93b`](https://github.com/gonzalomartinperez/portfolio/commit/ccd4dd3b0a7d222b2fed384578cc847b7dddd93b) | `ade20ab75a3cf1df9f115333c3409688a2746a8a` |
 | `v1.1.0` | [`ee4e8b514baae59e301c64ce650d97b4319de0de`](https://github.com/gonzalomartinperez/portfolio/commit/ee4e8b514baae59e301c64ce650d97b4319de0de) | `3ab0f360453cfeb3806e8d62ffa254ff3ff41a66` |
+| `v1.2.0` | [`be8da9cb4e0c99bee50215b71ae73828372062fa`](https://github.com/gonzalomartinperez/portfolio/commit/be8da9cb4e0c99bee50215b71ae73828372062fa) | `fca1e19d48b1b679affa5a22557457ad85d56048` |
 
-The exact raw annotated objects were archived with their verified object IDs. Both source commits remain available. Archiving records is not execution of a label transition; no rollback artifact, backup, release asset or source commit was removed.
+## Final label transition
 
-## Publishing the new release
-
-1. Recheck releases/assets, tag-triggered automation, tag protection and exact remote objects. Confirm `v1.2.0` does not exist and both historical refs still match the table. Stop on a collision; never force-push or remove an existing tag to make space.
-2. Finish normal task/release pull requests and required CI on the final main commit. Match the checked head to the current main SHA. Preserve older test and smoke results with their actual SHAs; a tag does not rerun them.
-3. Create the new annotated `v1.2.0` on that validated commit and push only its explicit tag ref. Its annotation records the actual source and successful verification, not a claim of production activation.
-4. Verify the remote tag object and peeled commit, confirm both historical refs are unchanged, and preserve the execution receipt. The annotation identifies the final source; this document describes the publication policy without claiming that CI proves deployment.
+1. Inventory exact local and remote tag objects, releases/assets, tag-triggered
+   automation and protection rules. Stop the affected mutation if it would trigger
+   an external publication or deployment that the owner has not authorized.
+2. Archive all affected references and reachable objects outside Git. Verify bundle
+   integrity, isolated restoration and object connectivity before removing any tag.
+3. Complete normal task and release pull requests. Verify required CI on the final
+   `main` SHA; preserve previous test results under the SHAs they actually checked.
+4. Create the annotated `v1.0.0` on that validated commit. Push only the explicit tag
+   changes, atomically and with expected-object leases for every occupied reference.
+   Abort if any remote object differs from the frozen inventory; never use a blanket force.
+5. Verify that the sole remote tag is `v1.0.0`, with the expected annotated object and
+   peeled commit. Confirm branches are unchanged, then align the local tag references
+   and retain the execution receipt and restore instructions outside the repository.
 
 Repository CI runs for branch pushes and pull requests, not tag pushes. Hosting
 continues to follow the configured `main` integration described in the deployment
-guide; label operations do not configure hosting or publish an image. Assistant
-and analytics activation remain independent and disabled until explicitly approved.
-The actual public activation is a separate operational event, not inferred from
-package metadata, a tag or successful source checks.
+guide. A tag operation does not configure hosting or prove an actual deployment.
+Assistant and analytics activation remain separate decisions and disabled until
+explicitly approved. Source checks, metadata and labels do not establish production readiness.

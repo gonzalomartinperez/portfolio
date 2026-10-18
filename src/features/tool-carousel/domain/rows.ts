@@ -1,4 +1,4 @@
-import { compareTechnologyNames, type Technology } from "../../../content/technologies.ts";
+import { compareTechnologyNames, type Technology } from "../../../../content/technologies.ts";
 
 export type CarouselTechnology = Pick<Technology, "id" | "name" | "icon" | "category">;
 

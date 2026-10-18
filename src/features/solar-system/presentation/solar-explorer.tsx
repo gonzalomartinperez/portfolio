@@ -1,5 +1,6 @@
 "use client";
 
+import type { Locale } from "@config/locales";
 import {
   ChevronDown,
   ChevronLeft,
@@ -12,7 +13,6 @@ import {
   ZoomOut,
 } from "lucide-react";
 import { type CSSProperties, useCallback, useRef, useState } from "react";
-import type { Locale } from "@/content/locales";
 import { Button } from "../../../shared/ui/button";
 import {
   Dialog,

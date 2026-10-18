@@ -1,9 +1,9 @@
+import { type Locale, localePath } from "@config/locales";
+import { resumeDownloads, resumeFilenames, resumeFiles } from "@config/site";
+import cv from "@content/cv-public.json";
+import documents from "@content/public-documents.json";
 import Link from "next/link";
 import { Fragment } from "react";
-import cv from "@/content/cv-public.json";
-import { type Locale, localePath } from "@/content/locales";
-import documents from "@/content/public-documents.json";
-import { resumeDownloads, resumeFilenames, resumeFiles } from "@/content/site-config";
 import { PageHeader } from "@/shared/editorial/page-header";
 import { ExternalLink } from "@/shared/navigation/external-link";
 import { buttonVariants } from "@/shared/ui/button";

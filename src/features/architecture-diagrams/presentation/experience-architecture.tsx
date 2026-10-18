@@ -1,6 +1,6 @@
 import "server-only";
 
-import type { Locale } from "@/content/locales";
+import type { Locale } from "@config/locales";
 import type { ArchitectureKind } from "../domain/architecture-types";
 import { ArchitectureCanvasLoader } from "./architecture-canvas-loader";
 import styles from "./experience-architecture.module.css";

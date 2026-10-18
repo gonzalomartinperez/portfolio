@@ -1,10 +1,10 @@
+import { type Locale, localePath } from "@config/locales";
+import { email, externalLinks } from "@config/site";
+import { getContent } from "@content";
+import { publicTechnologyCatalog } from "@content/technologies";
+import portrait from "@media/identity/portrait.avif";
 import Image from "next/image";
 import Link from "next/link";
-import portrait from "@/assets/portrait.avif";
-import { getContent } from "@/content";
-import { type Locale, localePath } from "@/content/locales";
-import { email, externalLinks } from "@/content/site-config";
-import { publicTechnologyCatalog } from "@/content/technologies";
 import { ToolCarousel } from "@/features/tool-carousel/presentation/tool-carousel";
 import { MetricList } from "@/shared/editorial/metric-list";
 import { CompanyMark } from "@/shared/identity/company-mark";

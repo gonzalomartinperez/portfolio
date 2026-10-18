@@ -16,7 +16,7 @@ The API owner owns wire schemas, ingestion, persistence, reporting and the
 backoffice; the portfolio owns reviewed public markup and bounded browser events.
 The public v2 schema and examples are pinned to API commit
 `284bc0474f66326ffa79082fd9fa53523e0ba27c` in
-`src/contracts/product-interaction-source.json`. This reviewed candidate permits
+`contracts/assistant-api/product-interaction-source.json`. This reviewed candidate permits
 client development; protected API promotion and the real local demonstration
 remain separate acceptance steps. Existing v1 and chat snapshots are unchanged.
 

@@ -12,7 +12,7 @@ bypass. Existing strict checks and human review remain authoritative.
 The root npm configuration separates patch proposals for `@types/react` and
 `@types/react-dom` from the wider minor/patch review group. Major updates remain
 separate. The Node type-major exclusion is retained. The additional
-`/tooling/api-contract` entry covers its separate manifest and frozen lock; all of
+`/tools/api-contract` entry covers its separate manifest and frozen lock; all of
 its proposals require manual regeneration and contract review. Frameworks, auth,
 databases, compilers, runtimes, native modules, browser/image versions and Actions
 always need compatibility review. Group names and labels are not trusted evidence.
@@ -76,7 +76,7 @@ Manual processing remains the default until a separate owner decision changes it
 
 ## Verification
 
-`node --test scripts/dependency-policy.test.mjs` checks single/grouped patches,
+`node --test tests/unit/dependency-policy.test.mjs` checks single/grouped patches,
 version classes, new/removed/unknown packages, framework/browser exclusions,
 transitive/script/registry/integrity changes, lock inconsistency, spoofed identity,
 forks, extra or unverified commits, wrong files, unsafe modes/hashes, changing

@@ -1,8 +1,8 @@
 "use client";
 
+import avatar from "@media/identity/avatar.png";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import avatar from "@/assets/avatar.png";
 import styles from "./identity-avatar.module.css";
 
 export function IdentityAvatar({ active = true }: { active?: boolean }) {

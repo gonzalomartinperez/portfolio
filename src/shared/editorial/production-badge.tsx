@@ -1,5 +1,5 @@
+import type { Locale } from "@config/locales";
 import { BadgeCheck } from "lucide-react";
-import type { Locale } from "@/content/locales";
 import { Badge } from "../ui/badge";
 import styles from "./production-badge.module.css";
 

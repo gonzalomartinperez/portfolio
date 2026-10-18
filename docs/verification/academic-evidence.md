@@ -6,7 +6,7 @@ documents are included by that authorization.
 
 ## Public source contract
 
-`src/content/academic-catalogue.ts` is the shared catalogue for both languages.
+`content/academic-catalogue.ts` is the shared catalogue for both languages.
 Course codes provide stable IDs. Spanish names follow Plan 2012; English names are
 editorial translations, with the original visible in the full record. The catalogue
 contains 34 curriculum entries (including professional practice and final project)

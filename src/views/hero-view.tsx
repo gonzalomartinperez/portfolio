@@ -1,6 +1,6 @@
+import { type Locale, localePath } from "@config/locales";
+import { getContent } from "@content";
 import Link from "next/link";
-import { getContent } from "@/content";
-import { type Locale, localePath } from "@/content/locales";
 import { HeroStage } from "@/features/hero/presentation/hero-stage";
 import { StaticConstellation } from "@/features/hero/presentation/static-constellation";
 import { TechConstellation } from "@/features/hero/presentation/tech-constellation";

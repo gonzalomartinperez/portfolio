@@ -19,7 +19,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@content": ["./content/index.ts"],
+      "@content/*": ["./content/*"],
+      "@config/*": ["./config/*"],
+      "@contracts/*": ["./contracts/*"],
+      "@media/*": ["./media/*"]
     },
     "allowImportingTsExtensions": true
   },

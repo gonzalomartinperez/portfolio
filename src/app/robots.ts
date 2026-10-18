@@ -1,5 +1,5 @@
+import { siteUrl } from "@config/site";
 import type { MetadataRoute } from "next";
-import { siteUrl } from "@/content/site-config";
 
 export default function robots(): MetadataRoute.Robots {
   return {

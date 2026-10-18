@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { publicTechnologyCatalog } from "../../src/content/technologies";
+import { publicTechnologyCatalog } from "../../content/technologies";
 import { setDocumentHidden } from "./document-visibility";
 
 for (const locale of ["en", "es"]) {

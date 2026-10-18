@@ -48,7 +48,7 @@ percentages, invented badges or claims of operating employer infrastructure.
 
 ## Checks
 
-Run `node --test scripts/content-migration.test.mjs` for the migration invariants, plus
+Run `node --test tests/unit/content-migration.test.mjs` for the migration invariants, plus
 the repository's standard `npm run check`. Visual and integrated browser validation
 belongs to the coordinator's release check. This document does not assert deployment.
 

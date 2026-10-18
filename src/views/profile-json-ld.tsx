@@ -1,6 +1,6 @@
-import { getContent } from "@/content";
-import { defaultLocale } from "@/content/locales";
-import { email, siteUrl } from "@/content/site-config";
+import { defaultLocale } from "@config/locales";
+import { email, siteUrl } from "@config/site";
+import { getContent } from "@content";
 
 /** schema.org ProfilePage wrapping Person, the documented shape for a personal profile. */
 export function ProfileJsonLd() {

@@ -88,7 +88,7 @@ already covers the application; the parser supplies the missing syntax analysis.
 
 ## Evidence and maintenance cost
 
-The guard and its [rejecting and accepting fixtures](../../scripts/architecture.test.mjs)
+The guard and its [rejecting and accepting fixtures](../../tests/unit/architecture.test.mjs)
 run through `npm run test:architecture`, inside the full protected quality workflow.
 [CI run 39078119996](https://github.com/gonzalomartinperez/portfolio/actions/runs/39078119996)
 passed all required quality, browser and hosting jobs at source

@@ -26,9 +26,9 @@ outlier spent 9m44s downloading BaseOS metadata at approximately 153 kB/s.
 
 ## Implementation
 
-The [planner](../../scripts/browser-ci-planner.mjs) discovers the current suite with
+The [planner](../../tools/browser-ci-planner.mjs) discovers the current suite with
 the pinned Playwright CLI. It assigns the longest estimated tests first to the
-least-loaded runner, using the [timing baseline](../../scripts/browser-ci-timings.json)
+least-loaded runner, using the [timing baseline](../../tools/browser-ci-timings.json)
 from the three successful runs above. New or renamed tests use the relevant
 file/project median, with a minimum 15-second estimate. Old timings never select
 or exclude tests.
@@ -86,7 +86,7 @@ repository-relative test file and full nested test title, excluding line numbers
 Do not derive a speedup from a single unusually fast run. A stale or missing timing
 entry affects placement only; discovery and exact coverage remain mandatory.
 
-Run `node scripts/browser-ci-planner.mjs` to verify a fresh plan without launching
+Run `node tools/browser-ci-planner.mjs` to verify a fresh plan without launching
 browsers. Run a generated group with
 `npm run test:browser -- --test-list=.artifacts/ci/shards/1.txt` after building with
 `ASSISTANT_ENABLED=true`. Local ordinary browser commands remain unchanged.

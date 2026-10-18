@@ -10,12 +10,12 @@ existing on the author's computer is not permission to publish its private data.
 
 ## CV export
 
-`src/content/cv-public.json` is generated, not independently edited. To update it,
+`content/cv-public.json` is generated, not independently edited. To update it,
 first reconcile the approved bilingual editorial source with its verified facts,
 then run the manual export with explicit local input arguments:
 
 ```sh
-node scripts/export-cv.mjs <approved-editorial-json> <verified-facts-json> <reviewed-release-manifest>
+node tools/export-cv.mjs <approved-editorial-json> <verified-facts-json> <reviewed-release-manifest>
 ```
 
 After copying the reviewed PDFs, verify the public projection and PDF bytes
@@ -72,13 +72,13 @@ Company links in generated CV content must come from reviewed authoring inputs, 
 
 ## Documents
 
-The explicit list in `scripts/documents.ts` contains six authorized assets: two
+The explicit list in `tools/documents.ts` contains six authorized assets: two
 CVs, two completed-course certificates, the original university plan and the original
-historical transcript. `src/content/public-documents.json` records their sizes,
+historical transcript. `content/public-documents.json` records their sizes,
 MIME types and SHA-256 hashes. After an approved asset update:
 
 ```sh
-node scripts/documents.ts --write
+node tools/documents.ts --write
 npm run test:documents
 ```
 

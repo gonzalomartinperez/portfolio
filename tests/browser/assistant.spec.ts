@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
 });
 
-import { answer, fixture, open } from "./helpers/assistant-fixture";
+import { answer, fixture, open } from "../helpers/assistant-fixture";
 
 test("native compact panel, sources and maximization preserve a single conversation", async ({
   page,

@@ -8,7 +8,7 @@
   "include": [
     "src/features/assistant/**/*.ts",
     "src/features/assistant/**/*.tsx",
-    "scripts/assistant-*.test.ts",
+    "tests/unit/assistant-*.test.ts",
     "next-env.d.ts"
   ],
   "exclude": ["node_modules"]

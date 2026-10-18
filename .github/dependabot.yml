@@ -19,7 +19,7 @@ updates:
         exclude-patterns: ["@types/react", "@types/react-dom"]
         update-types: [minor, patch]
   - package-ecosystem: npm
-    directory: /tooling/api-contract
+    directory: /tools/api-contract
     target-branch: develop
     rebase-strategy: auto
     labels: ["dependencies:manual"]

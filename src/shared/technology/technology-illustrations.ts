@@ -1,8 +1,8 @@
-import type { Technology } from "@/content/technologies";
+import type { Technology } from "@content/technologies";
 
 /**
  * Lucide icon names drawn for technologies without a brand mark. Each name is a symbol id in
- * `public/technology-illustrations.svg`; run `node scripts/technology-illustrations.mjs --write`
+ * `public/technology-illustrations.svg`; run `node tools/technology-illustrations.mjs --write`
  * after changing these maps so the sprite gains or drops the matching symbol.
  */
 const categoryIllustrations: Record<string, string> = {

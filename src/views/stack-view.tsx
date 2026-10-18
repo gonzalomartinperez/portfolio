@@ -1,7 +1,7 @@
+import { type Locale, localePath } from "@config/locales";
+import { getContent } from "@content";
+import { compareTechnologyNames, publicTechnologyCatalog } from "@content/technologies";
 import Link from "next/link";
-import { getContent } from "@/content";
-import { type Locale, localePath } from "@/content/locales";
-import { compareTechnologyNames, publicTechnologyCatalog } from "@/content/technologies";
 import { TechnologyCatalogue } from "@/features/technology-catalogue/presentation/technology-catalogue";
 import { PageHeader } from "@/shared/editorial/page-header";
 import { buttonVariants } from "@/shared/ui/button";

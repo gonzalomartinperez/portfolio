@@ -35,7 +35,7 @@ flowchart TB
 | --- | --- |
 | Routes and server rendering | [src/app](../src/app/) delegates page composition to [src/views](../src/views/). English uses unprefixed routes; Spanish uses `/es` with matching path segments. |
 | Persistent shell | [Root layout](../src/app/layout.tsx) owns the header, footer, decorative background, and conditional assistant host. Locale changes share the same layout instead of creating a new application. |
-| Reviewed public content | [src/content](../src/content/) stores typed bilingual copy, technology evidence, the generated CV projection, and approved document manifests. No private authoring inputs are read during a public build. |
+| Reviewed public content | [content](../content/) stores typed bilingual copy, technology evidence, the generated CV projection, and approved document manifests. No private authoring inputs are read during a public build. |
 | Interface system | Owned [UI primitives](../src/shared/ui/), portfolio tokens, Tailwind utilities, and CSS Modules preserve consistent controls, responsive layouts, and both themes. |
 | Interactive work diagrams | React Flow renders editorial architecture context. The diagrams represent approved experience, not repository runtime services or confidential employer infrastructure. |
 | Decorative motion | Three.js provides the hero and solar scenes; GSAP coordinates the hero with native scrolling. Static fallbacks, reduced motion, visibility suspension, context recovery, and scoped motion holds remain separate from content. |
@@ -78,8 +78,11 @@ flowchart TB
 | `src/features/assistant` | Independent domain and application ports, concrete API adapters, presentation and an explicit runtime composition entry. |
 | `src/features/analytics` | Closed route/event policies, per-document visit state, bounded credential-free delivery and explicit root-layout composition. Independently disabled by default. |
 | `src/shared` | Named reused capabilities: UI, styles, motion, identity, technology, navigation, contact and editorial. No feature or page-composition dependencies. UI, styles and motion stay independent of product content. |
-| `src/content` | Reviewed bilingual inputs and neutral data contracts. No dependency on features or rendering. |
-| Transitional inputs | Exact content, contract and image paths retain their existing consumers until an atomic, verified cutover; see the [exception registry](../scripts/architecture-policy.mjs) and [migration specification](specs/common-site-layout.md). |
+| `content` | Reviewed bilingual inputs and neutral data contracts. No dependency on features or rendering. |
+| `config` | Explicit locale/route/site and texture-manifest configuration. Configuration cannot depend on rendering or features. |
+| `contracts/assistant-api` | Byte-preserved external API snapshots and generated types; imported only by concrete feature adapters. |
+| `media/identity` | Original identity image inputs. Build-time generation remains an explicit tool. |
+| `tools` / `tests` | Repository commands and tests by role; never dependencies of production source. |
 
 Feature entries are deliberately named files rather than broad export barrels.
 Code must belong to a directory under `src/features`; flat feature files cannot
@@ -94,9 +97,13 @@ cycles and transitive client/server boundaries through parsed source. Contract t
 are included in layering checks; only runtime edges participate in client traversal.
 Before following imports, it classifies every owned source path, including importless
 modules, CSS and frozen input resources. Unknown roots, feature layers, capabilities
-and undeclared facades fail. The registry contains 39 content paths, nine contract
-paths and three source images with explicit owners and removal conditions; it does
-not grandfather arbitrary new files under those roots.
+and undeclared facades fail. The registry classifies 33 content files, four configuration files, nine API
+contract files and three identity inputs by exact path. The two solar texture
+modules belong to the solar feature: a pure domain contract and a server-only
+adapter reached through its narrow entry. This is an enforced atomic cutover,
+not an exemption for arbitrary files under a root. See the
+[placement decision](adr/site-architecture-parity.md) and
+[migration acceptance](specs/common-site-layout.md).
 
 Domain and application code take explicit time values or clock ports. Bounded AST
 checks reject ambient Date/performance reads and their static aliases while allowing
@@ -157,7 +164,7 @@ flowchart TB
     class EXPORT,PUBLIC,SITE public;
 ```
 
-[scripts/export-cv.mjs](../scripts/export-cv.mjs) requires explicit approved inputs, checks their revisions and promoted PDF provenance, and writes the public projection. [The document manifest](../src/content/public-documents.json) records approved file sizes and hashes. CI and browser tests verify the served files against these public inputs.
+[tools/export-cv.mjs](../tools/export-cv.mjs) requires explicit approved inputs, checks their revisions and promoted PDF provenance, and writes the public projection. [The document manifest](../content/public-documents.json) records approved file sizes and hashes. CI and browser tests verify the served files against these public inputs.
 
 The exporter excludes private notes, evidence paths, phone numbers, vacancies, and hidden content. Generated CV JSON and promoted PDFs are not manually rewritten in this repository. Download URLs use the corresponding document hash as a cache key; live verification must inspect those actual links rather than an unversioned PDF URL. See the [public-content contract](public-content.md) for commands and release requirements.
 
@@ -187,7 +194,7 @@ sequenceDiagram
 
 - The build-time `ASSISTANT_ENABLED` gate defaults to off. Disabled builds omit the launcher and return 404 for `/assistant` and `/es/assistant`. Changing a runtime environment value does not activate an already generated static build.
 - The browser uses the API origin through credentialed HTTPS requests, with API-owned session cookies and CSRF protection. There is no Next.js assistant proxy or iframe implementation. Model-provider credentials remain outside the portfolio.
-- [Imported contracts](../src/contracts/) define REST types and SSE schemas. Adapter validation handles unknown payloads; presentation does not render raw provider failures or unsafe HTML.
+- [Imported contracts](../contracts/assistant-api/) define REST types and SSE schemas. Adapter validation handles unknown payloads; presentation does not render raw provider failures or unsafe HTML.
 - The API owns conversations, generation, retrieval, persistence, and durable completion. Reconnection reads existing state; generation is not automatically repeated.
 - Locale, theme, opened/current allowlisted paths, and presentation are optional interface context. Query strings, fragments, referrers, page HTML, and visitor attributes are excluded. These hints are untrusted and are not evidence about the professional profile.
 - Local fixture tests validate frontend behavior with simulated responses. Production activation still requires the separately deployed API, exact-origin CORS, TLS/cookie/CSRF verification, and SSE proxy flushing and timeouts.
@@ -196,6 +203,6 @@ See [native-assistant.md](native-assistant.md) for bootstrap details, configurat
 
 ## Quality and integration
 
-Task branches enter `develop` through protected pull requests; only `develop` promotes to `main`. Independent workflow, secret and source-quality jobs validate the candidate. Build and hosting follow quality; eight browser shards and performance checks consume one source-bound enabled build. A separate Hostinger-compatible build validates both disabled feature boundaries. The full `Required checks` aggregate rejects failed, skipped or cancelled prerequisites; the temporary legacy bridge preserves protection during migration. Nightly freezes an exact permitted candidate and verifies its complete disjoint browser/visual inventory, internal links and bundle budgets with a separately named aggregate.
+Task branches enter `develop` through protected pull requests; only `develop` promotes to `main`. Independent workflow, secret and source-quality jobs validate the candidate. Build and hosting follow quality; eight browser shards and performance checks consume one source-bound enabled build. A separate Hostinger-compatible build validates both disabled feature boundaries. The full `Required checks` aggregate rejects failed, skipped or cancelled prerequisites and is the canonical protected aggregate. Nightly freezes an exact permitted candidate and verifies its complete disjoint browser/visual inventory, internal links and bundle budgets with a separately named aggregate.
 
 [Development workflow](development.md) covers test commands and ownership. [Deployment](deployment.md) covers native hosting and public verification. [Code quality](code-quality.md) and [editorial guidelines](editorial-guidelines.md) define readable implementation and evidence-aware copy. Automated checks complement human and visual review; they are not blanket accessibility, security, or deployment certifications.

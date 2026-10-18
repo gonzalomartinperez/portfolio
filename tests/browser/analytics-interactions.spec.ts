@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { captureAnalytics } from "./helpers/analytics-fixture";
+import { captureAnalytics, createAnalyticsDeliveryBarrier } from "../helpers/analytics-fixture";
 
 for (const locale of ["en", "es"] as const) {
   const prefix = locale === "es" ? "/es" : "";
@@ -9,10 +9,13 @@ for (const locale of ["en", "es"] as const) {
     page,
   }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
+    const waitForDelivery = createAnalyticsDeliveryBarrier(page);
     const events = await captureAnalytics(page);
     await page.goto(`${prefix}/cv?private=synthetic-only`);
+    await expect.poll(() => events.some((event) => event.event_name === "page_view")).toBe(true);
     const region = page.locator('[data-analytics-region="cv-summary"]');
     await region.scrollIntoViewIfNeeded();
+    await waitForDelivery();
     const box = await region.boundingBox();
     expect(box).not.toBeNull();
     await region.click({
@@ -117,6 +120,7 @@ for (const locale of ["en", "es"] as const) {
     page,
   }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
+    const waitForDelivery = createAnalyticsDeliveryBarrier(page);
     const events = await captureAnalytics(page);
     await page.goto(`${prefix}/about`);
     const story = page.locator(
@@ -135,13 +139,34 @@ for (const locale of ["en", "es"] as const) {
     await page.waitForTimeout(650);
     expect(count()).toBe(1);
     const nav = page.getByRole("navigation", { name: navName, exact: true });
-    await nav.locator(`a[data-analytics-destination="${prefix}/work"]`).click();
+    // Delivery is intentionally lossy while both interaction slots are occupied. Finish the
+    // Work header measurement before asserting that a second navigation click is delivered.
+    const [workHeaderResponse] = await Promise.all([
+      page.waitForResponse(
+        (response) => {
+          const request = response.request();
+          if (!response.url().endsWith("/api/v1/analytics/events") || request.method() !== "POST")
+            return false;
+          const event = request.postDataJSON();
+          return (
+            event.event_name === "section_exposure" &&
+            event.section === "work" &&
+            event.locale === locale &&
+            event.region_id === "site-header"
+          );
+        },
+        { timeout: 10_000 },
+      ),
+      nav.locator(`a[data-analytics-destination="${prefix}/work"]`).click(),
+    ]);
     await expect(page).toHaveURL(`${prefix}/work`);
     await expect
       .poll(() =>
         events.some((event) => event.event_name === "page_view" && event.section === "work"),
       )
       .toBe(true);
+    expect(await workHeaderResponse.finished()).toBeNull();
+    await waitForDelivery();
     await nav.locator(`a[data-analytics-destination="${prefix}/about"]`).click();
     await expect(page).toHaveURL(`${prefix}/about`);
     await story.scrollIntoViewIfNeeded();

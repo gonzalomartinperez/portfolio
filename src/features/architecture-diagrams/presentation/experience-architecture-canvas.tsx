@@ -1,5 +1,6 @@
 "use client";
 
+import type { Locale } from "@config/locales";
 import {
   Background,
   BackgroundVariant,
@@ -26,7 +27,6 @@ import {
   useRef,
   useState,
 } from "react";
-import type { Locale } from "@/content/locales";
 import { roundedRoute, routeConnection } from "../domain/architecture-edge-routing";
 import type {
   ArchitectureGroup,

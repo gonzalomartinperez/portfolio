@@ -35,10 +35,10 @@ session CSRF header. Provider/session credentials never enter URLs or localStora
 Sessions remain API-owned host-scoped cookies; the portfolio and API are different
 origins. HTTPS sibling subdomains are same-site, which does not replace CORS or CSRF.
 
-`src/contracts/source.json` records the imported revision and SHA-256 hashes.
+`contracts/assistant-api/source.json` records the imported revision and SHA-256 hashes.
 Run `npm run test:assistant-contract` after refreshing committed artifacts.
 Generated types are produced using `openapi-typescript@7.13.0` with its supported
-TypeScript 5.9.3 peer in the isolated, lockfile-pinned `tooling/api-contract` package:
+TypeScript 5.9.3 peer in the isolated, lockfile-pinned `tools/api-contract` package:
 
 ```sh
 npm run contract:generate
@@ -140,7 +140,7 @@ portfolio release pipeline remains unchanged.
 ## Browser test transport
 
 Playwright starts one managed Next.js/HTTPS proxy lifecycle through
-`scripts/browser-test-server.ts`. OpenSSL creates a one-day self-signed certificate
+`tools/browser-test-server.ts`. OpenSSL creates a one-day self-signed certificate
 in an isolated temporary directory; shutdown removes it and stops only the owned
 child process. The fixture does not alter production CSP: WebKit correctly applies
 `upgrade-insecure-requests`, so testing the production build over plain HTTP is

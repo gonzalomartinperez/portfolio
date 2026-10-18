@@ -1,4 +1,4 @@
-import type { Locale } from "@/content/locales";
+import type { Locale } from "@config/locales";
 import type { ArchitectureStep, Point } from "./architecture-types";
 
 export const filomenaSteps: Record<Locale, ArchitectureStep[]> = {
