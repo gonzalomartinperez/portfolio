@@ -227,8 +227,8 @@ acceptance requirements.
 
 ## Delivery and quality
 
-[Release history](docs/release-history.md) records the public-launch labeling policy
-and preserves the source anchors behind earlier preparation labels.
+[Release history](docs/release-history.md) records the `1.2.0` publication policy
+and preserves the exact `v1.0.0` and `v1.1.0` source anchors.
 
 <p align="center">
 <picture>
