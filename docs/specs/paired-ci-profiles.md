@@ -1,6 +1,6 @@
 # Paired validation profiles
 
-Status: in-progress
+Status: done
 
 ## Outcome
 
@@ -25,7 +25,23 @@ A dev-only YAML 1.2 parser validates workflow structure. A small Node helper val
 
 ## Verification and limits
 
-Phase A source 525588cf659e9d065b148214e3c9d41cd426fc3a passed all 16 Core jobs in run 39097851981 and merged through PR #165. Both protected branches then required the old and new full aggregates plus Branch policy, with strict mode and all other protections preserved. Phase B exact-head execution, final context retirement, main integration and a real default-branch Nightly dispatch remain pending. Local frozen installs, full check, both dependency audits, unchanged contract regeneration, both 498-test discovery plans, 15 scanner fixtures, 703-file/history and 412-file artifact scans, and 22 rendered checks passed. Record original failures and limits; do not infer deployment, physical-device frame rate or production capacity from CI. Initial Nightly dispatch requires publication of its workflow on the default branch. Existing assistant screenshots are refreshed separately with synthetic fixtures under an explicit local resource lease.
+Verified on 2026-10-18. Results refer to the exact reviewed heads below, not to a later documentation commit or a moving branch tip.
+
+| Stage | Reviewed head | Hosted execution | Result |
+| --- | --- | --- | --- |
+| Phase A, PR #165 | `525588cf659e9d065b148214e3c9d41cd426fc3a` | [39097851981](https://github.com/gonzalomartinperez/portfolio/actions/runs/39097851981) | All 16 Core jobs passed, including the temporary full-gate bridge. |
+| Phase B, PR #166 | `021aa4a07b2ee829f738c2302c1e86461e2a877e` | [39098456040](https://github.com/gonzalomartinperez/portfolio/actions/runs/39098456040) | All 15 canonical Core jobs passed. |
+| Release, PR #167 | `06fb5e01473c18584a4f4a7d38455fabbafe1539` | [39098955262](https://github.com/gonzalomartinperez/portfolio/actions/runs/39098955262) | All 15 Core jobs passed before the normal merge to main. |
+| Post-main | `b628ee298503eef4ca9d039f10a95e35a3ce49a3` | [39099466870](https://github.com/gonzalomartinperez/portfolio/actions/runs/39099466870) | All 15 Core jobs passed. |
+| Real Nightly bootstrap | `b628ee298503eef4ca9d039f10a95e35a3ce49a3` | [39099486047](https://github.com/gonzalomartinperez/portfolio/actions/runs/39099486047) | All 14 jobs passed after publication on the default branch. |
+
+The post-main Core browser inventory and the Nightly browser/visual union each contained 498 cases: 489 passed, nine existing applicability skips, no failed or flaky summaries. Nightly used a manual dispatch with the exact main SHA and main ancestry; this proves its real workflow execution, not a future scheduled trigger.
+
+Both branch protections first added Required checks alongside the previous full gate and Branch policy. Only after phase B passed was the old required context retired. Final main/develop protections require Required checks and Branch policy, bound to GitHub Actions app 15368, with strict mode; all other protection fields were compared and preserved.
+
+Local frozen installs, full check, both dependency audits, unchanged contract regeneration, both 498-test discovery plans, 15 scanner fixtures, 703 tracked-file/full-history and 412 artifact-file scans, and 22 rendered checks passed. The first policy test attempt exposed a shared mutable fixture; copying its prerequisite array fixed the test isolation without weakening policy. A trailing blank-line diff warning in phase B was corrected before publication. Original failures remain preserved in the coordinator's verification records.
+
+Ten final assistant captures were reviewed across both locales, themes and compact/expanded states using synthetic fixtures and zero provider calls. Their application source matches the post-main source; this does not imply a live API test or activation. Public HTTP checks returned 200 for both home locales and 404 for both disabled assistant routes, without a launcher or enabled analytics marker. The exact deployed Hostinger SHA was not independently confirmed in hPanel. CI does not establish physical-device frame rate, production capacity, container-image acceptance or tag publication. See the [tag policy](../release-history.md) for the separate, still-pending label decision.
 
 ## Primary references
 

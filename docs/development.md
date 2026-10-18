@@ -63,9 +63,10 @@ and their exact disjoint union rather than enforcing a fixed count.
 `Required checks` requires all seven Core responsibilities to succeed, including
 the whole browser matrix. It is the protected aggregate; `Quality checks` is the
 source-quality prerequisite. The aggregate was added alongside the old full gate
-on both branches after phase A passed. Phase B removes the forwarding job; the
-old required context is retired only after this phase passes with the new full
-aggregate still enforced. See the [paired CI specification](specs/paired-ci-profiles.md).
+on both branches after phase A passed. Phase B removed the forwarding job; the
+old required context was retired after that phase passed with the new full
+aggregate still enforced. Both branches now require Required checks and Branch
+policy under strict mode; Quality checks remains a source-quality prerequisite. See the [paired CI specification](specs/paired-ci-profiles.md).
 Skipped, failed or cancelled constituents fail the aggregate.
 
 Nightly freezes an exact existing commit reachable from main or develop before
