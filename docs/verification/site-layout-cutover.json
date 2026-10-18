@@ -138,5 +138,5 @@
     "src/contracts/sse.schema.json",
     "tooling/api-contract/package-lock.json"
   ],
-  "verification": "Pending current-candidate execution; see common-site-layout.md."
+  "verification": "Cutover source 12e68c662b855422411ffdfd1d5334f6b4b0e086: 119-move bijection and preserved bytes independently reviewed; 38 architecture fixtures, full production check, 498-case inventory, secret checks and 15-job CI 39163226470 passed. Second native fixture browser/SQL receipt matched 18 events. Final tool checks, external RAG compatibility and protected promotion remain gates; see common-site-layout.md."
 }

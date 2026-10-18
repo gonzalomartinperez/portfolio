@@ -25,15 +25,16 @@ documented in `portfolio-assistant-api/docs/local-analytics-demo.md` at API comm
 `33c544dead74e0d30283516b6653b0e0aea84bca`. The UI/session contract inspected here is
 backoffice commit `a124139e1cfa1d0d496fcf76c518830491fc1679`.
 
-The fixture starts without seeded events. Country attribution stays off. No other
-producer may ingest during this scenario. Existing API limits remain60 accepted
-new IDs/minute and10,000/day. The scenario makes fewer than40 POST attempts with
-zero retry/replay; an emergency guard stops the public context at32 observed
+Before starting a producer, retain the API owner's eight fixed read-only baseline
+counts and require all eight to be zero. The fixture starts without seeded events.
+Country attribution stays off. No other producer may ingest during this scenario. Existing API limits remain 60 accepted
+new IDs/minute and 10,000/day. The scenario makes fewer than 40 POST attempts with
+zero retry/replay; an emergency guard stops the public context at 32 observed
 attempts. Normal actions are eight reviewed pointer clicks, three committed page
 views, one keyboard navigation and incidental bounded section exposures.
 Every analytics POST counts toward that guard before destination or payload
 validation. The receipt distinguishes attempted POSTs, validated events and
-observed204 responses; a successful run requires those counts to agree.
+observed 204 responses; a successful run requires those counts to agree.
 
 ## Commands after the owners grant runtime leases
 
@@ -48,7 +49,7 @@ uv run python -m scripts.analytics_demo --authorize-fixture \
 The owner follows that repository's documented BO migration, session and standalone
 startup commands. `NODE_EXTRA_CA_CERTS` belongs in the BO parent process environment;
 never disable Node TLS verification. Only generated disposable viewer credentials
-are used. Keep `sessions.json`0600 in its0700 fixture directory. Never print, commit
+are used. Keep `sessions.json` 0600 in its 0700 fixture directory. Never print, commit
 or upload that directory, cookie, environment files or keys.
 
 In the isolated public-site worktree, build the exact fixture endpoint:
@@ -75,9 +76,10 @@ Set a task-specific absolute path to the owner-provided fixture directory, witho
 printing its files:
 
 ```sh
+umask 077
 ANALYTICS_LIVE_AUTHORIZED=disposable-fixture \
   ANALYTICS_DEMO_DIR=/absolute/owner-provided/fixture-directory \
-  npx --no-install playwright test --config=playwright.analytics-live.config.ts
+  npm run test:analytics:live
 ```
 
 The sole live spec lives at `tests/integration/analytics-live/real-flow.spec.ts`.
@@ -91,15 +93,15 @@ different fixtures.
 
 The scenario first requires an empty authenticated calendar report. A fresh
 unauthenticated BO context must redirect `/analytics` to `/sign-in` and its
-`/api/operations` read must return401. Direct private API denial is checked by the
+`/api/operations` read must return 401. Direct private API denial is checked by the
 API owner. BO credentials enter only a separate
 authenticated context through the privately validated viewer cookie.
 
 EN and ES CV pages generate v1 page views and v2 public clicks/exposures through
-native client fetch. Three clicks per locale target grid cell(3,5), and one per
+native client fetch. Three clicks per locale target grid cell (3,5), and one per
 locale targets(5,5). A keyboard navigation produces the existing v1 semantic
 navigation event without a fabricated pointer cell. The combined report must show
-six published clicks in its one-based column4,row6 cell and two withheld clicks.
+six published clicks in its one-based column 4, row 6 cell and two withheld clicks.
 Recorded page-view, click and exposure totals must match the authenticated UI.
 The report must declare the current partial UTC period and disabled country
 collection. Crossing a UTC-day boundary fails this bounded scenario.
@@ -109,6 +111,14 @@ Native requests are observed, never intercepted or replayed. Their exact API URL
 absence of Cookie/Authorization/Referer are checked. Unexpected public browser
 origins terminate the context. The accepted counts are observations of received
 events, not unique visitors or proof of reading.
+
+The JSON reporter retains the attachment in private
+`.artifacts/analytics-live/report.json`. The command then runs the bounded receipt
+extractor, which requires one first-attempt PASS and emits only the closed ledger
+to `.artifacts/analytics-live/results/native-browser-and-backoffice.json` with 0600
+permissions and exclusive creation. Keep the raw reporter file private; never
+upload reporter diagnostics or fixture credentials. A list-only reporter is not
+enough: it discards the attachment after a passing test.
 
 The sanitized `native-browser-and-backoffice.json` attachment records bounded
 counts, reviewed aggregate dimension groups and verification scope. It contains no cookie, session, private token or
@@ -128,6 +138,31 @@ Its guarded cleanup removes only labelled fixture resources and private material
 Confirm all four owned listeners are released. Do not use blanket Docker pruning,
 kill unrelated listeners or delete another session's worktree/build/cache.
 
-This document specifies the executable scenario. It records no executed PASS.
-Full quality, protected CI, independent review and source promotion remain the
-coordinator's delivery responsibilities.
+## Executed acceptance on 2026-10-18
+
+The second native run passed in 17.8 seconds with no retry at public source
+`12e68c662b855422411ffdfd1d5334f6b4b0e086`, API
+`c945cff8f6352e38ebf52be4edb3413a65eef7de` and backoffice tool source
+`286d9bd92c51a871ce16b66b9e424f343dfce188`. The API and backoffice trees match the
+inspected main revisions above; the executed revisions are attributed separately.
+The browser retained its closed ledger, and an independent comparison matched
+its 18 accepted distinct events to API-owned PostgreSQL counts: four semantic and
+14 interaction events, including three page views. The authenticated UI showed
+eight public clicks, six exposures, one navigation, six published grid clicks and
+two withheld clicks. The initial eight SQL counts were zero. Final non-unknown
+country rows, conversations, messages and provider-spend rows were all zero.
+SQL establishes those persisted totals; UI assertions establish the reviewed
+presentation dimensions. Neither establishes application-role least privilege or
+production activation.
+
+The first run also passed its browser assertions, but its list-only reporter lost
+the attachment. That evidence gap and the original result were preserved. The
+second run used a new database and retained a private JSON report plus the closed
+receipt; it did not replace or conceal the first result. All owned site processes
+were closed at 21:01:03Z; the API owner confirmed complete fixture cleanup at
+21:02:22Z, with no remaining owned containers, processes, credentials or listeners.
+The receipt tool/configuration added after this run makes that retention repeatable;
+it does not change the executed public client or event contract.
+
+Independent review, current protected CI and source promotion remain separate
+release gates. This fixture proof does not establish production readiness.

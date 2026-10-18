@@ -33,7 +33,7 @@
     "test:smoke": "node tools/smoke-test.mjs",
     "test:assistant-disabled": "playwright test --config playwright.rollout.config.ts",
     "test:browser": "playwright test",
-    "test:analytics:live": "playwright test --config playwright.analytics-live.config.ts",
+    "test:analytics:live": "playwright test --config playwright.analytics-live.config.ts && node tools/analytics-live-receipt.ts .artifacts/analytics-live/report.json .artifacts/analytics-live/results/native-browser-and-backoffice.json",
     "test:identity": "node tools/generate-identity.mjs --check",
     "identity:build": "node tools/generate-identity.mjs --write",
     "test:assistant-contract": "node tools/check-assistant-contract.mjs",

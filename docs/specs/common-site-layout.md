@@ -1,6 +1,6 @@
 # Shared physical site architecture
 
-Status: implementation; acceptance pending for the current candidate
+Status: local and native acceptance recorded; final protected promotion pending
 
 ## Outcome and scope
 
@@ -55,10 +55,33 @@ portfolio host, with its existing CI compatibility container. Google engineering
 review practices and the Microsoft Engineering Playbook inform the local standards;
 they do not override repository formatting, product ownership or runtime contracts.
 
-Source implementation and read-only review are in progress. Dependencies, baseline
-RED/green fixtures, build, current browser discovery/acceptance and the native-service
-scenario must be executed against this candidate before this status becomes complete.
-A green earlier release at `b06c81e` does not validate this cutover.
+At cutover source `12e68c662b855422411ffdfd1d5334f6b4b0e086`, independent review
+verified the 119-move bijection and unchanged frozen inputs. Four representative
+negative fixtures failed against the old guard; all 38 current architecture
+fixtures and the real-source audit passed. The full production check generated
+27 pages and passed all 12 budgets. Secret enforcement passed 15 fixtures, 709
+tracked files and fetched history. Browser discovery remained exactly 498 cases
+by project, mapped file and full title. Normalized comparison of 167 application
+modules found only intended import/path changes and the explicit solar server
+facade; it is not a general proof about arbitrary import side effects.
+
+Protected task CI run 39163226470 passed all 15 jobs, including the eight browser
+groups, hosting compatibility and aggregate. The additional branch-policy and
+dependency reviews also passed. These results belong to the named cutover source;
+new verification-tool/configuration/documentation changes require their own checks.
+
+The second disposable native run passed without retry and retained a closed
+18-event browser ledger. Independent API-owned SQL matched four semantic and 14
+interaction events, three page views, and zero country attribution, conversations,
+messages or provider-spend rows. Authenticated backoffice assertions covered the
+reviewed filters, grid and presentation. See the [executed native acceptance](../verification/analytics-real-flow.md#executed-acceptance-on-2026-10-18)
+for exact source revisions, the preserved first-run evidence gap and teardown.
+
+The external API RAG reader must accept both legacy `src/content/{en,es}` and new
+`content/{en,es}` projection paths before public main promotion. This compatibility
+handoff, the final verification-tool checks, protected task/develop/release/main
+checks and the final annotated tag remain delivery gates. No earlier release or
+fixture run substitutes for those gates.
 
 ## Historical named-capability checkpoint
 

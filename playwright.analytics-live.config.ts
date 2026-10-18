@@ -13,7 +13,7 @@ export default defineConfig({
   workers: 1,
   timeout: 45_000,
   expect: { timeout: 10_000 },
-  reporter: [["list"]],
+  reporter: [["list"], ["json", { outputFile: ".artifacts/analytics-live/report.json" }]],
   use: {
     ...devices["Desktop Chrome"],
     viewport: { width: 1440, height: 1000 },
