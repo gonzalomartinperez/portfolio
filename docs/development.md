@@ -61,12 +61,12 @@ behavior. New tests enter discovery automatically; the planner verifies each lis
 and their exact disjoint union rather than enforcing a fixed count.
 
 `Required checks` requires all seven Core responsibilities to succeed, including
-the whole browser matrix. During the protected-context transition, `Quality checks`
-is an additional full-gate bridge; it never means only static checks. Add the new
-aggregate to both branch protections after its exact-head success, then retire the
-old bridge only while the new aggregate remains required. See the
-[paired CI specification](specs/paired-ci-profiles.md) for the migration criteria.
-Skipped, failed or cancelled constituents fail both aggregate gates.
+the whole browser matrix. It is the protected aggregate; `Quality checks` is the
+source-quality prerequisite. The aggregate was added alongside the old full gate
+on both branches after phase A passed. Phase B removes the forwarding job; the
+old required context is retired only after this phase passes with the new full
+aggregate still enforced. See the [paired CI specification](specs/paired-ci-profiles.md).
+Skipped, failed or cancelled constituents fail the aggregate.
 
 Nightly freezes an exact existing commit reachable from main or develop before
 execution. An empty manual SHA uses the workflow event SHA; the selected ref

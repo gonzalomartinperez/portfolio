@@ -92,7 +92,7 @@ jobs:
         run: npm run test:secrets
 
   quality:
-    name: Quality (development)
+    name: Quality checks
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -364,16 +364,3 @@ jobs:
           test "$HOSTING_RESULT" = success &&
           test "$BROWSER_RESULT" = success &&
           test "$PERFORMANCE_RESULT" = success
-
-  legacy-checks:
-    name: Quality checks
-    if: always()
-    needs: [checks]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 2
-    steps:
-      - name: Require every prerequisite to succeed
-        env:
-          CHECKS_RESULT: ${{ needs.checks.result }}
-        run: |
-          test "$CHECKS_RESULT" = success

@@ -69,8 +69,8 @@ CI uses SHA-pinned actions, read-only permissions, complementary quality, browse
 and hosting jobs, the npm bundled with each Node version, and an npm download cache keyed by the lockfile.
 The development lane reads `.nvmrc`; the hosting lane pins the observed Node 24.6.0.
 Corepack is not invoked. The full `Required checks` gate rejects any failed,
-skipped or cancelled responsibility. The protected-context transition retains the
-old full aggregate until the replacement is enforced; see the
+skipped or cancelled responsibility. The new full aggregate was enforced before
+retiring the temporary forwarding job; see the
 [CI specification](specs/paired-ci-profiles.md). CI never caches `node_modules`.
 Eight isolated browser groups reuse one source/configuration/run-bound enabled
 build; hosting builds its disabled compatibility variant independently. Integrity

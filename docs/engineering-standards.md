@@ -97,8 +97,8 @@ Its full aggregate rejects skipped or cancelled constituents. Eight duration-bal
 browser groups reuse one integrity-bound build; the separate GLIBC 2.28 build and
 smoke keep both features disabled. Nightly freezes one permitted source and reuses
 one build across disjoint browser/visual groups, internal links and bundle checks.
-See the [CI migration contract](specs/paired-ci-profiles.md) for the temporary
-protected-context bridge and acceptance evidence.
+See the [CI migration contract](specs/paired-ci-profiles.md) for protected-context
+migration and acceptance evidence.
 
 Keep timeouts, retries, fail-on-flaky behavior and exact test selection intact.
 Negative architecture fixtures must fail on representative invalid code, while
