@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { captureAnalytics } from "./helpers/analytics-fixture";
+import { captureAnalytics, createAnalyticsDeliveryBarrier } from "./helpers/analytics-fixture";
 
 for (const locale of ["en", "es"] as const) {
   const prefix = locale === "es" ? "/es" : "";
@@ -9,10 +9,13 @@ for (const locale of ["en", "es"] as const) {
     page,
   }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
+    const waitForDelivery = createAnalyticsDeliveryBarrier(page);
     const events = await captureAnalytics(page);
     await page.goto(`${prefix}/cv?private=synthetic-only`);
+    await expect.poll(() => events.some((event) => event.event_name === "page_view")).toBe(true);
     const region = page.locator('[data-analytics-region="cv-summary"]');
     await region.scrollIntoViewIfNeeded();
+    await waitForDelivery();
     const box = await region.boundingBox();
     expect(box).not.toBeNull();
     await region.click({
@@ -117,6 +120,7 @@ for (const locale of ["en", "es"] as const) {
     page,
   }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
+    const waitForDelivery = createAnalyticsDeliveryBarrier(page);
     const events = await captureAnalytics(page);
     await page.goto(`${prefix}/about`);
     const story = page.locator(
@@ -162,12 +166,7 @@ for (const locale of ["en", "es"] as const) {
       )
       .toBe(true);
     expect(await workHeaderResponse.finished()).toBeNull();
-    await page.evaluate(
-      () =>
-        new Promise<void>((resolve) => {
-          requestAnimationFrame(() => queueMicrotask(() => resolve()));
-        }),
-    );
+    await waitForDelivery();
     await nav.locator(`a[data-analytics-destination="${prefix}/about"]`).click();
     await expect(page).toHaveURL(`${prefix}/about`);
     await story.scrollIntoViewIfNeeded();

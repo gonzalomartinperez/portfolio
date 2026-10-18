@@ -14,6 +14,63 @@ export type AnalyticsEvent = {
   target?: string;
 };
 
+/** Wait for bounded transport capacity without disabling background measurements. */
+export function createAnalyticsDeliveryBarrier(page: Page) {
+  const pending = new Set<Request>();
+  let generation = 0;
+  let lastActivity = Date.now();
+  const started = (request: Request) => {
+    if (
+      request.method() !== "POST" ||
+      new URL(request.url()).pathname !== "/api/v1/analytics/events"
+    )
+      return;
+    pending.add(request);
+    generation += 1;
+    lastActivity = Date.now();
+  };
+  const finished = (request: Request) => {
+    if (!pending.delete(request)) return;
+    generation += 1;
+    lastActivity = Date.now();
+  };
+  page.on("request", started);
+  page.on("requestfinished", finished);
+  page.on("requestfailed", finished);
+  page.once("close", () => {
+    page.off("request", started);
+    page.off("requestfinished", finished);
+    page.off("requestfailed", finished);
+  });
+
+  return async () => {
+    // Let the final scroll's intersection callbacks start their existing 500 ms dwell.
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) => {
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+        }),
+    );
+    lastActivity = Date.now();
+    await expect
+      .poll(
+        async () => {
+          if (pending.size || Date.now() - lastActivity < 500) return false;
+          const current = generation;
+          await page.evaluate(
+            () =>
+              new Promise<void>((resolve) => {
+                requestAnimationFrame(() => queueMicrotask(() => resolve()));
+              }),
+          );
+          return pending.size === 0 && generation === current;
+        },
+        { timeout: 10_000, message: "Analytics delivery settles before the next asserted click" },
+      )
+      .toBe(true);
+  };
+}
+
 export function expectInteractionPayload(body: Record<string, unknown>) {
   const keys = [
     "schema_version",
