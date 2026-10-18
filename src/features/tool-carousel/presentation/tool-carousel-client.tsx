@@ -6,9 +6,9 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { type Locale, localePath } from "@/content/locales";
 import { toolCarouselCopy } from "@/content/tool-carousel-copy";
-import { TechnologyMark } from "../../components/technology-mark";
-import { usePageMotionPaused } from "../../lib/motion-state";
-import type { CarouselTechnology } from "./domain/rows";
+import { usePageMotionPaused } from "../../../shared/motion/motion-state";
+import { TechnologyMark } from "../../../shared/technology/technology-mark";
+import type { CarouselTechnology } from "../domain/rows";
 import styles from "./tool-carousel.module.css";
 
 type CarouselViewport = HTMLDivElement & {

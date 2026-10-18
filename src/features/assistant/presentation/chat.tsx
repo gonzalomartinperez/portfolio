@@ -12,10 +12,10 @@ import {
 import Image from "next/image";
 import { type KeyboardEvent, useEffect, useRef, useState } from "react";
 import avatar from "@/assets/avatar.png";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import type { Assistant } from "../application/assistant";
-import { copy, retentionText } from "../copy";
 import { ChatMessage } from "./chat-message";
+import { copy, retentionText } from "./copy";
 import { IdentityAvatar } from "./identity-avatar";
 import type { NativePresentation } from "./presentation";
 import { cx } from "./styles";

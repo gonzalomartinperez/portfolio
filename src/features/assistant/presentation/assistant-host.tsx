@@ -4,9 +4,9 @@ import { Maximize2, Minimize2, Minus, Sparkles } from "lucide-react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { type KeyboardEvent, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { type PortfolioPath, portfolioPath } from "@/features/assistant/domain/visitor-context";
-import { holdPageMotion } from "@/lib/motion-state";
+import { holdPageMotion } from "@/shared/motion/motion-state";
+import { Button } from "@/shared/ui/button";
 import styles from "./assistant-host.module.css";
 import { AssistantLoading } from "./assistant-loading";
 

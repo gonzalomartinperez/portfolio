@@ -1,14 +1,14 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
-import { TechnologyMark } from "../../components/technology-mark";
-import { type CatalogueGroup, filterCatalogue } from "./domain/query";
+import { Badge } from "@/shared/ui/badge";
+import { Button } from "@/shared/ui/button";
+import { Card } from "@/shared/ui/card";
+import { Input } from "@/shared/ui/input";
+import { Label } from "@/shared/ui/label";
+import { NativeSelect, NativeSelectOption } from "@/shared/ui/native-select";
+import { TechnologyMark } from "../../../shared/technology/technology-mark";
+import { type CatalogueGroup, filterCatalogue } from "../domain/query";
 import styles from "./technology-catalogue.module.css";
 
 type CatalogueCopy = {

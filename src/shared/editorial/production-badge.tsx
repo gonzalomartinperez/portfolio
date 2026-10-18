@@ -1,7 +1,7 @@
 import { BadgeCheck } from "lucide-react";
 import type { Locale } from "@/content/locales";
+import { Badge } from "../ui/badge";
 import styles from "./production-badge.module.css";
-import { Badge } from "./ui/badge";
 
 export function ProductionBadge({ locale }: { locale: Locale }) {
   return (

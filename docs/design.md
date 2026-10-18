@@ -20,7 +20,7 @@ of the animation.
 
 ## Colour and typography
 
-Reusable interface components live in `src/components/ui/`, adapted from shadcn/ui
+Reusable interface components live in `src/shared/ui/`, adapted from shadcn/ui
 to this identity rather than a stock theme. Tailwind utilities style primitives;
 CSS Modules retain custom page geometry and motion. Native details preserve
 no-JavaScript academic/work disclosure. Ordinary navigation and download actions
@@ -35,7 +35,7 @@ not imported, so it cannot reset the unchanged scene or editorial layout.
 
 1. Change semantic color, spacing, type and radius tokens in `globals.css`,
    including both theme values. Avoid per-page replacement color palettes.
-2. Change component variants in `src/components/ui/` when the shape, density or
+2. Change component variants in `src/shared/ui/` when the shape, density or
    interactive appearance changes. Semantic link/card variants serve server HTML
    without turning content into client components.
 3. Change CSS Modules only for the affected page geometry or intentionally custom

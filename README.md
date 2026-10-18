@@ -147,13 +147,16 @@ The assistant owns its application ports and receives concrete adapters at its e
 The [module contract](docs/architecture.md#source-module-contract) is the source of truth.
 
 - **Enforced in CI:** `npm run test:architecture` audits parsed imports, aliases,
-  re-exports, dynamic imports and type-only edges. It rejects reversed dependencies,
-  private feature imports, cycles and client paths to server-only code. The
+  re-exports, dynamic imports and type-only edges. Every source module has a declared
+  placement, including importless code. It rejects reversed dependencies, private
+  feature imports, cycles, ambient inner-layer clock reads and client paths to server-only code. The
   [negative fixtures](scripts/architecture.test.mjs) must reject representative
   violations while valid composition passes; this runs inside `npm run check`.
 - **Deliberate adaptations:** small features do not need empty layers. Named public
   entries and the narrow server-only analytics configuration facade are documented
-  in the module contract. Static content needs no generic repository or DI framework.
+  in the module contract. Shared capabilities have named owners; exact transitional
+  content, contract and media paths have recorded cutover conditions. Static content
+  needs no generic repository or DI framework.
 - **Pending operational acceptance:** the assistant and analytics remain disabled.
   Effective TLS, CORS, cookies, CSRF, proxy streaming and VPS readiness require their
   owners' verification. Passing source checks does not establish production readiness.
@@ -358,7 +361,7 @@ updated without giving the public build access to private sources.
 | [src/views](src/views/) | Server page composition |
 | [src/shell](src/shell/) | Persistent layout, navigation, locale and theme controls |
 | [src/features](src/features/) | Feature-owned models, adapters and interactive presentation |
-| [src/components](src/components/) | Reusable presentation, identity marks and owned UI primitives |
+| [src/shared](src/shared/) | Reusable presentation, identity marks and owned UI primitives |
 | [src/content](src/content/) | Typed per-locale content and the shared interface-copy contract |
 | [tests](tests/) / [scripts](scripts/) | Browser/rollout cases, source and contract tests, build/QA tooling |
 | [.github](.github/) | Trusted workflows and repository maintenance configuration |

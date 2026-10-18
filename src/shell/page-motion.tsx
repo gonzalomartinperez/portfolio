@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { type ReactNode, useEffect, useRef } from "react";
-import { usePageMotionPaused } from "../lib/motion-state";
+import { usePageMotionPaused } from "../shared/motion/motion-state";
 
 export function PageMotion({ children }: { children: ReactNode }) {
   const paused = usePageMotionPaused();

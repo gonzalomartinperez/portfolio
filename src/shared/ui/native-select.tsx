@@ -1,6 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import type { ComponentProps } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/styles/cn";
 
 function NativeSelect({ className, ...props }: ComponentProps<"select">) {
   return (

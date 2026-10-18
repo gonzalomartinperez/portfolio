@@ -3,9 +3,9 @@ import { memo } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
-import { Button } from "@/components/ui/button";
-import { copy, type Locale } from "../copy";
+import { Button } from "@/shared/ui/button";
 import type { Message } from "../domain/models";
+import { copy, type Locale } from "./copy";
 import { CopyAnswer } from "./copy-answer";
 import { cx } from "./styles";
 

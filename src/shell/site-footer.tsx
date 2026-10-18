@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ExternalLink } from "@/components/external-link";
 import { chrome } from "@/content/chrome";
 import { contactChannels, contactLinks, profile } from "@/content/en/profile";
 import { contactChannels as spanishContactChannels } from "@/content/es/profile";
@@ -10,9 +9,10 @@ import { defaultLocale, type Locale, localePath } from "@/content/locales";
 import { privacy } from "@/content/privacy";
 import { navigationPath } from "@/content/routes";
 import { email } from "@/content/site-config";
-import { ContactIcons } from "../components/contact-links";
-import { Mark } from "../components/mark";
+import { ExternalLink } from "@/shared/navigation/external-link";
 import { SolarExplorer } from "../features/solar-system/presentation/solar-explorer";
+import { ContactIcons } from "../shared/contact/contact-links";
+import { Mark } from "../shared/identity/mark";
 import styles from "./site-footer.module.css";
 
 function localeFromPath(pathname: string): Locale {

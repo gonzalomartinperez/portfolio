@@ -7,7 +7,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import {
   technologyIllustrationNames,
   technologyIllustrationSprite,
-} from "../src/components/technology-illustrations.ts";
+} from "../src/shared/technology/technology-illustrations.ts";
 
 export const spriteFile = new URL(`../public${technologyIllustrationSprite}`, import.meta.url);
 

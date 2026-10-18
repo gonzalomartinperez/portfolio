@@ -112,8 +112,10 @@ See [acceptance specification](specs/native-assistant.md) and
 
 The initial migration measured **25.32 KiB gzip across all stylesheets**, including
 **2.72 KiB (2,789 bytes) deferred assistant CSS**. The measured non-assistant styles are **22.59 KiB (23,137 bytes)**.
-The existing portfolio allocation remains
-**24 KiB**; the new lazy feature has a separately reviewed **4 KiB** allowance.
+The current portfolio allocation is **25 KiB**, following the accepted
+[common-layout chunk redistribution](specs/common-site-layout.md#accepted-transfer-budget-adjustment);
+the lazy assistant retains its separately reviewed **4 KiB** allowance. The initial
+measurements above describe the earlier migration, not the current build.
 The webpack module graph report `.next/assistant-budget.json` identifies the
 feature CSS and rejects an initial assistant chunk. Budget tests enforce both
 allocations independently; this does not conceal the larger total transfer when

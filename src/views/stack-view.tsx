@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { PageHeader } from "@/components/page-header";
-import { buttonVariants } from "@/components/ui/button";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import { compareTechnologyNames, publicTechnologyCatalog } from "@/content/technologies";
-import { TechnologyCatalogue } from "@/features/technology-catalogue/technology-catalogue";
+import { TechnologyCatalogue } from "@/features/technology-catalogue/presentation/technology-catalogue";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { buttonVariants } from "@/shared/ui/button";
 import styles from "./stack.module.css";
 
 export function StackView({ locale }: { locale: Locale }) {

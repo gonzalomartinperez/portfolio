@@ -2,10 +2,10 @@ import { Bot, Boxes, PanelsTopLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import portrait from "@/assets/portrait.avif";
-import { PageHeader } from "@/components/page-header";
-import { buttonVariants } from "@/components/ui/button";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { buttonVariants } from "@/shared/ui/button";
 import styles from "./about.module.css";
 
 export function AboutView({ locale }: { locale: Locale }) {

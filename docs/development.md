@@ -24,7 +24,8 @@ and the relevant section of the [public-content contract](public-content.md).
 
 - Keep routes in `src/app/`, page composition in `src/views/`, and persistent
   navigation in `src/shell/`. Colocate feature code under `src/features/`; extract
-  shared components only for real reuse. Follow the enforced
+  shared capabilities under `src/shared/` only for real reuse. Every owned module,
+  including importless code, must have a registered role. Follow the enforced
   [module contract](architecture.md#source-module-contract) and
   [engineering standards](engineering-standards.md).
 - Prefer focused functions, explicit inputs, descriptive names, composition, and

@@ -1,16 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "@/components/external-link";
-import { MetricList } from "@/components/metric-list";
-import { PageHeader } from "@/components/page-header";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { CardTitle, cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { academicAreas, academicCatalogue, academicEntry } from "@/content/academic-catalogue";
 import { type Locale, localePath } from "@/content/locales";
 import documents from "@/content/public-documents.json";
-import { cn } from "@/lib/utils";
+import { MetricList } from "@/shared/editorial/metric-list";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { ExternalLink } from "@/shared/navigation/external-link";
+import { cn } from "@/shared/styles/cn";
+import { Badge } from "@/shared/ui/badge";
+import { buttonVariants } from "@/shared/ui/button";
+import { CardTitle, cardVariants } from "@/shared/ui/card";
 import styles from "./education.module.css";
 
 const credentialMarks: Record<string, string> = {

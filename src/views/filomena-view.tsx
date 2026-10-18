@@ -1,17 +1,17 @@
 import Link from "next/link";
-import { ExternalLink } from "@/components/external-link";
-import { MetricList } from "@/components/metric-list";
-import { PageHeader } from "@/components/page-header";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { filomenaGallery } from "@/content/filomena-gallery";
 import imageDimensions from "@/content/filomena-image-dimensions.json";
 import { type Locale, localePath } from "@/content/locales";
 import { ExperienceArchitecture } from "@/features/architecture-diagrams/presentation/experience-architecture";
-import { GalleryCarousel } from "@/features/project-gallery/gallery-carousel";
-import { cn } from "@/lib/utils";
+import { GalleryCarousel } from "@/features/project-gallery/presentation/gallery-carousel";
+import { MetricList } from "@/shared/editorial/metric-list";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { ExternalLink } from "@/shared/navigation/external-link";
+import { cn } from "@/shared/styles/cn";
+import { Badge } from "@/shared/ui/badge";
+import { buttonVariants } from "@/shared/ui/button";
+import { cardVariants } from "@/shared/ui/card";
 import styles from "./filomena.module.css";
 
 export function FilomenaView({ locale }: { locale: Locale }) {

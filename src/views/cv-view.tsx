@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import { ExternalLink } from "@/components/external-link";
-import { PageHeader } from "@/components/page-header";
-import { buttonVariants } from "@/components/ui/button";
 import cv from "@/content/cv-public.json";
 import { type Locale, localePath } from "@/content/locales";
 import documents from "@/content/public-documents.json";
 import { resumeDownloads, resumeFilenames, resumeFiles } from "@/content/site-config";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { ExternalLink } from "@/shared/navigation/external-link";
+import { buttonVariants } from "@/shared/ui/button";
 import styles from "./cv.module.css";
 
 type Run = { text: string; bold: boolean; href: string };

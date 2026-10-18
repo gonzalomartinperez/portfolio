@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { ContactLinks } from "@/components/contact-links";
-import { PageHeader } from "@/components/page-header";
-import { buttonVariants } from "@/components/ui/button";
-import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
-import { cn } from "@/lib/utils";
+import { ContactLinks } from "@/shared/contact/contact-links";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { cn } from "@/shared/styles/cn";
+import { buttonVariants } from "@/shared/ui/button";
+import { cardVariants } from "@/shared/ui/card";
 import styles from "./contact.module.css";
 
 export function ContactView({ locale }: { locale: Locale }) {

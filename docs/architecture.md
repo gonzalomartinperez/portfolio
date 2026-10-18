@@ -36,7 +36,7 @@ flowchart TB
 | Routes and server rendering | [src/app](../src/app/) delegates page composition to [src/views](../src/views/). English uses unprefixed routes; Spanish uses `/es` with matching path segments. |
 | Persistent shell | [Root layout](../src/app/layout.tsx) owns the header, footer, decorative background, and conditional assistant host. Locale changes share the same layout instead of creating a new application. |
 | Reviewed public content | [src/content](../src/content/) stores typed bilingual copy, technology evidence, the generated CV projection, and approved document manifests. No private authoring inputs are read during a public build. |
-| Interface system | Owned [UI primitives](../src/components/ui/), portfolio tokens, Tailwind utilities, and CSS Modules preserve consistent controls, responsive layouts, and both themes. |
+| Interface system | Owned [UI primitives](../src/shared/ui/), portfolio tokens, Tailwind utilities, and CSS Modules preserve consistent controls, responsive layouts, and both themes. |
 | Interactive work diagrams | React Flow renders editorial architecture context. The diagrams represent approved experience, not repository runtime services or confidential employer infrastructure. |
 | Decorative motion | Three.js provides the hero and solar scenes; GSAP coordinates the hero with native scrolling. Static fallbacks, reduced motion, visibility suspension, context recovery, and scoped motion holds remain separate from content. |
 | Build and hosting | One locked npm installation and a type-checked Next.js build produce prerendered routes for managed Node.js hosting. Native Hostinger deployment follows `main`; repository CI does not configure the hosting account. |
@@ -53,15 +53,15 @@ flowchart TB
     FEATURE --> ADAPTER["Feature adapters · Rendering or transport"]
     ADAPTER --> MODEL
     MODEL --> CONTENT["content · Reviewed inputs and neutral contracts"]
-    FEATURE --> SHARED["components · Shared presentation and owned UI"]
+    FEATURE --> SHARED["shared · Named presentation capabilities"]
     SHARED --> CONTENT
-    SHARED --> LIB["lib · Shared utilities and motion coordination"]
+    SHARED --> BASE["shared/ui · shared/styles · shared/motion"]
     classDef composition fill:#dbeafe,stroke:#2563eb,color:#1e3a8a;
     classDef domain fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e;
     classDef shared fill:#ede9fe,stroke:#7c3aed,color:#4c1d95;
     class APP,VIEWS,SHELL,FEATURE composition;
     class MODEL,CONTENT domain;
-    class ADAPTER,SHARED,LIB shared;
+    class ADAPTER,SHARED,BASE shared;
 ```
 
 | Module | Responsibility and allowed dependencies |
@@ -77,9 +77,9 @@ flowchart TB
 | `src/features/project-gallery` | Gallery interaction and its owned styles. |
 | `src/features/assistant` | Independent domain and application ports, concrete API adapters, presentation and an explicit runtime composition entry. |
 | `src/features/analytics` | Closed route/event policies, per-document visit state, bounded credential-free delivery and explicit root-layout composition. Independently disabled by default. |
-| `src/components` | Reused presentation; owned `ui` primitives cannot import content or product features. |
+| `src/shared` | Named reused capabilities: UI, styles, motion, identity, technology, navigation, contact and editorial. No feature or page-composition dependencies. UI, styles and motion stay independent of product content. |
 | `src/content` | Reviewed bilingual inputs and neutral data contracts. No dependency on features or rendering. |
-| `src/lib` | Shared utilities and scoped motion coordination; no content, features or composition imports. |
+| Transitional inputs | Exact content, contract and image paths retain their existing consumers until an atomic, verified cutover; see the [exception registry](../scripts/architecture-policy.mjs) and [migration specification](specs/common-site-layout.md). |
 
 Feature entries are deliberately named files rather than broad export barrels.
 Code must belong to a directory under `src/features`; flat feature files cannot
@@ -92,6 +92,16 @@ The full bilingual content registry, diagram figure and carousel composition use
 `npm run test:architecture` enforces dependency direction, public entries, all-import
 cycles and transitive client/server boundaries through parsed source. Contract types
 are included in layering checks; only runtime edges participate in client traversal.
+Before following imports, it classifies every owned source path, including importless
+modules, CSS and frozen input resources. Unknown roots, feature layers, capabilities
+and undeclared facades fail. The registry contains 39 content paths, nine contract
+paths and three source images with explicit owners and removal conditions; it does
+not grandfather arbitrary new files under those roots.
+
+Domain and application code take explicit time values or clock ports. Bounded AST
+checks reject ambient Date/performance reads and their static aliases while allowing
+deterministic date conversion, injected bindings and timing in outer adapters or
+composition. This is source-policy enforcement, not proof of arbitrary runtime purity.
 See [engineering standards](engineering-standards.md) for CI, toolchain ownership and
 cross-session coordination, and [research](research/clean-architecture.md) for tradeoffs.
 
