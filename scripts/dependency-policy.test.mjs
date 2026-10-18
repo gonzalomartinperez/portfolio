@@ -331,7 +331,7 @@ function visibleProtection() {
             requiresConversationResolution: true,
             requiresApprovingReviews: true,
             requiredApprovingReviewCount: 0,
-            requiredStatusChecks: ["Quality checks", "Branch policy"].map((context) => ({
+            requiredStatusChecks: ["Required checks", "Branch policy"].map((context) => ({
               context,
               app: { databaseId: 15368 },
             })),
@@ -418,9 +418,29 @@ test("published workflow remains read-only and executes only trusted policy sour
   assert.match(workflow, /package-manager-cache: false/);
   assert.doesNotMatch(workflow, /actions: read|checks: read/);
   const manifest = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
-  assert.match(manifest.scripts.check, /npm run test:dependency-policy/);
+  assert.match(manifest.scripts.check, /npm run check:quality/);
+  assert.match(manifest.scripts["check:quality"], /npm run test:dependency-policy/);
   const config = readFileSync(new URL("../.github/dependabot.yml", import.meta.url), "utf8");
   assert.equal((config.match(/labels: \["dependencies:manual"\]/g) ?? []).length, 3);
   assert.equal((config.match(/rebase-strategy: auto/g) ?? []).length, 3);
   assert.match(config, /directory: \/tooling\/api-contract/);
+});
+
+test("a legacy-named check cannot replace the canonical full aggregate", async () => {
+  const metadata = visibleProtection();
+  metadata.data.repository.ref.branchProtectionRule.requiredStatusChecks[0].context =
+    "Quality checks";
+  const result = await inspectReadiness(async (path) =>
+    path === "/graphql"
+      ? metadata
+      : {
+          full_name: "gonzalomartinperez/portfolio",
+          allow_auto_merge: false,
+        },
+  );
+  assert.deepEqual(result, {
+    status: "blocked",
+    automation: "manual",
+    reason: "protection-not-confirmed",
+  });
 });

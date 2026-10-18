@@ -1,5 +1,9 @@
 # CI efficiency
 
+This dated record describes the preceding CI layout. The current split and safe
+protected-context transition are specified in [paired CI profiles](../specs/paired-ci-profiles.md).
+Retain these measurements as their original baseline, not evidence of the new pipeline.
+
 Reviewed 2026-10-12. Optimize the critical path without changing application tests,
 engine coverage, one worker per runner, individual deadlines, retries or failure
 on flaky tests. Keep the eight existing protected browser contexts and the

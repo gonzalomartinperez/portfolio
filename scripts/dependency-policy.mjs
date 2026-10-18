@@ -239,7 +239,7 @@ export async function inspectReadiness(api) {
       !Number.isSafeInteger(rule.requiredApprovingReviewCount) ||
       rule.requiredApprovingReviewCount < 0 ||
       !Array.isArray(rule.requiredStatusChecks) ||
-      !["Quality checks", "Branch policy"].every((name) =>
+      !["Required checks", "Branch policy"].every((name) =>
         rule.requiredStatusChecks.some(
           (check) => check.context === name && check.app?.databaseId === 15368,
         ),

@@ -3,7 +3,7 @@ name: CI
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
     branches: [main, develop]
 
@@ -18,17 +18,52 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
+  ASSISTANT_ENABLED: "true"
+  ANALYTICS_ENABLED: "true"
+  ANALYTICS_INGEST_URL: "https://127.0.0.1:3160/api/v1/analytics/events"
+  NPM_CONFIG_CACHE: /tmp/portfolio-npm-cache
+  CI_WORKFLOW_FAMILY: ci
+  CI_SOURCE_SHA: ${{ github.sha }}
+  CI_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+  CI_BASE_SHA: ${{ github.event.pull_request.base.sha || '' }}
+
 jobs:
-  validate:
-    name: Quality (development)
+  workflows:
+    name: Workflow validation
     runs-on: ubuntu-24.04
     timeout-minutes: 15
-    env:
-      NEXT_TELEMETRY_DISABLED: "1"
-      ASSISTANT_ENABLED: "true"
-      ANALYTICS_ENABLED: "true"
-      ANALYTICS_INGEST_URL: "https://127.0.0.1:3160/api/v1/analytics/events"
-      NPM_CONFIG_CACHE: /tmp/portfolio-npm-cache
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tooling/api-contract/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+      - name: Install checksum-verified workflow validator
+        run: |
+          validator_dir="$(mktemp -d "$RUNNER_TEMP/portfolio-actionlint.XXXXXX")"
+          curl --fail --silent --show-error --location --retry 3 --max-time 120             https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz             -o "$validator_dir/archive.tar.gz"
+          echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  $validator_dir/archive.tar.gz" | sha256sum --check --status
+          tar -xzf "$validator_dir/archive.tar.gz" -C "$validator_dir" actionlint
+          "$validator_dir/actionlint" -color
+      - name: Verify workflow structure and negative fixtures
+        run: npm run test:ci-policy
+
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -53,63 +88,19 @@ jobs:
           echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  $scanner_dir/archive.tar.gz" | sha256sum --check --status
           tar -xzf "$scanner_dir/archive.tar.gz" -C "$scanner_dir" gitleaks
           echo "$scanner_dir" >> "$GITHUB_PATH"
-      - name: Reject secrets in tracked files and available history
+      - name: Reject secrets in tracked files and complete history
         run: npm run test:secrets
-      - name: Install locked dependencies
-        run: npm ci --prefer-offline --no-audit --no-fund
-      - name: Regenerate the committed assistant contract with frozen tooling
-        run: npm run contract:generate
-      - name: Audit both locked dependency graphs
-        run: |
-          npm audit --audit-level=moderate
-          npm audit --prefix tooling/api-contract --audit-level=moderate
-      - name: Reject generated contract drift
-        run: git diff --exit-code -- src/contracts
-      - name: Check architecture, repository, lint, types, and production build
-        run: npm run check
-      - name: Verify server-rendered routes
-        run: npm run test:rendered
-      - name: Plan and verify complete duration-balanced browser coverage
-        run: node scripts/browser-ci-planner.mjs
-      - name: Remove ephemeral framework keys from the CI transfer
-        run: node scripts/ci-build-artifact.mjs prepare
-      - name: Reject secrets in the build artifact before upload
-        run: npm run test:secrets:artifacts
-      - name: Package the verified production build
-        run: tar --exclude=.next/cache -cf - .next .artifacts/ci | gzip -1 > /tmp/portfolio-production-build.tar.gz
-      - name: Share the build with isolated browser runners
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: production-build
-          path: /tmp/portfolio-production-build.tar.gz
-          compression-level: 0
-          retention-days: 1
-      - name: Verify tracked sources remain unchanged
-        run: git diff --exit-code
 
-  browser:
-    name: Browser verification (${{ matrix.shard }}/8)
-    needs: validate
+  quality:
+    name: Quality (development)
     runs-on: ubuntu-24.04
-    container:
-      image: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:7852dc5a7d72f5fe458a597d690f6c42fbc8e9e26ddfa95f8e6ef552558d9bbf
-      options: --init --ipc=host
-    timeout-minutes: 30
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: [1, 2, 3, 4, 5, 6, 7, 8]
-    env:
-      NEXT_TELEMETRY_DISABLED: "1"
-      ASSISTANT_ENABLED: "true"
-      ANALYTICS_ENABLED: "true"
-      ANALYTICS_INGEST_URL: "https://127.0.0.1:3160/api/v1/analytics/events"
-      NPM_CONFIG_CACHE: /tmp/portfolio-npm-cache
+    timeout-minutes: 15
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          fetch-depth: 0
       - name: Set up Node.js LTS
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -120,41 +111,83 @@ jobs:
             tooling/api-contract/package-lock.json
       - name: Install locked dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
-      - name: Download this run's verified production build
-        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
-        with:
-          name: production-build
-          path: /tmp/portfolio-build
-      - name: Restore the production build
-        run: tar -xzf /tmp/portfolio-build/portfolio-production-build.tar.gz
-      - name: Restore runner-local ephemeral framework keys
-        run: node scripts/ci-build-artifact.mjs restore
-      - name: Align the ephemeral browser session and checkout
+      - name: Regenerate the committed assistant contract with frozen tooling
+        run: npm run contract:generate
+      - name: Audit both locked dependency graphs
         run: |
-          chown -- "$(id -u):$(id -g)" "$HOME"
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git rev-parse --show-toplevel
-      - name: Verify every preinstalled browser runtime
-        run: node scripts/check-browser-runtime.mjs
-      - name: Verify interactions and accessibility on an isolated runner
-        run: npm run test:browser -- --test-list=.artifacts/ci/shards/${{ matrix.shard }}.txt
-      - name: Retain browser verification artifacts
-        if: always()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: browser-verification-${{ matrix.shard }}
-          path: |
-            .artifacts/playwright/report
-            .artifacts/playwright/results
-            .artifacts/playwright/timing-report.json
-            .artifacts/ci/shards/plan.json
-          if-no-files-found: ignore
-          retention-days: 7
+          npm audit --audit-level=moderate
+          npm audit --prefix tooling/api-contract --audit-level=moderate
+      - name: Reject generated contract drift
+        run: git diff --exit-code -- src/contracts
+      - name: Check architecture, contracts, units, lint and types
+        run: npm run check:quality
       - name: Verify tracked sources remain unchanged
         run: git diff --exit-code
 
-  legacy-linux:
-    name: Compatibility (Hostinger / GLIBC 2.28)
+  build:
+    name: Build
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      archive_sha256: ${{ steps.manifest.outputs.archive_sha256 }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tooling/api-contract/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+      - name: Install checksum-verified secret scanner
+        run: |
+          scanner_dir="$(mktemp -d "$RUNNER_TEMP/portfolio-gitleaks.XXXXXX")"
+          trap 'rm -f "$scanner_dir/archive.tar.gz"' EXIT
+          curl --fail --silent --show-error --location --retry 3 --max-time 120 \
+            https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz \
+            -o "$scanner_dir/archive.tar.gz"
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  $scanner_dir/archive.tar.gz" | sha256sum --check --status
+          tar -xzf "$scanner_dir/archive.tar.gz" -C "$scanner_dir" gitleaks
+          echo "$scanner_dir" >> "$GITHUB_PATH"
+      - name: Build the synthetic-enabled candidate once
+        run: npm run build
+      - name: Prove complete duration-balanced browser coverage
+        run: node scripts/browser-ci-planner.mjs
+      - name: Normalize ephemeral framework material for transfer
+        run: node scripts/ci-build-artifact.mjs prepare
+      - name: Reject secrets in the actual transferred build
+        run: npm run test:secrets:artifacts
+      - name: Package the verified build and selection plan
+        run: |
+          mkdir -p /tmp/portfolio-ci-build
+          tar --exclude=.next/cache -cf - .next .artifacts/ci | gzip -1 > /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
+      - name: Bind the archive to its source, configuration and run
+        id: manifest
+        run: node scripts/ci-build-provenance.mjs create /tmp/portfolio-ci-build
+      - name: Share the immutable reviewed build
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
+            /tmp/portfolio-ci-build/portfolio-build-provenance.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 1
+      - name: Verify tracked sources remain unchanged
+        run: git diff --exit-code
+
+  hosting:
+    name: Hosting contract
+    needs: quality
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     container:
@@ -199,16 +232,148 @@ jobs:
       - name: Verify tracked sources remain unchanged
         run: git diff --exit-code
 
-  check:
-    name: Quality checks
+  browser:
+    name: Browser tests (${{ matrix.shard }}/8)
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:7852dc5a7d72f5fe458a597d690f6c42fbc8e9e26ddfa95f8e6ef552558d9bbf
+      options: --init --ipc=host
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
+    env:
+      CI_ARTIFACT_SHA256: ${{ needs.build.outputs.archive_sha256 }}
+      PLAYWRIGHT_SKIP_BROWSER_GC: "1"
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tooling/api-contract/package-lock.json
+      - name: Align the isolated browser checkout
+        run: |
+          chown -- "$(id -u):$(id -g)" "$HOME"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git rev-parse --show-toplevel
+      - name: Install locked dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+      - name: Download this run's reviewed build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/portfolio-ci-build
+      - name: Verify the archive before extraction
+        run: node scripts/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
+      - name: Restore the reviewed production build
+        run: |
+          tar -xzf /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
+          node scripts/ci-build-artifact.mjs restore
+      - name: Verify every preinstalled browser runtime
+        run: node scripts/check-browser-runtime.mjs
+      - name: Verify interactions and accessibility
+        run: npm run test:browser -- --test-list=.artifacts/ci/shards/${{ matrix.shard }}.txt --update-snapshots=none
+      - name: Retain synthetic browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: browser-verification-${{ matrix.shard }}
+          path: |
+            .artifacts/playwright/report
+            .artifacts/playwright/results
+            .artifacts/playwright/timing-report.json
+            .artifacts/ci/shards/plan.json
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Verify tracked sources remain unchanged
+        run: git diff --exit-code
+
+  performance:
+    name: Performance checks
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CI_ARTIFACT_SHA256: ${{ needs.build.outputs.archive_sha256 }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tooling/api-contract/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+      - name: Download this run's reviewed build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/portfolio-ci-build
+      - name: Verify the archive before extraction
+        run: node scripts/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
+      - name: Restore the reviewed production build
+        run: |
+          tar -xzf /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
+          node scripts/ci-build-artifact.mjs restore
+      - name: Verify bundle budgets and server-rendered routes
+        run: |
+          npm run test:budget
+          npm run test:rendered
+      - name: Verify tracked sources remain unchanged
+        run: git diff --exit-code
+
+  checks:
+    name: Required checks
     if: always()
-    needs: [validate, browser, legacy-linux]
+    needs: [workflows, secrets, quality, build, hosting, browser, performance]
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
-      - name: Require all runtime and compatibility checks
+      - name: Require every prerequisite to succeed
         env:
-          RESULT: ${{ needs.validate.result }}
+          WORKFLOWS_RESULT: ${{ needs.workflows.result }}
+          SECRETS_RESULT: ${{ needs.secrets.result }}
+          QUALITY_RESULT: ${{ needs.quality.result }}
+          BUILD_RESULT: ${{ needs.build.result }}
+          HOSTING_RESULT: ${{ needs.hosting.result }}
           BROWSER_RESULT: ${{ needs.browser.result }}
-          LEGACY_RESULT: ${{ needs.legacy-linux.result }}
-        run: test "$RESULT" = success && test "$BROWSER_RESULT" = success && test "$LEGACY_RESULT" = success
+          PERFORMANCE_RESULT: ${{ needs.performance.result }}
+        run: |
+          test "$WORKFLOWS_RESULT" = success &&
+          test "$SECRETS_RESULT" = success &&
+          test "$QUALITY_RESULT" = success &&
+          test "$BUILD_RESULT" = success &&
+          test "$HOSTING_RESULT" = success &&
+          test "$BROWSER_RESULT" = success &&
+          test "$PERFORMANCE_RESULT" = success
+
+  legacy-checks:
+    name: Quality checks
+    if: always()
+    needs: [checks]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Require every prerequisite to succeed
+        env:
+          CHECKS_RESULT: ${{ needs.checks.result }}
+        run: |
+          test "$CHECKS_RESULT" = success

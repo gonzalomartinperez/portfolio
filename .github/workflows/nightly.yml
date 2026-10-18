@@ -1,0 +1,386 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: "35 3 * * *"
+  workflow_dispatch:
+    inputs:
+      candidate_sha:
+        description: Optional exact SHA; blank freezes the workflow event SHA, not the ref tip
+        required: false
+        type: string
+      candidate_ref:
+        description: Permitted source ancestry
+        required: true
+        type: choice
+        options: [main, develop]
+        default: main
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: nightly-${{ github.repository }}
+  cancel-in-progress: false
+
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
+  ASSISTANT_ENABLED: "true"
+  ANALYTICS_ENABLED: "true"
+  ANALYTICS_INGEST_URL: "https://127.0.0.1:3160/api/v1/analytics/events"
+  NEXT_PUBLIC_ASSISTANT_API_URL: "https://assistant.gonzalomartinperez.com"
+  NPM_CONFIG_CACHE: /tmp/portfolio-npm-cache
+  CI_WORKFLOW_FAMILY: nightly
+  CI_BASE_SHA: ""
+
+jobs:
+  prepare:
+    name: Nightly prepare candidate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    outputs:
+      source_sha: ${{ steps.candidate.outputs.source_sha }}
+      source_tree: ${{ steps.candidate.outputs.source_tree }}
+      ref_sha: ${{ steps.candidate.outputs.ref_sha }}
+    steps:
+      - name: Check out the immutable workflow event source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - name: Freeze the permitted exact candidate
+        id: candidate
+        env:
+          INPUT_CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+          INPUT_CANDIDATE_REF: ${{ inputs.candidate_ref }}
+        run: node scripts/nightly-candidate.mjs
+
+  quality:
+    name: Nightly quality checks
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    outputs:
+      source_sha: ${{ needs.prepare.outputs.source_sha }}
+      source_tree: ${{ needs.prepare.outputs.source_tree }}
+      ref_sha: ${{ needs.prepare.outputs.ref_sha }}
+      archive_sha256: ${{ steps.manifest.outputs.archive_sha256 }}
+    env:
+      CI_SOURCE_SHA: ${{ needs.prepare.outputs.source_sha }}
+      CI_HEAD_SHA: ${{ needs.prepare.outputs.source_sha }}
+    steps:
+      - name: Check out the frozen candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.prepare.outputs.source_sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tooling/api-contract/package-lock.json
+      - name: Install checksum-verified secret scanner
+        run: |
+          scanner_dir="$(mktemp -d "$RUNNER_TEMP/portfolio-gitleaks.XXXXXX")"
+          trap 'rm -f "$scanner_dir/archive.tar.gz"' EXIT
+          curl --fail --silent --show-error --location --retry 3 --max-time 120 \
+            https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz \
+            -o "$scanner_dir/archive.tar.gz"
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  $scanner_dir/archive.tar.gz" | sha256sum --check --status
+          tar -xzf "$scanner_dir/archive.tar.gz" -C "$scanner_dir" gitleaks
+          echo "$scanner_dir" >> "$GITHUB_PATH"
+      - name: Reject secrets in tracked files and complete history
+        run: npm run test:secrets
+      - name: Verify candidate selection fixtures
+        run: node --test scripts/nightly-candidate.test.mjs
+      - name: Install locked dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+      - name: Regenerate the public contract with its frozen tooling
+        run: npm run contract:generate
+      - name: Audit both locked dependency graphs
+        run: |
+          npm audit --audit-level=moderate
+          npm audit --prefix tooling/api-contract --audit-level=moderate
+      - name: Reject public contract drift
+        run: git diff --exit-code -- src/contracts
+      - name: Check architecture, contracts, units, lint and types
+        run: npm run check:quality
+      - name: Build one synthetic-enabled candidate
+        run: npm run build
+      - name: Prove the complete disjoint browser and visual inventory
+        run: node scripts/browser-ci-planner.mjs --nightly
+      - name: Normalize ephemeral framework material for the CI transfer
+        run: node scripts/ci-build-artifact.mjs prepare
+      - name: Reject secrets in the actual transferred build
+        run: npm run test:secrets:artifacts
+      - name: Package the verified build and selection plan
+        run: |
+          mkdir -p /tmp/portfolio-ci-build
+          tar --exclude=.next/cache -cf - .next .artifacts/ci | gzip -1 > /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
+      - name: Bind the archive to this source, configuration and run
+        id: manifest
+        run: node scripts/ci-build-provenance.mjs create /tmp/portfolio-ci-build
+      - name: Share the immutable reviewed build
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
+            /tmp/portfolio-ci-build/portfolio-build-provenance.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 1
+      - name: Verify tracked sources remain unchanged
+        run: git diff --exit-code
+
+  browser:
+    name: Nightly browser tests (${{ matrix.shard }}/8)
+    needs: quality
+    runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:7852dc5a7d72f5fe458a597d690f6c42fbc8e9e26ddfa95f8e6ef552558d9bbf
+      options: --init --ipc=host
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
+    env:
+      CI_SOURCE_SHA: ${{ needs.quality.outputs.source_sha }}
+      CI_HEAD_SHA: ${{ needs.quality.outputs.source_sha }}
+      CI_ARTIFACT_SHA256: ${{ needs.quality.outputs.archive_sha256 }}
+      PLAYWRIGHT_SKIP_BROWSER_GC: "1"
+    steps:
+      - name: Check out the frozen candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.quality.outputs.source_sha }}
+          persist-credentials: false
+      - name: Align the isolated browser checkout
+        run: |
+          chown -- "$(id -u):$(id -g)" "$HOME"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git rev-parse --show-toplevel
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tooling/api-contract/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+      - name: Download this run's reviewed build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/portfolio-ci-build
+      - name: Verify the archive before extraction
+        run: node scripts/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
+      - name: Restore the reviewed production build
+        run: |
+          tar -xzf /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
+          node scripts/ci-build-artifact.mjs restore
+      - name: Verify every preinstalled browser runtime
+        run: node scripts/check-browser-runtime.mjs
+      - name: Run the reviewed browser assertions
+        run: npm run test:browser -- --test-list=.artifacts/ci/nightly/browser-${{ matrix.shard }}.txt --update-snapshots=none
+      - name: Retain synthetic diagnostics and exact selection plan
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: nightly-browser-${{ matrix.shard }}
+          path: |
+            .artifacts/playwright/report
+            .artifacts/playwright/results
+            .artifacts/playwright/timing-report.json
+            .artifacts/ci/nightly/plan.json
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Verify tracked sources and baselines remain unchanged
+        run: git diff --exit-code
+
+  visual:
+    name: Nightly visual checks
+    needs: quality
+    runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:7852dc5a7d72f5fe458a597d690f6c42fbc8e9e26ddfa95f8e6ef552558d9bbf
+      options: --init --ipc=host
+    timeout-minutes: 30
+    env:
+      CI_SOURCE_SHA: ${{ needs.quality.outputs.source_sha }}
+      CI_HEAD_SHA: ${{ needs.quality.outputs.source_sha }}
+      CI_ARTIFACT_SHA256: ${{ needs.quality.outputs.archive_sha256 }}
+      PLAYWRIGHT_SKIP_BROWSER_GC: "1"
+    steps:
+      - name: Check out the frozen candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.quality.outputs.source_sha }}
+          persist-credentials: false
+      - name: Align the isolated browser checkout
+        run: |
+          chown -- "$(id -u):$(id -g)" "$HOME"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git rev-parse --show-toplevel
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tooling/api-contract/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+      - name: Download this run's reviewed build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/portfolio-ci-build
+      - name: Verify the archive before extraction
+        run: node scripts/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
+      - name: Restore the reviewed production build
+        run: |
+          tar -xzf /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
+          node scripts/ci-build-artifact.mjs restore
+      - name: Verify every preinstalled browser runtime
+        run: node scripts/check-browser-runtime.mjs
+      - name: Run the reviewed visual assertions
+        run: npm run test:browser -- --test-list=.artifacts/ci/nightly/visual.txt --update-snapshots=none
+      - name: Retain synthetic diagnostics and exact selection plan
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: nightly-visual
+          path: |
+            .artifacts/playwright/report
+            .artifacts/playwright/results
+            .artifacts/playwright/timing-report.json
+            .artifacts/ci/nightly/plan.json
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Verify tracked sources and baselines remain unchanged
+        run: git diff --exit-code
+
+  links:
+    name: Nightly link checks
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      CI_SOURCE_SHA: ${{ needs.quality.outputs.source_sha }}
+      CI_HEAD_SHA: ${{ needs.quality.outputs.source_sha }}
+      CI_ARTIFACT_SHA256: ${{ needs.quality.outputs.archive_sha256 }}
+    steps:
+      - name: Check out the frozen candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.quality.outputs.source_sha }}
+          persist-credentials: false
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tooling/api-contract/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+      - name: Download this run's reviewed build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/portfolio-ci-build
+      - name: Verify the archive before extraction
+        run: node scripts/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
+      - name: Restore the reviewed production build
+        run: |
+          tar -xzf /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
+          node scripts/ci-build-artifact.mjs restore
+      - name: Run the reviewed links assertions
+        run: npm run test:rendered
+      - name: Verify tracked sources and baselines remain unchanged
+        run: git diff --exit-code
+
+  bundle:
+    name: Nightly bundle checks
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      CI_SOURCE_SHA: ${{ needs.quality.outputs.source_sha }}
+      CI_HEAD_SHA: ${{ needs.quality.outputs.source_sha }}
+      CI_ARTIFACT_SHA256: ${{ needs.quality.outputs.archive_sha256 }}
+    steps:
+      - name: Check out the frozen candidate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.quality.outputs.source_sha }}
+          persist-credentials: false
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            tooling/api-contract/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+      - name: Download this run's reviewed build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/portfolio-ci-build
+      - name: Verify the archive before extraction
+        run: node scripts/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
+      - name: Restore the reviewed production build
+        run: |
+          tar -xzf /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
+          node scripts/ci-build-artifact.mjs restore
+      - name: Run the reviewed bundle assertions
+        run: npm run test:budget
+      - name: Verify tracked sources and baselines remain unchanged
+        run: git diff --exit-code
+
+  checks:
+    name: Nightly required checks
+    if: always()
+    needs: [prepare, quality, browser, visual, links, bundle]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Require every frozen-candidate prerequisite to succeed
+        env:
+          PREPARE_RESULT: ${{ needs.prepare.result }}
+          QUALITY_RESULT: ${{ needs.quality.result }}
+          BROWSER_RESULT: ${{ needs.browser.result }}
+          VISUAL_RESULT: ${{ needs.visual.result }}
+          LINKS_RESULT: ${{ needs.links.result }}
+          BUNDLE_RESULT: ${{ needs.bundle.result }}
+        run: |
+          test "$PREPARE_RESULT" = success &&
+          test "$QUALITY_RESULT" = success &&
+          test "$BROWSER_RESULT" = success &&
+          test "$VISUAL_RESULT" = success &&
+          test "$LINKS_RESULT" = success &&
+          test "$BUNDLE_RESULT" = success

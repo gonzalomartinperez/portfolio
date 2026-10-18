@@ -157,6 +157,23 @@ export function verifySelection(expected, actual) {
   }
 }
 
+const visualFiles = new Set([
+  "tests/browser/routes.spec.ts",
+  "tests/browser/shadcn-controls.spec.ts",
+  "tests/browser/work-architecture.spec.ts",
+]);
+
+export function partitionNightly(discovered) {
+  if (new Set(discovered.map((test) => test.identity)).size !== discovered.length)
+    throw new Error("Nightly discovery must be unique");
+  const visual = discovered.filter((test) => visualFiles.has(test.file));
+  const browser = discovered.filter((test) => !visualFiles.has(test.file));
+  if (!visual.length || !browser.length)
+    throw new Error("Nightly partitions must both be nonempty");
+  verifySelection(discovered, [...visual, ...browser]);
+  return { visual, browser };
+}
+
 export function rejectSerialSource(source) {
   if (/\bdescribe\s*\.\s*serial\b/u.test(source) || /\bmode\s*:\s*["']serial["']/u.test(source)) {
     throw new Error("Explicit serial suites need whole-suite scheduling");
@@ -181,16 +198,30 @@ function main() {
   const timings = JSON.parse(
     readFileSync(path.join(repository, "scripts/browser-ci-timings.json"), "utf8"),
   );
-  const shards = planShards(discovered, timings);
-  const destination = path.join(repository, ".artifacts/ci/shards");
+  const nightly = process.argv.slice(2).includes("--nightly");
+  if (process.argv.slice(2).some((argument) => argument !== "--nightly"))
+    throw new Error("Unknown browser planner option");
+  const partitions = nightly ? partitionNightly(discovered) : { browser: discovered, visual: [] };
+  const shards = planShards(partitions.browser, timings);
+  const destination = path.join(
+    repository,
+    nightly ? ".artifacts/ci/nightly" : ".artifacts/ci/shards",
+  );
   mkdirSync(destination, { recursive: true });
   const verified = [];
   for (const shard of shards) {
     if (!shard.tests.length) throw new Error("Every CI shard must select at least one test");
-    const list = path.join(destination, `${shard.shard}.txt`);
+    const list = path.join(destination, `${nightly ? "browser-" : ""}${shard.shard}.txt`);
     writeFileSync(list, `${shard.tests.map((test) => test.selector).join("\n")}\n`);
     const selected = parseDiscovery(discover(["--test-list", list]));
     verifySelection(shard.tests, selected);
+    verified.push(...selected);
+  }
+  if (nightly) {
+    const list = path.join(destination, "visual.txt");
+    writeFileSync(list, `${partitions.visual.map((test) => test.selector).join("\n")}\n`);
+    const selected = parseDiscovery(discover(["--test-list", list]));
+    verifySelection(partitions.visual, selected);
     verified.push(...selected);
   }
   verifySelection(discovered, verified);
@@ -200,7 +231,7 @@ function main() {
   }).trim();
   writeFileSync(
     path.join(destination, "plan.json"),
-    `${JSON.stringify({ commit, totalTests: discovered.length, shards }, null, 2)}\n`,
+    `${JSON.stringify({ commit, totalTests: discovered.length, visual: partitions.visual, shards }, null, 2)}\n`,
   );
   console.log(`Verified ${discovered.length} tests in ${shards.length} duration-balanced shards.`);
 }

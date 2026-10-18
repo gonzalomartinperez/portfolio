@@ -93,3 +93,10 @@ and [secure Actions use](https://docs.github.com/en/actions/security-for-github-
 
 The [implementation specification](specs/manual-dependency-review.md) records scope
 and local verification; the delivery PR records protected CI and publication.
+
+The read-only protection probe now requires the canonical full `Required checks`
+context and `Branch policy`, both from GitHub Actions. During migration it reports
+blocked until the new full aggregate has passed and is actually enforced; an older
+`Quality checks` context alone cannot satisfy that condition. The probe never
+changes protection or grants merge authority. See the
+[paired CI transition](specs/paired-ci-profiles.md).
