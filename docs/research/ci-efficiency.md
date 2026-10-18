@@ -136,3 +136,9 @@ were corrected before the fully successful trial. The complete browser union rem
 434 identities: 423 passed, 11 existing conditional skips, no omissions, duplicates,
 unexpected results or flaky tests. Final integration still requires checks against
 the current develop head, including concurrent visual changes.
+
+## Paired-profile rollout, 2026-10-18
+
+The immediately preceding [498-case run](https://github.com/gonzalomartinperez/portfolio/actions/runs/39091043323) took 464 seconds from the first job start to the last completion. The [first paired-profile run](https://github.com/gonzalomartinperez/portfolio/actions/runs/39097851981) took 458 seconds on that same measurement; its source-quality feedback completed in 37 seconds versus 106 seconds in the preceding layout. The new source-quality job has a narrower responsibility, so that feedback comparison is not a claim that the same amount of work became proportionally faster.
+
+These are two individual observations, including job startup and queueing inside the measured interval; they do not establish a sustained speedup. The paired layout preserves the independent hosting proof and all discovered browser cases while separating independent workflow/source/secret checks, sharing one verified enabled build, and rejecting skipped prerequisites. No test deadline, retry, flaky-test rule or required test selection was weakened. Final Core and real Nightly bootstrap each preserved 498 cases: 489 passed and nine existing applicability skips, with no failed or flaky summaries. Exact source/run references are in the [completed specification](../specs/paired-ci-profiles.md).
