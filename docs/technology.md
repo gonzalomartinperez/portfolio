@@ -54,6 +54,13 @@ No independent major upgrade is implied by the consolidation.
 
 The application and isolated API-contract generator have separate committed npm
 lockfiles; the latter retains its own compatible compiler-API dependency.
+The application uses TypeScript 7, while `openapi-typescript` 7.13.0 requires the
+TypeScript `^5.x` compiler API and the generator therefore pins 5.9.3. Its proposed
+TypeScript 7 update failed frozen installation with `ERESOLVE`; forcing peers
+would not establish compatibility. Compiler-major proposals for this isolated
+tool remain disabled until a generator upgrade explicitly supports the replacement
+API and regeneration passes without unexplained contract changes. See the
+[dated dependency review](research/dependency-review-2026-10-18.md).
 `.npmrc` enforces exact saves, strict peers and runtime engines. Install
 lifecycle scripts remain disabled; native optional packages remain enabled.
 Review script requirements explicitly when adding dependencies. Strict peers

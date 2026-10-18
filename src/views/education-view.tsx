@@ -44,6 +44,7 @@ export function EducationView({ locale }: { locale: Locale }) {
     rankings,
     siteCopy: copy,
   } = content;
+  const openDocumentLabel = locale === "es" ? "Abrir documento" : "Open document";
 
   return (
     <>
@@ -330,9 +331,9 @@ export function EducationView({ locale }: { locale: Locale }) {
                   <a
                     className={cn(buttonVariants({ variant: "outline", size: "sm" }), "rounded-md")}
                     href={link.href}
-                    aria-label={`${locale === "es" ? "Abrir" : "Open"}: ${title}`}
+                    aria-label={`${openDocumentLabel}: ${title}`}
                   >
-                    {locale === "es" ? "Abrir documento" : "Open document"}
+                    {openDocumentLabel}
                     <span aria-hidden="true">↗</span>
                   </a>
                   <a
