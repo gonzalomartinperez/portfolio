@@ -1,17 +1,17 @@
 import Link from "next/link";
-import { ExternalLink } from "@/components/external-link";
-import { MetricList } from "@/components/metric-list";
-import { PageHeader } from "@/components/page-header";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { filomenaGallery } from "@/content/filomena-gallery";
 import imageDimensions from "@/content/filomena-image-dimensions.json";
 import { type Locale, localePath } from "@/content/locales";
 import { ExperienceArchitecture } from "@/features/architecture-diagrams/presentation/experience-architecture";
-import { GalleryCarousel } from "@/features/project-gallery/gallery-carousel";
-import { cn } from "@/lib/utils";
+import { GalleryCarousel } from "@/features/project-gallery/presentation/gallery-carousel";
+import { MetricList } from "@/shared/editorial/metric-list";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { ExternalLink } from "@/shared/navigation/external-link";
+import { cn } from "@/shared/styles/cn";
+import { Badge } from "@/shared/ui/badge";
+import { buttonVariants } from "@/shared/ui/button";
+import { cardVariants } from "@/shared/ui/card";
 import styles from "./filomena.module.css";
 
 export function FilomenaView({ locale }: { locale: Locale }) {
@@ -60,7 +60,11 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           {prose(study.overview.body)}
         </section>
 
-        <section className={styles.block}>
+        <section
+          className={styles.block}
+          data-analytics-region="filomena-problem"
+          data-analytics-exposure="filomena-problem"
+        >
           <h2>{study.problem.heading}</h2>
           {prose(study.problem.body)}
         </section>
@@ -75,7 +79,11 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           {prose(study.role.body)}
         </section>
 
-        <section className={styles.block}>
+        <section
+          className={styles.block}
+          data-analytics-region="filomena-approach"
+          data-analytics-exposure="filomena-approach"
+        >
           <h2>{study.approach.heading}</h2>
           {prose(study.approach.body)}
         </section>
@@ -164,7 +172,11 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           {prose(study.delivery.body)}
         </section>
 
-        <section className={styles.block}>
+        <section
+          className={styles.block}
+          data-analytics-region="filomena-outcomes"
+          data-analytics-exposure="filomena-outcomes"
+        >
           <h2>{study.outcomes.heading}</h2>
           {prose(study.outcomes.body)}
         </section>
@@ -174,7 +186,11 @@ export function FilomenaView({ locale }: { locale: Locale }) {
           {prose(study.lessons.body)}
         </section>
 
-        <section className={styles.block}>
+        <section
+          className={styles.block}
+          data-analytics-region="filomena-evidence"
+          data-analytics-exposure="filomena-evidence"
+        >
           <h2>{copy.filomena.evidenceHeading}</h2>
           <div className={styles.evidence}>
             {filomena.links.map((link) =>

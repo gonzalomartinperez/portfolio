@@ -1,19 +1,30 @@
-flowchart LR
-    TASK["Task branch<br/>type/kebab-case"] -->|"Pull request"| DEV["develop"]
+flowchart TB
+    TASK["Task branch<br/>type/kebab-case"] -->|"Task pull request"| DEV["develop"]
     DEV -->|"Release pull request"| MAIN["main"]
-    MAIN -->|"Native deployment"| LIVE["Hostinger"]
-    subgraph GATE["Required checks on every pull request"]
+    MAIN -->|"Native deployment"| LIVE["Hostinger<br/>Assistant remains disabled"]
+    subgraph GATE["CI on task and release pull requests"]
         direction TB
-        QUALITY["Quality (development)<br/>Repository · Lint · Types · Build · Budgets · Rendered routes"]
-        BROWSER["Browser verification ×8<br/>Playwright · axe · Desktop & mobile"]
-        COMPAT["Compatibility<br/>Hostinger GLIBC 2.28 build"]
-        AGG["Quality checks<br/>Fails on any skipped or failed job"]
-        QUALITY --> BROWSER --> AGG
-        COMPAT --> AGG
+        WORKFLOWS["Workflow validation<br/>Actionlint · Negative fixtures"]
+        SECRETS["Secret scan<br/>Tracked files · Complete history"]
+        QUALITY["Quality checks<br/>Architecture · Contracts · Units · Lint · Types"]
+        BUILD["Build<br/>One synthetic-enabled build · Verified archive"]
+        HOSTING["Hosting contract · OFF<br/>GLIBC 2.28 · Build · Smoke"]
+        BROWSER["Browser tests ×8<br/>Playwright · axe · Desktop & mobile"]
+        PERF["Performance checks<br/>Bundle budgets · Rendered routes"]
+        AGG["Required checks<br/>Always runs · All seven jobs must succeed"]
+        QUALITY --> BUILD
+        QUALITY --> HOSTING
+        BUILD --> BROWSER
+        BUILD --> PERF
+        WORKFLOWS -.-> AGG
+        SECRETS -.-> AGG
+        QUALITY -.-> AGG
+        BUILD -.-> AGG
+        HOSTING -.-> AGG
+        BROWSER -.-> AGG
+        PERF -.-> AGG
     end
-    TASK -.-> GATE
-    DEV -.-> GATE
     classDef branch fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e;
-    classDef check fill:#dcfce7,stroke:#16a34a,color:#14532d;
+    classDef check fill:#eff6ff,stroke:#0284c7,color:#0c4a6e;
     class TASK,DEV,MAIN,LIVE branch;
-    class QUALITY,BROWSER,COMPAT,AGG check;
+    class WORKFLOWS,SECRETS,QUALITY,BUILD,HOSTING,BROWSER,PERF,AGG check;

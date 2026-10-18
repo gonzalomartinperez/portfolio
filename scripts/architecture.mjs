@@ -3,26 +3,15 @@ import { builtinModules } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse } from "@babel/parser";
+import {
+  isNeutralShared,
+  isSharedPresentation,
+  placementViolation,
+  publicEntries,
+} from "./architecture-policy.mjs";
 
 const codePattern = /\.(?:[cm]?[jt]s|[jt]sx)$/;
 const nodeModules = new Set(builtinModules.map((name) => name.replace(/^node:/, "")));
-const publicEntries = new Set([
-  "analytics/entry.tsx",
-  "analytics/application/availability.ts",
-  "analytics/config.ts",
-  "solar-system/presentation/ambient-field.tsx",
-  "solar-system/presentation/solar-explorer.tsx",
-  "hero/presentation/hero-stage.tsx",
-  "hero/domain/constellation.ts",
-  "hero/presentation/static-constellation.tsx",
-  "hero/presentation/tech-constellation.tsx",
-  "architecture-diagrams/presentation/experience-architecture.tsx",
-  "technology-catalogue/technology-catalogue.tsx",
-  "tool-carousel/tool-carousel.tsx",
-  "project-gallery/gallery-carousel.tsx",
-  "assistant/presentation/assistant-host.tsx",
-  "assistant/application/availability.ts",
-]);
 
 export function readArchitectureSources(root) {
   const sources = new Map();
@@ -53,6 +42,153 @@ export function readArchitectureSources(root) {
   return sources;
 }
 
+const functionNodes = new Set([
+  "FunctionDeclaration",
+  "FunctionExpression",
+  "ArrowFunctionExpression",
+  "ObjectMethod",
+  "ClassMethod",
+  "ClassPrivateMethod",
+]);
+const lexicalNodes = new Set([
+  "BlockStatement",
+  "CatchClause",
+  "ForStatement",
+  "ForInStatement",
+  "ForOfStatement",
+  "SwitchStatement",
+  "StaticBlock",
+  "ClassDeclaration",
+  "ClassExpression",
+]);
+function childNodes(node) {
+  const children = [];
+  for (const [key, value] of Object.entries(node)) {
+    if (["loc", "start", "end", "comments", "tokens"].includes(key)) continue;
+    if (Array.isArray(value)) children.push(...value);
+    else if (value && typeof value === "object") children.push(value);
+  }
+  return children;
+}
+const memberName = (node) => {
+  if (!node.computed) return node.property.name;
+  if (["StringLiteral", "NumericLiteral"].includes(node.property.type))
+    return String(node.property.value);
+  if (node.property.type === "TemplateLiteral" && !node.property.expressions.length)
+    return node.property.quasis[0].value.cooked;
+  return "*";
+};
+
+/** Lexical declarations distinguish injected ports from ambient globals, including hoisted names. */
+function lexicalScopes(program) {
+  const scopes = new WeakMap();
+  const declarations = new WeakMap();
+  function bind(pattern, scope, init = null, suffix = [], initScope = scope, defaults = []) {
+    if (!pattern) return [];
+    if (pattern.type === "Identifier") {
+      const binding = { scope: initScope, init, suffix, defaults };
+      scope.bindings.set(pattern.name, binding);
+      return [pattern];
+    }
+    if (pattern.type === "AssignmentPattern")
+      return init
+        ? bind(pattern.left, scope, init, suffix, initScope, [
+            ...defaults,
+            { init: pattern.right, scope: initScope, suffix: [] },
+          ])
+        : bind(pattern.left, scope, pattern.right, [], initScope, defaults);
+    if (pattern.type === "TSParameterProperty")
+      return bind(pattern.parameter, scope, init, suffix, initScope, defaults);
+    if (pattern.type === "RestElement") return bind(pattern.argument, scope);
+    if (pattern.type === "ObjectPattern")
+      return pattern.properties.flatMap((property) => {
+        if (property.type === "RestElement") return bind(property.argument, scope);
+        const key = property.computed
+          ? (property.key.value ?? "*")
+          : (property.key.name ?? String(property.key.value));
+        return bind(property.value, scope, init, [...suffix, key], initScope, defaults);
+      });
+    if (pattern.type === "ArrayPattern")
+      return pattern.elements.flatMap((item) => bind(item, scope));
+    return [];
+  }
+  function visit(node, parent) {
+    if (!node || typeof node !== "object" || !node.type) return;
+    if (["FunctionDeclaration", "ClassDeclaration"].includes(node.type)) bind(node.id, parent);
+    const isFunction = functionNodes.has(node.type);
+    const scope =
+      node.type === "Program" || isFunction || lexicalNodes.has(node.type)
+        ? { parent, function: isFunction || node.type === "Program", bindings: new Map() }
+        : parent;
+    scopes.set(node, scope);
+    if (isFunction) {
+      bind(node.id, scope);
+      for (const parameter of node.params) bind(parameter, scope);
+    }
+    if (["ClassDeclaration", "ClassExpression"].includes(node.type)) bind(node.id, scope);
+    if (node.type === "CatchClause") bind(node.param, scope);
+    if (node.type === "VariableDeclaration") {
+      let target = scope;
+      if (node.kind === "var") while (!target.function) target = target.parent;
+      for (const declaration of node.declarations)
+        declarations.set(declaration, bind(declaration.id, target, declaration.init, [], scope));
+    }
+    if (node.type === "ImportDeclaration" && node.importKind !== "type")
+      for (const specifier of node.specifiers)
+        if (specifier.importKind !== "type") bind(specifier.local, scope);
+    for (const child of childNodes(node)) visit(child, scope);
+  }
+  visit(program, null);
+  return { scopes, declarations };
+}
+
+function bindingFor(scope, name) {
+  for (let current = scope; current; current = current.parent)
+    if (current.bindings.has(name)) return current.bindings.get(name);
+  return null;
+}
+
+// Follow static initializer aliases; reassignment and reflection are outside this source policy.
+function clockPath(node, scope, seen = new Set()) {
+  if (!node) return null;
+  if (
+    [
+      "TSAsExpression",
+      "TSTypeAssertion",
+      "TSNonNullExpression",
+      "ParenthesizedExpression",
+    ].includes(node.type)
+  )
+    return clockPath(node.expression, scope, seen);
+  if (node.type === "Identifier") {
+    const binding = bindingFor(scope, node.name);
+    if (!binding)
+      return ["Date", "performance", "globalThis", "global"].includes(node.name)
+        ? [node.name]
+        : null;
+    if (!binding.init || seen.has(binding)) return null;
+    const next = new Set(seen).add(binding);
+    const origins = [binding, ...binding.defaults].map((origin) => {
+      const base = clockPath(origin.init, origin.scope, next);
+      return base && [...base, ...origin.suffix];
+    });
+    return (
+      origins.find((parts) => ["Date", "performance"].includes(ambientPath(parts)?.[0])) ??
+      origins.find(Boolean) ??
+      null
+    );
+  }
+  if (["MemberExpression", "OptionalMemberExpression"].includes(node.type)) {
+    const base = clockPath(node.object, scope, seen);
+    return base && [...base, memberName(node)];
+  }
+  return null;
+}
+const ambientPath = (parts) =>
+  parts && (["globalThis", "global"].includes(parts[0]) ? parts.slice(1) : parts);
+const readsClock = (parts) =>
+  parts && (parts[0] === "performance" || (parts[0] === "Date" && ["now", "*"].includes(parts[1])));
+
 function dependencies(source, file) {
   const ast = parse(source, {
     sourceType: "module",
@@ -62,6 +198,7 @@ function dependencies(source, file) {
   });
   const imports = [];
   const effects = [];
+  const { scopes, declarations } = lexicalScopes(ast.program);
   const environmentObjects = new Set([
     "window",
     "document",
@@ -85,6 +222,25 @@ function dependencies(source, file) {
   }
   function visit(node) {
     if (!node || typeof node !== "object") return;
+    const scope = scopes.get(node);
+    const parts = ambientPath(clockPath(node, scope));
+    if (["MemberExpression", "OptionalMemberExpression"].includes(node.type) && readsClock(parts))
+      effects.push({ name: `ambient clock: ${parts.join(".")}`, line: node.loc.start.line });
+    if (["CallExpression", "OptionalCallExpression", "NewExpression"].includes(node.type)) {
+      const callee = ambientPath(clockPath(node.callee, scope));
+      if (
+        callee?.length === 1 &&
+        callee[0] === "Date" &&
+        (node.type !== "NewExpression" || node.arguments.length === 0)
+      )
+        effects.push({ name: "ambient clock: Date", line: node.loc.start.line });
+    }
+    if (node.type === "VariableDeclarator")
+      for (const name of declarations.get(node) ?? []) {
+        const alias = ambientPath(clockPath(name, scope));
+        if (readsClock(alias))
+          effects.push({ name: `ambient clock: ${alias.join(".")}`, line: node.loc.start.line });
+      }
     if (
       (node.type === "MemberExpression" || node.type === "OptionalMemberExpression") &&
       node.object.type === "Identifier"
@@ -92,8 +248,9 @@ function dependencies(source, file) {
       const object = node.object.name;
       const property = node.computed ? node.property.value : node.property.name;
       if (
-        environmentObjects.has(object) ||
+        (environmentObjects.has(object) && !bindingFor(scope, object)) ||
         ((object === "globalThis" || object === "global") &&
+          !bindingFor(scope, object) &&
           (environmentObjects.has(property) || environmentCalls.has(property)))
       )
         effects.push({ name: `${object}.${property}`, line: node.loc.start.line });
@@ -101,6 +258,7 @@ function dependencies(source, file) {
     if (
       (node.type === "CallExpression" || node.type === "NewExpression") &&
       node.callee.type === "Identifier" &&
+      !bindingFor(scope, node.callee.name) &&
       (environmentCalls.has(node.callee.name) ||
         ["WebSocket", "XMLHttpRequest", "EventSource", "Worker"].includes(node.callee.name))
     )
@@ -185,7 +343,7 @@ function resolveInternal(from, specifier, sources) {
 const within = (file, directory) => file.startsWith(`${directory}/`);
 const feature = (file) => file.match(/^src\/features\/([^/]+)\//)?.[1];
 
-function boundaryViolation(from, to, specifier) {
+function boundaryViolation(from, to, specifier, runtime) {
   const sourceFeature = feature(from);
   const targetFeature = to && feature(to);
   if (
@@ -206,7 +364,7 @@ function boundaryViolation(from, to, specifier) {
   )
     return "content must remain independent of rendering and features";
   if (
-    (within(from, "src/lib") || within(from, "src/components/ui")) &&
+    isNeutralShared(from) &&
     to &&
     ["src/content", "src/features", "src/shell", "src/views", "src/app"].some((directory) =>
       within(to, directory),
@@ -214,7 +372,25 @@ function boundaryViolation(from, to, specifier) {
   )
     return "shared utilities and UI cannot depend on product layers";
   if (
-    within(from, "src/components") &&
+    to &&
+    isSharedPresentation(to) &&
+    (within(from, "src/shared/styles") ||
+      within(from, "src/shared/motion") ||
+      (within(from, "src/shared/ui") && !within(to, "src/shared/ui")))
+  )
+    return "neutral shared capabilities cannot depend on presentation";
+  if (
+    within(from, "src/shared") &&
+    to &&
+    within(to, "src/content") &&
+    (runtime ||
+      !["src/content/locales.ts", "src/content/types.ts", "src/content/technologies.ts"].includes(
+        to,
+      ))
+  )
+    return "shared presentation accepts only neutral content types";
+  if (
+    within(from, "src/shared") &&
     to &&
     ["src/features", "src/shell", "src/views", "src/app"].some((directory) => within(to, directory))
   )
@@ -250,7 +426,7 @@ function boundaryViolation(from, to, specifier) {
     /^src\/features\/[^/]+\/adapters\//.test(from) &&
     to &&
     (/^src\/features\/[^/]+\/presentation\//.test(to) ||
-      within(to, "src/components") ||
+      isSharedPresentation(to) ||
       within(to, "src/views"))
   )
     return "feature adapters cannot depend on presentation";
@@ -271,9 +447,11 @@ export function auditArchitecture(sources) {
   const violations = [];
   const modules = new Map();
   for (const [file, source] of sources) {
+    if (file.startsWith("src/")) {
+      const reason = placementViolation(file);
+      if (reason) violations.push(`${file}: ${reason}`);
+    }
     if (!codePattern.test(file) || typeof source !== "string") continue;
-    if (/^src\/features\/[^/]+$/.test(file))
-      violations.push(`${file}: feature code must live in an owned feature directory`);
     try {
       modules.set(file, dependencies(source, file));
     } catch (error) {
@@ -298,7 +476,7 @@ export function auditArchitecture(sources) {
         violations.push(
           `${file}:${dependency.line}: unresolved internal module ${dependency.specifier}`,
         );
-      const reason = boundaryViolation(file, target, dependency.specifier);
+      const reason = boundaryViolation(file, target, dependency.specifier, dependency.runtime);
       if (reason) violations.push(`${file}:${dependency.line}: ${reason}: ${dependency.specifier}`);
     }
   }

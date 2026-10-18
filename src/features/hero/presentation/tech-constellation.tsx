@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { TechnologyMark } from "@/components/technology-mark";
 import { type Locale, localePath } from "@/content/locales";
 import {
   compareTechnologyNames,
   publicTechnologyCatalog,
   technologyGroups,
 } from "@/content/technologies";
+import { TechnologyMark } from "@/shared/technology/technology-mark";
 import { getSceneMarkIdentity } from "../domain/scene-technologies";
 import styles from "./tech-constellation.module.css";
 

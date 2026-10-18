@@ -24,7 +24,8 @@ and the relevant section of the [public-content contract](public-content.md).
 
 - Keep routes in `src/app/`, page composition in `src/views/`, and persistent
   navigation in `src/shell/`. Colocate feature code under `src/features/`; extract
-  shared components only for real reuse. Follow the enforced
+  shared capabilities under `src/shared/` only for real reuse. Every owned module,
+  including importless code, must have a registered role. Follow the enforced
   [module contract](architecture.md#source-module-contract) and
   [engineering standards](engineering-standards.md).
 - Prefer focused functions, explicit inputs, descriptive names, composition, and
@@ -51,29 +52,37 @@ it does not provide a security audit or visual accessibility QA. After building,
 `npm run test:smoke` checks the production server, HTML landmarks, and 404 handling;
 The Hostinger compatibility job runs it too. It uses port 3100 by default; set
 `SMOKE_TEST_PORT` for parallel runs. Locally, `npm run test:site` reuses one build
-with sequential owned HTTP rendered assertions and HTTPS browser fixtures. In CI, `Quality (development)` runs
-`npm run check` and the server-rendered assertions once, then uploads its verified
-production build. Eight isolated browser runners restore that same-run artifact
-and run the complete Playwright suite in eight duration-balanced groups without rebuilding.
-The planner verifies every current test-list selection and their exact union before
-sharing the build. See the [CI efficiency record](research/ci-efficiency.md) for
-measured baselines, new-test handling and timing maintenance.
-Rendered tests already cover the smoke assertions, so they are not repeated there.
-Browser tests default to one worker to avoid competing software-rendered scenes;
-see the [motion research](research/motion-performance.md) for measurements and rationale.
-Each browser shard retains one worker and has a 30-minute job ceiling, avoiding
-competition for a shared software-rendered GPU. Shards run on separate runners
-with fail-fast disabled so every shard can finish and retain diagnostics.
-Eight browser jobs plus compatibility fit below GitHub Free's standard-runner
-limit of 20 concurrent jobs; account-wide activity can still introduce queuing.
-Standard hosted runners are free for this public repository; this workflow uses
-no larger runners. See [Actions limits](https://docs.github.com/en/actions/reference/limits)
-and [billing and usage](https://docs.github.com/en/actions/concepts/billing-and-usage).
-Individual test deadlines, mandatory coverage, retries and failure on flaky tests
-remain unchanged. The build/rendered job has a 15-minute ceiling; the previous
-60-minute allowance covered the complete sequential browser suite.
-`Quality checks` requires every shard, the development checks
-and Hostinger compatibility to succeed; skipped or cancelled jobs fail the gate.
+with sequential owned HTTP rendered assertions and HTTPS browser fixtures. In CI,
+source quality, workflow validation and secret scans start independently. The build
+and hosting jobs follow source quality; browser and performance jobs consume one
+verified enabled build. Eight duration-balanced browser groups retain one worker
+per runner, all six actual projects, unchanged test deadlines and fail-on-flaky
+behavior. New tests enter discovery automatically; the planner verifies each list
+and their exact disjoint union rather than enforcing a fixed count.
+
+`Required checks` requires all seven Core responsibilities to succeed, including
+the whole browser matrix. It is the protected aggregate; `Quality checks` is the
+source-quality prerequisite. The aggregate was added alongside the old full gate
+on both branches after phase A passed. Phase B removes the forwarding job; the
+old required context is retired only after this phase passes with the new full
+aggregate still enforced. See the [paired CI specification](specs/paired-ci-profiles.md).
+Skipped, failed or cancelled constituents fail the aggregate.
+
+Nightly freezes an exact existing commit reachable from main or develop before
+execution. An empty manual SHA uses the workflow event SHA; the selected ref
+validates ancestry, not a moving tip. Its separately named browser and visual jobs
+partition the complete inventory. Visual here means existing layout, accessibility
+and interaction assertions; it does not claim pixel-baseline coverage. Snapshot
+updates are disabled. Internal rendered-link checks and bundle budgets reuse the
+same build. No external merchant crawling, provider calls or deployment is added.
+
+Build consumers validate archive size/checksum, repository/source/tree/configuration,
+workflow/run/attempt and enabled fixture flags before extraction. The expected hash
+comes from the producing job output, independently of the downloaded receipt.
+This is context and integrity binding, not a signed build attestation. Downloads
+stay within the same run; ephemeral runtime keys are restored locally afterward.
+The actual disabled Node 24.6 / GLIBC 2.28 / SWC WASM hosting build remains separate.
+
 Native image-tab tests use the full Chromium channel instead of headless shell
 to exercise browser document navigation. Install Chromium without `--only-shell`;
 the CI installation already provides both binaries. Other tests retain their runtime.
@@ -82,7 +91,7 @@ following port for its browser upstream; explicit rendered/browser overrides rem
 available. The rendered server stops before the HTTPS fixture starts. Browser CLI
 arguments after `--` can select targeted coverage without rebuilding. Document hashes and signature checks run before the build.
 Use `npm run typecheck` for a quick standalone type check during development;
-there is no need to run it immediately before `check`. Reuse successful verification
+`check:quality` also runs it before dependent build and hosting jobs. Reuse successful verification
 for an unchanged source state, dependencies and runtime; rerun affected checks
 after changes rather than repeating the full suite at each agent handoff.
 `test:repository` checks tracked/unignored source text, simple inline Markdown file links,
@@ -123,15 +132,15 @@ behavioral assertions rather than replacing them. Record untested devices or
 states explicitly. A documentation-only handoff may report repository/link and
 skill checks without claiming that application or hosting QA was repeated.
 
-The modern quality job owns lint, content checks, one type-checked build, budgets
-and rendered checks. The browser matrix consumes that build and owns interaction
-and accessibility checks. Build artifacts include that workflow's verified browser
+The source-quality job owns lint, content and unit checks. The build job owns the
+type-checked enabled build; performance owns budgets and rendered checks. The
+browser matrix consumes that build and owns interaction and accessibility checks. Build artifacts include that workflow's verified browser
 selection plan, are scoped to their workflow run, omit build caches and expire after
 one day; browser diagnostics expire after seven
 days. The separate Hostinger job owns the GLIBC 2.28
 baseline, observed runtime, SWC WASM fallback, build and smoke check. Do not add
 Biome to the hosting build or duplicate the full browser suite there. Preserve
-the `Quality checks` aggregator and protected branch checks; deployment evidence
+the full aggregate and protected branch checks; deployment evidence
 remains separate from CI, as described in [deployment](deployment.md).
 
 ## Agent entrypoints and skills
@@ -151,9 +160,10 @@ This avoids symlink requirements on Windows and keeps procedures in one place.
 | `update-dependencies` | Compatible stable upgrades with lockfile and regression checks |
 | `prepare-delivery` | Final verification and an authorized commit or push |
 
-Invoke a skill as `$specify-feature` in Codex or `/specify-feature` in Claude Code.
-Restart or refresh discovery in the host after adding skills. Verify discovery there;
-file validation alone cannot demonstrate that an installed host loaded a skill.
+Select relevant skills automatically by the task and description; explicit commands
+are optional. For parent-started sessions, use the local discovery fallback in
+[AGENTS.md](../AGENTS.md) and [skill discovery](skill-discovery.md). Verify native
+host discovery separately; file validation alone cannot demonstrate host loading.
 These are instruction workflows, not sandbox controls. No permissions are relaxed,
 no MCP servers are installed, and no publish hooks run automatically.
 
@@ -278,7 +288,7 @@ build is archived once with gzip level1 and uploaded with artifact compression l
 avoiding repeated compression. Explicit bash defaults enforce pipefail so failed archive
 creation cannot upload a partial successful gzip stream. Frozen installs skip implicit npm audit/funding requests;
 required explicit audits still cover both lockfiles. Modern jobs share both lockfiles
-in their cache key so the quality job warms the
+in their cache key so producer jobs warm the
 browser runners' package cache. Frozen installs prefer local package data; explicit
 audits still check current advisories. JSON timing reports retain per-test measurements.
 See [Playwright installation](https://playwright.dev/docs/browsers#chromium). Verify current-head
@@ -354,7 +364,10 @@ transfer helper. No persistent credentials or provider accounts are created or r
 ## Isolated analytics verification
 
 `npm run test:analytics` checks the closed vocabulary, exact upstream schema bytes,
-route-view deduplication and bounded delivery failures. It is part of `npm run check`.
+route-view deduplication, optional measurement budgets, dwell/observer cleanup
+and bounded delivery failures. Both public v1 and v2 schema snapshots have exact
+hash/provenance assertions; private reporting schemas are never vendored. It is
+part of `npm run check`.
 The public default remains off. Enabled browser QA uses only the existing loopback
 TLS fixture, which discards analytics request bodies instead of proxying or storing
 those events. For owned local ports, build and run consistently:
@@ -363,7 +376,7 @@ those events. For owned local ports, build and run consistently:
 ASSISTANT_ENABLED=true ANALYTICS_ENABLED=true \
   ANALYTICS_INGEST_URL=https://127.0.0.1:3381/api/v1/analytics/events npm run check
 BROWSER_TEST_PORT=3381 BROWSER_TEST_UPSTREAM_PORT=3382 \
-  npm run test:browser -- tests/browser/analytics.spec.ts tests/browser/privacy.spec.ts
+  npm run test:browser -- tests/browser/analytics.spec.ts tests/browser/analytics-interactions.spec.ts tests/browser/privacy.spec.ts
 ```
 
 The flags must match the built candidate when running rendered checks. To combine
@@ -371,13 +384,31 @@ rendered checks and selected browser cases against that enabled build:
 
 ```bash
 ASSISTANT_ENABLED=true ANALYTICS_ENABLED=true SITE_TEST_PORT=3381 \
-  npm run test:site -- tests/browser/analytics.spec.ts tests/browser/privacy.spec.ts
+  npm run test:site -- tests/browser/analytics.spec.ts tests/browser/analytics-interactions.spec.ts tests/browser/privacy.spec.ts
 ```
 
 Reserve ports/resources before running this alongside another session. These tests
 mock external destinations and assistant replies; no provider key or model call is
-needed. Existing CI reuses its enabled quality build across eight browser groups;
+needed. Existing CI reuses its enabled candidate build across eight browser groups;
 the separate Hostinger build explicitly keeps both feature flags false. Disabled
 rollout browser tests must use a separately built disabled candidate, not a runtime
 flag applied to previously enabled static output. No browser install may garbage-
 collect another session's shared cache.
+
+The interaction suite covers EN/ES, private descendants, keyboard activation,
+coarse cells, route revisits, viewport boundaries and ordinary scrolling. It runs
+in desktop/mobile Chromium and dedicated Firefox/WebKit projects through the same
+eight-group CI planner. A synthetic route sink proves browser behavior only. The
+actual API persistence and authenticated backoffice demo require separately owned
+services, exact local CORS, synthetic data and explicit resource leases; retain
+that receipt separately and never describe interception as an end-to-end result.
+
+Cookie isolation also has a native-network regression in all four interaction
+projects. The loopback sink challenges POST responses with a synthetic cookie;
+ordinary app delivery must omit a seeded cookie and ignore the response cookie.
+A separate explicit credentialed positive control proves the challenge is valid.
+Intercepted responses are not the evidence for this guarantee: Firefox and WebKit
+stored a cookie injected through `route.fulfill` in the initial fixture, while the
+native response tests passed. Preserve those original failures when reporting the
+fixture correction. The credentialed control is test-only and never reaches the
+actual analytics API.

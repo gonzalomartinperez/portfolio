@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { PageHeader } from "@/components/page-header";
-import { buttonVariants } from "@/components/ui/button";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import { compareTechnologyNames, publicTechnologyCatalog } from "@/content/technologies";
-import { TechnologyCatalogue } from "@/features/technology-catalogue/technology-catalogue";
+import { TechnologyCatalogue } from "@/features/technology-catalogue/presentation/technology-catalogue";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { buttonVariants } from "@/shared/ui/button";
 import styles from "./stack.module.css";
 
 export function StackView({ locale }: { locale: Locale }) {
@@ -53,10 +53,14 @@ export function StackView({ locale }: { locale: Locale }) {
   return (
     <>
       <PageHeader eyebrow={copy.stack.eyebrow} intro={copy.stack.intro} title={copy.stack.title} />
-      <section className="section-tight frame">
+      <section className="section-tight frame" data-analytics-exposure="stack-catalogue">
         <TechnologyCatalogue groups={groups} copy={labels} />
       </section>
-      <section className="section-tight frame">
+      <section
+        className="section-tight frame"
+        data-analytics-region="stack-scope"
+        data-analytics-exposure="stack-scope"
+      >
         <div className={styles.note}>
           <h2>{copy.stack.noteHeading}</h2>
           <p>{copy.stack.noteScope}</p>

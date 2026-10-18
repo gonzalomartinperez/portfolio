@@ -37,7 +37,9 @@ Use the [module map](architecture.md#source-module-contract) and run
 
 - Routes, views and shell compose features; lower layers cannot import composition.
 - Reviewed content does not import components, features or framework presentation.
-- Shared UI and utilities do not depend on product content or features.
+- Named shared capabilities do not import features or page composition. Shared UI,
+  styles and motion do not depend on product content. Editorial and identity
+  renderers retain only their reviewed neutral content dependencies.
 - Feature internals are private outside the feature; add a deliberate named entry
   and its rationale when a new integration is needed.
 - Domain dependencies point inward, without direct environment I/O. Renderers and
@@ -64,7 +66,9 @@ are updated together, with the registry manifest digest pinned in CI. These are
 verified repository selections, not universal cross-repository pins or permanent
 claims of latest versions. See the [toolchain review](research/toolchain-2026-10-17.md).
 Babel Parser
-7.29.9 is dev-only and compatible with both retained Node baselines.
+7.29.9 is dev-only and compatible with both retained Node baselines. The CI provenance
+helper deliberately verifies the reviewed development runtime; update its baseline
+and fixtures together with `.nvmrc` after a toolchain compatibility review.
 
 Direct dependencies use exact versions and lockfiles; CI tests that contract.
 Keep Next/SWC aligned. Pin third-party Actions and container images by digest.
@@ -87,11 +91,14 @@ checks, hide warnings, or bypass branch protections to finish a task.
 
 ## Required verification and release
 
-The development job runs the full source guard, repository/content/assistant checks,
-frozen contract generation, both dependency audits, lint, strict build, budgets and
-rendered route checks. Eight duration-balanced browser groups reuse that build;
-a separate GLIBC 2.28 job verifies the hosting baseline with the assistant disabled.
-The aggregate gate requires every group and compatibility job to succeed.
+Core separates workflow validation, full-history secret checks, source quality,
+verified enabled build, observed hosting, browser coverage and performance checks.
+Its full aggregate rejects skipped or cancelled constituents. Eight duration-balanced
+browser groups reuse one integrity-bound build; the separate GLIBC 2.28 build and
+smoke keep both features disabled. Nightly freezes one permitted source and reuses
+one build across disjoint browser/visual groups, internal links and bundle checks.
+See the [CI migration contract](specs/paired-ci-profiles.md) for protected-context
+migration and acceptance evidence.
 
 Keep timeouts, retries, fail-on-flaky behavior and exact test selection intact.
 Negative architecture fixtures must fail on representative invalid code, while

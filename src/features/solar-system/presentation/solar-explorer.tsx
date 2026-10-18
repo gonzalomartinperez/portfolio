@@ -13,14 +13,14 @@ import {
 } from "lucide-react";
 import { type CSSProperties, useCallback, useRef, useState } from "react";
 import type { Locale } from "@/content/locales";
-import { Button } from "../../../components/ui/button";
+import { Button } from "../../../shared/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
   DialogTrigger,
-} from "../../../components/ui/dialog";
+} from "../../../shared/ui/dialog";
 import styles from "./solar-explorer.module.css";
 import {
   resetSolarView,

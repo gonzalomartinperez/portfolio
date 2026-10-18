@@ -13,6 +13,7 @@ A bilingual portfolio with production experience, interactive architecture diagr
 reviewed CVs, a focused technology catalog and a realistic, readable 3D solar scene.
 
 [![CI](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gonzalomartinperez/portfolio/actions/workflows/ci.yml)
+[![Nightly](https://github.com/gonzalomartinperez/portfolio/actions/workflows/nightly.yml/badge.svg?branch=main)](https://github.com/gonzalomartinperez/portfolio/actions/workflows/nightly.yml)
 ![Next.js 16 LTS](https://img.shields.io/badge/Next.js-16%20LTS-000000?style=flat-square&logo=nextdotjs)
 ![TypeScript strict](https://img.shields.io/badge/TypeScript-7%20strict-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Node.js 24 LTS](https://img.shields.io/badge/Node.js-24%20LTS-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white)
@@ -23,7 +24,7 @@ reviewed CVs, a focused technology catalog and a realistic, readable 3D solar sc
 [Gallery](#gallery) · [Architecture](docs/architecture.md) · [Design system](docs/design.md) ·
 [Engineering standards](docs/engineering-standards.md) ·
 [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) ·
-[Development workflow](docs/development.md) · [Technology decisions](docs/technology.md)
+[Development workflow](docs/development.md) · [Automatic skills](docs/skill-discovery.md) · [Technology decisions](docs/technology.md)
 
 </div>
 
@@ -139,9 +140,33 @@ These badges describe this repository's implementation. The [professional techno
 [Full-size light](docs/diagrams/architecture-overview-light.svg) · [Full-size dark](docs/diagrams/architecture-overview-dark.svg) ·
 [Editable Mermaid source](docs/diagrams/architecture-overview.mmd) · [Diagram guide](docs/diagrams/README.md)
 
-Feature modules have explicit entry files, pure models and narrow client boundaries.
-CI rejects dependency cycles, reversed layers, private module imports and client paths
-to server-only code. See the [source module contract](docs/architecture.md#source-module-contract).
+### Architecture status and enforcement
+
+Implemented as feature-owned modules with inward dependencies: routes and views
+compose the interface; pure policies stay separate from rendering and transport.
+The assistant owns its application ports and receives concrete adapters at its entry.
+The [module contract](docs/architecture.md#source-module-contract) is the source of truth.
+
+- **Enforced in CI:** `npm run test:architecture` audits parsed imports, aliases,
+  re-exports, dynamic imports and type-only edges. Every source module has a declared
+  placement, including importless code. It rejects reversed dependencies, private
+  feature imports, cycles, ambient inner-layer clock reads and client paths to server-only code. The
+  [negative fixtures](scripts/architecture.test.mjs) must reject representative
+  violations while valid composition passes; this runs inside `npm run check`.
+- **Deliberate adaptations:** small features do not need empty layers. Named public
+  entries and the narrow server-only analytics configuration facade are documented
+  in the module contract. Shared capabilities have named owners; exact transitional
+  content, contract and media paths have recorded cutover conditions. Static content
+  needs no generic repository or DI framework.
+- **Pending operational acceptance:** the assistant and analytics remain disabled.
+  Effective TLS, CORS, cookies, CSRF, proxy streaming and VPS readiness require their
+  owners' verification. Passing source checks does not establish production readiness.
+
+The [decision record and primary bibliography](docs/research/clean-architecture.md)
+explain how the dependency rule and Microsoft architecture guidance apply here.
+Google's engineering practices inform review and quality, not an architecture
+certification. The guard's [scope and limits](docs/research/clean-architecture.md#scope-of-enforcement)
+remain explicit; no universal folder layout or complete security audit is claimed.
 
 The portfolio has no application database or model-provider key. Reviewed content and documents are committed inputs; the optional assistant talks directly to a separately deployed API. [Explore the application, CV publication, and assistant boundaries](docs/architecture.md).
 
@@ -183,7 +208,9 @@ CI verifies the enabled conversation suite and a separate disabled Hostinger bui
 Product analytics has its own **default-off** build gate, `ANALYTICS_ENABLED`.
 The optional client sends only reviewed event names, coarse page sections, language,
 allowlisted interaction targets and a fresh per-event duplicate-detection ID to the
-owned API. It uses no visitor identity, tracking cookie, persistent retry queue or
+owned API. The reviewed v2 extension adds closed public regions, 8×8 click cells,
+coarse viewport cohorts and geometric section exposure. It excludes forms,
+conversations, dynamic canvases and private controls; exposure does not mean reading. It uses no visitor identity, tracking cookie, persistent retry queue or
 credentialed assistant transport. Off means the analytics host is absent and no
 analytics requests or storage operations occur.
 
@@ -193,9 +220,15 @@ or a claim of legal compliance. Optional measurements needing consent stay off.
 Activation, retention approval and effective hosting/proxy log policies remain
 separate readiness decisions. See the [analytics contract and limits](docs/specs/product-analytics.md).
 CI's enabled analytics build uses only a loopback synthetic sink; it does not
-activate collection on the public site or call a model provider.
+activate collection on the public site or call a model provider. The
+[aggregate interaction specification](docs/specs/aggregate-interaction-analytics.md)
+records the pinned public contract, client bounds and separate real API/backoffice
+acceptance requirements.
 
 ## Delivery and quality
+
+[Release history](docs/release-history.md) records the public-launch labeling policy
+and preserves the source anchors behind earlier preparation labels.
 
 <p align="center">
 <picture>
@@ -329,7 +362,7 @@ updated without giving the public build access to private sources.
 | [src/views](src/views/) | Server page composition |
 | [src/shell](src/shell/) | Persistent layout, navigation, locale and theme controls |
 | [src/features](src/features/) | Feature-owned models, adapters and interactive presentation |
-| [src/components](src/components/) | Reusable presentation, identity marks and owned UI primitives |
+| [src/shared](src/shared/) | Reusable presentation, identity marks and owned UI primitives |
 | [src/content](src/content/) | Typed per-locale content and the shared interface-copy contract |
 | [tests](tests/) / [scripts](scripts/) | Browser/rollout cases, source and contract tests, build/QA tooling |
 | [.github](.github/) | Trusted workflows and repository maintenance configuration |

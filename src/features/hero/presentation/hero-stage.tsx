@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { usePageMotionPaused } from "../../../lib/motion-state";
+import { usePageMotionPaused } from "../../../shared/motion/motion-state";
 import type { SceneRuntime } from "../adapters/scene-runtime";
 import styles from "./hero-stage.module.css";
 

@@ -301,7 +301,7 @@ test("technology identifiers, categories and evidence remain complete", () => {
 
 test("every assigned logo resolves to a safe local resource", () => {
   const sprite = read("public/brands.svg");
-  const component = read("src/components/brand-mark.tsx");
+  const component = read("src/shared/identity/brand-mark.tsx");
   const localNames = component.match(/new Set\(\[([\s\S]*?)\]\)/)?.[1] ?? "";
   const rasterNames = component.match(/const rasterMarks = new Set\(\[([\s\S]*?)\]\)/)?.[1] ?? "";
   for (const { id, icon } of technologyCatalog) {

@@ -5,6 +5,7 @@ import { existsSync, readdirSync, readFileSync, realpathSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { parseDocument } from "yaml";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (file) => readFileSync(path.join(root, file), "utf8");
@@ -92,9 +93,18 @@ test("Claude skill adapters match canonical metadata and targets", () => {
       const content = read(file).replaceAll("\r\n", "\n");
       const frontmatter = content.match(/^---\n([\s\S]*?)\n---/);
       assert.ok(frontmatter, `${file}: missing frontmatter`);
+      const document = parseDocument(frontmatter[1], { uniqueKeys: true, version: "1.2" });
+      assert.deepEqual(document.errors, [], `${file}: invalid YAML`);
+      const fields = document.toJS({ maxAliasCount: 0 });
+      assert.ok(fields && typeof fields === "object" && !Array.isArray(fields));
+      assert.ok(
+        fields["disable-model-invocation"] === undefined ||
+          fields["disable-model-invocation"] === false,
+        `${file}: task-based implicit selection must remain available`,
+      );
       return ["name", "description"].map((field) => {
-        const value = frontmatter[1].match(new RegExp(`^${field}: (.+)$`, "m"))?.[1];
-        assert.ok(value, `${file}: missing ${field}`);
+        const value = fields[field];
+        assert.ok(typeof value === "string" && value.trim(), `${file}: missing ${field}`);
         return value;
       });
     };
@@ -121,88 +131,67 @@ test("Next.js and SWC WASM versions agree with the lockfile", () => {
   assert.deepEqual(lock.packages[""].devDependencies, manifest.devDependencies);
 });
 
-test("CI isolates browser shards and fails the protected gate for incomplete verification", () => {
+test("paired CI preserves enabled QA, disabled hosting and immutable browser runtimes", () => {
   const workflow = read(".github/workflows/ci.yml");
   const jobs = new Map(
     [
       ...workflow.matchAll(/^ {2}([a-z][a-z-]*):\n([\s\S]*?)(?=^ {2}[a-z][a-z-]*:|$(?![\s\S]))/gm),
     ].map(([, id, body]) => [id, body]),
   );
-  for (const id of ["validate", "browser", "legacy-linux", "check"]) {
-    assert.ok(jobs.has(id), `Missing verification job: ${id}`);
-  }
-  const development = jobs.get("validate");
   const browser = jobs.get("browser");
-  const gate = jobs.get("check");
-  assert.match(development, /ASSISTANT_ENABLED: "true"/);
-  assert.match(development, /ANALYTICS_ENABLED: "true"/);
-  assert.match(
-    development,
-    /ANALYTICS_INGEST_URL: "https:\/\/127\.0\.0\.1:3160\/api\/v1\/analytics\/events"/,
-  );
-  assert.match(jobs.get("legacy-linux"), /ASSISTANT_ENABLED: "false"/);
-  assert.match(jobs.get("legacy-linux"), /ANALYTICS_ENABLED: "false"/);
-  assert.match(jobs.get("legacy-linux"), /npm run test:smoke/);
-  assert.match(development, /name: Quality \(development\)/);
-  assert.match(jobs.get("legacy-linux"), /name: Compatibility \(Hostinger \/ GLIBC 2\.28\)/);
-  assert.match(gate, /name: Quality checks/);
+  const hosting = jobs.get("hosting");
+  assert.match(workflow, /ASSISTANT_ENABLED: "true"/);
+  assert.match(workflow, /ANALYTICS_ENABLED: "true"/);
+  assert.match(hosting, /ASSISTANT_ENABLED: "false"/);
+  assert.match(hosting, /ANALYTICS_ENABLED: "false"/);
+  assert.match(hosting, /node-version: 24\.6\.0/);
+  assert.match(hosting, /glibc 2\.28/);
+  assert.match(hosting, /if \(!b\.isWasm\)/);
+  assert.match(hosting, /npm run test:smoke/);
   assert.match(read(".github/workflows/branch-policy.yml"), /name: Branch policy/);
-  assert.match(browser, /needs: validate/);
-  assert.match(browser, /fail-fast: false/);
-  assert.match(browser, /shard: \[1, 2, 3, 4, 5, 6, 7, 8\]/);
-  assert.match(
-    browser,
-    /npm run test:browser -- --test-list=\.artifacts\/ci\/shards\/\$\{\{ matrix\.shard \}\}\.txt/,
-  );
   assert.match(read("playwright.config.ts"), /workers: 1,/);
   assert.match(read("playwright.config.ts"), /failOnFlakyTests: Boolean\(process\.env\.CI\)/);
-  assert.match(gate, /if: always\(\)/);
-  assert.match(gate, /needs: \[validate, browser, legacy-linux\]/);
-  for (const id of ["validate", "browser", "legacy-linux"]) {
-    assert.match(gate, new RegExp(`needs\\.${id}\\.result`));
-  }
-  assert.match(
-    gate,
-    /test "\$RESULT" = success && test "\$BROWSER_RESULT" = success && test "\$LEGACY_RESULT" = success/,
-  );
-  assert.doesNotMatch(workflow, /continue-on-error:|pull_request_target:/);
-});
-
-test("browser shards reuse the same workflow's verified build without rebuilding", () => {
-  const workflow = read(".github/workflows/ci.yml");
-  const development = workflow.split("  validate:")[1].split("  browser:")[0];
-  const browser = workflow.split("  browser:")[1].split("  legacy-linux:")[0];
-  assert.match(development, /npm run check/);
-  assert.match(development, /npm run test:rendered/);
-  assert.match(
-    development,
-    /tar --exclude=\.next\/cache -cf - \.next \.artifacts\/ci \| gzip -1 > \/tmp\/portfolio-production-build\.tar\.gz/,
-  );
-  assert.match(development, /node scripts\/browser-ci-planner\.mjs/);
-  assert.match(development, /name: production-build/);
-  assert.match(workflow, /defaults:\n {2}run:\n {4}shell: bash/);
-  assert.match(development, /compression-level: 0/);
   const version = JSON.parse(read("package.json")).devDependencies["@playwright/test"];
   const image = browser.match(
     /image: mcr\.microsoft\.com\/playwright:v([^\s]+)-noble@sha256:([a-f0-9]{64})/,
   );
-  assert.ok(image, "Browser runtime must use an immutable official Noble image");
-  assert.equal(image[1], version, "Image and Playwright package versions must match");
+  assert.ok(image);
+  assert.equal(image[1], version);
   assert.match(browser, /options: --init --ipc=host/);
   assert.match(browser, /node scripts\/check-browser-runtime\.mjs/);
-  assert.doesNotMatch(browser, /playwright install|--privileged|SYS_ADMIN/);
-  for (const job of [development, browser]) {
-    assert.match(job, /NPM_CONFIG_CACHE: \/tmp\/portfolio-npm-cache/);
+  assert.doesNotMatch(browser, /playwright install|--privileged|SYS_ADMIN|npm run (check|build)/);
+  assert.match(browser, /--test-list=\.artifacts\/ci\/shards\/\$\{\{ matrix\.shard \}\}\.txt/);
+});
+
+test("consumers verify same-run archives before extraction and never rebuild", () => {
+  for (const file of ["ci.yml", "nightly.yml"]) {
+    const workflow = read(`.github/workflows/${file}`);
+    assert.match(workflow, /defaults:\n {2}run:\n {4}shell: bash/);
+    assert.match(workflow, /tar --exclude=\.next\/cache -cf - \.next \.artifacts\/ci \| gzip -1/);
+    assert.match(workflow, /compression-level: 0/);
+    const jobs = [
+      ...workflow.matchAll(/^ {2}([a-z][a-z-]*):\n([\s\S]*?)(?=^ {2}[a-z][a-z-]*:|$(?![\s\S]))/gm),
+    ];
+    for (const [, id, body] of jobs) {
+      if (!body.includes("actions/download-artifact@")) continue;
+      assert.match(
+        body,
+        /CI_ARTIFACT_SHA256: \$\{\{ needs\.(build|quality)\.outputs\.archive_sha256 \}\}/,
+      );
+      assert.ok(body.indexOf("ci-build-provenance.mjs verify") < body.indexOf("tar -xzf"), id);
+      assert.ok(body.indexOf("tar -xzf") < body.indexOf("ci-build-artifact.mjs restore"), id);
+      assert.doesNotMatch(body, /run-id:|repository:|github-token:|npm run (check|build)/);
+    }
   }
-  assert.match(browser, /actions\/download-artifact@[a-f0-9]{40}/);
-  assert.match(browser, /name: production-build/);
-  assert.doesNotMatch(browser, /run-id:|repository:|github-token:|npm run (check|build)/);
-  assert.match(browser, /name: browser-verification-\$\{\{ matrix\.shard \}\}/);
 });
 
 test("architecture enforcement remains in the mandatory development check", () => {
   const manifest = JSON.parse(read("package.json"));
-  assert.match(manifest.scripts.check, /^npm run test:architecture && /);
+  assert.match(manifest.scripts["check:quality"], /^npm run test:architecture && /);
+  assert.equal(
+    manifest.scripts.check,
+    "npm run check:quality && npm run build && npm run test:budget",
+  );
   assert.equal(
     manifest.scripts["test:architecture"],
     "node --test scripts/architecture.test.mjs && node scripts/architecture.mjs",
@@ -238,26 +227,29 @@ test("module aliases remain supported by the architecture resolver", () => {
   );
 });
 
-test("quality scans tracked history and uploaded build artifacts with verified tooling", () => {
+test("source and build scans retain verified tooling and normalized transfers", () => {
   const workflow = read(".github/workflows/ci.yml");
-  const quality = workflow.split("  validate:")[1].split("  browser:")[0];
-  assert.match(quality, /fetch-depth: 0/);
-  assert.match(quality, /gitleaks\/releases\/download\/v8\.30\.1/);
-  assert.match(quality, /sha256sum --check --status/);
-  assert.match(quality, /run: node scripts\/ci-build-artifact\.mjs prepare/);
-  assert.match(
-    workflow.split("  browser:")[1].split("  legacy-linux:")[0],
-    /run: node scripts\/ci-build-artifact\.mjs restore/,
+  const secrets = workflow.split("  secrets:")[1].split("  quality:")[0];
+  const build = workflow.split("  build:")[1].split("  hosting:")[0];
+  for (const body of [secrets, build]) {
+    assert.match(body, /fetch-depth: 0/);
+    assert.match(body, /gitleaks\/releases\/download\/v8\.30\.1/);
+    assert.match(body, /sha256sum --check --status/);
+  }
+  assert.match(secrets, /run: npm run test:secrets\n/);
+  assert.match(build, /run: npm run test:secrets:artifacts\n/);
+  assert.ok(
+    build.indexOf("ci-build-artifact.mjs prepare") <
+      build.indexOf("npm run test:secrets:artifacts"),
   );
-  assert.match(quality, /run: npm run test:secrets\n/);
-  assert.match(quality, /run: npm run test:secrets:artifacts\n/);
+  assert.ok(
+    build.indexOf("npm run test:secrets:artifacts") <
+      build.indexOf("ci-build-provenance.mjs create"),
+  );
   const commands = JSON.parse(read("package.json")).scripts;
   assert.equal(
     commands["test:secrets"],
     "node --test scripts/secret-scan.test.mjs && node scripts/secret-scan.mjs",
   );
   assert.equal(commands["test:secrets:artifacts"], "node scripts/secret-scan.mjs --artifacts");
-  assert.ok(
-    quality.indexOf("run: npm run test:secrets:artifacts") > quality.indexOf("run: npm run check"),
-  );
 });

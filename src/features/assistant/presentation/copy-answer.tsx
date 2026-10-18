@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { copy, type Locale } from "../copy";
+import { Button } from "@/shared/ui/button";
+import { copy, type Locale } from "./copy";
 import { cx } from "./styles";
 
 type CopyState = "ready" | "copying" | "copied" | "failed";

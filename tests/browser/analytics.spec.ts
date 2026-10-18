@@ -1,4 +1,5 @@
 import { expect, type Page, test } from "@playwright/test";
+import { expectInteractionPayload, respondAnalytics } from "./helpers/analytics-fixture";
 
 type RecordedEvent = {
   event_name: string;
@@ -17,6 +18,11 @@ async function capture(page: Page, failure?: number | "offline") {
     for (const name of ["cookie", "authorization", "referer"])
       expect(headers[name]).toBeUndefined();
     const body = request.postDataJSON();
+    if (body.schema_version === 2) {
+      expectInteractionPayload(body);
+      await respondAnalytics(route, failure);
+      return;
+    }
     expect(Object.keys(body).sort()).toEqual(
       [
         "schema_version",

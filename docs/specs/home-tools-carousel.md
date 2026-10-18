@@ -6,7 +6,7 @@ Use the owner's `Downloads/carrusel de tecnologias.png` as visual inspiration fo
 
 ## Integration
 
-Import `ToolCarousel` from `@/features/tool-carousel/tool-carousel` in `src/views/home-view.tsx`. Render `<ToolCarousel locale={locale} />` after the personal/Who I am section and before the subsequent education or closing sections. Its own `section-tight frame` supplies spacing; do not wrap it in another frame. No SiteCopy adapter is required: bilingual editorial text lives in `tool-carousel-copy.ts`.
+Import `ToolCarousel` from `@/features/tool-carousel/presentation/tool-carousel` in `src/views/home-view.tsx`. Render `<ToolCarousel locale={locale} />` after the personal/Who I am section and before the subsequent education or closing sections. Its own `section-tight frame` supplies spacing; do not wrap it in another frame. No SiteCopy adapter is required: bilingual editorial text lives in `tool-carousel-copy.ts`.
 
 The twelve verified catalogue entries are React, TypeScript, Python, FastAPI, LangChain, LangGraph, Neo4j, React Native, Privy, Hyperliquid, Stripe, and DigitalOcean. Each tile links to its detailed Stack entry. Brand rendering reuses TechnologyMark and the reviewed official assets; no icon is redrawn here. The catalogue remains the source of names and marks.
 

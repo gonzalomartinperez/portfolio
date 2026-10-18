@@ -1,16 +1,16 @@
 import Link from "next/link";
-import { CompanyMark } from "@/components/company-mark";
-import { ExternalLink } from "@/components/external-link";
-import { MetricList } from "@/components/metric-list";
-import { PageHeader } from "@/components/page-header";
-import { ProductionBadge } from "@/components/production-badge";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
 import { ExperienceArchitecture } from "@/features/architecture-diagrams/presentation/experience-architecture";
-import { cn } from "@/lib/utils";
+import { MetricList } from "@/shared/editorial/metric-list";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { ProductionBadge } from "@/shared/editorial/production-badge";
+import { CompanyMark } from "@/shared/identity/company-mark";
+import { ExternalLink } from "@/shared/navigation/external-link";
+import { cn } from "@/shared/styles/cn";
+import { Badge } from "@/shared/ui/badge";
+import { buttonVariants } from "@/shared/ui/button";
+import { cardVariants } from "@/shared/ui/card";
 import styles from "./work.module.css";
 
 export function WorkView({ locale }: { locale: Locale }) {
@@ -59,38 +59,48 @@ export function WorkView({ locale }: { locale: Locale }) {
               </div>
 
               <div className={styles.body}>
-                <h3 className={styles.position}>
-                  {role.position}
-                  <span className={styles.company}>
-                    {role.companyHref ? (
-                      <ExternalLink
-                        href={role.companyHref}
-                        locale={locale}
-                        data-analytics-event="company_link_open"
-                        data-analytics-target={role.slug}
-                      >
-                        {role.company} <span aria-hidden="true">↗</span>
-                      </ExternalLink>
-                    ) : (
-                      role.company
-                    )}
-                  </span>
-                </h3>
+                <div
+                  className={styles.body}
+                  data-analytics-region={
+                    role.slug === "cooperativa-obrera" ? "work-cooperativa" : `work-${role.slug}`
+                  }
+                  data-analytics-exposure={
+                    role.slug === "cooperativa-obrera" ? "work-cooperativa" : `work-${role.slug}`
+                  }
+                >
+                  <h3 className={styles.position}>
+                    {role.position}
+                    <span className={styles.company}>
+                      {role.companyHref ? (
+                        <ExternalLink
+                          href={role.companyHref}
+                          locale={locale}
+                          data-analytics-event="company_link_open"
+                          data-analytics-target={role.slug}
+                        >
+                          {role.company} <span aria-hidden="true">↗</span>
+                        </ExternalLink>
+                      ) : (
+                        role.company
+                      )}
+                    </span>
+                  </h3>
 
-                <p className={styles.context}>{role.context}</p>
+                  <p className={styles.context}>{role.context}</p>
 
-                <ul className={`marked-list ${styles.featuredContributions}`}>
-                  {role.contributions.slice(0, 2).map((contribution) => (
-                    <li key={contribution}>{contribution}</li>
-                  ))}
-                </ul>
+                  <ul className={`marked-list ${styles.featuredContributions}`}>
+                    {role.contributions.slice(0, 2).map((contribution) => (
+                      <li key={contribution}>{contribution}</li>
+                    ))}
+                  </ul>
 
-                {role.metrics && (
-                  <div className={styles.outcomes}>
-                    <MetricList metrics={role.metrics} />
-                    {role.attribution && <p className={styles.attribution}>{role.attribution}</p>}
-                  </div>
-                )}
+                  {role.metrics && (
+                    <div className={styles.outcomes}>
+                      <MetricList metrics={role.metrics} />
+                      {role.attribution && <p className={styles.attribution}>{role.attribution}</p>}
+                    </div>
+                  )}
+                </div>
 
                 {role.contributions.length > 2 && (
                   <details className={styles.details}>
@@ -153,7 +163,12 @@ export function WorkView({ locale }: { locale: Locale }) {
           <p>{copy.work.projectsBody}</p>
         </div>
 
-        <article data-slot="card" className={cn(cardVariants(), styles.project, "flow")}>
+        <article
+          data-slot="card"
+          className={cn(cardVariants(), styles.project, "flow")}
+          data-analytics-region="work-projects"
+          data-analytics-exposure="work-projects"
+        >
           <div className={styles.projectHead}>
             <div>
               <h3 className={styles.projectTitle}>

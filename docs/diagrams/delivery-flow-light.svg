@@ -1,69 +1,76 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1660" viewBox="0 0 640 1660" role="img" aria-labelledby="title description">
-<title id="title">Reviewed code to a live site.</title><desc id="description">Task branches enter develop through pull requests. A release pull request promotes develop to main, followed by native Hostinger deployment. Both pull requests require quality checks, eight browser groups and an independent hosting compatibility job. The aggregate gate rejects any skipped or failed required job.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="2320" viewBox="0 0 640 2320" role="img" aria-labelledby="title description">
+<title id="title">Reviewed code to a live site.</title><desc id="description">Task pull requests integrate into develop; a release pull request promotes develop to main for native Hostinger deployment. Workflow validation, secret scan and quality start independently. Quality unlocks build and the disabled-feature hosting contract. Build unlocks eight browser groups and performance checks. Dashed connections collect all seven job results into Required checks, which always runs and rejects any result other than success. Assistant activation is separate and remains disabled.</desc>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#526A88" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
-<rect width="640" height="1660" rx="24" fill="#F7F9FC"/>
-<g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+<rect width="640" height="2320" rx="24" fill="#F7F9FC"/><g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
 <text x="32" y="43" font-size="17" font-weight="700" fill="#0A6E9B">DELIVERY / PROTECTED FLOW</text>
 <text x="32" y="84" font-size="30" font-weight="700" fill="#132238">Reviewed code to a live site.</text>
 <text x="32" y="117" font-size="20" font-weight="400" fill="#40526B">Task → reviewed integration → release</text>
-<rect x="96" y="180" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-<rect x="96" y="200" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<rect x="96" y="180" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="200" width="4" height="68" rx="2" fill="#0A6E9B"/>
 <text x="118" y="214" font-size="25" font-weight="650" fill="#132238">Task branch</text>
 <text x="118" y="244" font-size="20" font-weight="400" fill="#40526B">type/kebab-case</text>
 <text x="118" y="270" font-size="20" font-weight="400" fill="#40526B">Focused changes and review</text>
-<text x="510" y="213" font-size="16" font-weight="650" fill="#0A6E9B">01</text>
-<rect x="96" y="340" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-<rect x="96" y="360" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<rect x="96" y="340" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="360" width="4" height="68" rx="2" fill="#0A6E9B"/>
 <text x="118" y="374" font-size="25" font-weight="650" fill="#132238">develop</text>
 <text x="118" y="404" font-size="20" font-weight="400" fill="#40526B">Reviewed task pull requests</text>
 <text x="118" y="430" font-size="20" font-weight="400" fill="#40526B">Shared integration branch</text>
-<text x="510" y="373" font-size="16" font-weight="650" fill="#0A6E9B">02</text>
-<rect x="96" y="500" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-<rect x="96" y="520" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<rect x="96" y="500" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="520" width="4" height="68" rx="2" fill="#0A6E9B"/>
 <text x="118" y="534" font-size="25" font-weight="650" fill="#132238">main</text>
 <text x="118" y="564" font-size="20" font-weight="400" fill="#40526B">Reviewed release pull requests</text>
 <text x="118" y="590" font-size="20" font-weight="400" fill="#40526B">Only develop promotes to main</text>
-<text x="510" y="533" font-size="16" font-weight="650" fill="#0A6E9B">03</text>
-<rect x="96" y="660" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-<rect x="96" y="680" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<rect x="96" y="660" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="680" width="4" height="68" rx="2" fill="#0A6E9B"/>
 <text x="118" y="694" font-size="25" font-weight="650" fill="#132238">Hostinger</text>
-<text x="118" y="724" font-size="20" font-weight="400" fill="#40526B">Native deployment</text>
-<text x="118" y="750" font-size="20" font-weight="400" fill="#40526B">Existing managed hosting</text>
-<text x="510" y="693" font-size="16" font-weight="650" fill="#0A6E9B">04</text>
+<text x="118" y="724" font-size="20" font-weight="400" fill="#40526B">Native managed deployment</text>
+<text x="118" y="750" font-size="20" font-weight="400" fill="#40526B">Assistant remains disabled</text>
 <path d="M 320 288 V 340" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
 <path d="M 320 448 V 500" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
 <path d="M 320 608 V 660" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<rect x="48" y="850" width="544" height="720" rx="20" fill="#EEF3FA" stroke="#CBD5E1" stroke-width="1.5"/>
-<text x="70" y="882" font-size="17" font-weight="650" fill="#40526B">REQUIRED ON EACH PULL REQUEST</text>
-<path d="M 320 314 H 24 V 900 H 48" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="7 6"/>
-<path d="M 320 474 H 24" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="7 6"/>
-<rect x="96" y="920" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-<rect x="96" y="940" width="4" height="68" rx="2" fill="#0A6E9B"/>
-<text x="118" y="954" font-size="25" font-weight="650" fill="#132238">Quality · development</text>
-<text x="118" y="984" font-size="20" font-weight="400" fill="#40526B">Repository · Lint · Types · Build</text>
-<text x="118" y="1010" font-size="20" font-weight="400" fill="#40526B">Budgets · Rendered routes</text>
-<text x="510" y="953" font-size="16" font-weight="650" fill="#0A6E9B">05</text>
-<rect x="96" y="1060" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-<rect x="96" y="1080" width="4" height="68" rx="2" fill="#0A6E9B"/>
-<text x="118" y="1094" font-size="25" font-weight="650" fill="#132238">Browser verification ×8</text>
-<text x="118" y="1124" font-size="20" font-weight="400" fill="#40526B">Playwright · axe</text>
-<text x="118" y="1150" font-size="20" font-weight="400" fill="#40526B">Desktop and mobile</text>
-<text x="510" y="1093" font-size="16" font-weight="650" fill="#0A6E9B">06</text>
-<rect x="96" y="1200" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-<rect x="96" y="1220" width="4" height="68" rx="2" fill="#0A6E9B"/>
-<text x="118" y="1234" font-size="25" font-weight="650" fill="#132238">Hosting compatibility</text>
-<text x="118" y="1264" font-size="20" font-weight="400" fill="#40526B">Independent compatibility job</text>
-<text x="118" y="1290" font-size="20" font-weight="400" fill="#40526B">Hostinger · GLIBC 2.28 build</text>
-<text x="510" y="1233" font-size="16" font-weight="650" fill="#0A6E9B">07</text>
-<rect x="96" y="1420" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-<rect x="96" y="1440" width="4" height="68" rx="2" fill="#0A6E9B"/>
-<text x="118" y="1454" font-size="25" font-weight="650" fill="#132238">Quality checks</text>
-<text x="118" y="1484" font-size="20" font-weight="400" fill="#40526B">Required aggregate gate</text>
-<text x="118" y="1510" font-size="20" font-weight="400" fill="#40526B">Rejects skipped or failed jobs</text>
-<text x="510" y="1453" font-size="16" font-weight="650" fill="#0A6E9B">08</text>
-<path d="M 320 1028 V 1060" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<path d="M 544 1114 H 568 V 1380 H 320 V 1420" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<path d="M 320 1308 V 1420" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<text x="72" y="1608" font-size="19" font-weight="400" fill="#40526B">Source integration is not assistant activation.</text>
-</g>
-</svg>
+<rect x="32" y="830" width="576" height="1400" rx="20" fill="#EEF3FA" stroke="#CBD5E1" stroke-width="1.5"/>
+<text x="54" y="865" font-size="17" font-weight="650" fill="#0A6E9B">CI / TASK AND RELEASE PULL REQUESTS</text>
+<text x="96" y="899" font-size="20" font-weight="400" fill="#40526B">Three independent starting jobs</text>
+<rect x="96" y="920" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="940" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="954" font-size="25" font-weight="650" fill="#132238">Workflow validation</text>
+<text x="118" y="984" font-size="20" font-weight="400" fill="#40526B">Actionlint · Workflow structure</text>
+<text x="118" y="1010" font-size="20" font-weight="400" fill="#40526B">Negative fixtures</text>
+<rect x="96" y="1060" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="1080" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="1094" font-size="25" font-weight="650" fill="#132238">Secret scan</text>
+<text x="118" y="1124" font-size="20" font-weight="400" fill="#40526B">Tracked files · Complete history</text>
+<text x="118" y="1150" font-size="20" font-weight="400" fill="#40526B">Independent source scan</text>
+<rect x="96" y="1200" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="1220" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="1234" font-size="25" font-weight="650" fill="#132238">Quality checks</text>
+<text x="118" y="1264" font-size="20" font-weight="400" fill="#40526B">Architecture · Contracts · Units</text>
+<text x="118" y="1290" font-size="20" font-weight="400" fill="#40526B">Lint · Types · Dependency audit</text>
+<rect x="96" y="1400" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="1420" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="1434" font-size="25" font-weight="650" fill="#132238">Build</text>
+<text x="118" y="1464" font-size="20" font-weight="400" fill="#40526B">One synthetic-enabled build</text>
+<text x="118" y="1490" font-size="20" font-weight="400" fill="#40526B">Verified archive + browser plan</text>
+<rect x="96" y="1540" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="1560" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="1574" font-size="25" font-weight="650" fill="#132238">Hosting contract · OFF</text>
+<text x="118" y="1604" font-size="20" font-weight="400" fill="#40526B">Hostinger · GLIBC 2.28</text>
+<text x="118" y="1630" font-size="20" font-weight="400" fill="#40526B">Disabled features · Build · Smoke</text>
+<rect x="96" y="1720" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="1740" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="1754" font-size="25" font-weight="650" fill="#132238">Browser tests ×8</text>
+<text x="118" y="1784" font-size="20" font-weight="400" fill="#40526B">Playwright · axe</text>
+<text x="118" y="1810" font-size="20" font-weight="400" fill="#40526B">Desktop and mobile</text>
+<rect x="96" y="1860" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="1880" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="1894" font-size="25" font-weight="650" fill="#132238">Performance checks</text>
+<text x="118" y="1924" font-size="20" font-weight="400" fill="#40526B">Bundle budgets</text>
+<text x="118" y="1950" font-size="20" font-weight="400" fill="#40526B">Server-rendered routes</text>
+<path d="M 320 1308 V 1400" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M 544 1254 H 566 V 1594 H 544" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M 544 1454 H 590 V 1914 H 544" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M 590 1774 H 544" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M 96 974 H 64" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<path d="M 96 1114 H 64" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<path d="M 96 1254 H 64" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<path d="M 96 1454 H 64" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<path d="M 96 1594 H 64" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<path d="M 96 1774 H 64" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<path d="M 96 1914 H 64" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<path d="M 64 974 V 2134 H 96" fill="none" stroke="#526A88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<rect x="96" y="2080" width="448" height="108" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><rect x="96" y="2100" width="4" height="68" rx="2" fill="#0A6E9B"/>
+<text x="118" y="2114" font-size="25" font-weight="650" fill="#132238">Required checks</text>
+<text x="118" y="2144" font-size="20" font-weight="400" fill="#40526B">Always runs · Requires success</text>
+<text x="118" y="2170" font-size="20" font-weight="400" fill="#40526B">All seven jobs; no skips or failures</text>
+<text x="96" y="2020" font-size="20" font-weight="400" fill="#40526B">Dashed rail: all seven job results.</text>
+<text x="54" y="2270" font-size="20" font-weight="400" fill="#40526B">Synthetic CI is not assistant activation.</text>
+</g></svg>

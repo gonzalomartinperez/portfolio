@@ -68,15 +68,20 @@ hashes improve repeatability; they do not establish that a dependency is safe.
 CI uses SHA-pinned actions, read-only permissions, complementary quality, browser
 and hosting jobs, the npm bundled with each Node version, and an npm download cache keyed by the lockfile.
 The development lane reads `.nvmrc`; the hosting lane pins the observed Node 24.6.0.
-Corepack is not invoked. The required `Quality checks`
-gate fails if any required lane fails or is skipped/cancelled. CI never caches
-`node_modules`. The eight isolated browser groups reuse the quality lane's
-production build on compatible Linux runners; the hosting lane builds independently.
-Obsolete runs are cancelled and each run has a timeout. Local and development CI use the same `check`:
-repository invariants, lint and one production build with mandatory TypeScript
-validation. Standalone `typecheck` remains available for fast iteration. No redundant standalone whole-application type check precedes the build; the
-assistant retains its additional strict scoped check. `build` invokes only Next.js,
-so Hostinger does not need to execute Biome's incompatible native binary. Next.js
+Corepack is not invoked. The full `Required checks` gate rejects any failed,
+skipped or cancelled responsibility. The new full aggregate was enforced before
+retiring the temporary forwarding job; see the
+[CI specification](specs/paired-ci-profiles.md). CI never caches `node_modules`.
+Eight isolated browser groups reuse one source/configuration/run-bound enabled
+build; hosting builds its disabled compatibility variant independently. Integrity
+verification precedes archive extraction. Obsolete Core runs are cancelled and
+all jobs have bounded timeouts.
+
+Local `check` combines `check:quality`, the production build and budgets. Static
+quality includes whole-application types before dependent jobs, plus the assistant's
+additional strict scoped check. This small type-only pass lets hosting and build
+wait for verified source; Next also keeps its mandatory build validation. `build`
+invokes only Next.js, so Hostinger does not execute Biome's native binary. Next.js
 type validation remains enabled. Production uses the supported Webpack build option;
 development retains Turbopack. The JavaScript module `next.config.mjs` retains
 JSDoc type checking without requiring SWC configuration transpilation.

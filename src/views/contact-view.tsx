@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { ContactLinks } from "@/components/contact-links";
-import { PageHeader } from "@/components/page-header";
-import { buttonVariants } from "@/components/ui/button";
-import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
-import { cn } from "@/lib/utils";
+import { ContactLinks } from "@/shared/contact/contact-links";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { cn } from "@/shared/styles/cn";
+import { buttonVariants } from "@/shared/ui/button";
+import { cardVariants } from "@/shared/ui/card";
 import styles from "./contact.module.css";
 
 export function ContactView({ locale }: { locale: Locale }) {
@@ -21,7 +21,7 @@ export function ContactView({ locale }: { locale: Locale }) {
 
       <section className="section-tight frame">
         <div className={styles.columns}>
-          <div>
+          <div data-analytics-region="contact-channels" data-analytics-exposure="contact-channels">
             <ContactLinks channels={contactChannels} />
 
             <div className="prose flow">
@@ -33,7 +33,12 @@ export function ContactView({ locale }: { locale: Locale }) {
             </div>
           </div>
 
-          <aside data-slot="card" className={cn(cardVariants(), styles.panel)}>
+          <aside
+            data-slot="card"
+            className={cn(cardVariants(), styles.panel)}
+            data-analytics-region="contact-resume"
+            data-analytics-exposure="contact-resume"
+          >
             <h2 className={styles.panelTitle}>{copy.contact.resumeHeading}</h2>
             <div className={styles.downloads}>
               <Link

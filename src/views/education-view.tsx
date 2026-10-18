@@ -1,16 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "@/components/external-link";
-import { MetricList } from "@/components/metric-list";
-import { PageHeader } from "@/components/page-header";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { CardTitle, cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { academicAreas, academicCatalogue, academicEntry } from "@/content/academic-catalogue";
 import { type Locale, localePath } from "@/content/locales";
 import documents from "@/content/public-documents.json";
-import { cn } from "@/lib/utils";
+import { MetricList } from "@/shared/editorial/metric-list";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { ExternalLink } from "@/shared/navigation/external-link";
+import { cn } from "@/shared/styles/cn";
+import { Badge } from "@/shared/ui/badge";
+import { buttonVariants } from "@/shared/ui/button";
+import { CardTitle, cardVariants } from "@/shared/ui/card";
 import styles from "./education.module.css";
 
 const credentialMarks: Record<string, string> = {
@@ -71,7 +71,11 @@ export function EducationView({ locale }: { locale: Locale }) {
         </nav>
       </PageHeader>
 
-      <section className="section-tight frame">
+      <section
+        className="section-tight frame"
+        data-analytics-region="education-degree"
+        data-analytics-exposure="education-degree"
+      >
         <article data-slot="card" className={cn(cardVariants(), styles.degree)}>
           <ExternalLink
             className={styles.institutionLogo}
@@ -109,7 +113,7 @@ export function EducationView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="section-tight frame">
+      <section className="section-tight frame" data-analytics-exposure="education-curriculum">
         <div className="section-head">
           <p className="eyebrow">{copy.education.curriculumEyebrow}</p>
           <h2 id="curriculum">{copy.education.curriculumHeading}</h2>
@@ -232,7 +236,10 @@ export function EducationView({ locale }: { locale: Locale }) {
 
       <section className="section-tight frame">
         <div className={styles.columns}>
-          <div>
+          <div
+            data-analytics-region="education-credentials"
+            data-analytics-exposure="education-credentials"
+          >
             <div className="section-head">
               <p className="eyebrow">{copy.education.certificationsEyebrow}</p>
               <h2 id="credentials">{copy.education.certificationsHeading}</h2>
@@ -294,7 +301,11 @@ export function EducationView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="section-tight frame">
+      <section
+        className="section-tight frame"
+        data-analytics-exposure="education-evidence"
+        data-analytics-region="education-evidence"
+      >
         <div className="section-head">
           <p className="eyebrow">{copy.education.evidenceEyebrow}</p>
           <h2 id="evidence">{copy.education.evidenceHeading}</h2>

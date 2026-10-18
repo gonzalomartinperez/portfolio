@@ -2,10 +2,10 @@ import { Bot, Boxes, PanelsTopLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import portrait from "@/assets/portrait.avif";
-import { PageHeader } from "@/components/page-header";
-import { buttonVariants } from "@/components/ui/button";
 import { getContent } from "@/content";
 import { type Locale, localePath } from "@/content/locales";
+import { PageHeader } from "@/shared/editorial/page-header";
+import { buttonVariants } from "@/shared/ui/button";
 import styles from "./about.module.css";
 
 export function AboutView({ locale }: { locale: Locale }) {
@@ -18,13 +18,24 @@ export function AboutView({ locale }: { locale: Locale }) {
       <PageHeader eyebrow={copy.about.eyebrow} intro={copy.about.intro} title={copy.about.title} />
 
       <section
+        data-analytics-region="about-story"
+        data-analytics-exposure="about-story"
         aria-label={copy.about.eyebrow}
         className={`section-tight frame ${styles.introduction}`}
       >
         <div className={styles.split}>
           <div className="prose">
-            {copy.about.paragraphs.map((paragraph) => (
-              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            {copy.about.paragraphs.map((paragraph, paragraphIndex) => (
+              <p key={paragraph.slice(0, 40)}>
+                {paragraphIndex === 0 ? (
+                  <span
+                    aria-hidden="true"
+                    style={{ position: "absolute", width: 1, height: 1, pointerEvents: "none" }}
+                    data-analytics-exposure-target=""
+                  />
+                ) : null}
+                {paragraph}
+              </p>
             ))}
           </div>
 
@@ -85,7 +96,12 @@ export function AboutView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section aria-labelledby="about-focus-heading" className="section-tight frame">
+      <section
+        aria-labelledby="about-focus-heading"
+        className="section-tight frame"
+        data-analytics-region="about-focus"
+        data-analytics-exposure="about-focus"
+      >
         <div className="section-head">
           <p className="eyebrow">{copy.about.focusEyebrow}</p>
           <h2 id="about-focus-heading">{copy.about.focusHeading}</h2>
@@ -104,7 +120,12 @@ export function AboutView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section aria-labelledby="about-principles-heading" className="section-tight frame">
+      <section
+        aria-labelledby="about-principles-heading"
+        className="section-tight frame"
+        data-analytics-region="about-principles"
+        data-analytics-exposure="about-principles"
+      >
         <div className="section-head">
           <p className="eyebrow">{copy.about.principlesEyebrow}</p>
           <h2 id="about-principles-heading">{copy.about.principlesHeading}</h2>
@@ -128,6 +149,8 @@ export function AboutView({ locale }: { locale: Locale }) {
 
       <section
         aria-labelledby="about-looking-heading"
+        data-analytics-region="about-opportunities"
+        data-analytics-exposure="about-opportunities"
         className={`section-tight frame ${styles.looking}`}
       >
         <div className="section-head">

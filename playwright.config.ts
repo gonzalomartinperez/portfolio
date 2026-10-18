@@ -47,6 +47,16 @@ export default defineConfig({
       testMatch: "assistant.spec.ts",
       use: { ...devices["Desktop Safari"], viewport: { width: 1440, height: 1000 } },
     },
+    {
+      name: "analytics-firefox",
+      testMatch: "analytics-interactions.spec.ts",
+      use: { ...devices["Desktop Firefox"], viewport: { width: 1440, height: 1000 } },
+    },
+    {
+      name: "analytics-webkit",
+      testMatch: "analytics-interactions.spec.ts",
+      use: { ...devices["Desktop Safari"], viewport: { width: 1440, height: 1000 } },
+    },
   ],
   webServer: externalOrigin
     ? undefined

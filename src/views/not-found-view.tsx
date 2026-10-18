@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { Mark } from "@/components/mark";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { cardVariants } from "@/components/ui/card";
 import { getContent } from "@/content";
 import { chrome } from "@/content/chrome";
 import { type Locale, localePath } from "@/content/locales";
-import { cn } from "@/lib/utils";
+import { Mark } from "@/shared/identity/mark";
+import { cn } from "@/shared/styles/cn";
+import { Badge } from "@/shared/ui/badge";
+import { buttonVariants } from "@/shared/ui/button";
+import { cardVariants } from "@/shared/ui/card";
 import styles from "./not-found.module.css";
 
 export function NotFoundView({ locale }: { locale: Locale }) {

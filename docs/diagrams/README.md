@@ -10,7 +10,7 @@ maps or evidence that an optional service is active.
 | --- | --- | --- | --- |
 | Application context | What does this site own, and where does it connect? Top-to-bottom layers separate reviewed inputs, application composition, deployment and an independently gated API integration. | [Mermaid](architecture-overview.mmd) | [Light](architecture-overview-light.svg) · [Dark](architecture-overview-dark.svg) |
 | Solar rendering | How does the scene become ready while protecting reading? A top-to-bottom pipeline distinguishes preparation, independent mask input, the first-frame crossfade and quality feedback. | [Mermaid](solar-rendering.mmd) | [Light](solar-rendering-light.svg) · [Dark](solar-rendering-dark.svg) |
-| Delivery and quality | How does reviewed code reach the site? Task and release pull requests pass quality, browser and hosting checks before protected integration. Native hosting remains separate from assistant activation. | [Mermaid](delivery-flow.mmd) | [Light](delivery-flow-light.svg) · [Dark](delivery-flow-dark.svg) |
+| Delivery and quality | How does reviewed code reach the site? Task and release pull requests share one build across eight browser groups and performance checks. Independent workflow, secret and quality jobs feed an explicit aggregate; the hosting contract keeps optional features off. | [Mermaid](delivery-flow.mmd) | [Light](delivery-flow-light.svg) · [Dark](delivery-flow-dark.svg) |
 
 ## Reading the diagrams
 
@@ -32,6 +32,31 @@ preparation feed the render pass separately from the reading mask. Quality adapt
 feeds back into the same renderer. A fallback remains available under reduced motion,
 unavailable WebGL, texture failure or context loss; hidden tabs suspend rendering.
 The [solar specification](../specs/immersive-solar-scene.md) holds the detailed behavior.
+
+## Delivery dependency graph
+
+The delivery view follows `.github/workflows/ci.yml`: **Workflow validation**,
+**Secret scan** and **Quality checks** start independently. Quality unlocks
+**Build** and **Hosting contract**; Build unlocks **Browser tests** (eight groups)
+and **Performance checks** (bundle budgets and server-rendered routes). The build
+archive is normalized and scanned before transfer, then its provenance is verified
+before extraction and local restoration. It is a synthetic-enabled CI artifact,
+not a production deployment or an activation decision. The separate hosting build
+keeps assistant and analytics disabled and checks the observed GLIBC 2.28 baseline.
+
+Solid arrows within the CI panel are job dependencies. The dashed collector on the
+left represents seven separate `needs` edges into **Required checks**, including
+the upstream jobs as well as the leaf jobs. It is not a sequential job chain.
+The aggregate always runs and requires every result to be `success`; skipped,
+cancelled or failed prerequisites cannot satisfy it. **Quality checks** is the source-quality job. **Required checks** is the full
+protected aggregate; the temporary legacy forwarding job has been retired after
+the aggregate was added to both protected branches.
+
+Branch arrows describe the protected task → develop → release → main workflow and
+native Hostinger delivery, not CI jobs or automatic permission to deploy. Nightly
+has its own frozen-candidate run and aggregate; it is not a required pull-request
+prerequisite and is not included in this Core CI graph. Source integration never
+activates the assistant.
 
 ## Editing and review
 

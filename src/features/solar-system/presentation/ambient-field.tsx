@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { usePageMotionPaused } from "../../../lib/motion-state";
+import { usePageMotionPaused } from "../../../shared/motion/motion-state";
 import type { SolarTextureVersions } from "../domain/solar-system-scene";
 import styles from "./ambient-field.module.css";
 import { SolarSystem } from "./solar-system";
