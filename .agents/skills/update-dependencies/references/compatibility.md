@@ -28,7 +28,7 @@ another owner's test report remains attributed evidence, not local verification.
 | Next or SWC | Exact Next/SWC WASM versions and root lock entries, local `node_modules/next/dist/docs/` API guidance, full strict build and GLIBC compatibility lane. Native compiler loading and successful WASM fallback are different observations. |
 | TypeScript | Existing compiler API consumers, tooling workspace, strict application and assistant builds. A successful CLI type check does not establish compatibility with a removed JavaScript compiler API. |
 | Playwright | Exact CLI package/root lock and browser image version plus verified registry digest. Install the browsers for that CLI; do not invent a digest or reuse an old image with a new version label. Keep full Chromium, Headless Shell, Firefox and WebKit coverage. In this shared WSL workspace, set `PLAYWRIGHT_SKIP_BROWSER_GC=1` or use an isolated `PLAYWRIGHT_BROWSERS_PATH` when installing; default garbage collection can remove another active session's older browser revision. Do not clean the shared cache while peers are testing. |
-| Contract tooling | Its own `tooling/api-contract` manifest and lock, frozen generation and audit. Regeneration must not introduce unexplained tracked schema drift. |
+| Contract tooling | Its own `tools/api-contract` manifest and lock, frozen generation and audit. Regeneration must not introduce unexplained tracked schema drift. |
 | Other build tools | Relevant native binaries, exact package/lock versions, platform selectors and hosting build. Parser choices need to satisfy local Node baselines; no shared parser framework is required across repos. |
 
 Do not modify application runtime services, production configuration or feature

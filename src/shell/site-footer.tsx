@@ -1,14 +1,14 @@
 "use client";
 
+import { defaultLocale, type Locale, localePath } from "@config/locales";
+import { navigationPath } from "@config/routes";
+import { email } from "@config/site";
+import { chrome } from "@content/chrome";
+import { contactChannels, contactLinks, profile } from "@content/en/profile";
+import { contactChannels as spanishContactChannels } from "@content/es/profile";
+import { privacy } from "@content/privacy";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { chrome } from "@/content/chrome";
-import { contactChannels, contactLinks, profile } from "@/content/en/profile";
-import { contactChannels as spanishContactChannels } from "@/content/es/profile";
-import { defaultLocale, type Locale, localePath } from "@/content/locales";
-import { privacy } from "@/content/privacy";
-import { navigationPath } from "@/content/routes";
-import { email } from "@/content/site-config";
 import { ExternalLink } from "@/shared/navigation/external-link";
 import { SolarExplorer } from "../features/solar-system/presentation/solar-explorer";
 import { ContactIcons } from "../shared/contact/contact-links";

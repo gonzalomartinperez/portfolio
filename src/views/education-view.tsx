@@ -1,9 +1,9 @@
+import { type Locale, localePath } from "@config/locales";
+import { getContent } from "@content";
+import { academicAreas, academicCatalogue, academicEntry } from "@content/academic-catalogue";
+import documents from "@content/public-documents.json";
 import Image from "next/image";
 import Link from "next/link";
-import { getContent } from "@/content";
-import { academicAreas, academicCatalogue, academicEntry } from "@/content/academic-catalogue";
-import { type Locale, localePath } from "@/content/locales";
-import documents from "@/content/public-documents.json";
 import { MetricList } from "@/shared/editorial/metric-list";
 import { PageHeader } from "@/shared/editorial/page-header";
 import { ExternalLink } from "@/shared/navigation/external-link";

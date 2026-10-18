@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { expect, test } from "@playwright/test";
-import documents from "../../src/content/public-documents.json" with { type: "json" };
+import documents from "../../content/public-documents.json" with { type: "json" };
 import { captureSettledPage } from "./capture";
 
 test("CV and contact downloads use reviewed content hashes as cache keys", async ({

@@ -1,4 +1,4 @@
-import type { Metric } from "@/content/types";
+import type { Metric } from "@content/types";
 
 /** Renders figures with their qualifier. The qualifier is never optional — see content/types.ts. */
 export function MetricList({ metrics }: { metrics: readonly Metric[] }) {

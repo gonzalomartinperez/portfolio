@@ -30,8 +30,12 @@ description: Implement a requested portfolio feature or refactor with focused Ne
 6. Add targeted tests when behavior is introduced. Run npm run check and git diff --check, plus relevant production and visual checks. Record what could not be verified.
    For analytics/privacy changes, use the committed [event contract](../../../docs/specs/product-analytics.md)
    and [isolated verification commands](../../../docs/development.md#isolated-analytics-verification).
-   Keep independent build gates off in production; use only synthetic loopback sinks
-   for enabled QA. Notices must follow actual flags, storage and known processors,
+   Keep independent build gates off in production. Use synthetic loopback sinks
+   for ordinary enabled QA. An explicitly authorized end-to-end acceptance may use
+   the disposable native API/PostgreSQL/backoffice fixture described in
+   [real-flow verification](../../../docs/verification/analytics-real-flow.md); it
+   requires owned ports, a fresh database, isolated viewer credentials, no provider
+   keys and read-only receipt comparison. Do not treat intercepted replies as that proof. Notices must follow actual flags, storage and known processors,
    without treating a cookieless configuration as a consent exemption.
    Select responsive, document and motion cases from the
    [task-specific QA matrix](../../../docs/development.md#task-specific-qa), including

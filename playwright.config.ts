@@ -61,7 +61,7 @@ export default defineConfig({
   webServer: externalOrigin
     ? undefined
     : {
-        command: "node scripts/browser-test-server.ts",
+        command: "node tools/browser-test-server.ts",
         url: `https://127.0.0.1:${port}`,
         ignoreHTTPSErrors: true,
         reuseExistingServer: false,

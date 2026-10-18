@@ -1,80 +1,93 @@
-# Named shared capabilities and complete module placement
+# Shared physical site architecture
 
-Status: in-progress
+Status: local and native acceptance recorded; final protected promotion pending
 
 ## Outcome and scope
 
-Keep the portfolio's routes, content, motion, documents and disabled public assistant
-unchanged while making module ownership explicit and enforceable. This is the public
-site's slice of the coordinated seven-repository architecture plan accepted on
-2026-10-18. Other repositories retain their own implementation and release ownership.
-Career authoring and the GitHub profile are outside this physical migration.
+Complete the paired-site physical layout while preserving public content, all
+routes, responsive presentation, motion, documents and independently disabled
+assistant/analytics defaults. This extends the earlier named-capability migration;
+that historical checkpoint is retained below with its original limits. Other
+repositories retain their own source, runtime and release ownership.
 
 ## Acceptance criteria
 
-- **AC-1:** Shared primitives and reused presentation live under named `src/shared`
-  capabilities. Existing CSS, media bytes, public URLs and accessible semantics remain
-  unchanged; there is one motion store and no compatibility barrel or duplicate copy.
-- **AC-2:** Gallery, catalogue and carousel UI and assistant display copy live in their
-  feature's `presentation`. All source, generator, script, test, documentation and
-  skill consumers resolve the new paths. Existing explicit feature entries remain
-  narrow; server composition stays server-only.
-- **AC-3:** Every supported owned code module, including importless and alternative
-  suffix modules, is classified. Unknown roots, features, shared capabilities,
-  feature layers and undeclared root facades fail the architecture check. Exact
-  temporary exceptions have owners, reasons, consumers and removal conditions.
-- **AC-4:** Domain and application code reject ambient clock reads, while injected
-  clocks, deterministic date conversion and legitimate outer timing pass. Existing
-  import, cycle, type-only and transitive client/server checks remain enforced.
-- **AC-5:** Existing routes in both languages and themes, document downloads, native
-  scrolling, diagrams, lazy scenes, carousel and assistant fixture interactions
-  retain their behavior. Public assistant and analytics activation remain separate
-  decisions. No dependency, runtime pin, timeout or retry changes. Retain existing transfer gates, with the explicitly accepted portfolio CSS limit adjustment from 24 to 25 KiB described below.
-- **AC-6:** The task passes the existing protected checks and independent review before
-  integration. A subsequent protected release and post-main checks precede the final
-  version-tag transition. Synthetic client tests do not substitute for the separately
-  pending real API-to-database-to-authorized-backoffice analytics acceptance.
+- **AC-1:** Execute the mapped 119 moves exactly once. Every old path has one new
+  destination; all active imports, generators, commands, tests, CI, skills and links
+  resolve. No compatibility duplicates, empty layers or unrelated source changes.
+- **AC-2:** Use root `config`, `content`, `contracts`, `media` and `tools`, with
+  `src/app`, `views`, `shell`, named `features` and `shared` capabilities. Tests
+  belong to actual `unit`, `browser`, `helpers`, `integration` and `rollout` roles.
+  Enforce the [placement decision](../adr/site-architecture-parity.md).
+- **AC-3:** Inventory every production module and exact frozen input. Reject
+  unregistered and legacy roots, forbidden layer dependencies, cycles and
+  transitive client/server leaks through relative, dynamic, re-export and type
+  imports. Alias support must match TypeScript, including bare `@content`.
+  Preserve clock/effect checks and paired failing/passing fixtures.
+- **AC-4:** Preserve all imported contract/provenance bytes, public JSON, image
+  source bytes, PDFs, dependency versions/locks, protected contexts, test cases,
+  budgets, retries and deadlines. Historical `commit:path` references stay historical.
+- **AC-5:** Run source checks, production build and browser acceptance for the new
+  candidate. Compare browser discovery by config/project/full title/mapped file,
+  not an opaque ID that can change with test-helper relocation. Retain original
+  failures and describe unresolved evidence accurately.
+- **AC-6:** Verify native browser delivery through the disposable real API, fresh
+  PostgreSQL and authorized backoffice, using the
+  [separate real-flow procedure](../verification/analytics-real-flow.md). Join the
+  browser receipt to API-owned fixed read-only counts. No provider calls, production
+  credentials, deployment or feature activation.
+- **AC-7:** Independent exact-source review and protected task/develop/release/main
+  checks precede the final annotated `v1.0.0` transition and delivery closeout.
 
-## Design and decisions
+## Current implementation and evidence
 
-Framework adapters remain in `src/app`, page composition in `src/views` and persistent
-presentation in `src/shell`. Features keep only layers they actually need. Shared
-capabilities are `ui`, `styles`, `motion`, `identity`, `technology`, `navigation`,
-`contact` and `editorial`; none may depend on feature or page composition. Generic
-primitives and motion/styles remain independent of reviewed product content. Shared
-editorial and identity renderers may consume their existing neutral content types.
+The external consumer map records all 119 original paths, destinations and original
+SHA-256 hashes against `b06c81e302f007fa1f353ad306f4a5ea3331b534`.
+33 content files, four config files, nine contract files and three identity inputs
+are registered explicitly. Two former content modules belong to the solar feature:
+its pure texture contract and server-only texture-version adapter. The new entry
+exposes that adapter only to server composition.
 
-Keep the current 39 content files, nine imported contract files and three source
-images as exact transitional exceptions. Moving their authoring, generation and
-image consumers is a separate cutover; blanket root exemptions would conceal new
-unowned modules. Public contract bytes and provenance must remain unchanged. The
-public wire contract is not private configuration merely because it is generated.
+The canonical skills remain `specify-feature`, `implement-feature` and
+`prepare-delivery`, with real task-specific additions and relative Claude adapters.
+No site Docker runtime is invented: Hostinger managed Node remains the actual
+portfolio host, with its existing CI compatibility container. Google engineering
+review practices and the Microsoft Engineering Playbook inform the local standards;
+they do not override repository formatting, product ownership or runtime contracts.
 
-The existing Babel parser is sufficient. Paired failing and passing fixtures precede
-the source move. Scope-aware clock checks must not confuse an injected `performance`
-parameter with an ambient global. The guard remains a bounded source policy, not a
-sandbox or proof of arbitrary program purity. This site's existing CI transfer
-profile intentionally rejects Server Actions; it does not impose that restriction
-on the separately owned backoffice.
+At cutover source `12e68c662b855422411ffdfd1d5334f6b4b0e086`, independent review
+verified the 119-move bijection and unchanged frozen inputs. Four representative
+negative fixtures failed against the old guard; all 38 current architecture
+fixtures and the real-source audit passed. The full production check generated
+27 pages and passed all 12 budgets. Secret enforcement passed 15 fixtures, 709
+tracked files and fetched history. Browser discovery remained exactly 498 cases
+by project, mapped file and full title. Normalized comparison of 167 application
+modules found only intended import/path changes and the explicit solar server
+facade; it is not a general proof about arbitrary import side effects.
 
-## Delivery plan
+Protected task CI run 39163226470 passed all 15 jobs, including the eight browser
+groups, hosting compatibility and aggregate. The additional branch-policy and
+dependency reviews also passed. These results belong to the named cutover source;
+new verification-tool/configuration/documentation changes require their own checks.
 
-1. Freeze the analytics task separately and map consumers from its reviewed candidate.
-   This task started from protected `develop`. While service acceptance was pending,
-   it fast-forwarded locally to the already reviewed analytics candidate `193e1e6`
-   and restored the migration through a three-way application of its saved changes.
-   This allows combined source verification without integrating the draft analytics
-   PR prematurely. After analytics acceptance, adopt the protected `develop` merge
-   before opening this task's PR; neither protected branch is rewritten. Analytics PR #163 was accepted through protected merge `190d276` on 2026-10-18, and this task adopted that merge with no source conflicts.
-2. Record baseline failing placement/effect fixtures and positive controls. Implement
-   placement and dependency rules in a separate owned worktree, then integrate them.
-3. Move shared and feature presentation files together with all active consumers.
-   Preserve historical secret-scanner fingerprints and evidence source identities.
-4. Restore locked dependencies in this worktree during a coordinated resource window.
-   Run architecture and repository checks, the existing production quality pipeline,
-   affected browser checks, artifact/source scans and independent exact-source review.
-5. Use protected task and release PRs. Reconcile final documentation, evidence and tag
-   only after all required checks and the separately owned service handoff complete.
+The second disposable native run passed without retry and retained a closed
+18-event browser ledger. Independent API-owned SQL matched four semantic and 14
+interaction events, three page views, and zero country attribution, conversations,
+messages or provider-spend rows. Authenticated backoffice assertions covered the
+reviewed filters, grid and presentation. See the [executed native acceptance](../verification/analytics-real-flow.md#executed-acceptance-on-2026-10-18)
+for exact source revisions, the preserved first-run evidence gap and teardown.
+
+The external API RAG reader must accept both legacy `src/content/{en,es}` and new
+`content/{en,es}` projection paths before public main promotion. This compatibility
+handoff, the final verification-tool checks, protected task/develop/release/main
+checks and the final annotated tag remain delivery gates. No earlier release or
+fixture run substitutes for those gates.
+
+## Historical named-capability checkpoint
+
+The following record predates the physical-root cutover. Its pending items describe
+that checkpoint, not current acceptance, and its native-service receipt belongs to
+the older explicitly named source revisions.
 
 ## Accepted transfer-budget adjustment
 

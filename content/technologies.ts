@@ -1,0 +1,2693 @@
+import type { Locale } from "../config/locales";
+import type { StackGroup } from "./types";
+
+export type Technology = {
+  id: string;
+  name: string;
+  category: string;
+  kind: "brand" | "concept";
+  status: "applied" | "developing";
+  evidence: { label: string; href: string }[];
+  icon?: string;
+  aliases?: string[];
+};
+
+export const technologyCatalog: Technology[] = [
+  {
+    id: "solidity",
+    name: "Solidity",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+    icon: "solidity",
+  },
+  {
+    id: "llmops",
+    name: "LLMOps",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Large Language Model Operations"],
+    evidence: [{ label: "Experience & projects", href: "/work" }],
+  },
+  {
+    id: "fine-tuning",
+    name: "Fine-tuning",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Fine tuning"],
+    evidence: [{ label: "Experience & projects", href: "/work" }],
+  },
+  {
+    id: "ai-chains",
+    name: "AI Chains",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    aliases: ["LLM chains"],
+    evidence: [{ label: "Experience & projects", href: "/work" }],
+  },
+  {
+    id: "ai-testing",
+    name: "AI Testing",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Experience & projects", href: "/work" }],
+  },
+  {
+    id: "embeddings",
+    name: "Embeddings",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Text embeddings"],
+    evidence: [{ label: "Experience & projects", href: "/work" }],
+  },
+  {
+    id: "chunking",
+    name: "Chunking",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Text splitting"],
+    evidence: [{ label: "Experience & projects", href: "/work" }],
+  },
+  {
+    id: "prompt-engineering",
+    name: "Prompt engineering",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Prompt optimization"],
+    evidence: [{ label: "Experience & projects", href: "/work" }],
+  },
+  {
+    id: "context-engineering",
+    name: "Context engineering",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Context optimization"],
+    evidence: [{ label: "Experience & projects", href: "/work" }],
+  },
+  {
+    id: "server-sent-events",
+    name: "Server-Sent Events",
+    category: "backend",
+    kind: "concept",
+    status: "applied",
+    aliases: ["SSE", "Response streaming"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "transaction-idempotency",
+    name: "Transaction idempotency",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Idempotency"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "transaction-reconciliation",
+    name: "Transaction reconciliation",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "quote-aggregation-routing",
+    name: "Quote aggregation & routing",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Quote aggregation", "Quote routing"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "transaction-signing",
+    name: "Transaction signing",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "google-vertex-ai",
+    name: "Google Vertex AI",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "googlecloud",
+    aliases: ["Vertex AI", "Vertex"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "google-gemini",
+    name: "Google Gemini",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "googlegemini",
+    aliases: ["Gemini", "Gemini API"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "agno",
+    icon: "agno",
+    name: "Agno",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "openai-api",
+    name: "OpenAI API",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "openai",
+    aliases: ["OpenAI"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "graphrag",
+    name: "GraphRAG",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Graph RAG", "Graph-based RAG"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "neo4j",
+    icon: "neo4j",
+    name: "Neo4j",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      { label: "Rampy", href: "/work#rampy" },
+      { label: "Teamcubation", href: "/work#teamcubation" },
+    ],
+  },
+  {
+    id: "llm-provider-fallback",
+    name: "LLM provider fallback",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "alembic",
+    name: "Alembic",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "pytest",
+    name: "pytest",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    icon: "pytest",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "sentry",
+    name: "Sentry",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    icon: "sentry",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "expo",
+    name: "Expo",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    icon: "expo",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "android-studio",
+    icon: "android-studio",
+    name: "Android Studio",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "tanstack-query",
+    name: "TanStack Query",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    icon: "reactquery",
+    aliases: ["React Query"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "zod",
+    name: "Zod",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    icon: "zod",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "viem",
+    icon: "viem",
+    name: "Viem",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "zerodev",
+    icon: "zerodev",
+    name: "ZeroDev",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "vitest",
+    name: "Vitest",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    icon: "vitest",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "agent-harness",
+    name: "Agent harness",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Agent harnesses"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "pydantic-ai",
+    name: "Pydantic AI",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "pydantic",
+    aliases: ["PydanticAI"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "pytorch",
+    name: "PyTorch",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "pytorch",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "tensorflow",
+    name: "TensorFlow",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    icon: "tensorflow",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "pydantic",
+    name: "Pydantic",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    icon: "pydantic",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "sqlalchemy",
+    name: "SQLAlchemy",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    icon: "sqlalchemy",
+    aliases: ["SQL Alchemy"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "sqlmodel",
+    icon: "sqlmodel",
+    name: "SQLModel",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    aliases: ["SQL Model"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "pandas",
+    name: "pandas",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    icon: "pandas",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "numpy",
+    name: "NumPy",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    icon: "numpy",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "typeorm",
+    name: "TypeORM",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    icon: "typeorm",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+      {
+        label: "Cooperativa Obrera",
+        href: "/work#cooperativa-obrera",
+      },
+    ],
+  },
+  {
+    id: "prisma",
+    name: "Prisma",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    icon: "prisma",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+      {
+        label: "Cooperativa Obrera",
+        href: "/work#cooperativa-obrera",
+      },
+    ],
+  },
+  {
+    id: "google-analytics",
+    name: "Google Analytics",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    icon: "googleanalytics",
+    aliases: ["GA", "GA4"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+  },
+  {
+    id: "meta-pixel",
+    name: "Meta Pixel",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    icon: "meta",
+    aliases: ["Facebook Pixel"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+  },
+  {
+    id: "meta-app-events",
+    name: "Meta App Events",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    icon: "meta",
+    aliases: ["Facebook App Events"],
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "microsoft-clarity",
+    icon: "clarity",
+    name: "Microsoft Clarity",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    aliases: ["Clarity Mobile"],
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "firebase-analytics",
+    icon: "firebase",
+    name: "Firebase Analytics",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    aliases: ["Google Analytics for Firebase"],
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "singular-sdk",
+    icon: "singular",
+    name: "Singular SDK",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "product-analytics",
+    name: "Product analytics",
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Tracking", "Event tracking", "Seguimiento de eventos"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+  },
+  {
+    id: "lifi",
+    icon: "lifi",
+    name: "LI.FI",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    aliases: ["LiFi"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "hyperliquid",
+    icon: "hyperliquid",
+    name: "Hyperliquid",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "moonpay",
+    icon: "moonpay",
+    name: "MoonPay",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "cross-chain-bridges",
+    name: "Cross-chain bridges",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Bridges", "Cross-chain bridging"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "fiat-on-ramp",
+    name: "Fiat on-ramp",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Fiat on ramp", "On-ramp"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "fiat-off-ramp",
+    name: "Fiat off-ramp",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Fiat off ramp", "Off-ramp"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "mem0",
+    icon: "mem0",
+    name: "Mem0",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "deepinfra",
+    icon: "deepinfra",
+    name: "DeepInfra",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "agent-evaluation",
+    name: "Agent evaluation",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "reranking",
+    name: "Reranking",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "conversational-memory",
+    name: "Conversational memory",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "structured-outputs",
+    name: "Structured outputs",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "prompt-injection-defenses",
+    name: "Prompt-injection defenses",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "langchain",
+    name: "LangChain",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      { label: "Rampy", href: "/work#rampy" },
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+    icon: "langchain",
+  },
+  {
+    id: "langgraph",
+    name: "LangGraph",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      { label: "Rampy", href: "/work#rampy" },
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+    icon: "langgraph",
+  },
+  {
+    id: "langsmith",
+    name: "LangSmith",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      { label: "Rampy", href: "/work#rampy" },
+      { label: "Teamcubation", href: "/work#teamcubation" },
+    ],
+    icon: "langsmith",
+  },
+  {
+    id: "rag",
+    name: "RAG",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      { label: "Rampy", href: "/work#rampy" },
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "ai-agents",
+    name: "AI agents",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "model-context-protocol",
+    name: "Model Context Protocol",
+    aliases: ["MCP"],
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+    icon: "modelcontextprotocol",
+  },
+  {
+    id: "llm-integration",
+    name: "LLM integration",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "pgvector",
+    name: "pgvector",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "vector-databases",
+    name: "Vector databases",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "guardrails",
+    name: "Guardrails",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "claude-api",
+    name: "Claude API",
+    category: "applied-ai",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+    icon: "anthropic",
+  },
+  {
+    id: "agentic-engineering",
+    name: "Agentic engineering",
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "spec-driven-development",
+    name: "Spec-driven development",
+    aliases: ["SDD"],
+    category: "applied-ai",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      { label: "Rampy", href: "/work#rampy" },
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+  },
+  {
+    id: "kotlin",
+    name: "Kotlin",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+    icon: "kotlin",
+  },
+  {
+    id: "swift",
+    icon: "swift",
+    name: "Swift",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "python",
+    name: "Python",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "python",
+  },
+  {
+    id: "typescript",
+    name: "TypeScript",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "typescript",
+  },
+  {
+    id: "nodejs",
+    name: "Node.js",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "nodedotjs",
+  },
+  {
+    id: "java",
+    name: "Java",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "openjdk",
+  },
+  {
+    id: "javascript",
+    name: "JavaScript",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "javascript",
+  },
+  {
+    id: "sql",
+    name: "SQL",
+    category: "languages",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "php",
+    name: "PHP",
+    category: "languages",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "php",
+  },
+  {
+    id: "celery",
+    icon: "celery",
+    name: "Celery",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "webhooks",
+    name: "Webhooks",
+    category: "backend",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "async-processing",
+    name: "Asynchronous processing",
+    category: "backend",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "fastapi",
+    name: "FastAPI",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "fastapi",
+  },
+  {
+    id: "nestjs",
+    name: "NestJS",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "nestjs",
+  },
+  {
+    id: "spring-boot",
+    name: "Spring Boot",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "springboot",
+  },
+  {
+    id: "rest-apis",
+    name: "REST APIs",
+    category: "backend",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "microservices",
+    name: "Microservices",
+    category: "backend",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "api-design",
+    name: "API design",
+    category: "backend",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "spring-webflux",
+    name: "Spring WebFlux",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+    icon: "spring",
+  },
+  {
+    id: "spring-mvc",
+    name: "Spring MVC",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "spring",
+  },
+  {
+    id: "spring-security",
+    name: "Spring Security",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "spring",
+  },
+  {
+    id: "spring-data-jpa",
+    name: "Spring Data JPA",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "spring",
+  },
+  {
+    id: "hibernate",
+    name: "Hibernate",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "hibernate",
+  },
+  {
+    id: "laravel",
+    name: "Laravel",
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Filomena",
+        href: "/work/filomena",
+      },
+    ],
+    icon: "laravel",
+  },
+  {
+    id: "openapi",
+    name: "OpenAPI",
+    aliases: ["Swagger"],
+    category: "backend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "openapi",
+  },
+  {
+    id: "postgresql",
+    name: "PostgreSQL",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+    icon: "postgresql",
+  },
+  {
+    id: "mysql",
+    name: "MySQL",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Filomena",
+        href: "/work/filomena",
+      },
+    ],
+    icon: "mysql",
+  },
+  {
+    id: "mariadb",
+    name: "MariaDB",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "mariadb",
+  },
+  {
+    id: "mongodb",
+    name: "MongoDB",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+    icon: "mongodb",
+  },
+  {
+    id: "redis",
+    name: "Redis",
+    category: "data",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Filomena",
+        href: "/work/filomena",
+      },
+    ],
+    icon: "redis",
+  },
+  {
+    id: "system-design",
+    name: "System design",
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "distributed-systems",
+    name: "Distributed systems",
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "hexagonal-architecture",
+    name: "Hexagonal architecture",
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "layered-architecture",
+    name: "Layered architecture",
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "mvc",
+    name: "MVC",
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "event-driven-architecture",
+    name: "Event-driven architecture",
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "reactive-systems",
+    name: "Reactive systems",
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "sql-tuning",
+    name: "SQL tuning",
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "indexing",
+    name: "Indexing",
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "caching",
+    name: "Caching",
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "data-modelling",
+    name: "Data modeling",
+    aliases: ["Data modeling"],
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "react-native",
+    name: "React Native",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+    icon: "react",
+  },
+  {
+    id: "design-systems",
+    name: "Design systems",
+    category: "frontend",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "react",
+    name: "React",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "react",
+  },
+  {
+    id: "nextjs",
+    name: "Next.js",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "nextdotjs",
+  },
+  {
+    id: "single-spa",
+    icon: "single-spa",
+    name: "Single-SPA",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "microfrontends",
+    name: "Microfrontends",
+    category: "frontend",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "responsive-design",
+    name: "Responsive design",
+    category: "frontend",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "wordpress",
+    name: "WordPress",
+    category: "frontend",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Independent work",
+        href: "/work#independent",
+      },
+    ],
+    icon: "wordpress",
+  },
+  {
+    id: "server-side-rendering",
+    name: "Server-side rendering",
+    category: "frontend",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Filomena", href: "/work/filomena" }],
+    aliases: ["SSR"],
+  },
+  {
+    id: "single-page-applications",
+    name: "Single-page applications",
+    category: "frontend",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Filomena", href: "/work/filomena" }],
+    aliases: ["SPA"],
+  },
+  {
+    id: "digitalocean",
+    name: "DigitalOcean",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+    icon: "digitalocean",
+  },
+  {
+    id: "hostinger",
+    icon: "hostinger",
+    name: "Hostinger",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Independent work", href: "/work#independent" }],
+  },
+  {
+    id: "aws",
+    name: "AWS",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+    icon: "amazonwebservices",
+  },
+  {
+    id: "aws-lambda",
+    name: "AWS Lambda",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+    icon: "awslambda",
+  },
+  {
+    id: "amazon-api-gateway",
+    icon: "amazon-api-gateway",
+    name: "Amazon API Gateway",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "amazon-s3",
+    name: "Amazon S3",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+    icon: "amazons3",
+  },
+  {
+    id: "amazon-sqs",
+    icon: "amazon-sqs",
+    name: "Amazon SQS",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "amazon-cloudwatch",
+    icon: "amazon-cloudwatch",
+    name: "Amazon CloudWatch",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "serverless",
+    name: "Serverless",
+    category: "cloud",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "docker",
+    name: "Docker",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "docker",
+  },
+  {
+    id: "kubernetes",
+    name: "Kubernetes",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "kubernetes",
+  },
+  {
+    id: "coolify",
+    name: "Coolify",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Professional focus", href: "/about" }],
+    icon: "coolify",
+  },
+  {
+    id: "nginx",
+    name: "NGINX",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Professional focus", href: "/about" }],
+    icon: "nginx",
+  },
+  {
+    id: "traefik",
+    name: "Traefik",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Professional focus", href: "/about" }],
+    icon: "traefikproxy",
+    aliases: ["Traefik Proxy"],
+  },
+  {
+    id: "caddy",
+    name: "Caddy",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Professional focus", href: "/about" }],
+    icon: "caddy",
+  },
+  {
+    id: "reverse-proxy",
+    name: "Reverse proxy",
+    category: "cloud",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Professional focus", href: "/about" }],
+    aliases: ["Proxy inverso", "Reverse proxies"],
+  },
+  {
+    id: "helm",
+    name: "Helm",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "helm",
+  },
+  {
+    id: "gitlab-ci-cd",
+    name: "GitLab CI/CD",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "gitlab",
+  },
+  {
+    id: "github-actions",
+    name: "GitHub Actions",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Filomena",
+        href: "/work/filomena",
+      },
+    ],
+    icon: "githubactions",
+  },
+  {
+    id: "git",
+    name: "Git",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "git",
+  },
+  {
+    id: "maven",
+    name: "Maven",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "apachemaven",
+  },
+  {
+    id: "linux",
+    name: "Linux",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "linux",
+  },
+  {
+    id: "docker-compose",
+    icon: "docker",
+    name: "Docker Compose",
+    category: "cloud",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Filomena", href: "/work/filomena" }],
+  },
+  {
+    id: "infisical",
+    icon: "infisical",
+    name: "Infisical",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "junit",
+    name: "JUnit",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "junit",
+  },
+  {
+    id: "mockito",
+    icon: "mockito",
+    name: "Mockito",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "karate",
+    icon: "karate",
+    name: "Karate",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "jest",
+    name: "Jest",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "jest",
+  },
+  {
+    id: "react-testing-library",
+    name: "React Testing Library",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "testinglibrary",
+  },
+  {
+    id: "testcontainers",
+    icon: "testcontainers",
+    name: "Testcontainers",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "sonarqube",
+    name: "SonarQube",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "sonarqube",
+  },
+  {
+    id: "opentelemetry",
+    name: "OpenTelemetry",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+    icon: "opentelemetry",
+  },
+  {
+    id: "micrometer",
+    icon: "micrometer",
+    name: "Micrometer",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "prometheus",
+    name: "Prometheus",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "prometheus",
+  },
+  {
+    id: "grafana",
+    name: "Grafana",
+    category: "quality",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "grafana",
+  },
+  {
+    id: "structured-logging",
+    name: "Structured logging",
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "rbac",
+    name: "RBAC",
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "ldap",
+    name: "LDAP",
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Cooperativa Obrera",
+        href: "/work#cooperativa-obrera",
+      },
+    ],
+  },
+  {
+    id: "application-security",
+    name: "Application security",
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "input-validation",
+    name: "Input validation",
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Filomena", href: "/work/filomena" }],
+  },
+  {
+    id: "health-checks",
+    name: "Health checks",
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Filomena", href: "/work/filomena" }],
+  },
+  {
+    id: "agile",
+    name: "Agile",
+    category: "delivery",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "scrum",
+    name: "Scrum",
+    category: "delivery",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "kanban",
+    name: "Kanban",
+    category: "delivery",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "jira",
+    name: "Jira",
+    category: "delivery",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+    icon: "jira",
+  },
+  {
+    id: "trello",
+    name: "Trello",
+    category: "delivery",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Filomena",
+        href: "/work/filomena",
+      },
+    ],
+    icon: "trello",
+  },
+  {
+    id: "code-review",
+    name: "Code review",
+    category: "delivery",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "technical-documentation",
+    name: "Technical documentation",
+    category: "delivery",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "slack",
+    name: "Slack",
+    category: "delivery",
+    kind: "brand",
+    icon: "slack",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "discord",
+    name: "Discord",
+    category: "delivery",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+    icon: "discord",
+  },
+  {
+    id: "microsoft-teams",
+    icon: "microsoft-teams",
+    name: "Microsoft Teams",
+    category: "delivery",
+    kind: "brand",
+    status: "applied",
+    evidence: [
+      {
+        label: "Teamcubation",
+        href: "/work#teamcubation",
+      },
+    ],
+  },
+  {
+    id: "morpho",
+    icon: "morpho",
+    name: "Morpho",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "aave",
+    icon: "aave",
+    name: "Aave",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "compound",
+    icon: "compound",
+    name: "Compound",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "privy",
+    name: "Privy",
+    icon: "privy",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "stripe",
+    icon: "stripe",
+    name: "Stripe",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "end-to-end-encryption",
+    name: "End-to-end encryption",
+    aliases: ["E2EE"],
+    category: "quality",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "token-swaps",
+    name: "Token swaps",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "vaults",
+    name: "Vaults",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "protocol-integrations",
+    aliases: ["On-chain integrations"],
+    name: "Protocol integrations",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "perpetual-futures",
+    name: "Perpetual futures (perps)",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "non-custodial-wallets",
+    name: "Non-custodial wallets",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "user-authorization",
+    name: "Transaction authorization",
+    aliases: ["User authorization"],
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "transaction-execution",
+    name: "Transaction execution",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+  },
+  {
+    id: "fintech",
+    name: "Fintech",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Experience & projects",
+        href: "/work",
+      },
+    ],
+  },
+  {
+    id: "blockchain",
+    name: "Blockchain",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "web3",
+    name: "Web3",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "account-abstraction",
+    name: "Account abstraction",
+    category: "fintech",
+    kind: "concept",
+    status: "developing",
+    evidence: [
+      {
+        label: "Professional focus",
+        href: "/about",
+      },
+    ],
+  },
+  {
+    id: "smart-accounts",
+    name: "Smart accounts",
+    category: "fintech",
+    kind: "concept",
+    status: "developing",
+    evidence: [
+      {
+        label: "Professional focus",
+        href: "/about",
+      },
+    ],
+  },
+  {
+    id: "defi",
+    name: "DeFi",
+    category: "fintech",
+    kind: "concept",
+    status: "applied",
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "erc-20",
+    name: "ERC-20",
+    category: "fintech",
+    kind: "concept",
+    status: "developing",
+    evidence: [
+      {
+        label: "Professional focus",
+        href: "/about",
+      },
+    ],
+  },
+  {
+    id: "erc-4337",
+    name: "ERC-4337",
+    category: "fintech",
+    kind: "concept",
+    status: "developing",
+    evidence: [
+      {
+        label: "Professional focus",
+        href: "/about",
+      },
+    ],
+  },
+  {
+    id: "erc-4626",
+    name: "ERC-4626",
+    category: "fintech",
+    kind: "concept",
+    status: "developing",
+    evidence: [
+      {
+        label: "Professional focus",
+        href: "/about",
+      },
+    ],
+  },
+  {
+    id: "eip-712",
+    name: "EIP-712",
+    category: "fintech",
+    kind: "concept",
+    status: "developing",
+    evidence: [
+      {
+        label: "Professional focus",
+        href: "/about",
+      },
+    ],
+  },
+];
+
+export const publicTechnologyExclusions: Record<string, string> = {
+  slack: "Communication tool rather than a differentiating engineering capability.",
+  discord: "Communication tool rather than a differentiating engineering capability.",
+  "microsoft-teams": "Communication tool rather than a differentiating engineering capability.",
+  jira: "Routine project coordination, not a priority technical skill.",
+  trello: "Routine project coordination, not a priority technical skill.",
+  maven: "Build-tool detail remains documented in the source inventory.",
+  hostinger: "Hosting-provider detail does not strengthen the target role.",
+  wordpress: "Outside the current applied-AI and software engineering focus.",
+  fintech: "Concrete DeFi integrations provide more useful context than a broad industry label.",
+  blockchain: "Concrete protocol and transaction capabilities provide the relevant context.",
+  web3: "Concrete protocol and transaction capabilities provide the relevant context.",
+  "health-checks": "Covered by observability and production-engineering capabilities.",
+  "single-page-applications": "Covered by the named application frameworks.",
+  "responsive-design": "Baseline product practice rather than a differentiating technical entry.",
+};
+
+export const publicTechnologyCatalog = technologyCatalog.filter(
+  ({ id, status }) => status === "applied" && !Object.hasOwn(publicTechnologyExclusions, id),
+);
+
+export const technologyGroups = [
+  {
+    id: "applied-ai",
+    name: {
+      en: "Applied AI & agentic systems",
+      es: "IA aplicada y sistemas agénticos",
+    },
+    evidence: {
+      en: "Production agents, model integrations, retrieval and evaluations at Rampy; merchant RAG and client assistants.",
+      es: "Agentes, integración de modelos, recuperación y evaluaciones en Rampy; RAG para comercios y asistentes para clientes.",
+    },
+  },
+  {
+    id: "languages",
+    name: {
+      en: "Languages & runtimes",
+      es: "Lenguajes y runtimes",
+    },
+    evidence: {
+      en: "The foundations of my backend services, product interfaces and automation.",
+      es: "La base de mis servicios, interfaces de producto y automatizaciones.",
+    },
+  },
+  {
+    id: "backend",
+    name: {
+      en: "Backend & APIs",
+      es: "Backend y APIs",
+    },
+    evidence: {
+      en: "Service contracts, BFFs and integrations across fintech, enterprise systems and Filomena.",
+      es: "Contratos, BFFs e integraciones en fintech, sistemas empresariales y Filomena.",
+    },
+  },
+  {
+    id: "data",
+    name: {
+      en: "Data & architecture",
+      es: "Datos y arquitectura",
+    },
+    evidence: {
+      en: "Historical ingestion, permission queries and concurrent exams shaped these choices.",
+      es: "Ingesta histórica, consultas de permisos y exámenes concurrentes guiaron estas decisiones.",
+    },
+  },
+  {
+    id: "frontend",
+    name: {
+      en: "Frontend & product interfaces",
+      es: "Frontend e interfaces de producto",
+    },
+    evidence: {
+      en: "Web and mobile products, shared design systems, merchant experiences and enterprise back offices.",
+      es: "Productos web y móviles, sistemas de diseño compartidos, experiencias para comercios y paneles de gestión empresarial.",
+    },
+  },
+  {
+    id: "cloud",
+    name: {
+      en: "Cloud & delivery",
+      es: "Cloud y delivery",
+    },
+    evidence: {
+      en: "DigitalOcean infrastructure and delivery at Rampy; application integration on AWS and containerized workloads. My developer infrastructure experience also includes Coolify and reverse proxies.",
+      es: "Infraestructura y despliegues en DigitalOcean en Rampy; integración de aplicaciones en AWS y contenedores. Mi experiencia en infraestructura para aplicaciones también incluye Coolify y proxies inversos.",
+    },
+  },
+  {
+    id: "quality",
+    name: {
+      en: "Quality, observability & security",
+      es: "Calidad, observabilidad y seguridad",
+    },
+    evidence: {
+      en: "Testing, monitoring and access control for production applications.",
+      es: "Pruebas, monitoreo y control de acceso para aplicaciones productivas.",
+    },
+  },
+  {
+    id: "delivery",
+    name: {
+      en: "Delivery & collaboration",
+      es: "Delivery y colaboración",
+    },
+    evidence: {
+      en: "Iterative delivery, shared technical decisions and clear documentation.",
+      es: "Entrega iterativa, decisiones técnicas compartidas y documentación clara.",
+    },
+  },
+  {
+    id: "fintech",
+    name: {
+      en: "Financial integrations",
+      es: "Integraciones financieras",
+    },
+    evidence: {
+      en: "Product integrations at Rampy: wallets, protocol APIs and transaction flows connected to the application.",
+      es: "Integraciones de producto en Rampy: billeteras, APIs de protocolos y flujos de transacciones conectados con la aplicación.",
+    },
+  },
+];
+
+const aliases: Record<string, string> = {
+  mcp: "model-context-protocol",
+  ssr: "server-side-rendering",
+  spa: "single-page-applications",
+  swagger: "openapi",
+  "model context protocol (mcp)": "model-context-protocol",
+  lambda: "aws-lambda",
+  s3: "amazon-s3",
+  sqs: "amazon-sqs",
+  cloudwatch: "amazon-cloudwatch",
+  spring: "spring-boot",
+  "applied ai": "ai-agents",
+  "agentic systems": "agentic-engineering",
+  "ia aplicada": "ai-agents",
+  "sistemas agénticos": "agentic-engineering",
+  "sql (tuning, indexes, pagination)": "sql-tuning",
+};
+
+export function getTechnology(nameOrId: string) {
+  const key = nameOrId.trim().toLowerCase();
+  return technologyCatalog.find(
+    (technology) =>
+      technology.id === (aliases[key] ?? key) ||
+      technology.name.toLowerCase() === key ||
+      technology.aliases?.some((alias) => alias.toLowerCase() === key),
+  );
+}
+
+export function technologyNames(names: string[]) {
+  return names.map((name) => getTechnology(name)?.name ?? name);
+}
+
+export function getStackGroups(locale: Locale): StackGroup[] {
+  return technologyGroups.map((group) => ({
+    id: group.id,
+    name: group.name[locale],
+    evidence: group.evidence[locale],
+    items: publicTechnologyCatalog
+      .filter((technology) => technology.category === group.id)
+      .sort(compareTechnologyNames)
+      .map((technology) => technology.name),
+  }));
+}
+
+export function compareTechnologyNames(a: Technology, b: Technology) {
+  return a.name.localeCompare(b.name, "en", { sensitivity: "base", numeric: true });
+}

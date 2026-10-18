@@ -1,7 +1,7 @@
 "use client";
 
+import type { Locale } from "@config/locales";
 import dynamic from "next/dynamic";
-import type { Locale } from "@/content/locales";
 import type { ArchitectureKind } from "../domain/architecture-types";
 import styles from "./experience-architecture.module.css";
 

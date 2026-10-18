@@ -10,10 +10,10 @@ Regenerate them from a production build with a hardware GPU:
 npm run build
 npm run start
 # in another shell
-node scripts/capture-gallery.mjs
+node tools/capture-gallery.mjs
 ```
 
-[`capture-gallery.mjs`](../../scripts/capture-gallery.mjs) renders desktop shots at
+[`capture-gallery.mjs`](../../tools/capture-gallery.mjs) renders desktop shots at
 1440 × 900 CSS px with a device pixel ratio of 2 and mobile shots with Playwright's Pixel 7
 profile, then has Chromium downscale them with high-quality smoothing and encode WebP at
 quality 0.86 (1920 px wide for desktop, 780 px for mobile). The hero is frozen with its

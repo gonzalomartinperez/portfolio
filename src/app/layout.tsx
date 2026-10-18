@@ -1,13 +1,13 @@
+import { defaultLocale } from "@config/locales";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { defaultLocale } from "@/content/locales";
-import { solarTextureVersions } from "@/content/solar-textures";
 import { isAnalyticsEnabled } from "@/features/analytics/application/availability";
 import { analyticsEndpoint } from "@/features/analytics/config";
 import { AnalyticsHost } from "@/features/analytics/entry";
 import { isAssistantEnabled } from "@/features/assistant/application/availability";
 import { AssistantHost } from "@/features/assistant/presentation/assistant-host";
 import { AmbientField } from "@/features/solar-system/presentation/ambient-field";
+import { solarTextureVersions } from "@/features/solar-system/texture-data";
 import { PageMotion } from "@/shell/page-motion";
 import { SiteFooter } from "@/shell/site-footer";
 import { SiteHeader } from "@/shell/site-header";

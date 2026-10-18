@@ -1,6 +1,6 @@
+import { type Locale, localePath } from "@config/locales";
+import { getContent } from "@content";
 import Link from "next/link";
-import { getContent } from "@/content";
-import { type Locale, localePath } from "@/content/locales";
 import { ContactLinks } from "@/shared/contact/contact-links";
 import { PageHeader } from "@/shared/editorial/page-header";
 import { cn } from "@/shared/styles/cn";

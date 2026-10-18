@@ -1,4 +1,4 @@
-import type { components } from "../../../contracts/types";
+import type { components } from "../../../../contracts/assistant-api/types";
 import type { Citation, Conversation, Message } from "../domain/models.ts";
 
 export function record(value: unknown): value is Record<string, unknown> {

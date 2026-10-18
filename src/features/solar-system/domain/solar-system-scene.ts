@@ -1,6 +1,6 @@
-import type { SolarTextureVersions } from "@/content/solar-texture-contract";
+import type { SolarTextureVersions } from "@/features/solar-system/domain/texture-contract";
 
-export type { SolarTextureVersions } from "@/content/solar-texture-contract";
+export type { SolarTextureVersions } from "@/features/solar-system/domain/texture-contract";
 
 /**
  * Artistic space and time compression; these orbits are not an ephemeris.

@@ -1,5 +1,5 @@
+import type { Locale } from "@config/locales";
 import type { AnchorHTMLAttributes } from "react";
-import type { Locale } from "@/content/locales";
 
 type Props = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
   href: string;

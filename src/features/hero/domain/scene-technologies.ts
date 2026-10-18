@@ -1,4 +1,4 @@
-import type { Technology } from "@/content/technologies";
+import type { Technology } from "@content/technologies";
 
 const illustratedSceneTechnologies = new Set(["agent-evaluation", "pgvector", "rag"]);
 

@@ -1,4 +1,4 @@
-import type { components } from "../../../contracts/types";
+import type { components } from "../../../../contracts/assistant-api/types";
 import { AssistantError, type AssistantTransport } from "../application/ports.ts";
 import { readSse } from "./sse.ts";
 import { parseConversation, parseMessage, parsePage, parseSession } from "./validate.ts";

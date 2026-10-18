@@ -317,11 +317,11 @@ history: fetch complete history first. It never reads untracked `.env.local`.
 The snapshot uses working-tree bytes,
 not separate index blobs: an overwritten staged-only value needs staged-diff
 review or a committed candidate scan; CI checks the actual committed checkout.
-For a CI transfer, run `node scripts/ci-build-artifact.mjs prepare` after the build,
+For a CI transfer, run `node tools/ci-build-artifact.mjs prepare` after the build,
 then `npm run test:secrets:artifacts` to scan `.next`
 excluding its cache, plus `.artifacts/ci` when present: the same generated trees
 packaged by CI. This includes browser JS and prerendered HTML/RSC/server output.
-Run `node scripts/ci-build-artifact.mjs restore` before starting that sanitized
+Run `node tools/ci-build-artifact.mjs restore` before starting that sanitized
 local build again. The scanner commands suppress output, redact findings,
 and do not upload reports. A failure is evidence to investigate privately, not
 permission to print a matched value, weaken detection or rotate a live credential.
@@ -347,13 +347,13 @@ inspect live containers as part of an ordinary source check. Follow
 Next generates preview signing/encryption keys and a Server Actions encryption key
 in every build, even though this portfolio has no Server Actions. These are actual
 runtime cryptographic values, not provider keys or detector false positives. CI
-runs `node scripts/ci-build-artifact.mjs prepare` after rendered verification and
+runs `node tools/ci-build-artifact.mjs prepare` after rendered verification and
 browser planning, before the artifact scan and upload. It replaces only the three
 verified fields in their known JSON manifests with inert transfer markers. It
 preserves the public preview identifier, rejects unexpected embeddings and symlinks,
 and fails if Server Actions appear. This is deliberately version-specific.
 
-Each isolated browser runner calls `node scripts/ci-build-artifact.mjs restore`
+Each isolated browser runner calls `node tools/ci-build-artifact.mjs restore`
 after unpacking to generate fresh, runner-local ephemeral values. They are never
 printed or re-uploaded. The transferred build remains covered by the strict scanner,
 including all HTML/RSC/server files and CI planner output. This is not an exception

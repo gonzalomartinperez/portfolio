@@ -82,7 +82,7 @@ Firefox, and WebKit: interrupted/provider/session failures, 320 px recovery, com
 320 × 520 / 200% text, long answers, and failure while reading older content.
 
 ```sh
-BROWSER_TEST_PORT=3294 BROWSER_TEST_UPSTREAM_PORT=3295 node scripts/browser-test-server.ts
+BROWSER_TEST_PORT=3294 BROWSER_TEST_UPSTREAM_PORT=3295 node tools/browser-test-server.ts
 # In another terminal, using the same owned local server:
 SITE_TEST_ORIGIN=https://127.0.0.1:3294 npm run test:browser -- tests/browser/assistant.spec.ts --grep 'is honest, preserves safe recovery|long output'
 ```

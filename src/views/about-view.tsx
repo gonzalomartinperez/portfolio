@@ -1,9 +1,9 @@
+import { type Locale, localePath } from "@config/locales";
+import { getContent } from "@content";
+import portrait from "@media/identity/portrait.avif";
 import { Bot, Boxes, PanelsTopLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import portrait from "@/assets/portrait.avif";
-import { getContent } from "@/content";
-import { type Locale, localePath } from "@/content/locales";
 import { PageHeader } from "@/shared/editorial/page-header";
 import { buttonVariants } from "@/shared/ui/button";
 import styles from "./about.module.css";

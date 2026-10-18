@@ -1,6 +1,6 @@
 # Engineering standards and session ownership
 
-Reviewed 2026-10-17. This repository owns the public portfolio. Shared engineering
+Reviewed 2026-10-18. This repository owns the public portfolio. Shared engineering
 principles do not authorize one session to change another repository or deploy it.
 
 ## Concurrent responsibility agreement

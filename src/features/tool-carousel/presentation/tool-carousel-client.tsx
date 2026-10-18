@@ -1,11 +1,11 @@
 "use client";
 
+import { type Locale, localePath } from "@config/locales";
+import { toolCarouselCopy } from "@content/tool-carousel-copy";
 import type { gsap } from "gsap";
 import { Pause, Play } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
-import { type Locale, localePath } from "@/content/locales";
-import { toolCarouselCopy } from "@/content/tool-carousel-copy";
 import { usePageMotionPaused } from "../../../shared/motion/motion-state";
 import { TechnologyMark } from "../../../shared/technology/technology-mark";
 import type { CarouselTechnology } from "../domain/rows";

@@ -1,6 +1,6 @@
+import { type Locale, localePath } from "@config/locales";
+import { getContent } from "@content";
 import Link from "next/link";
-import { getContent } from "@/content";
-import { type Locale, localePath } from "@/content/locales";
 import { ExperienceArchitecture } from "@/features/architecture-diagrams/presentation/experience-architecture";
 import { MetricList } from "@/shared/editorial/metric-list";
 import { PageHeader } from "@/shared/editorial/page-header";

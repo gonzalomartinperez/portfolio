@@ -1,5 +1,5 @@
+import { getContent } from "@content";
 import { ImageResponse } from "next/og";
-import { getContent } from "@/content";
 import {
   buildConstellation,
   POINT_COUNT_STATIC,

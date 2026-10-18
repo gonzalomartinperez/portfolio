@@ -1,4 +1,4 @@
-import type { Technology } from "@/content/technologies";
+import type { Technology } from "@content/technologies";
 
 export type CatalogueGroup = {
   id: string;
