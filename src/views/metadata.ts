@@ -1,7 +1,7 @@
+import { htmlLang, type Locale, localePath, locales } from "@config/locales";
+import { siteUrl } from "@config/site";
+import { getContent } from "@content";
 import type { Metadata, Viewport } from "next";
-import { getContent } from "@/content";
-import { htmlLang, type Locale, localePath, locales } from "@/content/locales";
-import { siteUrl } from "@/content/site-config";
 
 export const sharedViewport: Viewport = {
   colorScheme: "dark light",

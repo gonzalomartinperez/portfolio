@@ -65,7 +65,7 @@ The coordinator owns SiteCopy and the two site modules; integrate the three
 compilation adapters manually, preserving concurrent Home, toolkit and contact
 changes:
 
-1. Import `AboutCopy` from `./about-copy` into `src/content/site-copy.ts`; replace
+1. Import `AboutCopy` from `./about-copy` into `content/site-copy.ts`; replace
    only its inline `about` shape with `about: AboutCopy`.
 2. In each locale's `site.ts`, import `aboutCopy` from `./about`; replace only the
    `about` object with `about: aboutCopy`.

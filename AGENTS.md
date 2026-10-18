@@ -49,6 +49,19 @@ Use detached worktrees for isolated read-only reviews. See docs/development.md f
 handoffs and cleanup. Parallel execution never authorizes broader task scope,
 private data access, account changes, or bypassing the PR workflow.
 
+## Physical module ownership
+
+Use the paired-site layout in [architecture](docs/architecture.md#source-module-contract)
+and [the placement decision](docs/adr/site-architecture-parity.md). Public authored
+inputs live in `content/`, build/runtime configuration in `config/`, imported API
+snapshots in `contracts/assistant-api/`, source identity assets in `media/identity/`
+and executable repository tooling in `tools/`. Production modules must not import
+`tools/` or `tests/`. Test role directories are `unit`, `browser`, `helpers`,
+`integration` and `rollout`; classify a test by what it executes. Every source
+root, feature entry and frozen input must be registered in the architecture policy.
+Do not restore legacy `src/content`, `src/contracts`, `src/assets`, `scripts` or
+`tooling` namespaces, add forwarding copies, or broaden root exemptions.
+
 ## Branch workflow
 
 Create task branches from `develop`, using `feat/`, `fix/`, `chore/`, `docs/`,

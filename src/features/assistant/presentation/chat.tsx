@@ -1,4 +1,5 @@
 "use client";
+import avatar from "@media/identity/avatar.png";
 import {
   ArrowUp,
   ArrowUpRight,
@@ -11,7 +12,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { type KeyboardEvent, useEffect, useRef, useState } from "react";
-import avatar from "@/assets/avatar.png";
 import { Button } from "@/shared/ui/button";
 import type { Assistant } from "../application/assistant";
 import { ChatMessage } from "./chat-message";

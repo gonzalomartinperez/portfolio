@@ -84,8 +84,8 @@ that ignored artifact is not a production feature or a published recording.
 | Message, Markdown, copy, composer and avatar | Shared feature presentation using owned portfolio buttons/tokens/avatar |
 | Standalone and embedded shells | Stable root-layout host and `/assistant` / `/es/assistant` |
 | Chat browser actions and failure coverage | `tests/browser/assistant.spec.ts` and actual adapter fixtures |
-| State, SSE and transport checks | `scripts/assistant-{state,sse,transport,network}.test.ts` |
-| API provenance | `src/contracts/source.json` and contract integrity checks |
+| State, SSE and transport checks | `tests/unit/assistant-{state,sse,transport,network}.test.ts` |
+| API provenance | `contracts/assistant-api/source.json` and contract integrity checks |
 | Frame/postMessage protocol | Retired for the native architecture; no browser credentials cross a messaging protocol |
 
 The imported API revision is `c6012067c4a99db477bb6ddcf1f26dae095641ca`,
@@ -102,7 +102,7 @@ the frontend, then start its test-only HTTPS wrapper in a separate terminal:
 
 ```sh
 NEXT_PUBLIC_ASSISTANT_API_URL=https://localhost:18118 npm run build
-BROWSER_TEST_PORT=3264 BROWSER_TEST_UPSTREAM_PORT=3265 node scripts/browser-test-server.ts
+BROWSER_TEST_PORT=3264 BROWSER_TEST_UPSTREAM_PORT=3265 node tools/browser-test-server.ts
 ```
 
 Once the managed wrapper is ready:

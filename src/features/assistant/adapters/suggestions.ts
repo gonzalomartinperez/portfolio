@@ -1,4 +1,4 @@
-import type { components } from "../../../contracts/types";
+import type { components } from "../../../../contracts/assistant-api/types";
 import type { Locale } from "../domain/models";
 import { record, text } from "./validate.ts";
 

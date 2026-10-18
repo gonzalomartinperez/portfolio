@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { answer, fixture, open } from "./helpers/assistant-fixture";
+import { answer, fixture, open } from "../helpers/assistant-fixture";
 
 for (const locale of ["en", "es"] as const) {
   test(`${locale} voluntary question context goes only to the conversation API`, async ({

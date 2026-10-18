@@ -35,8 +35,8 @@ jobs:
           sparse-checkout: |
             .nvmrc
             package.json
-            scripts/dependency-policy.mjs
-            scripts/dependency-policy.test.mjs
+            tools/dependency-policy.mjs
+            tests/unit/dependency-policy.test.mjs
             .github/dependabot.yml
             .github/workflows/dependency-policy.yml
           sparse-checkout-cone-mode: false
@@ -46,8 +46,8 @@ jobs:
           node-version-file: .nvmrc
           package-manager-cache: false
       - name: Verify trusted policy fixtures
-        run: node --test scripts/dependency-policy.test.mjs
+        run: node --test tests/unit/dependency-policy.test.mjs
       - name: Assess metadata without mutation
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: node scripts/dependency-policy.mjs
+        run: node tools/dependency-policy.mjs

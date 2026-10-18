@@ -13,7 +13,7 @@ The MIT software grant does not grant reuse rights to the following materials:
 
 | Material | Repository locations and scope |
 | --- | --- |
-| Personal career narrative and records | Biographical, employment, education and project data and editorial copy within `src/content/`, including the generated public CV projection. |
+| Personal career narrative and records | Biographical, employment, education and project data and editorial copy within `content/`, including the generated public CV projection. |
 | Personal documents | The two `public/gonzalo-martin-perez-ai-software-engineer-*.pdf` files, `public/documents/` and `public/certificates/`. Public viewing is not a general reuse license. |
 | Personal or employer/customer imagery | Portraits, photographs and project screenshots within `public/images/` and `docs/gallery/`, plus LinkedIn imagery documented in [the branding record](docs/linkedin-branding.md). |
 | Names and marks | Personal, employer, customer and technology names and logos. No trademark rights or endorsement are granted by the software license. |
@@ -37,7 +37,7 @@ or distributing them, including notices in installed packages and source files.
 | Technology brand artwork in `public/brands/` | [Brand notices](public/brands/NOTICE.md) and [technology mark provenance](docs/assets/technology-marks.md). The [Coolify Apache 2.0 license](public/brands/coolify-LICENSE.txt) remains intact. |
 | Employer/customer marks | [Company mark provenance](docs/assets/company-marks.md); the software license grants no trademark rights. |
 | Solar texture media in `public/images/solar-system/` | [Solar source and license record](docs/assets/solar-system.md), including the existing CC BY 4.0 attribution and NASA media context. On-site credits remain visible. |
-| Imported API descriptions in `src/contracts/` | [Contract provenance](src/contracts/source.json) identifies the originating API revision; imported material retains its source terms. |
+| Imported API descriptions in `contracts/assistant-api/` | [Contract provenance](contracts/assistant-api/source.json) identifies the originating API revision; imported material retains its source terms. |
 
 Public availability alone does not establish permission to reuse content or
 third-party material. Nothing here changes an upstream license, copyright notice

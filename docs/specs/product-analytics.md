@@ -85,7 +85,7 @@ flowchart TB
 The API owner committed the candidate contract at
 `59a5ccec1b38bb1a3679497deffd02749c0e8d49`, with the public ingest route
 `POST /api/v1/analytics/events`. The exact upstream JSON Schema is vendored at
-[src/contracts/product-event.schema.json](../../src/contracts/product-event.schema.json),
+[contracts/assistant-api/product-event.schema.json](../../contracts/assistant-api/product-event.schema.json),
 SHA-256 `8203591a5b8768ffaa8bfa13399c50de1802be9075a8f78808e61c94aaa9f6ca`.
 A unit check binds these bytes and separately verifies the event-specific semantic
 restrictions documented by the upstream contract. API CI/promotion remains owned by

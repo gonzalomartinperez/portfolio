@@ -75,7 +75,7 @@ alone. Brand marks keep their own colours and receive a suitable backing when ne
 A face-only caricature replaces Vertex in navigation, the favicon and the sphere. During review,
 the owner supplied alternatives and explicitly selected this image instead of the initial
 hand-drawn pixel-art proposal. It is a transparent raster illustration, not a vector graphic.
-The sanitized source lives in `src/assets/avatar.png`; smooth PNG variants and multi-resolution
+The sanitized source lives in `media/identity/avatar.png`; smooth PNG variants and multi-resolution
 ICO outputs are generated reproducibly. Unselected alternatives remain outside this public
 repository. The owner's approved transparent black-sweater portrait appears in the introduction;
 it is an illustrated presentation image, not described as an unaltered photograph.

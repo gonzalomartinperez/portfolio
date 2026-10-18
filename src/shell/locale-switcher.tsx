@@ -1,7 +1,7 @@
 "use client";
 
+import { type Locale, localeCodes, localeNames, locales, stripLocale } from "@config/locales";
 import Link from "next/link";
-import { type Locale, localeCodes, localeNames, locales, stripLocale } from "@/content/locales";
 import styles from "./locale-switcher.module.css";
 
 /**

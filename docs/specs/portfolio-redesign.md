@@ -41,7 +41,7 @@ depth-layered technology marks and an accessible settled catalogue. Do not reuse
 - Keep HeroStage props (hero, core, still, constellation, pauseLabel, playLabel). The scene lane
   owns HeroStage, all hero engine/components/styles and views/hero-view.tsx plus hero.module.css.
 - Catalogue lane exports technologyCatalog, technologyGroups and getTechnology(nameOrId) from
-  src/content/technologies.ts. Technology: id, name, category, kind ('brand'|'concept'), status
+  content/technologies.ts. Technology: id, name, category, kind ('brand'|'concept'), status
   ('applied'|'developing'), evidence: {label, href}[], optional icon string. icon resolves through
   BrandMark. Keep StackGroup shape and localized group IDs stable for existing consumers.
 - TechConstellation receives locale?: 'en'|'es' as well as existing heading/note. It reads the

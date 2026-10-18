@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { captureAnalytics, createAnalyticsDeliveryBarrier } from "./helpers/analytics-fixture";
+import { captureAnalytics, createAnalyticsDeliveryBarrier } from "../helpers/analytics-fixture";
 
 for (const locale of ["en", "es"] as const) {
   const prefix = locale === "es" ? "/es" : "";

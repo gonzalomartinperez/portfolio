@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
-import { filomenaGallery } from "../../src/content/filomena-gallery";
-import { certificateFiles } from "../../src/content/site-config";
+import { certificateFiles } from "../../config/site";
+import { filomenaGallery } from "../../content/filomena-gallery";
 
 for (const route of ["/work/filomena", "/es/work/filomena"]) {
   test(`${route} reviewed gallery screens remain available across filters`, async ({

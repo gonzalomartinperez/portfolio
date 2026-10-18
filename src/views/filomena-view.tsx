@@ -1,8 +1,8 @@
+import { type Locale, localePath } from "@config/locales";
+import { getContent } from "@content";
+import { filomenaGallery } from "@content/filomena-gallery";
+import imageDimensions from "@content/filomena-image-dimensions.json";
 import Link from "next/link";
-import { getContent } from "@/content";
-import { filomenaGallery } from "@/content/filomena-gallery";
-import imageDimensions from "@/content/filomena-image-dimensions.json";
-import { type Locale, localePath } from "@/content/locales";
 import { ExperienceArchitecture } from "@/features/architecture-diagrams/presentation/experience-architecture";
 import { GalleryCarousel } from "@/features/project-gallery/presentation/gallery-carousel";
 import { MetricList } from "@/shared/editorial/metric-list";

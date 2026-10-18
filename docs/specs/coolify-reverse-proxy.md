@@ -36,7 +36,7 @@ are outside this change. No DevOps specialty or additional platform expertise is
 
 ## Design and decisions
 
-`src/content/technologies.ts` is the shared data source for Stack and the expanded
+`content/technologies.ts` is the shared data source for Stack and the expanded
 Home catalog. Both new entries link to `/about`, whose localized paragraph
 provides explicit public context without assigning a company. Stack's existing
 infrastructure note and Cloud group context explain the same scope.

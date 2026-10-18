@@ -1,7 +1,7 @@
+import { htmlLang, type Locale, localePath, locales } from "@config/locales";
+import { siteRoutes } from "@config/routes";
+import { siteUrl } from "@config/site";
 import type { MetadataRoute } from "next";
-import { htmlLang, type Locale, localePath, locales } from "@/content/locales";
-import { siteRoutes } from "@/content/routes";
-import { siteUrl } from "@/content/site-config";
 
 const absolute = (locale: Locale, path: string) => `${siteUrl}${localePath(locale, path)}`;
 

@@ -1,5 +1,5 @@
 import { expect, type Page, test } from "@playwright/test";
-import { expectInteractionPayload, respondAnalytics } from "./helpers/analytics-fixture";
+import { expectInteractionPayload, respondAnalytics } from "../helpers/analytics-fixture";
 
 type RecordedEvent = {
   event_name: string;

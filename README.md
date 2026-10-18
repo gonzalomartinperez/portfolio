@@ -36,6 +36,7 @@ reviewed CVs, a focused technology catalog and a realistic, readable 3D solar sc
 | **Interactive architecture** | React Flow diagrams with keyboard-accessible detail panels explain the systems behind each role. |
 | **Hero identity** | A lazy Three.js particle sphere with perspective depth and rim light; the camera flies through it and the logos settle into the toolkit as a staggered wave. |
 | **Solar scene** | A single-pass Three.js renderer with physically motivated shaders, a baked Milky Way and a reading mask that keeps text contrast on every page. |
+| **Explicit architecture** | Shared paired-site roots, named feature boundaries and AST checks for ownership, cycles and client/server closure. See the [placement decision](docs/adr/site-architecture-parity.md). |
 | **Engineered quality** | Strict TypeScript, Biome, budgets, rendered checks and eight duration-balanced Playwright groups gate every pull request. |
 | **Reviewed delivery** | Task branch → `develop` → `main` through protected pull requests; native Hostinger deployment from `main`. |
 
@@ -151,7 +152,7 @@ The [module contract](docs/architecture.md#source-module-contract) is the source
   re-exports, dynamic imports and type-only edges. Every source module has a declared
   placement, including importless code. It rejects reversed dependencies, private
   feature imports, cycles, ambient inner-layer clock reads and client paths to server-only code. The
-  [negative fixtures](scripts/architecture.test.mjs) must reject representative
+  [negative fixtures](tests/unit/architecture.test.mjs) must reject representative
   violations while valid composition passes; this runs inside `npm run check`.
 - **Deliberate adaptations:** small features do not need empty layers. Named public
   entries and the narrow server-only analytics configuration facade are documented
@@ -363,8 +364,8 @@ updated without giving the public build access to private sources.
 | [src/shell](src/shell/) | Persistent layout, navigation, locale and theme controls |
 | [src/features](src/features/) | Feature-owned models, adapters and interactive presentation |
 | [src/shared](src/shared/) | Reusable presentation, identity marks and owned UI primitives |
-| [src/content](src/content/) | Typed per-locale content and the shared interface-copy contract |
-| [tests](tests/) / [scripts](scripts/) | Browser/rollout cases, source and contract tests, build/QA tooling |
+| [content](content/) | Typed per-locale content and the shared interface-copy contract |
+| [tests](tests/) / [tools](tools/) | Unit, browser, integration and rollout cases; build and verification tools |
 | [.github](.github/) | Trusted workflows and repository maintenance configuration |
 | [.agents/skills](.agents/skills/) | Canonical procedures; Claude adapters link to these |
 | [Architecture](docs/architecture.md) | Application boundaries, reviewed CV publication, and the disabled assistant integration |

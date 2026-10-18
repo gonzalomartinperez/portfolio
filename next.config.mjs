@@ -1,9 +1,9 @@
 // @ts-check
 
-import { AssistantBudgetPlugin } from "./scripts/assistant-budget-plugin.ts";
-import { SceneBudgetPlugin } from "./scripts/scene-budget-plugin.mjs";
-import { resumeFilenames, resumeFiles } from "./src/content/site-config.ts";
-import { solarTextureCacheRules } from "./src/content/solar-texture-cache.ts";
+import { resumeFilenames, resumeFiles } from "./config/site.ts";
+import { solarTextureCacheRules } from "./config/solar-textures.ts";
+import { AssistantBudgetPlugin } from "./tools/assistant-budget-plugin.ts";
+import { SceneBudgetPlugin } from "./tools/scene-budget-plugin.mjs";
 
 /**
  * Response headers.

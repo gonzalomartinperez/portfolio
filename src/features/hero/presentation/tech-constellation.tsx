@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { type Locale, localePath } from "@/content/locales";
+import { type Locale, localePath } from "@config/locales";
 import {
   compareTechnologyNames,
   publicTechnologyCatalog,
   technologyGroups,
-} from "@/content/technologies";
+} from "@content/technologies";
+import Link from "next/link";
 import { TechnologyMark } from "@/shared/technology/technology-mark";
 import { getSceneMarkIdentity } from "../domain/scene-technologies";
 import styles from "./tech-constellation.module.css";

@@ -133,7 +133,7 @@ narrow and exist only where browser state is unavoidable: the hero particle fiel
 toggle, and the header, which reads the current path to mark the active link and to build the
 language links.
 
-**Content model.** `src/content/` holds small typed modules with reviewed, public-safe fields, one
+**Content model.** `content/` holds small typed modules with reviewed, public-safe fields, one
 set per locale plus the shared `SiteCopy` interface contract. The private career sources are never
 copied wholesale and never imported.
 

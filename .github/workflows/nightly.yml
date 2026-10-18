@@ -63,7 +63,7 @@ jobs:
         env:
           INPUT_CANDIDATE_SHA: ${{ inputs.candidate_sha }}
           INPUT_CANDIDATE_REF: ${{ inputs.candidate_ref }}
-        run: node scripts/nightly-candidate.mjs
+        run: node tools/nightly-candidate.mjs
 
   quality:
     name: Nightly quality checks
@@ -92,7 +92,7 @@ jobs:
           cache: npm
           cache-dependency-path: |
             package-lock.json
-            tooling/api-contract/package-lock.json
+            tools/api-contract/package-lock.json
       - name: Install checksum-verified secret scanner
         run: |
           scanner_dir="$(mktemp -d "$RUNNER_TEMP/portfolio-gitleaks.XXXXXX")"
@@ -106,7 +106,7 @@ jobs:
       - name: Reject secrets in tracked files and complete history
         run: npm run test:secrets
       - name: Verify candidate selection fixtures
-        run: node --test scripts/nightly-candidate.test.mjs
+        run: node --test tests/unit/nightly-candidate.test.mjs
       - name: Install locked dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
       - name: Regenerate the public contract with its frozen tooling
@@ -114,17 +114,17 @@ jobs:
       - name: Audit both locked dependency graphs
         run: |
           npm audit --audit-level=moderate
-          npm audit --prefix tooling/api-contract --audit-level=moderate
+          npm audit --prefix tools/api-contract --audit-level=moderate
       - name: Reject public contract drift
-        run: git diff --exit-code -- src/contracts
+        run: git diff --exit-code -- contracts/assistant-api
       - name: Check architecture, contracts, units, lint and types
         run: npm run check:quality
       - name: Build one synthetic-enabled candidate
         run: npm run build
       - name: Prove the complete disjoint browser and visual inventory
-        run: node scripts/browser-ci-planner.mjs --nightly
+        run: node tools/browser-ci-planner.mjs --nightly
       - name: Normalize ephemeral framework material for the CI transfer
-        run: node scripts/ci-build-artifact.mjs prepare
+        run: node tools/ci-build-artifact.mjs prepare
       - name: Reject secrets in the actual transferred build
         run: npm run test:secrets:artifacts
       - name: Package the verified build and selection plan
@@ -133,7 +133,7 @@ jobs:
           tar --exclude=.next/cache -cf - .next .artifacts/ci | gzip -1 > /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
       - name: Bind the archive to this source, configuration and run
         id: manifest
-        run: node scripts/ci-build-provenance.mjs create /tmp/portfolio-ci-build
+        run: node tools/ci-build-provenance.mjs create /tmp/portfolio-ci-build
       - name: Share the immutable reviewed build
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -183,7 +183,7 @@ jobs:
           cache: npm
           cache-dependency-path: |
             package-lock.json
-            tooling/api-contract/package-lock.json
+            tools/api-contract/package-lock.json
       - name: Install locked dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
       - name: Download this run's reviewed build
@@ -192,13 +192,13 @@ jobs:
           name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
           path: /tmp/portfolio-ci-build
       - name: Verify the archive before extraction
-        run: node scripts/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
+        run: node tools/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
       - name: Restore the reviewed production build
         run: |
           tar -xzf /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
-          node scripts/ci-build-artifact.mjs restore
+          node tools/ci-build-artifact.mjs restore
       - name: Verify every preinstalled browser runtime
-        run: node scripts/check-browser-runtime.mjs
+        run: node tools/check-browser-runtime.mjs
       - name: Run the reviewed browser assertions
         run: npm run test:browser -- --test-list=.artifacts/ci/nightly/browser-${{ matrix.shard }}.txt --update-snapshots=none
       - name: Retain synthetic diagnostics and exact selection plan
@@ -247,7 +247,7 @@ jobs:
           cache: npm
           cache-dependency-path: |
             package-lock.json
-            tooling/api-contract/package-lock.json
+            tools/api-contract/package-lock.json
       - name: Install locked dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
       - name: Download this run's reviewed build
@@ -256,13 +256,13 @@ jobs:
           name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
           path: /tmp/portfolio-ci-build
       - name: Verify the archive before extraction
-        run: node scripts/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
+        run: node tools/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
       - name: Restore the reviewed production build
         run: |
           tar -xzf /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
-          node scripts/ci-build-artifact.mjs restore
+          node tools/ci-build-artifact.mjs restore
       - name: Verify every preinstalled browser runtime
-        run: node scripts/check-browser-runtime.mjs
+        run: node tools/check-browser-runtime.mjs
       - name: Run the reviewed visual assertions
         run: npm run test:browser -- --test-list=.artifacts/ci/nightly/visual.txt --update-snapshots=none
       - name: Retain synthetic diagnostics and exact selection plan
@@ -302,7 +302,7 @@ jobs:
           cache: npm
           cache-dependency-path: |
             package-lock.json
-            tooling/api-contract/package-lock.json
+            tools/api-contract/package-lock.json
       - name: Install locked dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
       - name: Download this run's reviewed build
@@ -311,11 +311,11 @@ jobs:
           name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
           path: /tmp/portfolio-ci-build
       - name: Verify the archive before extraction
-        run: node scripts/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
+        run: node tools/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
       - name: Restore the reviewed production build
         run: |
           tar -xzf /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
-          node scripts/ci-build-artifact.mjs restore
+          node tools/ci-build-artifact.mjs restore
       - name: Run the reviewed links assertions
         run: npm run test:rendered
       - name: Verify tracked sources and baselines remain unchanged
@@ -343,7 +343,7 @@ jobs:
           cache: npm
           cache-dependency-path: |
             package-lock.json
-            tooling/api-contract/package-lock.json
+            tools/api-contract/package-lock.json
       - name: Install locked dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
       - name: Download this run's reviewed build
@@ -352,11 +352,11 @@ jobs:
           name: enabled-build-${{ github.run_id }}-${{ github.run_attempt }}
           path: /tmp/portfolio-ci-build
       - name: Verify the archive before extraction
-        run: node scripts/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
+        run: node tools/ci-build-provenance.mjs verify /tmp/portfolio-ci-build
       - name: Restore the reviewed production build
         run: |
           tar -xzf /tmp/portfolio-ci-build/portfolio-production-build.tar.gz
-          node scripts/ci-build-artifact.mjs restore
+          node tools/ci-build-artifact.mjs restore
       - name: Run the reviewed bundle assertions
         run: npm run test:budget
       - name: Verify tracked sources and baselines remain unchanged

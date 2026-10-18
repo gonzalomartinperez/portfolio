@@ -1,7 +1,7 @@
+import { type Locale, localePath } from "@config/locales";
+import { getContent } from "@content";
+import { chrome } from "@content/chrome";
 import Link from "next/link";
-import { getContent } from "@/content";
-import { chrome } from "@/content/chrome";
-import { type Locale, localePath } from "@/content/locales";
 import { Mark } from "@/shared/identity/mark";
 import { cn } from "@/shared/styles/cn";
 import { Badge } from "@/shared/ui/badge";
