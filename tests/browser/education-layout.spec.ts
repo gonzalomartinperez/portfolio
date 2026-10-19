@@ -29,6 +29,10 @@ for (const locale of ["en", "es"]) {
         await expect(card).toContainText(/PDF · \d+\.\d KiB/);
         await expect(card.locator("a")).toHaveCount(2);
         await expect(card.locator("a[download]")).toHaveCount(1);
+        const documentTitle = await card.locator("h3").innerText();
+        await expect(card.locator("a:not([download])")).toHaveAccessibleName(
+          `${locale === "es" ? "Abrir documento" : "Open document"}: ${documentTitle}`,
+        );
         for (const link of await card.locator("a").all()) {
           const bounds = await link.boundingBox();
           expect(bounds?.height).toBeGreaterThanOrEqual(44);
