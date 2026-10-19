@@ -42,7 +42,7 @@ reviewed CVs, a focused technology catalog and a realistic, readable 3D solar sc
 
 ## Delivery status and ownership
 
-Developed and maintained exclusively by Gonzalo Martín Pérez, this public portfolio
+Developed and maintained exclusively by Gonzalo Martin Perez, this public portfolio
 is live on managed Hostinger Node.js hosting. Suggestions, bug reports and constructive
 feedback are welcome through the existing [contact channels](https://gonzalomartinperez.com/contact);
 priorities, implementation, review and releases remain the maintainer's responsibility.
