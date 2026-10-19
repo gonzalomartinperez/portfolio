@@ -1,6 +1,6 @@
 # Contributing
 
-Developed and maintained exclusively by Gonzalo Martín Pérez, this repository is
+Developed and maintained exclusively by Gonzalo Martin Perez, this repository is
 a public professional portfolio. Suggestions, bug reports and constructive feedback
 are welcome through the existing [contact channels](https://gonzalomartinperez.com/contact).
 Priorities, implementation, review and releases remain the maintainer's responsibility;
