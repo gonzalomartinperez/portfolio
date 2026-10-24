@@ -52,13 +52,34 @@ export const galleryAlt: Record<string, string> = {
 export const pequeversoGalleryAlt: Record<string, string> = {
   "store-home":
     "Pequeverso store home page with the Grafismo Fonético kit, its price and a call to action",
-  "assistant-desktop":
-    "Shopping assistant answering a guarantee question with two sources and a product card with a validated price",
-  "assistant-mobile":
-    "Shopping assistant on a phone, with the answer, its sources and the product card above the message box",
-  "backoffice-sign-in": "Back office sign-in page, open only to the owner and invited people",
-  "backoffice-dashboard":
-    "Back office operations dashboard with availability, remaining budget, completed answers and latency, labelled as synthetic data",
+  "store-support":
+    "Store support page with refund and contact options, and the assistant launcher in the corner",
+  "assistant-panel-welcome":
+    "Assistant panel at its real desktop size, with a welcome message, suggested questions and the message box",
+  "assistant-panel-answer":
+    "Assistant panel answering a guarantee question with two expanded sources, using a test model",
+  "assistant-waiting":
+    "Assistant open on the store page while it waits for an answer, with a control to cancel the request",
+  "assistant-expanded":
+    "Expanded assistant view with the answer, its sources, a product card with a validated price and related materials",
+  "assistant-mobile-answer":
+    "Assistant on a phone with the answer, expanded sources, a product card and the fixed message box",
+  "backoffice-mobile-status":
+    "Back office status page on a phone, with availability and remaining budget labelled as synthetic data",
+  "backoffice-availability":
+    "Back office availability summary: accepting questions, remaining monthly budget, completed answers and time to first text",
+  "backoffice-budget":
+    "Monthly budget with reported usage, estimated and reserved spend against the configured limit, using synthetic data",
+  "backoffice-catalog":
+    "Catalog panel with the store revision, last verified sync, price window and indexed documents",
+  "backoffice-daily":
+    "Daily activity charts for runs and cost per day, with the accessible data table below",
+  "backoffice-quality":
+    "Request outcomes for the last 24 hours and 30 days, with latency percentiles, token usage and failure codes",
+  "backoffice-runs":
+    "Recent runs with status, model, language, latency and opaque synthetic identifiers, without conversation content",
+  "backoffice-analytics":
+    "Site activity report with nine synthetic events and filters for period, page, section and screen width",
   "backoffice-access":
     "Back office access page for inviting people with a role and revoking pending invitations, using test accounts",
 };

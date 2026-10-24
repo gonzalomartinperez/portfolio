@@ -3,24 +3,64 @@
     "width": 1440,
     "height": 900
   },
-  "assistant-desktop": {
-    "width": 1440,
-    "height": 1000
-  },
-  "assistant-mobile": {
-    "width": 1082,
-    "height": 2181
-  },
-  "backoffice-sign-in": {
-    "width": 1280,
-    "height": 720
-  },
-  "backoffice-dashboard": {
-    "width": 1600,
-    "height": 1000
-  },
   "backoffice-access": {
     "width": 1280,
     "height": 758
+  },
+  "store-support": {
+    "width": 1440,
+    "height": 1000
+  },
+  "assistant-waiting": {
+    "width": 1440,
+    "height": 1000
+  },
+  "assistant-expanded": {
+    "width": 1440,
+    "height": 1000
+  },
+  "assistant-panel-welcome": {
+    "width": 408,
+    "height": 560
+  },
+  "assistant-panel-answer": {
+    "width": 408,
+    "height": 560
+  },
+  "assistant-mobile-answer": {
+    "width": 1082,
+    "height": 2181
+  },
+  "backoffice-mobile-status": {
+    "width": 780,
+    "height": 1688
+  },
+  "backoffice-availability": {
+    "width": 1600,
+    "height": 457
+  },
+  "backoffice-budget": {
+    "width": 904,
+    "height": 1578
+  },
+  "backoffice-catalog": {
+    "width": 904,
+    "height": 936
+  },
+  "backoffice-daily": {
+    "width": 1266,
+    "height": 2528
+  },
+  "backoffice-quality": {
+    "width": 1600,
+    "height": 1258
+  },
+  "backoffice-runs": {
+    "width": 1600,
+    "height": 1272
+  },
+  "backoffice-analytics": {
+    "width": 1440,
+    "height": 1957
   }
 }

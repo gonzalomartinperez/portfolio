@@ -1,12 +1,21 @@
 "use client";
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { cn } from "@/shared/styles/cn";
 import { Button } from "@/shared/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/shared/ui/dialog";
 import { Skeleton } from "@/shared/ui/skeleton";
 import styles from "./gallery-carousel.module.css";
 
-export type GallerySlide = { id: string; src: string; alt: string; width: number; height: number };
+export type GallerySlide = {
+  id: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  /** In a uniform frame, `contain` shows the whole capture instead of its top crop. */
+  fit?: "contain";
+};
 export type GalleryFlow = {
   id: string;
   en: string;
@@ -101,6 +110,7 @@ export function GalleryCarousel({
   slideLabels,
   locale = "en",
   flows = filomenaFlows,
+  frame = "natural",
 }: {
   slides: readonly GallerySlide[];
   label: string;
@@ -110,6 +120,8 @@ export function GalleryCarousel({
   locale?: "en" | "es";
   /** Optional filters; the Filomena walkthrough flows remain the default. */
   flows?: readonly GalleryFlow[];
+  /** `uniform` gives every thumbnail the same frame so mixed captures keep even rows. */
+  frame?: "natural" | "uniform";
 }) {
   const [filter, setFilter] = useState("all");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -151,7 +163,7 @@ export function GalleryCarousel({
       <p aria-live="polite" className={styles.count}>
         {visibleSlides.length} / {slides.length}
       </p>
-      <ul className={styles.grid}>
+      <ul className={cn(styles.grid, frame === "uniform" && styles.uniform)}>
         {visibleSlides.map((slide) => (
           <li key={slide.id}>
             <figure className={styles.figure}>
@@ -173,7 +185,7 @@ export function GalleryCarousel({
                   height={slide.height}
                   sizes="(min-width: 52rem) 32rem, 92vw"
                   unoptimized
-                  className={styles.image}
+                  className={cn(styles.image, slide.fit === "contain" && styles.contain)}
                 />
                 <span className={styles.enlargeHint} aria-hidden="true">
                   ↗
@@ -191,7 +203,7 @@ export function GalleryCarousel({
         }}
       >
         <DialogContent
-          className={styles.dialog}
+          className={cn(styles.dialog, frame === "uniform" && styles.uniformDialog)}
           closeLabel={closeLabel}
           onCloseAutoFocus={(event) => {
             event.preventDefault();
