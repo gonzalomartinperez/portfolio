@@ -23,7 +23,7 @@ test("public CV retains bilingual sections, stable IDs, metrics and B2", () => {
     assert.equal(copy.name, "Gonzalo Martin Perez");
     assert.deepEqual(
       copy.sections.map((section) => section.id),
-      ["experience", "skills", "education", "projects", "languages", "certifications"],
+      ["experience", "skills", "projects", "education"],
     );
     const serialized = JSON.stringify(copy);
     assert.match(serialized, /20M\+/);

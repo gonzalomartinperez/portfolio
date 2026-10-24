@@ -69,7 +69,7 @@ flowchart TB
 | `src/app` | Framework routes, metadata and root composition; never imported by lower layers. |
 | `src/views` | Server-rendered page composition using reviewed content, shared components and feature entry files. |
 | `src/shell` | Persistent header/footer, locale/theme controls and page motion. Features do not import it. |
-| `src/features/hero` | Pure geometry and visual curation in `domain`, Three.js/GSAP in `adapters`, React/CSS in `presentation`. The OG image may use the explicit geometry entry. |
+| `src/features/hero` | Pure geometry and visual curation in `domain`, Three.js/GSAP in `adapters`, React/CSS in `presentation`. |
 | `src/features/solar-system` | Scene model in `domain`, browser renderers in `adapters`, React explorer state and scene/explorer UI in `presentation`. |
 | `src/features/architecture-diagrams` | Framework-free graph contracts, layout and routing in `domain`; server figure and narrow lazy canvas in `presentation`. |
 | `src/features/technology-catalogue` | Pure search policy and interactive catalogue; selected data comes from server page composition. |
@@ -97,7 +97,7 @@ cycles and transitive client/server boundaries through parsed source. Contract t
 are included in layering checks; only runtime edges participate in client traversal.
 Before following imports, it classifies every owned source path, including importless
 modules, CSS and frozen input resources. Unknown roots, feature layers, capabilities
-and undeclared facades fail. The registry classifies 33 content files, four configuration files, nine API
+and undeclared facades fail. The registry classifies 35 content files, four configuration files, nine API
 contract files and three identity inputs by exact path. The two solar texture
 modules belong to the solar feature: a pure domain contract and a server-only
 adapter reached through its narrow entry. This is an enforced atomic cutover,
@@ -148,7 +148,7 @@ The private authoring workflow and the public site have different responsibiliti
 flowchart TB
     subgraph AUTHORING["Private authoring · Outside the public build"]
         SOURCE["Approved bilingual editorial content<br/>Verified facts"]
-        REVIEW["DOCX / PDF generation & QA<br/>Six pages visually reviewed · Three pages per CV"]
+        REVIEW["DOCX / PDF generation & QA<br/>Four pages visually reviewed · Two pages per CV"]
         RELEASE["Manifest-bound promotion<br/>Reviewed PDF hashes"]
         SOURCE --> REVIEW --> RELEASE
     end

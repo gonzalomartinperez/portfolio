@@ -75,7 +75,7 @@ container. Check the resulting spacing on both narrow and wide viewports.
 Professional facts remain in the approved source; the website contains a public
 projection. A correction affecting Work, the CV and downloadable PDFs must be
 reconciled across those outputs, not silently fixed in only one paragraph.
-Follow the generated CV and reviewed three-page release workflow in
+Follow the generated CV and reviewed two-page release workflow in
 [public content](public-content.md), and the task-specific QA matrix in
 [development](development.md#task-specific-qa). These rules do not authorize
 editing LinkedIn, Notion or other professional platforms.

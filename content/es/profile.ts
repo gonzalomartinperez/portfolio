@@ -61,13 +61,13 @@ export const resumeLinks: EvidenceLink[] = [
     label: "CV — Inglés (PDF)",
     href: resumeDownloads.en,
     download: resumeFilenames.en,
-    description: "Tres páginas, actualizado en octubre de 2026",
+    description: "Dos páginas, actualizado en octubre de 2026",
   },
   {
     label: "CV — Español (PDF)",
     href: resumeDownloads.es,
     download: resumeFilenames.es,
-    description: "Tres páginas, actualizado en octubre de 2026",
+    description: "Dos páginas, actualizado en octubre de 2026",
   },
 ];
 

@@ -97,7 +97,9 @@ test("confirmed toolkit additions retain their applied experience context", () =
     assert.equal(technology?.status, "applied", id);
     assert.deepEqual(
       technology.evidence.map(({ href }) => href),
-      ["/work#rampy", "/work#independent"],
+      id === "meta-pixel"
+        ? ["/work#rampy", "/work#independent", "/work/pequeverso"]
+        : ["/work#rampy", "/work#independent"],
     );
   }
   for (const id of ["microsoft-clarity", "firebase-analytics", "meta-app-events", "singular-sdk"]) {
@@ -169,7 +171,6 @@ test("additional Rampy confirmations retain their integration evidence", () => {
     "google-vertex-ai",
     "google-gemini",
     "llm-provider-fallback",
-    "server-sent-events",
     "transaction-idempotency",
     "transaction-reconciliation",
     "quote-aggregation-routing",
@@ -184,8 +185,12 @@ test("additional Rampy confirmations retain their integration evidence", () => {
     );
   }
   assert.deepEqual(
+    getTechnology("server-sent-events")?.evidence.map(({ href }) => href),
+    ["/work#rampy", "/work/pequeverso"],
+  );
+  assert.deepEqual(
     getTechnology("openai-api")?.evidence.map(({ href }) => href),
-    ["/work#teamcubation"],
+    ["/work#teamcubation", "/work/pequeverso"],
   );
   assert.deepEqual(
     getTechnology("claude-api")?.evidence.map(({ href }) => href),
@@ -198,7 +203,7 @@ test("additional Rampy confirmations retain their integration evidence", () => {
   assert.equal(getTechnology("hexagonal-architecture"), undefined);
   assert.deepEqual(
     getTechnology("graphrag")?.evidence.map(({ href }) => href),
-    ["/work#rampy", "/work#teamcubation"],
+    ["/work#rampy", "/work#teamcubation", "/work/pequeverso"],
   );
   for (const id of [
     "rag",
@@ -290,7 +295,7 @@ test("technology identifiers, categories and evidence remain complete", () => {
     assert.ok(["applied", "developing"].includes(technology.status));
     if (technology.kind === "concept") assert.equal(technology.icon, undefined);
     for (const { href } of technology.evidence) {
-      assert.match(href, /^\/(?:work(?:#[a-z0-9-]+|\/filomena)?|about)$/);
+      assert.match(href, /^\/(?:work(?:#[a-z0-9-]+|\/filomena|\/pequeverso)?|about)$/);
       if (href.includes("#")) {
         const slug = href.split("#")[1];
         for (const locale of ["en", "es"])

@@ -37,6 +37,10 @@
 .image {
   width: 100%;
   height: auto;
+  /* Tall phone captures stay a readable thumbnail; the dialog shows the full image. */
+  max-height: 34rem;
+  object-fit: cover;
+  object-position: top;
   transition: transform var(--duration-transition) var(--ease-out);
 }
 @media (prefers-reduced-motion: no-preference) {

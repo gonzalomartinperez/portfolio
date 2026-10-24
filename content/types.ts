@@ -27,6 +27,8 @@ export type Role = {
   company: string;
   companyHref?: string;
   links?: EvidenceLink[];
+  /** Site path of a case study about this role's work, shown as a primary action. */
+  caseStudyHref?: string;
   position: string;
   period: string;
   /** Machine-readable start for ordering and structured data. */

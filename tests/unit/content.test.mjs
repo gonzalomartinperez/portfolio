@@ -64,39 +64,35 @@ test("experience architecture claims agree with the reviewed CV in both locales"
       const role = source.slice(start, next === -1 ? undefined : next);
       const entry = entries.find((entry) => entry.id === cvId);
       assert.ok(entry, `${locale}: missing CV experience ${cvId}`);
-      for (const copy of [role, JSON.stringify(entry)]) {
-        assert.match(copy, /design system/i, `${locale}: ${slug} frontend uses a design system`);
-        assert.match(
-          copy,
-          /feature|funcionalidad/i,
-          `${locale}: ${slug} frontend has feature domains`,
-        );
-        if (slug === "rampy") {
-          // The reviewed CV release adopts Clean Architecture in a separate sync; until then it
-          // may still carry the superseded hexagonal wording, which the site must not repeat.
-          if (copy === role) {
-            assert.match(copy, /Clean Architecture/, `${locale}: Rampy uses Clean Architecture`);
-            assert.doesNotMatch(copy, /hexagonal/i, `${locale}: Rampy no longer claims hexagonal`);
-            assert.doesNotMatch(copy, /OpenAI/, `${locale}: Rampy models come from Claude`);
-            assert.ok(copy.includes("Claude"), `${locale}: Rampy names its primary model`);
-          } else {
-            assert.match(copy, /Clean Architecture|hexagonal/i, `${locale}: CV Rampy architecture`);
-          }
+      // The two-page CV (release 2026-10-24.1) no longer details frontend design systems,
+      // feature domains or layered backends; the site keeps those claims, and the CV must not
+      // contradict them.
+      const cvCopy = JSON.stringify(entry);
+      assert.doesNotMatch(cvCopy, /hexagonal/i, `${locale}: CV ${slug} must not claim hexagonal`);
+      assert.match(role, /design system/i, `${locale}: ${slug} frontend uses a design system`);
+      assert.match(
+        role,
+        /feature|funcionalidad/i,
+        `${locale}: ${slug} frontend has feature domains`,
+      );
+      if (slug === "rampy") {
+        assert.match(role, /Clean Architecture/, `${locale}: Rampy uses Clean Architecture`);
+        assert.match(cvCopy, /Clean Architecture/, `${locale}: CV Rampy architecture`);
+        assert.doesNotMatch(role, /hexagonal/i, `${locale}: Rampy no longer claims hexagonal`);
+        assert.doesNotMatch(role, /OpenAI/, `${locale}: Rampy models come from Claude`);
+        assert.ok(role.includes("Claude"), `${locale}: Rampy names its primary model`);
+        for (const copy of [role, cvCopy]) {
           for (const provider of ["pgvector", "Mem0", "Vertex AI", "DeepInfra"]) {
             assert.ok(copy.includes(provider), `${locale}: Rampy includes ${provider}`);
           }
-        } else {
-          assert.match(
-            copy,
-            /layered|en capas/i,
-            `${locale}: ${slug} backend uses layered architecture`,
-          );
-          assert.doesNotMatch(
-            copy,
-            /hexagonal/i,
-            `${locale}: ${slug} must not claim hexagonal architecture`,
-          );
         }
+      } else {
+        assert.match(
+          role,
+          /layered|en capas/i,
+          `${locale}: ${slug} backend uses layered architecture`,
+        );
+        assert.doesNotMatch(role, /hexagonal/i, `${locale}: ${slug} must not claim hexagonal`);
       }
     }
   }

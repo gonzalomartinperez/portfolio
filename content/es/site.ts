@@ -24,11 +24,13 @@ export const siteCopy: SiteCopy = {
     education: "Educación",
     contact: "Contacto",
     caseStudy: "Caso de estudio Filomena",
+    pequeversoCaseStudy: "Caso de estudio Pequeverso",
   },
   actions: {
     seeWork: "Ver mi experiencia",
     getInTouch: "Contactarme",
     readCaseStudy: "Leer el caso de estudio",
+    viewCaseStudy: "Ver el caso de estudio",
     fullExperience: "Experiencia y proyectos completos",
     fullStack: "Explorar todas las tecnologías",
     academicRecord: "Registro académico",
@@ -115,7 +117,7 @@ export const siteCopy: SiteCopy = {
       "Filomena reúne el recorrido del producto, las decisiones de arquitectura y las versiones públicas del código. Las experiencias empresariales describen mi contribución y el contexto de operación.",
   },
   filomena: {
-    metaTitle: "Filomena — plataforma productiva de exámenes",
+    metaTitle: "Filomena: plataforma de exámenes en producción",
     metaDescription:
       "Cómo un monolito CakePHP y jQuery se convirtió en una plataforma API-first que ejecuta " +
       "exámenes de alta exigencia para cinco instituciones nacionales argentinas, con 1.000+ " +
@@ -140,6 +142,22 @@ export const siteCopy: SiteCopy = {
     galleryPrevious: "Pantalla anterior",
     galleryNext: "Pantalla siguiente",
     galleryPosition: (current, total) => `Pantalla ${current} de ${total}`,
+  },
+  pequeverso: {
+    metaTitle: "Pequeverso: una tienda con asistente de compras con IA",
+    metaDescription:
+      "Caso de estudio para un cliente: una tienda en Next.js con checkout de Hotmart y Conversions API de Meta, un back office privado y un asistente de compras GraphRAG sobre LangGraph evaluado antes del lanzamiento.",
+    architectureHeading: "Arquitectura",
+    architectureCaption:
+      "Tres aplicaciones, desde el navegador del comprador hasta el back office privado.",
+    decisionsHeading: "Decisiones de ingeniería",
+    galleryHeading: "Explora el producto",
+    galleryCaption:
+      "Capturas reales de los repositorios públicos: la tienda, el asistente ejecutándose en local con un modelo de prueba y el back office con datos sintéticos. Amplía una pantalla para ver el detalle.",
+    galleryLabel: "Recorrido por el producto Pequeverso",
+    evidenceHeading: "Evidencia",
+    evidenceNote:
+      "Los tres repositorios son públicos. La aplicación del back office es privada y sus capturas usan datos sintéticos.",
   },
   stack: {
     metaTitle: "Stack",

@@ -1,7 +1,17 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const routes = ["", "/about", "/work", "/work/filomena", "/stack", "/education", "/contact", "/cv"];
+const routes = [
+  "",
+  "/about",
+  "/work",
+  "/work/filomena",
+  "/work/pequeverso",
+  "/stack",
+  "/education",
+  "/contact",
+  "/cv",
+];
 
 for (const locale of ["", "/es"]) {
   for (const route of routes) {

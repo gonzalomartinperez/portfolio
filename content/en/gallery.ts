@@ -47,3 +47,18 @@ export const galleryAlt: Record<string, string> = {
   "051": "Reports page with four exports available once the exam has finished",
   "091": "Grafana dashboard showing service health checks and record counts per exam model",
 };
+
+/** Alt text for the Pequeverso captures, keyed by the shared gallery ids. */
+export const pequeversoGalleryAlt: Record<string, string> = {
+  "store-home":
+    "Pequeverso store home page with the Grafismo Fonético kit, its price and a call to action",
+  "assistant-desktop":
+    "Shopping assistant answering a guarantee question with two sources and a product card with a validated price",
+  "assistant-mobile":
+    "Shopping assistant on a phone, with the answer, its sources and the product card above the message box",
+  "backoffice-sign-in": "Back office sign-in page, open only to the owner and invited people",
+  "backoffice-dashboard":
+    "Back office operations dashboard with availability, remaining budget, completed answers and latency, labelled as synthetic data",
+  "backoffice-access":
+    "Back office access page for inviting people with a role and revoking pending invitations, using test accounts",
+};
