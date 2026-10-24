@@ -92,7 +92,7 @@
   font-size: var(--text-small);
 }
 .evidence a {
-  white-space: nowrap;
+  max-width: 100%;
   color: var(--text-muted);
   text-decoration: underline;
   text-underline-offset: 0.2em;
@@ -104,7 +104,6 @@
   .evidence a {
     align-items: center;
     display: inline-flex;
-    gap: 0.25em;
     min-block-size: 44px;
   }
 }

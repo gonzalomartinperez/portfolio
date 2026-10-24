@@ -18,7 +18,7 @@ builds served with `next start`. "Before" is develop `825b5cf`, "after" is this 
 
 | Finding (before) | Fix |
 | --- | --- |
-| Catalogue evidence links ran together ("Rampy ↗Teamcubation ↗"), and on wrap an arrow started the next line | Evidence links are a wrapping flex row with a gap; each label keeps its arrow (`technology-catalogue.module.css`) |
+| Catalogue evidence links ran together ("Rampy ↗Teamcubation ↗"), and on wrap an arrow started the next line | Evidence links are a wrapping flex row with a gap; a no-break space binds each arrow to its label, and labels can still wrap at 200% text (`technology-catalogue`) |
 | Contact channel cards stacked at three different widths on phones | Channel cards fill the column below 40rem (`contact-links.module.css`) |
 | Page jump links on Work and Education wrapped into ragged rows of different widths | Jump links in a header `nav.actions` share each wrapped row below 52rem (`globals.css`) |
 | Footer links were 28 px tall on touch layouts | 44 px rows that span the column below 52rem or on coarse pointers (`site-footer.module.css`) |
@@ -31,6 +31,10 @@ Nothing else turned up. No route had document overflow or text past the viewport
 any width, and the only clipped text the audit reported was the screen-reader-only "opens
 in a new tab" note. The spacing between sections, galleries, carousels, header and footer
 looked consistent.
+
+A first version kept catalogue links on one line with `nowrap`, which broke the 320 px /
+200% text test on `/stack`, and it also put the education ranking links inline after their
+headings. Both were caught and corrected before the PR.
 
 ## Accepted as-is
 
@@ -48,7 +52,7 @@ looked consistent.
 | --- | --- |
 | `npm run check` | Pass |
 | `npm run test:architecture` | Pass (part of `check`) |
-| Playwright subset against the local build | See the PR description |
+| Playwright `routes`, `responsive-layout`, `narrow-readability`, `mobile-refinements`, `contact-icons`, `education-layout`, `expertise`, `shadcn-controls` (desktop and mobile) on the local build | 85 passed, 5 skipped |
 | `git diff --check` | Clean |
 
 ## Screenshots
