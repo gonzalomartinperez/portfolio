@@ -4,6 +4,7 @@
 @import "tw-animate-css";
 @import "@xyflow/react/dist/style.css";
 @source "../";
+@source not "../../docs";
 
 @custom-variant dark (&:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *));
 

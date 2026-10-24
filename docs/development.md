@@ -9,6 +9,10 @@ as implementation teaches us more. Record meaningful deviations and their reason
 An issue or explicit task is sufficient for a small fix; do not create paperwork
 that duplicates an existing source of truth.
 
+The [master plan](master-plan/README.md) records the October 2026 planning research,
+phased roadmap and fixed review rubrics. It is planning only: a phase starts only when
+the owner authorizes it, and each workstream then gets its own specification here.
+
 Statuses are `draft`, `ready`, `in-progress`, and `done`. A spec becomes `ready`
 when scope and consequential choices are resolved, not merely because an agent
 wrote it. Mark it `done` only after acceptance criteria have verification evidence.
