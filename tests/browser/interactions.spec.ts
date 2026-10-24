@@ -203,7 +203,9 @@ test("every catalogue entry has a logo or a labelled-context illustration", asyn
   await expect(page.locator("#tech-rag [data-representation='illustration']")).toHaveCount(1);
   await page.goto("/");
   await expect(
-    page.locator("[data-scene]").getByRole("link", { name: "LangGraph", exact: true }),
+    page
+      .locator("[data-scene]")
+      .getByRole("link", { name: "LangGraph", exact: true, includeHidden: true }),
   ).toHaveAttribute("href", "/stack#tech-langgraph");
 });
 

@@ -207,7 +207,7 @@ export function HomeView({ locale }: { locale: Locale }) {
               <p>{copy.home.whoParagraph}</p>
               <p>
                 {copy.home.whoAssistant.lead}
-                <Link href={localePath(locale, "/work#portfolio-assistant")}>
+                <Link href={localePath(locale, "/work#project-portfolio-assistant")}>
                   {copy.home.whoAssistant.link}
                 </Link>
                 {copy.home.whoAssistant.tail}

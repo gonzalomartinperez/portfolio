@@ -210,7 +210,7 @@ export function WorkView({ locale }: { locale: Locale }) {
           data-slot="card"
           className={cn(cardVariants(), styles.project, "flow")}
           data-project={portfolioAssistant.slug}
-          id={portfolioAssistant.slug}
+          id={`project-${portfolioAssistant.slug}`}
         >
           <div className={styles.projectHead}>
             <div>
