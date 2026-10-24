@@ -354,16 +354,14 @@ for (const renderer of ["webgl", "static"] as const)
           const large = Number.parseFloat(style.fontSize) >= 24;
           const range = document.createRange();
           range.selectNodeContents(element);
-          return [...range.getClientRects()]
-            .filter((rect) => rect.width > 8 && rect.bottom > 0 && rect.top < innerHeight)
-            .map((rect) => ({
-              x: rect.x,
-              y: rect.y,
-              width: rect.width,
-              height: rect.height,
-              color,
-              large,
-            }));
+          // Measure only the on-screen part of each line. A line clipped to a sliver at the
+          // viewport edge would otherwise sample pixels outside the captured image.
+          return [...range.getClientRects()].flatMap((rect) => {
+            const top = Math.max(0, rect.top);
+            const bottom = Math.min(innerHeight, rect.bottom);
+            if (rect.width <= 8 || bottom - top < 4) return [];
+            return [{ x: rect.x, y: top, width: rect.width, height: bottom - top, color, large }];
+          });
         }),
       );
       expect(runs.length).toBeGreaterThan(0);
