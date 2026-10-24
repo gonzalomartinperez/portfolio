@@ -18,13 +18,13 @@ export const profile = {
 
   /** El mensaje de cinco segundos. Una idea por frase. */
   headline:
-    "Transformo sistemas complejos de IA, fintech y blockchain en productos confiables, rápidos y pensados para los usuarios.",
+    "Construyo agentes LLM para producción, y las evaluaciones que demuestran que funcionan.",
 
   intro:
-    "Soy Gonzalo, ingeniero de software especializado en IA aplicada. Transformo ideas en productos útiles: desde agentes de IA y servicios backend hasta aplicaciones web y móviles.",
+    "Soy Gonzalo, AI Engineer, y me ocupo del producto completo: los agentes y sus evaluaciones, además del backend, la web y la app móvil que los rodean.",
 
   summary:
-    "Hoy trabajo en Rampy, una startup fintech y blockchain, donde desarrollo un sistema agéntico que conecta a los usuarios con activos digitales, swaps, vaults y mercados de perpetuos. Construyo las experiencias web y móviles, las APIs y las integraciones que lo sostienen. En producción, el arranque promedio observado de la app pasó de unos 7–8 segundos a 1–2 segundos.",
+    "En Rampy, una startup fintech de Estados Unidos, soy el único ingeniero. Construí un asistente de IA multilingüe que aprueba el 90% o más de una suite de evaluación de más de 3.000 casos y responde con componentes nativos que llevan directo a los flujos de swaps, vaults y perpetuos.",
 
   /** Etiqueta canónica exacta. Nunca Senior, Tech Lead, Architect ni Staff. */
   seniority: "Semi-senior",
@@ -72,7 +72,7 @@ export const resumeLinks: EvidenceLink[] = [
 ];
 
 export const openTo = [
-  "Ingeniería de IA: sistemas agénticos, RAG/GraphRAG e integración de modelos de lenguaje",
+  "Ingeniería de IA: agentes LLM, evaluaciones, RAG/GraphRAG e integración de modelos de lenguaje",
   "Ingeniería de software, backend y full-stack",
   "Ingeniería de producto con responsabilidad de punta a punta",
 ];

@@ -111,7 +111,7 @@ claim. Deterministic visual inspection uses `?sceneProgress=0..1&sceneTime=0`.
 
 The typed technology catalogue is the single editable inventory. Stable IDs connect names,
 categories, approved experience references and local logo resources. Concepts such as RAG and
-hexagonal architecture have descriptive original illustrations and text labels, not invented
+Clean Architecture have descriptive original illustrations and text labels, not invented
 brand logos. The same visual fallback covers tools without a supplied official mark. Applied experience and developing
 knowledge are distinguished without subjective proficiency percentages.
 

@@ -3,14 +3,14 @@ import type { AboutCopy } from "../about-copy";
 export const aboutCopy: AboutCopy = {
   metaTitle: "Sobre mí",
   metaDescription:
-    "Gonzalo Martin Perez: ingeniería de software, IA aplicada e ingeniería de producto. Trayectoria, forma de trabajar y oportunidades 100% remotas.",
+    "Gonzalo Martin Perez: ingeniería de IA, ingeniería de software e ingeniería de producto. Trayectoria, forma de trabajar y oportunidades 100% remotas.",
   eyebrow: "Sobre mí",
-  title: "Ingeniería de producto, con IA aplicada",
+  title: "Agentes LLM integrados en productos reales",
   intro:
     "Me gradué en Ingeniería en Sistemas de Información en la Universidad Nacional del Sur. Desde 2024 combino proyectos independientes con roles de ingeniería en software empresarial, fintech e integraciones blockchain.",
   paragraphs: [
     "Construí sistemas para comercios y backoffices empresariales, conectando servicios e incorporando integraciones fintech y blockchain. Mi proyecto final, Filomena, fue el cierre de esa etapa y llegó a convertirse en una plataforma de exámenes utilizada por cinco instituciones argentinas. Lo desarrollamos en un equipo de tres personas.",
-    "Hoy trabajo en ingeniería de IA en Rampy, una startup donde colaboro directamente con tres fundadores. Ayudo a dar forma a las ideas, tomo decisiones técnicas y acompaño las funcionalidades hasta las pruebas y el despliegue. Las prioridades cambian, así que busco equilibrar entregas útiles con un producto cada vez más fácil de mantener y preparado para crecer.",
+    "Hoy soy el único ingeniero de Rampy, una fintech de Estados Unidos en etapa temprana, donde trabajo directamente con tres cofundadores. Me ocupo del asistente de IA (los agentes, sus evaluaciones y el backend que los sostiene) y de la web y la app móvil donde la gente lo usa. Las prioridades cambian rápido, así que busco equilibrar entregas útiles con un producto fácil de mantener y preparado para crecer.",
     "Conecto IA aplicada con estándares de ingeniería de software: rendimiento, robustez, escalabilidad, mantenibilidad y seguridad. Los llevo a la práctica con contratos claros, pruebas automatizadas, evaluaciones de agentes, observabilidad y ejecución controlada de herramientas.",
     "Mis conocimientos de infraestructura acompañan la entrega de aplicaciones: Coolify para despliegues y NGINX, Traefik y Caddy como servidores web y proxies inversos.",
     "Me gusta entender cómo encajan las piezas de un sistema, conversar sobre alternativas y dividir los problemas complejos en pasos pequeños para construir soluciones de punta a punta. Disfruto trabajar en equipo, aprender y aportar valor.",
@@ -68,7 +68,7 @@ export const aboutCopy: AboutCopy = {
   lookingEyebrow: "Mi próximo paso",
   lookingHeading: "Ingeniería de IA y software, con foco en producto",
   lookingParagraphs: [
-    "Busco roles de ingeniería de IA 100% remotos para construir sistemas agénticos y soluciones de IA aplicada. Mi foco está en Python/FastAPI, LangChain/LangGraph, RAG/GraphRAG y recuperación sobre bases de datos vectoriales.",
+    "Busco roles de AI Engineer 100% remotos para construir agentes LLM, sistemas RAG y GraphRAG, y las evaluaciones que los mantienen confiables. Mi stack principal es Python/FastAPI, LangGraph, Claude, LangSmith y recuperación vectorial.",
     "También estoy abierto a roles de ingeniería de software, backend y full stack, donde pueda aportar mi experiencia en sistemas empresariales, aplicaciones web y móviles e integraciones. Me interesa participar en las decisiones de producto y acompañar las funcionalidades de punta a punta.",
     "Estoy abierto a nuevas oportunidades y disponible para entrevistas.",
   ],

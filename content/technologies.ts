@@ -210,10 +210,6 @@ export const technologyCatalog: Technology[] = [
     aliases: ["OpenAI"],
     evidence: [
       {
-        label: "Rampy",
-        href: "/work#rampy",
-      },
-      {
         label: "Teamcubation",
         href: "/work#teamcubation",
       },
@@ -942,7 +938,12 @@ export const technologyCatalog: Technology[] = [
     category: "applied-ai",
     kind: "brand",
     status: "applied",
+    aliases: ["Anthropic API", "Claude"],
     evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
       {
         label: "Independent work",
         href: "/work#independent",
@@ -984,7 +985,7 @@ export const technologyCatalog: Technology[] = [
     category: "languages",
     kind: "brand",
     status: "applied",
-    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+    evidence: [{ label: "Independent work", href: "/work#independent" }],
     icon: "kotlin",
   },
   {
@@ -994,7 +995,7 @@ export const technologyCatalog: Technology[] = [
     category: "languages",
     kind: "brand",
     status: "applied",
-    evidence: [{ label: "Rampy", href: "/work#rampy" }],
+    evidence: [{ label: "Independent work", href: "/work#independent" }],
   },
   {
     id: "python",
@@ -1395,15 +1396,15 @@ export const technologyCatalog: Technology[] = [
     ],
   },
   {
-    id: "hexagonal-architecture",
-    name: "Hexagonal architecture",
+    id: "clean-architecture",
+    name: "Clean Architecture",
     category: "data",
     kind: "concept",
     status: "applied",
     evidence: [
       {
-        label: "Experience & projects",
-        href: "/work",
+        label: "Rampy",
+        href: "/work#rampy",
       },
     ],
   },

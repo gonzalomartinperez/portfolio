@@ -45,22 +45,23 @@ export const siteCopy: SiteCopy = {
     avatarInteraction: "Interactuar con el avatar de Gonzalo",
     principles: [
       {
-        title: "Rendimiento",
-        description: "Latencia medida, carga inicial rápida y uso eficiente de recursos.",
-      },
-      {
-        title: "Escalabilidad",
+        title: "Evaluaciones primero",
         description:
-          "Límites claros entre servicios, trabajo asíncrono y acceso eficiente a datos.",
+          "La calidad se mide con escenarios representativos y las evaluaciones habilitan cada release.",
       },
       {
-        title: "Mantenibilidad",
-        description: "Código legible, componentes reutilizables y decisiones documentadas.",
-      },
-      {
-        title: "Calidad de software",
+        title: "Respuestas fundamentadas",
         description:
-          "Pruebas automatizadas, evaluación de agentes y revisión humana antes de entregar.",
+          "Recuperación y herramientas en lugar de suposiciones, con límites claros para cada agente.",
+      },
+      {
+        title: "Presupuestos de latencia y costo",
+        description:
+          "El tiempo de respuesta y los tokens son métricas de producto, medidas con pruebas de carga y evaluaciones.",
+      },
+      {
+        title: "Responsabilidad de punta a punta",
+        description: "Desde el agente y la API hasta la app y su comportamiento en producción.",
       },
     ],
     principlesLabel: "Principios de ingeniería",
@@ -68,9 +69,9 @@ export const siteCopy: SiteCopy = {
   },
   home: {
     whoEyebrow: "Quién soy",
-    whoHeading: "De sistemas complejos a productos reales",
+    whoHeading: "De los agentes de IA al producto que los rodea",
     whoParagraph:
-      "Mi trabajo abarca sistemas agénticos potenciados con IA, APIs y backoffices empresariales, sitios web y aplicaciones móviles. Acompaño el recorrido completo: entender las necesidades del usuario, diseñar la arquitectura, desarrollar y probar, desplegar y observar el producto en producción.",
+      "Trabajo sobre todo con LangGraph, Claude, RAG y LangSmith: agentes que usan herramientas reales, recuperación basada en el contexto del negocio y evaluaciones que deciden qué se publica. También construyo las APIs, los backoffices, la web y las apps móviles que los rodean, desde las necesidades del usuario y la arquitectura hasta las pruebas, el despliegue y el monitoreo.",
     factCurrently: "Actualmente",
     factExperience: "Experiencia",
     factBasedIn: "Radicado en",
@@ -93,19 +94,20 @@ export const siteCopy: SiteCopy = {
     closingHeading: "Hablemos",
     closingInvitation: "Hablemos de tu producto.",
     closingAvailability: "Estoy abierto a oportunidades 100% remotas.",
-    closingBody: "¿Buscas un perfil que combine ingeniería de software e IA aplicada?",
+    closingBody:
+      "¿Construyes un producto con IA y necesitas a alguien que se haga cargo desde el agente hasta producción?",
   },
   about: aboutCopy,
   work: {
     metaTitle: "Trabajo",
     metaDescription:
-      "Experiencia profesional y proyectos seleccionados: IA y producto en Rampy, procesamiento basado en eventos a escala " +
-      "financiera en Payway, un sistema empresarial de permisos, desarrollo de producto " +
-      "independiente y Filomena.",
+      "Experiencia profesional y proyectos seleccionados: agentes LLM y evaluaciones en Rampy, " +
+      "un asistente GraphRAG y procesamiento basado en eventos en Payway, un backoffice " +
+      "empresarial de permisos, desarrollo de producto independiente y Filomena.",
     eyebrow: "Trabajo",
     title: "Experiencia y proyectos seleccionados",
     intro: (length, asOf) =>
-      `${length} de experiencia profesional a ${asOf}, construyendo productos en fintech, sistemas empresariales e IA aplicada.`,
+      `${length} de experiencia profesional a ${asOf}, llevando a producción agentes de IA, productos fintech y sistemas empresariales.`,
     experienceHeading: "Experiencia profesional",
     projectsEyebrow: "Proyectos seleccionados",
     projectsHeading: "Explora el producto en detalle",
@@ -193,8 +195,8 @@ export const siteCopy: SiteCopy = {
   contact: {
     metaTitle: "Contacto",
     metaDescription:
-      "Contacta a Gonzalo Martin Perez — ingeniería de software, IA y producto. Abierto a nuevas oportunidades en " +
-      "roles remotos. Email, LinkedIn y GitHub.",
+      "Contacta a Gonzalo Martin Perez, AI Engineer, ingeniero de software y de producto, " +
+      "abierto a roles remotos. Email, LinkedIn y GitHub.",
     eyebrow: "Contacto",
     title: "Hablemos",
     intro:

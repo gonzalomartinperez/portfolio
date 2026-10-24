@@ -12,16 +12,18 @@ export const roles: Role[] = [
     location: "Estados Unidos",
     arrangement: "Remote",
     context:
-      "AI Engineer con alcance de ingeniería de producto de punta a punta: colaboro directamente con tres fundadores para definir prioridades y entregar funcionalidades productivas de IA, fintech, web y mobile desde la arquitectura y la implementación hasta la evaluación y la operación.",
+      "Una fintech estadounidense en etapa temprana que desarrolla una app no custodial de trading y rendimientos. Ingresé en septiembre de 2026 como único ingeniero, después de otros desarrolladores, y me ocupo de los agentes de IA, el backend, la web y la app móvil en colaboración directa con los tres cofundadores.",
     contributions: [
-      "Reconstruí la arquitectura del producto de Rampy en producción: refactoricé todo el backend hacia una arquitectura hexagonal coherente y el frontend React/Next.js hacia dominios separados por funcionalidades del usuario, con un design system completo y abstracciones de componentes reutilizables.",
-      "Desarrollé flujos agénticos productivos con Agno, LangChain, LangGraph, OpenAI API y GraphRAG sobre Neo4j, con PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Combiné reranking con la evaluación de recorridos completos y selección de herramientas, con apoyo de LangSmith. Las pruebas de carga confirmaron respuestas al menos 2× más rápidas en flujos optimizados comparables; eliminar llamadas y contexto redundantes redujo los tokens de las consultas afectadas un 30% estimado.",
-      "Reduje el arranque promedio medido de la app móvil de unos 7–8 segundos a 1–2 segundos; entregué funcionalidades con React Native, Kotlin y Swift, usando Android Studio para Android y verificando en emuladores y teléfonos reales.",
-      "Implementé cifrado de extremo a extremo (E2EE) para las conversaciones de usuarios en la app en producción, con mensajes almacenados cifrados en la base de datos.",
-      "Implementé tracking de eventos móviles de punta a punta con Google Analytics mediante Firebase, Clarity Mobile en todas las pantallas y Singular SDK para Meta App Events, coordinando integraciones para evitar duplicados. Diseñé, desarrollé, probé y desplegué una landing page para campañas de descargas.",
-      "Integré Morpho, Aave y Compound de punta a punta —backend, frontend y ejecución de transacciones— para consultar posiciones y rendimientos, depositar y retirar, con chequeos de completitud y seguimiento de estado mediante webhooks; también trabajé con Hyperliquid y LI.FI, autenticación y wallets con Privy e integraciones de Stripe en producción.",
+      "Construí un asistente de IA multilingüe (inglés, español y portugués) y la suite de evaluación que lo respalda: más de 1.000 escenarios replicados y traducidos a cada idioma (más de 3.000 casos), calificados en LangSmith con un LLM-as-a-judge validado contra revisión humana y de producto, y usados como requisito para cada release. Los agentes en producción aprueban el 90% o más en promedio. Un caso se aprueba cuando la respuesta es correcta y fundamentada, se usa la herramienta adecuada, el contrato estructurado para la interfaz es válido, se respetan los guardrails y la respuesta resuelve la necesidad del usuario en lenguaje simple.",
+      "Diseñé el grafo multiagente en LangGraph, con ciclos, herramientas financieras, procesos en segundo plano, reintentos y recuperación ante fallos, y migré el stack agéntico desde Agno cuando los flujos se volvieron más complejos. Claude es el modelo principal, con DeepInfra y Vertex AI como proveedores de respaldo, recuperación con GraphRAG sobre Neo4j y PostgreSQL/pgvector, y memoria con Mem0. Al eliminar llamadas redundantes a herramientas y ajustar la memoria y el contexto, las respuestas pasaron a ser el doble de rápidas con un 40% menos de tokens, verificado con pruebas de carga y evaluaciones.",
+      "Diseñé el contrato de salida estructurada que comparten los agentes y la app, para que las respuestas se muestren como UI generativa: botones, tarjetas y accesos nativos a los flujos de swaps, vaults y perpetuos, con datos de mercado en tiempo real. El agente prepara cada transacción y el usuario la confirma en su wallet no custodial de Privy.",
+      "Lancé el trading en más de 200 mercados de perpetuos de Hyperliquid (cripto, índices, acciones y commodities), swaps con más de 100 tokens mediante LI.FI y vaults de Morpho, Aave y Compound para consultar posiciones y rendimientos, depositar y retirar, con controles de completitud y seguimiento de estado mediante webhooks. Diseñé e implementé el modelo de comisiones de la empresa para swaps, vaults y perpetuos, y trabajé con autenticación de Privy e integraciones de Stripe en producción.",
+      "Reestructuré el backend y el frontend heredados con Clean Architecture, con el frontend React/Next.js organizado por funcionalidades y un design system completo con abstracciones de componentes reutilizables.",
       "Construí una vista consolidada del portfolio con activos, vaults y rendimientos de las últimas 24 horas; reduje la recuperación de datos en consultas comparables de vaults, mercados y perpetuos del rango de segundos al de milisegundos mediante precarga, consultas paralelas y caché selectiva.",
       "Reduje el pipeline de validación, build y despliegue de aproximadamente una hora a diez minutos conservando sus controles; optimicé bundles, imágenes Docker y entornos de desarrollo, staging y producción en DigitalOcean.",
+      "Implementé cifrado de extremo a extremo (E2EE) para las conversaciones de usuarios en la app en producción, con mensajes almacenados cifrados en la base de datos.",
+      "Desarrollé la app en React Native, usando Android Studio para Android y verificando en emuladores y teléfonos reales. La app está publicada en Android y la versión para iOS está lista, con su lanzamiento pendiente.",
+      "Implementé tracking de eventos móviles de punta a punta con Google Analytics mediante Firebase, Clarity Mobile en todas las pantallas y Singular SDK para Meta App Events, coordinando integraciones para evitar duplicados. Diseñé, desarrollé, probé y desplegué una landing page para campañas de descargas.",
       "Desarrollé el backoffice empresarial para administrar la aplicación y centralizar el monitoreo, la telemetría y el estado operativo; continúo ampliando sus capacidades.",
       "Incorporé controles de dominio y frente a instrucciones maliciosas en los flujos agénticos, verificados con pruebas automatizadas de comportamiento y revisión humana.",
       "Centralicé secretos con Infisical, acceso por usuario, sincronización automatizada y rotación a demanda; trabajé sobre despliegues, monitoreo, backups, bases de datos y permisos de servidores.",
@@ -29,16 +31,16 @@ export const roles: Role[] = [
       "Preparé infraestructura escalable con el objetivo de soportar miles de usuarios, organizando entornos, contenedores y controles operativos para acompañar el crecimiento del producto.",
     ],
     attribution:
-      "Ingeniería de producto desde los requisitos hasta producción, en colaboración directa con los fundadores y sobre el trabajo previo del equipo.",
+      "Único ingeniero desde septiembre de 2026, en colaboración directa con los fundadores y sobre el trabajo de los desarrolladores anteriores.",
     stack: technologyNames([
       "Python",
       "Solidity",
       "FastAPI",
-      "Agno",
-      "LangChain",
       "LangGraph",
+      "LangChain",
       "LangSmith",
-      "OpenAI API",
+      "Claude API",
+      "Agno",
       "Google Vertex AI",
       "DeepInfra",
       "GraphRAG",
@@ -46,12 +48,11 @@ export const roles: Role[] = [
       "RAG",
       "Mem0",
       "pgvector",
+      "Clean Architecture",
       "TypeScript",
       "React",
       "Next.js",
       "React Native",
-      "Kotlin",
-      "Swift",
       "Android Studio",
       "Hyperliquid",
       "LI.FI",
@@ -71,22 +72,22 @@ export const roles: Role[] = [
     ]),
     metrics: [
       {
+        value: "90%+",
+        label: "de aprobación en una suite de más de 3.000 casos",
+        qualifier:
+          "Promedio global de los agentes en producción sobre más de 1.000 escenarios en inglés, español y portugués, calificados en LangSmith con un LLM-as-a-judge validado contra revisión humana y de producto.",
+      },
+      {
         value: "≥2×",
         label: "respuestas más rápidas en flujos agénticos optimizados",
         qualifier:
-          "Las pruebas de carga verificaron tiempos de respuesta iguales o inferiores a la mitad del valor anterior en flujos agénticos optimizados comparables.",
+          "Las pruebas de carga y las evaluaciones verificaron tiempos de respuesta iguales o inferiores a la mitad del valor anterior en flujos agénticos optimizados comparables.",
       },
       {
-        value: "~30%",
-        label: "menos tokens en consultas optimizadas",
+        value: "40%",
+        label: "menos tokens en flujos agénticos optimizados",
         qualifier:
-          "Estimación para consultas afectadas por llamadas innecesarias y contexto redundante; no es un benchmark de todo el sistema.",
-      },
-      {
-        value: "~7–8 s → 1–2 s",
-        label: "arranque promedio de la app móvil",
-        qualifier:
-          "Promedios medidos por Gonzalo antes y después para el arranque; no se conservan la muestra ni el período de prueba y la cifra no describe todas las pantallas.",
+          "Medido con pruebas de carga y evaluaciones tras eliminar llamadas redundantes a herramientas y ajustar la memoria y el contexto; no es un benchmark de cada consulta.",
       },
       {
         value: "≥2×",
@@ -114,7 +115,7 @@ export const roles: Role[] = [
       "La plataforma de promociones de Payway, una fintech líder en América Latina, al servicio " +
       "de un ecosistema de 350.000+ comercios, 70+ emisores de tarjetas y 13 países.",
     contributions: [
-      "Construí un agente GraphRAG y su harness, conectados al BFF Spring WebFlux para acceder desde el portal de comercios. Combiné el contexto del grafo Neo4j con recuperación vectorial en PostgreSQL/pgvector mediante LangChain, LangGraph y OpenAI API para relacionar políticas empresariales y promociones. El harness orquestaba agentes, evaluaba respuestas con apoyo de LangSmith, permitía optimizar el rendimiento y aplicaba guardrails de dominio y protección de datos; el asistente respondía consultas sin ejecutar operaciones comerciales.",
+      "Construí un asistente con GraphRAG y su harness para responder consultas de comercios sobre promociones y políticas de la empresa desde el portal de comercios, conectados al BFF Spring WebFlux. Combinaba el contexto del grafo Neo4j con recuperación vectorial en PostgreSQL/pgvector mediante LangChain, LangGraph y OpenAI API, y aprobó el 95% o más de una suite de más de 500 casos, calificada en LangSmith con un LLM-as-a-judge validado contra revisión humana. Los guardrails lo mantenían en el dominio de promociones y evitaban fugas de datos; el asistente era de solo lectura y nunca ejecutaba operaciones comerciales.",
       "Contribuí a una carga histórica de 20M+ promociones en producción, seguida de miles de promociones nuevas por día; implementé un flujo event-driven y serverless con Amazon S3, SQS y una Lambda Python/FastAPI con estrategias de procesamiento ordenado, conectada con microservicios Java/Spring Boot y Node.js/NestJS para cargar sus respectivas bases de datos PostgreSQL. La carga productiva completa se validó sin pérdida de datos.",
       "Entregué la experiencia de promociones de punta a punta: un microfrontend React y TypeScript con Single-SPA, organizado por funcionalidades y con un design system, embebido como sección nativa del portal de comercios y conectado mediante un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS y proveedores.",
       "Construí microservicios en Java/Spring Boot y TypeScript/Node.js/NestJS para ingerir, normalizar y procesar promociones de comercios, entidades financieras y proveedores, adaptando los contratos según cada integración.",
@@ -156,6 +157,12 @@ export const roles: Role[] = [
     ]),
     metrics: [
       {
+        value: "95%+",
+        label: "de aprobación en una suite de más de 500 casos",
+        qualifier:
+          "Respuestas del asistente de promociones calificadas en LangSmith con un LLM-as-a-judge validado contra revisión humana.",
+      },
+      {
         value: "20M+",
         label: "promociones cargadas",
         qualifier:
@@ -177,38 +184,43 @@ export const roles: Role[] = [
     location: "Argentina",
     arrangement: "Remote",
     context:
-      "Desarrollo independiente de productos mediante proyectos ocasionales para clientes de comercio electrónico, redes sociales y productos digitales.",
+      "Proyectos ocasionales para clientes de e-commerce y productos digitales, centrados en automatización con IA y en entregar productos completos en poco tiempo.",
     contributions: [
-      "Entregué la tienda de productos digitales de Pequeverso con Node.js y Next.js en Hostinger, incluyendo un asistente conversacional de compras que responde consultas sobre productos sin ejecutar compras.",
-      "Construí pipelines y agentes con MCP, Claude y otros LLMs que investigan, generan y publican contenido de punta a punta. En el conjunto de proyectos históricos, los clientes estimaron reducciones de costos operativos de al menos un 70%.",
-      "Diseñé y entregué productos digitales, backoffices y extensiones de stock y punto de venta, conectando necesidades comerciales con sistemas mantenibles. Los productos entregados generaron USD 10.000+ de ganancias acumuladas para clientes de distintos proyectos históricos.",
-      "Desarrollé tiendas online, soluciones WordPress, APIs e integraciones full-stack a medida, con herramientas en Python y Node.js para automatización, carga masiva y análisis de datos bajo desarrollo guiado por especificaciones.",
+      "Automaticé procesos manuales que llevaban horas o días para que ahora se resuelvan en minutos: flujos con n8n, ManyChat y Meta Ads, y agentes de contenido con Claude y MCP que investigan, redactan y publican.",
+      "Entregué sitios web completos, software a medida y proyectos de e-commerce en días o semanas, para que los clientes llegaran a un público que antes no alcanzaban. En e-commerce y productos digitales, ese trabajo generó más de USD 10.000 en ganancias para los clientes.",
+      "Entregué la tienda de productos digitales de Pequeverso con Node.js y Next.js en Hostinger y desarrollé su asistente de compras con IA: GraphRAG sobre LangGraph con recuperación léxica, vectorial y por grafo, basado en el catálogo de la tienda, con precios y links validados por el servidor. Responde consultas sobre productos sin ejecutar compras y todavía no está publicado.",
+      "Desarrollé backoffices, extensiones de stock y punto de venta, soluciones WordPress, APIs e integraciones full-stack, con herramientas en Python y Node.js para automatización, carga masiva y análisis de datos. Usé Kotlin y Swift en proyectos móviles freelance y personales.",
     ],
     attribution:
       "Entrega independiente para clientes particulares. Las cifras reúnen proyectos históricos de distintos clientes, no solo Pequeverso.",
     stack: technologyNames([
+      "Claude API",
+      "Model Context Protocol",
+      "LangGraph",
+      "GraphRAG",
       "Python",
       "Node.js",
       "TypeScript",
-      "Claude API",
-      "Model Context Protocol",
-      "REST APIs",
-      "WordPress",
       "Next.js",
       "React",
+      "Kotlin",
+      "Swift",
+      "REST APIs",
+      "WordPress",
       "Hostinger",
     ]),
     metrics: [
       {
+        value: "Horas → minutos",
+        label: "procesos manuales automatizados",
+        qualifier:
+          "Procesos que llevaban horas o días ahora se resuelven en minutos mediante automatizaciones y agentes de contenido; los tiempos varían según el flujo y el cliente.",
+      },
+      {
         value: "USD 10.000+",
         label: "ganancias acumuladas para clientes",
         qualifier:
-          "Ganancias generadas para los clientes por los productos entregados — no ingresos propios.",
-      },
-      {
-        value: "≥70%",
-        label: "reducción de costos operativos",
-        qualifier: "Estimado por los propios clientes. No es una medición financiera auditada.",
+          "Ganancias generadas para los clientes por los sitios, el software a medida y los proyectos de e-commerce entregados; no son ingresos personales.",
       },
     ],
   },

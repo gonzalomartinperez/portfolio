@@ -12,16 +12,18 @@ export const roles: Role[] = [
     location: "United States",
     arrangement: "Remote",
     context:
-      "AI Engineer with end-to-end product engineering scope: partnering directly with three founders to shape priorities and ship production AI, fintech, web and mobile features across architecture, implementation, evaluation and operations.",
+      "An early-stage US fintech building a non-custodial trading and yield app. I joined in September 2026 as its sole engineer, taking over from earlier developers, and own the AI agents, backend, web and mobile app in direct collaboration with the three co-founders.",
     contributions: [
-      "Rebuilt Rampy’s product architecture in production: refactored the entire backend into a cohesive hexagonal architecture and the React/Next.js frontend into feature-based domains, with a complete design system and reusable component abstractions.",
-      "Built production agent workflows with Agno, LangChain, LangGraph, OpenAI API and Neo4j-backed GraphRAG, using PostgreSQL/pgvector, Mem0, Vertex AI and DeepInfra for retrieval, memory and model access. Combined reranking with LangSmith-assisted evaluation of complete journeys and tool selection. Load tests confirmed at least 2× faster responses in comparable optimized workflows; removing redundant calls and context cut tokens in affected queries by an estimated 30%.",
-      "Cut measured average mobile app startup from about 7–8 seconds to 1–2 seconds; shipped React Native, Kotlin and Swift features, using Android Studio for Android development and testing in emulators and on physical devices.",
-      "Implemented end-to-end encryption (E2EE) for user conversations in the production app, with messages persisted encrypted in the database.",
-      "Implemented end-to-end mobile event tracking with Google Analytics through Firebase, Clarity Mobile on every screen, and Singular SDK for Meta App Events, coordinating integrations to prevent duplicate events. Designed, built, tested and deployed a campaign landing page for app downloads.",
-      "Integrated Morpho, Aave and Compound across backend, frontend and transaction execution for positions, yields, deposits and withdrawals, with completeness checks and webhook-based status tracking; also worked with Hyperliquid and LI.FI, Privy authentication and wallets, and Stripe integrations in production.",
+      "Built a multilingual AI assistant (English, Spanish and Portuguese) and the eval suite behind it: 1,000+ scenarios replicated and translated into each language (3,000+ cases), graded in LangSmith by an LLM-as-a-judge validated against human and product review, and used as a release gate. Production agents pass 90%+ on average. A case passes when the answer is correct and grounded, the right tool is used, the structured contract for the UI is valid, guardrails hold and the reply solves the user’s need in plain language.",
+      "Designed the multi-agent LangGraph graph, with cycles, financial tools, background workers, retries and failure recovery, and migrated the agentic stack from Agno as the flows grew. Claude is the primary model, with DeepInfra and Vertex AI as fallback providers, GraphRAG retrieval over Neo4j and PostgreSQL/pgvector, and Mem0 memory. Removing redundant tool calls and tightening memory and context made responses 2× faster with 40% fewer tokens, verified with load tests and evals.",
+      "Designed the structured-output contract shared by the agents and the app, so answers render as generative UI: native buttons, cards and deep links into swap, vault and perps flows, with live market data. The agent prepares each transaction and the user confirms it in a non-custodial Privy wallet.",
+      "Shipped trading across 200+ Hyperliquid perpetual markets (crypto, indices, stocks and commodities), swaps across 100+ tokens via LI.FI, and Morpho, Aave and Compound vaults for positions, yields, deposits and withdrawals, with completeness checks and webhook-based status tracking. Designed and implemented the company’s fee model for swaps, vaults and perps, and worked with Privy authentication and Stripe integrations in production.",
+      "Re-architected the inherited backend and frontend into Clean Architecture, with the React/Next.js frontend organized by feature and a complete design system with reusable component abstractions.",
       "Built a consolidated portfolio experience for assets, vaults and 24-hour returns; reduced comparable vault, market and perpetual data retrieval from seconds into the millisecond range through prefetching, parallel provider calls and selective caching.",
       "Cut the validation, build and deployment pipeline from about one hour to ten minutes while retaining its checks; optimized application bundles, Docker images and development, staging and production environments on DigitalOcean.",
+      "Implemented end-to-end encryption (E2EE) for user conversations in the production app, with messages persisted encrypted in the database.",
+      "Shipped the React Native app, using Android Studio for Android development and testing in emulators and on physical devices. The Android app is live and the iOS version is ready, with its launch pending.",
+      "Implemented end-to-end mobile event tracking with Google Analytics through Firebase, Clarity Mobile on every screen, and Singular SDK for Meta App Events, coordinating integrations to prevent duplicate events. Designed, built, tested and deployed a campaign landing page for app downloads.",
       "Built the enterprise back office to manage application operations and centralize monitoring, telemetry and operational status; I continue to expand its capabilities.",
       "Added domain and malicious-instruction controls to agent workflows, checked with automated behavioral tests and human review.",
       "Centralized secrets with Infisical, per-user access, automated synchronization and on-demand rotation; worked across deployment, monitoring, backups, databases and server permissions.",
@@ -29,16 +31,16 @@ export const roles: Role[] = [
       "Prepared scalable infrastructure with the design goal of supporting thousands of users, organizing environments, containers and operational controls for product growth.",
     ],
     attribution:
-      "Product engineering from requirements through production, in direct collaboration with the founders and building on the team's existing work.",
+      "Sole engineer since September 2026, working directly with the founders and building on the work of earlier developers.",
     stack: technologyNames([
       "Python",
       "Solidity",
       "FastAPI",
-      "Agno",
-      "LangChain",
       "LangGraph",
+      "LangChain",
       "LangSmith",
-      "OpenAI API",
+      "Claude API",
+      "Agno",
       "Google Vertex AI",
       "DeepInfra",
       "GraphRAG",
@@ -46,12 +48,11 @@ export const roles: Role[] = [
       "RAG",
       "Mem0",
       "pgvector",
+      "Clean Architecture",
       "TypeScript",
       "React",
       "Next.js",
       "React Native",
-      "Kotlin",
-      "Swift",
       "Android Studio",
       "Hyperliquid",
       "LI.FI",
@@ -71,22 +72,22 @@ export const roles: Role[] = [
     ]),
     metrics: [
       {
+        value: "90%+",
+        label: "pass rate on a 3,000+ case eval suite",
+        qualifier:
+          "Global average for production agents on 1,000+ scenarios run in English, Spanish and Portuguese, graded in LangSmith by an LLM-as-a-judge validated against human and product review.",
+      },
+      {
         value: "≥2×",
         label: "faster responses in optimized agent workflows",
         qualifier:
-          "Load tests verified response times at half the previous baseline or less for comparable optimized agent workflows.",
+          "Load tests and evals verified response times at half the previous baseline or less for comparable optimized agent workflows.",
       },
       {
-        value: "~30%",
-        label: "fewer tokens in targeted queries",
+        value: "40%",
+        label: "fewer tokens in optimized agent workflows",
         qualifier:
-          "Estimated reduction for queries affected by unnecessary calls and redundant context; not a system-wide benchmark.",
-      },
-      {
-        value: "~7–8 s → 1–2 s",
-        label: "average mobile app startup",
-        qualifier:
-          "Owner-measured before/after averages for app startup; sample and test window were not retained, and the result does not describe every screen.",
+          "Measured with load tests and evals after removing redundant tool calls and tightening memory and context; not a benchmark of every query.",
       },
       {
         value: "≥2×",
@@ -114,7 +115,7 @@ export const roles: Role[] = [
       "The promotions platform for Payway, a leading Latin American fintech, serving an " +
       "ecosystem of 350,000+ merchants, 70+ card issuers and 13 countries.",
     contributions: [
-      "Built a GraphRAG agent and harness connected to the Spring WebFlux BFF for access through the merchant portal. Combined Neo4j graph context with PostgreSQL/pgvector retrieval using LangChain, LangGraph and OpenAI API to relate enterprise policies and promotions. The harness orchestrated agents, evaluated answers with LangSmith support, enabled performance tuning and enforced promotion-domain and data-leakage guardrails; the assistant answered queries without executing commercial actions.",
+      "Built a GraphRAG assistant and its harness to answer merchants’ questions about promotions and company policies through the merchant portal, connected to the Spring WebFlux BFF. It combined Neo4j graph context with PostgreSQL/pgvector retrieval using LangChain, LangGraph and OpenAI API, and passed 95%+ of a 500+ case eval suite graded in LangSmith by an LLM-as-a-judge validated against human review. Guardrails kept it on the promotions domain and prevented data leaks; the assistant was read-only and never executed commercial actions.",
       "Contributed to a historical production load of 20M+ promotions, followed by thousands of new promotions daily; implemented an event-driven, serverless flow with Amazon S3, SQS and a Python/FastAPI Lambda using ordered processing strategies, connected to Java/Spring Boot and Node.js/NestJS microservices that loaded their respective PostgreSQL databases. The complete production load was validated with zero data loss.",
       "Delivered the promotions experience end to end: a Single-SPA React and TypeScript microfrontend, organized by feature and using a design system, embedded as a native section of the merchant portal and connected through a Spring WebFlux BFF to Java/Spring Boot and Node.js/NestJS microservices and providers.",
       "Built Java/Spring Boot and TypeScript/Node.js/NestJS microservices to ingest, normalize and process promotions from merchants, financial entities and providers, adapting contracts per integration.",
@@ -156,6 +157,12 @@ export const roles: Role[] = [
     ]),
     metrics: [
       {
+        value: "95%+",
+        label: "pass rate on a 500+ case eval suite",
+        qualifier:
+          "Promotion assistant answers graded in LangSmith by an LLM-as-a-judge validated against human review.",
+      },
+      {
         value: "20M+",
         label: "promotions loaded",
         qualifier:
@@ -177,37 +184,43 @@ export const roles: Role[] = [
     location: "Argentina",
     arrangement: "Remote",
     context:
-      "Independent product engineering through occasional projects for clients in e-commerce, social media and digital products.",
+      "Occasional, project-based work for e-commerce and digital-product clients, focused on AI automation and shipping complete products quickly.",
     contributions: [
-      "Delivered Pequeverso’s digital-products storefront with Node.js and Next.js on Hostinger, including a conversational shopping assistant that answers product questions without executing purchases.",
-      "Built MCP-, Claude- and LLM-powered pipelines and agents that research, generate and publish content end to end. Across historical client projects, clients estimated operating-cost reductions of at least 70%.",
-      "Designed and shipped digital products, back offices and stock and point-of-sale extensions, connecting commercial needs to maintainable systems. Delivered products generated USD 10,000+ in cumulative client profit across historical projects.",
-      "Developed online stores, WordPress solutions, APIs and custom full-stack integrations, with Python and Node.js tooling for automation, bulk processing and data analysis under spec-driven development.",
+      "Automated manual processes that used to take hours or days so they now run in minutes: n8n, ManyChat and Meta Ads workflows, and content agents built with Claude and MCP that research, write and publish.",
+      "Delivered complete websites, custom software and e-commerce projects in days or weeks, giving clients a reach they couldn’t get before. Across e-commerce and digital products, that work generated USD 10,000+ in client profit.",
+      "Delivered Pequeverso’s digital-products storefront with Node.js and Next.js on Hostinger, and built its AI shopping assistant: GraphRAG on LangGraph combining lexical, vector and graph retrieval, grounded in the store catalog, with server-validated prices and links. It answers product questions without executing purchases and is not live yet.",
+      "Built back offices, stock and point-of-sale extensions, WordPress solutions, APIs and full-stack integrations, with Python and Node.js tooling for automation, bulk processing and data analysis. Used Kotlin and Swift in freelance and personal mobile projects.",
     ],
     attribution:
       "Independent delivery for individual clients. The figures below cover historical client projects collectively, not Pequeverso alone.",
     stack: technologyNames([
+      "Claude API",
+      "Model Context Protocol",
+      "LangGraph",
+      "GraphRAG",
       "Python",
       "Node.js",
       "TypeScript",
-      "Claude API",
-      "Model Context Protocol",
-      "REST APIs",
-      "WordPress",
       "Next.js",
       "React",
+      "Kotlin",
+      "Swift",
+      "REST APIs",
+      "WordPress",
       "Hostinger",
     ]),
     metrics: [
       {
-        value: "USD 10,000+",
-        label: "cumulative client profit",
-        qualifier: "Profit generated for clients by the products delivered — not personal revenue.",
+        value: "Hours → minutes",
+        label: "manual processes automated",
+        qualifier:
+          "Processes that took hours or days now run in minutes through automations and content agents; timings vary by workflow and client.",
       },
       {
-        value: "≥70%",
-        label: "operating-cost reduction",
-        qualifier: "Estimated by the clients themselves. Not an audited financial measurement.",
+        value: "USD 10,000+",
+        label: "cumulative client profit",
+        qualifier:
+          "Profit generated for clients by the websites, custom software and e-commerce projects delivered; not personal revenue.",
       },
     ],
   },
