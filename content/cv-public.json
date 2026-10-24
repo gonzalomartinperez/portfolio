@@ -1,41 +1,21 @@
 {
   "schemaVersion": 1,
-  "revision": "2026-10-17.1",
+  "revision": "2026-10-24.1",
   "locales": {
     "en": {
       "name": "Gonzalo Martin Perez",
       "email": "gonzalomartinperez2002@gmail.com",
-      "location": "Bahía Blanca, Argentina · 100% Remote (UTC-3)",
-      "headline": "Software Engineer | AI Engineer | Product Engineer | Generative AI · AI Agents · LLM · RAG · GraphRAG · Python · FastAPI · LangChain · LangGraph · Neo4j · Java · Spring Boot · TypeScript · Node.js · React · Next.js · AWS",
+      "location": "Bahía Blanca, Argentina · 100% Remote (UTC-3) · English B2",
+      "headline": "AI Engineer | Software Engineer | Product Engineer | LLM agents, RAG & evals in production | LangGraph · LangSmith · Claude API · MCP · Python · TypeScript · FastAPI · AWS",
       "summaryTitle": "Professional Summary",
       "summary": [
         {
-          "text": "AI Software Engineer",
+          "text": "AI Engineer",
           "bold": true,
           "href": ""
         },
         {
-          "text": " with an Information Systems Engineering degree. Build user-focused enterprise, fintech, and blockchain products end to end: AI agents and RAG/GraphRAG, distributed backends, web and mobile applications, and production operations. Reduced measured average mobile startup from about ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "7–8 s to 1–2 s",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": " and contributed to ingesting ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "20M+ promotions",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": ". Combine product judgment, maintainable architecture, performance, and security to turn complex requirements into reliable software.",
+          "text": " with 2.5+ years shipping production software, most recently LLM agents, RAG systems and eval suites. Sole engineer at an early-stage US fintech, owning its trading assistant end to end: the LangGraph agents in English, Spanish and Portuguese, the eval suite that gates every release, and the backend, web and mobile app around them. Previously built a GraphRAG assistant for Payway's merchant platform.",
           "bold": false,
           "href": ""
         }
@@ -58,108 +38,92 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "AI Engineer · end-to-end product engineering",
+                      "text": "Sole engineer",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " · Work with three founders to bring AI, fintech, web, and mobile features from technical decisions through delivery and production operations.",
+                      "text": ", taking over the codebase from earlier developers at a US fintech building a non-custodial trading and yield app. Work directly with the three co-founders.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "rampy-architecture-mobile",
+                  "id": "rampy-eval-assistant",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Modernized the production application end to end",
+                      "text": "Built the eval suite that gates every release of a multilingual AI assistant: 1,000+ scenarios replicated in English, Spanish and Portuguese (3,000+ cases), with the agents passing 90%+.",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ": refactored the backend into hexagonal architecture and organized the React/Next.js frontend by domain and feature; built Rampy’s complete design system with reusable components. Implemented end-to-end encryption (E2EE) for user conversations, storing messages encrypted in the database.",
+                      "text": " An LLM-as-a-judge in LangSmith, validated against human review, grades every run.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "rampy-rag-evaluation",
+                  "id": "rampy-agent-graph",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Built and optimized production AI agents with Neo4j GraphRAG",
+                      "text": "Migrated the assistant from Agno to a multi-agent LangGraph system",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " using Agno, LangChain/LangGraph, LangSmith, and OpenAI API; integrated PostgreSQL/pgvector, Mem0, Vertex AI, and DeepInfra for retrieval, memory, and model access. Improved tool selection and evaluation: load tests confirmed at least 2× faster responses in comparable optimized flows, while removing redundant calls reduced token usage in affected queries by an estimated 30%.",
+                      "text": " with cycles, financial tools, background workers, retries and failure recovery; Claude is the primary model, with DeepInfra and Vertex AI fallbacks, GraphRAG (Neo4j, pgvector) and Mem0 memory.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "rampy-mobile-production",
+                  "id": "rampy-agent-performance",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Cut measured average mobile app startup from about 7–8 s to 1–2 s",
+                      "text": "Made agent responses 2× faster and cut tokens by 40%",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": "; shipped React Native, Kotlin and Swift features, using Android Studio for Android. Implemented end-to-end event tracking with Firebase Analytics, Clarity Mobile on every screen, Singular SDK and Meta App Events, avoiding duplicates.",
+                      "text": " by removing redundant tool calls and tightening memory and context, verified with load tests and evals.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "rampy-defi-integrations",
+                  "id": "rampy-generative-ui",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Integrated Morpho, Aave, and Compound end to end",
+                      "text": "Designed the structured-output contract that turns agent answers into generative UI in the React Native app",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " for positions, yields, deposits, and withdrawals across backend, frontend, and transaction execution, with completeness checks and webhook-based status tracking; also worked with Hyperliquid and LI.FI, Privy authentication and wallets, and Stripe integrations, all in production.",
+                      "text": ": native buttons, cards and deep links into swap, vault and perps flows on live market data. Users confirm every transaction in a non-custodial Privy wallet.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "rampy-portfolio-orchestration",
+                  "id": "rampy-trading-fees",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Built a consolidated portfolio and 24-hour returns view",
+                      "text": "Re-architected the inherited backend and frontend around Clean Architecture, cutting build-and-deploy from about 1 hour to 10 minutes.",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " with parallel calls, prefetching and Redis caching; comparable vault, market and perpetual queries moved from seconds to milliseconds.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "rampy-delivery-operations",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Cut validation, build and deployment from about 1 hour to 10 minutes",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", retaining checks and preparing DigitalOcean environments. Built the enterprise backoffice for application management, monitoring, telemetry and status; continue to expand its capabilities.",
+                      "text": " Built the trading integrations and fee model on top: Hyperliquid perps (200+ markets), LI.FI swaps (100+ tokens) and Morpho, Aave and Compound vaults, tracked via webhooks.",
                       "bold": false,
                       "href": ""
                     }
@@ -180,7 +144,7 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Built software with PostgreSQL and MongoDB for Payway's merchant promotions platform, in a 13-country ecosystem with thousands of new promotions daily.",
+                      "text": "Consultant on Payway's merchant promotions platform (350,000+ merchants, 13 countries).",
                       "bold": false,
                       "href": ""
                     }
@@ -191,12 +155,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Built the merchant-facing Promotion Assistance System",
+                      "text": "Built a GraphRAG assistant that passed 95%+ of a 500+ case eval suite",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " with LangChain/LangGraph, LangSmith, Neo4j, PostgreSQL/pgvector and OpenAI API. GraphRAG related enterprise policies and promotions; its internal harness orchestrated agents, evaluated answers, tuned performance and enforced domain and data-leakage guardrails. Connected to the Spring WebFlux BFF for portal access, the assistant answered queries without executing commercial actions.",
+                      "text": ", graded in LangSmith by a human-validated LLM-as-a-judge. Used LangGraph, Neo4j and PostgreSQL/pgvector, and added guardrails against off-topic questions and data leaks.",
                       "bold": false,
                       "href": ""
                     }
@@ -207,164 +171,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Built event-driven ingestion for 20M+ historical promotions in production",
+                      "text": "Delivered the event-driven pipeline that ingested 20M+ historical promotions into production",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ": S3 → SQS → Python/FastAPI Lambda → Java/Spring Boot and Node.js/NestJS microservices, each writing to its own PostgreSQL database. Built Python/Node.js tooling to reproduce local loads, reconcile results and identify failed promotions.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "teamcubation-portal-bff",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Delivered the promotions experience end to end",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ": connected a Single-SPA React/TypeScript microfrontend, organized by feature and using a design system, to Java/Spring Boot and Node.js/NestJS microservices through a Spring WebFlux BFF; Amazon API Gateway bridged the HTTPS portal to internal HTTP services.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "teamcubation-microservices",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Built Java/Spring Boot and TypeScript/Node.js/NestJS microservices",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " using layered architecture, and developed and diagnosed containerized workloads running in Docker/Kubernetes-managed environments.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "teamcubation-engineering-workspace",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Created a custom agentic engineering workspace",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " for the product's multi-repository integration landscape to streamline context retrieval, token usage, and consistent feature delivery.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "independent",
-              "title": "Self Employed",
-              "subtitle": "AI Engineer & Full-Stack Developer",
-              "details": ["Jan 2024 – Present", "Argentina · Remote"],
-              "href": "",
-              "keywords": [],
-              "blocks": [
-                {
-                  "id": "independent-context-1",
-                  "kind": "paragraph",
-                  "runs": [
-                    {
-                      "text": "Independent Product Engineering",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " · Revenue-generating products, internal operations systems, and AI automation for e-commerce, social media, and digital-product clients.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "independent-commerce-automation",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Delivered ",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": "Pequeverso",
-                      "bold": true,
-                      "href": "https://pequeverso.com/"
-                    },
-                    {
-                      "text": "’s digital-product storefront",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " with Next.js on Hostinger and an informational product and shopping assistant. Built stores, APIs and Python/Node.js automation under Spec-Driven Development, cutting tasks from hours to minutes.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "independent-content-agents",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Built MCP-, Claude-, and LLM-powered pipelines and agents",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " for end-to-end content research, generation, and publishing; clients estimated operating-cost reductions of at least ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "70%",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ".",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "independent-client-products",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Designed and shipped digital products, backoffices, and inventory/point-of-sale extensions",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " that generated ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "USD 10,000+ in cumulative client profit across multiple projects",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", translating business needs into maintainable software.",
+                      "text": " (S3 and SQS into a Python/FastAPI Lambda, then Java/Spring Boot and NestJS services on Docker and Kubernetes). Wrote tooling to replay loads locally and reconcile failed records.",
                       "bold": false,
                       "href": ""
                     }
@@ -385,32 +197,7 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Permissions Management System",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " · Took a primary role in designing and building an enterprise backoffice for authorized personnel at an organization with ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "150+ branches",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "2.7M+ members",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", and 50+ internal systems.",
+                      "text": "Primary engineer on the permissions back office of Argentina's largest consumer cooperative (2.7M+ members).",
                       "bold": false,
                       "href": ""
                     }
@@ -421,12 +208,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Designed and built a permissions back office integrating 10+ enterprise systems",
+                      "text": "Integrated 10+ internal systems into one admin experience",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " with different databases and permission models; automated roughly 10 minutes of manual permission lookup into a workflow taking under 10 seconds, giving administrators a consistent experience.",
+                      "text": " through a Python/FastAPI BFF and a Next.js front end; a 10-minute manual permission lookup now takes under 10 seconds.",
                       "bold": false,
                       "href": ""
                     }
@@ -437,80 +224,75 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Standardized system onboarding",
+                      "text": "Cut permission tickets and manual assignments by 80%+ and recurring assignment bugs by 95%+",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " with reusable structures, filters, and validation, reducing permission-related tickets and manual assignments by at least ",
+                      "text": " by standardizing how new systems are onboarded.",
                       "bold": false,
                       "href": ""
-                    },
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "independent",
+              "title": "Self-employed",
+              "subtitle": "AI Engineer & Full-Stack Developer",
+              "details": ["Jan 2024 – Present", "Argentina · Remote · Project-based"],
+              "href": "",
+              "keywords": [],
+              "blocks": [
+                {
+                  "id": "independent-context-1",
+                  "kind": "paragraph",
+                  "runs": [
                     {
-                      "text": "80%",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " and eliminating at least ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "95%",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " of recurring assignment bugs, based on before/after tickets and logs.",
+                      "text": "AI and full-stack projects for clients selling on Shopify and Hotmart; several are live in production.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "cooperativa-frontend-bff",
+                  "id": "independent-content-agents",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Built a responsive, dynamic Next.js/TypeScript frontend",
+                      "text": "Cut manual processes from hours or days to minutes",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", organized by feature and using a design system, connected exclusively to a Python/FastAPI BFF. The backend used layered architecture; the BFF standardized frontend views and connected Java/Spring Boot, Node.js/NestJS and PHP services through OpenAPI/Swagger; microservices used MySQL / MariaDB databases.",
+                      "text": " with WhatsApp assistants, n8n, ManyChat and Meta Ads automations, and MCP content agents on the Claude or OpenAI APIs.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "cooperativa-query-performance",
+                  "id": "independent-client-products",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Kept critical endpoints below 300 ms on average",
+                      "text": "Delivered websites, custom software and e-commerce projects in days or weeks that generated USD 10,000+ in client profit",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " in repeatable tests on enterprise on-premise servers through SQL tuning, indexing, and pagination. Built an agentic engineering workspace to preserve context across integration repositories.",
+                      "text": ", including ",
                       "bold": false,
                       "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "cooperativa-security-audit",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Implemented LDAP, RBAC, and an exportable audit trail",
-                      "bold": true,
-                      "href": ""
                     },
                     {
-                      "text": " to control access and trace permission changes; automated bulk data loading and validation with Python in a MySQL/MariaDB and Redis environment.",
+                      "text": "Pequeverso",
+                      "bold": false,
+                      "href": "https://pequeverso.com/"
+                    },
+                    {
+                      "text": "'s store and its GraphRAG shopping assistant on LangGraph.",
                       "bold": false,
                       "href": ""
                     }
@@ -526,58 +308,67 @@
           "entries": [
             {
               "id": "applied-ai",
-              "title": "Applied AI & Agentic Systems",
+              "title": "AI Engineering",
               "subtitle": "",
               "details": [],
               "href": "",
               "keywords": [
                 "AI Agents",
+                "Multi-Agent Systems",
                 "RAG",
                 "GraphRAG",
-                "LangChain",
-                "LangGraph",
-                "LangSmith",
-                "Context Engineering",
-                "Prompt Engineering",
-                "Embeddings",
-                "Chunking",
-                "pgvector",
-                "Neo4j",
                 "LLM Evaluation",
-                "AI Testing",
-                "AI Guardrails",
-                "Fine Tuning",
-                "LLMOps",
-                "Model Context Protocol (MCP)",
+                "LLM-as-a-Judge",
+                "Tool Calling",
+                "Generative UI",
+                "Prompt Engineering",
+                "AI Guardrails"
+              ],
+              "blocks": []
+            },
+            {
+              "id": "ai-platforms",
+              "title": "AI Frameworks & Platforms",
+              "subtitle": "",
+              "details": [],
+              "href": "",
+              "keywords": [
+                "LangGraph",
+                "LangChain",
+                "LangSmith (LLM Observability)",
+                "OpenTelemetry",
+                "Claude API",
                 "OpenAI API",
-                "Agno",
-                "Claude API"
+                "Vertex AI",
+                "MCP",
+                "Neo4j",
+                "pgvector"
               ],
               "blocks": []
             },
             {
               "id": "backend",
-              "title": "Backend & APIs",
+              "title": "Backend & Data",
               "subtitle": "",
               "details": [],
               "href": "",
               "keywords": [
-                "Spring Boot",
                 "FastAPI",
                 "NestJS",
-                "Spring WebFlux",
-                "Spring Security",
+                "Spring Boot",
                 "Laravel",
                 "REST APIs",
                 "Microservices",
-                "Celery",
-                "OpenAPI"
+                "Clean Architecture",
+                "Event-Driven Architecture",
+                "PostgreSQL",
+                "Redis"
               ],
               "blocks": []
             },
             {
               "id": "languages-runtimes",
-              "title": "Languages & Runtimes",
+              "title": "Languages & Frontend",
               "subtitle": "",
               "details": [],
               "href": "",
@@ -585,48 +376,13 @@
                 "Python",
                 "TypeScript",
                 "Java",
-                "JavaScript",
-                "Node.js",
                 "SQL",
-                "Kotlin",
-                "Swift",
-                "PHP",
-                "Solidity"
-              ],
-              "blocks": []
-            },
-            {
-              "id": "frontend",
-              "title": "Web & Mobile",
-              "subtitle": "",
-              "details": [],
-              "href": "",
-              "keywords": [
+                "Node.js",
                 "React",
                 "Next.js",
                 "React Native",
-                "Android Studio",
-                "Design Systems",
-                "Feature-Based Architecture"
-              ],
-              "blocks": []
-            },
-            {
-              "id": "data-architecture",
-              "title": "Data & Architecture",
-              "subtitle": "",
-              "details": [],
-              "href": "",
-              "keywords": [
-                "PostgreSQL",
-                "MySQL",
-                "MariaDB",
-                "MongoDB",
-                "Redis",
-                "Hexagonal Architecture",
-                "Layered Architecture",
-                "Event-Driven Architecture",
-                "SQL Tuning"
+                "Kotlin",
+                "Swift"
               ],
               "blocks": []
             },
@@ -637,41 +393,13 @@
               "details": [],
               "href": "",
               "keywords": [
-                "DigitalOcean",
                 "AWS Lambda",
-                "Amazon API Gateway",
                 "Amazon S3",
                 "Amazon SQS",
-                "CloudWatch",
                 "Docker",
                 "Kubernetes",
-                "Coolify",
-                "Nginx",
-                "Traefik",
-                "Caddy",
-                "GitLab CI/CD",
-                "GitHub Actions"
-              ],
-              "blocks": []
-            },
-            {
-              "id": "quality-observability",
-              "title": "Quality, Delivery & Observability",
-              "subtitle": "",
-              "details": [],
-              "href": "",
-              "keywords": [
-                "JUnit",
-                "Mockito",
-                "SonarQube",
-                "OpenTelemetry",
-                "Prometheus",
-                "Grafana",
-                "RBAC",
-                "LDAP",
-                "Application Security",
-                "End-to-End Encryption",
-                "Infisical"
+                "GitHub Actions",
+                "SSE"
               ],
               "blocks": []
             },
@@ -682,23 +410,104 @@
               "details": [],
               "href": "",
               "keywords": [
-                "Fintech",
-                "Blockchain",
-                "Web3",
-                "DeFi",
+                "Hyperliquid",
+                "LI.FI",
                 "Morpho",
                 "Aave",
                 "Compound",
-                "Hyperliquid",
-                "LI.FI",
                 "Privy",
-                "Stripe",
-                "Swaps",
-                "Vaults",
-                "Perpetuals",
                 "Non-Custodial Wallets"
               ],
               "blocks": []
+            }
+          ]
+        },
+        {
+          "id": "projects",
+          "title": "Selected Projects",
+          "entries": [
+            {
+              "id": "portfolio-assistant",
+              "title": "Portfolio Assistant · Bilingual RAG Assistant with Evals",
+              "subtitle": "",
+              "details": ["Sep 2026 – Present"],
+              "href": "https://github.com/gonzalomartinperez/portfolio-assistant-api",
+              "keywords": [],
+              "blocks": [
+                {
+                  "id": "portfolio-assistant-architecture",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Open-source bilingual RAG assistant that answers recruiters' questions about my work",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": ": FastAPI and LangGraph with hybrid lexical and vector retrieval plus GraphRAG (pgvector, Neo4j), cited answers streamed over SSE and per-request cost limits. Implemented and evaluated; not yet deployed.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "portfolio-assistant-evals",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Built a 1,000-question bilingual eval bank plus adversarial cases",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": ", a 244-turn live-model evaluation on OpenAI and 800+ automated tests in GitHub Actions CI, with OpenTelemetry tracing.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "filomena",
+              "title": "Filomena · Production Exam Platform for Health Sciences",
+              "subtitle": "",
+              "details": ["Jan 2025 – Dec 2025"],
+              "href": "https://gonzalomartinperez.com/work/filomena",
+              "keywords": [],
+              "blocks": [
+                {
+                  "id": "filomena-context-1",
+                  "kind": "paragraph",
+                  "runs": [
+                    {
+                      "text": "Capstone project now used in production by ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "five national institutions in Argentina",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " for health sciences exams, serving 1,000+ concurrent users. Principal contributor on a three-person team (Laravel, Next.js, Redis); graded ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "10/10",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": ".",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -717,259 +526,6 @@
               ],
               "href": "https://www.uns.edu.ar/",
               "keywords": [],
-              "blocks": [
-                {
-                  "id": "uns-context-1",
-                  "kind": "paragraph",
-                  "runs": [
-                    {
-                      "text": "Graduated",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " from a 5-year accredited engineering program. Completed 34/34 courses, an ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "8.67/10 average",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", a ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "10/10 Final Year Project",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", and Supervised Professional Practice. UNS ranked ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "#10 nationally",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " in SCImago Institutions Rankings 2026. Relevant coursework: Artificial Intelligence, Systems Architecture & Design, Databases, Software Verification & Validation, Algorithms & Complexity, and Formal Methods.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "uns-context-2",
-                  "kind": "paragraph",
-                  "runs": [
-                    {
-                      "text": "View education and academic record →",
-                      "bold": false,
-                      "href": "https://gonzalomartinperez.com/education"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "projects",
-          "title": "Selected Project",
-          "entries": [
-            {
-              "id": "filomena",
-              "title": "Filomena · Production Exam Platform for Health Sciences",
-              "subtitle": "",
-              "details": ["Jan 2025 – Dec 2025"],
-              "href": "https://gonzalomartinperez.com/work/filomena",
-              "keywords": [],
-              "blocks": [
-                {
-                  "id": "filomena-context-1",
-                  "kind": "paragraph",
-                  "runs": [
-                    {
-                      "text": "Principal author and contributor in a three-person team building a production platform active at ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "5 Argentine national institutions",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": "; Final Year Project graded ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "10/10",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ".",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "filomena-concurrency",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Supported 1,000+ concurrent users observed in production",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " while preserving data consistency and keeping critical endpoints below ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "300 ms on average",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", using SQL optimization, Redis caching, and queues.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "filomena-modernization",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Led architecture, backend, frontend, and infrastructure",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", modernizing a CakePHP + jQuery monolith into an API-first product with a Laravel REST API and Next.js/React/TypeScript frontend.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "filomena-delivery",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Reduced institutional onboarding from hours to minutes",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " with production Docker/GitHub Actions deployments observed below ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "15 minutes",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ".",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "filomena-security-observability",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Implemented production security and observability",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " with Prometheus/Grafana, multi-role RBAC, student anonymity and per-institution data isolation.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "filomena-agile-contribution",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Coordinated Agile delivery",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " from requirements through production.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "languages",
-          "title": "Languages",
-          "entries": [
-            {
-              "id": "spanish",
-              "title": "Spanish",
-              "subtitle": "Native",
-              "details": [],
-              "href": "",
-              "keywords": [],
-              "blocks": []
-            },
-            {
-              "id": "english",
-              "title": "English",
-              "subtitle": "Professional working proficiency (B2)",
-              "details": [],
-              "href": "",
-              "keywords": [],
-              "blocks": []
-            }
-          ]
-        },
-        {
-          "id": "certifications",
-          "title": "Certifications",
-          "entries": [
-            {
-              "id": "docker-uns",
-              "title": "Docker Fundamentals",
-              "subtitle": "Universidad Nacional del Sur",
-              "details": ["Mar 2024"],
-              "href": "",
-              "keywords": [],
-              "blocks": []
-            },
-            {
-              "id": "power-skills",
-              "title": "Professional Power Skills",
-              "subtitle": "Kognité",
-              "details": ["Jun 2026"],
-              "href": "",
-              "keywords": [],
               "blocks": []
             }
           ]
@@ -979,37 +535,22 @@
     "es": {
       "name": "Gonzalo Martin Perez",
       "email": "gonzalomartinperez2002@gmail.com",
-      "location": "Bahía Blanca, Argentina · 100% Remoto (UTC-3)",
-      "headline": "Software Engineer | AI Engineer | Product Engineer | Generative AI · AI Agents · LLM · RAG · GraphRAG · Python · FastAPI · LangChain · LangGraph · Neo4j · Java · Spring Boot · TypeScript · Node.js · React · Next.js · AWS",
+      "location": "Bahía Blanca, Argentina · 100% remoto · Inglés B2",
+      "headline": "AI Engineer | Software Engineer | Product Engineer | LLM agents, RAG & evals in production | LangGraph · LangSmith · Claude API · MCP · Python · TypeScript · FastAPI · AWS",
       "summaryTitle": "Resumen profesional",
       "summary": [
         {
-          "text": "AI Software Engineer",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": " e Ingeniero en Sistemas de Información. Construyo productos centrados en los usuarios para software empresarial, fintech y blockchain: agentes con IA, RAG/GraphRAG, backends distribuidos y aplicaciones web y móviles, desde los requisitos hasta producción. Reduje el arranque promedio medido de una app de unos ",
+          "text": "Soy ",
           "bold": false,
           "href": ""
         },
         {
-          "text": "7–8 s a 1–2 s",
+          "text": "AI Engineer",
           "bold": true,
           "href": ""
         },
         {
-          "text": " y contribuí a la ingesta de ",
-          "bold": false,
-          "href": ""
-        },
-        {
-          "text": "20M+ promociones",
-          "bold": true,
-          "href": ""
-        },
-        {
-          "text": ". Combino criterio de producto, arquitectura mantenible, rendimiento y seguridad para convertir requisitos complejos en software confiable.",
+          "text": " con más de 2,5 años llevando software a producción, últimamente con agentes LLM, sistemas RAG y suites de evaluación. Como único ingeniero de una startup fintech de EE. UU., me ocupo de su asistente de trading de punta a punta: agentes en LangGraph en tres idiomas, la suite que cada versión debe aprobar y el backend, la web y la app móvil. Antes desarrollé un asistente con GraphRAG para Payway.",
           "bold": false,
           "href": ""
         }
@@ -1032,108 +573,92 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "AI Engineer · ingeniería de producto de punta a punta",
+                      "text": "Único ingeniero",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " · Colaboro con tres fundadores para llevar funcionalidades de IA, fintech, web y mobile desde las decisiones técnicas hasta producción.",
+                      "text": ", a cargo del código que dejaron desarrolladores anteriores en una fintech de EE. UU. que desarrolla una app no custodial de trading y rendimientos. Trabajo directamente con los tres cofundadores.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "rampy-architecture-mobile",
+                  "id": "rampy-eval-assistant",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Modernicé la aplicación en producción de punta a punta",
+                      "text": "Construí la suite de evaluación que cada versión de un asistente de IA multilingüe debe aprobar: 1.000+ escenarios replicados en inglés, español y portugués (3.000+ casos), con los agentes en un 90% o más.",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ": refactoricé el backend con arquitectura hexagonal y organicé el frontend React/Next.js por dominios y funcionalidades; desarrollé el design system completo con componentes reutilizables. Implementé cifrado de extremo a extremo (E2EE) para las conversaciones, con mensajes almacenados cifrados en la base de datos.",
+                      "text": " Un LLM-as-a-judge en LangSmith, validado con revisión humana, califica cada ejecución.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "rampy-rag-evaluation",
+                  "id": "rampy-agent-graph",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Desarrollé y optimicé agentes en producción con GraphRAG y Neo4j",
+                      "text": "Migré el asistente de Agno a un sistema multi-agent en LangGraph",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", usando Agno, LangChain/LangGraph, LangSmith y OpenAI API; integré PostgreSQL/pgvector, Mem0, Vertex AI y DeepInfra para recuperación, memoria y acceso a modelos. Mejoré la selección de herramientas y la evaluación: las pruebas de carga confirmaron respuestas al menos 2× más rápidas en flujos optimizados comparables, mientras que eliminar llamadas redundantes redujo un 30% estimado de tokens en las consultas afectadas.",
+                      "text": " con ciclos, herramientas financieras, procesos en segundo plano, reintentos y recuperación ante fallos; Claude es el modelo principal, con fallback a DeepInfra y Vertex AI, GraphRAG (Neo4j, pgvector) y memoria con Mem0.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "rampy-mobile-production",
+                  "id": "rampy-agent-performance",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Reduje el arranque promedio medido de la app móvil de unos 7–8 s a 1–2 s",
+                      "text": "Hice que las respuestas de los agentes fueran 2× más rápidas y reduje un 40% el consumo de tokens",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": "; entregué funcionalidades React Native, Kotlin y Swift, usando Android Studio para Android. Implementé seguimiento de eventos de punta a punta con Firebase Analytics, Clarity Mobile en todas las pantallas, Singular SDK y Meta App Events, evitando duplicados.",
+                      "text": " al eliminar llamadas redundantes a herramientas y ajustar memoria y contexto, con verificación por pruebas de carga y evaluaciones.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "rampy-defi-integrations",
+                  "id": "rampy-generative-ui",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Integré Morpho, Aave y Compound de punta a punta",
+                      "text": "Diseñé el contrato de salida estructurada que convierte las respuestas de los agentes en generative UI en la app en React Native",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " para consultar posiciones y rendimientos, depositar y retirar: backend, frontend y ejecución de transacciones con controles de completitud y seguimiento por webhooks; también trabajé con Hyperliquid y LI.FI, autenticación y wallets con Privy e integraciones de Stripe, todo en producción.",
+                      "text": ": botones, tarjetas y accesos nativos a swaps, vaults y perpetuos con datos en tiempo real. El usuario confirma cada transacción en su wallet no custodial de Privy.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "rampy-portfolio-orchestration",
+                  "id": "rampy-trading-fees",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Construí una vista consolidada del portfolio y rendimientos de 24 horas",
+                      "text": "Reestructuré el backend y el frontend heredados con Clean Architecture y reduje el tiempo de build y despliegue de alrededor de 1 hora a 10 minutos.",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " con consultas paralelas, precarga y caché Redis; consultas comparables de vaults, mercados y perpetuos pasaron de segundos a milisegundos.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "rampy-delivery-operations",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Reduje validaciones, build y despliegue de aproximadamente 1 hora a 10 minutos",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", conservando controles y preparando entornos DigitalOcean. Desarrollé el backoffice empresarial para gestionar la aplicación, su monitoreo, telemetría y estado; continúo ampliando sus capacidades.",
+                      "text": " Sobre esa base construí las integraciones de trading y el modelo de comisiones: perpetuos de Hyperliquid (200+ mercados), swaps con LI.FI (100+ tokens) y vaults de Morpho, Aave y Compound, con seguimiento por webhooks.",
                       "bold": false,
                       "href": ""
                     }
@@ -1154,7 +679,7 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Desarrollé software con PostgreSQL y MongoDB para la plataforma de promociones de Payway para comercios, en un ecosistema de 13 países con miles de promociones nuevas por día.",
+                      "text": "Consultor en la plataforma de promociones de Payway (350.000+ comercios, 13 países).",
                       "bold": false,
                       "href": ""
                     }
@@ -1165,12 +690,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Construí el Sistema de asistencia de promociones para comercios",
+                      "text": "Desarrollé un asistente con GraphRAG que aprobó el 95% o más de una suite de 500+ casos",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " con LangChain/LangGraph, LangSmith, Neo4j, PostgreSQL/pgvector y OpenAI API. GraphRAG relacionaba políticas empresariales y promociones; el harness interno orquestaba agentes, evaluaba respuestas, optimizaba rendimiento y aplicaba guardrails de dominio y protección de datos. Conectado al BFF Spring WebFlux para el acceso desde el portal, respondía consultas sin ejecutar operaciones comerciales.",
+                      "text": ", calificada en LangSmith con un LLM-as-a-judge validado por revisión humana. Usé LangGraph, Neo4j y PostgreSQL/pgvector, e incorporé guardrails contra preguntas fuera de dominio y fugas de datos.",
                       "bold": false,
                       "href": ""
                     }
@@ -1181,159 +706,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Implementé ingesta por eventos para 20M+ promociones históricas en producción",
+                      "text": "Entregué el pipeline orientado a eventos que ingirió 20M+ promociones históricas en producción",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ": S3 → SQS → Lambda Python/FastAPI → microservicios Java/Spring Boot y Node.js/NestJS, cada uno con escritura en su base de datos PostgreSQL. Desarrollé herramientas en Python/Node.js para reproducir cargas locales, reconciliar resultados y detectar promociones fallidas.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "teamcubation-portal-bff",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Entregué la experiencia de promociones de punta a punta",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ": conecté un microfrontend React/TypeScript (Single-SPA), organizado por funcionalidades y con un design system, a microservicios Java/Spring Boot y Node.js/NestJS mediante un BFF Spring WebFlux; Amazon API Gateway enlazó el portal HTTPS con servicios HTTP internos.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "teamcubation-microservices",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Construí microservicios en Java/Spring Boot y TypeScript/Node.js/NestJS",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " con arquitectura en capas, y desarrollé y diagnostiqué aplicaciones contenerizadas ejecutadas en entornos gestionados con Docker/Kubernetes.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "teamcubation-engineering-workspace",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Creé un entorno agéntico de ingeniería",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " adaptado al producto y sus múltiples repositorios de integración para optimizar la recuperación de contexto, el uso de tokens y la entrega consistente de funcionalidades.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "independent",
-              "title": "Self Employed",
-              "subtitle": "AI Engineer & Full-Stack Developer",
-              "details": ["Ene 2024 – Actualidad", "Argentina · Remoto"],
-              "href": "",
-              "keywords": [],
-              "blocks": [
-                {
-                  "id": "independent-context-1",
-                  "kind": "paragraph",
-                  "runs": [
-                    {
-                      "text": "Independent Product Engineering",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " · Productos generadores de ingresos, sistemas operativos internos y automatización con IA para clientes de e-commerce, redes sociales y productos digitales.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "independent-commerce-automation",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Entregué la tienda de productos digitales de ",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": "Pequeverso",
-                      "bold": true,
-                      "href": "https://pequeverso.com/"
-                    },
-                    {
-                      "text": " con Next.js en Hostinger y un asistente informativo de productos y compras. Desarrollé tiendas, APIs y automatizaciones Python/Node.js bajo Spec-Driven Development, reduciendo tareas de horas a minutos.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "independent-content-agents",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Construí pipelines y agentes",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " con MCP, Claude y otros LLMs para investigar, generar y publicar contenido de punta a punta; según estimaciones de los clientes, redujeron costos operativos al menos ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "70%",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ".",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "independent-client-products",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Diseñé y entregué productos digitales, backoffices y extensiones de inventario y caja",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " que generaron ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "USD 10.000+ en ganancias acumuladas para clientes de distintos proyectos",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", convirtiendo necesidades comerciales en software mantenible.",
+                      "text": " (S3 y SQS hacia una Lambda en Python/FastAPI y luego servicios Java/Spring Boot y NestJS en Docker y Kubernetes). Desarrollé herramientas para reproducir cargas localmente y conciliar registros fallidos.",
                       "bold": false,
                       "href": ""
                     }
@@ -1354,32 +732,7 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Sistema de Gestión de Permisos",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " · Tuve un rol principal en el diseño y construcción del backoffice para personal autorizado de una organización con ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "150+ sucursales",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "2,7M+ asociados",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " y 50+ sistemas internos.",
+                      "text": "Ingeniero principal del backoffice de permisos de la mayor cooperativa de consumo del país (2,7M+ asociados).",
                       "bold": false,
                       "href": ""
                     }
@@ -1390,12 +743,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Diseñé y construí un backoffice de permisos que integró 10+ sistemas empresariales",
+                      "text": "Integré 10+ sistemas internos en una sola experiencia para administradores",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " con bases de datos y permisos heterogéneos; reemplacé búsquedas manuales de unos 10 minutos por un flujo automatizado de menos de 10 segundos, con una experiencia uniforme para administradores.",
+                      "text": " mediante un BFF en Python/FastAPI y un frontend en Next.js; una búsqueda manual de 10 minutos pasó a menos de 10 segundos.",
                       "bold": false,
                       "href": ""
                     }
@@ -1406,80 +759,75 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Estandaricé la incorporación de sistemas",
+                      "text": "Reduje en más de un 80% los tickets de permisos y las asignaciones manuales, y en más de un 95% los errores recurrentes de asignación",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " con estructuras, filtros y validaciones reutilizables, reduciendo tickets y asignaciones manuales al menos ",
+                      "text": ", al estandarizar la incorporación de nuevos sistemas.",
                       "bold": false,
                       "href": ""
-                    },
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "independent",
+              "title": "Independiente",
+              "subtitle": "AI Engineer & Full-Stack Developer",
+              "details": ["Ene 2024 – Actualidad", "Argentina · Remoto · Por proyecto"],
+              "href": "",
+              "keywords": [],
+              "blocks": [
+                {
+                  "id": "independent-context-1",
+                  "kind": "paragraph",
+                  "runs": [
                     {
-                      "text": "80%",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " y eliminando al menos ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "95%",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " de los bugs recurrentes de asignación, según tickets y logs antes/después.",
+                      "text": "Proyectos de IA y full stack para clientes que venden en Shopify y Hotmart; varios ya están en producción.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "cooperativa-frontend-bff",
+                  "id": "independent-content-agents",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Construí un frontend responsive y dinámico en Next.js/TypeScript",
+                      "text": "Reduje procesos manuales de horas o días a minutos",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", organizado por funcionalidades y con un design system, conectado exclusivamente a un BFF Python/FastAPI. El backend seguía una arquitectura en capas; el BFF estandarizaba las vistas y conectaba servicios Java/Spring Boot, Node.js/NestJS y PHP mediante OpenAPI/Swagger; los microservicios utilizaban MySQL / MariaDB.",
+                      "text": " con asistentes de WhatsApp, automatizaciones en n8n, ManyChat y Meta Ads, y agentes de contenido con MCP sobre Claude u OpenAI.",
                       "bold": false,
                       "href": ""
                     }
                   ]
                 },
                 {
-                  "id": "cooperativa-query-performance",
+                  "id": "independent-client-products",
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Mantuve los endpoints críticos por debajo de 300 ms en promedio",
+                      "text": "Entregué sitios web completos, software a medida y proyectos de e-commerce en días o semanas que generaron USD 10.000+ de ganancia para clientes",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " en pruebas repetibles sobre servidores empresariales on-premise mediante optimización SQL, índices y paginación. Construí un entorno agéntico de ingeniería para preservar contexto entre repositorios de integración.",
+                      "text": ", entre ellos la tienda de ",
                       "bold": false,
                       "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "cooperativa-security-audit",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Implementé LDAP, RBAC y un registro de auditoría exportable",
-                      "bold": true,
-                      "href": ""
                     },
                     {
-                      "text": " para controlar el acceso y rastrear cambios de permisos; automaticé cargas masivas y validaciones de datos con Python en un entorno MySQL/MariaDB y Redis.",
+                      "text": "Pequeverso",
+                      "bold": false,
+                      "href": "https://pequeverso.com/"
+                    },
+                    {
+                      "text": " y su asistente de compras con GraphRAG en LangGraph.",
                       "bold": false,
                       "href": ""
                     }
@@ -1495,58 +843,67 @@
           "entries": [
             {
               "id": "applied-ai",
-              "title": "IA aplicada y sistemas agénticos",
+              "title": "Ingeniería de IA",
               "subtitle": "",
               "details": [],
               "href": "",
               "keywords": [
                 "AI Agents",
+                "Multi-Agent Systems",
                 "RAG",
                 "GraphRAG",
-                "LangChain",
-                "LangGraph",
-                "LangSmith",
-                "Context Engineering",
-                "Prompt Engineering",
-                "Embeddings",
-                "Chunking",
-                "pgvector",
-                "Neo4j",
                 "LLM Evaluation",
-                "AI Testing",
-                "AI Guardrails",
-                "Fine Tuning",
-                "LLMOps",
-                "Model Context Protocol (MCP)",
+                "LLM-as-a-Judge",
+                "Tool Calling",
+                "Generative UI",
+                "Prompt Engineering",
+                "AI Guardrails"
+              ],
+              "blocks": []
+            },
+            {
+              "id": "ai-platforms",
+              "title": "Frameworks y plataformas de IA",
+              "subtitle": "",
+              "details": [],
+              "href": "",
+              "keywords": [
+                "LangGraph",
+                "LangChain",
+                "LangSmith (LLM Observability)",
+                "OpenTelemetry",
+                "Claude API",
                 "OpenAI API",
-                "Agno",
-                "Claude API"
+                "Vertex AI",
+                "MCP",
+                "Neo4j",
+                "pgvector"
               ],
               "blocks": []
             },
             {
               "id": "backend",
-              "title": "Backend y APIs",
+              "title": "Backend y datos",
               "subtitle": "",
               "details": [],
               "href": "",
               "keywords": [
-                "Spring Boot",
                 "FastAPI",
                 "NestJS",
-                "Spring WebFlux",
-                "Spring Security",
+                "Spring Boot",
                 "Laravel",
                 "REST APIs",
                 "Microservices",
-                "Celery",
-                "OpenAPI"
+                "Clean Architecture",
+                "Event-Driven Architecture",
+                "PostgreSQL",
+                "Redis"
               ],
               "blocks": []
             },
             {
               "id": "languages-runtimes",
-              "title": "Lenguajes y runtimes",
+              "title": "Lenguajes y frontend",
               "subtitle": "",
               "details": [],
               "href": "",
@@ -1554,48 +911,13 @@
                 "Python",
                 "TypeScript",
                 "Java",
-                "JavaScript",
-                "Node.js",
                 "SQL",
-                "Kotlin",
-                "Swift",
-                "PHP",
-                "Solidity"
-              ],
-              "blocks": []
-            },
-            {
-              "id": "frontend",
-              "title": "Web y mobile",
-              "subtitle": "",
-              "details": [],
-              "href": "",
-              "keywords": [
+                "Node.js",
                 "React",
                 "Next.js",
                 "React Native",
-                "Android Studio",
-                "Design Systems",
-                "Feature-Based Architecture"
-              ],
-              "blocks": []
-            },
-            {
-              "id": "data-architecture",
-              "title": "Datos y arquitectura",
-              "subtitle": "",
-              "details": [],
-              "href": "",
-              "keywords": [
-                "PostgreSQL",
-                "MySQL",
-                "MariaDB",
-                "MongoDB",
-                "Redis",
-                "Hexagonal Architecture",
-                "Layered Architecture",
-                "Event-Driven Architecture",
-                "SQL Tuning"
+                "Kotlin",
+                "Swift"
               ],
               "blocks": []
             },
@@ -1606,41 +928,13 @@
               "details": [],
               "href": "",
               "keywords": [
-                "DigitalOcean",
                 "AWS Lambda",
-                "Amazon API Gateway",
                 "Amazon S3",
                 "Amazon SQS",
-                "CloudWatch",
                 "Docker",
                 "Kubernetes",
-                "Coolify",
-                "Nginx",
-                "Traefik",
-                "Caddy",
-                "GitLab CI/CD",
-                "GitHub Actions"
-              ],
-              "blocks": []
-            },
-            {
-              "id": "quality-observability",
-              "title": "Calidad, delivery y observabilidad",
-              "subtitle": "",
-              "details": [],
-              "href": "",
-              "keywords": [
-                "JUnit",
-                "Mockito",
-                "SonarQube",
-                "OpenTelemetry",
-                "Prometheus",
-                "Grafana",
-                "RBAC",
-                "LDAP",
-                "Application Security",
-                "End-to-End Encryption",
-                "Infisical"
+                "GitHub Actions",
+                "SSE"
               ],
               "blocks": []
             },
@@ -1651,23 +945,104 @@
               "details": [],
               "href": "",
               "keywords": [
-                "Fintech",
-                "Blockchain",
-                "Web3",
-                "DeFi",
+                "Hyperliquid",
+                "LI.FI",
                 "Morpho",
                 "Aave",
                 "Compound",
-                "Hyperliquid",
-                "LI.FI",
                 "Privy",
-                "Stripe",
-                "Swaps",
-                "Vaults",
-                "Perpetuals",
                 "Non-Custodial Wallets"
               ],
               "blocks": []
+            }
+          ]
+        },
+        {
+          "id": "projects",
+          "title": "Proyectos destacados",
+          "entries": [
+            {
+              "id": "portfolio-assistant",
+              "title": "Portfolio Assistant · Asistente RAG bilingüe con evaluación",
+              "subtitle": "",
+              "details": ["Sep 2026 – Actualidad"],
+              "href": "https://github.com/gonzalomartinperez/portfolio-assistant-api",
+              "keywords": [],
+              "blocks": [
+                {
+                  "id": "portfolio-assistant-architecture",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Asistente RAG bilingüe de código abierto que responde preguntas de reclutadores sobre mi trabajo",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": ": FastAPI y LangGraph con recuperación híbrida léxica y vectorial más GraphRAG (pgvector, Neo4j), respuestas citadas por SSE y límites de costo por solicitud. Implementado y evaluado; todavía sin desplegar.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "portfolio-assistant-evals",
+                  "kind": "bullet",
+                  "runs": [
+                    {
+                      "text": "Creé un banco bilingüe de 1.000 preguntas más casos adversariales",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": ", una evaluación de 244 turnos con el modelo real de OpenAI y 800+ pruebas en CI con GitHub Actions y trazas en OpenTelemetry.",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "filomena",
+              "title": "Filomena · Plataforma de exámenes en producción para ciencias de la salud",
+              "subtitle": "",
+              "details": ["Ene 2025 – Dic 2025"],
+              "href": "https://gonzalomartinperez.com/es/work/filomena",
+              "keywords": [],
+              "blocks": [
+                {
+                  "id": "filomena-context-1",
+                  "kind": "paragraph",
+                  "runs": [
+                    {
+                      "text": "Proyecto final de carrera que hoy usan en producción ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "cinco instituciones nacionales de Argentina",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": " para exámenes de ciencias de la salud, con más de 1.000 usuarios simultáneos. Colaborador principal en un equipo de tres (Laravel, Next.js, Redis); calificación ",
+                      "bold": false,
+                      "href": ""
+                    },
+                    {
+                      "text": "10/10",
+                      "bold": true,
+                      "href": ""
+                    },
+                    {
+                      "text": ".",
+                      "bold": false,
+                      "href": ""
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1682,259 +1057,6 @@
               "details": ["Ene 2020 – Oct 2025", "Bahía Blanca, Argentina", "Promedio: 8,67 / 10"],
               "href": "https://www.uns.edu.ar/",
               "keywords": [],
-              "blocks": [
-                {
-                  "id": "uns-context-1",
-                  "kind": "paragraph",
-                  "runs": [
-                    {
-                      "text": "Graduado",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " de una carrera de ingeniería acreditada de 5 años: 34/34 materias, promedio ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "8,67/10",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", Proyecto Final ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "10/10",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " y Práctica Profesional Supervisada completada. La UNS ocupó el ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "#10 nacional",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " en SCImago Institutions Rankings 2026. Formación relevante: inteligencia artificial, arquitectura y diseño de sistemas, bases de datos, verificación y validación de software, algoritmos y complejidad y métodos formales.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "uns-context-2",
-                  "kind": "paragraph",
-                  "runs": [
-                    {
-                      "text": "Ver formación y registro académico →",
-                      "bold": false,
-                      "href": "https://gonzalomartinperez.com/es/education"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "projects",
-          "title": "Proyecto destacado",
-          "entries": [
-            {
-              "id": "filomena",
-              "title": "Filomena · Plataforma productiva de exámenes de ciencias de la salud",
-              "subtitle": "",
-              "details": ["Ene 2025 – Dic 2025"],
-              "href": "https://gonzalomartinperez.com/es/work/filomena",
-              "keywords": [],
-              "blocks": [
-                {
-                  "id": "filomena-context-1",
-                  "kind": "paragraph",
-                  "runs": [
-                    {
-                      "text": "Plataforma productiva activa en ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "5 instituciones nacionales argentinas",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": "; Proyecto Final calificado ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "10/10",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", desarrollado por un equipo de tres conmigo como autor y contribuidor principal.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "filomena-concurrency",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Soporté 1.000+ usuarios simultáneos observados en producción",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", preservando la consistencia de datos y manteniendo endpoints críticos por debajo de ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "300 ms en promedio",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " mediante optimización SQL, caché y colas Redis.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "filomena-modernization",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Lideré arquitectura, backend, frontend e infraestructura",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ", modernizando un monolito CakePHP + jQuery hacia un producto API-first con API REST Laravel y frontend Next.js/React/TypeScript.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "filomena-delivery",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Reduje la incorporación de instituciones de horas a minutos",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " con despliegues productivos Docker/GitHub Actions observados por debajo de ",
-                      "bold": false,
-                      "href": ""
-                    },
-                    {
-                      "text": "15 minutos",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": ".",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "filomena-security-observability",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Implementé seguridad y observabilidad productivas",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " con Prometheus/Grafana, RBAC multirol, anonimato y aislamiento de datos por institución.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                },
-                {
-                  "id": "filomena-agile-contribution",
-                  "kind": "bullet",
-                  "runs": [
-                    {
-                      "text": "Coordiné la entrega Agile",
-                      "bold": true,
-                      "href": ""
-                    },
-                    {
-                      "text": " del equipo desde requisitos hasta producción.",
-                      "bold": false,
-                      "href": ""
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "languages",
-          "title": "Idiomas",
-          "entries": [
-            {
-              "id": "spanish",
-              "title": "Español",
-              "subtitle": "Nativo",
-              "details": [],
-              "href": "",
-              "keywords": [],
-              "blocks": []
-            },
-            {
-              "id": "english",
-              "title": "Inglés",
-              "subtitle": "Profesional (B2)",
-              "details": [],
-              "href": "",
-              "keywords": [],
-              "blocks": []
-            }
-          ]
-        },
-        {
-          "id": "certifications",
-          "title": "Certificaciones",
-          "entries": [
-            {
-              "id": "docker-uns",
-              "title": "Fundamentos de Docker",
-              "subtitle": "Universidad Nacional del Sur",
-              "details": ["Mar 2024"],
-              "href": "",
-              "keywords": [],
-              "blocks": []
-            },
-            {
-              "id": "power-skills",
-              "title": "Professional Power Skills",
-              "subtitle": "Kognité",
-              "details": ["Jun 2026"],
-              "href": "",
-              "keywords": [],
               "blocks": []
             }
           ]
@@ -1943,11 +1065,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "09248c6f28e7126d49c791e1ee423f037ee44246536f523fc14608f8bd3795d6",
-    "factsSha256": "25be242db504579441929f01cdaed4e4a0baf2f65b6aaf54a6957b0108b0a6f7",
+    "sourceSha256": "4938ab45e7e3ce68e5502433313dd2bfa6475008e5a4caa8ac70e149499129a9",
+    "factsSha256": "33a26d9591053024858e02b49983565cfd820056cedbe8b1d1153e29840aa9f7",
     "pdfSha256": {
-      "en": "bb6971f7ab0e7aa1dec27f849ddcd90b94d5cea74891ed55bf3152319e3ae9b5",
-      "es": "59d7fd6be8f0c4726b4f97f865d2b988bdaaa985d69cb3d424624746b1b52fdf"
+      "en": "eb6cb58393b554f173c131e69c13be745ea58fdafc209f490d2af12748bf7a61",
+      "es": "4708100650423531ac72252342f0776b53a2660bd8a76655568a017aa71209ca"
     }
   }
 }
