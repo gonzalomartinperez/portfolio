@@ -73,6 +73,8 @@ export type SiteCopy = {
     rampyCta: string;
     /** Stated in the Rampy contributions; shown as a card next to the measured metrics. */
     rampyMarkets: Metric;
+    /** Scope label on the home Pequeverso card, matching the case study status. */
+    pequeversoStatus: string;
     selectedEyebrow: string;
     selectedHeading: string;
     workEyebrow: string;

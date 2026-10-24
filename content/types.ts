@@ -37,6 +37,8 @@ export type Role = {
   arrangement: "Remote" | "On-site" | "Hybrid";
   /** One sentence of product or organisational context, before any personal claim. */
   context: string;
+  /** One-line summary for the home experience list, where the full context already appears above. */
+  homeSummary?: string;
   /** What Gonzalo did, separated from the product-scale context above. */
   contributions: string[];
   /** Separates personal contribution from team or platform-wide outcomes. */

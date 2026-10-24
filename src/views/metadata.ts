@@ -114,7 +114,21 @@ export function pageMetadata(locale: Locale, path: string): Metadata {
       title: entry.title,
       description: entry.description,
       url: localePath(locale, path),
+      locale: htmlLang[locale],
       images: [socialImageFor(locale)],
     },
+  };
+}
+
+/** Metadata for the assistant route, which is not indexed but still names its own locale. */
+export function assistantMetadata(locale: Locale, title: string): Metadata {
+  const base = layoutMetadata(locale);
+  const url = localePath(locale, "/assistant");
+  return {
+    title,
+    description: base.description,
+    robots: { index: false, follow: true },
+    alternates: alternatesFor(locale, "/assistant"),
+    openGraph: { ...base.openGraph, url },
   };
 }

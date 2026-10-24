@@ -11,6 +11,8 @@ export const roles: Role[] = [
     startedOn: "2026-09-01",
     location: "United States",
     arrangement: "Remote",
+    homeSummary:
+      "Multilingual AI assistant, eval suite and the trading product around it, at an early-stage fintech and blockchain startup.",
     context:
       "I lead engineering at Rampy, working directly with the three co-founders and with collaborators on blockchain and integrations. Rampy is an early-stage fintech and blockchain startup whose non-custodial app opens the world of digital assets (swaps, yield vaults, perps and market news) to everyday people through a generative interface that turns complex concepts into simple ones. I own the multilingual AI assistant and the eval suite that gates every release (3,000+ cases, 90%+ pass rate), plus the backend, web and mobile app.",
     contributions: [
