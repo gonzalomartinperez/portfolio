@@ -278,13 +278,6 @@
   margin-top: auto;
 }
 
-.toolkit summary {
-  align-content: center;
-  color: var(--accent);
-  cursor: pointer;
-  min-height: 44px;
-}
-
 .highlight,
 .projects {
   margin-top: var(--space-5);

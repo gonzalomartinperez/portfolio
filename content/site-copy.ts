@@ -77,8 +77,6 @@ export type SiteCopy = {
     rampyMarkets: Metric;
     selectedEyebrow: string;
     selectedHeading: string;
-    /** Closed disclosure holding the full animated toolkit; `count` is the catalogue size. */
-    fullToolkit: (count: number) => string;
     workEyebrow: string;
     workHeading: string;
     experienceEyebrow: string;
