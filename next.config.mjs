@@ -49,6 +49,14 @@ const nextConfig = {
       config.plugins.push(new SceneBudgetPlugin(), new AssistantBudgetPlugin());
     return config;
   },
+  async redirects() {
+    // CVs sent before the 2026-10-24 rename link to these paths.
+    return Object.entries(resumeFiles).map(([locale, destination]) => ({
+      source: `/gonzalo-martin-perez-ai-software-engineer-${locale}.pdf`,
+      destination,
+      permanent: true,
+    }));
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },
