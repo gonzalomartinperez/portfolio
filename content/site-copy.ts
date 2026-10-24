@@ -51,8 +51,6 @@ export type SiteCopy = {
     pauseAnimation: string;
     playAnimation: string;
     avatarInteraction: string;
-    /** Text link under the hero buttons, not a third button. */
-    readCv: string;
     principles: { title: string; description: string }[];
     principlesLabel: string;
     principlesLink: string;
