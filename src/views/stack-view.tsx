@@ -1,6 +1,10 @@
 import { type Locale, localePath } from "@config/locales";
 import { getContent } from "@content";
-import { compareTechnologyNames, publicTechnologyCatalog } from "@content/technologies";
+import {
+  appliedIntegrationEvidenceLabel,
+  compareTechnologyNames,
+  publicTechnologyCatalog,
+} from "@content/technologies";
 import Link from "next/link";
 import { TechnologyCatalogue } from "@/features/technology-catalogue/presentation/technology-catalogue";
 import { PageHeader } from "@/shared/editorial/page-header";
@@ -35,6 +39,7 @@ export function StackView({ locale }: { locale: Locale }) {
           "Experience & projects": "Experiencia y proyectos",
           "Independent work": "Trabajo independiente",
           "Professional focus": "Enfoque profesional",
+          [appliedIntegrationEvidenceLabel]: "Rampy (uso en aplicación e integración)",
         }
       : {};
   const groups = stackGroups.map((group) => ({

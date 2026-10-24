@@ -1,7 +1,7 @@
 import { type Locale, localePath } from "@config/locales";
 import {
   compareTechnologyNames,
-  publicTechnologyCatalog,
+  highlightedTechnologyCatalog,
   technologyGroups,
 } from "@content/technologies";
 import Link from "next/link";
@@ -43,7 +43,7 @@ export function TechConstellation({
           >
             <h3 id={`home-tech-${group.id}`}>{group.name[locale]}</h3>
             <ul className={styles.marks}>
-              {publicTechnologyCatalog
+              {highlightedTechnologyCatalog
                 .filter((item) => item.category === group.id)
                 .sort(compareTechnologyNames)
                 .map((item) => (

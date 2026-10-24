@@ -2,9 +2,12 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import {
+  appliedIntegrationEvidenceLabel,
+  catalogueOnlyTechnologies,
   compareTechnologyNames,
   getStackGroups,
   getTechnology,
+  highlightedTechnologyCatalog,
   publicTechnologyCatalog,
   publicTechnologyExclusions,
   technologyCatalog,
@@ -248,45 +251,41 @@ test("the hero fills seven desktop and five mobile columns with 35 unique marks"
   );
 });
 
-test("technologies the v3 brief does not support stay out of the public catalogue and hero", () => {
-  const unsupported = [
-    "pytorch",
-    "tensorflow",
-    "pydantic-ai",
-    "google-gemini",
-    "moonpay",
-    "zerodev",
-    "numpy",
-    "pandas",
-  ];
-  const sceneIdentities = new Set(
-    publicTechnologyCatalog.filter(getSceneMarkIdentity).map(getSceneMarkIdentity),
-  );
-  for (const id of unsupported) {
+test("owner-confirmed Rampy technologies are restored with their inventory scope", () => {
+  // Source: career-ops/perfil/inventario-tecnologico.md, confirmations of 2026-09-20 to 2026-10-03.
+  for (const id of ["moonpay", "zerodev", "google-gemini", "pydantic-ai"]) {
     const technology = getTechnology(id);
-    assert.ok(technology, `${id} keeps its source record`);
-    assert.ok(Object.hasOwn(publicTechnologyExclusions, id), id);
-    assert.ok(!publicTechnologyCatalog.includes(technology), id);
-    if (technology.icon && technology.icon !== "pydantic")
-      assert.ok(!sceneIdentities.has(technology.icon), id);
+    assert.ok(publicTechnologyCatalog.includes(technology), id);
+    assert.ok(highlightedTechnologyCatalog.includes(technology), id);
+    assert.deepEqual(technology.evidence, [{ label: "Rampy", href: "/work#rampy" }], id);
   }
+  const applicationOnly = ["pytorch", "tensorflow", "numpy", "pandas"];
+  assert.deepEqual(Object.keys(catalogueOnlyTechnologies).sort(), [...applicationOnly].sort());
+  const sceneIds = new Set(
+    highlightedTechnologyCatalog.filter(getSceneMarkIdentity).map(({ id }) => id),
+  );
+  for (const id of applicationOnly) {
+    const technology = getTechnology(id);
+    assert.ok(publicTechnologyCatalog.includes(technology), `${id} is listed on /stack`);
+    assert.ok(!highlightedTechnologyCatalog.includes(technology), `${id} stays out of highlights`);
+    assert.ok(!getSceneMarkIdentity(technology), `${id} is not a hero mark`);
+    assert.ok(!sceneIds.has(id), id);
+    assert.deepEqual(
+      technology.evidence,
+      [{ label: appliedIntegrationEvidenceLabel, href: "/work#rampy" }],
+      id,
+    );
+    assert.match(catalogueOnlyTechnologies[id], /no model training/);
+  }
+  assert.doesNotMatch(appliedIntegrationEvidenceLabel, /train/i);
   const fineTuning = getTechnology("fine-tuning");
   assert.ok(publicTechnologyCatalog.includes(fineTuning));
   assert.ok(!fineTuning.evidence.some(({ href }) => href.includes("rampy")));
   for (const locale of ["en", "es"]) {
     const rampy = read(`content/${locale}/experience.ts`).split('slug: "teamcubation"')[0];
-    for (const name of [
-      "PyTorch",
-      "TensorFlow",
-      "Pydantic AI",
-      "Gemini",
-      "MoonPay",
-      "ZeroDev",
-      "NumPy",
-      "pandas",
-      "Fine-tuning",
-    ])
-      assert.ok(!rampy.includes(name), `${locale}: ${name} is not attributed to Rampy`);
+    for (const name of ["PyTorch", "TensorFlow", "NumPy", "pandas", "Fine-tuning"])
+      assert.ok(!rampy.includes(name), `${locale}: ${name} is not Rampy headline tech`);
+    assert.doesNotMatch(rampy, /model training|entrenamiento de modelos|fine-tun/i);
   }
 });
 
