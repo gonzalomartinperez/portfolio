@@ -12,7 +12,7 @@ export const roles: Role[] = [
     location: "Estados Unidos",
     arrangement: "Remote",
     context:
-      "Me ocupo de toda la ingeniería de una startup fintech y blockchain en etapa temprana cuya app no custodial acerca el mundo de los activos digitales (swaps, vaults de rendimiento, perpetuos y noticias de mercado) a cualquier persona mediante una interfaz generativa que vuelve simples los conceptos complejos. Trabajo directamente con los tres cofundadores y me ocupo del asistente de IA multilingüe y de la suite de evaluación que habilita cada versión (3.000+ casos, 90% o más de aprobación), además del backend, la web y la app móvil.",
+      "Lidero la ingeniería en Rampy, trabajo directamente con los tres cofundadores y con colaboradores en blockchain e integraciones. Rampy es una startup fintech y blockchain en etapa temprana cuya app no custodial acerca el mundo de los activos digitales (swaps, vaults de rendimiento, perpetuos y noticias de mercado) a cualquier persona mediante una interfaz generativa que vuelve simples los conceptos complejos. Me ocupo del asistente de IA multilingüe y de la suite de evaluación que habilita cada versión (3.000+ casos, 90% o más de aprobación), además del backend, la web y la app móvil.",
     contributions: [
       "Construí un asistente de IA multilingüe (inglés, español y portugués) y la suite de evaluación que lo respalda: más de 1.000 escenarios replicados y traducidos a cada idioma (más de 3.000 casos), calificados en LangSmith con un LLM-as-a-judge validado contra revisión humana y de producto, y usados como requisito para cada release. Los agentes en producción aprueban el 90% o más en promedio. Un caso se aprueba cuando la respuesta es correcta y fundamentada, se usa la herramienta adecuada, el contrato estructurado para la interfaz es válido, se respetan los guardrails y la respuesta resuelve la necesidad del usuario en lenguaje simple.",
       "Diseñé el grafo multiagente en LangGraph, con ciclos, herramientas financieras, procesos en segundo plano, reintentos y recuperación ante fallos, y migré el stack agéntico desde Agno cuando los flujos se volvieron más complejos. Claude es el modelo principal, con DeepInfra y Vertex AI como proveedores de respaldo, recuperación con GraphRAG sobre Neo4j y PostgreSQL/pgvector, y memoria con Mem0. Al eliminar llamadas redundantes a herramientas y ajustar la memoria y el contexto, las respuestas pasaron a ser el doble de rápidas con un 40% menos de tokens, verificado con pruebas de carga y evaluaciones.",
@@ -31,7 +31,7 @@ export const roles: Role[] = [
       "Preparé infraestructura escalable con el objetivo de soportar miles de usuarios, organizando entornos, contenedores y controles operativos para acompañar el crecimiento del producto.",
     ],
     attribution:
-      "Me ocupo de toda la ingeniería desde septiembre de 2026, en colaboración directa con los fundadores y sobre el trabajo de los desarrolladores anteriores.",
+      "Lidero la ingeniería desde septiembre de 2026, con los fundadores, colaboradores en blockchain e integraciones y un asesor con experiencia en decisiones puntuales de arquitectura, sobre el trabajo de los desarrolladores anteriores.",
     stack: technologyNames([
       "Python",
       "Solidity",

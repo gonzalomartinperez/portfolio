@@ -144,11 +144,6 @@
   place-items: center;
   pointer-events: none;
 }
-.constellationPane {
-  position: relative;
-  z-index: 2;
-  padding-block: 4rem;
-}
 .scrollCue {
   position: absolute;
   bottom: 1.5rem;

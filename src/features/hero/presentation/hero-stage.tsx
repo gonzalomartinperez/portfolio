@@ -13,13 +13,14 @@ export function HeroStage({
   still,
   core,
   hero,
-  constellation,
+  sceneSource,
   avatarLabel,
 }: {
   still: ReactNode;
   core: ReactNode;
   hero: ReactNode;
-  constellation: ReactNode;
+  /** Copy and marks the runtime clones into the logo cloud; never shown in place. */
+  sceneSource: ReactNode;
   avatarLabel: string;
 }) {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -142,7 +143,7 @@ export function HeroStage({
           </div>
         </div>
       </div>
-      <div className={styles.constellationPane}>{constellation}</div>
+      <div hidden>{sceneSource}</div>
     </div>
   );
 }
