@@ -54,6 +54,9 @@ layout.
   provider) and three back-office captures (sign-in, synthetic dashboard, test-account access
   page). Converted to WebP at quality 82, at most 1600 px wide. Thumbnails cap at 34rem high
   with top-aligned cover cropping; the dialog shows the full image.
+- Superseded on 2026-10-24 by the [v3 proof-first follow-up](ai-engineer-positioning-v3.md#proof-first-follow-up):
+  16 captures (store 2, assistant 5 from the 2026-10-18 fixture runs, back office 9 with
+  synthetic MOCK data) in uniform 3:2 frames; panel and phone captures use `contain`.
 - The analytics and assistant visitor-context route enums mirror external, byte-preserved
   contracts, so the new route is intentionally not an analytics dimension or assistant path
   until those contracts change in their owning repository.

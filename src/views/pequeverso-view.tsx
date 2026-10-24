@@ -21,11 +21,12 @@ export function PequeversoView({ locale }: { locale: Locale }) {
     siteCopy: copy,
   } = getContent(locale);
 
-  const slides = pequeversoGallery.map((id) => ({
-    id,
-    src: `/pequeverso/pequeverso-${id}.webp`,
-    alt: galleryAlt[id],
-    ...imageDimensions[id],
+  const slides = pequeversoGallery.map((shot) => ({
+    id: shot.id,
+    src: `/pequeverso/pequeverso-${shot.id}.webp`,
+    alt: galleryAlt[shot.id],
+    fit: "fit" in shot ? shot.fit : undefined,
+    ...imageDimensions[shot.id],
   }));
 
   const prose = (paragraphs: readonly string[]) => (
@@ -116,6 +117,7 @@ export function PequeversoView({ locale }: { locale: Locale }) {
             )}
             previousLabel={copy.filomena.galleryPrevious}
             slides={slides}
+            frame="uniform"
             flows={pequeversoGalleryFlows}
           />
         </section>

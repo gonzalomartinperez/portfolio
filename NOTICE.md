@@ -14,7 +14,7 @@ The MIT software grant does not grant reuse rights to the following materials:
 | Material | Repository locations and scope |
 | --- | --- |
 | Personal career narrative and records | Biographical, employment, education and project data and editorial copy within `content/`, including the generated public CV projection. |
-| Personal documents | The two `public/gonzalo-martin-perez-ai-software-engineer-*.pdf` files, `public/documents/` and `public/certificates/`. Public viewing is not a general reuse license. |
+| Personal documents | The two `public/gonzalo-martin-perez-ai-engineer-*.pdf` files, `public/documents/` and `public/certificates/`. Public viewing is not a general reuse license. |
 | Personal or employer/customer imagery | Portraits, photographs and project screenshots within `public/images/` and `docs/gallery/`, plus LinkedIn imagery documented in [the branding record](docs/linkedin-branding.md). |
 | Names and marks | Personal, employer, customer and technology names and logos. No trademark rights or endorsement are granted by the software license. |
 

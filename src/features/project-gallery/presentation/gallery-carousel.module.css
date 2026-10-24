@@ -68,6 +68,19 @@
   color: var(--text-secondary);
   line-height: 1.5;
 }
+/* Uniform frames: landscape captures show their top, panels and phones stay whole. */
+.uniform .enlarge {
+  aspect-ratio: 3 / 2;
+  background: var(--surface-raised);
+}
+.uniform .image {
+  height: 100%;
+  max-height: none;
+}
+.uniform .contain {
+  object-fit: contain;
+  object-position: center;
+}
 .dialog {
   padding: clamp(1rem, 3vw, 2rem);
   width: min(96vw, 100rem);
@@ -108,6 +121,11 @@
   height: auto;
   max-height: 65svh;
   object-fit: contain;
+}
+/* Small panel captures open at their own size instead of being stretched. */
+.uniformDialog .fullImage {
+  width: auto;
+  max-width: 100%;
 }
 @media (width < 42rem) {
   .grid {

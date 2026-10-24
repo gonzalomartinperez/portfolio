@@ -13,7 +13,8 @@ for (const locale of ["en", "es"]) {
     await expect(main.getByRole("heading", { level: 1 })).toHaveCount(1);
     await expect(main).toContainText("Universidad Nacional del Sur");
     await expect(main).toContainText("B2");
-    await expect(main).toContainText(locale === "es" ? "septiembre de 2026" : "September 2026");
+    await expect(main).toContainText(locale === "es" ? "Más de 2,5 años" : "2.5+ years");
+    await expect(main).not.toContainText(/as of September 2026|a septiembre de 2026/i);
     await expect(main).toContainText(
       locale === "es" ? "cinco instituciones argentinas" : "five institutions in Argentina",
     );

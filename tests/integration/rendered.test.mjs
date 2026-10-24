@@ -190,8 +190,8 @@ test("sitemap lists both languages and robots points at it", async () => {
 
 test("published documents and assets are reachable", async () => {
   for (const asset of [
-    "/gonzalo-martin-perez-ai-software-engineer-en.pdf",
-    "/gonzalo-martin-perez-ai-software-engineer-es.pdf",
+    "/gonzalo-martin-perez-ai-engineer-en.pdf",
+    "/gonzalo-martin-perez-ai-engineer-es.pdf",
     "/icon.png",
   ]) {
     const response = await fetch(origin + asset, { signal: AbortSignal.timeout(15_000) });
@@ -201,15 +201,16 @@ test("published documents and assets are reachable", async () => {
 
 test("CV links and PDF responses use the approved bilingual filenames", async () => {
   for (const locale of ["en", "es"]) {
-    const filename = `Gonzalo-Martin-Perez-CV-AI-Software-Engineer-${locale.toUpperCase()}.pdf`;
+    const filename = {
+      en: "Gonzalo-Martin-Perez-AI-Engineer-Resume.pdf",
+      es: "Gonzalo-Martin-Perez-AI-Engineer-CV.pdf",
+    }[locale];
     const prefix = locale === "es" ? "/es" : "";
     assert.ok(pages.get(`${prefix}/cv`).body.includes(`download="${filename}"`));
     for (const contactPrefix of ["", "/es"]) {
       assert.ok(pages.get(`${contactPrefix}/contact`).body.includes(`download="${filename}"`));
     }
-    const response = await fetch(
-      `${origin}/gonzalo-martin-perez-ai-software-engineer-${locale}.pdf`,
-    );
+    const response = await fetch(`${origin}/gonzalo-martin-perez-ai-engineer-${locale}.pdf`);
     assert.equal(response.headers.get("content-disposition"), `inline; filename="${filename}"`);
   }
 });

@@ -12,7 +12,7 @@ export const roles: Role[] = [
     location: "United States",
     arrangement: "Remote",
     context:
-      "An early-stage US fintech building a non-custodial trading and yield app. I joined in September 2026 as its sole engineer, taking over from earlier developers, and own the AI agents, backend, web and mobile app in direct collaboration with the three co-founders.",
+      "Sole engineer at an early-stage US fintech building a non-custodial trading and yield app, working directly with the three co-founders. I own the multilingual AI assistant and the eval suite that gates every release (3,000+ cases, 90%+ pass rate), plus the backend, web and mobile app.",
     contributions: [
       "Built a multilingual AI assistant (English, Spanish and Portuguese) and the eval suite behind it: 1,000+ scenarios replicated and translated into each language (3,000+ cases), graded in LangSmith by an LLM-as-a-judge validated against human and product review, and used as a release gate. Production agents pass 90%+ on average. A case passes when the answer is correct and grounded, the right tool is used, the structured contract for the UI is valid, guardrails hold and the reply solves the user’s need in plain language.",
       "Designed the multi-agent LangGraph graph, with cycles, financial tools, background workers, retries and failure recovery, and migrated the agentic stack from Agno as the flows grew. Claude is the primary model, with DeepInfra and Vertex AI as fallback providers, GraphRAG retrieval over Neo4j and PostgreSQL/pgvector, and Mem0 memory. Removing redundant tool calls and tightening memory and context made responses 2× faster with 40% fewer tokens, verified with load tests and evals.",
@@ -23,7 +23,7 @@ export const roles: Role[] = [
       "Cut the validation, build and deployment pipeline from about one hour to ten minutes while retaining its checks; optimized application bundles, Docker images and development, staging and production environments on DigitalOcean.",
       "Implemented end-to-end encryption (E2EE) for user conversations in the production app, with messages persisted encrypted in the database.",
       "Shipped the React Native app, using Android Studio for Android development and testing in emulators and on physical devices. The Android app is live and the iOS version is ready, with its launch pending.",
-      "Implemented end-to-end mobile event tracking with Google Analytics through Firebase, Clarity Mobile on every screen, and Singular SDK for Meta App Events, coordinating integrations to prevent duplicate events. Designed, built, tested and deployed a campaign landing page for app downloads.",
+      "Implemented complete mobile event tracking with Google Analytics through Firebase, Clarity Mobile on every screen, and Singular SDK for Meta App Events, coordinating integrations to prevent duplicate events. Designed, built, tested and deployed a campaign landing page for app downloads.",
       "Built the enterprise back office to manage application operations and centralize monitoring, telemetry and operational status; I continue to expand its capabilities.",
       "Added domain and malicious-instruction controls to agent workflows, checked with automated behavioral tests and human review.",
       "Centralized secrets with Infisical, per-user access, automated synchronization and on-demand rotation; worked across deployment, monitoring, backups, databases and server permissions.",
@@ -80,8 +80,7 @@ export const roles: Role[] = [
       {
         value: "≥2×",
         label: "faster responses in optimized agent workflows",
-        qualifier:
-          "Load tests and evals verified response times at half the previous baseline or less for comparable optimized agent workflows.",
+        qualifier: "Measured with load tests and evals on comparable optimized agent workflows.",
       },
       {
         value: "40%",
@@ -116,7 +115,7 @@ export const roles: Role[] = [
       "ecosystem of 350,000+ merchants, 70+ card issuers and 13 countries.",
     contributions: [
       "Built a GraphRAG assistant and its harness to answer merchants’ questions about promotions and company policies through the merchant portal, connected to the Spring WebFlux BFF. It combined Neo4j graph context with PostgreSQL/pgvector retrieval using LangChain, LangGraph and OpenAI API, and passed 95%+ of a 500+ case eval suite graded in LangSmith by an LLM-as-a-judge validated against human review. Guardrails kept it on the promotions domain and prevented data leaks; the assistant was read-only and never executed commercial actions.",
-      "Contributed to a historical production load of 20M+ promotions, followed by thousands of new promotions daily; implemented an event-driven, serverless flow with Amazon S3, SQS and a Python/FastAPI Lambda using ordered processing strategies, connected to Java/Spring Boot and Node.js/NestJS microservices that loaded their respective PostgreSQL databases. The complete production load was validated with zero data loss.",
+      "Delivered the event-driven pipeline that ingested 20M+ historical promotions into production, followed by thousands of new promotions daily: a serverless flow with Amazon S3, SQS and a Python/FastAPI Lambda using ordered processing strategies, connected to Java/Spring Boot and Node.js/NestJS microservices that loaded their respective PostgreSQL databases. The complete production load was validated with zero data loss.",
       "Delivered the promotions experience end to end: a Single-SPA React and TypeScript microfrontend, organized by feature and using a design system, embedded as a native section of the merchant portal and connected through a Spring WebFlux BFF to Java/Spring Boot and Node.js/NestJS microservices and providers.",
       "Built Java/Spring Boot and TypeScript/Node.js/NestJS microservices to ingest, normalize and process promotions from merchants, financial entities and providers, adapting contracts per integration.",
       "Built Python and Node.js tooling to replay bulk loads safely against isolated local databases, reconcile results and surface failed promotions and edge cases before release.",
@@ -193,7 +192,7 @@ export const roles: Role[] = [
       "Built back offices, stock and point-of-sale extensions, WordPress solutions, APIs and full-stack integrations, with Python and Node.js tooling for automation, bulk processing and data analysis. Used Kotlin and Swift in freelance and personal mobile projects.",
     ],
     attribution:
-      "Independent delivery for individual clients. The figures below cover historical client projects collectively, not Pequeverso alone.",
+      "Independent work for individual clients. These figures add up several client projects, not Pequeverso alone.",
     stack: technologyNames([
       "Claude API",
       "Model Context Protocol",

@@ -40,10 +40,7 @@ test("public CV retains bilingual sections, stable IDs, metrics and B2", () => {
   assert.match(cv.provenance.factsSha256, /^[a-f0-9]{64}$/);
   for (const locale of ["en", "es"]) {
     const pdf = readFileSync(
-      new URL(
-        `../../public/gonzalo-martin-perez-ai-software-engineer-${locale}.pdf`,
-        import.meta.url,
-      ),
+      new URL(`../../public/gonzalo-martin-perez-ai-engineer-${locale}.pdf`, import.meta.url),
     );
     assert.equal(
       createHash("sha256").update(pdf).digest("hex"),

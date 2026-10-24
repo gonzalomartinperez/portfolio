@@ -69,7 +69,58 @@ export const filomena: Project = {
   ],
 };
 
-export const projects: Project[] = [filomena];
+/**
+ * Open-source project. Facts come from the approved brief and the public repository; it is
+ * implemented and evaluated but not deployed, so no usage or production figure is published.
+ */
+export const portfolioAssistant: Project = {
+  slug: "portfolio-assistant",
+  name: "Portfolio Assistant",
+  tagline: "Bilingual RAG assistant with a 1,000-question eval bank",
+  period: "Sep 2026 – Present",
+  summary:
+    "Open-source FastAPI and LangGraph assistant that answers recruiters’ questions about my " +
+    "work, with hybrid lexical and vector retrieval plus GraphRAG (pgvector, Neo4j), cited " +
+    "answers streamed over SSE and per-request cost limits.",
+  attribution: "Personal open-source project. Implemented and evaluated; not deployed yet.",
+  metrics: [
+    {
+      value: "1,000",
+      label: "bilingual eval questions",
+      qualifier:
+        "100 intent families in English and Spanish, run with a fixture model, plus adversarial cases.",
+    },
+    {
+      value: "800+",
+      label: "automated tests",
+      qualifier: "Run in GitHub Actions CI.",
+    },
+    {
+      value: "244",
+      label: "live-model turns",
+      qualifier: "One evaluation run against a live OpenAI model.",
+    },
+  ],
+  stack: technologyNames([
+    "Python",
+    "FastAPI",
+    "LangGraph",
+    "GraphRAG",
+    "PostgreSQL",
+    "pgvector",
+    "Neo4j",
+    "Server-Sent Events",
+  ]),
+  links: [
+    {
+      label: "Source on GitHub",
+      href: "https://github.com/gonzalomartinperez/portfolio-assistant-api",
+      description: "FastAPI and LangGraph backend on GitHub",
+    },
+  ],
+};
+
+export const projects: Project[] = [filomena, portfolioAssistant];
 
 type CaseStudySection = {
   heading: string;

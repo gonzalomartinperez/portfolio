@@ -48,7 +48,7 @@ export function SiteHeader() {
           data-analytics-exposure="site-header"
         >
           <Link
-            aria-label={`Gonzalo Martin Perez — ${copy.roleSubtitle}`}
+            aria-label={`Gonzalo Martin Perez, ${copy.roleSubtitle}`}
             className={styles.brand}
             data-analytics-event="navigation_click"
             data-analytics-destination={localePath(locale, "/")}
