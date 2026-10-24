@@ -74,15 +74,12 @@ for (const { height, extraMarks } of [
         .locator("[data-tech-icon]")
         .first()
         .evaluate((source, count) => {
-          const item = source.closest("li");
-          if (!item?.parentElement) throw new Error("Technology catalogue item is missing");
+          if (!source.parentElement) throw new Error("Scene mark source is missing");
           for (let index = 0; index < count; index += 1) {
-            const clone = item.cloneNode(true) as HTMLElement;
-            const mark = clone.querySelector<HTMLElement>("[data-tech-icon]");
-            if (!mark) throw new Error("Technology identity is missing");
+            const mark = source.cloneNode(true) as HTMLElement;
             mark.dataset.techIcon = `layout-fixture-${index}`;
             mark.dataset.sceneBrand = `layout-fixture-${index}`;
-            item.parentElement.append(clone);
+            source.parentElement.append(mark);
           }
         }, extraMarks);
       await page.emulateMedia({ reducedMotion: "no-preference" });

@@ -86,6 +86,17 @@ export const siteCopy: SiteCopy = {
     factLanguages: "Idiomas",
     languagesValue: "Español (nativo) · Inglés (B2)",
     experienceSince: (length, since) => `${length}, desde ${since}`,
+    rampyEyebrow: "Rol actual",
+    rampyHeading: "Agentes LLM en producción en Rampy",
+    rampyCta: "Ver el trabajo en Rampy",
+    rampyMarkets: {
+      value: "200+",
+      label: "mercados de perpetuos lanzados",
+      qualifier:
+        "Mercados de Hyperliquid en cripto, índices, acciones y commodities, junto a swaps con más de 100 tokens.",
+    },
+    selectedEyebrow: "Trabajo seleccionado",
+    selectedHeading: "Casos de estudio y trabajo open source",
     workEyebrow: "Proyecto destacado",
     workHeading: "En producción desde la universidad",
     experienceEyebrow: "Experiencia",

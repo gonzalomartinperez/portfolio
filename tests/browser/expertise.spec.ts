@@ -64,11 +64,6 @@ for (const [route, label] of [
     const chips = page.getByText(label, { exact: true });
     await expect(chips).toHaveCount(0);
     const toolkit = page.locator("#home-tech-fintech").locator("..");
-    const toggle = toolkit.getByRole("button", { expanded: false });
-    await expect(toolkit.getByRole("link", { name: "Privy", exact: true })).toBeHidden();
-    await toggle.focus();
-    await page.keyboard.press("Enter");
-    await expect(toolkit.getByRole("button", { expanded: true })).toBeVisible();
     for (const theme of ["dark", "light"]) {
       await page.evaluate((value) => {
         document.documentElement.dataset.theme = value;
@@ -114,10 +109,7 @@ test("the scene shows Spring once while the catalogue keeps every tool", async (
       page.locator('section[aria-labelledby="technology-heading"]'),
       page.locator("[data-tool-carousel]"),
     ]) {
-      // Phones collapse the grouped list, so hidden links still count as present once.
-      await expect(
-        section.getByRole("link", { name, exact: true, includeHidden: true }),
-      ).toHaveCount(1);
+      await expect(section.getByRole("link", { name, exact: true })).toHaveCount(1);
     }
   }
 });

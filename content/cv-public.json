@@ -15,7 +15,7 @@
           "href": ""
         },
         {
-          "text": " with 2.5+ years shipping production software, most recently LLM agents, RAG systems and eval suites. Own all engineering at an early-stage fintech and blockchain startup whose generative interface opens digital assets to everyday people, including its AI assistant end to end: the LangGraph agents in English, Spanish and Portuguese, the eval suite that gates every release, and the backend, web and mobile app around them. Previously built a GraphRAG assistant for Payway's merchant platform.",
+          "text": " with 2.5+ years shipping production software, most recently LLM agents, RAG systems and eval suites. Lead engineering at an early-stage fintech and blockchain startup whose generative interface opens digital assets to everyday people, and own its AI assistant end to end: the LangGraph agents in English, Spanish and Portuguese, the eval suite that gates every release, and the backend, web and mobile app around them. Previously built a GraphRAG assistant for Payway's merchant platform.",
           "bold": false,
           "href": ""
         }
@@ -38,12 +38,12 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Own all engineering",
+                      "text": "Lead engineering",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " at an early-stage fintech and blockchain startup whose non-custodial app opens digital assets to everyday people through a generative interface. Work directly with the three co-founders on a codebase I took over from earlier developers.",
+                      "text": " at an early-stage fintech and blockchain startup whose non-custodial app opens digital assets to everyday people through a generative interface. Work directly with the three co-founders and coordinate collaborators on blockchain and integrations, on a codebase I took over from earlier developers.",
                       "bold": false,
                       "href": ""
                     }
@@ -550,7 +550,7 @@
           "href": ""
         },
         {
-          "text": " con más de 2,5 años llevando software a producción, últimamente con agentes LLM, sistemas RAG y suites de evaluación. Me ocupo de toda la ingeniería de una startup fintech y blockchain cuya interfaz generativa acerca los activos digitales a cualquier persona, incluido su asistente de IA de punta a punta: agentes en LangGraph en tres idiomas, la suite que cada versión debe aprobar y el backend, la web y la app móvil. Antes desarrollé un asistente con GraphRAG para Payway.",
+          "text": " con más de 2,5 años llevando software a producción, últimamente con agentes LLM, sistemas RAG y suites de evaluación. Lidero la ingeniería de una startup fintech y blockchain cuya interfaz generativa acerca los activos digitales a cualquier persona, y me ocupo de su asistente de IA de punta a punta: agentes en LangGraph en tres idiomas, la suite que cada versión debe aprobar y el backend, la web y la app móvil. Antes desarrollé un asistente con GraphRAG para Payway.",
           "bold": false,
           "href": ""
         }
@@ -573,12 +573,12 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Me ocupo de toda la ingeniería",
+                      "text": "Lidero la ingeniería",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " de una startup fintech y blockchain cuya app no custodial acerca los activos digitales a cualquier persona mediante una interfaz generativa. Trabajo con los tres cofundadores, sobre un código que tomé de desarrolladores anteriores.",
+                      "text": " de una startup fintech y blockchain cuya app no custodial acerca los activos digitales a cualquier persona mediante una interfaz generativa. Trabajo con los tres cofundadores y coordino colaboradores en blockchain e integraciones, sobre un código que tomé de desarrolladores anteriores.",
                       "bold": false,
                       "href": ""
                     }
@@ -1065,11 +1065,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "1e9dcdc48316912c448808e2fa9faf51b9580e29b3ad92bf11a6e341aa4248e0",
-    "factsSha256": "16ff6aa8da12fdca5ed85186ee6679c2b3b8b38ba35d424c059f192ff45e51bf",
+    "sourceSha256": "19c2449cca336aa7db81b793e7435722c7f566b2ec3dc38fb75d39e8ef5005b1",
+    "factsSha256": "bf7b40d6b61e3d9c9c77278f5dac8548f8c31e3f466d274d820c34f0da01cd0c",
     "pdfSha256": {
-      "en": "a13261534ac732090244659e61ef085da86e8ac9e01cfa37b7c4036e7242cd9a",
-      "es": "d8ac9dadb36741f95184e3e86e8a5a461ca7d8a6f2b4b2ef13f3678cfe9e9819"
+      "en": "20bd5d2ac4a021ece188d17986a1a1bb9c02c5cd76e277d861f384b23f017358",
+      "es": "aa979b10f4b9458e426c5cf263b03ff571400d31f2820485e2b76a52a739772e"
     }
   }
 }

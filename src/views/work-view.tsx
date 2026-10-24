@@ -2,6 +2,7 @@ import { type Locale, localePath } from "@config/locales";
 import { getContent } from "@content";
 import Link from "next/link";
 import { ExperienceArchitecture } from "@/features/architecture-diagrams/presentation/experience-architecture";
+import { EvalCaseBlock } from "@/shared/editorial/eval-case";
 import { MetricList } from "@/shared/editorial/metric-list";
 import { PageHeader } from "@/shared/editorial/page-header";
 import { ProductionBadge } from "@/shared/editorial/production-badge";
@@ -225,29 +226,12 @@ export function WorkView({ locale }: { locale: Locale }) {
           <MetricList metrics={portfolioAssistant.metrics} />
 
           {portfolioAssistant.evalCase && (
-            <section
+            <EvalCaseBlock
               className={cn(styles.outcomes, "flow-tight")}
-              aria-labelledby={`${portfolioAssistant.slug}-eval-case`}
-            >
-              <h4 className="eyebrow" id={`${portfolioAssistant.slug}-eval-case`}>
-                {portfolioAssistant.evalCase.heading}
-              </h4>
-              <dl>
-                <dt>{portfolioAssistant.evalCase.questionLabel}</dt>
-                <dd className="muted">{portfolioAssistant.evalCase.question}</dd>
-                <dt>{portfolioAssistant.evalCase.expectedLabel}</dt>
-                <dd className="muted">{portfolioAssistant.evalCase.expected}</dd>
-                <dt>{portfolioAssistant.evalCase.criterionLabel}</dt>
-                <dd className="muted">{portfolioAssistant.evalCase.criterion}</dd>
-              </dl>
-              <ExternalLink
-                className="text-link"
-                href={portfolioAssistant.evalCase.href}
-                locale={locale}
-              >
-                {portfolioAssistant.evalCase.linkLabel}
-              </ExternalLink>
-            </section>
+              evalCase={portfolioAssistant.evalCase}
+              id={`${portfolioAssistant.slug}-eval-case`}
+              locale={locale}
+            />
           )}
 
           <div className="actions">

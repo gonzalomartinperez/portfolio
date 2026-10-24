@@ -3,7 +3,7 @@ import { getContent } from "@content";
 import Link from "next/link";
 import { HeroStage } from "@/features/hero/presentation/hero-stage";
 import { StaticConstellation } from "@/features/hero/presentation/static-constellation";
-import { TechConstellation } from "@/features/hero/presentation/tech-constellation";
+import { TechSceneSource } from "@/features/hero/presentation/tech-constellation";
 import { Mark } from "@/shared/identity/mark";
 import { buttonVariants } from "@/shared/ui/button";
 import styles from "./hero.module.css";
@@ -43,7 +43,7 @@ export function HeroView({ locale }: { locale: Locale }) {
           {copy.actions.getInTouch}
         </Link>
       </div>
-      <Link className="text-link muted" href={localePath(locale, "/cv")}>
+      <Link className={styles.cvLink} href={localePath(locale, "/cv")}>
         {copy.hero.readCv}
       </Link>
 
@@ -59,38 +59,40 @@ export function HeroView({ locale }: { locale: Locale }) {
   );
 
   return (
-    <>
-      <HeroStage
-        constellation={
-          <TechConstellation
-            sceneHeading={copy.stack.fieldHeading}
-            sceneNote={copy.stack.fieldIntro}
-            heading={copy.stack.groupedHeading}
-            note={copy.stack.groupedIntro}
-            locale={locale}
-          />
-        }
-        core={
-          <span aria-hidden="true" className={styles.core}>
-            <Mark size={64} />
-          </span>
-        }
-        hero={hero}
-        avatarLabel={copy.hero.avatarInteraction}
-        still={<StaticConstellation />}
-      />
+    <HeroStage
+      sceneSource={
+        <TechSceneSource
+          heading={copy.stack.fieldHeading}
+          note={copy.stack.fieldIntro}
+          locale={locale}
+        />
+      }
+      core={
+        <span aria-hidden="true" className={styles.core}>
+          <Mark size={64} />
+        </span>
+      }
+      hero={hero}
+      avatarLabel={copy.hero.avatarInteraction}
+      still={<StaticConstellation />}
+    />
+  );
+}
 
-      <section className={`frame ${styles.principles}`} aria-label={copy.hero.principlesLabel}>
-        {copy.hero.principles.map((item) => (
-          <div key={item.title}>
-            <h2 className={styles.principleTitle}>{item.title}</h2>
-            <p className={styles.principleDescription}>{item.description}</p>
-          </div>
-        ))}
-        <Link className={styles.principlesLink} href={localePath(locale, "/work")}>
-          {copy.hero.principlesLink}
-        </Link>
-      </section>
-    </>
+/** Working principles, shown on the home page after the evidence. */
+export function HeroPrinciples({ locale }: { locale: Locale }) {
+  const { siteCopy: copy } = getContent(locale);
+  return (
+    <section className={`frame ${styles.principles}`} aria-label={copy.hero.principlesLabel}>
+      {copy.hero.principles.map((item) => (
+        <div key={item.title}>
+          <h2 className={styles.principleTitle}>{item.title}</h2>
+          <p className={styles.principleDescription}>{item.description}</p>
+        </div>
+      ))}
+      <Link className={styles.principlesLink} href={localePath(locale, "/work")}>
+        {copy.hero.principlesLink}
+      </Link>
+    </section>
   );
 }
