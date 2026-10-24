@@ -85,13 +85,28 @@
   line-height: 1.4;
 }
 .evidence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
   margin-top: auto;
   font-size: var(--text-small);
 }
 .evidence a {
+  white-space: nowrap;
   color: var(--text-muted);
   text-decoration: underline;
   text-underline-offset: 0.2em;
+}
+@media (width < 52rem), (pointer: coarse) {
+  .evidence {
+    row-gap: 0;
+  }
+  .evidence a {
+    align-items: center;
+    display: inline-flex;
+    gap: 0.25em;
+    min-block-size: 44px;
+  }
 }
 .status {
   align-self: start;

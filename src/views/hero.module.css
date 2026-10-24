@@ -104,6 +104,16 @@
   text-underline-offset: 0.2em;
 }
 
+/* Standalone links get a 44px touch target where touch is likely. */
+@media (width < 52rem), (pointer: coarse) {
+  .principlesLink {
+    align-items: center;
+    display: inline-flex;
+    gap: 0.25em;
+    min-block-size: 44px;
+  }
+}
+
 @media (width < 40rem) {
   .availability {
     flex-direction: column;

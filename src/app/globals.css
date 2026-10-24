@@ -324,6 +324,15 @@
     gap: var(--space-3);
   }
 
+  @media (width < 52rem), (pointer: coarse) {
+    .text-link {
+      align-items: center;
+      display: inline-flex;
+      gap: 0.25em;
+      min-block-size: 44px;
+    }
+  }
+
   @media (width < 52rem) {
     .actions {
       justify-content: center;
@@ -334,6 +343,10 @@
       overflow-wrap: anywhere;
       text-align: center;
       padding-inline: min(1.5rem, 24px);
+    }
+    /* Page jump links share each wrapped row instead of leaving ragged, centered widths. */
+    nav.actions > .ui-action {
+      flex: 1 1 auto;
     }
   }
 
