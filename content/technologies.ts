@@ -12,6 +12,8 @@ export type Technology = {
   aliases?: string[];
 };
 
+export const appliedIntegrationEvidenceLabel = "Rampy (application and integration use)";
+
 export const technologyCatalog: Technology[] = [
   {
     id: "solidity",
@@ -435,7 +437,7 @@ export const technologyCatalog: Technology[] = [
     icon: "pytorch",
     evidence: [
       {
-        label: "Rampy",
+        label: appliedIntegrationEvidenceLabel,
         href: "/work#rampy",
       },
     ],
@@ -449,7 +451,7 @@ export const technologyCatalog: Technology[] = [
     icon: "tensorflow",
     evidence: [
       {
-        label: "Rampy",
+        label: appliedIntegrationEvidenceLabel,
         href: "/work#rampy",
       },
     ],
@@ -507,7 +509,7 @@ export const technologyCatalog: Technology[] = [
     icon: "pandas",
     evidence: [
       {
-        label: "Rampy",
+        label: appliedIntegrationEvidenceLabel,
         href: "/work#rampy",
       },
     ],
@@ -521,7 +523,7 @@ export const technologyCatalog: Technology[] = [
     icon: "numpy",
     evidence: [
       {
-        label: "Rampy",
+        label: appliedIntegrationEvidenceLabel,
         href: "/work#rampy",
       },
     ],
@@ -2547,21 +2549,23 @@ export const publicTechnologyExclusions: Record<string, string> = {
   "health-checks": "Covered by observability and production-engineering capabilities.",
   "single-page-applications": "Covered by the named application frameworks.",
   "responsive-design": "Baseline product practice rather than a differentiating technical entry.",
-  // The v3 brief and canonical profile are the public sources for Rampy; these source records
-  // stay in the inventory but are not published until those sources support them.
-  pytorch: "Not supported by the v3 brief or the canonical profile.",
-  tensorflow: "Not supported by the v3 brief or the canonical profile.",
-  "pydantic-ai": "Not supported by the v3 brief or the canonical profile.",
-  "google-gemini":
-    "Not a Rampy provider in the v3 brief (Claude, with DeepInfra and Vertex AI as fallbacks).",
-  moonpay: "Not supported by the v3 brief or the canonical profile.",
-  zerodev: "Not supported by the v3 brief or the canonical profile.",
-  numpy: "Not supported by the v3 brief or the canonical profile.",
-  pandas: "Not supported by the v3 brief or the canonical profile.",
 };
 
 export const publicTechnologyCatalog = technologyCatalog.filter(
   ({ id, status }) => status === "applied" && !Object.hasOwn(publicTechnologyExclusions, id),
+);
+
+// Confirmed for Rampy only as application/integration use, never model training. They are listed
+// in the /stack catalogue but stay out of the hero scene and the home tool carousel.
+export const catalogueOnlyTechnologies: Record<string, string> = {
+  pytorch: "Application and integration use at Rampy; no model training.",
+  tensorflow: "Application and integration use at Rampy; no model training.",
+  numpy: "Data processing and evaluation for agents at Rampy; no model training.",
+  pandas: "Data processing and evaluation for agents at Rampy; no model training.",
+};
+
+export const highlightedTechnologyCatalog = publicTechnologyCatalog.filter(
+  ({ id }) => !Object.hasOwn(catalogueOnlyTechnologies, id),
 );
 
 export const technologyGroups = [

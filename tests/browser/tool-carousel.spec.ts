@@ -1,11 +1,11 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { publicTechnologyCatalog } from "../../content/technologies";
+import { highlightedTechnologyCatalog } from "../../content/technologies";
 import { setDocumentHidden } from "./document-visibility";
 
 for (const locale of ["en", "es"]) {
   const prefix = locale === "es" ? "/es" : "";
-  test(`${locale} carousel exposes the complete catalog without duplicate accessible links`, async ({
+  test(`${locale} carousel exposes the highlighted catalog without duplicate accessible links`, async ({
     page,
   }, info) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
@@ -18,9 +18,9 @@ for (const locale of ["en", "es"]) {
     const ids = await section
       .locator("[data-tool-id]")
       .evaluateAll((nodes) => nodes.map((node) => node.getAttribute("data-tool-id")));
-    expect(ids.length).toBe(publicTechnologyCatalog.length);
+    expect(ids.length).toBe(highlightedTechnologyCatalog.length);
     expect(new Set(ids).size).toBe(ids.length);
-    expect([...ids].sort()).toEqual(publicTechnologyCatalog.map((tool) => tool.id).sort());
+    expect([...ids].sort()).toEqual(highlightedTechnologyCatalog.map((tool) => tool.id).sort());
     await expect(section.getByRole("button")).toHaveCount(0);
     for (const theme of ["dark", "light"]) {
       await page.evaluate((value) => {
@@ -188,7 +188,7 @@ test("concept marks retain an opaque readable surface in the light theme", async
   expect(colors.outline).not.toBe("none");
 });
 
-test("carousel preserves its complete linked catalog without JavaScript", async ({
+test("carousel preserves its highlighted linked catalog without JavaScript", async ({
   browser,
   baseURL,
 }) => {
@@ -203,7 +203,9 @@ test("carousel preserves its complete linked catalog without JavaScript", async 
         .first()
         .evaluate((node) => getComputedStyle(node).display),
     ).toBe("grid");
-    await expect(section.locator("[data-tool-id] a")).toHaveCount(publicTechnologyCatalog.length);
+    await expect(section.locator("[data-tool-id] a")).toHaveCount(
+      highlightedTechnologyCatalog.length,
+    );
     await expect(section.getByRole("button")).toHaveCount(0);
     const last = section.locator("[data-tool-id] a").last();
     await last.scrollIntoViewIfNeeded();
