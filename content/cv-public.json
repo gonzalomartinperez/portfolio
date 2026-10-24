@@ -15,7 +15,7 @@
           "href": ""
         },
         {
-          "text": " with 2.5+ years shipping production software, most recently LLM agents, RAG systems and eval suites. Sole engineer at an early-stage US fintech, owning its trading assistant end to end: the LangGraph agents in English, Spanish and Portuguese, the eval suite that gates every release, and the backend, web and mobile app around them. Previously built a GraphRAG assistant for Payway's merchant platform.",
+          "text": " with 2.5+ years shipping production software, most recently LLM agents, RAG systems and eval suites. Own all engineering at an early-stage fintech and blockchain startup whose generative interface opens digital assets to everyday people, including its AI assistant end to end: the LangGraph agents in English, Spanish and Portuguese, the eval suite that gates every release, and the backend, web and mobile app around them. Previously built a GraphRAG assistant for Payway's merchant platform.",
           "bold": false,
           "href": ""
         }
@@ -38,12 +38,12 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Sole engineer",
+                      "text": "Own all engineering",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", taking over the codebase from earlier developers at a US fintech building a non-custodial trading and yield app. Work directly with the three co-founders.",
+                      "text": " at an early-stage fintech and blockchain startup whose non-custodial app opens digital assets to everyday people through a generative interface. Work directly with the three co-founders on a codebase I took over from earlier developers.",
                       "bold": false,
                       "href": ""
                     }
@@ -517,8 +517,8 @@
           "entries": [
             {
               "id": "uns",
-              "title": "Universidad Nacional del Sur (UNS)",
-              "subtitle": "Information Systems Engineer",
+              "title": "Universidad Nacional del Sur",
+              "subtitle": "Information Systems Engineer (Software Engineering equivalent)",
               "details": [
                 "Jan 2020 – Oct 2025",
                 "Bahía Blanca, Argentina",
@@ -550,7 +550,7 @@
           "href": ""
         },
         {
-          "text": " con más de 2,5 años llevando software a producción, últimamente con agentes LLM, sistemas RAG y suites de evaluación. Como único ingeniero de una startup fintech de EE. UU., me ocupo de su asistente de trading de punta a punta: agentes en LangGraph en tres idiomas, la suite que cada versión debe aprobar y el backend, la web y la app móvil. Antes desarrollé un asistente con GraphRAG para Payway.",
+          "text": " con más de 2,5 años llevando software a producción, últimamente con agentes LLM, sistemas RAG y suites de evaluación. Me ocupo de toda la ingeniería de una startup fintech y blockchain cuya interfaz generativa acerca los activos digitales a cualquier persona, incluido su asistente de IA de punta a punta: agentes en LangGraph en tres idiomas, la suite que cada versión debe aprobar y el backend, la web y la app móvil. Antes desarrollé un asistente con GraphRAG para Payway.",
           "bold": false,
           "href": ""
         }
@@ -573,12 +573,12 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Único ingeniero",
+                      "text": "Me ocupo de toda la ingeniería",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": ", a cargo del código que dejaron desarrolladores anteriores en una fintech de EE. UU. que desarrolla una app no custodial de trading y rendimientos. Trabajo directamente con los tres cofundadores.",
+                      "text": " de una startup fintech y blockchain cuya app no custodial acerca los activos digitales a cualquier persona mediante una interfaz generativa. Trabajo con los tres cofundadores, sobre un código que tomé de desarrolladores anteriores.",
                       "bold": false,
                       "href": ""
                     }
@@ -1052,7 +1052,7 @@
           "entries": [
             {
               "id": "uns",
-              "title": "Universidad Nacional del Sur (UNS)",
+              "title": "Universidad Nacional del Sur",
               "subtitle": "Ingeniero en Sistemas de Información",
               "details": ["Ene 2020 – Oct 2025", "Bahía Blanca, Argentina", "Promedio: 8,67 / 10"],
               "href": "https://www.uns.edu.ar/",
@@ -1065,11 +1065,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "4938ab45e7e3ce68e5502433313dd2bfa6475008e5a4caa8ac70e149499129a9",
-    "factsSha256": "33a26d9591053024858e02b49983565cfd820056cedbe8b1d1153e29840aa9f7",
+    "sourceSha256": "1e9dcdc48316912c448808e2fa9faf51b9580e29b3ad92bf11a6e341aa4248e0",
+    "factsSha256": "16ff6aa8da12fdca5ed85186ee6679c2b3b8b38ba35d424c059f192ff45e51bf",
     "pdfSha256": {
-      "en": "046b43aa227a4e898c08381f850f56d57bc55b90e281b8c4afdb2d4bbe6d9c90",
-      "es": "881f54293f9333af78225ce371bb1aec72b7fb5e031c73c641fc9fcf99acffb0"
+      "en": "a13261534ac732090244659e61ef085da86e8ac9e01cfa37b7c4036e7242cd9a",
+      "es": "d8ac9dadb36741f95184e3e86e8a5a461ca7d8a6f2b4b2ef13f3678cfe9e9819"
     }
   }
 }

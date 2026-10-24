@@ -43,6 +43,9 @@ export function HeroView({ locale }: { locale: Locale }) {
           {copy.actions.getInTouch}
         </Link>
       </div>
+      <Link className="text-link muted" href={localePath(locale, "/cv")}>
+        {copy.hero.readCv}
+      </Link>
 
       <p className={styles.availability}>
         <span aria-hidden="true" className={styles.pulse} />
@@ -60,8 +63,10 @@ export function HeroView({ locale }: { locale: Locale }) {
       <HeroStage
         constellation={
           <TechConstellation
-            heading={copy.stack.fieldHeading}
-            note={copy.stack.fieldIntro}
+            sceneHeading={copy.stack.fieldHeading}
+            sceneNote={copy.stack.fieldIntro}
+            heading={copy.stack.groupedHeading}
+            note={copy.stack.groupedIntro}
             locale={locale}
           />
         }

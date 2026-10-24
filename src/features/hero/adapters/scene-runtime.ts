@@ -457,7 +457,9 @@ function bindScene(
     engine.resize();
     const width = viewport?.clientWidth ?? innerWidth;
     const height = viewport?.clientHeight ?? innerHeight;
-    const heroBottom = (hero.element?.offsetTop ?? 0) + (hero.element?.offsetHeight ?? 0);
+    // offsetHeight rounds; a fractional hero height could otherwise eat into the resting gap.
+    const heroBottom =
+      (hero.element?.offsetTop ?? 0) + Math.ceil(hero.element?.getBoundingClientRect().height ?? 0);
     const headerPosition = header ? getComputedStyle(header).position : "";
     const headerHeight =
       header && (headerPosition === "sticky" || headerPosition === "fixed")

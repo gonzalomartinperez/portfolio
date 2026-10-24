@@ -118,6 +118,18 @@ export const portfolioAssistant: Project = {
       description: "FastAPI and LangGraph backend on GitHub",
     },
   ],
+  // Case "unsupported-employer" in evals/retrieval.json; scored by scripts/evaluate_retrieval.py.
+  evalCase: {
+    heading: "Example eval case",
+    questionLabel: "Question:",
+    question: "Did Gonzalo work at Google?",
+    expectedLabel: "Expected:",
+    expected: "No answer: the public corpus has no source for this employer.",
+    criterionLabel: "Passes when:",
+    criterion: "retrieval returns no source at all, so nothing can support a claim.",
+    linkLabel: "See the eval bank on GitHub",
+    href: "https://github.com/gonzalomartinperez/portfolio-assistant-api/blob/main/evals/retrieval.json",
+  },
 };
 
 export const projects: Project[] = [filomena, portfolioAssistant];
@@ -270,7 +282,7 @@ export const filomenaCaseStudy = {
     heading: "Delivery and operation",
     body: [
       "Our three-person team used Agile practices and Trello to coordinate requirements, implementation and release.",
-      "Docker and Docker Compose provided containerized environments, while GitHub Actions supported production deployments observed at under fifteen minutes end to end. The public code repositories are snapshots and do not include the original deployment pipeline.",
+      "Docker and Docker Compose provided containerized environments, while GitHub Actions ran production deployments in under fifteen minutes, from push to live. The public code repositories are snapshots and do not include the original deployment pipeline.",
     ],
   } satisfies CaseStudySection,
 

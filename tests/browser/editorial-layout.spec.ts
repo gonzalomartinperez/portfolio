@@ -13,7 +13,7 @@ for (const locale of ["", "/es"]) {
     await expect(biography.locator("p")).toHaveCount(5);
     await expect(biography.locator("p").nth(3)).toContainText("Coolify");
     await expect(biography.locator("p").nth(3)).toContainText(
-      locale ? "proxies inversos" : "reverse proxies",
+      locale ? "me ocupo del despliegue" : "I also handle deployment",
     );
     await expect(biography).not.toContainText("Soy Gonzalo");
     await expect(biography).not.toContainText("I’m Gonzalo");

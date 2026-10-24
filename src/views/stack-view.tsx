@@ -3,6 +3,7 @@ import { getContent } from "@content";
 import {
   appliedIntegrationEvidenceLabel,
   compareTechnologyNames,
+  generalSkillEvidenceLabel,
   publicTechnologyCatalog,
 } from "@content/technologies";
 import Link from "next/link";
@@ -40,6 +41,8 @@ export function StackView({ locale }: { locale: Locale }) {
           "Independent work": "Trabajo independiente",
           "Professional focus": "Enfoque profesional",
           [appliedIntegrationEvidenceLabel]: "Rampy (uso en aplicación e integración)",
+          [generalSkillEvidenceLabel]:
+            "Habilidad general: ajuste de modelos con un dataset (fuera de los roles listados)",
         }
       : {};
   const groups = stackGroups.map((group) => ({
@@ -51,7 +54,7 @@ export function StackView({ locale }: { locale: Locale }) {
         ...technology,
         evidence: technology.evidence.map((evidence) => ({
           label: evidenceLabels[evidence.label] ?? evidence.label,
-          href: localePath(locale, evidence.href),
+          href: evidence.href ? localePath(locale, evidence.href) : undefined,
         })),
       })),
   }));

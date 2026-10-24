@@ -7,12 +7,15 @@ export type Technology = {
   category: string;
   kind: "brand" | "concept";
   status: "applied" | "developing";
-  evidence: { label: string; href: string }[];
+  /** Entries without `href` are general skills shown as plain text, with no page to link. */
+  evidence: { label: string; href?: string }[];
   icon?: string;
   aliases?: string[];
 };
 
 export const appliedIntegrationEvidenceLabel = "Rampy (application and integration use)";
+export const generalSkillEvidenceLabel =
+  "General skill: model tuning on a dataset (not part of a listed role)";
 
 export const technologyCatalog: Technology[] = [
   {
@@ -40,7 +43,7 @@ export const technologyCatalog: Technology[] = [
     kind: "concept",
     status: "applied",
     aliases: ["Fine tuning"],
-    evidence: [{ label: "Experience & projects", href: "/work" }],
+    evidence: [{ label: generalSkillEvidenceLabel }],
   },
   {
     id: "ai-chains",

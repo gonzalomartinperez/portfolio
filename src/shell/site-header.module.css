@@ -134,10 +134,10 @@
     gap: 0;
   }
 
-  /* Full-bleed hit areas; wider end items keep the first and last labels off the edge. */
+  /* Full-bleed hit areas; from 390px the centered end labels keep a 16px page gutter. */
   .list > li:first-child .link,
   .list > li:last-child .link {
-    padding-inline: 0.625rem;
+    padding-inline: clamp(0.625rem, 20vw - 62px, 1rem);
   }
 
   .list > li {

@@ -11,41 +11,6 @@
   }
 }
 
-.channels {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.channel {
-  align-items: baseline;
-  background: var(--surface-raised);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-md);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-4);
-  justify-content: space-between;
-  padding: var(--space-5);
-  text-decoration: none;
-  transition: border-color var(--duration-micro) var(--ease-standard);
-}
-
-.channel:hover {
-  border-color: var(--accent);
-}
-
-.channelLabel {
-  color: var(--text-primary);
-  font-weight: 550;
-  word-break: break-word;
-}
-
-.channelDescription {
-  color: var(--text-muted);
-  font-size: var(--text-small);
-}
-
 .panel {
   display: flex;
   flex-direction: column;

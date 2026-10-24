@@ -10,6 +10,14 @@ import { buttonVariants } from "@/shared/ui/button";
 import styles from "./cv.module.css";
 
 type Run = { text: string; bold: boolean; href: string };
+
+/**
+ * The career CV source keeps an English focus phrase in its Spanish headline. The exported
+ * projection must stay byte-identical to that source, so the web page translates it here.
+ */
+const focusTranslations: Partial<Record<Locale, Record<string, string>>> = {
+  es: { "LLM agents, RAG & evals in production": "Agentes LLM, RAG y evaluaciones en producción" },
+};
 type Block = { id: string; kind: string; runs: Run[] };
 
 function InlineCopy({ runs, locale }: { runs: Run[]; locale: Locale }) {
@@ -63,7 +71,8 @@ export function CvView({ locale }: { locale: Locale }) {
   const spanish = locale === "es";
   const headlineParts = copy.headline.split(" | ", 4);
   const roles = headlineParts.slice(0, 3).join(" | ");
-  const focus = headlineParts[3];
+  const focus =
+    headlineParts[3] && (focusTranslations[locale]?.[headlineParts[3]] ?? headlineParts[3]);
   return (
     <div lang={locale}>
       <PageHeader eyebrow="CV" title={copy.name} intro={roles}>

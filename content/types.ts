@@ -55,6 +55,20 @@ export type Project = {
   metrics: Metric[];
   stack: string[];
   links: EvidenceLink[];
+  /** A real case copied from the project's public eval bank, never a paraphrase. */
+  evalCase?: EvalCase;
+};
+
+export type EvalCase = {
+  heading: string;
+  questionLabel: string;
+  question: string;
+  expectedLabel: string;
+  expected: string;
+  criterionLabel: string;
+  criterion: string;
+  linkLabel: string;
+  href: string;
 };
 
 export type StackGroup = {

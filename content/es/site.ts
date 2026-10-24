@@ -45,6 +45,7 @@ export const siteCopy: SiteCopy = {
     pauseAnimation: "Pausar la animación",
     playAnimation: "Reproducir la animación",
     avatarInteraction: "Interactuar con el avatar de Gonzalo",
+    readCv: "o lee el CV",
     principles: [
       {
         title: "Evaluaciones primero",
@@ -74,6 +75,11 @@ export const siteCopy: SiteCopy = {
     whoHeading: "De los agentes de IA al producto que los rodea",
     whoParagraph:
       "Trabajo sobre todo con LangGraph, Claude, RAG y LangSmith: agentes que usan herramientas reales, recuperación basada en el contexto del negocio y evaluaciones que deciden qué se publica. También construyo las APIs, los backoffices, la web y las apps móviles que los rodean, desde las necesidades del usuario y la arquitectura hasta las pruebas, el despliegue y el monitoreo.",
+    whoAssistant: {
+      lead: "Mi ",
+      link: "Portfolio Assistant",
+      tail: " open source muestra el mismo enfoque en código público: un asistente RAG bilingüe con un banco de 1.000 preguntas de evaluación.",
+    },
     factCurrently: "Actualmente",
     factExperience: "Experiencia",
     factBasedIn: "Radicado en",
@@ -171,6 +177,8 @@ export const siteCopy: SiteCopy = {
     fieldHeading: "El stack detrás de agentes que llegan a producción",
     fieldIntro:
       "Lo que uso en producción, desde LangGraph y las evaluaciones hasta las APIs y apps que los rodean.",
+    groupedHeading: "Agrupado por lo que hace",
+    groupedIntro: "Cada herramienta enlaza al rol o proyecto donde la usé.",
     fieldLabel: "Tecnologías",
     noteHeading: "Experiencia detrás de las herramientas",
     noteScope:

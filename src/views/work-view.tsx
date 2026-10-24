@@ -210,6 +210,7 @@ export function WorkView({ locale }: { locale: Locale }) {
           data-slot="card"
           className={cn(cardVariants(), styles.project, "flow")}
           data-project={portfolioAssistant.slug}
+          id={`project-${portfolioAssistant.slug}`}
         >
           <div className={styles.projectHead}>
             <div>
@@ -222,6 +223,32 @@ export function WorkView({ locale }: { locale: Locale }) {
           <p className="lede">{portfolioAssistant.summary}</p>
           <p className={styles.attribution}>{portfolioAssistant.attribution}</p>
           <MetricList metrics={portfolioAssistant.metrics} />
+
+          {portfolioAssistant.evalCase && (
+            <section
+              className={cn(styles.outcomes, "flow-tight")}
+              aria-labelledby={`${portfolioAssistant.slug}-eval-case`}
+            >
+              <h4 className="eyebrow" id={`${portfolioAssistant.slug}-eval-case`}>
+                {portfolioAssistant.evalCase.heading}
+              </h4>
+              <dl>
+                <dt>{portfolioAssistant.evalCase.questionLabel}</dt>
+                <dd className="muted">{portfolioAssistant.evalCase.question}</dd>
+                <dt>{portfolioAssistant.evalCase.expectedLabel}</dt>
+                <dd className="muted">{portfolioAssistant.evalCase.expected}</dd>
+                <dt>{portfolioAssistant.evalCase.criterionLabel}</dt>
+                <dd className="muted">{portfolioAssistant.evalCase.criterion}</dd>
+              </dl>
+              <ExternalLink
+                className="text-link"
+                href={portfolioAssistant.evalCase.href}
+                locale={locale}
+              >
+                {portfolioAssistant.evalCase.linkLabel}
+              </ExternalLink>
+            </section>
+          )}
 
           <div className="actions">
             {portfolioAssistant.links.map((link) => (

@@ -83,7 +83,7 @@ for (const prefix of ["", "/es"]) {
   }) => {
     await page.setViewportSize({ width: 393, height: 844 });
     await page.goto(`${prefix || "/"}?sceneProgress=0&sceneTime=0`);
-    const actions = page.locator("[data-scene-hero] a");
+    const actions = page.locator("[data-scene-hero] .actions a");
     const first = await actions.first().boundingBox();
     const second = await actions.last().boundingBox();
     expect(first).not.toBeNull();
