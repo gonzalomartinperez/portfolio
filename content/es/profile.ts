@@ -16,6 +16,13 @@ export const profile = {
   arrangement: "100% remoto",
   availability: "Abierto a oportunidades remotas y disponible para entrevistas",
 
+  /** Prueba del primer pantallazo, sobre el nombre. Cada parte ocupa una línea en móviles. */
+  heroProof: [
+    "Único ingeniero en una fintech de EE. UU.",
+    "3.000+ evaluaciones habilitan cada versión",
+    "Remoto desde Argentina (UTC-3)",
+  ],
+
   /** El mensaje de cinco segundos. Una idea por frase. */
   headline:
     "Construyo agentes LLM para producción, y las evaluaciones que demuestran que funcionan.",
@@ -28,9 +35,8 @@ export const profile = {
 
   /** Etiqueta canónica exacta. Nunca Senior, Tech Lead, Architect ni Staff. */
   seniority: "Semi-senior",
-  experienceLength: "2 años y 8 meses",
+  experienceLength: "Más de 2,5 años",
   experienceSince: "enero de 2024",
-  experienceAsOf: "septiembre de 2026",
 
   languages: [
     { language: "Español", level: "Nativo" },
@@ -42,7 +48,7 @@ export const contactLinks: EvidenceLink[] = [
   {
     label: email,
     href: `mailto:${email}`,
-    description: "Email — la vía más directa",
+    description: "Email, la vía más directa",
   },
   {
     label: "linkedin.com/in/gonzalo-martin-perez",
@@ -52,19 +58,19 @@ export const contactLinks: EvidenceLink[] = [
   {
     label: "github.com/gonzalomartinperez",
     href: externalLinks.github,
-    description: "GitHub — código fuente público",
+    description: "GitHub, código fuente público",
   },
 ];
 
 export const resumeLinks: EvidenceLink[] = [
   {
-    label: "CV — Inglés (PDF)",
+    label: "CV en inglés (PDF)",
     href: resumeDownloads.en,
     download: resumeFilenames.en,
     description: "Dos páginas, actualizado en octubre de 2026",
   },
   {
-    label: "CV — Español (PDF)",
+    label: "CV en español (PDF)",
     href: resumeDownloads.es,
     download: resumeFilenames.es,
     description: "Dos páginas, actualizado en octubre de 2026",
@@ -74,7 +80,7 @@ export const resumeLinks: EvidenceLink[] = [
 export const openTo = [
   "Ingeniería de IA: agentes LLM, evaluaciones, RAG/GraphRAG e integración de modelos de lenguaje",
   "Ingeniería de software, backend y full-stack",
-  "Ingeniería de producto con responsabilidad de punta a punta",
+  "Ingeniería de producto con responsabilidad completa sobre cada funcionalidad",
 ];
 
 /** Contact channels with their brand glyph, for the icon links. */

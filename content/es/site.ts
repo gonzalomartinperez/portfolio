@@ -49,7 +49,7 @@ export const siteCopy: SiteCopy = {
       {
         title: "Evaluaciones primero",
         description:
-          "La calidad se mide con escenarios representativos y las evaluaciones habilitan cada release.",
+          "La calidad se mide con escenarios representativos y las evaluaciones deciden qué versión sale.",
       },
       {
         title: "Respuestas fundamentadas",
@@ -62,7 +62,7 @@ export const siteCopy: SiteCopy = {
           "El tiempo de respuesta y los tokens son métricas de producto, medidas con pruebas de carga y evaluaciones.",
       },
       {
-        title: "Responsabilidad de punta a punta",
+        title: "Responsabilidad completa",
         description: "Desde el agente y la API hasta la app y su comportamiento en producción.",
       },
     ],
@@ -81,7 +81,7 @@ export const siteCopy: SiteCopy = {
     languagesValue: "Español (nativo) · Inglés (B2)",
     experienceSince: (length, since) => `${length}, desde ${since}`,
     workEyebrow: "Proyecto destacado",
-    workHeading: "Un producto real, de punta a punta",
+    workHeading: "En producción desde la universidad",
     experienceEyebrow: "Experiencia",
     experienceHeading: "Productos, equipos y contribuciones",
     stackEyebrow: "Stack",
@@ -108,13 +108,13 @@ export const siteCopy: SiteCopy = {
       "empresarial de permisos, desarrollo de producto independiente y Filomena.",
     eyebrow: "Trabajo",
     title: "Experiencia y proyectos seleccionados",
-    intro: (length, asOf) =>
-      `${length} de experiencia profesional a ${asOf}, llevando a producción agentes de IA, productos fintech y sistemas empresariales.`,
+    intro:
+      "Más de 2,5 años llevando a producción agentes de IA, productos fintech y sistemas empresariales.",
     experienceHeading: "Experiencia profesional",
     projectsEyebrow: "Proyectos seleccionados",
-    projectsHeading: "Explora el producto en detalle",
+    projectsHeading: "Explora los productos en detalle",
     projectsBody:
-      "Filomena reúne el recorrido del producto, las decisiones de arquitectura y las versiones públicas del código. Las experiencias empresariales describen mi contribución y el contexto de operación.",
+      "Filomena reúne el recorrido del producto, las decisiones de arquitectura y las versiones públicas del código. Portfolio Assistant reúne mi trabajo open source de evaluación. Las experiencias empresariales describen mi contribución y el contexto de operación.",
   },
   filomena: {
     metaTitle: "Filomena: plataforma de exámenes en producción",
@@ -162,14 +162,15 @@ export const siteCopy: SiteCopy = {
   stack: {
     metaTitle: "Stack",
     metaDescription:
-      "Tecnología agrupada por capacidad — IA aplicada y sistemas agénticos, backend y APIs, " +
-      "datos y arquitectura, infraestructura en la nube y entrega de software — con el trabajo que respalda cada grupo.",
+      "Tecnología agrupada por capacidad (IA aplicada y sistemas agénticos, backend y APIs, " +
+      "datos y arquitectura, infraestructura en la nube y entrega de software), con el trabajo que respalda cada grupo.",
     eyebrow: "Stack",
     title: "La tecnología detrás del trabajo",
     intro:
       "Desde interfaces y contratos de servicios hasta recuperación de contexto y flujos agénticos. Explora el conjunto completo por capacidad y accede al contexto profesional de cada entrada.",
-    fieldHeading: "Herramientas de ingeniería conectadas",
-    fieldIntro: "Lenguajes, frameworks y herramientas con los que construyo productos de calidad.",
+    fieldHeading: "El stack detrás de agentes que llegan a producción",
+    fieldIntro:
+      "Lo que uso en producción, desde LangGraph y las evaluaciones hasta las APIs y apps que los rodean.",
     fieldLabel: "Tecnologías",
     noteHeading: "Experiencia detrás de las herramientas",
     noteScope:

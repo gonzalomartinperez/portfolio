@@ -69,7 +69,58 @@ export const filomena: Project = {
   ],
 };
 
-export const projects: Project[] = [filomena];
+/**
+ * Proyecto open source. Los datos provienen del brief aprobado y del repositorio público; está
+ * implementado y evaluado, pero no desplegado, así que no se publican cifras de uso.
+ */
+export const portfolioAssistant: Project = {
+  slug: "portfolio-assistant",
+  name: "Portfolio Assistant",
+  tagline: "Asistente RAG bilingüe con un banco de 1.000 preguntas de evaluación",
+  period: "Sep 2026 – Actualidad",
+  summary:
+    "Asistente open source en FastAPI y LangGraph que responde preguntas de recruiters sobre mi " +
+    "trabajo, con recuperación híbrida léxica y vectorial más GraphRAG (pgvector, Neo4j), " +
+    "respuestas con fuentes transmitidas por SSE y límites de costo por solicitud.",
+  attribution: "Proyecto personal open source. Implementado y evaluado; todavía sin desplegar.",
+  metrics: [
+    {
+      value: "1.000",
+      label: "preguntas de evaluación bilingües",
+      qualifier:
+        "100 familias de intención en inglés y español, ejecutadas con un modelo de prueba, más casos adversariales.",
+    },
+    {
+      value: "800+",
+      label: "tests automatizados",
+      qualifier: "Se ejecutan en la CI de GitHub Actions.",
+    },
+    {
+      value: "244",
+      label: "turnos con el modelo real",
+      qualifier: "Una ejecución de evaluación con un modelo real de OpenAI.",
+    },
+  ],
+  stack: technologyNames([
+    "Python",
+    "FastAPI",
+    "LangGraph",
+    "GraphRAG",
+    "PostgreSQL",
+    "pgvector",
+    "Neo4j",
+    "Server-Sent Events",
+  ]),
+  links: [
+    {
+      label: "Código en GitHub",
+      href: "https://github.com/gonzalomartinperez/portfolio-assistant-api",
+      description: "Backend en FastAPI y LangGraph en GitHub",
+    },
+  ],
+};
+
+export const projects: Project[] = [filomena, portfolioAssistant];
 
 type CaseStudySection = {
   heading: string;

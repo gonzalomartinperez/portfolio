@@ -62,7 +62,7 @@ export const siteCopy: SiteCopy = {
           "Response time and tokens are product metrics, checked with load tests and evals.",
       },
       {
-        title: "End-to-end ownership",
+        title: "Full ownership",
         description: "From the agent and the API to the app and its behavior in production.",
       },
     ],
@@ -81,7 +81,7 @@ export const siteCopy: SiteCopy = {
     languagesValue: "Spanish (native) · English (B2)",
     experienceSince: (length, since) => `${length}, since ${since}`,
     workEyebrow: "Featured project",
-    workHeading: "A real product, built end to end",
+    workHeading: "Shipped to production while still at university",
     experienceEyebrow: "Experience",
     experienceHeading: "Products, teams and contributions",
     stackEyebrow: "Stack",
@@ -108,13 +108,12 @@ export const siteCopy: SiteCopy = {
       "independent product engineering, and Filomena.",
     eyebrow: "Work",
     title: "Experience and selected projects",
-    intro: (length, asOf) =>
-      `${length} of professional experience as of ${asOf}, shipping AI agents, fintech products and enterprise systems to production.`,
+    intro: "2.5+ years shipping AI agents, fintech products and enterprise systems to production.",
     experienceHeading: "Professional experience",
     projectsEyebrow: "Selected projects",
-    projectsHeading: "Explore the product in detail",
+    projectsHeading: "Explore the products in detail",
     projectsBody:
-      "Filomena brings together the product walkthrough, architecture decisions and public source snapshots. For enterprise work, the experience above describes the contribution and operating context.",
+      "Filomena brings together the product walkthrough, architecture decisions and public source snapshots. Portfolio Assistant is my open-source eval work. For enterprise work, the experience above describes the contribution and operating context.",
   },
   filomena: {
     metaTitle: "Filomena: a production exam platform",
@@ -159,14 +158,15 @@ export const siteCopy: SiteCopy = {
   stack: {
     metaTitle: "Stack",
     metaDescription:
-      "Technology grouped by capability — applied AI and agentic systems, backend and APIs, " +
-      "data and architecture, cloud and delivery — with the work that backs each group.",
+      "Technology grouped by capability (applied AI and agentic systems, backend and APIs, " +
+      "data and architecture, cloud and delivery), with the work that backs each group.",
     eyebrow: "Stack",
     title: "The technology behind the work",
     intro:
       "From interfaces and service contracts to retrieval and agent workflows. Explore the full toolkit by capability, and follow each entry to its professional context.",
-    fieldHeading: "A connected engineering toolkit",
-    fieldIntro: "Languages, frameworks, and tools I use to build high-quality products.",
+    fieldHeading: "The stack behind agents that ship",
+    fieldIntro:
+      "What I use in production, from LangGraph and evals to the APIs and apps around them.",
     fieldLabel: "Technologies",
     noteHeading: "Experience behind the toolkit",
     noteScope:
@@ -228,7 +228,7 @@ export const siteCopy: SiteCopy = {
     eyebrow: "Error 404",
     title: "This page does not exist",
     body:
-      "The link may be out of date, or the address may have a typo. No harm done — everything on " +
+      "The link may be out of date, or the address may have a typo. No harm done: everything on " +
       "the site is reachable from the navigation above.",
   },
 };

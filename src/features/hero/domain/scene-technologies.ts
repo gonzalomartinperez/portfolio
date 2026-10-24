@@ -1,12 +1,13 @@
 import type { Technology } from "@content/technologies";
 
-const illustratedSceneTechnologies = new Set(["agent-evaluation", "pgvector", "rag"]);
+const illustratedSceneTechnologies = new Set(["agent-evaluation", "graphrag", "pgvector", "rag"]);
 
 // Curate the scene independently so catalogue growth does not crowd its layout.
 const selectedSceneMarks = new Set([
   "celery",
   "langchain",
   "langgraph",
+  "langsmith",
   "openai",
   "anthropic",
   "googlecloud",
@@ -28,14 +29,13 @@ const selectedSceneMarks = new Set([
   "postgresql",
   "redis",
   "sqlalchemy",
-  "numpy",
-  "pandas",
+  "neo4j",
+  "graphrag",
   "docker",
   "kubernetes",
   "amazonwebservices",
   "digitalocean",
   "githubactions",
-  "pytorch",
   "pytest",
   "sentry",
   "expo",

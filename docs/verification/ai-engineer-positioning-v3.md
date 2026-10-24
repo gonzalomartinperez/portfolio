@@ -24,3 +24,30 @@ locally; the full browser matrix runs in required CI.
   separate CV sync. The Rampy architecture assertion accepts the superseded
   hexagonal wording only in the CV projection; tighten it after that sync.
 - Copy quality was reviewed against the owner's brief, not by an external reader.
+
+## Proof-first follow-up (AC-8 to AC-16)
+
+Date: 2026-10-24. Base: `origin/develop` at `a40aa7a`.
+
+| Criterion | Evidence | Result |
+| --- | --- | --- |
+| AC-8 | Production build measured with Playwright at 375, 390, 414 and 1440 px in both locales: each proof part renders on one line on phones, the status pill is one 36 px line with its dot, no horizontal overflow; nav labels sit 11–17 px from the edge (previously 6–12) while `mobile-navigation.spec.ts` keeps full-width hit areas | Pass |
+| AC-9, AC-12, AC-14 | `content.test.mjs`, `about-profile.spec.ts` (2.5+ years, no as-of date), diff review of both locales | Pass |
+| AC-10 | New `catalogue.test.mjs` case: the eight entries keep source records, are excluded from the public catalogue and hero, and are absent from Rampy's stack; the hero still has 35 marks | Pass |
+| AC-11 | `grep` for U+2014 in `content/` and `src/` returns only code comments | Pass |
+| AC-13 | Visual review of the `/work` project card at 1440 and 390 px in both locales | Pass |
+| AC-15 | Visual review of the gallery at 1440 and 390 px: 16 captures in even 3:2 rows; panel captures shown whole and not enlarged | Pass |
+| AC-16 | `npm run cv:sync:check` against the approved inputs; `documents.spec.ts` and `rendered.test.mjs` check new paths, hashes and download names; a local `next start` returns 308 from the old PDF paths | Pass |
+
+Item 4 evidence: the portfolio docs record owner confirmation only for Fine-tuning
+(general skill, `docs/research/engineering-profile-2026-10-10.md`). The other eight
+are not in the v3 brief or the canonical profile. The private career inventory
+(`career-ops/perfil/inventario-tecnologico.md`, confirmations of 2026-09-20 to
+2026-10-03) lists them for Rampy, with "application/integration only" limits for the
+ML libraries. They are therefore excluded, not deleted: removing an id from
+`publicTechnologyExclusions` restores it if the owner wants it back.
+
+Commands: `npm run check`, `npm run test:architecture` (inside check), `git diff --check`
+and the content-relevant Chromium desktop and mobile specs ran locally; the full
+matrix runs in required CI. The `/es/cv` tagline stays in English because it comes from
+the reviewed CV source.

@@ -16,6 +16,13 @@ export const profile = {
   arrangement: "100% remote",
   availability: "Open to remote opportunities and available for interviews",
 
+  /** First-screen proof, shown above the name. Each part stays on one line on phones. */
+  heroProof: [
+    "Sole engineer at a US fintech",
+    "3,000+ eval cases gate every release",
+    "Remote from Argentina (UTC-3)",
+  ],
+
   /** The five-second message. Kept to one clause per idea. */
   headline: "I build LLM agents for production, and the evals that show they work.",
 
@@ -31,9 +38,8 @@ export const profile = {
    * the work. Never Senior, Tech Lead, Architect or Staff.
    */
   seniority: "Mid-level",
-  experienceLength: "2 years and 8 months",
+  experienceLength: "2.5+ years",
   experienceSince: "January 2024",
-  experienceAsOf: "September 2026",
 
   languages: [
     { language: "Spanish", level: "Native" },
@@ -45,7 +51,7 @@ export const contactLinks: EvidenceLink[] = [
   {
     label: email,
     href: `mailto:${email}`,
-    description: "Email — the most direct route",
+    description: "Email, the most direct route",
   },
   {
     label: "linkedin.com/in/gonzalo-martin-perez",
@@ -55,19 +61,19 @@ export const contactLinks: EvidenceLink[] = [
   {
     label: "github.com/gonzalomartinperez",
     href: externalLinks.github,
-    description: "GitHub — public source code",
+    description: "GitHub, public source code",
   },
 ];
 
 export const resumeLinks: EvidenceLink[] = [
   {
-    label: "CV — English (PDF)",
+    label: "English CV (PDF)",
     href: resumeDownloads.en,
     download: resumeFilenames.en,
     description: "Two pages, updated October 2026",
   },
   {
-    label: "CV — Spanish (PDF)",
+    label: "Spanish CV (PDF)",
     href: resumeDownloads.es,
     download: resumeFilenames.es,
     description: "Two pages, updated October 2026",
@@ -77,7 +83,7 @@ export const resumeLinks: EvidenceLink[] = [
 export const openTo = [
   "AI engineering: LLM agents, evals, RAG/GraphRAG and LLM integration",
   "Software, backend and full-stack engineering",
-  "Product engineering with end-to-end ownership",
+  "Product engineering with full ownership of the feature",
 ];
 
 /** Contact channels with their brand glyph, for the icon links. */

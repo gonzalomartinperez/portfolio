@@ -20,6 +20,7 @@ export {
   filomenaCaseStudy,
   pequeverso,
   pequeversoCaseStudy,
+  portfolioAssistant,
   projects,
 } from "./projects";
 export { siteCopy } from "./site";

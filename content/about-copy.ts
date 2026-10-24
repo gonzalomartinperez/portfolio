@@ -9,7 +9,6 @@ export type AboutCopy = {
   asideArrangement: string;
   asideLanguages: string;
   asideAvailability: string;
-  experienceAsOf: (asOf: string) => string;
   focusEyebrow: string;
   focusHeading: string;
   focus: { id: "ai" | "product" | "systems"; title: string; body: string }[];

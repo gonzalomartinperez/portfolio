@@ -13,13 +13,12 @@ export const aboutCopy: AboutCopy = {
     "Hoy soy el único ingeniero de Rampy, una fintech de Estados Unidos en etapa temprana, donde trabajo directamente con tres cofundadores. Me ocupo del asistente de IA (los agentes, sus evaluaciones y el backend que los sostiene) y de la web y la app móvil donde la gente lo usa. Las prioridades cambian rápido, así que busco equilibrar entregas útiles con un producto fácil de mantener y preparado para crecer.",
     "Conecto IA aplicada con estándares de ingeniería de software: rendimiento, robustez, escalabilidad, mantenibilidad y seguridad. Los llevo a la práctica con contratos claros, pruebas automatizadas, evaluaciones de agentes, observabilidad y ejecución controlada de herramientas.",
     "Mis conocimientos de infraestructura acompañan la entrega de aplicaciones: Coolify para despliegues y NGINX, Traefik y Caddy como servidores web y proxies inversos.",
-    "Me gusta entender cómo encajan las piezas de un sistema, conversar sobre alternativas y dividir los problemas complejos en pasos pequeños para construir soluciones de punta a punta. Disfruto trabajar en equipo, aprender y aportar valor.",
+    "Me gusta el momento en que una pregunta de producto difusa se vuelve medible: qué debe hacer el agente, cómo lo probamos y cuánto cuesta. Ahí es donde suelo aportar más a un equipo pequeño.",
   ],
   asideCurrently: "Actualmente",
   asideArrangement: "Modalidad",
   asideLanguages: "Idiomas",
   asideAvailability: "Disponibilidad",
-  experienceAsOf: (asOf) => `A ${asOf}`,
   focusEyebrow: "Lo que aporto",
   focusHeading: "Conecto IA, producto y sistemas",
   focus: [
@@ -69,7 +68,7 @@ export const aboutCopy: AboutCopy = {
   lookingHeading: "Ingeniería de IA y software, con foco en producto",
   lookingParagraphs: [
     "Busco roles de AI Engineer 100% remotos para construir agentes LLM, sistemas RAG y GraphRAG, y las evaluaciones que los mantienen confiables. Mi stack principal es Python/FastAPI, LangGraph, Claude, LangSmith y recuperación vectorial.",
-    "También estoy abierto a roles de ingeniería de software, backend y full stack, donde pueda aportar mi experiencia en sistemas empresariales, aplicaciones web y móviles e integraciones. Me interesa participar en las decisiones de producto y acompañar las funcionalidades de punta a punta.",
+    "También estoy abierto a roles de ingeniería de software, backend y full stack, donde pueda aportar mi experiencia en sistemas empresariales, aplicaciones web y móviles e integraciones. Me interesa participar en las decisiones de producto y acompañar las funcionalidades desde los requisitos iniciales hasta producción.",
     "Estoy abierto a nuevas oportunidades y disponible para entrevistas.",
   ],
 };

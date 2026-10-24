@@ -134,6 +134,12 @@
     gap: 0;
   }
 
+  /* Full-bleed hit areas; wider end items keep the first and last labels off the edge. */
+  .list > li:first-child .link,
+  .list > li:last-child .link {
+    padding-inline: 0.625rem;
+  }
+
   .list > li {
     flex: 1 1 auto;
   }
@@ -141,8 +147,8 @@
   .link {
     justify-content: center;
     min-width: 2.75rem;
-    padding-inline: 0.25rem;
-    font-size: clamp(0.75rem, 3.2vw, 0.9375rem);
+    padding-inline: 0.1875rem;
+    font-size: clamp(0.6875rem, 3vw, 0.9375rem);
     white-space: nowrap;
     width: 100%;
   }
@@ -155,6 +161,13 @@
 @media (width < 52rem) {
   .brandRole {
     display: none;
+  }
+}
+
+@media (width < 22.5rem) {
+  .list > li:first-child .link,
+  .list > li:last-child .link {
+    padding-inline: 0.1875rem;
   }
 }
 

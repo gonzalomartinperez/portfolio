@@ -58,9 +58,6 @@ export function AboutView({ locale }: { locale: Locale }) {
                 <dt className="eyebrow">{copy.home.factExperience}</dt>
                 <dd>
                   {copy.home.experienceSince(profile.experienceLength, profile.experienceSince)}
-                  <span className={styles.asOf}>
-                    {copy.about.experienceAsOf(profile.experienceAsOf)}
-                  </span>
                 </dd>
               </div>
               <div>
@@ -76,9 +73,11 @@ export function AboutView({ locale }: { locale: Locale }) {
               <div>
                 <dt className="eyebrow">{copy.about.asideLanguages}</dt>
                 <dd>
-                  {profile.languages
-                    .map((entry) => `${entry.language} — ${entry.level}`)
-                    .join("; ")}
+                  {profile.languages.map((entry) => (
+                    <span className={styles.language} key={entry.language}>
+                      {entry.language}: {entry.level}
+                    </span>
+                  ))}
                 </dd>
               </div>
               <div>
