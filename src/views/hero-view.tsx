@@ -14,7 +14,19 @@ export function HeroView({ locale }: { locale: Locale }) {
   const hero = (
     <div className={`frame ${styles.inner}`}>
       <p className={`eyebrow ${styles.eyebrow}`}>
-        {profile.role} · {profile.location} · {profile.arrangement}
+        {profile.heroProof.map((part, index) => (
+          <span className={styles.proofPart} key={part}>
+            {index > 0 && (
+              <>
+                {" "}
+                <span aria-hidden="true" className={styles.proofSeparator}>
+                  ·
+                </span>{" "}
+              </>
+            )}
+            {part}
+          </span>
+        ))}
       </p>
 
       <h1 className={styles.name}>{profile.name}</h1>
@@ -38,7 +50,7 @@ export function HeroView({ locale }: { locale: Locale }) {
         <span aria-hidden="true" className={styles.separator}>
           ·
         </span>
-        <span>{copy.hero.openToRemote}</span>
+        <span className={styles.openToRemote}>{copy.hero.openToRemote}</span>
       </p>
     </div>
   );

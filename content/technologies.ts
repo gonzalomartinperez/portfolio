@@ -2547,6 +2547,17 @@ export const publicTechnologyExclusions: Record<string, string> = {
   "health-checks": "Covered by observability and production-engineering capabilities.",
   "single-page-applications": "Covered by the named application frameworks.",
   "responsive-design": "Baseline product practice rather than a differentiating technical entry.",
+  // The v3 brief and canonical profile are the public sources for Rampy; these source records
+  // stay in the inventory but are not published until those sources support them.
+  pytorch: "Not supported by the v3 brief or the canonical profile.",
+  tensorflow: "Not supported by the v3 brief or the canonical profile.",
+  "pydantic-ai": "Not supported by the v3 brief or the canonical profile.",
+  "google-gemini":
+    "Not a Rampy provider in the v3 brief (Claude, with DeepInfra and Vertex AI as fallbacks).",
+  moonpay: "Not supported by the v3 brief or the canonical profile.",
+  zerodev: "Not supported by the v3 brief or the canonical profile.",
+  numpy: "Not supported by the v3 brief or the canonical profile.",
+  pandas: "Not supported by the v3 brief or the canonical profile.",
 };
 
 export const publicTechnologyCatalog = technologyCatalog.filter(

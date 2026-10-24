@@ -14,15 +14,11 @@ import { cardVariants } from "@/shared/ui/card";
 import styles from "./work.module.css";
 
 export function WorkView({ locale }: { locale: Locale }) {
-  const { profile, roles, filomena, siteCopy: copy } = getContent(locale);
+  const { roles, filomena, portfolioAssistant, siteCopy: copy } = getContent(locale);
 
   return (
     <>
-      <PageHeader
-        eyebrow={copy.work.eyebrow}
-        intro={copy.work.intro(profile.experienceLength, profile.experienceAsOf)}
-        title={copy.work.title}
-      >
+      <PageHeader eyebrow={copy.work.eyebrow} intro={copy.work.intro} title={copy.work.title}>
         <nav className="actions flow-tight" aria-label={copy.work.experienceHeading}>
           {roles.map((role) => (
             <a
@@ -207,6 +203,37 @@ export function WorkView({ locale }: { locale: Locale }) {
                   {link.label}
                 </ExternalLink>
               ))}
+          </div>
+        </article>
+
+        <article
+          data-slot="card"
+          className={cn(cardVariants(), styles.project, "flow")}
+          data-project={portfolioAssistant.slug}
+        >
+          <div className={styles.projectHead}>
+            <div>
+              <h3 className={styles.projectTitle}>{portfolioAssistant.name}</h3>
+              <p className="muted">{portfolioAssistant.tagline}</p>
+            </div>
+            <p className="mono muted">{portfolioAssistant.period}</p>
+          </div>
+
+          <p className="lede">{portfolioAssistant.summary}</p>
+          <p className={styles.attribution}>{portfolioAssistant.attribution}</p>
+          <MetricList metrics={portfolioAssistant.metrics} />
+
+          <div className="actions">
+            {portfolioAssistant.links.map((link) => (
+              <ExternalLink
+                className={buttonVariants({ variant: "outline" })}
+                href={link.href}
+                key={link.href}
+                locale={locale}
+              >
+                {link.label}
+              </ExternalLink>
+            ))}
           </div>
         </article>
       </section>

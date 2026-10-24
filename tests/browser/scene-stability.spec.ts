@@ -55,8 +55,12 @@ for (const { prefix, theme } of [
       );
       expect(spans).toHaveLength(2);
       if (isMobile) {
-        expect(spans[1].top).toBeGreaterThanOrEqual(spans[0].bottom);
-        await expect(availability.locator("span[aria-hidden]").first()).not.toBeVisible();
+        // One line on phones: the dot stays, the remote clause is kept only for screen readers.
+        const pill = await availability.boundingBox();
+        expect(pill?.height ?? 0).toBeLessThan(44);
+        await expect(availability).toContainText(/remote|remoto/i);
+        await expect(availability.locator("span[aria-hidden]").first()).toBeVisible();
+        await expect(availability.locator("span[aria-hidden]").nth(1)).not.toBeVisible();
       } else {
         expect(Math.abs(spans[0].top - spans[1].top)).toBeLessThan(1);
         await expect(availability.locator("span[aria-hidden]").first()).toBeVisible();

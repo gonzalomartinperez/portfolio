@@ -293,7 +293,7 @@ export function EducationView({ locale }: { locale: Locale }) {
             <ul className="marked-list flow-tight">
               {profile.languages.map((entry) => (
                 <li key={entry.language}>
-                  <strong>{entry.language}</strong> — {entry.level}
+                  <strong>{entry.language}</strong>: {entry.level}
                 </li>
               ))}
             </ul>

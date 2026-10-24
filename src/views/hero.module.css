@@ -15,6 +15,8 @@
 
 .eyebrow {
   margin-bottom: var(--space-2);
+  max-width: 100%;
+  text-wrap: balance;
 }
 
 .name {
@@ -115,14 +117,25 @@
 }
 
 @media (width < 40rem) {
-  .availability {
-    flex-direction: column;
-    gap: var(--space-1);
+  .eyebrow {
+    letter-spacing: 0.03em;
+    line-height: 1.6;
   }
 
-  .availability .pulse,
-  .separator {
+  .proofPart {
+    display: block;
+  }
+
+  .proofSeparator {
     display: none;
+  }
+
+  .availability {
+    flex-wrap: nowrap;
+    font-size: 0.6875rem;
+    gap: var(--space-2);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
   }
 
   .actions {
@@ -135,6 +148,22 @@
 
   .principles {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* One line with the status dot on phones; the availability stays available to screen readers. */
+@media (width < 27rem) {
+  .separator {
+    display: none;
+  }
+
+  .openToRemote {
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 }
 

@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { expect, test } from "@playwright/test";
+import { resumeFilenames } from "../../config/site";
 import documents from "../../content/public-documents.json" with { type: "json" };
 import { captureSettledPage } from "./capture";
 
@@ -9,7 +10,7 @@ test("CV and contact downloads use reviewed content hashes as cache keys", async
 }) => {
   for (const route of ["/cv", "/es/cv", "/contact", "/es/contact"]) {
     await page.goto(route);
-    const links = page.locator('main a[href*="ai-software-engineer-"][href*=".pdf"]');
+    const links = page.locator('main a[href*="ai-engineer-"][href*=".pdf"]');
     const attributes = await links.evaluateAll((elements) =>
       elements.map((element) => ({
         href: element.getAttribute("href"),
@@ -24,8 +25,8 @@ test("CV and contact downloads use reviewed content hashes as cache keys", async
       expect(url.searchParams.get("sha256")).toBe(document?.sha256);
       const response = await request.get(url.href);
       expect(response.status()).toBe(200);
-      const language = url.pathname.endsWith("-es.pdf") ? "ES" : "EN";
-      const filename = `Gonzalo-Martin-Perez-CV-AI-Software-Engineer-${language}.pdf`;
+      const language = url.pathname.endsWith("-es.pdf") ? "es" : "en";
+      const filename = resumeFilenames[language];
       expect(response.headers()["content-disposition"]).toBe(`inline; filename="${filename}"`);
       if (link.download !== null) expect(link.download).toBe(filename);
       expect(
@@ -51,7 +52,7 @@ test("CV and contact downloads use reviewed content hashes as cache keys", async
       expect(openAttributes.rel).toMatch(/noopener/);
       expect(openAttributes.download).toBeNull();
       expect(downloadAttributes.download).toBe(
-        `Gonzalo-Martin-Perez-CV-AI-Software-Engineer-${route.startsWith("/es/") ? "ES" : "EN"}.pdf`,
+        resumeFilenames[route.startsWith("/es/") ? "es" : "en"],
       );
       expect(openAttributes.href).toBe(downloadAttributes.href);
     }
@@ -104,10 +105,7 @@ test("all academic outcomes and CV content remain usable without JavaScript", as
       await page.goto(`${locale}/cv`);
       await expect(page.getByRole("heading", { level: 1 })).toHaveText("Gonzalo Martin Perez");
       await expect(page.locator("#cv-experience")).toBeVisible();
-      await expect(page.locator("a[download]")).toHaveAttribute(
-        "href",
-        /ai-software-engineer-(en|es)\.pdf/,
-      );
+      await expect(page.locator("a[download]")).toHaveAttribute("href", /ai-engineer-(en|es)\.pdf/);
       await captureSettledPage(
         page,
         {

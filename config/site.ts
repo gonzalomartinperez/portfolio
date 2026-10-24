@@ -15,13 +15,13 @@ export const externalLinks = {
 };
 
 export const resumeFiles = {
-  en: "/gonzalo-martin-perez-ai-software-engineer-en.pdf",
-  es: "/gonzalo-martin-perez-ai-software-engineer-es.pdf",
+  en: "/gonzalo-martin-perez-ai-engineer-en.pdf",
+  es: "/gonzalo-martin-perez-ai-engineer-es.pdf",
 };
 
 export const resumeFilenames = {
-  en: "Gonzalo-Martin-Perez-CV-AI-Software-Engineer-EN.pdf",
-  es: "Gonzalo-Martin-Perez-CV-AI-Software-Engineer-ES.pdf",
+  en: "Gonzalo-Martin-Perez-AI-Engineer-Resume.pdf",
+  es: "Gonzalo-Martin-Perez-AI-Engineer-CV.pdf",
 };
 
 function resumeDownload(locale: keyof typeof resumeFiles) {

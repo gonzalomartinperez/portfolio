@@ -124,13 +124,13 @@ test("confirmed toolkit additions retain their applied experience context", () =
 
 test("the curated hero prioritizes applied AI while preserving source knowledge", () => {
   for (const id of [
-    "pydantic-ai",
+    "pydantic",
     "google-vertex-ai",
+    "langsmith",
+    "neo4j",
+    "graphrag",
     "pytest",
     "sentry",
-    "pytorch",
-    "numpy",
-    "pandas",
     "sqlalchemy",
     "expo",
   ])
@@ -244,8 +244,50 @@ test("the hero fills seven desktop and five mobile columns with 35 unique marks"
       .filter(({ icon }) => !icon)
       .map(({ id }) => id)
       .sort(),
-    ["agent-evaluation", "pgvector", "rag"],
+    ["agent-evaluation", "graphrag", "pgvector", "rag"],
   );
+});
+
+test("technologies the v3 brief does not support stay out of the public catalogue and hero", () => {
+  const unsupported = [
+    "pytorch",
+    "tensorflow",
+    "pydantic-ai",
+    "google-gemini",
+    "moonpay",
+    "zerodev",
+    "numpy",
+    "pandas",
+  ];
+  const sceneIdentities = new Set(
+    publicTechnologyCatalog.filter(getSceneMarkIdentity).map(getSceneMarkIdentity),
+  );
+  for (const id of unsupported) {
+    const technology = getTechnology(id);
+    assert.ok(technology, `${id} keeps its source record`);
+    assert.ok(Object.hasOwn(publicTechnologyExclusions, id), id);
+    assert.ok(!publicTechnologyCatalog.includes(technology), id);
+    if (technology.icon && technology.icon !== "pydantic")
+      assert.ok(!sceneIdentities.has(technology.icon), id);
+  }
+  const fineTuning = getTechnology("fine-tuning");
+  assert.ok(publicTechnologyCatalog.includes(fineTuning));
+  assert.ok(!fineTuning.evidence.some(({ href }) => href.includes("rampy")));
+  for (const locale of ["en", "es"]) {
+    const rampy = read(`content/${locale}/experience.ts`).split('slug: "teamcubation"')[0];
+    for (const name of [
+      "PyTorch",
+      "TensorFlow",
+      "Pydantic AI",
+      "Gemini",
+      "MoonPay",
+      "ZeroDev",
+      "NumPy",
+      "pandas",
+      "Fine-tuning",
+    ])
+      assert.ok(!rampy.includes(name), `${locale}: ${name} is not attributed to Rampy`);
+  }
 });
 
 test("catalogue preserves category priority and sorts technology names alphabetically", () => {

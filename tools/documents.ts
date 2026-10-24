@@ -34,18 +34,8 @@ const definitions: DocumentDefinition[] = [
     "Professional Power Skills",
     "image/png",
   ],
-  [
-    "/gonzalo-martin-perez-ai-software-engineer-en.pdf",
-    "CV in English",
-    "CV en inglés",
-    "application/pdf",
-  ],
-  [
-    "/gonzalo-martin-perez-ai-software-engineer-es.pdf",
-    "CV in Spanish",
-    "CV en español",
-    "application/pdf",
-  ],
+  ["/gonzalo-martin-perez-ai-engineer-en.pdf", "CV in English", "CV en inglés", "application/pdf"],
+  ["/gonzalo-martin-perez-ai-engineer-es.pdf", "CV in Spanish", "CV en español", "application/pdf"],
 ];
 const records = await Promise.all(
   definitions.map(async ([href, en, es, mime]) => {

@@ -54,14 +54,34 @@ export const galleryAlt: Record<string, string> = {
 export const pequeversoGalleryAlt: Record<string, string> = {
   "store-home":
     "Página de inicio de la tienda Pequeverso con el kit Grafismo Fonético, su precio y un botón de compra",
-  "assistant-desktop":
-    "Asistente de compras respondiendo una pregunta sobre la garantía, con dos fuentes y una ficha de producto con precio validado",
-  "assistant-mobile":
-    "Asistente de compras en un teléfono, con la respuesta, sus fuentes y la ficha de producto sobre el cuadro de mensaje",
-  "backoffice-sign-in":
-    "Inicio de sesión del back office, abierto solo al propietario y a las personas invitadas",
-  "backoffice-dashboard":
-    "Panel de operaciones del back office con disponibilidad, presupuesto restante, respuestas completadas y latencia, marcado como datos sintéticos",
+  "store-support":
+    "Página de soporte de la tienda con opciones de reembolso y contacto, y el botón del asistente en la esquina",
+  "assistant-panel-welcome":
+    "Panel del asistente en su tamaño real de escritorio, con bienvenida, preguntas sugeridas y el cuadro de mensaje",
+  "assistant-panel-answer":
+    "Panel del asistente respondiendo una pregunta sobre la garantía con dos fuentes desplegadas, con un modelo de prueba",
+  "assistant-waiting":
+    "Asistente abierto en la tienda mientras espera una respuesta, con un control para cancelar la solicitud",
+  "assistant-expanded":
+    "Vista ampliada del asistente con la respuesta, sus fuentes, una ficha de producto con precio validado y materiales relacionados",
+  "assistant-mobile-answer":
+    "Asistente en un teléfono con la respuesta, las fuentes desplegadas, una ficha de producto y el cuadro de mensaje fijo",
+  "backoffice-mobile-status":
+    "Página de estado del back office en un teléfono, con disponibilidad y presupuesto restante marcados como datos sintéticos",
+  "backoffice-availability":
+    "Resumen de disponibilidad del back office: acepta preguntas, presupuesto mensual restante, respuestas completadas y tiempo hasta el primer texto",
+  "backoffice-budget":
+    "Presupuesto mensual con uso informado, gasto estimado y reservado frente al límite configurado, con datos sintéticos",
+  "backoffice-catalog":
+    "Panel del catálogo con la revisión de la tienda, la última sincronización verificada, la ventana de precios y los documentos indexados",
+  "backoffice-daily":
+    "Gráficos de actividad diaria con ejecuciones y costo por día, y la tabla de datos accesible debajo",
+  "backoffice-quality":
+    "Resultados de solicitudes de las últimas 24 horas y 30 días, con percentiles de latencia, uso de tokens y códigos de fallo",
+  "backoffice-runs":
+    "Últimas ejecuciones con estado, modelo, idioma, latencia e identificadores sintéticos opacos, sin contenido de conversaciones",
+  "backoffice-analytics":
+    "Informe de actividad del sitio con nueve eventos sintéticos y filtros por período, página, sección y ancho de pantalla",
   "backoffice-access":
     "Página de accesos del back office para invitar personas con un rol y revocar invitaciones pendientes, con cuentas de prueba",
 };

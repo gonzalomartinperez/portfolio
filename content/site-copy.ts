@@ -85,7 +85,7 @@ export type SiteCopy = {
     metaDescription: string;
     eyebrow: string;
     title: string;
-    intro: (length: string, asOf: string) => string;
+    intro: string;
     experienceHeading: string;
     projectsEyebrow: string;
     projectsHeading: string;

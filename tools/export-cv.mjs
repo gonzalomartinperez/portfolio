@@ -152,7 +152,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   assert.equal(release.review?.visualQA, true, "PDF release needs visual review");
   result.provenance.pdfSha256 = Object.fromEntries(
     ["en", "es"].map((locale) => {
-      const hash = release.files[`gonzalo-martin-perez-ai-software-engineer-${locale}.pdf`];
+      const hash = release.files[`gonzalo-martin-perez-ai-engineer-${locale}.pdf`];
       assert.match(hash, /^[a-f0-9]{64}$/, "Missing reviewed PDF hash");
       return [locale, hash];
     }),
@@ -166,7 +166,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     );
     for (const locale of ["en", "es"]) {
       const pdf = new URL(
-        `../public/gonzalo-martin-perez-ai-software-engineer-${locale}.pdf`,
+        `../public/gonzalo-martin-perez-ai-engineer-${locale}.pdf`,
         import.meta.url,
       );
       assert.equal(sha256(await readFile(pdf)), result.provenance.pdfSha256[locale]);

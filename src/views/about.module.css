@@ -37,10 +37,8 @@
   overflow-wrap: anywhere;
 }
 
-.asOf {
+.language {
   display: block;
-  font-size: 0.85em;
-  color: var(--text-muted);
 }
 
 .focus {

@@ -12,7 +12,7 @@ export const roles: Role[] = [
     location: "Estados Unidos",
     arrangement: "Remote",
     context:
-      "Una fintech estadounidense en etapa temprana que desarrolla una app no custodial de trading y rendimientos. Ingresé en septiembre de 2026 como único ingeniero, después de otros desarrolladores, y me ocupo de los agentes de IA, el backend, la web y la app móvil en colaboración directa con los tres cofundadores.",
+      "Único ingeniero en una fintech estadounidense en etapa temprana que desarrolla una app no custodial de trading y rendimientos; trabajo directamente con los tres cofundadores. Me ocupo del asistente de IA multilingüe y de la suite de evaluación que habilita cada versión (3.000+ casos, 90% o más de aprobación), además del backend, la web y la app móvil.",
     contributions: [
       "Construí un asistente de IA multilingüe (inglés, español y portugués) y la suite de evaluación que lo respalda: más de 1.000 escenarios replicados y traducidos a cada idioma (más de 3.000 casos), calificados en LangSmith con un LLM-as-a-judge validado contra revisión humana y de producto, y usados como requisito para cada release. Los agentes en producción aprueban el 90% o más en promedio. Un caso se aprueba cuando la respuesta es correcta y fundamentada, se usa la herramienta adecuada, el contrato estructurado para la interfaz es válido, se respetan los guardrails y la respuesta resuelve la necesidad del usuario en lenguaje simple.",
       "Diseñé el grafo multiagente en LangGraph, con ciclos, herramientas financieras, procesos en segundo plano, reintentos y recuperación ante fallos, y migré el stack agéntico desde Agno cuando los flujos se volvieron más complejos. Claude es el modelo principal, con DeepInfra y Vertex AI como proveedores de respaldo, recuperación con GraphRAG sobre Neo4j y PostgreSQL/pgvector, y memoria con Mem0. Al eliminar llamadas redundantes a herramientas y ajustar la memoria y el contexto, las respuestas pasaron a ser el doble de rápidas con un 40% menos de tokens, verificado con pruebas de carga y evaluaciones.",
@@ -23,7 +23,7 @@ export const roles: Role[] = [
       "Reduje el pipeline de validación, build y despliegue de aproximadamente una hora a diez minutos conservando sus controles; optimicé bundles, imágenes Docker y entornos de desarrollo, staging y producción en DigitalOcean.",
       "Implementé cifrado de extremo a extremo (E2EE) para las conversaciones de usuarios en la app en producción, con mensajes almacenados cifrados en la base de datos.",
       "Desarrollé la app en React Native, usando Android Studio para Android y verificando en emuladores y teléfonos reales. La app está publicada en Android y la versión para iOS está lista, con su lanzamiento pendiente.",
-      "Implementé tracking de eventos móviles de punta a punta con Google Analytics mediante Firebase, Clarity Mobile en todas las pantallas y Singular SDK para Meta App Events, coordinando integraciones para evitar duplicados. Diseñé, desarrollé, probé y desplegué una landing page para campañas de descargas.",
+      "Implementé el tracking completo de eventos móviles con Google Analytics mediante Firebase, Clarity Mobile en todas las pantallas y Singular SDK para Meta App Events, coordinando integraciones para evitar duplicados. Diseñé, desarrollé, probé y desplegué una landing page para campañas de descargas.",
       "Desarrollé el backoffice empresarial para administrar la aplicación y centralizar el monitoreo, la telemetría y el estado operativo; continúo ampliando sus capacidades.",
       "Incorporé controles de dominio y frente a instrucciones maliciosas en los flujos agénticos, verificados con pruebas automatizadas de comportamiento y revisión humana.",
       "Centralicé secretos con Infisical, acceso por usuario, sincronización automatizada y rotación a demanda; trabajé sobre despliegues, monitoreo, backups, bases de datos y permisos de servidores.",
@@ -81,7 +81,7 @@ export const roles: Role[] = [
         value: "≥2×",
         label: "respuestas más rápidas en flujos agénticos optimizados",
         qualifier:
-          "Las pruebas de carga y las evaluaciones verificaron tiempos de respuesta iguales o inferiores a la mitad del valor anterior en flujos agénticos optimizados comparables.",
+          "Medido con pruebas de carga y evaluaciones en flujos agénticos optimizados comparables.",
       },
       {
         value: "40%",
@@ -116,7 +116,7 @@ export const roles: Role[] = [
       "de un ecosistema de 350.000+ comercios, 70+ emisores de tarjetas y 13 países.",
     contributions: [
       "Construí un asistente con GraphRAG y su harness para responder consultas de comercios sobre promociones y políticas de la empresa desde el portal de comercios, conectados al BFF Spring WebFlux. Combinaba el contexto del grafo Neo4j con recuperación vectorial en PostgreSQL/pgvector mediante LangChain, LangGraph y OpenAI API, y aprobó el 95% o más de una suite de más de 500 casos, calificada en LangSmith con un LLM-as-a-judge validado contra revisión humana. Los guardrails lo mantenían en el dominio de promociones y evitaban fugas de datos; el asistente era de solo lectura y nunca ejecutaba operaciones comerciales.",
-      "Contribuí a una carga histórica de 20M+ promociones en producción, seguida de miles de promociones nuevas por día; implementé un flujo event-driven y serverless con Amazon S3, SQS y una Lambda Python/FastAPI con estrategias de procesamiento ordenado, conectada con microservicios Java/Spring Boot y Node.js/NestJS para cargar sus respectivas bases de datos PostgreSQL. La carga productiva completa se validó sin pérdida de datos.",
+      "Entregué el pipeline orientado a eventos que ingirió 20M+ promociones históricas en producción, seguido de miles de promociones nuevas por día: un flujo serverless con Amazon S3, SQS y una Lambda Python/FastAPI con estrategias de procesamiento ordenado, conectada con microservicios Java/Spring Boot y Node.js/NestJS para cargar sus respectivas bases de datos PostgreSQL. La carga productiva completa se validó sin pérdida de datos.",
       "Entregué la experiencia de promociones de punta a punta: un microfrontend React y TypeScript con Single-SPA, organizado por funcionalidades y con un design system, embebido como sección nativa del portal de comercios y conectado mediante un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS y proveedores.",
       "Construí microservicios en Java/Spring Boot y TypeScript/Node.js/NestJS para ingerir, normalizar y procesar promociones de comercios, entidades financieras y proveedores, adaptando los contratos según cada integración.",
       "Construí herramientas en Python y Node.js para reejecutar cargas masivas de forma segura contra bases de datos locales aisladas, reconciliar resultados y exponer promociones fallidas y casos límite antes de cada release.",
@@ -193,7 +193,7 @@ export const roles: Role[] = [
       "Desarrollé backoffices, extensiones de stock y punto de venta, soluciones WordPress, APIs e integraciones full-stack, con herramientas en Python y Node.js para automatización, carga masiva y análisis de datos. Usé Kotlin y Swift en proyectos móviles freelance y personales.",
     ],
     attribution:
-      "Entrega independiente para clientes particulares. Las cifras reúnen proyectos históricos de distintos clientes, no solo Pequeverso.",
+      "Trabajo independiente para clientes particulares. Estas cifras suman varios proyectos de clientes, no solo Pequeverso.",
     stack: technologyNames([
       "Claude API",
       "Model Context Protocol",

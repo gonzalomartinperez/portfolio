@@ -194,7 +194,7 @@ test("production profile preserves corrected scope and metric qualifications", (
     assert.doesNotMatch(source, /90[,.]000|\bSGA\b|\bIT Lead\b/);
     assert.match(source, /https:\/\/getrampy\.com\//);
     assert.match(source, /https:\/\/pequeverso\.com\//);
-    assert.match(source, /historical client projects|proyectos históricos/);
+    assert.match(source, /several client projects|varios proyectos de clientes/);
     const tokenMetric = source.slice(source.indexOf('value: "40%"')).slice(0, 450);
     assert.match(tokenMetric, locale === "en" ? /load tests and evals/ : /pruebas de carga/);
     assert.doesNotMatch(tokenMetric, /estimat|estimación/i);
