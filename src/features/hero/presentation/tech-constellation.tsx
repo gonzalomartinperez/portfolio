@@ -2,12 +2,10 @@ import { type Locale, localePath } from "@config/locales";
 import {
   compareTechnologyNames,
   highlightedTechnologyCatalog,
-  homeStackTechnologies,
   type Technology,
   technologyGroups,
 } from "@content/technologies";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { TechnologyMark } from "@/shared/technology/technology-mark";
 import { getSceneMarkIdentity } from "../domain/scene-technologies";
 import styles from "./tech-constellation.module.css";
@@ -58,20 +56,15 @@ export function TechSceneSource({
   );
 }
 
-/** The home stack: a short, grouped selection that links each tool to its context. */
-export function CondensedStack({
-  eyebrow,
+/** The home technology section: every highlighted tool, grouped by capability. */
+export function TechConstellation({
   heading,
   note,
   locale = "en",
-  children,
 }: {
-  eyebrow: string;
   heading: string;
   note: string;
   locale?: Locale;
-  /** The full-catalogue disclosure, kept closed by default. */
-  children?: ReactNode;
 }) {
   return (
     <section
@@ -79,7 +72,9 @@ export function CondensedStack({
       aria-labelledby="technology-heading"
     >
       <div className={styles.intro}>
-        <p className="eyebrow">{eyebrow}</p>
+        <p className="eyebrow">
+          {locale === "es" ? "De la idea al sistema" : "From idea to system"}
+        </p>
         <h2 className={styles.heading} id="technology-heading">
           {heading}
         </h2>
@@ -91,20 +86,18 @@ export function CondensedStack({
         </Link>
       </div>
       <div className={styles.groups}>
-        {technologyGroups.map((group) => {
-          const items = homeStackTechnologies
-            .filter((item) => item.category === group.id)
-            .sort(compareTechnologyNames);
-          if (!items.length) return null;
-          return (
-            <section
-              className={styles.group}
-              key={group.id}
-              aria-labelledby={`home-tech-${group.id}`}
-            >
-              <h3 id={`home-tech-${group.id}`}>{group.name[locale]}</h3>
-              <ul className={styles.marks}>
-                {items.map((item) => (
+        {technologyGroups.map((group) => (
+          <section
+            className={styles.group}
+            key={group.id}
+            aria-labelledby={`home-tech-${group.id}`}
+          >
+            <h3 id={`home-tech-${group.id}`}>{group.name[locale]}</h3>
+            <ul className={styles.marks}>
+              {highlightedTechnologyCatalog
+                .filter((item) => item.category === group.id)
+                .sort(compareTechnologyNames)
+                .map((item) => (
                   <li key={item.id}>
                     <Link
                       className={styles.mark}
@@ -116,15 +109,24 @@ export function CondensedStack({
                         </span>
                         <span className={styles.name}>{item.name}</span>
                       </span>
+                      {item.status === "developing" && (
+                        <span
+                          className={styles.status}
+                          title={locale === "es" ? "En consolidación" : "In development"}
+                        >
+                          <span aria-hidden="true">◌</span>
+                          <span className="sr-only">
+                            {locale === "es" ? "En consolidación" : "In development"}
+                          </span>
+                        </span>
+                      )}
                     </Link>
                   </li>
                 ))}
-              </ul>
-            </section>
-          );
-        })}
+            </ul>
+          </section>
+        ))}
       </div>
-      {children}
     </section>
   );
 }

@@ -1,11 +1,11 @@
 import { type Locale, localePath } from "@config/locales";
 import { email, externalLinks } from "@config/site";
 import { getContent } from "@content";
-import { highlightedTechnologyCatalog, publicTechnologyCatalog } from "@content/technologies";
+import { publicTechnologyCatalog } from "@content/technologies";
 import portrait from "@media/identity/portrait.avif";
 import Image from "next/image";
 import Link from "next/link";
-import { CondensedStack } from "@/features/hero/presentation/tech-constellation";
+import { TechConstellation } from "@/features/hero/presentation/tech-constellation";
 import { ToolCarousel } from "@/features/tool-carousel/presentation/tool-carousel";
 import { EvalCaseBlock } from "@/shared/editorial/eval-case";
 import { MetricList } from "@/shared/editorial/metric-list";
@@ -30,7 +30,7 @@ export function HomeView({ locale }: { locale: Locale }) {
     academicResults,
     siteCopy: copy,
   } = content;
-  const [rampy, ...otherRoles] = roles;
+  const rampy = roles[0];
   // Measured results first, then the shipped market count stated in the Rampy contributions.
   const rampyMetrics = [
     ...(rampy.metrics ?? []).filter((metric) => ["90%+", "40%"].includes(metric.value)),
@@ -144,6 +144,13 @@ export function HomeView({ locale }: { locale: Locale }) {
             </div>
           </article>
         </div>
+      </section>
+
+      <section className="section-tight frame">
+        <div className="section-head">
+          <p className="eyebrow">{copy.home.workEyebrow}</p>
+          <h2>{copy.home.workHeading}</h2>
+        </div>
 
         <article
           data-slot="card"
@@ -248,7 +255,7 @@ export function HomeView({ locale }: { locale: Locale }) {
         </div>
 
         <ol className={styles.roles}>
-          {otherRoles.map((role) => (
+          {roles.map((role) => (
             <li className={styles.role} key={role.slug}>
               <div className={styles.roleIdentity}>
                 <CompanyMark company={role.slug} />
@@ -302,6 +309,7 @@ export function HomeView({ locale }: { locale: Locale }) {
               <h2>{copy.home.whoHeading}</h2>
             </div>
             <div className="prose flow-tight">
+              <p>{profile.summary}</p>
               <p>{copy.home.whoParagraph}</p>
               <p>
                 {copy.home.whoAssistant.lead}
@@ -340,17 +348,13 @@ export function HomeView({ locale }: { locale: Locale }) {
 
       <HeroPrinciples locale={locale} />
 
-      <CondensedStack
-        eyebrow={copy.home.stackEyebrow}
+      <TechConstellation
         heading={copy.stack.groupedHeading}
         note={copy.stack.groupedIntro}
         locale={locale}
-      >
-        <details className={styles.toolkit}>
-          <summary>{copy.home.fullToolkit(highlightedTechnologyCatalog.length)}</summary>
-          <ToolCarousel locale={locale} embedded />
-        </details>
-      </CondensedStack>
+      />
+
+      <ToolCarousel locale={locale} />
 
       <section
         className="section-tight frame"

@@ -97,7 +97,6 @@ export const siteCopy: SiteCopy = {
     },
     selectedEyebrow: "Selected work",
     selectedHeading: "Case studies and open-source work",
-    fullToolkit: (count) => `Show the full toolkit (${count} tools)`,
     workEyebrow: "Featured project",
     workHeading: "Shipped to production while still at university",
     experienceEyebrow: "Experience",

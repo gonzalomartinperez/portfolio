@@ -12,9 +12,9 @@ for (const prefix of ["", "/es"]) {
     ).toHaveCount(0);
     await expect(page.locator('[data-featured-project="filomena"]')).toHaveCount(1);
     for (const role of ["rampy", "teamcubation", "cooperativa-obrera"]) {
-      // Rampy has its highlight: the position link and the call to action.
+      // Rampy also has its highlight: the position link and the call to action.
       await expect(page.locator(`main a[href="${prefix}/work#${role}"]`)).toHaveCount(
-        role === "rampy" ? 2 : 1,
+        role === "rampy" ? 3 : 1,
       );
     }
     for (const width of [320, 375, 390, 430]) {
@@ -55,7 +55,7 @@ for (const prefix of ["", "/es"]) {
             mark: !!link.querySelector("img,svg"),
           })),
         );
-      expect(chips.length).toBeGreaterThanOrEqual(20);
+      expect(chips.length).toBeGreaterThan(35);
       expect(
         Math.max(...chips.map((chip) => chip.height)) -
           Math.min(...chips.map((chip) => chip.height)),

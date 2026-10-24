@@ -97,7 +97,6 @@ export const siteCopy: SiteCopy = {
     },
     selectedEyebrow: "Trabajo seleccionado",
     selectedHeading: "Casos de estudio y trabajo open source",
-    fullToolkit: (count) => `Mostrar el toolkit completo (${count} herramientas)`,
     workEyebrow: "Proyecto destacado",
     workHeading: "En producción desde la universidad",
     experienceEyebrow: "Experiencia",
