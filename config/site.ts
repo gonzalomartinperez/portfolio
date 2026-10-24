@@ -1,7 +1,7 @@
 import documents from "../content/public-documents.json" with { type: "json" };
 
 /** Values that do not change with language. */
-export const professionalHeadline = "Software Engineer | AI Engineer | Product Engineer";
+export const professionalHeadline = "AI Engineer | Software Engineer | Product Engineer";
 
 export const siteUrl = "https://gonzalomartinperez.com";
 

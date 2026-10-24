@@ -12,9 +12,11 @@ for (const prefix of ["", "/es"]) {
       "https://getrampy.com/",
     );
     await expect(rampy).toContainText("~1 h → 10 min");
-    await expect(rampy).toContainText("~7–8 s → 1–2 s");
-    await expect(rampy).toContainText("~30%");
-    await expect(rampy).toContainText(prefix ? /estimación/i : /estimat/i);
+    await expect(rampy).toContainText("90%+");
+    await expect(rampy).toContainText(prefix ? "3.000" : "3,000+");
+    await expect(rampy).toContainText("40%");
+    await expect(rampy).not.toContainText("7–8");
+    await expect(page.locator("#teamcubation")).toContainText("95%+");
     for (const slug of ["rampy", "teamcubation", "cooperativa-obrera", "independent"]) {
       const role = page.locator(`#${slug}`);
       await expect(role).toContainText(prefix ? "En producción" : "In production");

@@ -19,7 +19,7 @@ export function enterpriseSteps(kind: EnterpriseKind, locale: Locale): Architect
   if (kind === "rampy")
     return [
       step("web", t("Web frontend", "Frontend web"), "React · Next.js", "surface"),
-      step("mobile", t("Mobile app", "App móvil"), "React Native · Kotlin · Swift", "surface"),
+      step("mobile", t("Mobile app", "App móvil"), "React Native", "surface"),
       step(
         "backoffice",
         "Backoffice web",
@@ -50,7 +50,7 @@ export function enterpriseSteps(kind: EnterpriseKind, locale: Locale): Architect
       step(
         "ai",
         t("Harness and orchestration", "Harness y orquestación"),
-        "Agno · LangChain · LangGraph",
+        "LangGraph · LangChain",
         "gateway",
       ),
       step("graph", "GraphRAG", t("Knowledge retrieval", "Recuperación de conocimiento")),
@@ -68,9 +68,9 @@ export function enterpriseSteps(kind: EnterpriseKind, locale: Locale): Architect
       step("vector", "PostgreSQL · pgvector", t("Vector retrieval", "Recuperación vectorial")),
       step("memory", "Mem0", t("Contextual memory", "Memoria contextual")),
       step("neo4j", "Neo4j", t("Knowledge graph", "Grafo de conocimiento")),
-      step("vertex", "Vertex AI", t("Model provider", "Proveedor de modelos")),
-      step("deepinfra", "DeepInfra", t("Model provider", "Proveedor de modelos")),
-      step("openai", "OpenAI API", t("Model provider", "Proveedor de modelos")),
+      step("claude", "Claude API", t("Primary model", "Modelo principal")),
+      step("vertex", "Vertex AI", t("Fallback provider", "Proveedor de respaldo")),
+      step("deepinfra", "DeepInfra", t("Fallback provider", "Proveedor de respaldo")),
       step("lending", t("Lending and vaults", "Lending y vaults"), "Aave · Morpho · Compound"),
       step("swaps", "Swaps", "LI.FI"),
       step("perps", t("Perpetuals", "Perpetuos"), "Hyperliquid"),
@@ -189,8 +189,8 @@ export function enterpriseLayout(kind: EnterpriseKind, vertical: boolean, locale
       place(["privy"], 116, 1370);
       place(["vector", "memory"], 24, 1620, 184, 0);
       place(["neo4j"], 24, 1810);
-      place(["vertex", "deepinfra"], 24, 2060, 184, 0);
-      place(["openai"], 24, 2250);
+      place(["claude", "vertex"], 24, 2060, 184, 0);
+      place(["deepinfra"], 24, 2250);
       place(["lending", "swaps"], 24, 2500, 184, 0);
       place(["perps"], 24, 2690);
       group(
@@ -242,7 +242,7 @@ export function enterpriseLayout(kind: EnterpriseKind, vertical: boolean, locale
       place(["ai", "graph", "defi"], 40, 900, 270, 0);
       place(["privy"], 310, 1140);
       place(["vector", "memory", "neo4j"], 40, 1400, 270, 0);
-      place(["vertex", "deepinfra", "openai"], 40, 1690, 270, 0);
+      place(["claude", "vertex", "deepinfra"], 40, 1690, 270, 0);
       place(["lending", "swaps", "perps"], 40, 1980, 270, 0);
       group(
         "deployment",

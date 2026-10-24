@@ -72,7 +72,16 @@ test("experience architecture claims agree with the reviewed CV in both locales"
           `${locale}: ${slug} frontend has feature domains`,
         );
         if (slug === "rampy") {
-          assert.match(copy, /hexagonal/i, `${locale}: Rampy backend uses hexagonal architecture`);
+          // The reviewed CV release adopts Clean Architecture in a separate sync; until then it
+          // may still carry the superseded hexagonal wording, which the site must not repeat.
+          if (copy === role) {
+            assert.match(copy, /Clean Architecture/, `${locale}: Rampy uses Clean Architecture`);
+            assert.doesNotMatch(copy, /hexagonal/i, `${locale}: Rampy no longer claims hexagonal`);
+            assert.doesNotMatch(copy, /OpenAI/, `${locale}: Rampy models come from Claude`);
+            assert.ok(copy.includes("Claude"), `${locale}: Rampy names its primary model`);
+          } else {
+            assert.match(copy, /Clean Architecture|hexagonal/i, `${locale}: CV Rampy architecture`);
+          }
           for (const provider of ["pgvector", "Mem0", "Vertex AI", "DeepInfra"]) {
             assert.ok(copy.includes(provider), `${locale}: Rampy includes ${provider}`);
           }
@@ -125,7 +134,7 @@ test("Rampy response improvements retain load-test evidence and comparable workf
     assert.match(source, /value: "≥2×"/);
     const agentMetric = source.slice(
       source.indexOf('value: "≥2×"'),
-      source.indexOf('value: "~30%"'),
+      source.indexOf('value: "40%"'),
     );
     assert.match(agentMetric, locale === "en" ? /[Ll]oad tests/ : /pruebas de carga/);
     assert.match(
@@ -182,29 +191,30 @@ test("production profile preserves corrected scope and metric qualifications", (
   for (const locale of ["en", "es"]) {
     const source = read(`content/${locale}/experience.ts`);
     assert.match(source, /~1 h → 10 min/);
-    assert.match(source, /~30%/);
+    assert.match(source, /value: "40%"/);
+    assert.match(source, /value: "90%\+"/);
+    assert.match(source, /value: "95%\+"/);
+    assert.doesNotMatch(source, /value: "~7–8 s/);
     assert.doesNotMatch(source, /90[,.]000|\bSGA\b|\bIT Lead\b/);
     assert.match(source, /https:\/\/getrampy\.com\//);
     assert.match(source, /https:\/\/pequeverso\.com\//);
     assert.match(source, /historical client projects|proyectos históricos/);
-    const tokenMetric = source.slice(source.indexOf('value: "~30%"'));
-    assert.match(tokenMetric.slice(0, 450), /estimat|estimación/i);
+    const tokenMetric = source.slice(source.indexOf('value: "40%"')).slice(0, 450);
+    assert.match(tokenMetric, locale === "en" ? /load tests and evals/ : /pruebas de carga/);
+    assert.doesNotMatch(tokenMetric, /estimat|estimación/i);
   }
 });
 
-test("client-estimated figures are labelled as estimates", () => {
-  for (const [locale, marker] of [
-    ["en", /estimat/i],
-    ["es", /estimad|estimaron/i],
-  ]) {
-    const source = read(`content/${locale}/experience.ts`);
-    const position = source.indexOf("70%");
-    assert.ok(position > -1, `${locale}: the cost-reduction figure is missing`);
-    assert.match(
-      source.slice(Math.max(0, position - 200), position + 200),
-      marker,
-      `${locale}: the 70% figure must be marked as a client estimate`,
+test("retired claims stay out of the published experience", () => {
+  for (const locale of ["en", "es"]) {
+    const source = readWithoutComments(`content/${locale}/experience.ts`);
+    assert.doesNotMatch(source, /70%/, `${locale}: the client cost estimate was retired`);
+    assert.doesNotMatch(source, /7–8 s/, `${locale}: mobile startup is no longer featured`);
+    const rampy = source.slice(
+      source.indexOf('slug: "rampy"'),
+      source.indexOf('slug: "teamcubation"'),
     );
+    assert.doesNotMatch(rampy, /Kotlin|Swift/, `${locale}: Rampy mobile is React Native`);
   }
 });
 

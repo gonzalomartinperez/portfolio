@@ -12,15 +12,13 @@ test("catalogue preserves AI-first breadth with grounded additions", () => {
     "agno",
     "langchain",
     "langgraph",
-    "openai-api",
+    "claude-api",
     "graphrag",
     "neo4j",
-    "swift",
     "android-studio",
     "mem0",
     "celery",
     "react-native",
-    "kotlin",
     "digitalocean",
     "infisical",
     "morpho",
@@ -39,6 +37,12 @@ test("catalogue preserves AI-first breadth with grounded additions", () => {
     assert.equal(getTechnology(id)?.status, "applied", `${id}: approved production experience`);
     assert.ok(getTechnology(id)?.evidence.some(({ href }) => href === "/work#rampy"));
   }
+  for (const id of ["kotlin", "swift"])
+    assert.deepEqual(
+      getTechnology(id)?.evidence.map(({ href }) => href),
+      ["/work#independent"],
+      `${id}: freelance and personal projects, not Rampy`,
+    );
   for (const id of [
     "erc-4337",
     "erc-4626",
