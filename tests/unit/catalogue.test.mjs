@@ -25,7 +25,6 @@ test("confirmed AI concepts retain general evidence without inventing an employe
     "chunking",
     "prompt-engineering",
     "context-engineering",
-    "fine-tuning",
     "llmops",
   ]) {
     const technology = getTechnology(id);
@@ -229,10 +228,13 @@ test("additional Rampy confirmations retain their integration evidence", () => {
   ])
     assert.equal(getTechnology(alias)?.id, id);
   assert.equal(getTechnology("foundation-model-training"), undefined);
-  assert.deepEqual(
-    getTechnology("fine-tuning")?.evidence.map(({ href }) => href),
-    ["/work"],
-  );
+  const fineTuning = getTechnology("fine-tuning");
+  assert.equal(fineTuning?.kind, "concept");
+  assert.equal(fineTuning?.category, "applied-ai");
+  assert.ok(publicTechnologyCatalog.includes(fineTuning));
+  assert.deepEqual(fineTuning.evidence, [
+    { label: "General skill: model tuning on a dataset (not part of a listed role)" },
+  ]);
 });
 
 test("the hero fills seven desktop and five mobile columns with 35 unique marks", () => {
@@ -280,7 +282,7 @@ test("owner-confirmed Rampy technologies are restored with their inventory scope
   assert.doesNotMatch(appliedIntegrationEvidenceLabel, /train/i);
   const fineTuning = getTechnology("fine-tuning");
   assert.ok(publicTechnologyCatalog.includes(fineTuning));
-  assert.ok(!fineTuning.evidence.some(({ href }) => href.includes("rampy")));
+  assert.ok(!fineTuning.evidence.some(({ href }) => href?.includes("rampy")));
   for (const locale of ["en", "es"]) {
     const rampy = read(`content/${locale}/experience.ts`).split('slug: "teamcubation"')[0];
     for (const name of ["PyTorch", "TensorFlow", "NumPy", "pandas", "Fine-tuning"])
@@ -335,7 +337,15 @@ test("technology identifiers, categories and evidence remain complete", () => {
     assert.ok(technology.evidence.length > 0, `${technology.id}: missing context`);
     assert.ok(["applied", "developing"].includes(technology.status));
     if (technology.kind === "concept") assert.equal(technology.icon, undefined);
-    for (const { href } of technology.evidence) {
+    for (const { label, href } of technology.evidence) {
+      if (href === undefined) {
+        assert.match(
+          label,
+          /^General skill:/,
+          `${technology.id}: unlinked evidence is a general skill`,
+        );
+        continue;
+      }
       assert.match(href, /^\/(?:work(?:#[a-z0-9-]+|\/filomena|\/pequeverso)?|about)$/);
       if (href.includes("#")) {
         const slug = href.split("#")[1];

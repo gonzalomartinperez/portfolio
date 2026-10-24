@@ -13,9 +13,15 @@
   width: 100%;
 }
 
+/* Body face, not the label style: the proof line has to read at a glance (WCAG AA both themes). */
 .eyebrow {
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  letter-spacing: normal;
   margin-bottom: var(--space-2);
   max-width: 100%;
+  text-transform: none;
   text-wrap: balance;
 }
 
@@ -117,11 +123,6 @@
 }
 
 @media (width < 40rem) {
-  .eyebrow {
-    letter-spacing: 0.03em;
-    line-height: 1.6;
-  }
-
   .proofPart {
     display: block;
   }

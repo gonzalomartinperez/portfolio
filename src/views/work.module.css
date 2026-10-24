@@ -155,3 +155,12 @@
   text-align: center;
   flex-wrap: wrap;
 }
+
+/* Phones: one indent level, so bullets keep the column width. */
+@media (width < 30rem) {
+  .featuredContributions {
+    border-left: 0;
+    background: none;
+    padding: 0;
+  }
+}

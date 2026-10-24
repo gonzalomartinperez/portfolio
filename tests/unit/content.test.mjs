@@ -127,11 +127,9 @@ test("the hero presents engineering principles rather than unattributed figures"
 test("Rampy response improvements retain load-test evidence and comparable workflow scope", () => {
   for (const locale of ["en", "es"]) {
     const source = read(`content/${locale}/experience.ts`);
-    assert.match(source, /value: "≥2×"/);
-    const agentMetric = source.slice(
-      source.indexOf('value: "≥2×"'),
-      source.indexOf('value: "40%"'),
-    );
+    assert.match(source, /value: "2×"/);
+    assert.doesNotMatch(source, /≥2×/);
+    const agentMetric = source.slice(source.indexOf('value: "2×"'), source.indexOf('value: "40%"'));
     assert.match(agentMetric, locale === "en" ? /[Ll]oad tests/ : /pruebas de carga/);
     assert.match(
       agentMetric,
@@ -141,10 +139,11 @@ test("Rampy response improvements retain load-test evidence and comparable workf
     );
     assert.doesNotMatch(agentMetric, /estimat|estimación/i);
     const financialMetric = source.slice(
-      source.lastIndexOf('value: "≥2×"'),
+      source.lastIndexOf('value: "2×"'),
       source.indexOf('value: "~1 h'),
     );
-    assert.match(financialMetric, locale === "en" ? /[Ll]oad-tested/ : /pruebas de carga/);
+    assert.match(financialMetric, locale === "en" ? /[Ll]oad tests/ : /pruebas de carga/);
+    assert.match(financialMetric, locale === "en" ? /At least 2×/ : /Al menos 2×/);
     assert.match(financialMetric, /vault|mercados/);
     assert.doesNotMatch(financialMetric, /estimat|estimación/i);
   }

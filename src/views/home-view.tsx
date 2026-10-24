@@ -205,6 +205,13 @@ export function HomeView({ locale }: { locale: Locale }) {
             <div className="prose flow-tight">
               <p>{profile.summary}</p>
               <p>{copy.home.whoParagraph}</p>
+              <p>
+                {copy.home.whoAssistant.lead}
+                <Link href={localePath(locale, "/work#portfolio-assistant")}>
+                  {copy.home.whoAssistant.link}
+                </Link>
+                {copy.home.whoAssistant.tail}
+              </p>
             </div>
 
             <dl className={styles.facts}>

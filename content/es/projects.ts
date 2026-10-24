@@ -118,6 +118,19 @@ export const portfolioAssistant: Project = {
       description: "Backend en FastAPI y LangGraph en GitHub",
     },
   ],
+  // Caso "education-es" de evals/retrieval.json; lo puntúa scripts/evaluate_retrieval.py.
+  evalCase: {
+    heading: "Ejemplo de caso de evaluación",
+    questionLabel: "Pregunta:",
+    question: "¿Dónde estudió Gonzalo?",
+    expectedLabel: "Esperado:",
+    expected: "Universidad Nacional del Sur, tomado de la página de educación en español.",
+    criterionLabel: "Se aprueba cuando:",
+    criterion:
+      "las fuentes recuperadas incluyen esa página y su texto contiene «Universidad Nacional del Sur».",
+    linkLabel: "Ver el banco de evaluación en GitHub",
+    href: "https://github.com/gonzalomartinperez/portfolio-assistant-api/blob/main/evals/retrieval.json",
+  },
 };
 
 export const projects: Project[] = [filomena, portfolioAssistant];
@@ -272,7 +285,7 @@ export const filomenaCaseStudy = {
     heading: "Entrega y operación",
     body: [
       "El equipo de tres personas utilizó prácticas Agile y Trello para coordinar requisitos, implementación y releases.",
-      "Docker y Docker Compose proporcionaron entornos contenerizados, mientras que GitHub Actions sostuvo despliegues productivos observados por debajo de quince minutos de punta a punta. Los repositorios públicos son versiones del código y no incluyen el pipeline original de despliegue.",
+      "Docker y Docker Compose proporcionaron entornos contenerizados, mientras GitHub Actions ejecutaba despliegues a producción en menos de quince minutos, desde el push hasta producción. Los repositorios públicos son versiones del código y no incluyen el pipeline original de despliegue.",
     ],
   } satisfies CaseStudySection,
 

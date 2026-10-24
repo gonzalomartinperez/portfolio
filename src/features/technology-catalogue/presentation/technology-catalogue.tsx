@@ -107,12 +107,16 @@ export function TechnologyCatalogue({
                       </Badge>
                     )}
                     <div className={styles.evidence}>
-                      {technology.evidence.map((evidence) => (
-                        <Link href={evidence.href} key={evidence.href}>
-                          {evidence.label}
-                          <span aria-hidden="true">{"\u00a0"}↗</span>
-                        </Link>
-                      ))}
+                      {technology.evidence.map((evidence) =>
+                        evidence.href ? (
+                          <Link href={evidence.href} key={evidence.href}>
+                            {evidence.label}
+                            <span aria-hidden="true">{"\u00a0"}↗</span>
+                          </Link>
+                        ) : (
+                          <span key={evidence.label}>{evidence.label}</span>
+                        ),
+                      )}
                     </div>
                   </Card>
                 </li>

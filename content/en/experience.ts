@@ -12,7 +12,7 @@ export const roles: Role[] = [
     location: "United States",
     arrangement: "Remote",
     context:
-      "Sole engineer at an early-stage US fintech building a non-custodial trading and yield app, working directly with the three co-founders. I own the multilingual AI assistant and the eval suite that gates every release (3,000+ cases, 90%+ pass rate), plus the backend, web and mobile app.",
+      "Own all engineering at an early-stage fintech and blockchain startup whose non-custodial app opens the world of digital assets (swaps, yield vaults, perps and market news) to everyday people through a generative interface that turns complex concepts into simple ones. I work directly with the three co-founders and own the multilingual AI assistant and the eval suite that gates every release (3,000+ cases, 90%+ pass rate), plus the backend, web and mobile app.",
     contributions: [
       "Built a multilingual AI assistant (English, Spanish and Portuguese) and the eval suite behind it: 1,000+ scenarios replicated and translated into each language (3,000+ cases), graded in LangSmith by an LLM-as-a-judge validated against human and product review, and used as a release gate. Production agents pass 90%+ on average. A case passes when the answer is correct and grounded, the right tool is used, the structured contract for the UI is valid, guardrails hold and the reply solves the user’s need in plain language.",
       "Designed the multi-agent LangGraph graph, with cycles, financial tools, background workers, retries and failure recovery, and migrated the agentic stack from Agno as the flows grew. Claude is the primary model, with DeepInfra and Vertex AI as fallback providers, GraphRAG retrieval over Neo4j and PostgreSQL/pgvector, and Mem0 memory. Removing redundant tool calls and tightening memory and context made responses 2× faster with 40% fewer tokens, verified with load tests and evals.",
@@ -31,7 +31,7 @@ export const roles: Role[] = [
       "Prepared scalable infrastructure with the design goal of supporting thousands of users, organizing environments, containers and operational controls for product growth.",
     ],
     attribution:
-      "Sole engineer since September 2026, working directly with the founders and building on the work of earlier developers.",
+      "Took over all engineering in September 2026, working directly with the founders and building on the work of earlier developers.",
     stack: technologyNames([
       "Python",
       "Solidity",
@@ -78,9 +78,10 @@ export const roles: Role[] = [
           "Global average for production agents on 1,000+ scenarios run in English, Spanish and Portuguese, graded in LangSmith by an LLM-as-a-judge validated against human and product review.",
       },
       {
-        value: "≥2×",
+        value: "2×",
         label: "faster responses in optimized agent workflows",
-        qualifier: "Measured with load tests and evals on comparable optimized agent workflows.",
+        qualifier:
+          "At least 2×, measured with load tests and evals on comparable optimized agent workflows.",
       },
       {
         value: "40%",
@@ -89,10 +90,10 @@ export const roles: Role[] = [
           "Measured with load tests and evals after removing redundant tool calls and tightening memory and context; not a benchmark of every query.",
       },
       {
-        value: "≥2×",
+        value: "2×",
         label: "faster optimized financial queries",
         qualifier:
-          "Load-tested improvement for comparable optimized vault, market and swap queries in production.",
+          "At least 2×, measured with load tests on comparable optimized vault, market and swap queries in production.",
       },
       {
         value: "~1 h → 10 min",
@@ -116,7 +117,7 @@ export const roles: Role[] = [
     contributions: [
       "Built a GraphRAG assistant and its harness to answer merchants’ questions about promotions and company policies through the merchant portal, connected to the Spring WebFlux BFF. It combined Neo4j graph context with PostgreSQL/pgvector retrieval using LangChain, LangGraph and OpenAI API, and passed 95%+ of a 500+ case eval suite graded in LangSmith by an LLM-as-a-judge validated against human review. Guardrails kept it on the promotions domain and prevented data leaks; the assistant was read-only and never executed commercial actions.",
       "Delivered the event-driven pipeline that ingested 20M+ historical promotions into production, followed by thousands of new promotions daily: a serverless flow with Amazon S3, SQS and a Python/FastAPI Lambda using ordered processing strategies, connected to Java/Spring Boot and Node.js/NestJS microservices that loaded their respective PostgreSQL databases. The complete production load was validated with zero data loss.",
-      "Delivered the promotions experience end to end: a Single-SPA React and TypeScript microfrontend, organized by feature and using a design system, embedded as a native section of the merchant portal and connected through a Spring WebFlux BFF to Java/Spring Boot and Node.js/NestJS microservices and providers.",
+      "Delivered the whole promotions experience: a Single-SPA React and TypeScript microfrontend, organized by feature and using a design system, embedded as a native section of the merchant portal and connected through a Spring WebFlux BFF to Java/Spring Boot and Node.js/NestJS microservices and providers.",
       "Built Java/Spring Boot and TypeScript/Node.js/NestJS microservices to ingest, normalize and process promotions from merchants, financial entities and providers, adapting contracts per integration.",
       "Built Python and Node.js tooling to replay bulk loads safely against isolated local databases, reconcile results and surface failed promotions and edge cases before release.",
       "Integrated the HTTPS merchant portal with internal HTTP enterprise services through Amazon API Gateway.",
