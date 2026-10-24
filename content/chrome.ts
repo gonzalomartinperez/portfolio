@@ -34,6 +34,7 @@ export type ChromeCopy = {
     contact: string;
     cv: string;
     caseStudy: string;
+    pequeversoCaseStudy: string;
   };
 };
 
@@ -64,6 +65,7 @@ export const chrome: Record<Locale, ChromeCopy> = {
       contact: "Contact",
       cv: "CV",
       caseStudy: "Filomena case study",
+      pequeversoCaseStudy: "Pequeverso case study",
     },
   },
   es: {
@@ -92,6 +94,7 @@ export const chrome: Record<Locale, ChromeCopy> = {
       contact: "Contacto",
       cv: "CV",
       caseStudy: "Caso de estudio de Filomena",
+      pequeversoCaseStudy: "Caso de estudio de Pequeverso",
     },
   },
 };

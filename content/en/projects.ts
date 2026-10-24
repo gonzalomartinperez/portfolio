@@ -88,6 +88,8 @@ type Change = {
 };
 
 export const filomenaCaseStudy = {
+  title: "Filomena: health-sciences exams across five institutions",
+
   overview: {
     heading: "One platform for the assessment lifecycle",
     body: [
@@ -113,7 +115,7 @@ export const filomenaCaseStudy = {
     body: [
       "Three roles with genuinely different needs. Administrators configure institutions, " +
         "courses and schedules. Evaluators author questions and review results. Students sit " +
-        "the exams — and must remain anonymous to the evaluator grading them.",
+        "the exams, and they must remain anonymous to the evaluator grading them.",
       "Those roles are not mutually exclusive. A professor can be an evaluator in one course " +
         "and an administrator in another, which is why role handling had to be multi-role from " +
         "the start rather than a single field on a user.",
@@ -241,3 +243,179 @@ export const filomenaCaseStudy = {
 export const filomenaEvidence: EvidenceLink[] = filomena.links;
 
 export const filomenaHighlights: Metric[] = filomena.metrics;
+
+/**
+ * Client project. Facts come from the approved brief and the three public Pequeverso
+ * repositories; no revenue, traffic or sales figures are published for it.
+ */
+export const pequeverso: Project = {
+  slug: "pequeverso",
+  name: "Pequeverso",
+  tagline: "A digital-products store with an AI shopping assistant",
+  period: "Sep 2026 – Present",
+  summary:
+    "A Next.js store for printable learning resources, a private back office and an AI " +
+    "shopping assistant that answers buyers from the store's own catalog.",
+  attribution:
+    "Independent client work. I built the store, the back office and the assistant API; the " +
+    "client owns the brand, the products and the decision to launch the assistant.",
+  metrics: [
+    {
+      value: "3",
+      label: "public repositories",
+      qualifier: "Store, back office and assistant API, each with its own CI.",
+    },
+    {
+      value: "288",
+      label: "hand-written eval cases",
+      qualifier:
+        "18 intent families run through the full HTTP/SSE path in CI with a fixture model; they test the pipeline and guards, not model quality.",
+    },
+    {
+      value: "303",
+      label: "real-model turns",
+      qualifier: "One evaluation run against an earlier version of the assistant, before launch.",
+    },
+    {
+      value: "USD 10",
+      label: "monthly LLM spend cap",
+      qualifier: "Configurable default, reserved atomically before every model call.",
+    },
+  ],
+  stack: technologyNames([
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Python",
+    "FastAPI",
+    "LangGraph",
+    "GraphRAG",
+    "PostgreSQL",
+    "pgvector",
+    "Neo4j",
+    "OpenAI API",
+    "Meta Pixel",
+    "Docker",
+    "Hostinger",
+  ]),
+  links: [
+    {
+      label: "Live store",
+      href: "https://pequeverso.com/",
+      description: "pequeverso.com, with Hotmart checkout",
+    },
+    {
+      label: "Store source",
+      href: "https://github.com/gonzalomartinperez/pequeverso",
+      description: "Next.js store on GitHub",
+    },
+    {
+      label: "Back office source",
+      href: "https://github.com/gonzalomartinperez/pequeverso-backoffice",
+      description: "Private operations app, public code on GitHub",
+    },
+    {
+      label: "Assistant API source",
+      href: "https://github.com/gonzalomartinperez/pequeverso-assistant-api",
+      description: "FastAPI and LangGraph backend on GitHub",
+    },
+  ],
+};
+
+export const pequeversoCaseStudy = {
+  title: "Pequeverso: a store with an AI shopping assistant",
+  eyebrow: "Case study · Client project",
+
+  overview: {
+    heading: "Three applications for one small store",
+    body: [
+      "Pequeverso sells printable learning resources for families with children aged 3 to 7. I built its public store, a private back office and an AI shopping assistant that answers buyers' questions about the catalog.",
+      "Hotmart handles payment, delivery and refunds, so the store can focus on explaining the products clearly and sending buyers to checkout.",
+    ],
+  } satisfies CaseStudySection,
+
+  problem: {
+    heading: "The problem",
+    body: [
+      "Buyers have questions before they pay: what the kit includes, which ages it suits, how the guarantee works. A generic chatbot can invent a price, a discount or a link, and in a store a wrong answer is worse than none.",
+      "The store also had to report purchases and checkout intent to Meta for advertising, and the assistant had to stay inside a small, fixed monthly budget.",
+    ],
+  } satisfies CaseStudySection,
+
+  built: {
+    heading: "What I built",
+    body: [
+      "The store: Next.js with Hotmart checkout, Meta Pixel in the browser and a server-side Conversions API relay, plus an automated check after every release that confirms production serves the merged commit.",
+      "The back office: a private app with OAuth sign-in, invite-only roles and an operations dashboard for the assistant's health, catalog freshness, runs, latency, tokens and spend.",
+      "The assistant: GraphRAG on LangGraph that combines lexical, pgvector and Neo4j retrieval over the store catalog. The server validates every product, price and link before it reaches the buyer, and a monthly spend cap is enforced before each model call.",
+    ],
+  } satisfies CaseStudySection,
+
+  architecture: [
+    {
+      layer: "Store",
+      detail:
+        "Next.js, React and TypeScript. Product pages, Hotmart checkout and a native assistant panel that stays off until launch.",
+    },
+    {
+      layer: "Tracking",
+      detail:
+        "Meta Pixel in the browser, mirrored by a same-origin Conversions API relay with matching event ids.",
+    },
+    {
+      layer: "Assistant API",
+      detail:
+        "Python and FastAPI. Sessions with CSRF protection, answers streamed over SSE and a versioned HTTP contract.",
+    },
+    {
+      layer: "Retrieval",
+      detail:
+        "A bounded LangGraph flow over lexical, pgvector and Neo4j retrieval, using a catalog exported from the store.",
+    },
+    {
+      layer: "Guards",
+      detail:
+        "Server-side checks for products, prices and links, plus budget reservations against the monthly cap.",
+    },
+    {
+      layer: "Back office",
+      detail:
+        "Next.js with OAuth sign-in and roles in PostgreSQL, reading operations data from the API on the server.",
+    },
+  ] satisfies ArchitectureStep[],
+
+  decisions: [
+    {
+      heading: "Prices and links come from the catalog",
+      body: [
+        "The catalog is exported from the store at a pinned commit. The API checks every product, price and link before showing it, and withholds a price that has expired instead of guessing.",
+      ],
+    },
+    {
+      heading: "A spend cap in the request path",
+      body: [
+        "Before each model call the API reserves the worst-case cost against the monthly budget, so concurrent requests cannot overspend it. The default cap is USD 10 a month.",
+      ],
+    },
+    {
+      heading: "Evaluated before launch",
+      body: [
+        "288 hand-written cases in 18 intent families run through the full HTTP/SSE path in CI. An earlier version was also evaluated in a 303-turn run against the real model.",
+      ],
+    },
+    {
+      heading: "Operations stay private",
+      body: [
+        "The back office is a separate app. Only the owner and invited people can sign in, and it reads content-free operations data from the API on the server, never from the browser.",
+      ],
+    },
+  ] satisfies CaseStudySection[],
+
+  status: {
+    heading: "Where it stands",
+    body: [
+      "The store is live at pequeverso.com, and each release to production is verified automatically after deployment.",
+      "The assistant is implemented and evaluated, but it has not launched yet. It stays disabled in the published store until its server is deployed and the launch is approved.",
+    ],
+  } satisfies CaseStudySection,
+};

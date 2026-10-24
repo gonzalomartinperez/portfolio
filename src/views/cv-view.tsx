@@ -113,7 +113,7 @@ export function CvView({ locale }: { locale: Locale }) {
           {(
             (documents.find((document) => document.href === resumeFiles[locale])?.bytes ?? 0) / 1024
           ).toFixed(1)}{" "}
-          KiB · {spanish ? "3 páginas" : "3 pages"}
+          KiB · {spanish ? "2 páginas" : "2 pages"}
         </p>
         <nav aria-label={spanish ? "Secciones del CV" : "CV sections"} className={styles.contents}>
           {copy.sections.map((section) => (

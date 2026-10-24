@@ -3,6 +3,22 @@ import { siteUrl } from "@config/site";
 import { getContent } from "@content";
 import type { Metadata, Viewport } from "next";
 
+/**
+ * Reviewed social preview shared by both locales. Its copy is English, like the profile
+ * headline it shows; replace it with a new dated file rather than editing it in place.
+ */
+const socialImage = {
+  url: "/social/portfolio-og-2026-10-24.png",
+  width: 1200,
+  height: 627,
+  type: "image/png",
+};
+
+function socialImageFor(locale: Locale) {
+  const { profile } = getContent(locale);
+  return { ...socialImage, alt: `${profile.name}: ${profile.role}` };
+}
+
 export const sharedViewport: Viewport = {
   colorScheme: "dark light",
   themeColor: "#08090c",
@@ -50,11 +66,13 @@ export function layoutMetadata(locale: Locale): Metadata {
       description: profile.headline,
       url: localePath(locale, "/"),
       locale: htmlLang[locale],
+      images: [socialImageFor(locale)],
     },
     twitter: {
       card: "summary_large_image",
       title: `${profile.name} · ${profile.role}`,
       description: profile.headline,
+      images: [socialImageFor(locale)],
     },
     robots: { index: true, follow: true },
     category: "technology",
@@ -78,6 +96,10 @@ export function pageMetadata(locale: Locale, path: string): Metadata {
       title: copy.filomena.metaTitle,
       description: copy.filomena.metaDescription,
     },
+    "/work/pequeverso": {
+      title: copy.pequeverso.metaTitle,
+      description: copy.pequeverso.metaDescription,
+    },
     "/stack": { title: copy.stack.metaTitle, description: copy.stack.metaDescription },
     "/education": { title: copy.education.metaTitle, description: copy.education.metaDescription },
     "/contact": { title: copy.contact.metaTitle, description: copy.contact.metaDescription },
@@ -92,6 +114,7 @@ export function pageMetadata(locale: Locale, path: string): Metadata {
       title: entry.title,
       description: entry.description,
       url: localePath(locale, path),
+      images: [socialImageFor(locale)],
     },
   };
 }
