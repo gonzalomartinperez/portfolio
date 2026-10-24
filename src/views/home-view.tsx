@@ -1,11 +1,13 @@
 import { type Locale, localePath } from "@config/locales";
 import { email, externalLinks } from "@config/site";
 import { getContent } from "@content";
-import { publicTechnologyCatalog } from "@content/technologies";
+import { highlightedTechnologyCatalog, publicTechnologyCatalog } from "@content/technologies";
 import portrait from "@media/identity/portrait.avif";
 import Image from "next/image";
 import Link from "next/link";
+import { CondensedStack } from "@/features/hero/presentation/tech-constellation";
 import { ToolCarousel } from "@/features/tool-carousel/presentation/tool-carousel";
+import { EvalCaseBlock } from "@/shared/editorial/eval-case";
 import { MetricList } from "@/shared/editorial/metric-list";
 import { CompanyMark } from "@/shared/identity/company-mark";
 import { ExternalLink } from "@/shared/navigation/external-link";
@@ -14,12 +16,27 @@ import { TechnologyMark } from "@/shared/technology/technology-mark";
 import { Badge } from "@/shared/ui/badge";
 import { buttonVariants } from "@/shared/ui/button";
 import { cardVariants } from "@/shared/ui/card";
-import { HeroView } from "./hero-view";
+import { HeroPrinciples, HeroView } from "./hero-view";
 import styles from "./home.module.css";
 
 export function HomeView({ locale }: { locale: Locale }) {
   const content = getContent(locale);
-  const { profile, roles, filomena, academicResults, siteCopy: copy } = content;
+  const {
+    profile,
+    roles,
+    filomena,
+    portfolioAssistant,
+    pequeversoCaseStudy,
+    academicResults,
+    siteCopy: copy,
+  } = content;
+  const [rampy, ...otherRoles] = roles;
+  // Measured results first, then the shipped market count stated in the Rampy contributions.
+  const rampyMetrics = [
+    ...(rampy.metrics ?? []).filter((metric) => ["90%+", "40%"].includes(metric.value)),
+    ...(rampy.metrics ?? []).filter((metric) => metric.value === "2×").slice(0, 1),
+    copy.home.rampyMarkets,
+  ];
   const showcaseScreens = [
     { id: "057", height: 725, label: locale === "es" ? "Rendir el examen" : "Taking the exam" },
     {
@@ -36,10 +53,96 @@ export function HomeView({ locale }: { locale: Locale }) {
     <>
       <HeroView locale={locale} />
 
+      <section
+        className="section-tight frame"
+        data-home-rampy
+        data-analytics-region="home-experience"
+        data-analytics-exposure="home-experience"
+      >
+        <div className="section-head">
+          <p className="eyebrow">{copy.home.rampyEyebrow}</p>
+          <h2>{copy.home.rampyHeading}</h2>
+        </div>
+        <div data-slot="card" className={cn(cardVariants(), styles.highlight)}>
+          <div className={styles.roleIdentity}>
+            <CompanyMark company={rampy.slug} />
+            <p className={styles.rolePeriod}>{rampy.period}</p>
+          </div>
+          <p>
+            <Link className={styles.rolePosition} href={localePath(locale, "/work#rampy")}>
+              {rampy.position}
+            </Link>{" "}
+            <span className={styles.roleCompany}>· {rampy.company}</span>
+          </p>
+          <p className={styles.roleContext}>{rampy.context}</p>
+          <MetricList metrics={rampyMetrics} />
+          <div className="actions">
+            <Link className={buttonVariants()} href={localePath(locale, "/work#rampy")}>
+              {copy.home.rampyCta}
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="section-tight frame" data-analytics-exposure="home-featured">
         <div className="section-head">
-          <p className="eyebrow">{copy.home.workEyebrow}</p>
-          <h2>{copy.home.workHeading}</h2>
+          <p className="eyebrow">{copy.home.selectedEyebrow}</p>
+          <h2>{copy.home.selectedHeading}</h2>
+        </div>
+
+        <div className={styles.projects}>
+          <article
+            data-slot="card"
+            data-home-project="portfolio-assistant"
+            className={cn(cardVariants(), styles.project)}
+          >
+            <h3 className={styles.featureTitle}>
+              <Link href={localePath(locale, "/work#project-portfolio-assistant")}>
+                {portfolioAssistant.name}
+              </Link>
+            </h3>
+            <p className={styles.featureTagline}>{portfolioAssistant.tagline}</p>
+            <p className={styles.featureContext}>{portfolioAssistant.summary}</p>
+            <p className={styles.featureAttribution}>{portfolioAssistant.attribution}</p>
+            {portfolioAssistant.evalCase && (
+              <EvalCaseBlock
+                className={cn(styles.evalCase, "flow-tight")}
+                evalCase={portfolioAssistant.evalCase}
+                id="home-portfolio-assistant-eval-case"
+                locale={locale}
+              />
+            )}
+            <div className="actions">
+              {portfolioAssistant.links.map((link) => (
+                <ExternalLink
+                  className={buttonVariants({ variant: "outline" })}
+                  href={link.href}
+                  key={link.href}
+                  locale={locale}
+                >
+                  {link.label}
+                </ExternalLink>
+              ))}
+            </div>
+          </article>
+
+          <article
+            data-slot="card"
+            data-home-project="pequeverso"
+            className={cn(cardVariants(), styles.project)}
+          >
+            <p className="eyebrow">{pequeversoCaseStudy.eyebrow}</p>
+            <h3 className={styles.featureTitle}>
+              <Link href={localePath(locale, "/work/pequeverso")}>{pequeversoCaseStudy.title}</Link>
+            </h3>
+            <p className={styles.featureContext}>{pequeversoCaseStudy.overview.body[0]}</p>
+            <p className={styles.featureContext}>{pequeversoCaseStudy.built.body[2]}</p>
+            <div className="actions">
+              <Link className={buttonVariants()} href={localePath(locale, "/work/pequeverso")}>
+                {copy.actions.viewCaseStudy}
+              </Link>
+            </div>
+          </article>
         </div>
 
         <article
@@ -138,18 +241,14 @@ export function HomeView({ locale }: { locale: Locale }) {
         </article>
       </section>
 
-      <section
-        className="section-tight frame"
-        data-analytics-region="home-experience"
-        data-analytics-exposure="home-experience"
-      >
+      <section className="section-tight frame">
         <div className="section-head">
           <p className="eyebrow">{copy.home.experienceEyebrow}</p>
           <h2>{copy.home.experienceHeading}</h2>
         </div>
 
         <ol className={styles.roles}>
-          {roles.map((role) => (
+          {otherRoles.map((role) => (
             <li className={styles.role} key={role.slug}>
               <div className={styles.roleIdentity}>
                 <CompanyMark company={role.slug} />
@@ -203,7 +302,6 @@ export function HomeView({ locale }: { locale: Locale }) {
               <h2>{copy.home.whoHeading}</h2>
             </div>
             <div className="prose flow-tight">
-              <p>{profile.summary}</p>
               <p>{copy.home.whoParagraph}</p>
               <p>
                 {copy.home.whoAssistant.lead}
@@ -240,7 +338,19 @@ export function HomeView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <ToolCarousel locale={locale} />
+      <HeroPrinciples locale={locale} />
+
+      <CondensedStack
+        eyebrow={copy.home.stackEyebrow}
+        heading={copy.stack.groupedHeading}
+        note={copy.stack.groupedIntro}
+        locale={locale}
+      >
+        <details className={styles.toolkit}>
+          <summary>{copy.home.fullToolkit(highlightedTechnologyCatalog.length)}</summary>
+          <ToolCarousel locale={locale} embedded />
+        </details>
+      </CondensedStack>
 
       <section
         className="section-tight frame"

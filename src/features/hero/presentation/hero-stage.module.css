@@ -144,11 +144,6 @@
   place-items: center;
   pointer-events: none;
 }
-.constellationPane {
-  position: relative;
-  z-index: 2;
-  padding-block: 4rem;
-}
 .scrollCue {
   position: absolute;
   bottom: 1.5rem;
@@ -157,7 +152,8 @@
   font-size: 1.5rem;
 }
 .stage:is([data-mode="running"], [data-mode="paused"]) .journey {
-  height: calc(300svh + var(--scene-reading-hold, 0px));
+  /* Short enough that the Rampy evidence follows within about two screens of scrolling. */
+  height: calc(200svh + var(--scene-reading-hold, 0px));
   margin-bottom: var(--toolkit-overflow, 0px);
 }
 .stage:is([data-mode="running"], [data-mode="paused"]) .viewport {
@@ -245,7 +241,7 @@
     padding-top: 1rem;
   }
   .stage:is([data-mode="running"], [data-mode="paused"]) .journey {
-    height: calc(225svh + var(--scene-reading-hold, 0px));
+    height: calc(160svh + var(--scene-reading-hold, 0px));
   }
   .logoCloud :global(.scene-logo) svg,
   .logoCloud :global(.scene-logo) img {

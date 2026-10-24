@@ -2571,6 +2571,37 @@ export const highlightedTechnologyCatalog = publicTechnologyCatalog.filter(
   ({ id }) => !Object.hasOwn(catalogueOnlyTechnologies, id),
 );
 
+/** The short home selection; the full catalogue stays on /stack. */
+export const homeStackIds = [
+  "langgraph",
+  "langsmith",
+  "claude-api",
+  "model-context-protocol",
+  "rag",
+  "graphrag",
+  "agent-evaluation",
+  "python",
+  "typescript",
+  "fastapi",
+  "spring-boot",
+  "postgresql",
+  "pgvector",
+  "neo4j",
+  "react",
+  "nextjs",
+  "react-native",
+  "docker",
+  "aws",
+  "digitalocean",
+  "github-actions",
+] as const;
+
+export const homeStackTechnologies = homeStackIds.map((id) => {
+  const technology = publicTechnologyCatalog.find((item) => item.id === id);
+  if (!technology) throw new Error(`Home stack technology is not public: ${id}`);
+  return technology;
+});
+
 export const technologyGroups = [
   {
     id: "applied-ai",

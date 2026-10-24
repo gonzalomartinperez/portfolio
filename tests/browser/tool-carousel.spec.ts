@@ -1,7 +1,14 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import { highlightedTechnologyCatalog } from "../../content/technologies";
 import { setDocumentHidden } from "./document-visibility";
+
+/** Home keeps the full toolkit behind a closed disclosure under the short stack. */
+async function openFullToolkit(page: Page) {
+  const summary = page.locator("details:has([data-tool-carousel]) > summary");
+  await summary.scrollIntoViewIfNeeded();
+  await summary.click();
+}
 
 for (const locale of ["en", "es"]) {
   const prefix = locale === "es" ? "/es" : "";
@@ -11,6 +18,7 @@ for (const locale of ["en", "es"]) {
     await page.emulateMedia({ reducedMotion: "reduce" });
     if (info.project.name === "mobile") await page.setViewportSize({ width: 320, height: 650 });
     await page.goto(prefix || "/");
+    await openFullToolkit(page);
     const section = page.locator("[data-tool-carousel]");
     await section.scrollIntoViewIfNeeded();
     await expect(section.locator("[data-tool-row]")).toHaveCount(2);
@@ -56,6 +64,7 @@ for (const locale of ["en", "es"]) {
   }, info) => {
     await page.emulateMedia({ reducedMotion: "no-preference" });
     await page.goto(prefix || "/");
+    await openFullToolkit(page);
     const section = page.locator("[data-tool-carousel]");
     await expect(section).toHaveAttribute("data-animated", "true");
     await section.scrollIntoViewIfNeeded();
@@ -196,6 +205,7 @@ test("carousel preserves its highlighted linked catalog without JavaScript", asy
   try {
     const page = await context.newPage();
     await page.goto("/");
+    await openFullToolkit(page);
     const section = page.locator("[data-tool-carousel]");
     expect(
       await section
@@ -223,6 +233,7 @@ test("carousel suspends work when hidden or offscreen and respects global pause"
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
+  await openFullToolkit(page);
   const section = page.locator("[data-tool-carousel]");
   const row = section.locator("[data-tool-row]").first();
   await section.scrollIntoViewIfNeeded();
@@ -258,6 +269,7 @@ test("carousel keeps both rows filled through multiple complete cycles", async (
   await page.emulateMedia({ reducedMotion: "no-preference" });
   if (info.project.name === "mobile") await page.setViewportSize({ width: 320, height: 650 });
   await page.goto("/?carouselDebug=1");
+  await openFullToolkit(page);
   const section = page.locator("[data-tool-carousel]");
   await section.scrollIntoViewIfNeeded();
   await section.getByRole("button").click();

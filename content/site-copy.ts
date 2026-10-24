@@ -1,4 +1,5 @@
 import type { AboutCopy } from "./about-copy";
+import type { Metric } from "./types";
 
 /**
  * Interface copy, separate from the professional facts in the per-locale content modules.
@@ -68,6 +69,16 @@ export type SiteCopy = {
     factLanguages: string;
     languagesValue: string;
     experienceSince: (length: string, since: string) => string;
+    /** Rampy block right after the hero: the current role and its measured results. */
+    rampyEyebrow: string;
+    rampyHeading: string;
+    rampyCta: string;
+    /** Stated in the Rampy contributions; shown as a card next to the measured metrics. */
+    rampyMarkets: Metric;
+    selectedEyebrow: string;
+    selectedHeading: string;
+    /** Closed disclosure holding the full animated toolkit; `count` is the catalogue size. */
+    fullToolkit: (count: number) => string;
     workEyebrow: string;
     workHeading: string;
     experienceEyebrow: string;

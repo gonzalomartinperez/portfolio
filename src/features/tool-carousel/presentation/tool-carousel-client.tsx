@@ -174,10 +174,14 @@ function TechnologyRow({
 export function ToolCarouselClient({
   locale,
   rows,
+  embedded = false,
 }: {
   locale: Locale;
   rows: CarouselTechnology[][];
+  /** Inside another section (the home stack disclosure): no own frame, h3 heading. */
+  embedded?: boolean;
 }) {
+  const Heading = embedded ? "h3" : "h2";
   const copy = toolCarouselCopy[locale];
   const id = useId();
   const globalPaused = usePageMotionPaused();
@@ -219,7 +223,7 @@ export function ToolCarouselClient({
 
   return (
     <section
-      className={`section-tight frame ${styles.section}`}
+      className={embedded ? styles.section : `section-tight frame ${styles.section}`}
       aria-labelledby={`${id}-heading`}
       data-tool-carousel
       data-animated={motionAllowed && !keyboardGrid}
@@ -252,7 +256,7 @@ export function ToolCarouselClient({
       </noscript>
       <div className={styles.header}>
         <div className="section-head">
-          <h2 id={`${id}-heading`}>{copy.heading}</h2>
+          <Heading id={`${id}-heading`}>{copy.heading}</Heading>
           <p>{copy.description}</p>
         </div>
         {motionAllowed && (

@@ -63,25 +63,18 @@ for (const [route, label] of [
     await page.goto(route);
     const chips = page.getByText(label, { exact: true });
     await expect(chips).toHaveCount(0);
-    const toolkit = page.locator("#home-tech-fintech").locator("..");
-    const toggle = toolkit.getByRole("button", { expanded: false });
-    await expect(toolkit.getByRole("link", { name: "Privy", exact: true })).toBeHidden();
-    await toggle.focus();
-    await page.keyboard.press("Enter");
-    await expect(toolkit.getByRole("button", { expanded: true })).toBeVisible();
+    // Home keeps a short grouped selection; the full catalogue stays behind a closed disclosure.
+    const toolkit = page.locator('section[aria-labelledby="technology-heading"]');
+    const full = toolkit.locator("details");
+    await expect(full).not.toHaveAttribute("open", "");
+    await expect(full.locator("[data-tool-carousel]")).toBeHidden();
     for (const theme of ["dark", "light"]) {
       await page.evaluate((value) => {
         document.documentElement.dataset.theme = value;
       }, theme);
       await toolkit.scrollIntoViewIfNeeded();
       await page.screenshot({ path: info.outputPath(`expertise-${theme}.png`) });
-      for (const name of [
-        "Privy",
-        "Token swaps",
-        "Vaults",
-        "Non-custodial wallets",
-        "Transaction execution",
-      ]) {
+      for (const name of ["LangGraph", "FastAPI", "PostgreSQL", "Docker"]) {
         await expect(toolkit.getByRole("link", { name, exact: true })).toBeVisible();
       }
       expect(
@@ -103,6 +96,9 @@ test("the scene shows Spring once while the catalogue keeps every tool", async (
   await page.goto("/?sceneProgress=0.75&sceneTime=0");
   await expect(page.locator("[data-scene]")).toHaveAttribute("data-mode", "running");
   await expect(page.locator('.scene-logo [data-scene-brand="spring"]')).toHaveCount(1);
+  // The short home stack keeps Spring Boot; the closed full-toolkit disclosure keeps every tool once.
+  const shortStack = page.locator('section[aria-labelledby="technology-heading"] > div');
+  await expect(shortStack.getByRole("link", { name: "Spring Boot", exact: true })).toHaveCount(1);
   for (const name of [
     "Spring Boot",
     "Spring WebFlux",
@@ -110,15 +106,11 @@ test("the scene shows Spring once while the catalogue keeps every tool", async (
     "Spring Security",
     "Spring Data JPA",
   ]) {
-    for (const section of [
-      page.locator('section[aria-labelledby="technology-heading"]'),
-      page.locator("[data-tool-carousel]"),
-    ]) {
-      // Phones collapse the grouped list, so hidden links still count as present once.
-      await expect(
-        section.getByRole("link", { name, exact: true, includeHidden: true }),
-      ).toHaveCount(1);
-    }
+    await expect(
+      page
+        .locator("[data-tool-carousel]")
+        .getByRole("link", { name, exact: true, includeHidden: true }),
+    ).toHaveCount(1);
   }
 });
 

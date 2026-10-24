@@ -17,11 +17,7 @@ export const profile = {
   availability: "Abierto a oportunidades remotas y disponible para entrevistas",
 
   /** Prueba del primer pantallazo, sobre el nombre. Cada parte ocupa una línea en móviles. */
-  heroProof: [
-    "Me ocupo de toda la ingeniería en una startup fintech",
-    "3.000+ casos de evaluación deciden cada versión",
-    "Remoto desde Argentina (UTC-3)",
-  ],
+  heroProof: ["Lidero la ingeniería en una startup fintech", "Remoto desde Argentina (UTC-3)"],
 
   /** El mensaje de cinco segundos. Una idea por frase. */
   headline:
@@ -31,7 +27,7 @@ export const profile = {
     "Soy Gonzalo, AI Engineer, y me ocupo del producto completo: los agentes y sus evaluaciones, además del backend, la web y la app móvil que los rodean.",
 
   summary:
-    "En Rampy, una startup fintech y blockchain en etapa temprana, me ocupo de toda la ingeniería. Construí un asistente de IA multilingüe que aprueba el 90% o más de una suite de evaluación de más de 3.000 casos y responde con componentes nativos que llevan directo a los flujos de swaps, vaults y perpetuos.",
+    "En Rampy, una startup fintech y blockchain en etapa temprana, lidero la ingeniería. Construí un asistente de IA multilingüe que aprueba el 90% o más de una suite de evaluación de más de 3.000 casos y responde con componentes nativos que llevan directo a los flujos de swaps, vaults y perpetuos.",
 
   /** Etiqueta canónica exacta. Nunca Senior, Tech Lead, Architect ni Staff. */
   seniority: "Semi-senior",
