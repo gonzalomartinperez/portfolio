@@ -4,14 +4,14 @@
   gap: clamp(var(--space-6), 5vw, var(--space-8));
 }
 
-/* Prose is centred on the page rather than pinned left, so a long read does not run beside a
-   permanently empty half. Full-width elements — the walkthrough, the table, the architecture
-   list — keep the wider frame. */
+/* Headings, captions and prose share the content column's left edge, so each heading sits
+   directly above its own text. Full-width elements (the walkthrough, the table, the
+   architecture list) keep the wider frame. */
 .block > .prose,
 .block > p,
 .block > h2 {
-  margin-inline: auto;
-  width: min(46rem, 100%);
+  margin-inline: 0;
+  max-width: var(--measure-text);
 }
 
 .block {
@@ -21,8 +21,8 @@
   gap: var(--space-4);
 }
 
-.block h2 {
-  max-width: 22ch;
+.block > h2 {
+  text-wrap: balance;
 }
 
 .attribution {

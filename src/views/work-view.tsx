@@ -125,9 +125,17 @@ export function WorkView({ locale }: { locale: Locale }) {
                 {!role.metrics && role.attribution ? (
                   <p className={styles.attribution}>{role.attribution}</p>
                 ) : null}
-                {role.links && (
+                {(role.caseStudyHref || role.links) && (
                   <div className={`actions ${styles.clientLinks}`}>
-                    {role.links.map((link) => (
+                    {role.caseStudyHref && (
+                      <Link
+                        className={buttonVariants()}
+                        href={localePath(locale, role.caseStudyHref)}
+                      >
+                        {copy.actions.viewCaseStudy}
+                      </Link>
+                    )}
+                    {role.links?.map((link) => (
                       <ExternalLink
                         className={buttonVariants({ variant: "outline" })}
                         href={link.href}

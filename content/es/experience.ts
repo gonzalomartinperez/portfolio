@@ -178,7 +178,8 @@ export const roles: Role[] = [
   {
     slug: "independent",
     company: "Independiente",
-    links: [{ label: "Pequeverso — sitio del cliente", href: "https://pequeverso.com/" }],
+    links: [{ label: "Sitio del cliente Pequeverso", href: "https://pequeverso.com/" }],
+    caseStudyHref: "/work/pequeverso",
     ...experienceFacts("es", "independent"),
     startedOn: "2024-01-01",
     location: "Argentina",

@@ -12,7 +12,7 @@ import { cn } from "@/shared/styles/cn";
 import { Badge } from "@/shared/ui/badge";
 import { buttonVariants } from "@/shared/ui/button";
 import { cardVariants } from "@/shared/ui/card";
-import styles from "./filomena.module.css";
+import styles from "./case-study.module.css";
 
 export function FilomenaView({ locale }: { locale: Locale }) {
   const { filomena, filomenaCaseStudy: study, galleryAlt, siteCopy: copy } = getContent(locale);
@@ -37,7 +37,7 @@ export function FilomenaView({ locale }: { locale: Locale }) {
       <PageHeader
         eyebrow={`${copy.filomena.caseStudyLabel} · ${filomena.period}`}
         intro={filomena.summary}
-        title={`${filomena.name} — ${filomena.tagline}`}
+        title={study.title}
       >
         <ul className="tags flow-tight">
           {filomena.stack.map((item) => (

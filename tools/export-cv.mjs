@@ -3,7 +3,10 @@ import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 
-const sectionIds = ["experience", "skills", "education", "projects", "languages", "certifications"];
+const requiredSectionIds = ["experience", "skills", "education", "projects"];
+/** Published only while the approved source keeps them visible; a shorter CV may omit them. */
+const optionalSectionIds = ["languages", "certifications"];
+const sectionIds = [...requiredSectionIds, ...optionalSectionIds];
 const entities = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " " };
 const decode = (text) => text.replace(/&([a-z]+);/g, (match, name) => entities[name] ?? match);
 const localized = (value, locale) =>
@@ -78,6 +81,10 @@ export function exportCv(source, facts) {
           summary: resolve(source.summaries.general),
           sections: source.sectionOrder
             .filter((id) => sectionIds.includes(id))
+            .filter((id) => {
+              const section = source.sections.find((item) => item.id === id);
+              return requiredSectionIds.includes(id) || (section && !section.hidden);
+            })
             .map((id) => {
               const section = source.sections.find((item) => item.id === id);
               assert(section && !section.hidden, `Missing public CV section: ${id}`);

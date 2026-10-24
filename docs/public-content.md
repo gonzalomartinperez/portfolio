@@ -45,8 +45,8 @@ that a professional claim is true. Keep applied knowledge distinct from developi
 expertise and retain metric qualifiers, team attribution and contractual titles.
 
 CV PDF updates use the established private DOCX/PDF pipeline: reproducible DOCX,
-three-page general baseline, all six rendered pages reviewed, then explicit
-manifest-bound promotion. Copy only the two promoted public PDFs. No automatic
+two-page general baseline (US Letter in English, A4 in Spanish), all four rendered
+pages reviewed, then explicit manifest-bound promotion. Copy only the two promoted public PDFs. No automatic
 Reactive Resume synchronization or professional-platform publication takes place.
 
 When correcting a shared metric, compare the experience page, CV projection and

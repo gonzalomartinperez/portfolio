@@ -7,6 +7,12 @@ import { Skeleton } from "@/shared/ui/skeleton";
 import styles from "./gallery-carousel.module.css";
 
 export type GallerySlide = { id: string; src: string; alt: string; width: number; height: number };
+export type GalleryFlow = {
+  id: string;
+  en: string;
+  es: string;
+  shots: readonly string[];
+};
 
 function EnlargedImage({ slide, locale }: { slide: GallerySlide; locale: "en" | "es" }) {
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
@@ -44,7 +50,7 @@ function EnlargedImage({ slide, locale }: { slide: GallerySlide; locale: "en" | 
     </div>
   );
 }
-const flows = [
+const filomenaFlows: readonly GalleryFlow[] = [
   {
     id: "access",
     en: "Access",
@@ -94,6 +100,7 @@ export function GalleryCarousel({
   nextLabel,
   slideLabels,
   locale = "en",
+  flows = filomenaFlows,
 }: {
   slides: readonly GallerySlide[];
   label: string;
@@ -101,6 +108,8 @@ export function GalleryCarousel({
   nextLabel: string;
   slideLabels: readonly string[];
   locale?: "en" | "es";
+  /** Optional filters; the Filomena walkthrough flows remain the default. */
+  flows?: readonly GalleryFlow[];
 }) {
   const [filter, setFilter] = useState("all");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
