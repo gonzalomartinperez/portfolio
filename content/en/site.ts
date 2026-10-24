@@ -45,7 +45,6 @@ export const siteCopy: SiteCopy = {
     pauseAnimation: "Pause animation",
     playAnimation: "Play animation",
     avatarInteraction: "Interact with Gonzalo’s avatar",
-    readCv: "or read the CV",
     principles: [
       {
         title: "Evals first",

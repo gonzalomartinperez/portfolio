@@ -43,9 +43,6 @@ export function HeroView({ locale }: { locale: Locale }) {
           {copy.actions.getInTouch}
         </Link>
       </div>
-      <Link className={styles.cvLink} href={localePath(locale, "/cv")}>
-        {copy.hero.readCv}
-      </Link>
 
       <p className={styles.availability}>
         <span aria-hidden="true" className={styles.pulse} />
