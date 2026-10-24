@@ -49,3 +49,19 @@ export const galleryAlt: Record<string, string> = {
   "051": "Página de reportes con cuatro exportaciones disponibles una vez finalizado el examen",
   "091": "Tablero de Grafana con chequeos de salud de servicios y conteos por modelo del examen",
 };
+
+/** Texto alternativo de las capturas de Pequeverso, por id compartido de la galería. */
+export const pequeversoGalleryAlt: Record<string, string> = {
+  "store-home":
+    "Página de inicio de la tienda Pequeverso con el kit Grafismo Fonético, su precio y un botón de compra",
+  "assistant-desktop":
+    "Asistente de compras respondiendo una pregunta sobre la garantía, con dos fuentes y una ficha de producto con precio validado",
+  "assistant-mobile":
+    "Asistente de compras en un teléfono, con la respuesta, sus fuentes y la ficha de producto sobre el cuadro de mensaje",
+  "backoffice-sign-in":
+    "Inicio de sesión del back office, abierto solo al propietario y a las personas invitadas",
+  "backoffice-dashboard":
+    "Panel de operaciones del back office con disponibilidad, presupuesto restante, respuestas completadas y latencia, marcado como datos sintéticos",
+  "backoffice-access":
+    "Página de accesos del back office para invitar personas con un rol y revocar invitaciones pendientes, con cuentas de prueba",
+};

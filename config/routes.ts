@@ -4,6 +4,7 @@ export const siteRoutes = [
   { path: "/", priority: 1 },
   { path: "/work", priority: 0.9 },
   { path: "/work/filomena", priority: 0.9 },
+  { path: "/work/pequeverso", priority: 0.9 },
   { path: "/about", priority: 0.8 },
   { path: "/contact", priority: 0.8 },
   { path: "/stack", priority: 0.7 },

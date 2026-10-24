@@ -38,6 +38,7 @@ export function SiteFooter({
     { path: "/about", label: copy.nav.about },
     { path: "/work", label: copy.nav.work },
     { path: "/work/filomena", label: copy.nav.caseStudy },
+    { path: "/work/pequeverso", label: copy.nav.pequeversoCaseStudy },
     { path: "/stack", label: copy.nav.stack },
     { path: "/education", label: copy.nav.education },
     { path: "/cv", label: copy.nav.cv },

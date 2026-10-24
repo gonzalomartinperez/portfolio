@@ -105,6 +105,7 @@ export const technologyCatalog: Technology[] = [
         label: "Rampy",
         href: "/work#rampy",
       },
+      { label: "Pequeverso", href: "/work/pequeverso" },
     ],
   },
   {
@@ -213,6 +214,7 @@ export const technologyCatalog: Technology[] = [
         label: "Teamcubation",
         href: "/work#teamcubation",
       },
+      { label: "Pequeverso", href: "/work/pequeverso" },
     ],
   },
   {
@@ -231,6 +233,7 @@ export const technologyCatalog: Technology[] = [
         label: "Teamcubation",
         href: "/work#teamcubation",
       },
+      { label: "Pequeverso", href: "/work/pequeverso" },
     ],
   },
   {
@@ -243,6 +246,7 @@ export const technologyCatalog: Technology[] = [
     evidence: [
       { label: "Rampy", href: "/work#rampy" },
       { label: "Teamcubation", href: "/work#teamcubation" },
+      { label: "Pequeverso", href: "/work/pequeverso" },
     ],
   },
   {
@@ -594,6 +598,7 @@ export const technologyCatalog: Technology[] = [
         label: "Independent work",
         href: "/work#independent",
       },
+      { label: "Pequeverso", href: "/work/pequeverso" },
     ],
   },
   {
@@ -823,6 +828,7 @@ export const technologyCatalog: Technology[] = [
         label: "Teamcubation",
         href: "/work#teamcubation",
       },
+      { label: "Pequeverso", href: "/work/pequeverso" },
     ],
     icon: "langgraph",
   },
@@ -904,6 +910,7 @@ export const technologyCatalog: Technology[] = [
         label: "Teamcubation",
         href: "/work#teamcubation",
       },
+      { label: "Pequeverso", href: "/work/pequeverso" },
     ],
   },
   {
@@ -1646,7 +1653,10 @@ export const technologyCatalog: Technology[] = [
     category: "cloud",
     kind: "brand",
     status: "applied",
-    evidence: [{ label: "Independent work", href: "/work#independent" }],
+    evidence: [
+      { label: "Independent work", href: "/work#independent" },
+      { label: "Pequeverso", href: "/work/pequeverso" },
+    ],
   },
   {
     id: "aws",

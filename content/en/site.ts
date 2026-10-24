@@ -24,11 +24,13 @@ export const siteCopy: SiteCopy = {
     education: "Education",
     contact: "Contact",
     caseStudy: "Filomena case study",
+    pequeversoCaseStudy: "Pequeverso case study",
   },
   actions: {
     seeWork: "Explore my work",
     getInTouch: "Get in touch",
     readCaseStudy: "Read the case study",
+    viewCaseStudy: "View case study",
     fullExperience: "Full experience and projects",
     fullStack: "Explore all technologies",
     academicRecord: "Academic record",
@@ -115,7 +117,7 @@ export const siteCopy: SiteCopy = {
       "Filomena brings together the product walkthrough, architecture decisions and public source snapshots. For enterprise work, the experience above describes the contribution and operating context.",
   },
   filomena: {
-    metaTitle: "Filomena — production exam platform",
+    metaTitle: "Filomena: a production exam platform",
     metaDescription:
       "How a CakePHP and jQuery monolith became an API-first platform running high-stakes exams " +
       "for five Argentine national institutions, with 1,000+ simultaneous users in production.",
@@ -138,6 +140,21 @@ export const siteCopy: SiteCopy = {
     galleryPrevious: "Previous screen",
     galleryNext: "Next screen",
     galleryPosition: (current, total) => `Screen ${current} of ${total}`,
+  },
+  pequeverso: {
+    metaTitle: "Pequeverso: a store with an AI shopping assistant",
+    metaDescription:
+      "Client case study: a Next.js store with Hotmart checkout and Meta Conversions API, a private back office, and a GraphRAG shopping assistant on LangGraph evaluated before launch.",
+    architectureHeading: "Architecture",
+    architectureCaption: "Three applications, from the buyer's browser to the private back office.",
+    decisionsHeading: "Engineering decisions",
+    galleryHeading: "Explore the product",
+    galleryCaption:
+      "Real captures from the public repositories: the store, the assistant running locally with a test model, and the back office with synthetic data. Enlarge a screen for a closer look.",
+    galleryLabel: "Pequeverso product walkthrough",
+    evidenceHeading: "Evidence",
+    evidenceNote:
+      "The three repositories are public. The back office application itself is private, and its screenshots use synthetic data.",
   },
   stack: {
     metaTitle: "Stack",

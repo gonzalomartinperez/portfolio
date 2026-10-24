@@ -29,11 +29,13 @@ export type SiteCopy = {
     education: string;
     contact: string;
     caseStudy: string;
+    pequeversoCaseStudy: string;
   };
   actions: {
     seeWork: string;
     getInTouch: string;
     readCaseStudy: string;
+    viewCaseStudy: string;
     fullExperience: string;
     fullStack: string;
     academicRecord: string;
@@ -109,6 +111,18 @@ export type SiteCopy = {
     galleryPrevious: string;
     galleryNext: string;
     galleryPosition: (current: number, total: number) => string;
+  };
+  pequeverso: {
+    metaTitle: string;
+    metaDescription: string;
+    architectureHeading: string;
+    architectureCaption: string;
+    decisionsHeading: string;
+    galleryHeading: string;
+    galleryCaption: string;
+    galleryLabel: string;
+    evidenceHeading: string;
+    evidenceNote: string;
   };
   stack: {
     metaTitle: string;
