@@ -62,6 +62,16 @@
   text-decoration: none;
 }
 
+@media (width < 52rem), (pointer: coarse) {
+  .list {
+    gap: 0;
+  }
+  .link {
+    display: flex;
+    min-block-size: 44px;
+  }
+}
+
 .link:hover {
   color: var(--accent);
   text-decoration: underline;

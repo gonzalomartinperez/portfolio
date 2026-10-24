@@ -41,6 +41,6 @@
 @media (width < 52rem) {
   .option {
     min-block-size: 44px;
-    min-inline-size: 38px;
+    min-inline-size: 44px;
   }
 }
