@@ -25,18 +25,6 @@
   text-wrap: balance;
 }
 
-/* Opaque chip: the hero sits over the scene, so the link carries its own background. */
-.cvLink {
-  background: var(--surface-base);
-  border: 1px solid var(--line-subtle);
-  border-radius: 999px;
-  color: var(--text-primary);
-  font-size: var(--text-small);
-  margin-top: 0.75rem;
-  padding: 0.375rem 0.875rem;
-  text-underline-offset: 0.2em;
-}
-
 .name {
   font-size: clamp(2.25rem, 4.3vw, 4.5rem);
   font-weight: 400;
