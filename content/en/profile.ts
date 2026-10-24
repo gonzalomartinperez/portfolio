@@ -17,14 +17,13 @@ export const profile = {
   availability: "Open to remote opportunities and available for interviews",
 
   /** The five-second message. Kept to one clause per idea. */
-  headline:
-    "I turn complex AI, fintech, and blockchain systems into reliable, fast products built for users.",
+  headline: "I build LLM agents for production, and the evals that show they work.",
 
   intro:
-    "I’m Gonzalo, a software engineer specializing in applied AI and end-to-end product development. I turn ideas into useful products, from AI agents and backend services to web and mobile apps.",
+    "I’m Gonzalo, an AI engineer who owns the whole product: the agents and their evals, plus the backend, web and mobile app around them.",
 
   summary:
-    "At Rampy, a fintech and blockchain startup, I build an agentic system that connects users with digital assets, swaps, vaults, and perpetual markets. I develop the web and mobile experiences, APIs, and integrations behind it. In production, observed average app startup dropped from about 7–8 seconds to 1–2 seconds.",
+    "At Rampy, a US fintech startup, I’m the sole engineer. I built a multilingual AI assistant that passes 90%+ of a 3,000+ case eval suite and answers with native UI that links straight into swap, vault and perps flows.",
 
   /**
    * Retained because structured forms elsewhere ask for it, and deliberately not published:
@@ -76,7 +75,7 @@ export const resumeLinks: EvidenceLink[] = [
 ];
 
 export const openTo = [
-  "AI engineering: agentic systems, RAG/GraphRAG and LLM integration",
+  "AI engineering: LLM agents, evals, RAG/GraphRAG and LLM integration",
   "Software, backend and full-stack engineering",
   "Product engineering with end-to-end ownership",
 ];

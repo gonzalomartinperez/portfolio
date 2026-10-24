@@ -233,7 +233,7 @@ for (const locale of ["", "/es"]) {
         "Neo4j",
         "Vertex AI",
         "DeepInfra",
-        "OpenAI",
+        "Claude API",
       ]) {
         await expect(page.locator("#rampy figure")).toContainText(technology);
       }

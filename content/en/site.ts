@@ -45,20 +45,23 @@ export const siteCopy: SiteCopy = {
     avatarInteraction: "Interact with Gonzalo’s avatar",
     principles: [
       {
-        title: "Performance",
-        description: "Measured latency, fast startup and efficient use of resources.",
+        title: "Evals first",
+        description:
+          "Quality is measured on representative scenarios, and evals gate each release.",
       },
       {
-        title: "Scalability",
-        description: "Clear service boundaries, asynchronous work and deliberate data access.",
+        title: "Grounded answers",
+        description:
+          "Retrieval and tools instead of guesses, with clear limits on what an agent can do.",
       },
       {
-        title: "Maintainability",
-        description: "Readable code, reusable components and documented decisions.",
+        title: "Latency and cost budgets",
+        description:
+          "Response time and tokens are product metrics, checked with load tests and evals.",
       },
       {
-        title: "Software quality",
-        description: "Automated tests, agent evaluations and human review before delivery.",
+        title: "End-to-end ownership",
+        description: "From the agent and the API to the app and its behavior in production.",
       },
     ],
     principlesLabel: "Engineering principles",
@@ -66,9 +69,9 @@ export const siteCopy: SiteCopy = {
   },
   home: {
     whoEyebrow: "Who I am",
-    whoHeading: "From complex systems to real products",
+    whoHeading: "From AI agents to the product around them",
     whoParagraph:
-      "My work spans AI-powered agentic systems, APIs and enterprise back offices, websites, and mobile apps. I follow the full journey: understand user needs, design the architecture, build and test, deploy, and monitor the product in production.",
+      "Most of my work is with LangGraph, Claude, RAG and LangSmith: agents that call real tools, retrieval grounded in the business context and evals that decide what ships. I also build the APIs, back offices, web and mobile apps around them, from user needs and architecture through testing, deployment and monitoring.",
     factCurrently: "Currently",
     factExperience: "Experience",
     factBasedIn: "Based in",
@@ -91,18 +94,20 @@ export const siteCopy: SiteCopy = {
     closingHeading: "Let's talk",
     closingInvitation: "Let’s talk about your product.",
     closingAvailability: "I’m open to fully remote opportunities.",
-    closingBody: "Looking for someone who combines software engineering with applied AI?",
+    closingBody:
+      "Building an AI product and need someone who can own it from the agent to production?",
   },
   about: aboutCopy,
   work: {
     metaTitle: "Work",
     metaDescription:
-      "Professional experience and selected projects: production AI at Rampy, event pipelines at Payway, " +
-      "an enterprise permissions back office, independent product engineering, and Filomena.",
+      "Professional experience and selected projects: LLM agents and evals at Rampy, a GraphRAG " +
+      "assistant and event pipelines at Payway, an enterprise permissions back office, " +
+      "independent product engineering, and Filomena.",
     eyebrow: "Work",
     title: "Experience and selected projects",
     intro: (length, asOf) =>
-      `${length} of professional experience as of ${asOf}, building products across fintech, enterprise systems and applied AI.`,
+      `${length} of professional experience as of ${asOf}, shipping AI agents, fintech products and enterprise systems to production.`,
     experienceHeading: "Professional experience",
     projectsEyebrow: "Selected projects",
     projectsHeading: "Explore the product in detail",
@@ -187,8 +192,8 @@ export const siteCopy: SiteCopy = {
   contact: {
     metaTitle: "Contact",
     metaDescription:
-      "Get in touch with Gonzalo Martin Perez — software, AI and product engineer, open to " +
-      "remote roles. Email, LinkedIn and GitHub.",
+      "Get in touch with Gonzalo Martin Perez, AI engineer, software engineer and product " +
+      "engineer, open to remote roles. Email, LinkedIn and GitHub.",
     eyebrow: "Contact",
     title: "Let's talk",
     intro:

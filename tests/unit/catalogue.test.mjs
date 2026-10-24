@@ -185,8 +185,17 @@ test("additional Rampy confirmations retain their integration evidence", () => {
   }
   assert.deepEqual(
     getTechnology("openai-api")?.evidence.map(({ href }) => href),
-    ["/work#rampy", "/work#teamcubation"],
+    ["/work#teamcubation"],
   );
+  assert.deepEqual(
+    getTechnology("claude-api")?.evidence.map(({ href }) => href),
+    ["/work#rampy", "/work#independent"],
+  );
+  assert.deepEqual(
+    getTechnology("clean-architecture")?.evidence.map(({ href }) => href),
+    ["/work#rampy"],
+  );
+  assert.equal(getTechnology("hexagonal-architecture"), undefined);
   assert.deepEqual(
     getTechnology("graphrag")?.evidence.map(({ href }) => href),
     ["/work#rampy", "/work#teamcubation"],
