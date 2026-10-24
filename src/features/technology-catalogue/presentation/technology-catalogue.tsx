@@ -110,7 +110,7 @@ export function TechnologyCatalogue({
                       {technology.evidence.map((evidence) => (
                         <Link href={evidence.href} key={evidence.href}>
                           {evidence.label}
-                          <span aria-hidden="true"> ↗</span>
+                          <span aria-hidden="true">{"\u00a0"}↗</span>
                         </Link>
                       ))}
                     </div>

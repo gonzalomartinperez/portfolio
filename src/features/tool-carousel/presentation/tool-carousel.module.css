@@ -120,6 +120,16 @@
   color: var(--accent);
   text-underline-offset: 0.25em;
 }
+
+/* Standalone links get a 44px touch target where touch is likely. */
+@media (width < 52rem), (pointer: coarse) {
+  .catalogue {
+    align-items: center;
+    display: inline-flex;
+    gap: 0.25em;
+    min-block-size: 44px;
+  }
+}
 @media (max-width: 640px) {
   .tile {
     min-height: 4rem;

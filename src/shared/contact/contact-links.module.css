@@ -8,6 +8,17 @@
   max-width: 100%;
 }
 
+/* Stacked channels share one width on phones instead of following their text lengths. */
+@media (width < 40rem) {
+  .list > li {
+    flex: 1 1 100%;
+  }
+  .list .link {
+    justify-content: flex-start;
+    width: 100%;
+  }
+}
+
 .chip {
   background: #f4f6f9;
   border-radius: 50%;

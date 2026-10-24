@@ -40,7 +40,7 @@ layout.
 ## Design and decisions
 
 - Case-study styles moved from `filomena.module.css` to a shared `case-study.module.css`.
-  Before this change the heading had a centred `22ch` box while `.prose` stayed at the left
+  Before this change the heading had a centered `22ch` box while `.prose` stayed at the left
   edge (measured at 1440 px: heading x=471, prose x=137, caption x=345). All three now use
   the content column's left edge, capped at `--measure-text`; wide elements keep the frame.
 - `GalleryCarousel` accepts optional `flows`, defaulting to the existing Filomena flows, so
