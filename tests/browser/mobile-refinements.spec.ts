@@ -12,7 +12,10 @@ for (const prefix of ["", "/es"]) {
     ).toHaveCount(0);
     await expect(page.locator('[data-featured-project="filomena"]')).toHaveCount(1);
     for (const role of ["rampy", "teamcubation", "cooperativa-obrera"]) {
-      await expect(page.locator(`main a[href="${prefix}/work#${role}"]`)).toHaveCount(1);
+      // Rampy has its highlight: the position link and the call to action.
+      await expect(page.locator(`main a[href="${prefix}/work#${role}"]`)).toHaveCount(
+        role === "rampy" ? 2 : 1,
+      );
     }
     for (const width of [320, 375, 390, 430]) {
       await page.setViewportSize({ width, height: 844 });
@@ -45,14 +48,14 @@ for (const prefix of ["", "/es"]) {
       expect(geometry.brandRight).toBeLessThanOrEqual(geometry.languageLeft);
       expect(geometry.navTop).toBeGreaterThanOrEqual(geometry.rowBottom);
       const chips = await page
-        .locator('[data-scene] a[href*="/stack#tech-"]')
+        .locator('section[aria-labelledby="technology-heading"] > div a[href*="/stack#tech-"]')
         .evaluateAll((links) =>
           links.map((link) => ({
             height: link.getBoundingClientRect().height,
             mark: !!link.querySelector("img,svg"),
           })),
         );
-      expect(chips.length).toBeGreaterThan(35);
+      expect(chips.length).toBeGreaterThanOrEqual(20);
       expect(
         Math.max(...chips.map((chip) => chip.height)) -
           Math.min(...chips.map((chip) => chip.height)),

@@ -204,8 +204,8 @@ test("every catalogue entry has a logo or a labelled-context illustration", asyn
   await page.goto("/");
   await expect(
     page
-      .locator("[data-scene]")
-      .getByRole("link", { name: "LangGraph", exact: true, includeHidden: true }),
+      .locator('section[aria-labelledby="technology-heading"] > div')
+      .getByRole("link", { name: "LangGraph", exact: true }),
   ).toHaveAttribute("href", "/stack#tech-langgraph");
 });
 

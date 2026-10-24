@@ -247,3 +247,45 @@
   min-width: 0;
   overflow-wrap: anywhere;
 }
+
+.highlight,
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: clamp(var(--space-5), 4vw, var(--space-7));
+}
+
+.projects {
+  display: grid;
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+@media (width >= 56rem) {
+  .projects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.evalCase {
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+
+.project :global(.actions) {
+  margin-top: auto;
+}
+
+.toolkit summary {
+  align-content: center;
+  color: var(--accent);
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.highlight,
+.projects {
+  margin-top: var(--space-5);
+}

@@ -5,7 +5,7 @@ import { highlightedTechnologyCatalog, technologyGroups } from "@content/technol
 import { buildCarouselRows } from "../domain/rows";
 import { ToolCarouselClient } from "./tool-carousel-client";
 
-export function ToolCarousel({ locale }: { locale: Locale }) {
+export function ToolCarousel({ locale, embedded }: { locale: Locale; embedded?: boolean }) {
   const rows = buildCarouselRows(highlightedTechnologyCatalog, technologyGroups);
-  return <ToolCarouselClient locale={locale} rows={rows} />;
+  return <ToolCarouselClient locale={locale} rows={rows} embedded={embedded} />;
 }

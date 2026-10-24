@@ -46,8 +46,8 @@
       "es": "CV en inglés"
     },
     "mime": "application/pdf",
-    "bytes": 73009,
-    "sha256": "a13261534ac732090244659e61ef085da86e8ac9e01cfa37b7c4036e7242cd9a"
+    "bytes": 73033,
+    "sha256": "20bd5d2ac4a021ece188d17986a1a1bb9c02c5cd76e277d861f384b23f017358"
   },
   {
     "href": "/gonzalo-martin-perez-ai-engineer-es.pdf",
@@ -56,7 +56,7 @@
       "es": "CV en español"
     },
     "mime": "application/pdf",
-    "bytes": 80554,
-    "sha256": "d8ac9dadb36741f95184e3e86e8a5a461ca7d8a6f2b4b2ef13f3678cfe9e9819"
+    "bytes": 80570,
+    "sha256": "aa979b10f4b9458e426c5cf263b03ff571400d31f2820485e2b76a52a739772e"
   }
 ]
