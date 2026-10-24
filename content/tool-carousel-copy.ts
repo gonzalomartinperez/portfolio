@@ -14,7 +14,7 @@ export const toolCarouselCopy: Record<
   es: {
     heading: "Herramientas con las que construyo",
     description:
-      "Todas las tecnologías que uso, agrupadas por capacidad. En el stack completo verás dónde apliqué cada una.",
+      "Las tecnologías que más uso, agrupadas por capacidad. El stack completo reúne todas y muestra dónde apliqué cada una.",
     pause: "Pausar tecnologías",
     resume: "Reanudar tecnologías",
     catalogue: "Explorar el stack completo",
@@ -23,7 +23,7 @@ export const toolCarouselCopy: Record<
   en: {
     heading: "Tools I build with",
     description:
-      "Every technology I use, grouped by capability. The full stack shows where I applied each one.",
+      "The technologies I use most, grouped by capability. The full stack lists all of them and where I applied each one.",
     pause: "Pause technologies",
     resume: "Resume technologies",
     catalogue: "Explore the full stack",

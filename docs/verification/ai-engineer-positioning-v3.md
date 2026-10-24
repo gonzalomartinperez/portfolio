@@ -51,3 +51,30 @@ Commands: `npm run check`, `npm run test:architecture` (inside check), `git diff
 and the content-relevant Chromium desktop and mobile specs ran locally; the full
 matrix runs in required CI. The `/es/cv` tagline stays in English because it comes from
 the reviewed CV source.
+
+## Restored technologies (AC-17)
+
+Date: 2026-10-24. Base: `origin/develop` at `649ed07`.
+
+Provenance: the owner's private career inventory
+(`career-ops/perfil/inventario-tecnologico.md`, updated 2026-10-03, from direct
+confirmations of 2026-09-20, 2026-09-26 and 2026-10-03) lists all eight for Rampy.
+Its scope wording, applied here:
+
+- Pydantic AI: language and API stack. Gemini: provider integration/configuration
+  and evaluation/selection or fallback between providers, without training
+  foundation models. MoonPay and ZeroDev: financial and Web3 integrations (fiat
+  on/off-ramp; smart accounts), without inferring custody or implementation of
+  every account-abstraction standard.
+- NumPy, pandas, PyTorch and TensorFlow: "application/integration of models,
+  processing and evaluation for agents and user experience". The inventory forbids
+  claiming training, fine-tuning, ML research or building own models with them.
+
+No private text is copied into public content; only the scope limits shape the labels.
+
+| Check | Evidence | Result |
+| --- | --- | --- |
+| Four integrations restored with Rampy evidence | `catalogue.test.mjs` restored-technologies case; records unchanged since before #194 | Pass |
+| ML libraries on `/stack` only, labelled application/integration use | Same case: in `publicTechnologyCatalog`, absent from `highlightedTechnologyCatalog` and the hero scene, absent from Rampy's stack; `tool-carousel.spec.ts` compares against the highlighted list | Pass |
+| No training claim | Labels and Rampy copy checked for "training" / "entrenamiento" / "fine-tun"; Fine-tuning keeps `/work` evidence only | Pass |
+| Visual | `/stack` screenshots at 1440 and 390 px in EN and ES | Pass |

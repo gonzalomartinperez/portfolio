@@ -62,6 +62,7 @@ into the first screen without redesigning layout, navigation or routes.
   through `publicTechnologyExclusions`; their source records stay. The hero keeps
   35 marks, replacing PyTorch, NumPy and pandas with LangSmith, Neo4j and GraphRAG.
   Fine-tuning stays a general skill with `/work` evidence, never Rampy.
+  Superseded by AC-17 after the owner's 2026-10-24 decision.
 - AC-11: No em dash remains in visible prose, labels, aria-labels or OG alt text.
   Languages read `Language: Level`; CV downloads read `English CV (PDF)` /
   `CV en inglés (PDF)`.
@@ -89,6 +90,14 @@ into the first screen without redesigning layout, navigation or routes.
   `Gonzalo-Martin-Perez-AI-Engineer-Resume.pdf` / `Gonzalo-Martin-Perez-AI-Engineer-CV.pdf`,
   and `content/cv-public.json` plus `content/public-documents.json` are regenerated
   from the approved inputs.
+- AC-17 (owner decision of 2026-10-24, "restore with criteria"): MoonPay, ZeroDev,
+  Google Gemini and Pydantic AI return to `/stack`, the carousel and the hero list
+  with their Rampy evidence link, as before AC-10. PyTorch, TensorFlow, NumPy and
+  pandas return only to `/stack`, with the evidence label "Rampy (application and
+  integration use)" / "Rampy (uso en aplicación e integración)". They are listed in
+  `catalogueOnlyTechnologies`, so they stay out of the hero scene, the home tool
+  carousel and Rampy's experience stack, and no copy claims model training.
+  Fine-tuning stays a general skill with `/work` evidence, never Rampy.
 
 Out of scope: the `/es/cv` tagline ("LLM agents, RAG & evals in production")
 comes from the reviewed CV export and is left for the next CV sync.
