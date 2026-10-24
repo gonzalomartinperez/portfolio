@@ -28,6 +28,8 @@ test("mobile navigation gives each centered label a content-aware share of the r
           const text = range.getBoundingClientRect();
           return {
             label: link.textContent,
+            textLeft: text.left,
+            textRight: text.right,
             left: rect.left,
             right: rect.right,
             width: rect.width,
@@ -55,6 +57,10 @@ test("mobile navigation gives each centered label a content-aware share of the r
       const cv = geometry.find((link) => link.label === "CV");
       expect(education?.width).toBeGreaterThan(cv?.width ?? 0);
       expect(geometry[0].left).toBeLessThan(1);
+      if (width >= 390) {
+        expect(geometry[0].textLeft).toBeGreaterThanOrEqual(16);
+        expect(width - (geometry.at(-1)?.textRight ?? width)).toBeGreaterThanOrEqual(16);
+      }
       expect(Math.max(...geometry.map((link) => link.right))).toBeLessThanOrEqual(width);
       expect(Math.min(...geometry.map((link) => link.height))).toBeGreaterThanOrEqual(44);
     }

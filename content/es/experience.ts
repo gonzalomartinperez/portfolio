@@ -12,7 +12,7 @@ export const roles: Role[] = [
     location: "Estados Unidos",
     arrangement: "Remote",
     context:
-      "Único ingeniero en una fintech estadounidense en etapa temprana que desarrolla una app no custodial de trading y rendimientos; trabajo directamente con los tres cofundadores. Me ocupo del asistente de IA multilingüe y de la suite de evaluación que habilita cada versión (3.000+ casos, 90% o más de aprobación), además del backend, la web y la app móvil.",
+      "Me ocupo de toda la ingeniería de una startup fintech y blockchain en etapa temprana cuya app no custodial acerca el mundo de los activos digitales (swaps, vaults de rendimiento, perpetuos y noticias de mercado) a cualquier persona mediante una interfaz generativa que vuelve simples los conceptos complejos. Trabajo directamente con los tres cofundadores y me ocupo del asistente de IA multilingüe y de la suite de evaluación que habilita cada versión (3.000+ casos, 90% o más de aprobación), además del backend, la web y la app móvil.",
     contributions: [
       "Construí un asistente de IA multilingüe (inglés, español y portugués) y la suite de evaluación que lo respalda: más de 1.000 escenarios replicados y traducidos a cada idioma (más de 3.000 casos), calificados en LangSmith con un LLM-as-a-judge validado contra revisión humana y de producto, y usados como requisito para cada release. Los agentes en producción aprueban el 90% o más en promedio. Un caso se aprueba cuando la respuesta es correcta y fundamentada, se usa la herramienta adecuada, el contrato estructurado para la interfaz es válido, se respetan los guardrails y la respuesta resuelve la necesidad del usuario en lenguaje simple.",
       "Diseñé el grafo multiagente en LangGraph, con ciclos, herramientas financieras, procesos en segundo plano, reintentos y recuperación ante fallos, y migré el stack agéntico desde Agno cuando los flujos se volvieron más complejos. Claude es el modelo principal, con DeepInfra y Vertex AI como proveedores de respaldo, recuperación con GraphRAG sobre Neo4j y PostgreSQL/pgvector, y memoria con Mem0. Al eliminar llamadas redundantes a herramientas y ajustar la memoria y el contexto, las respuestas pasaron a ser el doble de rápidas con un 40% menos de tokens, verificado con pruebas de carga y evaluaciones.",
@@ -31,7 +31,7 @@ export const roles: Role[] = [
       "Preparé infraestructura escalable con el objetivo de soportar miles de usuarios, organizando entornos, contenedores y controles operativos para acompañar el crecimiento del producto.",
     ],
     attribution:
-      "Único ingeniero desde septiembre de 2026, en colaboración directa con los fundadores y sobre el trabajo de los desarrolladores anteriores.",
+      "Me ocupo de toda la ingeniería desde septiembre de 2026, en colaboración directa con los fundadores y sobre el trabajo de los desarrolladores anteriores.",
     stack: technologyNames([
       "Python",
       "Solidity",
@@ -78,10 +78,10 @@ export const roles: Role[] = [
           "Promedio global de los agentes en producción sobre más de 1.000 escenarios en inglés, español y portugués, calificados en LangSmith con un LLM-as-a-judge validado contra revisión humana y de producto.",
       },
       {
-        value: "≥2×",
+        value: "2×",
         label: "respuestas más rápidas en flujos agénticos optimizados",
         qualifier:
-          "Medido con pruebas de carga y evaluaciones en flujos agénticos optimizados comparables.",
+          "Al menos 2×, medido con pruebas de carga y evaluaciones en flujos agénticos optimizados comparables.",
       },
       {
         value: "40%",
@@ -90,10 +90,10 @@ export const roles: Role[] = [
           "Medido con pruebas de carga y evaluaciones tras eliminar llamadas redundantes a herramientas y ajustar la memoria y el contexto; no es un benchmark de cada consulta.",
       },
       {
-        value: "≥2×",
+        value: "2×",
         label: "consultas financieras optimizadas más rápidas",
         qualifier:
-          "Mejora verificada mediante pruebas de carga para consultas optimizadas comparables de vaults, mercados y swaps en producción.",
+          "Al menos 2×, medido con pruebas de carga en consultas optimizadas comparables de vaults, mercados y swaps en producción.",
       },
       {
         value: "~1 h → 10 min",
@@ -117,7 +117,7 @@ export const roles: Role[] = [
     contributions: [
       "Construí un asistente con GraphRAG y su harness para responder consultas de comercios sobre promociones y políticas de la empresa desde el portal de comercios, conectados al BFF Spring WebFlux. Combinaba el contexto del grafo Neo4j con recuperación vectorial en PostgreSQL/pgvector mediante LangChain, LangGraph y OpenAI API, y aprobó el 95% o más de una suite de más de 500 casos, calificada en LangSmith con un LLM-as-a-judge validado contra revisión humana. Los guardrails lo mantenían en el dominio de promociones y evitaban fugas de datos; el asistente era de solo lectura y nunca ejecutaba operaciones comerciales.",
       "Entregué el pipeline orientado a eventos que ingirió 20M+ promociones históricas en producción, seguido de miles de promociones nuevas por día: un flujo serverless con Amazon S3, SQS y una Lambda Python/FastAPI con estrategias de procesamiento ordenado, conectada con microservicios Java/Spring Boot y Node.js/NestJS para cargar sus respectivas bases de datos PostgreSQL. La carga productiva completa se validó sin pérdida de datos.",
-      "Entregué la experiencia de promociones de punta a punta: un microfrontend React y TypeScript con Single-SPA, organizado por funcionalidades y con un design system, embebido como sección nativa del portal de comercios y conectado mediante un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS y proveedores.",
+      "Entregué la experiencia completa de promociones: un microfrontend React y TypeScript con Single-SPA, organizado por funcionalidades y con un design system, embebido como sección nativa del portal de comercios y conectado mediante un BFF Spring WebFlux a microservicios Java/Spring Boot y Node.js/NestJS y proveedores.",
       "Construí microservicios en Java/Spring Boot y TypeScript/Node.js/NestJS para ingerir, normalizar y procesar promociones de comercios, entidades financieras y proveedores, adaptando los contratos según cada integración.",
       "Construí herramientas en Python y Node.js para reejecutar cargas masivas de forma segura contra bases de datos locales aisladas, reconciliar resultados y exponer promociones fallidas y casos límite antes de cada release.",
       "Integré el portal HTTPS de comercios con los servicios HTTP internos de la empresa mediante Amazon API Gateway.",

@@ -93,3 +93,29 @@
 .marks > li {
   max-width: 100%;
 }
+.sceneSource,
+.groupToggle {
+  display: none;
+}
+/* Phones: each group collapses to its heading and count until the visitor opens it. */
+@media (width < 30rem) {
+  .group {
+    margin-bottom: 0;
+    padding-top: 0;
+  }
+  .groupName,
+  .group[data-expanded="false"] .marks {
+    display: none;
+  }
+  .groupToggle {
+    align-items: center;
+    background: none;
+    border: 0;
+    color: inherit;
+    display: flex;
+    font: inherit;
+    justify-content: space-between;
+    min-height: 44px;
+    width: 100%;
+  }
+}

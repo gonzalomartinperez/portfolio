@@ -45,6 +45,7 @@ export const siteCopy: SiteCopy = {
     pauseAnimation: "Pause animation",
     playAnimation: "Play animation",
     avatarInteraction: "Interact with Gonzalo’s avatar",
+    readCv: "or read the CV",
     principles: [
       {
         title: "Evals first",
@@ -74,6 +75,11 @@ export const siteCopy: SiteCopy = {
     whoHeading: "From AI agents to the product around them",
     whoParagraph:
       "Most of my work is with LangGraph, Claude, RAG and LangSmith: agents that call real tools, retrieval grounded in the business context and evals that decide what ships. I also build the APIs, back offices, web and mobile apps around them, from user needs and architecture through testing, deployment and monitoring.",
+    whoAssistant: {
+      lead: "My open-source ",
+      link: "Portfolio Assistant",
+      tail: " shows the same approach in public code: a bilingual RAG assistant with a 1,000-question eval bank.",
+    },
     factCurrently: "Currently",
     factExperience: "Experience",
     factBasedIn: "Based in",
@@ -167,6 +173,8 @@ export const siteCopy: SiteCopy = {
     fieldHeading: "The stack behind agents that ship",
     fieldIntro:
       "What I use in production, from LangGraph and evals to the APIs and apps around them.",
+    groupedHeading: "Grouped by what it does",
+    groupedIntro: "Each tool links to the role or project where I used it.",
     fieldLabel: "Technologies",
     noteHeading: "Experience behind the toolkit",
     noteScope:

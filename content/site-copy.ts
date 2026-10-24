@@ -50,6 +50,8 @@ export type SiteCopy = {
     pauseAnimation: string;
     playAnimation: string;
     avatarInteraction: string;
+    /** Text link under the hero buttons, not a third button. */
+    readCv: string;
     principles: { title: string; description: string }[];
     principlesLabel: string;
     principlesLink: string;
@@ -58,6 +60,8 @@ export type SiteCopy = {
     whoEyebrow: string;
     whoHeading: string;
     whoParagraph: string;
+    /** One sentence; `link` is the linked project name between `lead` and `tail`. */
+    whoAssistant: { lead: string; link: string; tail: string };
     factCurrently: string;
     factExperience: string;
     factBasedIn: string;
@@ -132,6 +136,9 @@ export type SiteCopy = {
     intro: string;
     fieldHeading: string;
     fieldIntro: string;
+    /** The grouped block below the animated constellation, so it does not repeat `fieldHeading`. */
+    groupedHeading: string;
+    groupedIntro: string;
     fieldLabel: string;
     noteHeading: string;
     noteScope: string;
