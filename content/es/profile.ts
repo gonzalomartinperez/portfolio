@@ -24,7 +24,7 @@ export const profile = {
     "Construyo agentes LLM para producción, y las evaluaciones que demuestran que funcionan.",
 
   intro:
-    "Soy Gonzalo, AI Engineer, y me ocupo del producto completo: los agentes y sus evaluaciones, además del backend, la web y la app móvil que los rodean.",
+    "Soy Gonzalo, AI Engineer: construyo agentes LLM y sus evaluaciones, además del backend, la web y la app móvil que los rodean.",
 
   summary:
     "En Rampy, una startup fintech y blockchain en etapa temprana, lidero la ingeniería. Construí un asistente de IA multilingüe que aprueba el 90% o más de una suite de evaluación de más de 3.000 casos y responde con componentes nativos que llevan directo a los flujos de swaps, vaults y perpetuos.",

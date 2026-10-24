@@ -17,13 +17,13 @@ export const profile = {
   availability: "Open to remote opportunities and available for interviews",
 
   /** First-screen proof, shown above the name. Each part stays on one line on phones. */
-  heroProof: ["Lead engineering at a fintech startup", "Remote from Argentina (UTC-3)"],
+  heroProof: ["Leading engineering at a fintech startup", "Remote from Argentina (UTC-3)"],
 
   /** The five-second message. Kept to one clause per idea. */
   headline: "I build LLM agents for production, and the evals that show they work.",
 
   intro:
-    "I’m Gonzalo, an AI engineer who owns the whole product: the agents and their evals, plus the backend, web and mobile app around them.",
+    "I’m Gonzalo, an AI engineer who builds LLM agents and their evals, plus the backend, web and mobile app around them.",
 
   summary:
     "At Rampy, an early-stage fintech and blockchain startup, I lead engineering. I built a multilingual AI assistant that passes 90%+ of a 3,000+ case eval suite and answers with native UI that links straight into swap, vault and perps flows.",
