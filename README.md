@@ -240,7 +240,7 @@ launch label and preserves the original source anchors and verification history.
 
 [Full-size light](docs/diagrams/delivery-flow-light.svg) · [Full-size dark](docs/diagrams/delivery-flow-dark.svg) · [Editable Mermaid source](docs/diagrams/delivery-flow.mmd)
 
-- **Deliberate scope:** no CMS, application database or third-party tracking SDK — static routes,
+- **Deliberate scope:** no CMS, application database or third-party tracking SDK: static routes,
   typed content, and client boundaries only where interaction actually requires them.
 - **Decisions written down:** the [design system](docs/design.md), specifications in
   [docs/specs](docs/specs/) and the [research note](docs/research/portfolio-2026-09-12.md)

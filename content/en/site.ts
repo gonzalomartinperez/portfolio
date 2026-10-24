@@ -94,6 +94,7 @@ export const siteCopy: SiteCopy = {
       qualifier:
         "Hyperliquid markets across crypto, indices, stocks and commodities, alongside swaps across 100+ tokens.",
     },
+    pequeversoStatus: "The assistant is implemented and evaluated; launch pending.",
     selectedEyebrow: "Selected work",
     selectedHeading: "Case studies and open-source work",
     workEyebrow: "Featured project",

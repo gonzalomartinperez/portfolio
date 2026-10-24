@@ -137,6 +137,7 @@ export function HomeView({ locale }: { locale: Locale }) {
             </h3>
             <p className={styles.featureContext}>{pequeversoCaseStudy.overview.body[0]}</p>
             <p className={styles.featureContext}>{pequeversoCaseStudy.built.body[2]}</p>
+            <p className={styles.featureContext}>{copy.home.pequeversoStatus}</p>
             <div className="actions">
               <Link className={buttonVariants()} href={localePath(locale, "/work/pequeverso")}>
                 {copy.actions.viewCaseStudy}
@@ -271,7 +272,7 @@ export function HomeView({ locale }: { locale: Locale }) {
                   </Link>{" "}
                   <span className={styles.roleCompany}>· {role.company}</span>
                 </p>
-                <p className={styles.roleContext}>{role.context}</p>
+                <p className={styles.roleContext}>{role.homeSummary ?? role.context}</p>
               </div>
             </li>
           ))}
