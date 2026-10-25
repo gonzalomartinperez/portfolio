@@ -130,7 +130,7 @@
               "id": "teamcubation",
               "title": "Teamcubation",
               "subtitle": "Software Engineer",
-              "details": ["Dec 2025 – Aug 2026", "Argentina · Remote"],
+              "details": ["Dec 2025 – Sep 2026", "Argentina · Remote"],
               "href": "https://teamcubation.com/",
               "keywords": [],
               "blocks": [
@@ -660,7 +660,7 @@
               "id": "teamcubation",
               "title": "Teamcubation",
               "subtitle": "Software Engineer",
-              "details": ["Dic 2025 – Ago 2026", "Argentina · Remoto"],
+              "details": ["Dic 2025 – Sep 2026", "Argentina · Remoto"],
               "href": "https://teamcubation.com/",
               "keywords": [],
               "blocks": [
@@ -1056,10 +1056,10 @@
   },
   "provenance": {
     "sourceSha256": "9c5fe865f69eae2c4261c1e5d1d63a211e4d417bdb3248fb1af60c453f627dcc",
-    "factsSha256": "a3899aa0ee9505c3c6498eab5915374349da291860e72af252835ce78e9be706",
+    "factsSha256": "df58fa4b67d6182e0e3fca609f46d350d26c790d705bde78da342220e37b6b44",
     "pdfSha256": {
-      "en": "e0030aef1d728deb836ae2373bc560908971a9216fb77f8ffb2529953f4c3a29",
-      "es": "16f295585f176aa797b2bd9a3eb61b46ffea41f20da88e801ed776b9dc32c030"
+      "en": "0d22399d0536ea4e2602be9443bd56043e50f23ebb575bb5bf44e27e2546ada2",
+      "es": "12dec1890c87ce76523e5acb96c208eaac6232388a2f8be37bc1f21b7b7b7d13"
     }
   }
 }
