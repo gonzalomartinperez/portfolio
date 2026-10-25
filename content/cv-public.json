@@ -38,7 +38,7 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Leading engineering at an early-stage fintech and blockchain startup whose non-custodial app opens digital assets to everyday people through a generative interface. Working directly with the three co-founders and with collaborators on blockchain and integrations, on a codebase I took over from earlier developers.",
+                      "text": "Leading engineering at an early-stage fintech and blockchain startup whose non-custodial app opens digital assets to everyday people through a generative interface. Working closely with the three founders and with specialists in blockchain and integrations.",
                       "bold": false,
                       "href": ""
                     }
@@ -568,7 +568,7 @@
                   "kind": "paragraph",
                   "runs": [
                     {
-                      "text": "Lidero la ingeniería de una startup fintech y blockchain cuya app no custodial acerca los activos digitales a cualquier persona mediante una interfaz generativa. Trabajo con los tres cofundadores y con colaboradores en blockchain e integraciones, sobre un código que tomé de desarrolladores anteriores.",
+                      "text": "Lidero la ingeniería de una startup fintech y blockchain cuya app no custodial acerca los activos digitales a cualquier persona mediante una interfaz generativa. Colaboro con los tres fundadores y con especialistas en blockchain e integraciones.",
                       "bold": false,
                       "href": ""
                     }
@@ -1055,11 +1055,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "b3378a43b1a113ad6fe5ae5202dd1791a922936dee8193680667b2ae9bc98753",
-    "factsSha256": "b01795e0ba34eef410816e3649343f41cc2810040af1d2ca50f4977a570d712d",
+    "sourceSha256": "9c5fe865f69eae2c4261c1e5d1d63a211e4d417bdb3248fb1af60c453f627dcc",
+    "factsSha256": "c0ace8e3616045965f2d439b96f9b22d653ac2fb7284be83a9a2f37a60008728",
     "pdfSha256": {
-      "en": "ded3b27a6be419424e7c471623717828f537a1b3fb0de9f52026532ff1688ff6",
-      "es": "12e20a2464b1c7e83783f559958f0676a256f57ad6af4b373c58e2a458d3e691"
+      "en": "afcc014414116bea379697bd0e86c3aa31f693089c8c9f3f3d3aaca6ed929153",
+      "es": "dddd18e0adc0537b7c89a485daaacd71d8bd508ca1a291689198540767bdb861"
     }
   }
 }
