@@ -14,7 +14,7 @@ export const roles: Role[] = [
     homeSummary:
       "Multilingual AI assistant, eval suite and the trading product around it, at an early-stage fintech and blockchain startup.",
     context:
-      "I lead engineering at Rampy, working directly with the three co-founders and with collaborators on blockchain and integrations. Rampy is an early-stage fintech and blockchain startup whose non-custodial app opens the world of digital assets (swaps, yield vaults, perps and market news) to everyday people through a generative interface that turns complex concepts into simple ones. I own the multilingual AI assistant and the eval suite that gates every release (3,000+ cases, 90%+ pass rate), plus the backend, web and mobile app.",
+      "I lead engineering at Rampy and work closely with the three founders and with specialists in blockchain and integrations. Rampy is an early-stage fintech and blockchain startup whose non-custodial app opens the world of digital assets (swaps, yield vaults, perps and market news) to everyday people through a generative interface that turns complex concepts into simple ones. I own the multilingual AI assistant and the eval suite that gates every release (3,000+ cases, 90%+ pass rate), plus the backend, web and mobile app.",
     contributions: [
       "Built a multilingual AI assistant (English, Spanish and Portuguese) and the eval suite behind it: 1,000+ scenarios replicated and translated into each language (3,000+ cases), graded in LangSmith by an LLM-as-a-judge validated against human and product review, and used as a release gate. Production agents pass 90%+ on average. A case passes when the answer is correct and grounded, the right tool is used, the structured contract for the UI is valid, guardrails hold and the reply solves the user’s need in plain language.",
       "Designed the multi-agent LangGraph graph, with cycles, financial tools, background workers, retries and failure recovery, and migrated the agentic stack from Agno as the flows grew. Claude is the primary model, with DeepInfra and Vertex AI as fallback providers, GraphRAG retrieval over Neo4j and PostgreSQL/pgvector, and Mem0 memory. Removing redundant tool calls and tightening memory and context made responses 2× faster with 40% fewer tokens, verified with load tests and evals.",
@@ -33,7 +33,7 @@ export const roles: Role[] = [
       "Prepared scalable infrastructure with the design goal of supporting thousands of users, organizing environments, containers and operational controls for product growth.",
     ],
     attribution:
-      "Leading engineering since September 2026, with the founders, collaborators on blockchain and integrations, and an experienced advisor on specific architecture decisions, building on the work of earlier developers.",
+      "Leading engineering since September 2026 with the founders, specialists in blockchain and integrations, and an experienced advisor on specific architecture decisions.",
     stack: technologyNames([
       "Python",
       "Solidity",

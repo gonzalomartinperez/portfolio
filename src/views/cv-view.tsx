@@ -16,7 +16,10 @@ type Run = { text: string; bold: boolean; href: string };
  * projection must stay byte-identical to that source, so the web page translates it here.
  */
 const focusTranslations: Partial<Record<Locale, Record<string, string>>> = {
-  es: { "LLM agents, RAG & evals in production": "Agentes LLM, RAG y evaluaciones en producción" },
+  es: {
+    "LLM Agents · Agentic AI · RAG · GraphRAG · LLM Evals":
+      "Agentes LLM · Agentic AI · RAG · GraphRAG · Evals de LLM",
+  },
 };
 type Block = { id: string; kind: string; runs: Run[] };
 
