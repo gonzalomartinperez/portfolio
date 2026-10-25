@@ -71,6 +71,8 @@ test("confirmed toolkit additions retain their applied experience context", () =
     "pandas",
     "numpy",
     "lifi",
+    "relay",
+    "alchemy",
     "hyperliquid",
     "moonpay",
     "cross-chain-bridges",
@@ -118,6 +120,8 @@ test("confirmed toolkit additions retain their applied experience context", () =
     ["SQL Model", "sqlmodel"],
     ["PydanticAI", "pydantic-ai"],
     ["LiFi", "lifi"],
+    ["Relay Link", "relay"],
+    ["Alchemy RPC", "alchemy"],
     ["Tracking", "product-analytics"],
   ])
     assert.equal(getTechnology(alias)?.id, id);

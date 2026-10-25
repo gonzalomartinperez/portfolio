@@ -123,6 +123,8 @@ and hidden from assistive technology.
 | --- | --- | --- |
 | `hyperliquid.png` | [Official site icon](https://hyperliquid.xyz/apple-touch-icon.png) · [brand kit](https://hyperliquid.gitbook.io/hyperliquid-docs/brand-kit) | Original 180px raster; original mint artwork on a dark tile. |
 | `lifi.svg` | [Official brand kit](https://li.fi/brand-guidelines) · [archive](https://framerusercontent.com/assets/6Uucr4NyFNh6ZRPoVFbUGjuXtQs.zip) | Original `SVG/icon_lifi_light.svg`, black symbol for white tiles; the guidelines allow the standalone icon in tight layouts. |
+| `relay.svg` | [Official brand assets](https://docs.relay.link/resources/brand-assets) · [Drive folder](https://drive.google.com/drive/folders/1cI223F-K1IR6Vumy7xJymLOkEbyyD0r5) | Original `SVG/symbol_violet.svg`, violet symbol for white tiles. |
+| `alchemy.svg` | [Official brand page](https://www.alchemy.com/brand) · [archive](https://media.alchemy.com/1702567897-alchemy-brand-assets.zip) | Original `Mark/Blue-gradient/alchemy-mark-blue-gradient.svg`, gradient mark for white tiles. |
 | `neo4j.svg` | [Official site icon](https://neo4j.com/safari-pinned-tab.svg?v=bOXynyJWa6a) | Original monochrome symbol served by Neo4j. |
 | `android-studio.svg` | [Android Studio](https://developer.android.com/static/studio/images/android-studio-stable.svg) | Official stable-channel IDE mark; intrinsic 60×60 viewport retained. |
 | `viem.png` | [Official documentation icon](https://viem.sh/icon-light.png) | Original light-background raster. |

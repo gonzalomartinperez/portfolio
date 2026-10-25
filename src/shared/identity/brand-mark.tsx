@@ -16,6 +16,8 @@ const localMarks = new Set([
   "stripe",
   "swift",
   "lifi",
+  "relay",
+  "alchemy",
   "pytest",
   "sentry",
   "expo",
