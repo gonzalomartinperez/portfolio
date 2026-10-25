@@ -78,7 +78,12 @@ test("experience architecture claims agree with the reviewed CV in both locales"
       if (slug === "rampy") {
         assert.match(role, /Clean Architecture/, `${locale}: Rampy uses Clean Architecture`);
         assert.match(cvCopy, /Clean Architecture/, `${locale}: CV Rampy architecture`);
-        assert.doesNotMatch(role, /hexagonal/i, `${locale}: Rampy no longer claims hexagonal`);
+        // Hexagonal is only an intermediate backend stage; Clean Architecture is the current one.
+        assert.match(
+          role,
+          /hexagonal \((?:ports and adapters|puertos y adaptadores)\) (?:and then|y luego a) Clean Architecture/,
+          `${locale}: Rampy presents hexagonal only as a stage before Clean Architecture`,
+        );
         assert.doesNotMatch(role, /OpenAI/, `${locale}: Rampy models come from Claude`);
         assert.ok(role.includes("Claude"), `${locale}: Rampy names its primary model`);
         for (const copy of [role, cvCopy]) {

@@ -61,6 +61,7 @@ const specificIllustrations: Record<string, string> = {
   "system-design": "network",
   "distributed-systems": "network",
   "clean-architecture": "blocks",
+  "hexagonal-architecture": "hexagon",
   "layered-architecture": "layers",
   mvc: "panels-top-left",
   "event-driven-architecture": "workflow",
