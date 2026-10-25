@@ -679,6 +679,36 @@ export const technologyCatalog: Technology[] = [
     ],
   },
   {
+    id: "relay",
+    icon: "relay",
+    name: "Relay",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    aliases: ["Relay Protocol", "Relay Link"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
+    id: "alchemy",
+    icon: "alchemy",
+    name: "Alchemy",
+    category: "fintech",
+    kind: "brand",
+    status: "applied",
+    aliases: ["Alchemy RPC"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
     id: "hyperliquid",
     icon: "hyperliquid",
     name: "Hyperliquid",
