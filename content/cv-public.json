@@ -6,7 +6,7 @@
       "name": "Gonzalo Martin Perez",
       "email": "gonzalomartinperez2002@gmail.com",
       "location": "Bahía Blanca, Argentina · 100% Remote (UTC-3) · English B2",
-      "headline": "AI Engineer | Software Engineer | Product Engineer | LLM agents, RAG & evals in production | LangGraph · LangSmith · Claude API · MCP · Python · TypeScript · FastAPI · AWS",
+      "headline": "AI Engineer | Software Engineer | Product Engineer | LLM Agents · Agentic AI · RAG · GraphRAG · LLM Evals | LangChain · LangGraph · OpenAI API · Claude API · MCP · pgvector · Python · TypeScript · FastAPI · Next.js · AWS",
       "summaryTitle": "Professional Summary",
       "summary": [
         {
@@ -531,7 +531,7 @@
       "name": "Gonzalo Martin Perez",
       "email": "gonzalomartinperez2002@gmail.com",
       "location": "Bahía Blanca, Argentina · 100% remoto (UTC-3) · Inglés B2",
-      "headline": "AI Engineer | Software Engineer | Product Engineer | LLM agents, RAG & evals in production | LangGraph · LangSmith · Claude API · MCP · Python · TypeScript · FastAPI · AWS",
+      "headline": "AI Engineer | Software Engineer | Product Engineer | LLM Agents · Agentic AI · RAG · GraphRAG · LLM Evals | LangChain · LangGraph · OpenAI API · Claude API · MCP · pgvector · Python · TypeScript · FastAPI · Next.js · AWS",
       "summaryTitle": "Resumen profesional",
       "summary": [
         {
@@ -1055,11 +1055,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "2efaefd8617988166f75c78f9bc653181903a50d336701366eaf4e30a4ae20d1",
+    "sourceSha256": "b3378a43b1a113ad6fe5ae5202dd1791a922936dee8193680667b2ae9bc98753",
     "factsSha256": "b01795e0ba34eef410816e3649343f41cc2810040af1d2ca50f4977a570d712d",
     "pdfSha256": {
-      "en": "dc2815a7450c8a1514858716cca3068e3215262dce0f3af635453fe8cf61c51e",
-      "es": "1f4be8c17d60499f706fe9ad417e878fd3bde49aa45548ce95f6c47643a39be1"
+      "en": "ded3b27a6be419424e7c471623717828f537a1b3fb0de9f52026532ff1688ff6",
+      "es": "12e20a2464b1c7e83783f559958f0676a256f57ad6af4b373c58e2a458d3e691"
     }
   }
 }
