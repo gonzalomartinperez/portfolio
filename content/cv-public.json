@@ -530,7 +530,7 @@
     "es": {
       "name": "Gonzalo Martin Perez",
       "email": "gonzalomartinperez2002@gmail.com",
-      "location": "Bahía Blanca, Argentina · 100% remoto (UTC-3) · Inglés B2",
+      "location": "Bahía Blanca, Argentina · 100% remoto · Inglés B2",
       "headline": "AI Engineer | Software Engineer | Product Engineer | LLM Agents · Agentic AI · RAG · GraphRAG · LLM Evals | LangChain · LangGraph · OpenAI API · Claude API · MCP · pgvector · Python · TypeScript · FastAPI · Next.js · AWS",
       "summaryTitle": "Resumen profesional",
       "summary": [
@@ -1056,10 +1056,10 @@
   },
   "provenance": {
     "sourceSha256": "9c5fe865f69eae2c4261c1e5d1d63a211e4d417bdb3248fb1af60c453f627dcc",
-    "factsSha256": "c0ace8e3616045965f2d439b96f9b22d653ac2fb7284be83a9a2f37a60008728",
+    "factsSha256": "a3899aa0ee9505c3c6498eab5915374349da291860e72af252835ce78e9be706",
     "pdfSha256": {
-      "en": "afcc014414116bea379697bd0e86c3aa31f693089c8c9f3f3d3aaca6ed929153",
-      "es": "dddd18e0adc0537b7c89a485daaacd71d8bd508ca1a291689198540767bdb861"
+      "en": "e0030aef1d728deb836ae2373bc560908971a9216fb77f8ffb2529953f4c3a29",
+      "es": "16f295585f176aa797b2bd9a3eb61b46ffea41f20da88e801ed776b9dc32c030"
     }
   }
 }
