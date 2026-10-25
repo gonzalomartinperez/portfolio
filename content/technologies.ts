@@ -1451,6 +1451,20 @@ export const technologyCatalog: Technology[] = [
     ],
   },
   {
+    id: "hexagonal-architecture",
+    name: "Hexagonal Architecture",
+    category: "data",
+    kind: "concept",
+    status: "applied",
+    aliases: ["Ports and adapters"],
+    evidence: [
+      {
+        label: "Rampy",
+        href: "/work#rampy",
+      },
+    ],
+  },
+  {
     id: "layered-architecture",
     name: "Layered architecture",
     category: "data",
