@@ -206,7 +206,10 @@ test("additional Rampy confirmations retain their integration evidence", () => {
     getTechnology("clean-architecture")?.evidence.map(({ href }) => href),
     ["/work#rampy"],
   );
-  assert.equal(getTechnology("hexagonal-architecture"), undefined);
+  assert.deepEqual(
+    getTechnology("hexagonal-architecture")?.evidence.map(({ href }) => href),
+    ["/work#rampy"],
+  );
   assert.deepEqual(
     getTechnology("graphrag")?.evidence.map(({ href }) => href),
     ["/work#rampy", "/work#teamcubation", "/work/pequeverso"],
