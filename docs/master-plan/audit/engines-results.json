@@ -1,0 +1,182 @@
+[
+ {
+  "name": "webkit-iphone15",
+  "route": "/",
+  "theme": "dark",
+  "sw": 393,
+  "cw": 393,
+  "dt": "dark",
+  "overflow": false
+ },
+ {
+  "name": "webkit-iphone15",
+  "route": "/work/filomena",
+  "theme": "dark",
+  "sw": 393,
+  "cw": 393,
+  "dt": "dark",
+  "overflow": false
+ },
+ {
+  "name": "webkit-iphone15",
+  "route": "/cv",
+  "theme": "dark",
+  "sw": 393,
+  "cw": 393,
+  "dt": "dark",
+  "overflow": false
+ },
+ {
+  "name": "webkit-iphone15",
+  "route": "/contact",
+  "theme": "dark",
+  "sw": 393,
+  "cw": 393,
+  "dt": "dark",
+  "overflow": false
+ },
+ {
+  "name": "webkit-iphone15",
+  "route": "/es",
+  "theme": "dark",
+  "sw": 393,
+  "cw": 393,
+  "dt": "dark",
+  "overflow": false
+ },
+ {
+  "name": "webkit-iphone15",
+  "route": "/",
+  "theme": "light",
+  "sw": 393,
+  "cw": 393,
+  "dt": "light",
+  "overflow": false
+ },
+ {
+  "name": "webkit-iphone15",
+  "route": "/work/filomena",
+  "theme": "light",
+  "sw": 393,
+  "cw": 393,
+  "dt": "light",
+  "overflow": false
+ },
+ {
+  "name": "webkit-iphone15",
+  "route": "/cv",
+  "theme": "light",
+  "sw": 393,
+  "cw": 393,
+  "dt": "light",
+  "overflow": false
+ },
+ {
+  "name": "webkit-iphone15",
+  "route": "/contact",
+  "theme": "light",
+  "sw": 393,
+  "cw": 393,
+  "dt": "light",
+  "overflow": false
+ },
+ {
+  "name": "webkit-iphone15",
+  "route": "/es",
+  "theme": "light",
+  "sw": 393,
+  "cw": 393,
+  "dt": "light",
+  "overflow": false
+ },
+ {
+  "name": "firefox-390",
+  "route": "/",
+  "theme": "dark",
+  "sw": 390,
+  "cw": 390,
+  "dt": "dark",
+  "overflow": false
+ },
+ {
+  "name": "firefox-390",
+  "route": "/work/filomena",
+  "theme": "dark",
+  "sw": 390,
+  "cw": 390,
+  "dt": "dark",
+  "overflow": false
+ },
+ {
+  "name": "firefox-390",
+  "route": "/cv",
+  "theme": "dark",
+  "sw": 390,
+  "cw": 390,
+  "dt": "dark",
+  "overflow": false
+ },
+ {
+  "name": "firefox-390",
+  "route": "/contact",
+  "theme": "dark",
+  "sw": 390,
+  "cw": 390,
+  "dt": "dark",
+  "overflow": false
+ },
+ {
+  "name": "firefox-390",
+  "route": "/es",
+  "theme": "dark",
+  "sw": 390,
+  "cw": 390,
+  "dt": "dark",
+  "overflow": false
+ },
+ {
+  "name": "firefox-390",
+  "route": "/",
+  "theme": "light",
+  "sw": 390,
+  "cw": 390,
+  "dt": "light",
+  "overflow": false
+ },
+ {
+  "name": "firefox-390",
+  "route": "/work/filomena",
+  "theme": "light",
+  "sw": 390,
+  "cw": 390,
+  "dt": "light",
+  "overflow": false
+ },
+ {
+  "name": "firefox-390",
+  "route": "/cv",
+  "theme": "light",
+  "sw": 390,
+  "cw": 390,
+  "dt": "light",
+  "overflow": false
+ },
+ {
+  "name": "firefox-390",
+  "route": "/contact",
+  "theme": "light",
+  "sw": 390,
+  "cw": 390,
+  "dt": "light",
+  "overflow": false
+ },
+ {
+  "name": "firefox-390",
+  "route": "/es",
+  "theme": "light",
+  "sw": 390,
+  "cw": 390,
+  "dt": "light",
+  "overflow": false
+ }
+]
