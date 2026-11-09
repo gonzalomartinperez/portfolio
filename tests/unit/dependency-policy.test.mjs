@@ -421,8 +421,9 @@ test("published workflow remains read-only and executes only trusted policy sour
   assert.match(manifest.scripts.check, /npm run check:quality/);
   assert.match(manifest.scripts["check:quality"], /npm run test:dependency-policy/);
   const config = readFileSync(new URL("../../.github/dependabot.yml", import.meta.url), "utf8");
-  assert.equal((config.match(/labels: \["dependencies:manual"\]/g) ?? []).length, 3);
-  assert.equal((config.match(/rebase-strategy: auto/g) ?? []).length, 3);
+  assert.equal((config.match(/labels: \["dependencies"\]/g) ?? []).length, 3);
+  assert.equal((config.match(/multi-ecosystem-group: weekly-all/g) ?? []).length, 3);
+  assert.equal((config.match(/open-pull-requests-limit: 1/g) ?? []).length, 3);
   assert.match(config, /directory: \/tools\/api-contract/);
 });
 

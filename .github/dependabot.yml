@@ -1,40 +1,48 @@
 version: 2
+multi-ecosystem-groups:
+  weekly-all:
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: America/Argentina/Buenos_Aires
+    target-branch: develop
 updates:
   - package-ecosystem: npm
     directory: /
-    target-branch: develop
-    rebase-strategy: auto
-    labels: ["dependencies:manual"]
+    multi-ecosystem-group: weekly-all
+    patterns: ["*"]
+    open-pull-requests-limit: 1
+    labels: ["dependencies"]
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+      semver-patch-days: 3
     ignore:
+      # Hostinger runs Node 24; @types/node stays on the 24 line.
       - dependency-name: "@types/node"
-        update-types: [version-update:semver-major]
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 3
-    groups:
-      type-patches:
-        patterns: ["@types/react", "@types/react-dom"]
-        update-types: [patch]
-      reviewed-updates:
-        exclude-patterns: ["@types/react", "@types/react-dom"]
-        update-types: [minor, patch]
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: npm
     directory: /tools/api-contract
-    target-branch: develop
-    rebase-strategy: auto
-    labels: ["dependencies:manual"]
+    multi-ecosystem-group: weekly-all
+    patterns: ["*"]
+    open-pull-requests-limit: 1
+    labels: ["dependencies"]
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+      semver-patch-days: 3
     ignore:
       # The generator consumes the TS5 compiler API; review compiler majors with its upgrade.
       - dependency-name: typescript
-        update-types: [version-update:semver-major]
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 2
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
-    target-branch: develop
-    rebase-strategy: auto
-    labels: ["dependencies:manual"]
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 3
+    multi-ecosystem-group: weekly-all
+    patterns: ["*"]
+    open-pull-requests-limit: 1
+    labels: ["dependencies"]
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+      semver-patch-days: 3
