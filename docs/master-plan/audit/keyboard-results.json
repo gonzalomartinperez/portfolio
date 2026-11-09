@@ -1,406 +1,278 @@
 [
- {
-  "route": "/",
-  "label": "desktop",
-  "theme": "dark",
-  "firstCtaStops": [
-   [
-    4,
-    "Work",
-    "/work"
-   ],
-   [
-    8,
-    "Contact",
-    "/contact"
-   ],
-   [
-    12,
-    "Explore my work",
-    "/work"
-   ],
-   [
-    13,
-    "Get in touch",
-    "/contact"
-   ]
-  ],
-  "noVisibleFocusStops": 0,
-  "first12": [
-   "1:Skip to content|2px solid",
-   "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
-   "3:About|2px solid",
-   "4:Work|2px solid",
-   "5:Stack|2px solid",
-   "6:Education|2px solid",
-   "7:CV|2px solid",
-   "8:Contact|2px solid",
-   "9:EN|2px solid",
-   "10:ES|2px solid",
-   "11:Switch to light theme|2px solid",
-   "12:Explore my work|2px solid"
-  ],
-  "small": [
-   "15:AI Engineer 94x20",
-   "18:See the eval bank on GitHub (opens in a  230x20",
-   "26:AI Engineer 94x20",
-   "27:Software Engineer 155x20",
-   "28:AI Engineer & Full-Stack Developer 288x20",
-   "29:Software Engineer 155x20",
-   "31:Portfolio Assistant 146x20"
-  ]
- },
- {
-  "route": "/es",
-  "label": "desktop",
-  "theme": "dark",
-  "firstCtaStops": [
-   [
-    4,
-    "Trabajo",
-    "/es/work"
-   ],
-   [
-    8,
-    "Contacto",
-    "/es/contact"
-   ],
-   [
-    12,
-    "Ver mi experiencia",
-    "/es/work"
-   ],
-   [
-    13,
-    "Contactarme",
-    "/es/contact"
-   ]
-  ],
-  "noVisibleFocusStops": 0,
-  "first12": [
-   "1:Ir al contenido|2px solid",
-   "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
-   "3:Sobre mí|2px solid",
-   "4:Trabajo|2px solid",
-   "5:Stack|2px solid",
-   "6:Educación|2px solid",
-   "7:CV|2px solid",
-   "8:Contacto|2px solid",
-   "9:EN|2px solid",
-   "10:ES|2px solid",
-   "11:Cambiar al tema claro|2px solid",
-   "12:Ver mi experiencia|2px solid"
-  ],
-  "small": [
-   "15:AI Engineer 94x20",
-   "18:Ver el banco de evaluación en GitHub (se 304x20",
-   "26:AI Engineer 94x20",
-   "27:Software Engineer 155x20",
-   "28:AI Engineer & Full-Stack Developer 288x20",
-   "29:Software Engineer 155x20",
-   "31:Portfolio Assistant 146x20"
-  ]
- },
- {
-  "route": "/",
-  "label": "desktop",
-  "theme": "light",
-  "firstCtaStops": [
-   [
-    4,
-    "Work",
-    "/work"
-   ],
-   [
-    8,
-    "Contact",
-    "/contact"
-   ],
-   [
-    12,
-    "Explore my work",
-    "/work"
-   ],
-   [
-    13,
-    "Get in touch",
-    "/contact"
-   ]
-  ],
-  "noVisibleFocusStops": 0,
-  "first12": [
-   "1:Skip to content|2px solid",
-   "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
-   "3:About|2px solid",
-   "4:Work|2px solid",
-   "5:Stack|2px solid",
-   "6:Education|2px solid",
-   "7:CV|2px solid",
-   "8:Contact|2px solid",
-   "9:EN|2px solid",
-   "10:ES|2px solid",
-   "11:Switch to dark theme|2px solid",
-   "12:Explore my work|2px solid"
-  ],
-  "small": [
-   "15:AI Engineer 94x20",
-   "18:See the eval bank on GitHub (opens in a  230x20",
-   "26:AI Engineer 94x20",
-   "27:Software Engineer 155x20",
-   "28:AI Engineer & Full-Stack Developer 288x20",
-   "29:Software Engineer 155x20",
-   "31:Portfolio Assistant 146x20"
-  ]
- },
- {
-  "route": "/es",
-  "label": "desktop",
-  "theme": "light",
-  "firstCtaStops": [
-   [
-    4,
-    "Trabajo",
-    "/es/work"
-   ],
-   [
-    8,
-    "Contacto",
-    "/es/contact"
-   ],
-   [
-    12,
-    "Ver mi experiencia",
-    "/es/work"
-   ],
-   [
-    13,
-    "Contactarme",
-    "/es/contact"
-   ]
-  ],
-  "noVisibleFocusStops": 0,
-  "first12": [
-   "1:Ir al contenido|2px solid",
-   "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
-   "3:Sobre mí|2px solid",
-   "4:Trabajo|2px solid",
-   "5:Stack|2px solid",
-   "6:Educación|2px solid",
-   "7:CV|2px solid",
-   "8:Contacto|2px solid",
-   "9:EN|2px solid",
-   "10:ES|2px solid",
-   "11:Cambiar al tema oscuro|2px solid",
-   "12:Ver mi experiencia|2px solid"
-  ],
-  "small": [
-   "15:AI Engineer 94x20",
-   "18:Ver el banco de evaluación en GitHub (se 304x20",
-   "26:AI Engineer 94x20",
-   "27:Software Engineer 155x20",
-   "28:AI Engineer & Full-Stack Developer 288x20",
-   "29:Software Engineer 155x20",
-   "31:Portfolio Assistant 146x20"
-  ]
- },
- {
-  "route": "/",
-  "label": "mobile",
-  "theme": "dark",
-  "firstCtaStops": [
-   [
-    4,
-    "Work",
-    "/work"
-   ],
-   [
-    8,
-    "Contact",
-    "/contact"
-   ],
-   [
-    12,
-    "Explore my work",
-    "/work"
-   ],
-   [
-    13,
-    "Get in touch",
-    "/contact"
-   ]
-  ],
-  "noVisibleFocusStops": 0,
-  "first12": [
-   "1:Skip to content|2px solid",
-   "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
-   "3:About|2px solid",
-   "4:Work|2px solid",
-   "5:Stack|2px solid",
-   "6:Education|2px solid",
-   "7:CV|2px solid",
-   "8:Contact|2px solid",
-   "9:EN|2px solid",
-   "10:ES|2px solid",
-   "11:Switch to light theme|2px solid",
-   "12:Explore my work|2px solid"
-  ],
-  "small": [
-   "15:AI Engineer 94x20",
-   "26:AI Engineer 94x20",
-   "27:Software Engineer 155x20",
-   "28:AI Engineer & Full-Stack Developer 288x20",
-   "29:Software Engineer 155x20",
-   "31:Portfolio Assistant 146x20"
-  ]
- },
- {
-  "route": "/es",
-  "label": "mobile",
-  "theme": "dark",
-  "firstCtaStops": [
-   [
-    4,
-    "Trabajo",
-    "/es/work"
-   ],
-   [
-    8,
-    "Contacto",
-    "/es/contact"
-   ],
-   [
-    12,
-    "Ver mi experiencia",
-    "/es/work"
-   ],
-   [
-    13,
-    "Contactarme",
-    "/es/contact"
-   ]
-  ],
-  "noVisibleFocusStops": 0,
-  "first12": [
-   "1:Ir al contenido|2px solid",
-   "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
-   "3:Sobre mí|2px solid",
-   "4:Trabajo|2px solid",
-   "5:Stack|2px solid",
-   "6:Educación|2px solid",
-   "7:CV|2px solid",
-   "8:Contacto|2px solid",
-   "9:EN|2px solid",
-   "10:ES|2px solid",
-   "11:Cambiar al tema claro|2px solid",
-   "12:Ver mi experiencia|2px solid"
-  ],
-  "small": [
-   "15:AI Engineer 94x20",
-   "26:AI Engineer 94x20",
-   "27:Software Engineer 155x20",
-   "28:AI Engineer & Full-Stack Developer 288x20",
-   "29:Software Engineer 155x20",
-   "31:Portfolio Assistant 146x20"
-  ]
- },
- {
-  "route": "/",
-  "label": "mobile",
-  "theme": "light",
-  "firstCtaStops": [
-   [
-    4,
-    "Work",
-    "/work"
-   ],
-   [
-    8,
-    "Contact",
-    "/contact"
-   ],
-   [
-    12,
-    "Explore my work",
-    "/work"
-   ],
-   [
-    13,
-    "Get in touch",
-    "/contact"
-   ]
-  ],
-  "noVisibleFocusStops": 0,
-  "first12": [
-   "1:Skip to content|2px solid",
-   "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
-   "3:About|2px solid",
-   "4:Work|2px solid",
-   "5:Stack|2px solid",
-   "6:Education|2px solid",
-   "7:CV|2px solid",
-   "8:Contact|2px solid",
-   "9:EN|2px solid",
-   "10:ES|2px solid",
-   "11:Switch to dark theme|2px solid",
-   "12:Explore my work|2px solid"
-  ],
-  "small": [
-   "15:AI Engineer 94x20",
-   "26:AI Engineer 94x20",
-   "27:Software Engineer 155x20",
-   "28:AI Engineer & Full-Stack Developer 288x20",
-   "29:Software Engineer 155x20",
-   "31:Portfolio Assistant 146x20"
-  ]
- },
- {
-  "route": "/es",
-  "label": "mobile",
-  "theme": "light",
-  "firstCtaStops": [
-   [
-    4,
-    "Trabajo",
-    "/es/work"
-   ],
-   [
-    8,
-    "Contacto",
-    "/es/contact"
-   ],
-   [
-    12,
-    "Ver mi experiencia",
-    "/es/work"
-   ],
-   [
-    13,
-    "Contactarme",
-    "/es/contact"
-   ]
-  ],
-  "noVisibleFocusStops": 0,
-  "first12": [
-   "1:Ir al contenido|2px solid",
-   "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
-   "3:Sobre mí|2px solid",
-   "4:Trabajo|2px solid",
-   "5:Stack|2px solid",
-   "6:Educación|2px solid",
-   "7:CV|2px solid",
-   "8:Contacto|2px solid",
-   "9:EN|2px solid",
-   "10:ES|2px solid",
-   "11:Cambiar al tema oscuro|2px solid",
-   "12:Ver mi experiencia|2px solid"
-  ],
-  "small": [
-   "15:AI Engineer 94x20",
-   "26:AI Engineer 94x20",
-   "27:Software Engineer 155x20",
-   "28:AI Engineer & Full-Stack Developer 288x20",
-   "29:Software Engineer 155x20",
-   "31:Portfolio Assistant 146x20"
-  ]
- }
+  {
+    "route": "/",
+    "label": "desktop",
+    "theme": "dark",
+    "firstCtaStops": [
+      [4, "Work", "/work"],
+      [8, "Contact", "/contact"],
+      [12, "Explore my work", "/work"],
+      [13, "Get in touch", "/contact"]
+    ],
+    "noVisibleFocusStops": 0,
+    "first12": [
+      "1:Skip to content|2px solid",
+      "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
+      "3:About|2px solid",
+      "4:Work|2px solid",
+      "5:Stack|2px solid",
+      "6:Education|2px solid",
+      "7:CV|2px solid",
+      "8:Contact|2px solid",
+      "9:EN|2px solid",
+      "10:ES|2px solid",
+      "11:Switch to light theme|2px solid",
+      "12:Explore my work|2px solid"
+    ],
+    "small": [
+      "15:AI Engineer 94x20",
+      "18:See the eval bank on GitHub (opens in a  230x20",
+      "26:AI Engineer 94x20",
+      "27:Software Engineer 155x20",
+      "28:AI Engineer & Full-Stack Developer 288x20",
+      "29:Software Engineer 155x20",
+      "31:Portfolio Assistant 146x20"
+    ]
+  },
+  {
+    "route": "/es",
+    "label": "desktop",
+    "theme": "dark",
+    "firstCtaStops": [
+      [4, "Trabajo", "/es/work"],
+      [8, "Contacto", "/es/contact"],
+      [12, "Ver mi experiencia", "/es/work"],
+      [13, "Contactarme", "/es/contact"]
+    ],
+    "noVisibleFocusStops": 0,
+    "first12": [
+      "1:Ir al contenido|2px solid",
+      "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
+      "3:Sobre mí|2px solid",
+      "4:Trabajo|2px solid",
+      "5:Stack|2px solid",
+      "6:Educación|2px solid",
+      "7:CV|2px solid",
+      "8:Contacto|2px solid",
+      "9:EN|2px solid",
+      "10:ES|2px solid",
+      "11:Cambiar al tema claro|2px solid",
+      "12:Ver mi experiencia|2px solid"
+    ],
+    "small": [
+      "15:AI Engineer 94x20",
+      "18:Ver el banco de evaluación en GitHub (se 304x20",
+      "26:AI Engineer 94x20",
+      "27:Software Engineer 155x20",
+      "28:AI Engineer & Full-Stack Developer 288x20",
+      "29:Software Engineer 155x20",
+      "31:Portfolio Assistant 146x20"
+    ]
+  },
+  {
+    "route": "/",
+    "label": "desktop",
+    "theme": "light",
+    "firstCtaStops": [
+      [4, "Work", "/work"],
+      [8, "Contact", "/contact"],
+      [12, "Explore my work", "/work"],
+      [13, "Get in touch", "/contact"]
+    ],
+    "noVisibleFocusStops": 0,
+    "first12": [
+      "1:Skip to content|2px solid",
+      "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
+      "3:About|2px solid",
+      "4:Work|2px solid",
+      "5:Stack|2px solid",
+      "6:Education|2px solid",
+      "7:CV|2px solid",
+      "8:Contact|2px solid",
+      "9:EN|2px solid",
+      "10:ES|2px solid",
+      "11:Switch to dark theme|2px solid",
+      "12:Explore my work|2px solid"
+    ],
+    "small": [
+      "15:AI Engineer 94x20",
+      "18:See the eval bank on GitHub (opens in a  230x20",
+      "26:AI Engineer 94x20",
+      "27:Software Engineer 155x20",
+      "28:AI Engineer & Full-Stack Developer 288x20",
+      "29:Software Engineer 155x20",
+      "31:Portfolio Assistant 146x20"
+    ]
+  },
+  {
+    "route": "/es",
+    "label": "desktop",
+    "theme": "light",
+    "firstCtaStops": [
+      [4, "Trabajo", "/es/work"],
+      [8, "Contacto", "/es/contact"],
+      [12, "Ver mi experiencia", "/es/work"],
+      [13, "Contactarme", "/es/contact"]
+    ],
+    "noVisibleFocusStops": 0,
+    "first12": [
+      "1:Ir al contenido|2px solid",
+      "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
+      "3:Sobre mí|2px solid",
+      "4:Trabajo|2px solid",
+      "5:Stack|2px solid",
+      "6:Educación|2px solid",
+      "7:CV|2px solid",
+      "8:Contacto|2px solid",
+      "9:EN|2px solid",
+      "10:ES|2px solid",
+      "11:Cambiar al tema oscuro|2px solid",
+      "12:Ver mi experiencia|2px solid"
+    ],
+    "small": [
+      "15:AI Engineer 94x20",
+      "18:Ver el banco de evaluación en GitHub (se 304x20",
+      "26:AI Engineer 94x20",
+      "27:Software Engineer 155x20",
+      "28:AI Engineer & Full-Stack Developer 288x20",
+      "29:Software Engineer 155x20",
+      "31:Portfolio Assistant 146x20"
+    ]
+  },
+  {
+    "route": "/",
+    "label": "mobile",
+    "theme": "dark",
+    "firstCtaStops": [
+      [4, "Work", "/work"],
+      [8, "Contact", "/contact"],
+      [12, "Explore my work", "/work"],
+      [13, "Get in touch", "/contact"]
+    ],
+    "noVisibleFocusStops": 0,
+    "first12": [
+      "1:Skip to content|2px solid",
+      "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
+      "3:About|2px solid",
+      "4:Work|2px solid",
+      "5:Stack|2px solid",
+      "6:Education|2px solid",
+      "7:CV|2px solid",
+      "8:Contact|2px solid",
+      "9:EN|2px solid",
+      "10:ES|2px solid",
+      "11:Switch to light theme|2px solid",
+      "12:Explore my work|2px solid"
+    ],
+    "small": [
+      "15:AI Engineer 94x20",
+      "26:AI Engineer 94x20",
+      "27:Software Engineer 155x20",
+      "28:AI Engineer & Full-Stack Developer 288x20",
+      "29:Software Engineer 155x20",
+      "31:Portfolio Assistant 146x20"
+    ]
+  },
+  {
+    "route": "/es",
+    "label": "mobile",
+    "theme": "dark",
+    "firstCtaStops": [
+      [4, "Trabajo", "/es/work"],
+      [8, "Contacto", "/es/contact"],
+      [12, "Ver mi experiencia", "/es/work"],
+      [13, "Contactarme", "/es/contact"]
+    ],
+    "noVisibleFocusStops": 0,
+    "first12": [
+      "1:Ir al contenido|2px solid",
+      "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
+      "3:Sobre mí|2px solid",
+      "4:Trabajo|2px solid",
+      "5:Stack|2px solid",
+      "6:Educación|2px solid",
+      "7:CV|2px solid",
+      "8:Contacto|2px solid",
+      "9:EN|2px solid",
+      "10:ES|2px solid",
+      "11:Cambiar al tema claro|2px solid",
+      "12:Ver mi experiencia|2px solid"
+    ],
+    "small": [
+      "15:AI Engineer 94x20",
+      "26:AI Engineer 94x20",
+      "27:Software Engineer 155x20",
+      "28:AI Engineer & Full-Stack Developer 288x20",
+      "29:Software Engineer 155x20",
+      "31:Portfolio Assistant 146x20"
+    ]
+  },
+  {
+    "route": "/",
+    "label": "mobile",
+    "theme": "light",
+    "firstCtaStops": [
+      [4, "Work", "/work"],
+      [8, "Contact", "/contact"],
+      [12, "Explore my work", "/work"],
+      [13, "Get in touch", "/contact"]
+    ],
+    "noVisibleFocusStops": 0,
+    "first12": [
+      "1:Skip to content|2px solid",
+      "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
+      "3:About|2px solid",
+      "4:Work|2px solid",
+      "5:Stack|2px solid",
+      "6:Education|2px solid",
+      "7:CV|2px solid",
+      "8:Contact|2px solid",
+      "9:EN|2px solid",
+      "10:ES|2px solid",
+      "11:Switch to dark theme|2px solid",
+      "12:Explore my work|2px solid"
+    ],
+    "small": [
+      "15:AI Engineer 94x20",
+      "26:AI Engineer 94x20",
+      "27:Software Engineer 155x20",
+      "28:AI Engineer & Full-Stack Developer 288x20",
+      "29:Software Engineer 155x20",
+      "31:Portfolio Assistant 146x20"
+    ]
+  },
+  {
+    "route": "/es",
+    "label": "mobile",
+    "theme": "light",
+    "firstCtaStops": [
+      [4, "Trabajo", "/es/work"],
+      [8, "Contacto", "/es/contact"],
+      [12, "Ver mi experiencia", "/es/work"],
+      [13, "Contactarme", "/es/contact"]
+    ],
+    "noVisibleFocusStops": 0,
+    "first12": [
+      "1:Ir al contenido|2px solid",
+      "2:Gonzalo Martin Perez, AI Engineer | Soft|2px solid",
+      "3:Sobre mí|2px solid",
+      "4:Trabajo|2px solid",
+      "5:Stack|2px solid",
+      "6:Educación|2px solid",
+      "7:CV|2px solid",
+      "8:Contacto|2px solid",
+      "9:EN|2px solid",
+      "10:ES|2px solid",
+      "11:Cambiar al tema oscuro|2px solid",
+      "12:Ver mi experiencia|2px solid"
+    ],
+    "small": [
+      "15:AI Engineer 94x20",
+      "26:AI Engineer 94x20",
+      "27:Software Engineer 155x20",
+      "28:AI Engineer & Full-Stack Developer 288x20",
+      "29:Software Engineer 155x20",
+      "31:Portfolio Assistant 146x20"
+    ]
+  }
 ]

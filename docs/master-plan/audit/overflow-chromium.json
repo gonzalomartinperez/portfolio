@@ -1,3166 +1,2998 @@
 [
- {
-  "route": "/",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 24797,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482",
-   "UL.tool-carousel_rail__veI9P r=18375",
-   "LI. r=367",
-   "A.tool-carousel_tile__9lLbg r=367"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 24160,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 21313,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482",
-   "TABLE.case-study_changes__nauHJ r=596",
-   "CAPTION. r=596",
-   "THEAD. r=596"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 13477,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 8538,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 9126,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 30752,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 10241,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 3063,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 25739,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482",
-   "UL.tool-carousel_rail__veI9P r=18375",
-   "LI. r=367",
-   "A.tool-carousel_tile__9lLbg r=367"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 25217,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 22113,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482",
-   "TABLE.case-study_changes__nauHJ r=596",
-   "CAPTION. r=596",
-   "THEAD. r=596"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 14426,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 9299,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 9537,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 31185,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 10911,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "dark",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 3182,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 21497,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550",
-   "UL.tool-carousel_rail__veI9P r=18375",
-   "LI. r=577",
-   "A.tool-carousel_tile__9lLbg r=577"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 21119,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 20441,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550",
-   "TABLE.case-study_changes__nauHJ r=596",
-   "CAPTION. r=596",
-   "THEAD. r=596"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 12973,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 7267,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 8188,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 29994,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 8803,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 2875,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 22077,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550",
-   "UL.tool-carousel_rail__veI9P r=18375",
-   "LI. r=577",
-   "A.tool-carousel_tile__9lLbg r=577"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 22114,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 21296,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550",
-   "TABLE.case-study_changes__nauHJ r=596",
-   "CAPTION. r=596",
-   "THEAD. r=596"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 13626,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 7807,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 8408,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 30155,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 9170,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "dark",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 2947,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 16264,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785",
-   "UL.tool-carousel_rail__veI9P r=19148",
-   "LI. r=823"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 15620,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 12566,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 7913,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 5263,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 6748,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 16738,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 5963,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 2255,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 16626,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785",
-   "UL.tool-carousel_rail__veI9P r=19148",
-   "LI. r=823"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 16161,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 13043,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 8205,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 5420,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 6802,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 16766,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 6136,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "dark",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 2279,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 13078,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159",
-   "UL.tool-carousel_rail__veI9P r=19161",
-   "LI. r=1180",
-   "A.tool-carousel_tile__9lLbg r=1180"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 14878,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 12961,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 7978,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 4137,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 5733,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 10984,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 5119,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 1766,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 13382,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159",
-   "UL.tool-carousel_rail__veI9P r=19161",
-   "LI. r=1180",
-   "A.tool-carousel_tile__9lLbg r=1180"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 15498,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 13217,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 8274,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 4196,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 5863,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 11008,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 5176,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "dark",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 1814,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 12749,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585",
-   "UL.tool-carousel_rail__veI9P r=19247",
-   "LI. r=1610",
-   "A.tool-carousel_tile__9lLbg r=1610"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 13662,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 14264,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585",
-   "DIV.react-flow__viewport xyflow__viewport react-flow__ r=1472",
-   "DIV.react-flow__edges r=1472",
-   "svg.[object SVGAnimatedString] r=1472"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 8541,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 4065,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 5868,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 9342,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 4851,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 1792,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 13002,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585",
-   "UL.tool-carousel_rail__veI9P r=19247",
-   "LI. r=1610",
-   "A.tool-carousel_tile__9lLbg r=1610"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 14125,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 14446,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585",
-   "DIV.react-flow__viewport xyflow__viewport react-flow__ r=1472",
-   "DIV.react-flow__edges r=1472",
-   "svg.[object SVGAnimatedString] r=1472"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 8747,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 4180,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 6034,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 9506,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 4937,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "dark",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 1840,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 12855,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055",
-   "UL.tool-carousel_rail__veI9P r=19487",
-   "LI. r=2022",
-   "A.tool-carousel_tile__9lLbg r=2022"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 13690,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 14281,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 8558,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 4112,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 5947,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 9369,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 4853,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 1807,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 13108,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055",
-   "UL.tool-carousel_rail__veI9P r=19487",
-   "LI. r=2022",
-   "A.tool-carousel_tile__9lLbg r=2022"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 14154,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 14464,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 8764,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 4229,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 6115,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 9533,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 4940,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "dark",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 1855,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 24857,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482",
-   "UL.tool-carousel_rail__veI9P r=18375",
-   "LI. r=367",
-   "A.tool-carousel_tile__9lLbg r=367"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 24160,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 21313,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482",
-   "TABLE.case-study_changes__nauHJ r=596",
-   "CAPTION. r=596",
-   "THEAD. r=596"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 13477,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 8538,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 9126,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 30752,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 10241,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 3063,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 25739,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482",
-   "UL.tool-carousel_rail__veI9P r=18375",
-   "LI. r=367",
-   "A.tool-carousel_tile__9lLbg r=367"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 25217,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 22113,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482",
-   "TABLE.case-study_changes__nauHJ r=596",
-   "CAPTION. r=596",
-   "THEAD. r=596"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 14426,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 9299,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 9537,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 31185,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 10911,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "light",
-  "w": 320,
-  "sw": 305,
-  "cw": 320,
-  "bsw": 305,
-  "docH": 3182,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=353",
-   "DIV.ambient-field_starsFar__2KGXW r=482"
-  ],
-  "overflow": false
- },
- {
-  "route": "/",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 21557,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550",
-   "UL.tool-carousel_rail__veI9P r=18375",
-   "LI. r=577",
-   "A.tool-carousel_tile__9lLbg r=577"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 21119,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 20441,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550",
-   "TABLE.case-study_changes__nauHJ r=596",
-   "CAPTION. r=596",
-   "THEAD. r=596"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 12973,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 7267,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 8188,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 29994,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 8803,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 2875,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 22077,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550",
-   "UL.tool-carousel_rail__veI9P r=18375",
-   "LI. r=577",
-   "A.tool-carousel_tile__9lLbg r=577"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 22114,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 21296,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550",
-   "TABLE.case-study_changes__nauHJ r=596",
-   "CAPTION. r=596",
-   "THEAD. r=596"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 13626,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 7807,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 8408,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 30155,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 9170,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "light",
-  "w": 390,
-  "sw": 375,
-  "cw": 390,
-  "bsw": 375,
-  "docH": 2947,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=423",
-   "DIV.ambient-field_starsFar__2KGXW r=550"
-  ],
-  "overflow": false
- },
- {
-  "route": "/",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 16264,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785",
-   "UL.tool-carousel_rail__veI9P r=19148",
-   "LI. r=823"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 15620,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 12566,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 7913,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 5263,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 6748,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 16738,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 5963,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 2255,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 16626,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785",
-   "UL.tool-carousel_rail__veI9P r=19148",
-   "LI. r=823"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 16161,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 13043,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 8205,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 5420,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 6802,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 16766,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 6136,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "light",
-  "w": 768,
-  "sw": 753,
-  "cw": 768,
-  "bsw": 753,
-  "docH": 2279,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=801",
-   "DIV.ambient-field_starsFar__2KGXW r=946",
-   "SPAN.solar-system_corona__ujZe_ r=785"
-  ],
-  "overflow": false
- },
- {
-  "route": "/",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 13078,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159",
-   "UL.tool-carousel_rail__veI9P r=19161",
-   "LI. r=1180",
-   "A.tool-carousel_tile__9lLbg r=1180"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 14898,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 12961,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 7978,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 4137,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 5733,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 10984,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 5119,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 1766,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 13382,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159",
-   "UL.tool-carousel_rail__veI9P r=19161",
-   "LI. r=1180",
-   "A.tool-carousel_tile__9lLbg r=1180"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 15498,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 13217,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 8274,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 4196,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 5863,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 11008,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 5176,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "light",
-  "w": 1024,
-  "sw": 1009,
-  "cw": 1024,
-  "bsw": 1009,
-  "docH": 1814,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1057",
-   "DIV.ambient-field_starsFar__2KGXW r=1159"
-  ],
-  "overflow": false
- },
- {
-  "route": "/",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 12749,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585",
-   "UL.tool-carousel_rail__veI9P r=19247",
-   "LI. r=1610",
-   "A.tool-carousel_tile__9lLbg r=1610"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 13682,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 14264,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585",
-   "DIV.react-flow__viewport xyflow__viewport react-flow__ r=1472",
-   "DIV.react-flow__edges r=1472",
-   "svg.[object SVGAnimatedString] r=1472"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 8541,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 4065,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 5868,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 9342,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 4851,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 1792,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 13002,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585",
-   "UL.tool-carousel_rail__veI9P r=19247",
-   "LI. r=1610",
-   "A.tool-carousel_tile__9lLbg r=1610"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 14125,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 14446,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585",
-   "DIV.react-flow__viewport xyflow__viewport react-flow__ r=1472",
-   "DIV.react-flow__edges r=1472",
-   "svg.[object SVGAnimatedString] r=1472"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 8747,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 4180,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 6034,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 9506,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 4937,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "light",
-  "w": 1440,
-  "sw": 1425,
-  "cw": 1440,
-  "bsw": 1425,
-  "docH": 1840,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1473",
-   "DIV.ambient-field_starsFar__2KGXW r=1585"
-  ],
-  "overflow": false
- },
- {
-  "route": "/",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 12855,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055",
-   "UL.tool-carousel_rail__veI9P r=19487",
-   "LI. r=2022",
-   "A.tool-carousel_tile__9lLbg r=2022"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 13710,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/filomena",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 14281,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 8558,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/about",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 4112,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/education",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 5947,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/stack",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 9369,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/cv",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 4853,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/contact",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 1807,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 13108,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055",
-   "UL.tool-carousel_rail__veI9P r=19487",
-   "LI. r=2022",
-   "A.tool-carousel_tile__9lLbg r=2022"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 14154,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 14464,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 8764,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/about",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 4229,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/education",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 6115,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/stack",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 9533,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/cv",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 4940,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- },
- {
-  "route": "/es/contact",
-  "theme": "light",
-  "w": 1920,
-  "sw": 1905,
-  "cw": 1920,
-  "bsw": 1905,
-  "docH": 1855,
-  "wide": [
-   "DIV.ambient-field_starsNear__glguN r=1953",
-   "DIV.ambient-field_starsFar__2KGXW r=2055"
-  ],
-  "overflow": false
- }
+  {
+    "route": "/",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 24797,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=353",
+      "DIV.ambient-field_starsFar__2KGXW r=482",
+      "UL.tool-carousel_rail__veI9P r=18375",
+      "LI. r=367",
+      "A.tool-carousel_tile__9lLbg r=367"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 24160,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 21313,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=353",
+      "DIV.ambient-field_starsFar__2KGXW r=482",
+      "TABLE.case-study_changes__nauHJ r=596",
+      "CAPTION. r=596",
+      "THEAD. r=596"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 13477,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 8538,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 9126,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 30752,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 10241,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 3063,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 25739,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=353",
+      "DIV.ambient-field_starsFar__2KGXW r=482",
+      "UL.tool-carousel_rail__veI9P r=18375",
+      "LI. r=367",
+      "A.tool-carousel_tile__9lLbg r=367"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 25217,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 22113,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=353",
+      "DIV.ambient-field_starsFar__2KGXW r=482",
+      "TABLE.case-study_changes__nauHJ r=596",
+      "CAPTION. r=596",
+      "THEAD. r=596"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 14426,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 9299,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 9537,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 31185,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 10911,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "dark",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 3182,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 21497,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=423",
+      "DIV.ambient-field_starsFar__2KGXW r=550",
+      "UL.tool-carousel_rail__veI9P r=18375",
+      "LI. r=577",
+      "A.tool-carousel_tile__9lLbg r=577"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 21119,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 20441,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=423",
+      "DIV.ambient-field_starsFar__2KGXW r=550",
+      "TABLE.case-study_changes__nauHJ r=596",
+      "CAPTION. r=596",
+      "THEAD. r=596"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 12973,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 7267,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 8188,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 29994,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 8803,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 2875,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 22077,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=423",
+      "DIV.ambient-field_starsFar__2KGXW r=550",
+      "UL.tool-carousel_rail__veI9P r=18375",
+      "LI. r=577",
+      "A.tool-carousel_tile__9lLbg r=577"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 22114,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 21296,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=423",
+      "DIV.ambient-field_starsFar__2KGXW r=550",
+      "TABLE.case-study_changes__nauHJ r=596",
+      "CAPTION. r=596",
+      "THEAD. r=596"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 13626,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 7807,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 8408,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 30155,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 9170,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "dark",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 2947,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 16264,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785",
+      "UL.tool-carousel_rail__veI9P r=19148",
+      "LI. r=823"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 15620,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 12566,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 7913,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 5263,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 6748,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 16738,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 5963,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 2255,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 16626,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785",
+      "UL.tool-carousel_rail__veI9P r=19148",
+      "LI. r=823"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 16161,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 13043,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 8205,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 5420,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 6802,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 16766,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 6136,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "dark",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 2279,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 13078,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159",
+      "UL.tool-carousel_rail__veI9P r=19161",
+      "LI. r=1180",
+      "A.tool-carousel_tile__9lLbg r=1180"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 14878,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 12961,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 7978,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 4137,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 5733,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 10984,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 5119,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 1766,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 13382,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159",
+      "UL.tool-carousel_rail__veI9P r=19161",
+      "LI. r=1180",
+      "A.tool-carousel_tile__9lLbg r=1180"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 15498,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 13217,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 8274,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 4196,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 5863,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 11008,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 5176,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "dark",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 1814,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 12749,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585",
+      "UL.tool-carousel_rail__veI9P r=19247",
+      "LI. r=1610",
+      "A.tool-carousel_tile__9lLbg r=1610"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 13662,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 14264,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585",
+      "DIV.react-flow__viewport xyflow__viewport react-flow__ r=1472",
+      "DIV.react-flow__edges r=1472",
+      "svg.[object SVGAnimatedString] r=1472"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 8541,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 4065,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 5868,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 9342,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 4851,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 1792,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 13002,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585",
+      "UL.tool-carousel_rail__veI9P r=19247",
+      "LI. r=1610",
+      "A.tool-carousel_tile__9lLbg r=1610"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 14125,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 14446,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585",
+      "DIV.react-flow__viewport xyflow__viewport react-flow__ r=1472",
+      "DIV.react-flow__edges r=1472",
+      "svg.[object SVGAnimatedString] r=1472"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 8747,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 4180,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 6034,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 9506,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 4937,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "dark",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 1840,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 12855,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055",
+      "UL.tool-carousel_rail__veI9P r=19487",
+      "LI. r=2022",
+      "A.tool-carousel_tile__9lLbg r=2022"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 13690,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 14281,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 8558,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 4112,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 5947,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 9369,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 4853,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 1807,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 13108,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055",
+      "UL.tool-carousel_rail__veI9P r=19487",
+      "LI. r=2022",
+      "A.tool-carousel_tile__9lLbg r=2022"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 14154,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 14464,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 8764,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 4229,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 6115,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 9533,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 4940,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "dark",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 1855,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 24857,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=353",
+      "DIV.ambient-field_starsFar__2KGXW r=482",
+      "UL.tool-carousel_rail__veI9P r=18375",
+      "LI. r=367",
+      "A.tool-carousel_tile__9lLbg r=367"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 24160,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 21313,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=353",
+      "DIV.ambient-field_starsFar__2KGXW r=482",
+      "TABLE.case-study_changes__nauHJ r=596",
+      "CAPTION. r=596",
+      "THEAD. r=596"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 13477,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 8538,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 9126,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 30752,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 10241,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 3063,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 25739,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=353",
+      "DIV.ambient-field_starsFar__2KGXW r=482",
+      "UL.tool-carousel_rail__veI9P r=18375",
+      "LI. r=367",
+      "A.tool-carousel_tile__9lLbg r=367"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 25217,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 22113,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=353",
+      "DIV.ambient-field_starsFar__2KGXW r=482",
+      "TABLE.case-study_changes__nauHJ r=596",
+      "CAPTION. r=596",
+      "THEAD. r=596"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 14426,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 9299,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 9537,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 31185,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 10911,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "light",
+    "w": 320,
+    "sw": 305,
+    "cw": 320,
+    "bsw": 305,
+    "docH": 3182,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=353", "DIV.ambient-field_starsFar__2KGXW r=482"],
+    "overflow": false
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 21557,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=423",
+      "DIV.ambient-field_starsFar__2KGXW r=550",
+      "UL.tool-carousel_rail__veI9P r=18375",
+      "LI. r=577",
+      "A.tool-carousel_tile__9lLbg r=577"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 21119,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 20441,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=423",
+      "DIV.ambient-field_starsFar__2KGXW r=550",
+      "TABLE.case-study_changes__nauHJ r=596",
+      "CAPTION. r=596",
+      "THEAD. r=596"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 12973,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 7267,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 8188,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 29994,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 8803,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 2875,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 22077,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=423",
+      "DIV.ambient-field_starsFar__2KGXW r=550",
+      "UL.tool-carousel_rail__veI9P r=18375",
+      "LI. r=577",
+      "A.tool-carousel_tile__9lLbg r=577"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 22114,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 21296,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=423",
+      "DIV.ambient-field_starsFar__2KGXW r=550",
+      "TABLE.case-study_changes__nauHJ r=596",
+      "CAPTION. r=596",
+      "THEAD. r=596"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 13626,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 7807,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 8408,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 30155,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 9170,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "light",
+    "w": 390,
+    "sw": 375,
+    "cw": 390,
+    "bsw": 375,
+    "docH": 2947,
+    "wide": ["DIV.ambient-field_starsNear__glguN r=423", "DIV.ambient-field_starsFar__2KGXW r=550"],
+    "overflow": false
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 16264,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785",
+      "UL.tool-carousel_rail__veI9P r=19148",
+      "LI. r=823"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 15620,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 12566,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 7913,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 5263,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 6748,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 16738,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 5963,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 2255,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 16626,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785",
+      "UL.tool-carousel_rail__veI9P r=19148",
+      "LI. r=823"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 16161,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 13043,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 8205,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 5420,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 6802,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 16766,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 6136,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "light",
+    "w": 768,
+    "sw": 753,
+    "cw": 768,
+    "bsw": 753,
+    "docH": 2279,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=801",
+      "DIV.ambient-field_starsFar__2KGXW r=946",
+      "SPAN.solar-system_corona__ujZe_ r=785"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 13078,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159",
+      "UL.tool-carousel_rail__veI9P r=19161",
+      "LI. r=1180",
+      "A.tool-carousel_tile__9lLbg r=1180"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 14898,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 12961,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 7978,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 4137,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 5733,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 10984,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 5119,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 1766,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 13382,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159",
+      "UL.tool-carousel_rail__veI9P r=19161",
+      "LI. r=1180",
+      "A.tool-carousel_tile__9lLbg r=1180"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 15498,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 13217,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 8274,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 4196,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 5863,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 11008,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 5176,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "light",
+    "w": 1024,
+    "sw": 1009,
+    "cw": 1024,
+    "bsw": 1009,
+    "docH": 1814,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1057",
+      "DIV.ambient-field_starsFar__2KGXW r=1159"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 12749,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585",
+      "UL.tool-carousel_rail__veI9P r=19247",
+      "LI. r=1610",
+      "A.tool-carousel_tile__9lLbg r=1610"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 13682,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 14264,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585",
+      "DIV.react-flow__viewport xyflow__viewport react-flow__ r=1472",
+      "DIV.react-flow__edges r=1472",
+      "svg.[object SVGAnimatedString] r=1472"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 8541,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 4065,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 5868,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 9342,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 4851,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 1792,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 13002,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585",
+      "UL.tool-carousel_rail__veI9P r=19247",
+      "LI. r=1610",
+      "A.tool-carousel_tile__9lLbg r=1610"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 14125,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 14446,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585",
+      "DIV.react-flow__viewport xyflow__viewport react-flow__ r=1472",
+      "DIV.react-flow__edges r=1472",
+      "svg.[object SVGAnimatedString] r=1472"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 8747,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 4180,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 6034,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 9506,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 4937,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "light",
+    "w": 1440,
+    "sw": 1425,
+    "cw": 1440,
+    "bsw": 1425,
+    "docH": 1840,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1473",
+      "DIV.ambient-field_starsFar__2KGXW r=1585"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 12855,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055",
+      "UL.tool-carousel_rail__veI9P r=19487",
+      "LI. r=2022",
+      "A.tool-carousel_tile__9lLbg r=2022"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 13710,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 14281,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 8558,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 4112,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/education",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 5947,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/stack",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 9369,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/cv",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 4853,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 1807,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 13108,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055",
+      "UL.tool-carousel_rail__veI9P r=19487",
+      "LI. r=2022",
+      "A.tool-carousel_tile__9lLbg r=2022"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 14154,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 14464,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 8764,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/about",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 4229,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/education",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 6115,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/stack",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 9533,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/cv",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 4940,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/es/contact",
+    "theme": "light",
+    "w": 1920,
+    "sw": 1905,
+    "cw": 1920,
+    "bsw": 1905,
+    "docH": 1855,
+    "wide": [
+      "DIV.ambient-field_starsNear__glguN r=1953",
+      "DIV.ambient-field_starsFar__2KGXW r=2055"
+    ],
+    "overflow": false
+  }
 ]

@@ -1,1186 +1,1170 @@
 [
- {
-  "route": "/",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 41
-   }
-  ]
- },
- {
-  "route": "/work",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 3
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 123
-   },
-   {
-    "id": "duplicate-id-aria",
-    "nodes": 1
-   }
-  ]
- },
- {
-  "route": "/work/filomena",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "en",
-  "violations": [
-   {
-    "id": "heading-order",
-    "impact": "moderate",
-    "nodes": 1,
-    "help": "Heading levels should only increase by one",
-    "sample": [
-     "h4 :: Fix any of the following:   Heading order invalid"
+  {
+    "route": "/",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 41
+      }
     ]
-   }
-  ],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 1
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 48
-   }
-  ]
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 34
-   }
-  ]
- },
- {
-  "route": "/about",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 14
-   }
-  ]
- },
- {
-  "route": "/education",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 18
-   }
-  ]
- },
- {
-  "route": "/stack",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 15
-   }
-  ]
- },
- {
-  "route": "/cv",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 22
-   }
-  ]
- },
- {
-  "route": "/contact",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 15
-   }
-  ]
- },
- {
-  "route": "/es",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 41
-   }
-  ]
- },
- {
-  "route": "/es/work",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 3
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 120
-   },
-   {
-    "id": "duplicate-id-aria",
-    "nodes": 1
-   }
-  ]
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "es",
-  "violations": [
-   {
-    "id": "heading-order",
-    "impact": "moderate",
-    "nodes": 1,
-    "help": "Heading levels should only increase by one",
-    "sample": [
-     "h4 :: Fix any of the following:   Heading order invalid"
+  },
+  {
+    "route": "/work",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 3
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 123
+      },
+      {
+        "id": "duplicate-id-aria",
+        "nodes": 1
+      }
     ]
-   }
-  ],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 1
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 48
-   }
-  ]
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 34
-   }
-  ]
- },
- {
-  "route": "/es/about",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 14
-   }
-  ]
- },
- {
-  "route": "/es/education",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 18
-   }
-  ]
- },
- {
-  "route": "/es/stack",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 15
-   }
-  ]
- },
- {
-  "route": "/es/cv",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 22
-   }
-  ]
- },
- {
-  "route": "/es/contact",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 15
-   }
-  ]
- },
- {
-  "route": "/",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 39
-   }
-  ]
- },
- {
-  "route": "/work",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 3
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 110
-   },
-   {
-    "id": "duplicate-id-aria",
-    "nodes": 1
-   }
-  ]
- },
- {
-  "route": "/work/filomena",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "en",
-  "violations": [
-   {
-    "id": "heading-order",
-    "impact": "moderate",
-    "nodes": 1,
-    "help": "Heading levels should only increase by one",
-    "sample": [
-     "h4 :: Fix any of the following:   Heading order invalid"
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "en",
+    "violations": [
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Heading levels should only increase by one",
+        "sample": ["h4 :: Fix any of the following:   Heading order invalid"]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 48
+      }
     ]
-   }
-  ],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 1
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 45
-   }
-  ]
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 28
-   }
-  ]
- },
- {
-  "route": "/about",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 13
-   }
-  ]
- },
- {
-  "route": "/education",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 17
-   }
-  ]
- },
- {
-  "route": "/stack",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 14
-   }
-  ]
- },
- {
-  "route": "/cv",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 20
-   }
-  ]
- },
- {
-  "route": "/contact",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 12
-   }
-  ]
- },
- {
-  "route": "/es",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 39
-   }
-  ]
- },
- {
-  "route": "/es/work",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 3
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 108
-   },
-   {
-    "id": "duplicate-id-aria",
-    "nodes": 1
-   }
-  ]
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "es",
-  "violations": [
-   {
-    "id": "heading-order",
-    "impact": "moderate",
-    "nodes": 1,
-    "help": "Heading levels should only increase by one",
-    "sample": [
-     "h4 :: Fix any of the following:   Heading order invalid"
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 34
+      }
     ]
-   }
-  ],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 1
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 43
-   }
-  ]
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 25
-   }
-  ]
- },
- {
-  "route": "/es/about",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 13
-   }
-  ]
- },
- {
-  "route": "/es/education",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 17
-   }
-  ]
- },
- {
-  "route": "/es/stack",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 11
-   }
-  ]
- },
- {
-  "route": "/es/cv",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 20
-   }
-  ]
- },
- {
-  "route": "/es/contact",
-  "theme": "dark",
-  "dt": "dark",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 12
-   }
-  ]
- },
- {
-  "route": "/",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 41
-   }
-  ]
- },
- {
-  "route": "/work",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 3
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 123
-   },
-   {
-    "id": "duplicate-id-aria",
-    "nodes": 1
-   }
-  ]
- },
- {
-  "route": "/work/filomena",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "en",
-  "violations": [
-   {
-    "id": "heading-order",
-    "impact": "moderate",
-    "nodes": 1,
-    "help": "Heading levels should only increase by one",
-    "sample": [
-     "h4 :: Fix any of the following:   Heading order invalid"
+  },
+  {
+    "route": "/about",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 14
+      }
     ]
-   }
-  ],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 1
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 48
-   }
-  ]
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 34
-   }
-  ]
- },
- {
-  "route": "/about",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 14
-   }
-  ]
- },
- {
-  "route": "/education",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 18
-   }
-  ]
- },
- {
-  "route": "/stack",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 15
-   }
-  ]
- },
- {
-  "route": "/cv",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 22
-   }
-  ]
- },
- {
-  "route": "/contact",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 15
-   }
-  ]
- },
- {
-  "route": "/es",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 41
-   }
-  ]
- },
- {
-  "route": "/es/work",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 3
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 120
-   },
-   {
-    "id": "duplicate-id-aria",
-    "nodes": 1
-   }
-  ]
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "es",
-  "violations": [
-   {
-    "id": "heading-order",
-    "impact": "moderate",
-    "nodes": 1,
-    "help": "Heading levels should only increase by one",
-    "sample": [
-     "h4 :: Fix any of the following:   Heading order invalid"
+  },
+  {
+    "route": "/education",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 18
+      }
     ]
-   }
-  ],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 1
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 48
-   }
-  ]
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 34
-   }
-  ]
- },
- {
-  "route": "/es/about",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 14
-   }
-  ]
- },
- {
-  "route": "/es/education",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 18
-   }
-  ]
- },
- {
-  "route": "/es/stack",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 15
-   }
-  ]
- },
- {
-  "route": "/es/cv",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 22
-   }
-  ]
- },
- {
-  "route": "/es/contact",
-  "theme": "light",
-  "dt": "light",
-  "w": 1280,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 15
-   }
-  ]
- },
- {
-  "route": "/",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 39
-   }
-  ]
- },
- {
-  "route": "/work",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 3
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 110
-   },
-   {
-    "id": "duplicate-id-aria",
-    "nodes": 1
-   }
-  ]
- },
- {
-  "route": "/work/filomena",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "en",
-  "violations": [
-   {
-    "id": "heading-order",
-    "impact": "moderate",
-    "nodes": 1,
-    "help": "Heading levels should only increase by one",
-    "sample": [
-     "h4 :: Fix any of the following:   Heading order invalid"
+  },
+  {
+    "route": "/stack",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 15
+      }
     ]
-   }
-  ],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 1
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 47
-   }
-  ]
- },
- {
-  "route": "/work/pequeverso",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 28
-   }
-  ]
- },
- {
-  "route": "/about",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 13
-   }
-  ]
- },
- {
-  "route": "/education",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 17
-   }
-  ]
- },
- {
-  "route": "/stack",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 14
-   }
-  ]
- },
- {
-  "route": "/cv",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 20
-   }
-  ]
- },
- {
-  "route": "/contact",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "en",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 12
-   }
-  ]
- },
- {
-  "route": "/es",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 39
-   }
-  ]
- },
- {
-  "route": "/es/work",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 3
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 108
-   },
-   {
-    "id": "duplicate-id-aria",
-    "nodes": 1
-   }
-  ]
- },
- {
-  "route": "/es/work/filomena",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "es",
-  "violations": [
-   {
-    "id": "heading-order",
-    "impact": "moderate",
-    "nodes": 1,
-    "help": "Heading levels should only increase by one",
-    "sample": [
-     "h4 :: Fix any of the following:   Heading order invalid"
+  },
+  {
+    "route": "/cv",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 22
+      }
     ]
-   }
-  ],
-  "incomplete": [
-   {
-    "id": "aria-prohibited-attr",
-    "nodes": 1
-   },
-   {
-    "id": "color-contrast",
-    "nodes": 44
-   }
-  ]
- },
- {
-  "route": "/es/work/pequeverso",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 27
-   }
-  ]
- },
- {
-  "route": "/es/about",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 13
-   }
-  ]
- },
- {
-  "route": "/es/education",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 17
-   }
-  ]
- },
- {
-  "route": "/es/stack",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 14
-   }
-  ]
- },
- {
-  "route": "/es/cv",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 20
-   }
-  ]
- },
- {
-  "route": "/es/contact",
-  "theme": "light",
-  "dt": "light",
-  "w": 390,
-  "lang": "es",
-  "violations": [],
-  "incomplete": [
-   {
-    "id": "color-contrast",
-    "nodes": 12
-   }
-  ]
- }
+  },
+  {
+    "route": "/contact",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 15
+      }
+    ]
+  },
+  {
+    "route": "/es",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 41
+      }
+    ]
+  },
+  {
+    "route": "/es/work",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 3
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 120
+      },
+      {
+        "id": "duplicate-id-aria",
+        "nodes": 1
+      }
+    ]
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "es",
+    "violations": [
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Heading levels should only increase by one",
+        "sample": ["h4 :: Fix any of the following:   Heading order invalid"]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 48
+      }
+    ]
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 34
+      }
+    ]
+  },
+  {
+    "route": "/es/about",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 14
+      }
+    ]
+  },
+  {
+    "route": "/es/education",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 18
+      }
+    ]
+  },
+  {
+    "route": "/es/stack",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 15
+      }
+    ]
+  },
+  {
+    "route": "/es/cv",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 22
+      }
+    ]
+  },
+  {
+    "route": "/es/contact",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 15
+      }
+    ]
+  },
+  {
+    "route": "/",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 39
+      }
+    ]
+  },
+  {
+    "route": "/work",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 3
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 110
+      },
+      {
+        "id": "duplicate-id-aria",
+        "nodes": 1
+      }
+    ]
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "en",
+    "violations": [
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Heading levels should only increase by one",
+        "sample": ["h4 :: Fix any of the following:   Heading order invalid"]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 45
+      }
+    ]
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 28
+      }
+    ]
+  },
+  {
+    "route": "/about",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 13
+      }
+    ]
+  },
+  {
+    "route": "/education",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 17
+      }
+    ]
+  },
+  {
+    "route": "/stack",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 14
+      }
+    ]
+  },
+  {
+    "route": "/cv",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 20
+      }
+    ]
+  },
+  {
+    "route": "/contact",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 12
+      }
+    ]
+  },
+  {
+    "route": "/es",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 39
+      }
+    ]
+  },
+  {
+    "route": "/es/work",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 3
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 108
+      },
+      {
+        "id": "duplicate-id-aria",
+        "nodes": 1
+      }
+    ]
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "es",
+    "violations": [
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Heading levels should only increase by one",
+        "sample": ["h4 :: Fix any of the following:   Heading order invalid"]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 43
+      }
+    ]
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 25
+      }
+    ]
+  },
+  {
+    "route": "/es/about",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 13
+      }
+    ]
+  },
+  {
+    "route": "/es/education",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 17
+      }
+    ]
+  },
+  {
+    "route": "/es/stack",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 11
+      }
+    ]
+  },
+  {
+    "route": "/es/cv",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 20
+      }
+    ]
+  },
+  {
+    "route": "/es/contact",
+    "theme": "dark",
+    "dt": "dark",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 12
+      }
+    ]
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 41
+      }
+    ]
+  },
+  {
+    "route": "/work",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 3
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 123
+      },
+      {
+        "id": "duplicate-id-aria",
+        "nodes": 1
+      }
+    ]
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "en",
+    "violations": [
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Heading levels should only increase by one",
+        "sample": ["h4 :: Fix any of the following:   Heading order invalid"]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 48
+      }
+    ]
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 34
+      }
+    ]
+  },
+  {
+    "route": "/about",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 14
+      }
+    ]
+  },
+  {
+    "route": "/education",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 18
+      }
+    ]
+  },
+  {
+    "route": "/stack",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 15
+      }
+    ]
+  },
+  {
+    "route": "/cv",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 22
+      }
+    ]
+  },
+  {
+    "route": "/contact",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 15
+      }
+    ]
+  },
+  {
+    "route": "/es",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 41
+      }
+    ]
+  },
+  {
+    "route": "/es/work",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 3
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 120
+      },
+      {
+        "id": "duplicate-id-aria",
+        "nodes": 1
+      }
+    ]
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "es",
+    "violations": [
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Heading levels should only increase by one",
+        "sample": ["h4 :: Fix any of the following:   Heading order invalid"]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 48
+      }
+    ]
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 34
+      }
+    ]
+  },
+  {
+    "route": "/es/about",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 14
+      }
+    ]
+  },
+  {
+    "route": "/es/education",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 18
+      }
+    ]
+  },
+  {
+    "route": "/es/stack",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 15
+      }
+    ]
+  },
+  {
+    "route": "/es/cv",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 22
+      }
+    ]
+  },
+  {
+    "route": "/es/contact",
+    "theme": "light",
+    "dt": "light",
+    "w": 1280,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 15
+      }
+    ]
+  },
+  {
+    "route": "/",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 39
+      }
+    ]
+  },
+  {
+    "route": "/work",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 3
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 110
+      },
+      {
+        "id": "duplicate-id-aria",
+        "nodes": 1
+      }
+    ]
+  },
+  {
+    "route": "/work/filomena",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "en",
+    "violations": [
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Heading levels should only increase by one",
+        "sample": ["h4 :: Fix any of the following:   Heading order invalid"]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 47
+      }
+    ]
+  },
+  {
+    "route": "/work/pequeverso",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 28
+      }
+    ]
+  },
+  {
+    "route": "/about",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 13
+      }
+    ]
+  },
+  {
+    "route": "/education",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 17
+      }
+    ]
+  },
+  {
+    "route": "/stack",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 14
+      }
+    ]
+  },
+  {
+    "route": "/cv",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 20
+      }
+    ]
+  },
+  {
+    "route": "/contact",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "en",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 12
+      }
+    ]
+  },
+  {
+    "route": "/es",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 39
+      }
+    ]
+  },
+  {
+    "route": "/es/work",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 3
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 108
+      },
+      {
+        "id": "duplicate-id-aria",
+        "nodes": 1
+      }
+    ]
+  },
+  {
+    "route": "/es/work/filomena",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "es",
+    "violations": [
+      {
+        "id": "heading-order",
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Heading levels should only increase by one",
+        "sample": ["h4 :: Fix any of the following:   Heading order invalid"]
+      }
+    ],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": 1
+      },
+      {
+        "id": "color-contrast",
+        "nodes": 44
+      }
+    ]
+  },
+  {
+    "route": "/es/work/pequeverso",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 27
+      }
+    ]
+  },
+  {
+    "route": "/es/about",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 13
+      }
+    ]
+  },
+  {
+    "route": "/es/education",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 17
+      }
+    ]
+  },
+  {
+    "route": "/es/stack",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 14
+      }
+    ]
+  },
+  {
+    "route": "/es/cv",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 20
+      }
+    ]
+  },
+  {
+    "route": "/es/contact",
+    "theme": "light",
+    "dt": "light",
+    "w": 390,
+    "lang": "es",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": 12
+      }
+    ]
+  }
 ]
