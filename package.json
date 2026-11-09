@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
-    "@babel/parser": "8.0.10",
+    "@babel/parser": "7.29.12",
     "@biomejs/biome": "2.6.4",
     "@next/swc-wasm-nodejs": "16.4.4",
     "@playwright/test": "1.64.1",
