@@ -2,16 +2,15 @@
 
 ## Policy
 
-Dependency updates remain manual by owner decision. Dependabot proposes weekly npm
-and GitHub Actions changes against `develop`, rebasing its own proposals when
-needed. The `dependencies:manual` label is a deny-only routing signal, never a merge
-permission. No workflow creates approvals, changes labels or repository settings,
+Dependency updates remain manual by owner decision. Dependabot proposes one weekly
+PR (Monday 09:00 America/Argentina/Buenos_Aires) joining npm and GitHub Actions
+changes against `develop` through the `weekly-all` multi-ecosystem group. The
+`dependencies` label is a deny-only routing signal, never a merge permission. No workflow creates approvals, changes labels or repository settings,
 creates check runs, arms native auto-merge, or merges PRs. There is no PAT or admin
 bypass. Existing strict checks and human review remain authoritative.
 
-The root npm configuration separates patch proposals for `@types/react` and
-`@types/react-dom` from the wider minor/patch review group. Major updates remain
-separate. The Node type-major exclusion is retained. The additional
+Every ecosystem entry joins the single `weekly-all` group with a 7/14/3-day
+cooldown. The Node type-major exclusion is retained. The additional
 `/tools/api-contract` entry covers its separate manifest and frozen lock; all of
 its proposals require manual regeneration and contract review. Frameworks, auth,
 databases, compilers, runtimes, native modules, browser/image versions and Actions
