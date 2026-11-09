@@ -423,7 +423,7 @@ test("published workflow remains read-only and executes only trusted policy sour
   const config = readFileSync(new URL("../../.github/dependabot.yml", import.meta.url), "utf8");
   assert.equal((config.match(/labels: \["dependencies"\]/g) ?? []).length, 3);
   assert.equal((config.match(/multi-ecosystem-group: weekly-all/g) ?? []).length, 3);
-  assert.equal((config.match(/open-pull-requests-limit: 1/g) ?? []).length, 3);
+  assert.equal((config.match(/open-pull-requests-limit: 1/g) ?? []).length, 1);
   assert.match(config, /directory: \/tools\/api-contract/);
 });
 
