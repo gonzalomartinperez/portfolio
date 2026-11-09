@@ -1,0 +1,863 @@
+path,layer,kind,lines,target_path,target_layer,action,reason
+.agents/skills/debug-issue/SKILL.md,skill,skill,34,.agents/skills/debug-issue/SKILL.md,skill,rewrite,"Adds diagnose-loop (reproduce, minimise, hypothesise, fix, regression test) and evals; repo-specific skill kept"
+.agents/skills/implement-feature/SKILL.md,skill,skill,48,.agents/skills/implement-task/SKILL.md,skill,rename+rewrite,"Catalog name implement-task (ecosystem 15.5); adds worktree, review chain, evidence template, evals"
+.agents/skills/prepare-delivery/SKILL.md,skill,skill,42,.agents/skills/verify-release/SKILL.md,skill,merge+rewrite,"Delivery checks fold into implement-task (per-PR) and verify-release (release profile, build-info check)"
+.agents/skills/prepare-delivery/references/secret-review.md,skill,skill-reference,60,.agents/skills/implement-task/references/secret-review.md,skill,move,Secret review stays with the PR pipeline skill
+.agents/skills/review-change/SKILL.md,skill,skill,39,.agents/skills/review-change/SKILL.md,skill,rewrite,"Adds reproduce-every-finding, rubric lenses, designer evidence, activation evals"
+.agents/skills/specify-feature/SKILL.md,skill,skill,25,.agents/skills/specify-feature/SKILL.md,skill,rewrite,Spec-driven flow kept; adds measurable acceptance and CI profile fields
+.agents/skills/update-dependencies/SKILL.md,skill,skill,28,.agents/skills/update-dependencies/SKILL.md,skill,rewrite,Rewritten around the single weekly Dependabot PR (ecosystem 5)
+.agents/skills/update-dependencies/references/compatibility.md,skill,skill-reference,57,.agents/skills/update-dependencies/references/compatibility.md,skill,keep,Compatibility notes still valid; refreshed in PF-M3
+.claude/skills/debug-issue/SKILL.md,skill-adapter,skill,10,.claude/skills/debug-issue,skill-adapter,replace-with-symlink,Copy adapter becomes a relative symlink so one canonical skill exists
+.claude/skills/implement-feature/SKILL.md,skill-adapter,skill,10,.claude/skills/implement-task,skill-adapter,replace-with-symlink,Relative symlink to ../../.agents/skills/implement-task (ecosystem 15.1)
+.claude/skills/prepare-delivery/SKILL.md,skill-adapter,skill,10,.claude/skills/verify-release,skill-adapter,replace-with-symlink,Relative symlink to the merged verify-release skill
+.claude/skills/review-change/SKILL.md,skill-adapter,skill,10,.claude/skills/review-change,skill-adapter,replace-with-symlink,Copy adapter becomes a relative symlink so one canonical skill exists
+.claude/skills/specify-feature/SKILL.md,skill-adapter,skill,10,.claude/skills/specify-feature,skill-adapter,replace-with-symlink,Copy adapter becomes a relative symlink so one canonical skill exists
+.claude/skills/update-dependencies/SKILL.md,skill-adapter,skill,10,.claude/skills/update-dependencies,skill-adapter,replace-with-symlink,Copy adapter becomes a relative symlink so one canonical skill exists
+.editorconfig,root,config,9,.editorconfig,root,keep,Unchanged
+.env.example,root,config,5,.env.example,root,keep,Unchanged
+.gitattributes,root,config,2,.gitattributes,root,keep,Unchanged
+.github/dependabot.yml,ci,config,40,.github/dependabot.yml,ci,rewrite,"multi-ecosystem-groups, one weekly PR, Monday 09:00 ART (ecosystem 5.2); today 3+2+3 PR slots"
+.github/pull_request_template.md,ci,template,32,.github/pull_request_template.md,ci,modify,"Ecosystem PR template (summary, issue, evidence, docs touched, agent-docs, risk, rollback, screenshots)"
+.github/workflows/branch-policy.yml,ci,workflow,38,(classify job in ci.yml),ci,merge,Route and title check moves into the pull_request classify job; removes the pull_request_target trigger (zizmor); see PF-D20
+.github/workflows/ci.yml,ci,workflow,366,.github/workflows/ci.yml,ci,rewrite,"classify job plus profiles, shared reusable workflows, ci-gate (ecosystem 6.0); existing job logic ported"
+.github/workflows/dependency-policy.yml,ci,workflow,53,.github/workflows/ci.yml (deps-weekly profile),ci,merge,Becomes the deps-weekly profile plus deps-weekly-guard
+.github/workflows/nightly.yml,ci,workflow,386,.github/workflows/nightly.yml,ci,rewrite,"Adds full mutation, flake detector, Scorecard, scorecard.json ratchet; keeps visual, links, bundle"
+.gitignore,root,config,19,.gitignore,root,modify,"Adds .artifacts/, ratchet temp files; .npmrc ignore-scripts with allow-list"
+.npmrc,root,config,4,.npmrc,root,modify,"Adds .artifacts/, ratchet temp files; .npmrc ignore-scripts with allow-list"
+.nvmrc,root,config,1,.nvmrc,root,keep,Unchanged
+AGENTS.md,docs,agent-doc,102,AGENTS.md,docs,modify,"Cut to <= 200 lines, commands equal CI commands, plan pointers; module contract kept"
+CLAUDE.md,docs,agent-doc,7,CLAUDE.md,docs,modify,"@AGENTS.md plus Claude-only notes (skills, subagents)"
+CONTRIBUTING.md,docs,community,109,CONTRIBUTING.md,docs,rewrite,"Short form: run checks, branch flow, commit convention (ecosystem 14.2)"
+LICENSE,root,config,21,LICENSE,root,keep,Unchanged
+NOTICE.md,root,config,44,NOTICE.md,root,keep,Unchanged
+README.md,docs,readme,416,README.md,docs,rewrite,Ecosystem README template (80-180 lines; now 416); content moves to docs/ Diataxis pages
+SECURITY.md,docs,community,56,SECURITY.md,docs,modify,"Adds private reporting, 5-day acknowledgement, scope; security.txt added"
+biome.json,root,config,18,biome.json,root,modify,Biome preset from engineering-standards; domains next/react/test/project; noImportCycles; class sorting
+components.json,root,config,20,components.json,root,keep,shadcn CLI record; primitives are owned and not regenerated
+config/locales.ts,config,config,38,config/locales.ts,config,keep,Typed runtime config; no change in behaviour
+config/routes.ts,config,config,24,config/routes.ts,config,keep,Typed runtime config; no change in behaviour
+config/site.ts,config,config,43,config/site.ts,config,keep,Typed runtime config; no change in behaviour
+config/solar-textures.ts,config,config,25,config/solar-textures.ts,config,modify,Ambient 512 px set vs explorer sets; cache rules
+content/about-copy.ts,content,content,22,content/about-copy.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/academic-catalogue.ts,content,content,301,content/academic-catalogue.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/chrome.ts,content,content,100,content/chrome.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/cv-public.json,content,content-data,1065,content/cv-public.json,content,keep,"Generated or synced snapshot; checked by tests (cv sync with career-ops, image dimensions)"
+content/en/about.ts,content,content,74,content/en/about.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/en/education.ts,content,content,108,content/en/education.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/en/experience.ts,content,content,300,content/en/experience.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/en/gallery.ts,content,content,85,content/en/gallery.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/en/index.ts,content,content,27,content/en/index.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/en/profile.ts,content,content,111,content/en/profile.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/en/projects.ts,content,content,484,content/en/projects.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/en/site.ts,content,content,253,content/en/site.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/en/stack.ts,content,content,4,content/en/stack.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/es/about.ts,content,content,74,content/es/about.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/es/education.ts,content,content,109,content/es/education.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/es/experience.ts,content,content,299,content/es/experience.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/es/gallery.ts,content,content,87,content/es/gallery.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/es/index.ts,content,content,27,content/es/index.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/es/profile.ts,content,content,108,content/es/profile.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/es/projects.ts,content,content,488,content/es/projects.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/es/site.ts,content,content,258,content/es/site.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/es/stack.ts,content,content,4,content/es/stack.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/experience-facts.ts,content,content,12,content/experience-facts.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/filomena-gallery.ts,content,content,54,content/filomena-gallery.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/filomena-image-dimensions.json,content,content-data,174,content/filomena-image-dimensions.json,content,keep,"Generated or synced snapshot; checked by tests (cv sync with career-ops, image dimensions)"
+content/index.ts,content,content,14,content/index.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/pequeverso-gallery.ts,content,content,61,content/pequeverso-gallery.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/pequeverso-image-dimensions.json,content,content-data,66,content/pequeverso-image-dimensions.json,content,keep,"Generated or synced snapshot; checked by tests (cv sync with career-ops, image dimensions)"
+content/privacy.ts,content,content,38,content/privacy.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/public-documents.json,content,content-data,62,content/public-documents.json,content,keep,"Generated or synced snapshot; checked by tests (cv sync with career-ops, image dimensions)"
+content/site-copy.ts,content,content,199,content/site-copy.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/tech-marks.ts,content,content,5,content/tech-marks.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/technologies.ts,content,content,2766,content/technologies/*.ts,content,split,"2,766 lines in one module: split by category with stable ids and a schema test; client bundle receives only used fields"
+content/tool-carousel-copy.ts,content,content,31,content/tool-carousel-copy.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+content/types.ts,content,content,96,content/types.ts,content,keep,Typed public copy; EN/ES parity test added; facts single-sourced
+contracts/assistant-api/openapi.json,contracts,contract-snapshot,2215,contracts/assistant-api/openapi.json,contracts,keep,Snapshot with revision and SHA-256 (ecosystem 18); refreshed by task PRs only
+contracts/assistant-api/product-event.schema.json,contracts,contract-snapshot,93,contracts/assistant-api/product-event.schema.json,contracts,keep,Snapshot with revision and SHA-256 (ecosystem 18); refreshed by task PRs only
+contracts/assistant-api/product-interaction-source.json,contracts,contract-snapshot,19,contracts/assistant-api/product-interaction-source.json,contracts,keep,Snapshot with revision and SHA-256 (ecosystem 18); refreshed by task PRs only
+contracts/assistant-api/product-interaction.examples.json,contracts,contract-snapshot,28,contracts/assistant-api/product-interaction.examples.json,contracts,keep,Snapshot with revision and SHA-256 (ecosystem 18); refreshed by task PRs only
+contracts/assistant-api/product-interaction.schema.json,contracts,contract-snapshot,147,contracts/assistant-api/product-interaction.schema.json,contracts,keep,Snapshot with revision and SHA-256 (ecosystem 18); refreshed by task PRs only
+contracts/assistant-api/source.json,contracts,contract-snapshot,14,contracts/assistant-api/source.json,contracts,keep,Snapshot with revision and SHA-256 (ecosystem 18); refreshed by task PRs only
+contracts/assistant-api/sse.examples.json,contracts,contract-snapshot,83,contracts/assistant-api/sse.examples.json,contracts,keep,Snapshot with revision and SHA-256 (ecosystem 18); refreshed by task PRs only
+contracts/assistant-api/sse.schema.json,contracts,contract-snapshot,578,contracts/assistant-api/sse.schema.json,contracts,keep,Snapshot with revision and SHA-256 (ecosystem 18); refreshed by task PRs only
+contracts/assistant-api/types.d.ts,contracts,contract-snapshot,1842,contracts/assistant-api/types.d.ts,contracts,keep,Snapshot with revision and SHA-256 (ecosystem 18); refreshed by task PRs only
+docs/adr/site-architecture-parity.md,docs,doc,65,docs/decisions/0001-site-architecture-parity.md,docs,move,MADR numbering under docs/decisions (ecosystem 14.2)
+docs/architecture.md,docs,doc,208,docs/architecture/overview.md,docs,move,C4 levels 1-2 live under docs/architecture/
+docs/assets/company-marks.md,docs,doc,116,docs/reference/assets/company-marks.md,docs,move,Diataxis: reference
+docs/assets/credential-marks.md,docs,doc,19,docs/reference/assets/credential-marks.md,docs,move,Diataxis: reference
+docs/assets/profile-images.md,docs,doc,13,docs/reference/assets/profile-images.md,docs,move,Diataxis: reference
+docs/assets/shadcn-ui.md,docs,doc,40,docs/reference/assets/shadcn-ui.md,docs,move,Diataxis: reference
+docs/assets/solar-system.md,docs,doc,103,docs/reference/assets/solar-system.md,docs,move,Diataxis: reference
+docs/assets/technology-marks.md,docs,doc,209,docs/reference/assets/technology-marks.md,docs,move,Diataxis: reference
+docs/code-quality.md,docs,doc,101,docs/reference/code-quality.md,docs,move,Diataxis: reference; superseded in part by standards.md in the plan
+docs/dependency-updates.md,docs,doc,102,docs/how-to/handle-the-weekly-dependency-pr.md,docs,move,Rewritten for the single weekly PR rule
+docs/deployment.md,docs,doc,157,docs/how-to/deploy-hostinger.md,docs,move,Diataxis: how-to
+docs/design.md,docs,doc,137,docs/explanation/design-system.md,docs,move,Diataxis: explanation; replaced by design-playbook link plus generated token table
+docs/development.md,docs,doc,419,docs/how-to/develop.md,docs,move,Diataxis: how-to
+docs/diagrams/README.md,docs,doc,93,docs/architecture/diagrams/README.md,docs,move,Diagrams colocated with architecture docs
+docs/diagrams/architecture-overview-dark.svg,docs,doc,70,docs/architecture/diagrams/architecture-overview-dark.svg,docs,move,Diagrams colocated with architecture docs
+docs/diagrams/architecture-overview-light.svg,docs,doc,70,docs/architecture/diagrams/architecture-overview-light.svg,docs,move,Diagrams colocated with architecture docs
+docs/diagrams/architecture-overview.mmd,docs,doc,20,docs/architecture/diagrams/architecture-overview.mmd,docs,move,Diagrams colocated with architecture docs
+docs/diagrams/delivery-flow-dark.svg,docs,doc,76,docs/architecture/diagrams/delivery-flow-dark.svg,docs,move,Diagrams colocated with architecture docs
+docs/diagrams/delivery-flow-light.svg,docs,doc,76,docs/architecture/diagrams/delivery-flow-light.svg,docs,move,Diagrams colocated with architecture docs
+docs/diagrams/delivery-flow.mmd,docs,doc,30,docs/architecture/diagrams/delivery-flow.mmd,docs,move,Diagrams colocated with architecture docs
+docs/diagrams/solar-rendering-dark.svg,docs,doc,66,docs/architecture/diagrams/solar-rendering-dark.svg,docs,move,Diagrams colocated with architecture docs
+docs/diagrams/solar-rendering-light.svg,docs,doc,66,docs/architecture/diagrams/solar-rendering-light.svg,docs,move,Diagrams colocated with architecture docs
+docs/diagrams/solar-rendering.mmd,docs,doc,15,docs/architecture/diagrams/solar-rendering.mmd,docs,move,Diagrams colocated with architecture docs
+docs/editorial-guidelines.md,docs,doc,81,docs/reference/editorial-guidelines.md,docs,move,Diataxis: reference
+docs/engineering-standards.md,docs,doc,114,docs/reference/engineering-standards.md,docs,move,Diataxis: reference; superseded in part by standards.md in the plan
+docs/gallery/README.md,docs,evidence,24,docs/gallery/README.md,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/about-light.webp,docs,evidence,0,docs/gallery/about-light.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/contact-dark.webp,docs,evidence,0,docs/gallery/contact-dark.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/education-dark.webp,docs,evidence,0,docs/gallery/education-dark.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/explorer-earth.webp,docs,evidence,0,docs/gallery/explorer-earth.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/explorer-saturn.webp,docs,evidence,0,docs/gallery/explorer-saturn.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/explorer-system.webp,docs,evidence,0,docs/gallery/explorer-system.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/filomena-architecture-dark.webp,docs,evidence,0,docs/gallery/filomena-architecture-dark.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/filomena-gallery-light.webp,docs,evidence,0,docs/gallery/filomena-gallery-light.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/home-featured-project-dark.webp,docs,evidence,0,docs/gallery/home-featured-project-dark.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/home-flythrough-dark.webp,docs,evidence,0,docs/gallery/home-flythrough-dark.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/home-hero-dark.webp,docs,evidence,0,docs/gallery/home-hero-dark.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/home-hero-es-light.webp,docs,evidence,0,docs/gallery/home-hero-es-light.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/home-hero-light.webp,docs,evidence,0,docs/gallery/home-hero-light.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/home-toolkit-dark.webp,docs,evidence,0,docs/gallery/home-toolkit-dark.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/mobile-about-light.webp,docs,evidence,0,docs/gallery/mobile-about-light.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/mobile-explorer-jupiter.webp,docs,evidence,0,docs/gallery/mobile-explorer-jupiter.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/mobile-home-dark.webp,docs,evidence,0,docs/gallery/mobile-home-dark.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/mobile-work-dark.webp,docs,evidence,0,docs/gallery/mobile-work-dark.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/stack-light.webp,docs,evidence,0,docs/gallery/stack-light.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/gallery/work-architecture-dark.webp,docs,evidence,0,docs/gallery/work-architecture-dark.webp,docs,keep,Gallery captures used by README; regenerated by audit-visual after M5
+docs/linkedin-branding.md,docs,doc,19,docs/reference/linkedin-branding.md,docs,move,Diataxis: reference
+docs/master-plan/README.md,docs/master-plan,plan,149,docs/master-plan/README.md,docs/master-plan,rewrite,Replaced in place by v2 (git history keeps v1)
+docs/master-plan/audit/baseline-2026-10.md,docs/master-plan,audit,304,docs/master-plan/audit/baseline-2026-10.md,docs/master-plan,keep,Historical v1 audit retained as evidence
+docs/master-plan/ecosystem.md,docs/master-plan,plan,100,docs/master-plan/ecosystem.md,docs/master-plan,replace,Replaced by the byte-identical ecosystem standard; v1 cross-repo notes moved into target-state.md
+docs/master-plan/research/design-ux-playbook.md,docs/master-plan,plan-research,552,docs/master-plan/archive-v1/design-ux-playbook.md,docs/master-plan,move,"Kept readable as v1 archive (rules, sources); v2 cites the shared research set in research/"
+docs/master-plan/research/engineering-target-state.md,docs/master-plan,plan-research,985,docs/master-plan/archive-v1/engineering-target-state.md,docs/master-plan,move,"Kept readable as v1 archive (rules, sources); v2 cites the shared research set in research/"
+docs/master-plan/research/file-index-current.csv,docs/master-plan,plan-research,727,docs/master-plan/archive-v1/file-index-current.csv,docs/master-plan,move,Superseded by file-index.csv v2
+docs/master-plan/research/skills-plan.md,docs/master-plan,plan-research,682,docs/master-plan/archive-v1/skills-plan.md,docs/master-plan,move,"Kept readable as v1 archive (rules, sources); v2 cites the shared research set in research/"
+docs/master-plan/research/standards-and-index.md,docs/master-plan,plan-research,1458,docs/master-plan/archive-v1/standards-and-index.md,docs/master-plan,move,"Kept readable as v1 archive (rules, sources); v2 cites the shared research set in research/"
+docs/master-plan/roadmap.md,docs/master-plan,plan,200,docs/master-plan/roadmap.md,docs/master-plan,rewrite,Replaced in place by v2 (git history keeps v1)
+docs/master-plan/rubrics/designer.md,docs/master-plan,plan,58,docs/master-plan/rubrics.md,docs/master-plan,merge,Superseded by rubrics v2; v1 scoring detail moves to archive-v1 and is mapped in scorecard.md
+docs/master-plan/rubrics/developer.md,docs/master-plan,plan,56,docs/master-plan/rubrics.md,docs/master-plan,merge,Superseded by rubrics v2; v1 scoring detail moves to archive-v1 and is mapped in scorecard.md
+docs/master-plan/rubrics/recruiter.md,docs/master-plan,plan,78,docs/master-plan/rubrics.md,docs/master-plan,merge,Superseded by rubrics v2; v1 scoring detail moves to archive-v1 and is mapped in scorecard.md
+docs/master-plan/scorecard.md,docs/master-plan,plan,90,docs/master-plan/scorecard.md,docs/master-plan,rewrite,Replaced in place by v2 (git history keeps v1)
+docs/native-assistant.md,docs,doc,217,docs/explanation/native-assistant.md,docs,move,Diataxis: explanation
+docs/public-content.md,docs,doc,107,docs/reference/public-content.md,docs,move,Diataxis: reference
+docs/release-history.md,docs,doc,56,CHANGELOG.md,docs,merge,"Generated CHANGELOG by release-please; history appended once, then file deleted"
+docs/research/ci-efficiency.md,docs,doc,144,docs/explanation/research/ci-efficiency.md,docs,move,Dated research kept as explanation archive
+docs/research/clean-architecture.md,docs,doc,102,docs/explanation/research/clean-architecture.md,docs,move,Dated research kept as explanation archive
+docs/research/dependency-review-2026-10-18.md,docs,doc,48,docs/explanation/research/dependency-review-2026-10-18.md,docs,move,Dated research kept as explanation archive
+docs/research/engineering-profile-2026-10-10.md,docs,doc,142,docs/explanation/research/engineering-profile-2026-10-10.md,docs,move,Dated research kept as explanation archive
+docs/research/motion-performance.md,docs,doc,157,docs/explanation/research/motion-performance.md,docs,move,Dated research kept as explanation archive
+docs/research/portfolio-2026-09-12.md,docs,doc,203,docs/explanation/research/portfolio-2026-09-12.md,docs,move,Dated research kept as explanation archive
+docs/research/recruiter-journey-2026-09-19.md,docs,doc,73,docs/explanation/research/recruiter-journey-2026-09-19.md,docs,move,Dated research kept as explanation archive
+docs/research/toolchain-2026-10-17.md,docs,doc,90,docs/explanation/research/toolchain-2026-10-17.md,docs,move,Dated research kept as explanation archive
+docs/skill-discovery.md,docs,doc,48,docs/reference/skill-discovery.md,docs,move,Diataxis: reference
+docs/specs/about-profile-polish.md,docs,spec,79,docs/specs/about-profile-polish.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/aggregate-interaction-analytics.md,docs,spec,169,docs/specs/aggregate-interaction-analytics.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/ai-engineer-positioning-v3.md,docs,spec,107,docs/specs/ai-engineer-positioning-v3.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/ambient-particles.md,docs,spec,69,docs/specs/ambient-particles.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/applied-ai-profile-2026-10-10.md,docs,spec,72,docs/specs/applied-ai-profile-2026-10-10.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/ci-efficiency.md,docs,spec,44,docs/specs/ci-efficiency.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/cinematic-solar-system.md,docs,spec,117,docs/specs/cinematic-solar-system.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/clean-architecture.md,docs,spec,80,docs/specs/clean-architecture.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/common-site-layout.md,docs,spec,145,docs/specs/common-site-layout.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/continuous-technology-carousel.md,docs,spec,58,docs/specs/continuous-technology-carousel.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/coolify-reverse-proxy.md,docs,spec,107,docs/specs/coolify-reverse-proxy.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/engineering-profile-polish.md,docs,spec,156,docs/specs/engineering-profile-polish.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/enterprise-architecture-maps.md,docs,spec,193,docs/specs/enterprise-architecture-maps.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/experience-architecture-diagrams.md,docs,spec,25,docs/specs/experience-architecture-diagrams.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/home-tools-carousel.md,docs,spec,31,docs/specs/home-tools-carousel.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/immersive-solar-scene.md,docs,spec,100,docs/specs/immersive-solar-scene.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/interactive-sphere.md,docs,spec,45,docs/specs/interactive-sphere.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/manual-dependency-review.md,docs,spec,39,docs/specs/manual-dependency-review.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/mobile-cloud-spacing.md,docs,spec,61,docs/specs/mobile-cloud-spacing.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/mobile-polish-verification.md,docs,spec,34,docs/specs/mobile-polish-verification.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/native-assistant.md,docs,spec,48,docs/specs/native-assistant.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/paired-ci-profiles.md,docs,spec,53,docs/specs/paired-ci-profiles.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/pequeverso-case-study.md,docs,spec,72,docs/specs/pequeverso-case-study.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/polished-ai-assistant.md,docs,spec,79,docs/specs/polished-ai-assistant.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/portfolio-autonomy.md,docs,spec,62,docs/specs/portfolio-autonomy.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/portfolio-initial-release.md,docs,spec,173,docs/specs/portfolio-initial-release.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/portfolio-redesign.md,docs,spec,69,docs/specs/portfolio-redesign.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/product-analytics.md,docs,spec,409,docs/specs/product-analytics.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/production-repository-polish.md,docs,spec,42,docs/specs/production-repository-polish.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/professional-profile.md,docs,spec,84,docs/specs/professional-profile.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/profile-release-polish.md,docs,spec,29,docs/specs/profile-release-polish.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/release-2026-09-19.md,docs,spec,124,docs/specs/release-2026-09-19.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/release-2026-10-03.md,docs,spec,89,docs/specs/release-2026-10-03.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/resting-sphere-size.md,docs,spec,60,docs/specs/resting-sphere-size.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/shadcn-migration.md,docs,spec,59,docs/specs/shadcn-migration.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/solar-explorer-and-toolkit.md,docs,spec,92,docs/specs/solar-explorer-and-toolkit.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/template.md,docs,spec,29,docs/specs/template.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/verified-toolchain.md,docs,spec,64,docs/specs/verified-toolchain.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/specs/work-profile-polish.md,docs,spec,47,docs/specs/work-profile-polish.md,docs,keep,Spec-driven record kept; template.md is the entry; no moves to keep links stable
+docs/technology.md,docs,doc,119,docs/reference/technology-catalogue.md,docs,move,Diataxis: reference
+docs/verification/academic-evidence.md,docs,evidence,67,docs/verification/academic-evidence.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/ai-engineer-positioning-v3.md,docs,evidence,80,docs/verification/ai-engineer-positioning-v3.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/analytics-real-flow.md,docs,evidence,168,docs/verification/analytics-real-flow.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/content-migration.md,docs,evidence,60,docs/verification/content-migration.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/immersive-solar-scene.md,docs,evidence,144,docs/verification/immersive-solar-scene.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/interactive-sphere.md,docs,evidence,85,docs/verification/interactive-sphere.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/native-assistant.md,docs,evidence,185,docs/verification/native-assistant.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/native-assistant/avatar-depth.png,docs,evidence,0,docs/verification/native-assistant/avatar-depth.png,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/native-assistant/before-iframe-conversation.png,docs,evidence,0,docs/verification/native-assistant/before-iframe-conversation.png,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/native-assistant/compact-dark-en.png,docs,evidence,0,docs/verification/native-assistant/compact-dark-en.png,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/native-assistant/disabled-desktop.png,docs,evidence,0,docs/verification/native-assistant/disabled-desktop.png,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/native-assistant/disabled-mobile.png,docs,evidence,0,docs/verification/native-assistant/disabled-mobile.png,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/native-assistant/expanded-dark-en.png,docs,evidence,0,docs/verification/native-assistant/expanded-dark-en.png,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/native-assistant/mobile-light-es.png,docs,evidence,0,docs/verification/native-assistant/mobile-light-es.png,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/native-assistant/page-dark-en.png,docs,evidence,0,docs/verification/native-assistant/page-dark-en.png,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/pequeverso-case-study.md,docs,evidence,52,docs/verification/pequeverso-case-study.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/polished-ai-assistant.md,docs,evidence,134,docs/verification/polished-ai-assistant.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/portfolio-autonomy.md,docs,evidence,107,docs/verification/portfolio-autonomy.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/portfolio-initial-release.md,docs,evidence,91,docs/verification/portfolio-initial-release.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/portfolio-redesign.md,docs,evidence,67,docs/verification/portfolio-redesign.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/portrait-quality.md,docs,evidence,9,docs/verification/portrait-quality.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/responsive-polish-2026-10-24.md,docs,evidence,63,docs/verification/responsive-polish-2026-10-24.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/route-theme-readiness.md,docs,evidence,50,docs/verification/route-theme-readiness.md,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+docs/verification/site-layout-cutover.json,docs,evidence,142,docs/verification/site-layout-cutover.json,docs,keep,Verification evidence for shipped specs; retention review in PF-M6
+media/identity/avatar.png,media,identity-source,0,media/identity/avatar.png,media,keep,Source identity masters; generated into public/avatar by tools/generate-identity.ts
+media/identity/portrait-source.png,media,identity-source,0,media/identity/portrait-source.png,media,keep,Source identity masters; generated into public/avatar by tools/generate-identity.ts
+media/identity/portrait.avif,media,identity-source,0,media/identity/portrait.avif,media,keep,Source identity masters; generated into public/avatar by tools/generate-identity.ts
+next.config.mjs,root,config,77,next.config.mjs,root,keep-exception,"Must stay .mjs: Hostinger glibc 2.28 cannot load next.config.ts through SWC (docs/deployment.md); JSDoc-typed and checked by tsc; adds CSP report-only, image config"
+package-lock.json,root,lockfile,4865,package-lock.json,root,keep,Lockfile regenerated by dependency PRs only
+package.json,root,manifest,85,package.json,root,modify,"Scripts renamed to the check/ci-gate contract; Vitest, Stryker, knip, style-dictionary, lighthouse added; gsap removed after PF-D2"
+playwright.analytics-live.config.ts,root,config,28,playwright.analytics-live.config.ts,root,keep,Specialised configs stay; folded into one projects map only if the E2E suite stays under budget
+playwright.config.ts,root,config,71,playwright.config.ts,root,modify,"Adds webkit-iphone and firefox projects for journeys, fluidity and visual projects"
+playwright.rollout.config.ts,root,config,9,playwright.rollout.config.ts,root,keep,Specialised configs stay; folded into one projects map only if the E2E suite stays under budget
+postcss.config.mjs,root,config,5,postcss.config.mjs,root,keep-exception,Tailwind PostCSS loader cannot load TS config; the only other .mjs exception
+public/avatar/face-16.png,asset,asset,0,public/avatar/face-16.png,asset,keep,"Identity, evidence and CV documents; CV PDFs generated from synced CV data"
+public/avatar/face-192.png,asset,asset,0,public/avatar/face-192.png,asset,keep,"Identity, evidence and CV documents; CV PDFs generated from synced CV data"
+public/avatar/face-32.png,asset,asset,0,public/avatar/face-32.png,asset,keep,"Identity, evidence and CV documents; CV PDFs generated from synced CV data"
+public/avatar/face-48.png,asset,asset,0,public/avatar/face-48.png,asset,keep,"Identity, evidence and CV documents; CV PDFs generated from synced CV data"
+public/avatar/face-96.png,asset,asset,0,public/avatar/face-96.png,asset,keep,"Identity, evidence and CV documents; CV PDFs generated from synced CV data"
+public/brands.svg,asset,svg-mark,44,public/brands.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/NOTICE.md,asset,svg-mark,83,public/brands/NOTICE.md,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/aave.svg,asset,svg-mark,1,public/brands/aave.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/agno.svg,asset,svg-mark,7,public/brands/agno.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/alchemy.svg,asset,svg-mark,22,public/brands/alchemy.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/amazon-api-gateway.svg,asset,svg-mark,1,public/brands/amazon-api-gateway.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/amazon-cloudwatch.svg,asset,svg-mark,1,public/brands/amazon-cloudwatch.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/amazon-sqs.svg,asset,svg-mark,1,public/brands/amazon-sqs.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/android-studio.svg,asset,svg-mark,1,public/brands/android-studio.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/apachemaven.svg,asset,svg-mark,215,public/brands/apachemaven.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/caddy.svg,asset,svg-mark,1,public/brands/caddy.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/celery.svg,asset,svg-mark,1,public/brands/celery.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/clarity.png,asset,svg-mark,0,public/brands/clarity.png,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/compound.svg,asset,svg-mark,3,public/brands/compound.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/coolify-LICENSE.txt,asset,svg-mark,201,public/brands/coolify-LICENSE.txt,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/coolify.svg,asset,svg-mark,1,public/brands/coolify.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/deepinfra.png,asset,svg-mark,0,public/brands/deepinfra.png,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/digitalocean.svg,asset,svg-mark,1,public/brands/digitalocean.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/discord.svg,asset,svg-mark,1,public/brands/discord.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/docker.svg,asset,svg-mark,1,public/brands/docker.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/expo.svg,asset,svg-mark,1,public/brands/expo.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/fastapi.svg,asset,svg-mark,1,public/brands/fastapi.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/firebase.png,asset,svg-mark,0,public/brands/firebase.png,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/git.svg,asset,svg-mark,1,public/brands/git.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/githubactions.svg,asset,svg-mark,1,public/brands/githubactions.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/gitlab.svg,asset,svg-mark,1,public/brands/gitlab.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/googleanalytics.svg,asset,svg-mark,1,public/brands/googleanalytics.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/googlecloud.svg,asset,svg-mark,1,public/brands/googlecloud.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/googlegemini.svg,asset,svg-mark,1,public/brands/googlegemini.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/grafana.svg,asset,svg-mark,1,public/brands/grafana.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/helm.svg,asset,svg-mark,1,public/brands/helm.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/hibernate.svg,asset,svg-mark,4,public/brands/hibernate.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/hostinger.svg,asset,svg-mark,1,public/brands/hostinger.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/hyperliquid.png,asset,svg-mark,0,public/brands/hyperliquid.png,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/infisical.svg,asset,svg-mark,3,public/brands/infisical.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/javascript.svg,asset,svg-mark,1,public/brands/javascript.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/jest.svg,asset,svg-mark,1,public/brands/jest.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/jira.svg,asset,svg-mark,1,public/brands/jira.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/junit.svg,asset,svg-mark,1,public/brands/junit.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/karate.svg,asset,svg-mark,4,public/brands/karate.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/kotlin.svg,asset,svg-mark,10,public/brands/kotlin.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/kubernetes.svg,asset,svg-mark,1,public/brands/kubernetes.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/langgraph.svg,asset,svg-mark,1,public/brands/langgraph.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/langsmith.svg,asset,svg-mark,11,public/brands/langsmith.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/laravel.svg,asset,svg-mark,1,public/brands/laravel.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/lifi.svg,asset,svg-mark,4,public/brands/lifi.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/mariadb.svg,asset,svg-mark,1,public/brands/mariadb.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/mem0.svg,asset,svg-mark,1,public/brands/mem0.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/meta.svg,asset,svg-mark,1,public/brands/meta.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/micrometer.svg,asset,svg-mark,152,public/brands/micrometer.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/microsoft-teams.svg,asset,svg-mark,1,public/brands/microsoft-teams.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/mockito.png,asset,svg-mark,0,public/brands/mockito.png,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/modelcontextprotocol.svg,asset,svg-mark,1,public/brands/modelcontextprotocol.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/mongodb.svg,asset,svg-mark,1,public/brands/mongodb.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/moonpay.png,asset,svg-mark,0,public/brands/moonpay.png,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/morpho.svg,asset,svg-mark,1,public/brands/morpho.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/mysql.svg,asset,svg-mark,1,public/brands/mysql.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/neo4j.svg,asset,svg-mark,1,public/brands/neo4j.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/nestjs.svg,asset,svg-mark,1,public/brands/nestjs.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/nextdotjs.svg,asset,svg-mark,1,public/brands/nextdotjs.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/nginx.svg,asset,svg-mark,1,public/brands/nginx.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/nodedotjs.svg,asset,svg-mark,1,public/brands/nodedotjs.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/numpy.svg,asset,svg-mark,1,public/brands/numpy.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/openai.svg,asset,svg-mark,1,public/brands/openai.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/openapi.svg,asset,svg-mark,1,public/brands/openapi.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/openjdk.svg,asset,svg-mark,1,public/brands/openjdk.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/opentelemetry.svg,asset,svg-mark,4,public/brands/opentelemetry.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/pandas.svg,asset,svg-mark,1,public/brands/pandas.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/php.svg,asset,svg-mark,1,public/brands/php.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/postgresql.svg,asset,svg-mark,1,public/brands/postgresql.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/prisma.svg,asset,svg-mark,1,public/brands/prisma.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/privy.png,asset,svg-mark,0,public/brands/privy.png,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/prometheus.svg,asset,svg-mark,1,public/brands/prometheus.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/pydantic.svg,asset,svg-mark,1,public/brands/pydantic.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/pytest.svg,asset,svg-mark,1,public/brands/pytest.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/python.svg,asset,svg-mark,1,public/brands/python.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/pytorch.svg,asset,svg-mark,1,public/brands/pytorch.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/react.svg,asset,svg-mark,1,public/brands/react.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/reactquery.svg,asset,svg-mark,1,public/brands/reactquery.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/redis.svg,asset,svg-mark,1,public/brands/redis.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/relay.svg,asset,svg-mark,3,public/brands/relay.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/sentry.svg,asset,svg-mark,1,public/brands/sentry.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/single-spa.svg,asset,svg-mark,1,public/brands/single-spa.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/singular.svg,asset,svg-mark,1,public/brands/singular.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/slack.svg,asset,svg-mark,1,public/brands/slack.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/solidity.svg,asset,svg-mark,1,public/brands/solidity.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/sonarqube.svg,asset,svg-mark,1,public/brands/sonarqube.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/spring.svg,asset,svg-mark,1,public/brands/spring.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/springboot.svg,asset,svg-mark,1,public/brands/springboot.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/sqlalchemy.svg,asset,svg-mark,1,public/brands/sqlalchemy.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/sqlmodel.svg,asset,svg-mark,21,public/brands/sqlmodel.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/stripe.svg,asset,svg-mark,11,public/brands/stripe.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/swift.svg,asset,svg-mark,1,public/brands/swift.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/tensorflow.svg,asset,svg-mark,1,public/brands/tensorflow.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/testcontainers.svg,asset,svg-mark,92,public/brands/testcontainers.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/testinglibrary.svg,asset,svg-mark,1,public/brands/testinglibrary.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/traefikproxy.svg,asset,svg-mark,1,public/brands/traefikproxy.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/trello.svg,asset,svg-mark,1,public/brands/trello.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/typeorm.svg,asset,svg-mark,1,public/brands/typeorm.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/typescript.svg,asset,svg-mark,1,public/brands/typescript.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/universidad-nacional-del-sur.png,asset,svg-mark,0,public/brands/universidad-nacional-del-sur.png,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/viem.png,asset,svg-mark,0,public/brands/viem.png,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/vitest.svg,asset,svg-mark,1,public/brands/vitest.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/wordpress.svg,asset,svg-mark,1,public/brands/wordpress.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/zerodev.svg,asset,svg-mark,4,public/brands/zerodev.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/brands/zod.svg,asset,svg-mark,1,public/brands/zod.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+public/certificates/docker-fundamentals-2024.pdf,asset,asset,0,public/certificates/docker-fundamentals-2024.pdf,asset,keep,"Identity, evidence and CV documents; CV PDFs generated from synced CV data"
+public/certificates/professional-power-skills-2026.png,asset,image-raster,0,public/certificates/professional-power-skills-2026.png,asset,convert,Unoptimised raster; AVIF/WebP
+public/documents/uns-academic-transcript-2025.pdf,asset,asset,911,public/documents/uns-academic-transcript-2025.pdf,asset,keep,"Identity, evidence and CV documents; CV PDFs generated from synced CV data"
+public/documents/uns-information-systems-plan-2012.pdf,asset,asset,0,public/documents/uns-information-systems-plan-2012.pdf,asset,keep,"Identity, evidence and CV documents; CV PDFs generated from synced CV data"
+public/filomena/filomena-001.webp,asset,image,0,public/filomena/filomena-001.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-004.webp,asset,image,0,public/filomena/filomena-004.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-005.webp,asset,image,0,public/filomena/filomena-005.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-006.webp,asset,image,0,public/filomena/filomena-006.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-007.webp,asset,image,0,public/filomena/filomena-007.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-011.webp,asset,image,0,public/filomena/filomena-011.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-012.webp,asset,image,0,public/filomena/filomena-012.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-015.webp,asset,image,0,public/filomena/filomena-015.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-017.webp,asset,image,0,public/filomena/filomena-017.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-019.webp,asset,image,0,public/filomena/filomena-019.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-023.webp,asset,image,0,public/filomena/filomena-023.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-026.webp,asset,image,0,public/filomena/filomena-026.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-028.webp,asset,image,0,public/filomena/filomena-028.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-029.webp,asset,image,0,public/filomena/filomena-029.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-032.webp,asset,image,0,public/filomena/filomena-032.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-033.webp,asset,image,0,public/filomena/filomena-033.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-034.webp,asset,image,0,public/filomena/filomena-034.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-038.webp,asset,image,0,public/filomena/filomena-038.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-040.webp,asset,image,0,public/filomena/filomena-040.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-043.webp,asset,image,0,public/filomena/filomena-043.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-044.webp,asset,image,0,public/filomena/filomena-044.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-045.webp,asset,image,0,public/filomena/filomena-045.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-049.webp,asset,image,0,public/filomena/filomena-049.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-051.webp,asset,image,0,public/filomena/filomena-051.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-052.webp,asset,image,0,public/filomena/filomena-052.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-053.webp,asset,image,0,public/filomena/filomena-053.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-057.webp,asset,image,0,public/filomena/filomena-057.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-058.webp,asset,image,0,public/filomena/filomena-058.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-059.webp,asset,image,0,public/filomena/filomena-059.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-060.webp,asset,image,0,public/filomena/filomena-060.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-063.webp,asset,image,0,public/filomena/filomena-063.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-066.webp,asset,image,0,public/filomena/filomena-066.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-068.webp,asset,image,0,public/filomena/filomena-068.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-070.webp,asset,image,0,public/filomena/filomena-070.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-074.webp,asset,image,0,public/filomena/filomena-074.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-075.webp,asset,image,0,public/filomena/filomena-075.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-076.webp,asset,image,0,public/filomena/filomena-076.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-077.webp,asset,image,0,public/filomena/filomena-077.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-078.webp,asset,image,0,public/filomena/filomena-078.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-079.webp,asset,image,0,public/filomena/filomena-079.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-086.webp,asset,image,0,public/filomena/filomena-086.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-090.webp,asset,image,0,public/filomena/filomena-090.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/filomena/filomena-091.webp,asset,image,0,public/filomena/filomena-091.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/gonzalo-martin-perez-ai-engineer-en.pdf,asset,asset,0,public/gonzalo-martin-perez-ai-engineer-en.pdf,asset,keep,"Identity, evidence and CV documents; CV PDFs generated from synced CV data"
+public/gonzalo-martin-perez-ai-engineer-es.pdf,asset,asset,0,public/gonzalo-martin-perez-ai-engineer-es.pdf,asset,keep,"Identity, evidence and CV documents; CV PDFs generated from synced CV data"
+public/images/companies/cooperativa-obrera-100.jpg,asset,image-raster,0,public/images/companies/cooperativa-obrera-100.jpg,asset,convert,Unoptimised raster (v1/audit: 11 unoptimised images); AVIF/WebP via next/image with dimensions
+public/images/companies/cooperativa-obrera.png,asset,image-raster,0,public/images/companies/cooperativa-obrera.png,asset,convert,Unoptimised raster (v1/audit: 11 unoptimised images); AVIF/WebP via next/image with dimensions
+public/images/companies/independent.jpg,asset,image-raster,0,public/images/companies/independent.jpg,asset,convert,Unoptimised raster (v1/audit: 11 unoptimised images); AVIF/WebP via next/image with dimensions
+public/images/companies/pequeverso-isotipo.webp,asset,image,0,public/images/companies/pequeverso-isotipo.webp,asset,keep,Decorative or identity imagery; vector or already optimised
+public/images/companies/pequeverso.png,asset,image-raster,0,public/images/companies/pequeverso.png,asset,convert,Unoptimised raster (v1/audit: 11 unoptimised images); AVIF/WebP via next/image with dimensions
+public/images/companies/rampy-original.jpg,asset,image,0,media/companies/rampy-original.jpg,media,move,Source masters do not belong in public/; served derivatives only
+public/images/companies/rampy.png,asset,image-raster,0,public/images/companies/rampy.png,asset,convert,Unoptimised raster (v1/audit: 11 unoptimised images); AVIF/WebP via next/image with dimensions
+public/images/companies/teamcubation-original.jpg,asset,image,0,media/companies/teamcubation-original.jpg,media,move,Source masters do not belong in public/; served derivatives only
+public/images/companies/teamcubation.png,asset,image-raster,0,public/images/companies/teamcubation.png,asset,convert,Unoptimised raster (v1/audit: 11 unoptimised images); AVIF/WebP via next/image with dimensions
+public/images/companies/teamcubation.svg,asset,image,6,public/images/companies/teamcubation.svg,asset,keep,Decorative or identity imagery; vector or already optimised
+public/images/institutions/kognite.jpg,asset,image-raster,0,public/images/institutions/kognite.jpg,asset,convert,Unoptimised raster; AVIF/WebP
+public/images/institutions/uns.jpg,asset,image-raster,0,public/images/institutions/uns.jpg,asset,convert,Unoptimised raster; AVIF/WebP
+public/images/scene-stars.svg,asset,image,4,public/images/scene-stars.svg,asset,keep,Decorative or identity imagery; vector or already optimised
+public/images/solar-system/earth-1024.webp,asset,texture,0,public/images/solar-system/earth-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/earth-2048.webp,asset,texture,0,public/images/solar-system/earth-2048.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/earth-256.webp,asset,texture,0,public/images/solar-system/earth-256.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/earth-clouds-1024.webp,asset,texture,0,public/images/solar-system/earth-clouds-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/earth-clouds.webp,asset,texture,0,public/images/solar-system/earth-clouds.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/earth-night-1024.webp,asset,texture,0,public/images/solar-system/earth-night-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/earth-night.webp,asset,texture,0,public/images/solar-system/earth-night.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/earth-normal-1024.webp,asset,texture,0,public/images/solar-system/earth-normal-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/earth-normal.webp,asset,texture,0,public/images/solar-system/earth-normal.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/earth-specular-1024.webp,asset,texture,0,public/images/solar-system/earth-specular-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/earth-specular.webp,asset,texture,0,public/images/solar-system/earth-specular.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/earth.webp,asset,texture,0,public/images/solar-system/earth.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/jupiter-1024.webp,asset,texture,0,public/images/solar-system/jupiter-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/jupiter-2048.webp,asset,texture,0,public/images/solar-system/jupiter-2048.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/jupiter.webp,asset,texture,0,public/images/solar-system/jupiter.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/manifest.json,asset,data,510,public/images/solar-system/manifest.json,asset,modify,Adds ambient 512 px entries and byte sizes (budget test reads it)
+public/images/solar-system/mars-1024.webp,asset,texture,0,public/images/solar-system/mars-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/mars-256.webp,asset,texture,0,public/images/solar-system/mars-256.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/mars.webp,asset,texture,0,public/images/solar-system/mars.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/mercury-1024.webp,asset,texture,0,public/images/solar-system/mercury-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/mercury-128.webp,asset,texture,0,public/images/solar-system/mercury-128.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/mercury.webp,asset,texture,0,public/images/solar-system/mercury.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/moon-1024.webp,asset,texture,0,public/images/solar-system/moon-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/moon-128.webp,asset,texture,0,public/images/solar-system/moon-128.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/moon.webp,asset,texture,0,public/images/solar-system/moon.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/neptune-1024.webp,asset,texture,0,public/images/solar-system/neptune-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/neptune-512.webp,asset,texture,0,public/images/solar-system/neptune-512.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/neptune.webp,asset,texture,0,public/images/solar-system/neptune.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/pluto-1024.webp,asset,texture,0,public/images/solar-system/pluto-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/pluto-128.webp,asset,texture,0,public/images/solar-system/pluto-128.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/pluto.webp,asset,texture,0,public/images/solar-system/pluto.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/saturn-1024.webp,asset,texture,0,public/images/solar-system/saturn-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/saturn-rings.webp,asset,texture,0,public/images/solar-system/saturn-rings.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/saturn.webp,asset,texture,0,public/images/solar-system/saturn.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/sun-1024.webp,asset,texture,0,public/images/solar-system/sun-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/sun-2048.webp,asset,texture,0,public/images/solar-system/sun-2048.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/sun.webp,asset,texture,0,public/images/solar-system/sun.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/uranus-1024.webp,asset,texture,0,public/images/solar-system/uranus-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/uranus-512.webp,asset,texture,0,public/images/solar-system/uranus-512.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/uranus.webp,asset,texture,0,public/images/solar-system/uranus.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/venus-1024.webp,asset,texture,0,public/images/solar-system/venus-1024.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/venus-256.webp,asset,texture,0,public/images/solar-system/venus-256.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/images/solar-system/venus.webp,asset,texture,0,public/images/solar-system/venus.webp,asset,keep,Explorer textures; an ambient 512 px set is added; routes other than home/stack/explorer stop loading them
+public/pequeverso/pequeverso-assistant-expanded.webp,asset,image,0,public/pequeverso/pequeverso-assistant-expanded.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-assistant-mobile-answer.webp,asset,image,0,public/pequeverso/pequeverso-assistant-mobile-answer.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-assistant-panel-answer.webp,asset,image,0,public/pequeverso/pequeverso-assistant-panel-answer.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-assistant-panel-welcome.webp,asset,image,0,public/pequeverso/pequeverso-assistant-panel-welcome.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-assistant-waiting.webp,asset,image,0,public/pequeverso/pequeverso-assistant-waiting.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-backoffice-access.webp,asset,image,0,public/pequeverso/pequeverso-backoffice-access.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-backoffice-analytics.webp,asset,image,0,public/pequeverso/pequeverso-backoffice-analytics.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-backoffice-availability.webp,asset,image,0,public/pequeverso/pequeverso-backoffice-availability.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-backoffice-budget.webp,asset,image,0,public/pequeverso/pequeverso-backoffice-budget.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-backoffice-catalog.webp,asset,image,0,public/pequeverso/pequeverso-backoffice-catalog.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-backoffice-daily.webp,asset,image,0,public/pequeverso/pequeverso-backoffice-daily.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-backoffice-mobile-status.webp,asset,image,0,public/pequeverso/pequeverso-backoffice-mobile-status.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-backoffice-quality.webp,asset,image,0,public/pequeverso/pequeverso-backoffice-quality.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-backoffice-runs.webp,asset,image,0,public/pequeverso/pequeverso-backoffice-runs.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-store-home.webp,asset,image,0,public/pequeverso/pequeverso-store-home.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/pequeverso/pequeverso-store-support.webp,asset,image,0,public/pequeverso/pequeverso-store-support.webp,asset,keep,WebP case-study imagery; responsive sizes verified by image audit
+public/social/portfolio-og-2026-10-24.png,asset,og-image,0,public/social/portfolio-og.png,asset,rename,Drop date suffix; generated by tools; PNG required by OG consumers
+public/technology-illustrations.svg,asset,svg-mark,49,public/technology-illustrations.svg,asset,keep,Tech marks; sprite generated by tools/technology-illustrations.ts
+src/app/about/page.tsx,app,route,9,src/app/about/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/apple-icon.png,app,asset,0,src/app/apple-icon.png,app,keep,Metadata icon files
+src/app/assistant/page.tsx,app,route,9,src/app/assistant/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/contact/page.tsx,app,route,9,src/app/contact/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/cv/page.tsx,app,route,9,src/app/cv/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/education/page.tsx,app,route,9,src/app/education/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/es/about/page.tsx,app,route,13,src/app/es/about/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/es/assistant/page.tsx,app,route,9,src/app/es/assistant/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/es/contact/page.tsx,app,route,13,src/app/es/contact/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/es/cv/page.tsx,app,route,9,src/app/es/cv/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/es/education/page.tsx,app,route,13,src/app/es/education/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/es/page.tsx,app,route,17,src/app/es/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/es/stack/page.tsx,app,route,13,src/app/es/stack/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/es/work/filomena/page.tsx,app,route,13,src/app/es/work/filomena/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/es/work/page.tsx,app,route,13,src/app/es/work/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/es/work/pequeverso/page.tsx,app,route,13,src/app/es/work/pequeverso/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/favicon.ico,app,asset,0,src/app/favicon.ico,app,keep,Metadata icon files
+src/app/fonts.ts,app,config,26,src/app/fonts.ts,app,modify,"next/font/local with committed subset woff2 (hermetic build), two variable families, <= 100 KB"
+src/app/globals.css,app,style,517,src/app/globals.css + src/design/theme.css,app/design,split,Hand-written 12-line entry imports generated theme.css from DTCG tokens; literals removed
+src/app/icon.png,app,asset,0,src/app/icon.png,app,keep,Metadata icon files
+src/app/layout.tsx,app,route,60,src/app/layout.tsx,app,modify,"Theme script, motion toggle, view transitions, preconnect-free fonts"
+src/app/not-found.tsx,app,route,15,src/app/not-found.tsx,app,modify,Locale-aware 404 (open from v1; /es 404 is English)
+src/app/page.tsx,app,route,5,src/app/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/robots.ts,app,route,9,src/app/robots.ts,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/sitemap.ts,app,route,24,src/app/sitemap.ts,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/stack/page.tsx,app,route,9,src/app/stack/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/work/filomena/page.tsx,app,route,9,src/app/work/filomena/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/work/page.tsx,app,route,9,src/app/work/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/app/work/pequeverso/page.tsx,app,route,9,src/app/work/pequeverso/page.tsx,app,keep,Route file; wrapped in <ViewTransition> where a page (PF-M5)
+src/features/analytics/adapters/exposure.ts,feature/analytics/adapters,feature,192,src/features/analytics/adapters/exposure.ts,feature/analytics/adapters,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/adapters/http.ts,feature/analytics/adapters,feature,81,src/features/analytics/adapters/http.ts,feature/analytics/adapters,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/adapters/interactions.ts,feature/analytics/adapters,feature,46,src/features/analytics/adapters/interactions.ts,feature/analytics/adapters,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/adapters/public-clicks.ts,feature/analytics/adapters,feature,46,src/features/analytics/adapters/public-clicks.ts,feature/analytics/adapters,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/adapters/public-regions.ts,feature/analytics/adapters,feature,65,src/features/analytics/adapters/public-regions.ts,feature/analytics/adapters,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/application/availability.ts,feature/analytics/application,feature,6,src/features/analytics/application/availability.ts,feature/analytics/application,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/application/exposure-dwell.ts,feature/analytics/application,feature,50,src/features/analytics/application/exposure-dwell.ts,feature/analytics/application,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/application/exposure-session.ts,feature/analytics/application,feature,49,src/features/analytics/application/exposure-session.ts,feature/analytics/application,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/application/measurement-budget.ts,feature/analytics/application,feature,21,src/features/analytics/application/measurement-budget.ts,feature/analytics/application,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/application/page-visits.ts,feature/analytics/application,feature,17,src/features/analytics/application/page-visits.ts,feature/analytics/application,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/config.ts,feature/analytics,facade,3,src/features/analytics/config.ts,feature/analytics,keep,Registered feature facade in architecture-policy
+src/features/analytics/domain/click-grid.ts,feature/analytics/domain,feature,23,src/features/analytics/domain/click-grid.ts,feature/analytics/domain,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/domain/events.ts,feature/analytics/domain,feature,86,src/features/analytics/domain/events.ts,feature/analytics/domain,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/domain/interactions.ts,feature/analytics/domain,feature,94,src/features/analytics/domain/interactions.ts,feature/analytics/domain,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/analytics/entry.tsx,feature/analytics,facade,70,src/features/analytics/entry.tsx,feature/analytics,keep,Registered feature facade in architecture-policy
+src/features/architecture-diagrams/domain/architecture-edge-routing.ts,feature/architecture-diagrams/domain,feature,159,src/features/architecture-diagrams/domain/architecture-edge-routing.ts,feature/architecture-diagrams/domain,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/architecture-diagrams/domain/architecture-types.ts,feature/architecture-diagrams/domain,feature,25,src/features/architecture-diagrams/domain/architecture-types.ts,feature/architecture-diagrams/domain,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/architecture-diagrams/domain/enterprise-architecture-layout.ts,feature/architecture-diagrams/domain,feature,378,src/features/architecture-diagrams/domain/enterprise-architecture-layout.ts,feature/architecture-diagrams/domain,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/architecture-diagrams/domain/filomena-architecture-layout.ts,feature/architecture-diagrams/domain,feature,75,src/features/architecture-diagrams/domain/filomena-architecture-layout.ts,feature/architecture-diagrams/domain,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/architecture-diagrams/presentation/architecture-canvas-loader.tsx,feature/architecture-diagrams/presentation,component,21,src/features/architecture-diagrams/presentation/architecture-canvas-loader.tsx,feature/architecture-diagrams/presentation,modify,"Heading order fix (8 moderate axe findings), nodes tabindex -1 with roving entry, skip-diagram link"
+src/features/architecture-diagrams/presentation/experience-architecture-canvas.tsx,feature/architecture-diagrams/presentation,component,403,src/features/architecture-diagrams/presentation/experience-architecture-canvas.tsx,feature/architecture-diagrams/presentation,modify,"Heading order fix (8 moderate axe findings), nodes tabindex -1 with roving entry, skip-diagram link"
+src/features/architecture-diagrams/presentation/experience-architecture.module.css,feature/architecture-diagrams/presentation,feature,317,src/features/architecture-diagrams/presentation/experience-architecture.module.css,feature/architecture-diagrams/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/architecture-diagrams/presentation/experience-architecture.tsx,feature/architecture-diagrams/presentation,feature,79,src/features/architecture-diagrams/presentation/experience-architecture.tsx,feature/architecture-diagrams/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/adapters/api.ts,feature/assistant/adapters,feature,190,src/features/assistant/adapters/api.ts,feature/assistant/adapters,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/adapters/sse.ts,feature/assistant/adapters,feature,148,src/features/assistant/adapters/sse.ts,feature/assistant/adapters,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/adapters/suggestions.ts,feature/assistant/adapters,feature,49,src/features/assistant/adapters/suggestions.ts,feature/assistant/adapters,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/adapters/validate.ts,feature/assistant/adapters,feature,101,src/features/assistant/adapters/validate.ts,feature/assistant/adapters,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/application/assistant.ts,feature/assistant/application,feature,366,src/features/assistant/application/assistant.ts,feature/assistant/application,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/application/availability.ts,feature/assistant/application,feature,5,src/features/assistant/application/availability.ts,feature/assistant/application,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/application/ports.ts,feature/assistant/application,feature,32,src/features/assistant/application/ports.ts,feature/assistant/application,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/domain/models.ts,feature/assistant/domain,feature,133,src/features/assistant/domain/models.ts,feature/assistant/domain,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/domain/visitor-context.ts,feature/assistant/domain,feature,30,src/features/assistant/domain/visitor-context.ts,feature/assistant/domain,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/entry.tsx,feature/assistant,facade,31,src/features/assistant/entry.tsx,feature/assistant,keep,Registered feature facade in architecture-policy
+src/features/assistant/presentation/assistant-host.module.css,feature/assistant/presentation,feature,224,src/features/assistant/presentation/assistant-host.module.css,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/assistant-host.tsx,feature/assistant/presentation,feature,258,src/features/assistant/presentation/assistant-host.tsx,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/assistant-loading.tsx,feature/assistant/presentation,feature,17,src/features/assistant/presentation/assistant-loading.tsx,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/chat-message.tsx,feature/assistant/presentation,feature,112,src/features/assistant/presentation/chat-message.tsx,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/chat.module.css,feature/assistant/presentation,feature,606,src/features/assistant/presentation/chat.module.css,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/chat.tsx,feature/assistant/presentation,feature,533,src/features/assistant/presentation/chat.tsx,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/copy-answer.tsx,feature/assistant/presentation,feature,55,src/features/assistant/presentation/copy-answer.tsx,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/copy.ts,feature/assistant/presentation,feature,165,src/features/assistant/presentation/copy.ts,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/identity-avatar.module.css,feature/assistant/presentation,feature,64,src/features/assistant/presentation/identity-avatar.module.css,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/identity-avatar.tsx,feature/assistant/presentation,feature,71,src/features/assistant/presentation/identity-avatar.tsx,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/presentation.ts,feature/assistant/presentation,feature,9,src/features/assistant/presentation/presentation.ts,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/styles.ts,feature/assistant/presentation,feature,7,src/features/assistant/presentation/styles.ts,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/assistant/presentation/use-chat.ts,feature/assistant/presentation,feature,56,src/features/assistant/presentation/use-chat.ts,feature/assistant/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/hero/adapters/field-engine.ts,feature/hero/adapters,engine,307,src/features/hero/adapters/gpu/particle-engine.ts,feature/hero/adapters,rewrite,Replaced by the v2 stateless GPU morph engine (hero-particles.md); sphere logic becomes figure 01
+src/features/hero/adapters/scene-runtime.ts,feature/hero/adapters,engine,635,src/features/hero/adapters/catalogue-journey.ts + scene-host,feature/hero/adapters,split,"635 lines mixing scene mount, scroll journey and pointer; split into SceneHost client, journey scrub and pulses; complexity <= 10"
+src/features/hero/domain/cloud-layout.ts,feature/hero,feature,143,src/features/hero/domain/cloud-layout.ts,feature/hero,keep,Behaviour preserved; touched by hero v2 only where listed in roadmap PF-M5
+src/features/hero/domain/constellation.ts,feature/hero/domain,domain,121,src/features/hero/domain/figures/sphere.ts + poster,feature/hero/domain,rewrite,Static constellation becomes the sphere at seed time 0 (poster = first GPU frame)
+src/features/hero/domain/scene-technologies.ts,feature/hero,feature,50,src/features/hero/domain/scene-technologies.ts,feature/hero,keep,Behaviour preserved; touched by hero v2 only where listed in roadmap PF-M5
+src/features/hero/presentation/hero-stage.module.css,feature/hero/presentation,component,282,src/features/hero/presentation/hero-stage.module.css,feature/hero/presentation,modify,"Mount after LCP, tier selection, HUD and controls, context-loss handling kept"
+src/features/hero/presentation/hero-stage.tsx,feature/hero/presentation,component,149,src/features/hero/presentation/hero-stage.tsx,feature/hero/presentation,modify,"Mount after LCP, tier selection, HUD and controls, context-loss handling kept"
+src/features/hero/presentation/static-constellation.module.css,feature/hero/presentation,poster,4,src/features/hero/presentation/static-constellation.module.css,feature/hero/presentation,modify,Server-rendered poster generated from figure 01 geometry per theme
+src/features/hero/presentation/static-constellation.tsx,feature/hero/presentation,poster,35,src/features/hero/presentation/static-constellation.tsx,feature/hero/presentation,modify,Server-rendered poster generated from figure 01 geometry per theme
+src/features/hero/presentation/tech-constellation.module.css,feature/hero,feature,95,src/features/hero/presentation/tech-constellation.module.css,feature/hero,keep,Behaviour preserved; touched by hero v2 only where listed in roadmap PF-M5
+src/features/hero/presentation/tech-constellation.tsx,feature/hero,feature,132,src/features/hero/presentation/tech-constellation.tsx,feature/hero,keep,Behaviour preserved; touched by hero v2 only where listed in roadmap PF-M5
+src/features/project-gallery/presentation/gallery-carousel.module.css,feature/project-gallery/presentation,feature,134,src/features/project-gallery/presentation/gallery-carousel.module.css,feature/project-gallery/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/project-gallery/presentation/gallery-carousel.tsx,feature/project-gallery/presentation,component,253,src/features/project-gallery/presentation/gallery-carousel.tsx,feature/project-gallery/presentation,modify,Fix lightbox ignoring the active filter (lines 137-141); CSS scroll-snap carousel; GSAP removed
+src/features/solar-system/adapters/solar-system-bodies.ts,feature/solar-system,feature,534,src/features/solar-system/adapters/solar-system-bodies.ts,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/adapters/solar-system-engine.ts,feature/solar-system/adapters,engine,620,src/features/solar-system/adapters/solar-system-engine.ts,feature/solar-system/adapters,modify,"620 lines; frame-rate independent damping, 30 fps behind content, render on demand after idle; per-theme night side shading"
+src/features/solar-system/adapters/solar-system-quality.ts,feature/solar-system,feature,113,src/features/solar-system/adapters/solar-system-quality.ts,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/adapters/solar-system-reading.ts,feature/solar-system,feature,274,src/features/solar-system/adapters/solar-system-reading.ts,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/adapters/solar-system-resources.ts,feature/solar-system,feature,113,src/features/solar-system/adapters/solar-system-resources.ts,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/adapters/solar-system-shaders.ts,feature/solar-system,feature,520,src/features/solar-system/adapters/solar-system-shaders.ts,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/adapters/solar-system-sky.ts,feature/solar-system,feature,359,src/features/solar-system/adapters/solar-system-sky.ts,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/adapters/solar-system-textures.ts,feature/solar-system/adapters,adapter,252,src/features/solar-system/adapters/solar-system-textures.ts,feature/solar-system/adapters,modify,Ambient uses 512 px set; explorer streams 1024/2048 on open
+src/features/solar-system/adapters/texture-versions.ts,feature/solar-system,feature,15,src/features/solar-system/adapters/texture-versions.ts,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/domain/solar-system-scene.ts,feature/solar-system,feature,242,src/features/solar-system/domain/solar-system-scene.ts,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/domain/texture-contract.ts,feature/solar-system,feature,5,src/features/solar-system/domain/texture-contract.ts,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/presentation/ambient-field.module.css,feature/solar-system,feature,62,src/features/solar-system/presentation/ambient-field.module.css,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/presentation/ambient-field.tsx,feature/solar-system/presentation,component,25,src/features/solar-system/presentation/ambient-field.tsx,feature/solar-system/presentation,modify,Route opt-in through SceneHost; poster on reading routes (PF-D1)
+src/features/solar-system/presentation/solar-explorer-state.ts,feature/solar-system,feature,61,src/features/solar-system/presentation/solar-explorer-state.ts,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/presentation/solar-explorer.module.css,feature/solar-system,feature,221,src/features/solar-system/presentation/solar-explorer.module.css,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/presentation/solar-explorer.tsx,feature/solar-system,feature,240,src/features/solar-system/presentation/solar-explorer.tsx,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/presentation/solar-system.module.css,feature/solar-system,feature,183,src/features/solar-system/presentation/solar-system.module.css,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/presentation/solar-system.tsx,feature/solar-system,feature,347,src/features/solar-system/presentation/solar-system.tsx,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/solar-system/texture-data.ts,feature/solar-system,feature,3,src/features/solar-system/texture-data.ts,feature/solar-system,keep,Behaviour preserved; budgets and posters added around it
+src/features/technology-catalogue/domain/query.ts,feature/technology-catalogue/domain,feature,35,src/features/technology-catalogue/domain/query.ts,feature/technology-catalogue/domain,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/technology-catalogue/presentation/technology-catalogue.module.css,feature/technology-catalogue/presentation,feature,124,src/features/technology-catalogue/presentation/technology-catalogue.module.css,feature/technology-catalogue/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/technology-catalogue/presentation/technology-catalogue.tsx,feature/technology-catalogue/presentation,feature,138,src/features/technology-catalogue/presentation/technology-catalogue.tsx,feature/technology-catalogue/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/tool-carousel/domain/rows.ts,feature/tool-carousel/domain,feature,18,src/features/tool-carousel/domain/rows.ts,feature/tool-carousel/domain,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/tool-carousel/presentation/tool-carousel-client.tsx,feature/tool-carousel/presentation,feature,294,src/features/tool-carousel/presentation/tool-carousel-client.tsx,feature/tool-carousel/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/tool-carousel/presentation/tool-carousel.module.css,feature/tool-carousel/presentation,feature,173,src/features/tool-carousel/presentation/tool-carousel.module.css,feature/tool-carousel/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/features/tool-carousel/presentation/tool-carousel.tsx,feature/tool-carousel/presentation,feature,11,src/features/tool-carousel/presentation/tool-carousel.tsx,feature/tool-carousel/presentation,keep,Layer already matches the guard; refactor limited to complexity and TS strictness findings
+src/shared/contact/contact-links.module.css,shared,shared,136,src/shared/contact/contact-links.module.css,shared,keep,Shared capability registered in architecture-policy
+src/shared/contact/contact-links.tsx,shared,shared,92,src/shared/contact/contact-links.tsx,shared,keep,Shared capability registered in architecture-policy
+src/shared/editorial/eval-case.tsx,shared,shared,37,src/shared/editorial/eval-case.tsx,shared,keep,Shared capability registered in architecture-policy
+src/shared/editorial/metric-list.tsx,shared,shared,16,src/shared/editorial/metric-list.tsx,shared,keep,Shared capability registered in architecture-policy
+src/shared/editorial/page-header.module.css,shared,shared,21,src/shared/editorial/page-header.module.css,shared,keep,Shared capability registered in architecture-policy
+src/shared/editorial/page-header.tsx,shared,shared,25,src/shared/editorial/page-header.tsx,shared,keep,Shared capability registered in architecture-policy
+src/shared/editorial/production-badge.module.css,shared,shared,5,src/shared/editorial/production-badge.module.css,shared,keep,Shared capability registered in architecture-policy
+src/shared/editorial/production-badge.tsx,shared,shared,13,src/shared/editorial/production-badge.tsx,shared,keep,Shared capability registered in architecture-policy
+src/shared/identity/brand-mark.module.css,shared,shared,17,src/shared/identity/brand-mark.module.css,shared,keep,Shared capability registered in architecture-policy
+src/shared/identity/brand-mark.tsx,shared,shared,138,src/shared/identity/brand-mark.tsx,shared,keep,Shared capability registered in architecture-policy
+src/shared/identity/company-mark.module.css,shared,shared,29,src/shared/identity/company-mark.module.css,shared,keep,Shared capability registered in architecture-policy
+src/shared/identity/company-mark.tsx,shared,shared,30,src/shared/identity/company-mark.tsx,shared,keep,Shared capability registered in architecture-policy
+src/shared/identity/mark.tsx,shared/identity,component,14,src/shared/identity/mark.tsx + src/shared/identity/monogram.ts,shared/identity,modify,"Mark is a raster face PNG via next/image, not sampleable; add vector monogram stroke data for hero figure 10 (PF-D15)"
+src/shared/motion/motion-state.ts,shared/motion,state,34,src/shared/motion/motion-state.ts,shared/motion,modify,"Persisted pause (try/catch storage), UI control wired (open from v1: nothing calls setPageMotionPaused)"
+src/shared/navigation/external-link.tsx,shared,shared,19,src/shared/navigation/external-link.tsx,shared,keep,Shared capability registered in architecture-policy
+src/shared/styles/cn.ts,shared,shared,6,src/shared/styles/cn.ts,shared,keep,Shared capability registered in architecture-policy
+src/shared/technology/technology-illustrations.ts,shared,shared,117,src/shared/technology/technology-illustrations.ts,shared,keep,Shared capability registered in architecture-policy
+src/shared/technology/technology-mark.module.css,shared,shared,15,src/shared/technology/technology-mark.module.css,shared,keep,Shared capability registered in architecture-policy
+src/shared/technology/technology-mark.tsx,shared,shared,37,src/shared/technology/technology-mark.tsx,shared,keep,Shared capability registered in architecture-policy
+src/shared/ui/badge.tsx,shared/ui,primitive,32,src/shared/ui/badge.tsx,shared/ui,modify,Rebuilt on semantic tokens with all states (design-playbook.md section 6)
+src/shared/ui/button.tsx,shared/ui,primitive,46,src/shared/ui/button.tsx,shared/ui,modify,Rebuilt on semantic tokens with all states (design-playbook.md section 6)
+src/shared/ui/card.tsx,shared/ui,primitive,52,src/shared/ui/card.tsx,shared/ui,modify,Rebuilt on semantic tokens with all states (design-playbook.md section 6)
+src/shared/ui/dialog.tsx,shared/ui,primitive,70,src/shared/ui/dialog.tsx,shared/ui,modify,Rebuilt on semantic tokens with all states (design-playbook.md section 6)
+src/shared/ui/input.tsx,shared/ui,primitive,18,src/shared/ui/input.tsx,shared/ui,modify,Rebuilt on semantic tokens with all states (design-playbook.md section 6)
+src/shared/ui/label.tsx,shared/ui,primitive,22,src/shared/ui/label.tsx,shared/ui,modify,Rebuilt on semantic tokens with all states (design-playbook.md section 6)
+src/shared/ui/native-select.tsx,shared/ui,primitive,27,src/shared/ui/native-select.tsx,shared/ui,modify,Rebuilt on semantic tokens with all states (design-playbook.md section 6)
+src/shared/ui/skeleton.tsx,shared/ui,primitive,15,src/shared/ui/skeleton.tsx,shared/ui,modify,Rebuilt on semantic tokens with all states (design-playbook.md section 6)
+src/shell/locale-switcher.module.css,shell,component,46,src/shell/locale-switcher.module.css,shell,keep,Shell chrome; tokens only
+src/shell/locale-switcher.tsx,shell,component,50,src/shell/locale-switcher.tsx,shell,keep,Shell chrome; tokens only
+src/shell/page-motion.tsx,shell,component,58,src/shell/page-motion.tsx,shell,rewrite,IntersectionObserver reveals replaced by CSS scroll-driven animations; ViewTransition navigation
+src/shell/site-footer.module.css,shell,component,124,src/shell/site-footer.module.css,shell,keep,Shell chrome; tokens only
+src/shell/site-footer.tsx,shell,component,151,src/shell/site-footer.tsx,shell,keep,Shell chrome; tokens only
+src/shell/site-header.module.css,shell,component,184,src/shell/site-header.module.css,shell,modify,"Sticky below 26rem (open from v1), motion pause control, skip links, recruiter shortcut"
+src/shell/site-header.tsx,shell,component,98,src/shell/site-header.tsx,shell,modify,"Sticky below 26rem (open from v1), motion pause control, skip links, recruiter shortcut"
+src/shell/theme-toggle.module.css,shell,component,34,src/shell/theme-toggle.module.css,shell,modify,"Theme reveal view transition (clip-path), pressed state, 44 px target"
+src/shell/theme-toggle.tsx,shell,component,95,src/shell/theme-toggle.tsx,shell,modify,"Theme reveal view transition (clip-path), pressed state, 44 px target"
+src/views/about-view.tsx,views,view,176,src/views/about-view.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/about.module.css,views,view,137,src/views/about.module.css,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/case-study.module.css,views,view,161,src/views/case-study.module.css,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/contact-view.tsx,views,view,73,src/views/contact-view.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/contact.module.css,views,view,52,src/views/contact.module.css,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/cv-view.tsx,views,view,178,src/views/cv-view.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/cv.module.css,views,view,65,src/views/cv.module.css,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/education-view.tsx,views,view,361,src/views/education-view.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/education.module.css,views,view,279,src/views/education.module.css,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/filomena-view.tsx,views,view,238,src/views/filomena-view.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/hero-view.tsx,views,view,95,src/views/hero-view.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/hero.module.css,views,style,175,src/views/hero.module.css,views,modify,"Home journey shortened (21.5k px at 390 to <= 12k), tokens only"
+src/views/home-view.tsx,views,view,415,src/views/home-view.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/home.module.css,views,style,284,src/views/home.module.css,views,modify,"Home journey shortened (21.5k px at 390 to <= 12k), tokens only"
+src/views/metadata.ts,views,view,134,src/views/metadata.ts,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/not-found-view.tsx,views,view,86,src/views/not-found-view.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/not-found.module.css,views,view,97,src/views/not-found.module.css,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/pequeverso-view.tsx,views,view,163,src/views/pequeverso-view.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/profile-json-ld.tsx,views,view,39,src/views/profile-json-ld.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/stack-view.tsx,views,view,86,src/views/stack-view.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/stack.module.css,views,view,14,src/views/stack.module.css,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/work-view.tsx,views,view,253,src/views/work-view.tsx,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+src/views/work.module.css,views,view,166,src/views/work.module.css,views,keep,Page composition; sections extracted only when a file exceeds complexity budget
+tests/browser/about-profile.spec.ts,test/browser,e2e-test,76,tests/browser/about-profile.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/ambient-field.spec.ts,test/browser,e2e-test,118,tests/browser/ambient-field.spec.ts,test/browser,modify,"Re-targeted to SceneHost, hero v2 states and posters; reduced-motion lane"
+tests/browser/analytics-interactions.spec.ts,test/browser,e2e-test,286,tests/browser/analytics-interactions.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/analytics.spec.ts,test/browser,e2e-test,205,tests/browser/analytics.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/assistant.spec.ts,test/browser,e2e-test,651,tests/browser/assistant.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/avatar-depth.spec.ts,test/browser,e2e-test,49,tests/browser/avatar-depth.spec.ts,test/browser,modify,"Re-targeted to SceneHost, hero v2 states and posters; reduced-motion lane"
+tests/browser/capture.ts,test/browser,e2e-test,24,tests/browser/capture.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/cloud-spacing.spec.ts,test/browser,e2e-test,113,tests/browser/cloud-spacing.spec.ts,test/browser,modify,"Re-targeted to SceneHost, hero v2 states and posters; reduced-motion lane"
+tests/browser/contact-icons.spec.ts,test/browser,e2e-test,43,tests/browser/contact-icons.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/control-depth.spec.ts,test/browser,e2e-test,56,tests/browser/control-depth.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/document-visibility.ts,test/browser,e2e-test,13,tests/browser/document-visibility.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/documents.spec.ts,test/browser,e2e-test,149,tests/browser/documents.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/editorial-layout.spec.ts,test/browser,e2e-test,31,tests/browser/editorial-layout.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/education-layout.spec.ts,test/browser,e2e-test,69,tests/browser/education-layout.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/expertise.spec.ts,test/browser,e2e-test,155,tests/browser/expertise.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/gallery-native-navigation.spec.ts,test/browser,e2e-test,35,tests/browser/gallery-native-navigation.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/hero-language-loading.spec.ts,test/browser,e2e-test,106,tests/browser/hero-language-loading.spec.ts,test/browser,modify,"Re-targeted to SceneHost, hero v2 states and posters; reduced-motion lane"
+tests/browser/hero-locale-performance.spec.ts,test/browser,e2e-test,127,tests/browser/hero-locale-performance.spec.ts,test/browser,modify,"Re-targeted to SceneHost, hero v2 states and posters; reduced-motion lane"
+tests/browser/interactions.spec.ts,test/browser,e2e-test,237,tests/browser/interactions.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/lab.spec.ts,test/browser,e2e-test,51,tests/browser/lab.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/locale-position.spec.ts,test/browser,e2e-test,52,tests/browser/locale-position.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/mobile-navigation.spec.ts,test/browser,e2e-test,88,tests/browser/mobile-navigation.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/mobile-refinements.spec.ts,test/browser,e2e-test,99,tests/browser/mobile-refinements.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/mobile-scroll.spec.ts,test/browser,e2e-test,61,tests/browser/mobile-scroll.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/narrow-readability.spec.ts,test/browser,e2e-test,29,tests/browser/narrow-readability.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/not-found.spec.ts,test/browser,e2e-test,74,tests/browser/not-found.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/portrait.spec.ts,test/browser,e2e-test,42,tests/browser/portrait.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/privacy.spec.ts,test/browser,e2e-test,153,tests/browser/privacy.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/professional-profile.spec.ts,test/browser,e2e-test,124,tests/browser/professional-profile.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/responsive-layout.spec.ts,test/browser,e2e-test,32,tests/browser/responsive-layout.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/routes.spec.ts,test/browser,e2e-a11y-test,121,tests/browser/routes.spec.ts,test/browser,modify,"axe wcag22aa both themes, both locales, all routes; moderate heading-order fix asserted"
+tests/browser/scene-runtime-regressions.spec.ts,test/browser,e2e-test,78,tests/browser/scene-runtime-regressions.spec.ts,test/browser,modify,"Re-targeted to SceneHost, hero v2 states and posters; reduced-motion lane"
+tests/browser/scene-stability.spec.ts,test/browser,e2e-test,233,tests/browser/scene-stability.spec.ts,test/browser,modify,"Re-targeted to SceneHost, hero v2 states and posters; reduced-motion lane"
+tests/browser/scene-toolkit.spec.ts,test/browser,e2e-test,160,tests/browser/scene-toolkit.spec.ts,test/browser,modify,"Re-targeted to SceneHost, hero v2 states and posters; reduced-motion lane"
+tests/browser/shadcn-controls.spec.ts,test/browser,e2e-test,86,tests/browser/shadcn-controls.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/solar-explorer.spec.ts,test/browser,e2e-test,121,tests/browser/solar-explorer.spec.ts,test/browser,modify,"Re-targeted to SceneHost, hero v2 states and posters; reduced-motion lane"
+tests/browser/solar-system.spec.ts,test/browser,e2e-test,474,tests/browser/solar-system.spec.ts,test/browser,modify,"Re-targeted to SceneHost, hero v2 states and posters; reduced-motion lane"
+tests/browser/sphere-pulses.spec.ts,test/browser,e2e-test,170,tests/browser/sphere-pulses.spec.ts,test/browser,modify,"Re-targeted to SceneHost, hero v2 states and posters; reduced-motion lane"
+tests/browser/tool-carousel.spec.ts,test/browser,e2e-test,316,tests/browser/tool-carousel.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/touch-sequence.ts,test/browser,e2e-test,28,tests/browser/touch-sequence.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/browser/work-architecture.spec.ts,test/browser,e2e-test,479,tests/browser/work-architecture.spec.ts,test/browser,keep,Journey or layout spec retained; screenshot baselines added per route family
+tests/helpers/analytics-fixture.ts,test,test-support,125,tests/helpers/analytics-fixture.ts,test,keep,Retained
+tests/helpers/assistant-fixture.ts,test,test-support,174,tests/helpers/assistant-fixture.ts,test,keep,Retained
+tests/integration/analytics-live/real-flow.spec.ts,test,test-support,352,tests/integration/analytics-live/real-flow.spec.ts,test,keep,Retained
+tests/integration/budget.test.mjs,test/integration,integration-test,189,tests/integration/budget.test.ts,test/integration,convert-ts,Same; budget and rendered tests stay build-output integration tests
+tests/integration/native-api.ts,test,test-support,90,tests/integration/native-api.ts,test,keep,Retained
+tests/integration/rendered.test.mjs,test/integration,integration-test,297,tests/integration/rendered.test.ts,test/integration,convert-ts,Same; budget and rendered tests stay build-output integration tests
+tests/rollout/assistant-disabled.spec.ts,test,test-support,38,tests/rollout/assistant-disabled.spec.ts,test,keep,Retained
+tests/unit/academic.test.mjs,test/unit,unit-test,54,tests/unit/academic.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/analytics-availability.test.ts,test/unit,unit-test,12,tests/unit/analytics-availability.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/analytics-click-grid.test.ts,test/unit,unit-test,51,tests/unit/analytics-click-grid.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/analytics-contract.test.ts,test/unit,unit-test,72,tests/unit/analytics-contract.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/analytics-events.test.ts,test/unit,unit-test,41,tests/unit/analytics-events.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/analytics-exposure-adapter.test.ts,test/unit,unit-test,608,tests/unit/analytics-exposure-adapter.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/analytics-exposure-dwell.test.ts,test/unit,unit-test,99,tests/unit/analytics-exposure-dwell.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/analytics-exposure-session.test.ts,test/unit,unit-test,121,tests/unit/analytics-exposure-session.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/analytics-http.test.ts,test/unit,unit-test,200,tests/unit/analytics-http.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/analytics-interactions.test.ts,test/unit,unit-test,154,tests/unit/analytics-interactions.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/analytics-live-receipt.test.ts,test/unit,unit-test,205,tests/unit/analytics-live-receipt.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/analytics-measurement-budget.test.ts,test/unit,unit-test,37,tests/unit/analytics-measurement-budget.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/analytics-page-visits.test.ts,test/unit,unit-test,36,tests/unit/analytics-page-visits.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/architecture-diagrams.test.ts,test/unit,unit-test,80,tests/unit/architecture-diagrams.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/architecture.test.mjs,test/unit,unit-test,800,tests/unit/architecture.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/assistant-availability.test.ts,test/unit,unit-test,12,tests/unit/assistant-availability.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/assistant-boundaries.test.ts,test/unit,unit-test,20,tests/unit/assistant-boundaries.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/assistant-budget.test.ts,test/unit,unit-test,48,tests/unit/assistant-budget.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/assistant-context.test.ts,test/unit,unit-test,29,tests/unit/assistant-context.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/assistant-motion.test.ts,test/unit,unit-test,25,tests/unit/assistant-motion.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/assistant-network.test.ts,test/unit,unit-test,107,tests/unit/assistant-network.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/assistant-sse.test.ts,test/unit,unit-test,179,tests/unit/assistant-sse.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/assistant-state.test.ts,test/unit,unit-test,244,tests/unit/assistant-state.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/assistant-transport.test.ts,test/unit,unit-test,159,tests/unit/assistant-transport.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/browser-ci-planner.test.mjs,test/unit,unit-test,177,tests/unit/browser-ci-planner.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/catalogue.test.mjs,test/unit,unit-test,401,tests/unit/catalogue.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/ci-build-artifact.test.mjs,test/unit,unit-test,118,tests/unit/ci-build-artifact.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/ci-build-provenance.test.mjs,test/unit,unit-test,321,tests/unit/ci-build-provenance.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/cloud-layout.test.mjs,test/unit,unit-test,169,tests/unit/cloud-layout.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/content-migration.test.mjs,test/unit,unit-test,92,tests/unit/content-migration.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/content.test.mjs,test/unit,unit-test,325,tests/unit/content.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/cv-export.test.mjs,test/unit,unit-test,82,tests/unit/cv-export.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/dependency-policy.test.mjs,test/unit,unit-test,446,tests/unit/dependency-policy.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/nightly-candidate.test.mjs,test/unit,unit-test,217,tests/unit/nightly-candidate.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/repository.test.mjs,test/unit,unit-test,262,tests/unit/repository.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/scene-budget.test.mjs,test/unit,unit-test,105,tests/unit/scene-budget.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/secret-scan.test.mjs,test/unit,unit-test,241,tests/unit/secret-scan.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tests/unit/technology-models.test.ts,test/unit,unit-test,62,tests/unit/technology-models.test.ts,test/unit,keep,Retained; mutation-scoped where in domain/application
+tests/unit/workflow-policy.test.mjs,test/unit,unit-test,557,tests/unit/workflow-policy.test.ts,test/unit,convert-ts,Every .mjs gets a TS destination (ecosystem 10.1); runner decided by E7 spike (Vitest default)
+tools/analytics-live-receipt.ts,tool,script,252,tools/analytics-live-receipt.ts,tool,keep,Already TypeScript
+tools/api-contract/package-lock.json,tool,contract-generator,395,tools/api-contract/package-lock.json,tool,keep-exception,Isolated package with its own pinned TypeScript 5 (compiler API); JSON only
+tools/api-contract/package.json,tool,contract-generator,14,tools/api-contract/package.json,tool,keep-exception,Isolated package with its own pinned TypeScript 5 (compiler API); JSON only
+tools/architecture-policy.mjs,tool,guard,133,tools/architecture-policy.ts,tool,convert-ts,"Guard stays custom (AST, registered roots, negative fixtures); adds Biome noImportCycles and knip alongside"
+tools/architecture.mjs,tool,guard,540,tools/architecture.ts,tool,convert-ts,"Guard stays custom (AST, registered roots, negative fixtures); adds Biome noImportCycles and knip alongside"
+tools/assistant-budget-plugin.ts,tool,script,54,tools/assistant-budget-plugin.ts,tool,keep,Already TypeScript
+tools/assistant-fixture-json.ts,tool,script,31,tools/assistant-fixture-json.ts,tool,keep,Already TypeScript
+tools/browser-ci-planner.mjs,tool,script,239,tools/browser-ci-planner.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/browser-ci-timings.json,tool,data,418,tools/browser-ci-timings.json,tool,keep,Generated timing data for shard balancing
+tools/browser-test-server.ts,tool,script,140,tools/browser-test-server.ts,tool,keep,Already TypeScript
+tools/capture-gallery.mjs,tool,script,180,tools/capture-gallery.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/check-assistant-contract.mjs,tool,script,16,tools/check-assistant-contract.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/check-browser-runtime.mjs,tool,script,22,tools/check-browser-runtime.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/ci-build-artifact.mjs,tool,script,113,tools/ci-build-artifact.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/ci-build-provenance.mjs,tool,script,283,tools/ci-build-provenance.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/dependency-policy.mjs,tool,script,312,tools/dependency-policy.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/documents.ts,tool,script,76,tools/documents.ts,tool,keep,Already TypeScript
+tools/export-cv.mjs,tool,script,181,tools/export-cv.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/generate-identity.mjs,tool,script,75,tools/generate-identity.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/nightly-candidate.mjs,tool,script,73,tools/nightly-candidate.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/scene-budget-plugin.mjs,tool,script,70,tools/scene-budget-plugin.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/secret-scan.mjs,tool,script,256,tools/secret-scan.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/smoke-test.mjs,tool,script,69,tools/smoke-test.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/technology-illustrations.mjs,tool,script,53,tools/technology-illustrations.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/test-server.mjs,tool,script,62,tools/test-server.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/test-site.mjs,tool,script,27,tools/test-site.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tools/workflow-policy.mjs,tool,script,313,tools/workflow-policy.ts,tool,convert-ts,Node type stripping (>= 24.12) runs .ts directly; no tsx
+tsconfig.assistant.json,root,config,15,tsconfig.assistant.json,root,keep,Disabled-assistant typecheck variant still needed (test:assistant-disabled)
+tsconfig.json,root,config,40,tsconfig.json,root,modify,"Adds erasableSyntaxOnly, verbatimModuleSyntax, noUncheckedIndexedAccess, exactOptionalPropertyTypes; allowJs off after migration"
+src/design/tokens/structure.tokens.json,design,tokens,0,src/design/tokens/structure.tokens.json,design,add,"DTCG: type, space, radius, motion, breakpoints, z-index (shared structure with sibling repos)"
+src/design/tokens/pack-instrument.tokens.json,design,tokens,0,src/design/tokens/pack-instrument.tokens.json,design,add,DTCG: Instrument blue ramps and light/dark semantic mapping
+src/design/theme.css,design,generated-css,0,src/design/theme.css,design,add,Generated by Style Dictionary v5; snapshot-tested; contrast asserted at build
+tools/build-tokens.ts,tool,script,0,tools/build-tokens.ts,tool,add,Runs Style Dictionary and the contrast/CVD checks
+tools/scorecard.ts,tool,script,0,tools/scorecard.ts,tool,add,Aggregates CI artifacts into scorecard.json and checks ratchets
+tools/lighthouse-gate.ts,tool,script,0,tools/lighthouse-gate.ts,tool,add,Lighthouse 13.5 median-of-5 with budget assertions (PF-D5)
+tools/frame-budget.ts,tool,script,0,tools/frame-budget.ts,tool,add,"Frame-time, LoAF and INP sampling helpers for fluidity specs"
+tools/image-audit.ts,tool,script,0,tools/image-audit.ts,tool,add,Finds unoptimised or unsized images; emits dimension manifests
+tools/render-posters.ts,tool,script,0,tools/render-posters.ts,tool,add,Deterministic CPU renderer: 10 figures x 2 themes to SVG posters
+tools/bundle-attribution.ts,tool,script,0,tools/bundle-attribution.ts,tool,add,"Per-route, per-chunk, per-module gzip attribution for the JS budget"
+ratchets/coverage.json,ratchet,data,0,ratchets/coverage.json,ratchet,add,Branch/line/function floors; may only increase
+ratchets/mutation.json,ratchet,data,0,ratchets/mutation.json,ratchet,add,Per-scope Stryker thresholds
+ratchets/bundle.json,ratchet,data,0,ratchets/bundle.json,ratchet,add,Per-route JS/CSS/font/texture budgets
+ratchets/lighthouse.json,ratchet,data,0,ratchets/lighthouse.json,ratchet,add,Per-route Lighthouse floors
+ratchets/static.json,ratchet,data,0,ratchets/static.json,ratchet,add,"Lint, type, knip, complexity and guard violation counts"
+ratchets/a11y.json,ratchet,data,0,ratchets/a11y.json,ratchet,add,axe counts and target-size findings
+ratchets/scorecard.json,ratchet,data,0,ratchets/scorecard.json,ratchet,add,Per-axis score floors
+ci-profile.json,ci,data,0,ci-profile.json,ci,add,CI profile path map (moves to .github/ci-profile.json at M1)
+.github/workflows/deps-weekly-guard.yml,ci,workflow,0,.github/workflows/deps-weekly-guard.yml,ci,add,Shared workflow caller (ecosystem 5.3)
+.github/workflows/security.yml,ci,workflow,0,.github/workflows/security.yml,ci,add,"CodeQL, zizmor, osv-scanner daily job caller"
+.github/workflows/release.yml,ci,workflow,0,.github/workflows/release.yml,ci,add,release-please and immutable GitHub Release
+.github/workflows/scorecard.yml,ci,workflow,0,.github/workflows/scorecard.yml,ci,add,OpenSSF Scorecard weekly
+release-please-config.json,root,config,0,release-please-config.json,root,add,Manifest mode config
+.release-please-manifest.json,root,config,0,.release-please-manifest.json,root,add,Current version
+CHANGELOG.md,docs,changelog,0,CHANGELOG.md,docs,add,Keep a Changelog via release-please
+CODE_OF_CONDUCT.md,docs,community,0,CODE_OF_CONDUCT.md,docs,add,Contributor Covenant 2.1
+SUPPORT.md,docs,community,0,SUPPORT.md,docs,add,Where to ask
+.github/CODEOWNERS,ci,community,0,.github/CODEOWNERS,ci,add,Map of ownership
+.github/ISSUE_TEMPLATE/bug.yml,ci,template,0,.github/ISSUE_TEMPLATE/bug.yml,ci,add,Issue form
+.github/ISSUE_TEMPLATE/feature.yml,ci,template,0,.github/ISSUE_TEMPLATE/feature.yml,ci,add,Issue form
+.github/ISSUE_TEMPLATE/config.yml,ci,template,0,.github/ISSUE_TEMPLATE/config.yml,ci,add,blank_issues_enabled false
+public/.well-known/security.txt,asset,security,0,public/.well-known/security.txt,asset,add,RFC 9116
+public/build-info.json,asset,generated,0,public/build-info.json,asset,add,Merge SHA and time for post-deploy verification
+src/features/hero/domain/sequence.ts,feature/hero/domain,domain,0,src/features/hero/domain/sequence.ts,feature/hero/domain,add,"Single source of the loop timeline (dwell, morph, style, easing)"
+src/features/hero/domain/figures/index.ts,feature/hero/domain,domain,0,src/features/hero/domain/figures/index.ts,feature/hero/domain,add,Registry of exactly 10 figures with character metadata
+src/features/hero/domain/figures/sphere.ts,feature/hero/domain,domain,0,src/features/hero/domain/figures/sphere.ts,feature/hero/domain,add,Figure 01
+src/features/hero/domain/figures/cube.ts,feature/hero/domain,domain,0,src/features/hero/domain/figures/cube.ts,feature/hero/domain,add,Figure 02
+src/features/hero/domain/figures/wormhole.ts,feature/hero/domain,domain,0,src/features/hero/domain/figures/wormhole.ts,feature/hero/domain,add,Figure 03 (catenoid)
+src/features/hero/domain/figures/triangle-tetrahedron.ts,feature/hero/domain,domain,0,src/features/hero/domain/figures/triangle-tetrahedron.ts,feature/hero/domain,add,Figure 04 (two layers)
+src/features/hero/domain/figures/toroidal-helix.ts,feature/hero/domain,domain,0,src/features/hero/domain/figures/toroidal-helix.ts,feature/hero/domain,add,Figure 05
+src/features/hero/domain/figures/neural-graph.ts,feature/hero/domain,domain,0,src/features/hero/domain/figures/neural-graph.ts,feature/hero/domain,add,Figure 06
+src/features/hero/domain/figures/galaxy.ts,feature/hero/domain,domain,0,src/features/hero/domain/figures/galaxy.ts,feature/hero/domain,add,Figure 07
+src/features/hero/domain/figures/wave-field.ts,feature/hero/domain,domain,0,src/features/hero/domain/figures/wave-field.ts,feature/hero/domain,add,Figure 08
+src/features/hero/domain/figures/moebius.ts,feature/hero/domain,domain,0,src/features/hero/domain/figures/moebius.ts,feature/hero/domain,add,Figure 09
+src/features/hero/domain/figures/monogram.ts,feature/hero/domain,domain,0,src/features/hero/domain/figures/monogram.ts,feature/hero/domain,add,Figure 10 (stroke sampler over monogram data)
+src/features/hero/domain/matching.ts,feature/hero/domain,domain,0,src/features/hero/domain/matching.ts,feature/hero/domain,add,Recursive median (k-d) pairing between consecutive figures
+src/features/hero/domain/rng.ts,feature/hero/domain,domain,0,src/features/hero/domain/rng.ts,feature/hero/domain,add,mulberry32 seeded generator
+src/features/hero/domain/easing.ts,feature/hero/domain,domain,0,src/features/hero/domain/easing.ts,feature/hero/domain,add,"back.out, elastic.out, expo.inOut, power3.out, circ.out, sine.inOut in about 1 KB (replaces GSAP)"
+src/features/hero/domain/tier.ts,feature/hero/domain,domain,0,src/features/hero/domain/tier.ts,feature/hero/domain,add,Tier selection and governor as pure functions
+src/features/hero/adapters/gpu/shaders.ts,feature/hero/adapters,adapter,0,src/features/hero/adapters/gpu/shaders.ts,feature/hero/adapters,add,Vertex/fragment GLSL ES 3.00 strings
+src/features/hero/adapters/gpu/targets.worker.ts,feature/hero/adapters,adapter,0,src/features/hero/adapters/gpu/targets.worker.ts,feature/hero/adapters,add,Web Worker: figure generation and matching
+src/features/hero/adapters/gpu/satellites.ts,feature/hero/adapters,adapter,0,src/features/hero/adapters/gpu/satellites.ts,feature/hero/adapters,add,Analytic orbit rings
+src/features/hero/presentation/hero-hud.tsx,feature/hero/presentation,component,0,src/features/hero/presentation/hero-hud.tsx,feature/hero/presentation,add,"HUD brackets, 01/10 label, figure and easing names"
+src/features/hero/presentation/hero-controls.tsx,feature/hero/presentation,component,0,src/features/hero/presentation/hero-controls.tsx,feature/hero/presentation,add,"Pause/play, previous, next (WCAG 2.2.2)"
+src/features/hero/presentation/poster-figures.tsx,feature/hero/presentation,component,0,src/features/hero/presentation/poster-figures.tsx,feature/hero/presentation,add,Lazy per-theme SVG posters for the Still variant
+src/shared/scene/scene-host.ts,shared/scene,capability,0,src/shared/scene/scene-host.ts,shared/scene,add,"SceneHost contract: route opt-in, one context, tier, pause, dispose"
+src/shared/scene/frame-scheduler.ts,shared/scene,capability,0,src/shared/scene/frame-scheduler.ts,shared/scene,add,"Single rAF owner, dt-based damping"
+src/shared/scene/quality-governor.ts,shared/scene,capability,0,src/shared/scene/quality-governor.ts,shared/scene,add,Frame-time tiering shared by hero and solar
+src/shared/identity/monogram.ts,shared/identity,data,0,src/shared/identity/monogram.ts,shared/identity,add,"Monogram stroke vertices (draft GMP, PF-D15)"
+src/shell/motion-toggle.tsx,shell,component,0,src/shell/motion-toggle.tsx,shell,add,Header/footer pause control wired to motion-state
+src/shell/progress-rail.tsx,shell,component,0,src/shell/progress-rail.tsx,shell,add,Scroll-driven section rail with aria-current
+src/shared/ui/tooltip.tsx,shared/ui,primitive,0,src/shared/ui/tooltip.tsx,shared/ui,add,Tooltip for icon buttons
+src/shared/ui/callout.tsx,shared/ui,primitive,0,src/shared/ui/callout.tsx,shared/ui,add,Callout / status message
+src/shared/ui/toast.tsx,shared/ui,primitive,0,src/shared/ui/toast.tsx,shared/ui,add,"Copy confirmation, polite live region"
+src/shared/editorial/instrument-label.tsx,shared/editorial,component,0,src/shared/editorial/instrument-label.tsx,shared/editorial,add,"Mono eyebrow, index and hairline signature"
+src/shared/editorial/registration-ticks.tsx,shared/editorial,component,0,src/shared/editorial/registration-ticks.tsx,shared/editorial,add,Corner ticks signature
+src/views/about-sections/ (as needed),views,view,0,src/views/about-sections/ (as needed),views,add,Only if a view exceeds complexity budget
+tests/unit/hero/figures.test.ts,test/unit,unit-test,0,tests/unit/hero/figures.test.ts,test/unit,add,"Geometry tolerance, bbox, seed determinism, golden hashes"
+tests/unit/hero/sequence.test.ts,test/unit,unit-test,0,tests/unit/hero/sequence.test.ts,test/unit,add,"Timeline, alternation rule, 49.1 s loop"
+tests/unit/hero/matching.test.ts,test/unit,unit-test,0,tests/unit/hero/matching.test.ts,test/unit,add,Pairing metric and permutation validity
+tests/unit/design-tokens.test.ts,test/unit,unit-test,0,tests/unit/design-tokens.test.ts,test/unit,add,"Contrast pairs, CVD distance, light/dark completeness, snapshot"
+tests/unit/ci-profile.test.ts,test/unit,unit-test,0,tests/unit/ci-profile.test.ts,test/unit,add,No file outside every profile
+tests/browser/hero-figures.spec.ts,test/browser,e2e-visual,0,tests/browser/hero-figures.spec.ts,test/browser,add,44+ per-figure snapshots with QA clock
+tests/browser/hero-fluidity.spec.ts,test/browser,e2e-perf,0,tests/browser/hero-fluidity.spec.ts,test/browser,add,"Frame-time, LoAF, INP lanes"
+tests/browser/hero-fallbacks.spec.ts,test/browser,e2e,0,tests/browser/hero-fallbacks.spec.ts,test/browser,add,"Context loss, no float, Save-Data, reduced motion"
+tests/browser/visual-routes.spec.ts,test/browser,e2e-visual,0,tests/browser/visual-routes.spec.ts,test/browser,add,Route x theme x viewport x locale baselines
+tests/browser/motion-pause.spec.ts,test/browser,e2e,0,tests/browser/motion-pause.spec.ts,test/browser,add,"WCAG 2.2.2 control, persistence, reduced-motion runtime change"
+tests/browser/view-transitions.spec.ts,test/browser,e2e,0,tests/browser/view-transitions.spec.ts,test/browser,add,"Duration, pointer-events, click during transition"
+tests/browser/security-headers.spec.ts,test/browser,e2e,0,tests/browser/security-headers.spec.ts,test/browser,add,Headers and CSP snapshot
+tests/browser/no-webgl-on-reading-routes.spec.ts,test/browser,e2e,0,tests/browser/no-webgl-on-reading-routes.spec.ts,test/browser,add,0 contexts and 0 texture requests on /cv /education /contact /about
+docs/architecture/overview.md,docs,explanation,0,docs/architecture/overview.md,docs,add,C4 context and container diagrams
+docs/decisions/0002-*.md,docs,adr,0,docs/decisions/0002-*.md,docs,add,ADRs listed in target-state.md section 7
+.agents/skills/audit-visual/SKILL.md,skill,skill,0,.agents/skills/audit-visual/SKILL.md,skill,add,Catalog
+.agents/skills/audit-accessibility/SKILL.md,skill,skill,0,.agents/skills/audit-accessibility/SKILL.md,skill,add,Catalog
+.agents/skills/audit-performance/SKILL.md,skill,skill,0,.agents/skills/audit-performance/SKILL.md,skill,add,Catalog
+.agents/skills/evolve-design-system/SKILL.md,skill,skill,0,.agents/skills/evolve-design-system/SKILL.md,skill,add,Catalog
+.agents/skills/change-content/SKILL.md,skill,skill,0,.agents/skills/change-content/SKILL.md,skill,add,Catalog
+.agents/skills/animate-scene/SKILL.md,skill,skill,0,.agents/skills/animate-scene/SKILL.md,skill,add,Catalog
+.agents/skills/write-adr/SKILL.md,skill,skill,0,.agents/skills/write-adr/SKILL.md,skill,add,Catalog
+.agents/skills/resume-refactor/SKILL.md,skill,skill,0,.agents/skills/resume-refactor/SKILL.md,skill,add,Catalog
+.agents/skills/score-repo/SKILL.md,skill,skill,0,.agents/skills/score-repo/SKILL.md,skill,add,Catalog
+.claude/settings.json,harness,config,0,.claude/settings.json,harness,add,Allow/ask/deny and hooks (ecosystem 15.6)
+.claude/hooks/,harness,hooks,0,.claude/hooks/,harness,add,"format, guard-files, guard-bash, fast-check"
+.claude/agents/,harness,agents,0,.claude/agents/,harness,add,"test-runner, reviewer, architecture-reviewer, designer-evaluator"
+.codex/config.toml,harness,config,0,.codex/config.toml,harness,add,Codex config (ecosystem 15.6)
+.mcp.json,harness,config,0,.mcp.json,harness,add,Playwright and next-devtools only
+.devcontainer/devcontainer.json,dx,config,0,.devcontainer/devcontainer.json,dx,add,One-command setup
+content/facts-snapshot.json,content,content-data,0,content/facts-snapshot.json,content,add,Hash-checked snapshot of the career-ops facts used by copy (PF-D29)
+tests/unit/facts-sync.test.ts,test/unit,unit-test,0,tests/unit/facts-sync.test.ts,test/unit,add,"Every number, date, title, employer and metric in EN/ES copy derives from the facts snapshot"
+tests/unit/hero/easing-lut.test.ts,test/unit,unit-test,0,tests/unit/hero/easing-lut.test.ts,test/unit,add,Easing LUT equals closed-form functions
+public/images/solar-system/posters/dark-wide.avif,asset,poster,0,public/images/solar-system/posters/dark-wide.avif,asset,add,"Solar poster for reading routes (dark, wide)"
+public/images/solar-system/posters/dark-narrow.avif,asset,poster,0,public/images/solar-system/posters/dark-narrow.avif,asset,add,"Solar poster (dark, narrow)"
+public/images/solar-system/posters/light-wide.avif,asset,poster,0,public/images/solar-system/posters/light-wide.avif,asset,add,"Solar poster (light, wide)"
+public/images/solar-system/posters/light-narrow.avif,asset,poster,0,public/images/solar-system/posters/light-narrow.avif,asset,add,"Solar poster (light, narrow)"
+public/hero/posters/ (20 SVG files),asset,poster,0,public/hero/posters/ (20 SVG files),asset,add,"Ten figures x two themes, generated by tools/render-posters.ts, <= 12 KB each"
+.agents/skills/refresh-copy/SKILL.md,skill,skill,0,.agents/skills/refresh-copy/SKILL.md,skill,add,M6 copy refresh skill
+.agents/skills/refresh-contract/SKILL.md,skill,skill,0,.agents/skills/refresh-contract/SKILL.md,skill,add,Contract snapshot refresh
+docs/master-plan/owner-decisions.md,docs/master-plan,plan,0,docs/master-plan/owner-decisions.md,docs/master-plan,add,Byte-identical owner decisions register
+docs/master-plan/owner-decisions-existing.md,docs/master-plan,plan,0,docs/master-plan/owner-decisions-existing.md,docs/master-plan,add,Byte-identical companion register
+tools/css-policy.ts,tool,script,0,tools/css-policy.ts,tool,add,G8 and G11 literal and animation lint
