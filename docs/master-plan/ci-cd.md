@@ -46,7 +46,7 @@ Duration budgets (public site): PR p50 5 min and p95 10 min (lint and types <= 2
 | Triggers | No `pull_request_target` that checks out PR head; no `${{ }}` of untrusted context in `run:` | `branch-policy.yml` uses `pull_request_target` without checkout; removed (PF-D20) |
 | Scanners | zizmor (regular persona, online audits) and actionlint on `.github/**`; gitleaks; secret scanning and push protection on | actionlint and gitleaks only |
 | CodeQL | Default setup, JS/TS and `actions`, free on public repos | absent |
-| Dependency review | `dependency-review-action` on PRs; osv-scanner daily (notifies, opens an issue labelled `vuln`, no PR) | `npm audit` only |
+| Dependency review | `dependency-review-action` on PRs; osv-scanner daily (updates one tracking issue labelled `vuln` silently; the Monday summary notifies, OD-75; no PR) | `npm audit` only |
 | Scorecard | Weekly with SARIF and badge; fail on a drop > 1 point | absent |
 | SBOM | CycloneDX (Syft) as a CI artifact of the site build (no image) | absent |
 | Provenance | Cannot cover Hostinger's own build; compensate with `main` ruleset, `v*` tag ruleset, post-deploy `build-info.json` check against the merge SHA, long cooldown, post-build scan of `.next` for forbidden strings (G7) | Partial |
