@@ -79,10 +79,14 @@ export const roles: Role[] = [
           "Measured with load tests and evals after removing redundant tool calls and tightening memory and context; not a benchmark of every query.",
       },
       {
-        value: "2×",
-        label: "faster optimized financial queries",
-        qualifier:
-          "At least 2×, measured with load tests on comparable optimized vault, market and swap queries in production.",
+        value: "500+",
+        label: "perpetual markets shipped",
+        qualifier: "Crypto, forex, stocks, indices and commodities, enabled from the back office.",
+      },
+      {
+        value: "150+",
+        label: "tokens available for swaps",
+        qualifier: "Through two aggregation providers, enabled from the back office.",
       },
       {
         value: "~1 h → 10 min",

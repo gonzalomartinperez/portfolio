@@ -150,14 +150,12 @@ test("Rampy response improvements retain load-test evidence and comparable workf
         : /flujos agénticos optimizados comparables/,
     );
     assert.doesNotMatch(agentMetric, /estimat|estimación/i);
-    const financialMetric = source.slice(
-      source.lastIndexOf('value: "2×"'),
-      source.indexOf('value: "~1 h'),
+    // Owner decision (2026-11-13): the separate "2× faster financial queries" metric is removed;
+    // the seconds-to-milliseconds retrieval improvement stays in the role text.
+    assert.doesNotMatch(
+      source,
+      /faster optimized financial queries|consultas financieras optimizadas/,
     );
-    assert.match(financialMetric, locale === "en" ? /[Ll]oad tests/ : /pruebas de carga/);
-    assert.match(financialMetric, locale === "en" ? /At least 2×/ : /Al menos 2×/);
-    assert.match(financialMetric, /vault|mercados/);
-    assert.doesNotMatch(financialMetric, /estimat|estimación/i);
   }
 });
 

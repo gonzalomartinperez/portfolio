@@ -79,10 +79,15 @@ export const roles: Role[] = [
           "Medido con pruebas de carga y evaluaciones tras eliminar llamadas redundantes a herramientas y ajustar la memoria y el contexto; no es un benchmark de cada consulta.",
       },
       {
-        value: "2×",
-        label: "consultas financieras optimizadas más rápidas",
+        value: "500+",
+        label: "mercados de perpetuos lanzados",
         qualifier:
-          "Al menos 2×, medido con pruebas de carga en consultas optimizadas comparables de vaults, mercados y swaps en producción.",
+          "Cripto, divisas, acciones, índices y commodities, habilitables desde el backoffice.",
+      },
+      {
+        value: "150+",
+        label: "tokens disponibles para swaps",
+        qualifier: "Mediante dos proveedores de agregación, habilitables desde el backoffice.",
       },
       {
         value: "~1 h → 10 min",
