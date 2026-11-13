@@ -131,7 +131,8 @@ test("confirmed toolkit additions retain their applied experience context", () =
 test("the curated hero prioritizes applied AI while preserving source knowledge", () => {
   for (const id of [
     "pydantic",
-    "google-vertex-ai",
+    "model-context-protocol",
+    "opentelemetry",
     "langsmith",
     "neo4j",
     "graphrag",
@@ -262,7 +263,13 @@ test("the hero fills seven desktop and five mobile columns with 35 unique marks"
 
 test("owner-confirmed Rampy technologies are restored with their inventory scope", () => {
   // Source: career-ops/perfil/inventario-tecnologico.md, confirmations of 2026-09-20 to 2026-10-03.
-  for (const id of ["moonpay", "zerodev", "google-gemini", "pydantic-ai"]) {
+  // Owner decision OD-76 (2026-11-13): provider brands stay in the inventory but off the site.
+  for (const id of ["moonpay", "zerodev", "google-gemini"]) {
+    const technology = getTechnology(id);
+    assert.ok(technology, id);
+    assert.ok(!publicTechnologyCatalog.includes(technology), `${id} is not public`);
+  }
+  for (const id of ["pydantic-ai"]) {
     const technology = getTechnology(id);
     assert.ok(publicTechnologyCatalog.includes(technology), id);
     assert.ok(highlightedTechnologyCatalog.includes(technology), id);
