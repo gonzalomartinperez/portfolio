@@ -27,7 +27,7 @@ export const profile = {
     "Soy Gonzalo, AI Engineer: construyo agentes LLM y sus evaluaciones, además del backend, la web y la app móvil que los rodean.",
 
   summary:
-    "En Rampy, una startup fintech y blockchain en etapa temprana, lidero la ingeniería. Construí un asistente de IA multilingüe que aprueba el 90% o más de una suite de evaluación de más de 3.000 casos y responde con componentes nativos que llevan directo a los flujos de swaps, vaults y perpetuos.",
+    "En Rampy, una startup fintech y blockchain en etapa temprana, lidero la ingeniería. Construí un asistente de IA multilingüe que aprueba el 90% o más de una suite de evaluación de más de 4.500 casos y responde con componentes nativos que llevan directo a los flujos de swaps, vaults y perpetuos.",
 
   /** Etiqueta canónica exacta. Nunca Senior, Tech Lead, Architect ni Staff. */
   seniority: "Semi-senior",

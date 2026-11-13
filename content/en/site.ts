@@ -89,10 +89,10 @@ export const siteCopy: SiteCopy = {
     rampyHeading: "LLM agents in production at Rampy",
     rampyCta: "See the Rampy work",
     rampyMarkets: {
-      value: "200+",
+      value: "500+",
       label: "perpetual markets shipped",
       qualifier:
-        "Hyperliquid markets across crypto, indices, stocks and commodities, alongside swaps across 100+ tokens.",
+        "Crypto, forex, stocks, indices and commodities, alongside swaps across 150+ tokens, all enabled from the back office.",
     },
     pequeversoStatus: "The assistant is implemented and evaluated; launch pending.",
     selectedEyebrow: "Selected work",

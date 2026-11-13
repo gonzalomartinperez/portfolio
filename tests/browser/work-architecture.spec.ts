@@ -1,4 +1,10 @@
 import { expect, test } from "@playwright/test";
+import { architectureDiagramsEnabled } from "../../src/features/architecture-diagrams/domain/architecture-visibility";
+
+test.skip(
+  !architectureDiagramsEnabled,
+  "Architecture diagrams are hidden until the owner enables them.",
+);
 
 for (const locale of ["", "/es"]) {
   for (const theme of ["dark", "light"]) {
