@@ -65,12 +65,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Migrated the assistant from Agno to a multi-agent LangGraph system",
+                      "text": "Built the assistant as a multi-agent system on LangChain and LangGraph",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " with cycles, financial tools, background workers, retries and failure recovery; Claude is the primary model, with fallback model providers, GraphRAG (Neo4j, pgvector) and Mem0 memory.",
+                      "text": " with cycles, financial tools, background workers, retries and failure recovery; Claude is the primary model, with fallback model providers, GraphRAG (Neo4j, pgvector) and Mem0 memory, all traced in LangSmith.",
                       "bold": false,
                       "href": ""
                     }
@@ -592,12 +592,12 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Migré el asistente de Agno a un sistema multi-agent en LangGraph",
+                      "text": "Construí el asistente como un sistema multiagente con LangChain y LangGraph",
                       "bold": true,
                       "href": ""
                     },
                     {
-                      "text": " con ciclos, herramientas financieras, procesos en segundo plano, reintentos y recuperación ante fallos; Claude es el modelo principal, con proveedores de modelos de respaldo, GraphRAG (Neo4j, pgvector) y memoria con Mem0.",
+                      "text": " con ciclos, herramientas financieras, procesos en segundo plano, reintentos y recuperación ante fallos; Claude es el modelo principal, con proveedores de modelos de respaldo, GraphRAG (Neo4j, pgvector) y memoria con Mem0, con trazas en LangSmith.",
                       "bold": false,
                       "href": ""
                     }
@@ -1049,11 +1049,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "717dc12ffe1d93266d051d958a129b33f52de53961d0d6336f2b9d5cb1c50b7e",
+    "sourceSha256": "15a4cdab78ad163e9a9fe791216471518051302fdfae9cfbe66146af0c248aaf",
     "factsSha256": "c1761ce4821b5b8edb2a2fd55246ed2b1452a2c780b1a724e298ac66db1cd6d1",
     "pdfSha256": {
-      "en": "dbef99d53dc5af787e603e45e4837ef45ebb2d6f52b0b4628f3b5deadfb0521a",
-      "es": "22caaaeb62715ecc449456be8ef65a1bedbfb3ef3d6c4d91440974848e6e730e"
+      "en": "f4733163143f8a0779d54556366735298e580417a2526c6de4cecef7032846ab",
+      "es": "665ca484380a2a2c0478901675721269d8ccce1cfe5726d6c7ab4bb5ec068aa6"
     }
   }
 }
