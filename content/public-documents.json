@@ -47,7 +47,7 @@
     },
     "mime": "application/pdf",
     "bytes": 72635,
-    "sha256": "f4733163143f8a0779d54556366735298e580417a2526c6de4cecef7032846ab"
+    "sha256": "5ad9ed8b970798bede2aa6924a36cb9cf08eba339c286fd1b2b7d061612b4988"
   },
   {
     "href": "/gonzalo-martin-perez-ai-engineer-es.pdf",
@@ -57,6 +57,6 @@
     },
     "mime": "application/pdf",
     "bytes": 80238,
-    "sha256": "665ca484380a2a2c0478901675721269d8ccce1cfe5726d6c7ab4bb5ec068aa6"
+    "sha256": "8e60f83dc4e5bd85cde3f8d588038d1044234d5abe41e162f221e17cee55a7c2"
   }
 ]
