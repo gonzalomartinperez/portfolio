@@ -81,7 +81,7 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Made agent responses 2× faster and cut tokens by 40%",
+                      "text": "Made agent responses up to 3× faster (from 9–12 s to 3–4 s on average) and cut tokens by 40%",
                       "bold": true,
                       "href": ""
                     },
@@ -608,7 +608,7 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Hice que las respuestas de los agentes fueran 2× más rápidas y reduje un 40% el consumo de tokens",
+                      "text": "Hice que las respuestas de los agentes fueran hasta 3× más rápidas (de 9–12 s a 3–4 s en promedio) y reduje un 40% el consumo de tokens",
                       "bold": true,
                       "href": ""
                     },
@@ -1049,11 +1049,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "a513ee80e93179962b821edcc712b54b61f0867a753d500de8539414c4d5fc03",
-    "factsSha256": "28d74990d6f13d4180285b4d46725042021296657bccc39fc2a0b5832d52414e",
+    "sourceSha256": "8205b47e63ae4a38d380a07ae5a8bbd68ab2166f815b49a121381d91c8400170",
+    "factsSha256": "b1220669448cfa21fda212c11999d042656384d2310e756a50cd7d7ce32f9339",
     "pdfSha256": {
-      "en": "5ad9ed8b970798bede2aa6924a36cb9cf08eba339c286fd1b2b7d061612b4988",
-      "es": "8e60f83dc4e5bd85cde3f8d588038d1044234d5abe41e162f221e17cee55a7c2"
+      "en": "5e5c25ade59dbef233034e9fd103df871abe9d1e7ee921d1b13295cf879d655d",
+      "es": "c1e7ec418fd2b06ed260d9ba55b798b18a782e7166f55b697795c567ab22027c"
     }
   }
 }

@@ -17,7 +17,7 @@ export const roles: Role[] = [
       "I lead engineering at Rampy and work closely with the three founders and with specialists in blockchain and integrations. Rampy is an early-stage fintech and blockchain startup whose non-custodial app opens the world of digital assets (swaps, yield vaults, perps and market news) to everyday people through a generative interface that turns complex concepts into simple ones. I own the multilingual AI assistant and the eval suite that gates every release (4,500+ cases, 90%+ pass rate), plus the backend, web and mobile app.",
     contributions: [
       "Built a multilingual AI assistant (English, Spanish and Portuguese) and the eval suite behind it: 1,500+ scenarios replicated and translated into each language (4,500+ cases), graded in LangSmith by an LLM-as-a-judge validated against human and product review, and used as a release gate. Production agents pass 90%+ on average. A case passes when the answer is correct and grounded, the right tool is used, the structured contract for the UI is valid, guardrails hold and the reply solves the user’s need in plain language.",
-      "Designed the multi-agent graph with LangChain and LangGraph, with cycles, financial tools, background workers, retries and failure recovery, traced and evaluated in LangSmith. Claude is the primary model, with fallback model providers, GraphRAG retrieval over Neo4j and PostgreSQL/pgvector, and Mem0 memory. Removing redundant tool calls and tightening memory and context made responses 2× faster with 40% fewer tokens, verified with load tests and evals.",
+      "Designed the multi-agent graph with LangChain and LangGraph, with cycles, financial tools, background workers, retries and failure recovery, traced and evaluated in LangSmith. Claude is the primary model, with fallback model providers, GraphRAG retrieval over Neo4j and PostgreSQL/pgvector, and Mem0 memory. Removing redundant tool calls and tightening memory and context made responses up to 3× faster (from 9–12 s to 3–4 s on average) with 40% fewer tokens, verified with load tests and evals.",
       "Designed the structured-output contract shared by the agents and the app, so answers render as generative UI: native buttons, cards and deep links into swap, vault and perps flows, with live market data. The agent prepares each transaction and the user confirms it in their non-custodial wallet.",
       "Shipped trading across 500+ perpetual markets (crypto, forex, stocks, indices and commodities), swaps across 150+ tokens through two aggregation providers, both enabled from the back office, and yield vaults for positions, yields, deposits and withdrawals, with completeness checks and webhook-based status tracking. Implemented the fee logic for swaps, vaults and perps, and worked with wallet authentication, cross-chain connections and on-chain RPC queries in production.",
       "Evolved the inherited codebase step by step: the backend from no defined architecture to hexagonal (ports and adapters) and then Clean Architecture; the React/Next.js frontend from no defined architecture to a feature-based structure and then Clean Architecture, with a complete design system with reusable component abstractions.",
@@ -67,10 +67,10 @@ export const roles: Role[] = [
           "Global average for production agents on 1,500+ scenarios per language in English, Spanish and Portuguese, graded in LangSmith by an LLM-as-a-judge validated against human and product review.",
       },
       {
-        value: "2×",
+        value: "3×",
         label: "faster responses in optimized agent workflows",
         qualifier:
-          "At least 2×, measured with load tests and evals on comparable optimized agent workflows.",
+          "Average response time down from 9–12 s to 3–4 s, measured with load tests and evals on comparable optimized agent workflows.",
       },
       {
         value: "40%",
