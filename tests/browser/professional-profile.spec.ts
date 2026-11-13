@@ -38,10 +38,10 @@ for (const prefix of ["", "/es"]) {
       await expect(rampy.locator("figure")).toHaveCount(0);
     }
     await rampy.locator("summary").click();
-    await expect(rampy).toContainText("Stripe");
+    await expect(rampy).toContainText("LangGraph");
     // Owner decision (2026-11-13): blockchain providers are not named on the public site.
     await expect(rampy).not.toContainText(
-      /Morpho|Aave|Compound|Hyperliquid|LI\.FI|1inch|Privy|Alchemy/,
+      /Morpho|Aave|Compound|Hyperliquid|LI\.FI|1inch|Privy|Alchemy|Stripe|Infisical|iOS/,
     );
     await expect(page.locator("#teamcubation")).not.toContainText(/90[,.]000/);
     await expect(page.locator("#cooperativa-obrera")).not.toContainText(/\bSGA\b/);

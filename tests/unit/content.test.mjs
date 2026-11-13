@@ -87,8 +87,13 @@ test("experience architecture claims agree with the reviewed CV in both locales"
         assert.doesNotMatch(role, /OpenAI/, `${locale}: Rampy models come from Claude`);
         assert.ok(role.includes("Claude"), `${locale}: Rampy names its primary model`);
         for (const copy of [role, cvCopy]) {
-          for (const provider of ["pgvector", "Mem0", "Vertex AI", "DeepInfra"]) {
+          for (const provider of ["pgvector", "Mem0"]) {
             assert.ok(copy.includes(provider), `${locale}: Rampy includes ${provider}`);
+          }
+          // Owner decision OD-76 (2026-11-13): fallback model vendors and blockchain
+          // providers are not named in public copy.
+          for (const hidden of ["Vertex AI", "DeepInfra", "Hyperliquid", "LI.FI", "Privy"]) {
+            assert.ok(!copy.includes(hidden), `${locale}: Rampy must not name ${hidden}`);
           }
         }
       } else {

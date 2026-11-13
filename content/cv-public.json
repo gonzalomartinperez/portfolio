@@ -29,10 +29,7 @@
               "id": "rampy",
               "title": "Rampy",
               "subtitle": "AI Engineer",
-              "details": [
-                "Sep 2026 – Present",
-                "Argentina · Remote"
-              ],
+              "details": ["Sep 2026 – Present", "Argentina · Remote"],
               "href": "https://getrampy.com/",
               "keywords": [],
               "blocks": [
@@ -133,10 +130,7 @@
               "id": "teamcubation",
               "title": "Teamcubation",
               "subtitle": "Software Engineer",
-              "details": [
-                "Dec 2025 – Sep 2026",
-                "Argentina · Remote"
-              ],
+              "details": ["Dec 2025 – Sep 2026", "Argentina · Remote"],
               "href": "https://teamcubation.com/",
               "keywords": [],
               "blocks": [
@@ -189,10 +183,7 @@
               "id": "cooperativa",
               "title": "Cooperativa Obrera",
               "subtitle": "Software Engineer",
-              "details": [
-                "Dec 2024 – Dec 2025",
-                "Bahía Blanca, Argentina · On-site"
-              ],
+              "details": ["Dec 2024 – Dec 2025", "Bahía Blanca, Argentina · On-site"],
               "href": "https://www.cooperativaobrera.coop/",
               "keywords": [],
               "blocks": [
@@ -245,10 +236,7 @@
               "id": "independent",
               "title": "Self-employed",
               "subtitle": "AI Engineer & Full-Stack Developer",
-              "details": [
-                "Jan 2024 – Present",
-                "Argentina · Remote · Project-based"
-              ],
+              "details": ["Jan 2024 – Present", "Argentina · Remote · Project-based"],
               "href": "",
               "keywords": [],
               "blocks": [
@@ -434,9 +422,7 @@
               "id": "portfolio-assistant",
               "title": "Portfolio Assistant · Bilingual RAG Assistant with Evals",
               "subtitle": "",
-              "details": [
-                "Sep 2026 – Present"
-              ],
+              "details": ["Sep 2026 – Present"],
               "href": "https://github.com/gonzalomartinperez/portfolio-assistant-api",
               "keywords": [],
               "blocks": [
@@ -478,9 +464,7 @@
               "id": "filomena",
               "title": "Filomena · Production Exam Platform for Health Sciences",
               "subtitle": "",
-              "details": [
-                "Jan 2025 – Dec 2025"
-              ],
+              "details": ["Jan 2025 – Dec 2025"],
               "href": "https://gonzalomartinperez.com/work/filomena",
               "keywords": [],
               "blocks": [
@@ -572,10 +556,7 @@
               "id": "rampy",
               "title": "Rampy",
               "subtitle": "AI Engineer",
-              "details": [
-                "Sep 2026 – Actualidad",
-                "Argentina · Remoto"
-              ],
+              "details": ["Sep 2026 – Actualidad", "Argentina · Remoto"],
               "href": "https://getrampy.com/",
               "keywords": [],
               "blocks": [
@@ -676,10 +657,7 @@
               "id": "teamcubation",
               "title": "Teamcubation",
               "subtitle": "Software Engineer",
-              "details": [
-                "Dic 2025 – Sep 2026",
-                "Argentina · Remoto"
-              ],
+              "details": ["Dic 2025 – Sep 2026", "Argentina · Remoto"],
               "href": "https://teamcubation.com/",
               "keywords": [],
               "blocks": [
@@ -732,10 +710,7 @@
               "id": "cooperativa",
               "title": "Cooperativa Obrera",
               "subtitle": "Software Engineer",
-              "details": [
-                "Dic 2024 – Dic 2025",
-                "Bahía Blanca, Argentina · Presencial"
-              ],
+              "details": ["Dic 2024 – Dic 2025", "Bahía Blanca, Argentina · Presencial"],
               "href": "https://www.cooperativaobrera.coop/",
               "keywords": [],
               "blocks": [
@@ -788,10 +763,7 @@
               "id": "independent",
               "title": "Independiente",
               "subtitle": "AI Engineer & Full-Stack Developer",
-              "details": [
-                "Ene 2024 – Actualidad",
-                "Argentina · Remoto · Por proyecto"
-              ],
+              "details": ["Ene 2024 – Actualidad", "Argentina · Remoto · Por proyecto"],
               "href": "",
               "keywords": [],
               "blocks": [
@@ -977,9 +949,7 @@
               "id": "portfolio-assistant",
               "title": "Portfolio Assistant · Asistente RAG bilingüe con evaluación",
               "subtitle": "",
-              "details": [
-                "Sep 2026 – Actualidad"
-              ],
+              "details": ["Sep 2026 – Actualidad"],
               "href": "https://github.com/gonzalomartinperez/portfolio-assistant-api",
               "keywords": [],
               "blocks": [
@@ -1021,9 +991,7 @@
               "id": "filomena",
               "title": "Filomena · Plataforma de exámenes en producción para ciencias de la salud",
               "subtitle": "",
-              "details": [
-                "Ene 2025 – Dic 2025"
-              ],
+              "details": ["Ene 2025 – Dic 2025"],
               "href": "https://gonzalomartinperez.com/es/work/filomena",
               "keywords": [],
               "blocks": [
@@ -1070,11 +1038,7 @@
               "id": "uns",
               "title": "Universidad Nacional del Sur",
               "subtitle": "Ingeniero en Sistemas de Información",
-              "details": [
-                "Ene 2020 – Oct 2025",
-                "Bahía Blanca, Argentina",
-                "Promedio: 8,67 / 10"
-              ],
+              "details": ["Ene 2020 – Oct 2025", "Bahía Blanca, Argentina", "Promedio: 8,67 / 10"],
               "href": "https://www.uns.edu.ar/",
               "keywords": [],
               "blocks": []
