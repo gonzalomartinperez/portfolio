@@ -2,6 +2,7 @@ import "server-only";
 
 import type { Locale } from "@config/locales";
 import type { ArchitectureKind } from "../domain/architecture-types";
+import { architectureDiagramsEnabled } from "../domain/architecture-visibility";
 import { ArchitectureCanvasLoader } from "./architecture-canvas-loader";
 import styles from "./experience-architecture.module.css";
 
@@ -63,6 +64,7 @@ export function ExperienceArchitecture({
   kind: ArchitectureKind;
   locale: Locale;
 }) {
+  if (!architectureDiagramsEnabled) return null;
   const content = descriptions[kind][locale];
   return (
     <figure className={`${styles.figure} ${styles[kind]}`} aria-label={content.title}>

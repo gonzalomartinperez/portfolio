@@ -29,7 +29,10 @@
               "id": "rampy",
               "title": "Rampy",
               "subtitle": "AI Engineer",
-              "details": ["Sep 2026 – Present", "United States · Remote"],
+              "details": [
+                "Sep 2026 – Present",
+                "Argentina · Remote"
+              ],
               "href": "https://getrampy.com/",
               "keywords": [],
               "blocks": [
@@ -49,7 +52,7 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Built the eval suite that gates every release of a multilingual AI assistant: 1,000+ scenarios replicated in English, Spanish and Portuguese (3,000+ cases), with the agents passing 90%+.",
+                      "text": "Built the eval suite that gates every release of a multilingual AI assistant: 1,500+ scenarios replicated in English, Spanish and Portuguese (4,500+ cases), with the agents passing 90%+.",
                       "bold": true,
                       "href": ""
                     },
@@ -70,7 +73,7 @@
                       "href": ""
                     },
                     {
-                      "text": " with cycles, financial tools, background workers, retries and failure recovery; Claude is the primary model, with DeepInfra and Vertex AI fallbacks, GraphRAG (Neo4j, pgvector) and Mem0 memory.",
+                      "text": " with cycles, financial tools, background workers, retries and failure recovery; Claude is the primary model, with fallback model providers, GraphRAG (Neo4j, pgvector) and Mem0 memory.",
                       "bold": false,
                       "href": ""
                     }
@@ -102,7 +105,7 @@
                       "href": ""
                     },
                     {
-                      "text": ": native buttons, cards and deep links into swap, vault and perps flows on live market data. Users confirm every transaction in a non-custodial Privy wallet.",
+                      "text": ": native buttons, cards and deep links into swap, vault and perps flows on live market data. Users confirm every transaction in their non-custodial wallet.",
                       "bold": false,
                       "href": ""
                     }
@@ -118,7 +121,7 @@
                       "href": ""
                     },
                     {
-                      "text": " Built the trading integrations and fee model on top: Hyperliquid perps (200+ markets), LI.FI swaps (100+ tokens) and Morpho, Aave and Compound vaults, tracked via webhooks.",
+                      "text": " Built the trading integrations on top: perpetual markets (500+ across crypto, forex, stocks, indices and commodities), swaps across 150+ tokens through two aggregation providers enabled from the back office, and yield vaults, tracked via webhooks. Implemented the fee logic for swaps, vaults and perps.",
                       "bold": false,
                       "href": ""
                     }
@@ -130,7 +133,10 @@
               "id": "teamcubation",
               "title": "Teamcubation",
               "subtitle": "Software Engineer",
-              "details": ["Dec 2025 – Sep 2026", "Argentina · Remote"],
+              "details": [
+                "Dec 2025 – Sep 2026",
+                "Argentina · Remote"
+              ],
               "href": "https://teamcubation.com/",
               "keywords": [],
               "blocks": [
@@ -183,7 +189,10 @@
               "id": "cooperativa",
               "title": "Cooperativa Obrera",
               "subtitle": "Software Engineer",
-              "details": ["Dec 2024 – Dec 2025", "Bahía Blanca, Argentina · On-site"],
+              "details": [
+                "Dec 2024 – Dec 2025",
+                "Bahía Blanca, Argentina · On-site"
+              ],
               "href": "https://www.cooperativaobrera.coop/",
               "keywords": [],
               "blocks": [
@@ -236,7 +245,10 @@
               "id": "independent",
               "title": "Self-employed",
               "subtitle": "AI Engineer & Full-Stack Developer",
-              "details": ["Jan 2024 – Present", "Argentina · Remote · Project-based"],
+              "details": [
+                "Jan 2024 – Present",
+                "Argentina · Remote · Project-based"
+              ],
               "href": "",
               "keywords": [],
               "blocks": [
@@ -334,7 +346,6 @@
                 "OpenTelemetry",
                 "Claude API",
                 "OpenAI API",
-                "Vertex AI",
                 "MCP",
                 "Neo4j",
                 "pgvector"
@@ -405,13 +416,11 @@
               "details": [],
               "href": "",
               "keywords": [
-                "Hyperliquid",
-                "LI.FI",
-                "Morpho",
-                "Aave",
-                "Compound",
-                "Privy",
-                "Non-Custodial Wallets"
+                "Non-Custodial Wallets",
+                "Perpetual Markets",
+                "Swap Aggregation",
+                "Yield Vaults",
+                "Cross-Chain"
               ],
               "blocks": []
             }
@@ -425,7 +434,9 @@
               "id": "portfolio-assistant",
               "title": "Portfolio Assistant · Bilingual RAG Assistant with Evals",
               "subtitle": "",
-              "details": ["Sep 2026 – Present"],
+              "details": [
+                "Sep 2026 – Present"
+              ],
               "href": "https://github.com/gonzalomartinperez/portfolio-assistant-api",
               "keywords": [],
               "blocks": [
@@ -467,7 +478,9 @@
               "id": "filomena",
               "title": "Filomena · Production Exam Platform for Health Sciences",
               "subtitle": "",
-              "details": ["Jan 2025 – Dec 2025"],
+              "details": [
+                "Jan 2025 – Dec 2025"
+              ],
               "href": "https://gonzalomartinperez.com/work/filomena",
               "keywords": [],
               "blocks": [
@@ -559,7 +572,10 @@
               "id": "rampy",
               "title": "Rampy",
               "subtitle": "AI Engineer",
-              "details": ["Sep 2026 – Actualidad", "Estados Unidos · Remoto"],
+              "details": [
+                "Sep 2026 – Actualidad",
+                "Argentina · Remoto"
+              ],
               "href": "https://getrampy.com/",
               "keywords": [],
               "blocks": [
@@ -579,7 +595,7 @@
                   "kind": "bullet",
                   "runs": [
                     {
-                      "text": "Construí la suite de evaluación que cada versión de un asistente de IA multilingüe debe aprobar: 1.000+ escenarios replicados en inglés, español y portugués (3.000+ casos), con los agentes en un 90% o más.",
+                      "text": "Construí la suite de evaluación que cada versión de un asistente de IA multilingüe debe aprobar: 1.500+ escenarios replicados en inglés, español y portugués (4.500+ casos), con los agentes en un 90% o más.",
                       "bold": true,
                       "href": ""
                     },
@@ -600,7 +616,7 @@
                       "href": ""
                     },
                     {
-                      "text": " con ciclos, herramientas financieras, procesos en segundo plano, reintentos y recuperación ante fallos; Claude es el modelo principal, con fallback a DeepInfra y Vertex AI, GraphRAG (Neo4j, pgvector) y memoria con Mem0.",
+                      "text": " con ciclos, herramientas financieras, procesos en segundo plano, reintentos y recuperación ante fallos; Claude es el modelo principal, con proveedores de modelos de respaldo, GraphRAG (Neo4j, pgvector) y memoria con Mem0.",
                       "bold": false,
                       "href": ""
                     }
@@ -632,7 +648,7 @@
                       "href": ""
                     },
                     {
-                      "text": ": botones, tarjetas y accesos nativos a swaps, vaults y perpetuos con datos en tiempo real. El usuario confirma cada transacción en su wallet no custodial de Privy.",
+                      "text": ": botones, tarjetas y accesos nativos a swaps, vaults y perpetuos con datos en tiempo real. El usuario confirma cada transacción en su wallet no custodial.",
                       "bold": false,
                       "href": ""
                     }
@@ -648,7 +664,7 @@
                       "href": ""
                     },
                     {
-                      "text": " Sobre esa base construí las integraciones de trading y el modelo de comisiones: perpetuos de Hyperliquid (200+ mercados), swaps con LI.FI (100+ tokens) y vaults de Morpho, Aave y Compound, con seguimiento por webhooks.",
+                      "text": " Sobre esa base construí las integraciones de trading: mercados de perpetuos (500+ de cripto, forex, acciones, índices y materias primas), swaps con 150+ tokens a través de dos proveedores de agregación habilitados desde el back office, y vaults de rendimiento, con seguimiento por webhooks. Implementé la lógica de comisiones de swaps, vaults y perpetuos.",
                       "bold": false,
                       "href": ""
                     }
@@ -660,7 +676,10 @@
               "id": "teamcubation",
               "title": "Teamcubation",
               "subtitle": "Software Engineer",
-              "details": ["Dic 2025 – Sep 2026", "Argentina · Remoto"],
+              "details": [
+                "Dic 2025 – Sep 2026",
+                "Argentina · Remoto"
+              ],
               "href": "https://teamcubation.com/",
               "keywords": [],
               "blocks": [
@@ -713,7 +732,10 @@
               "id": "cooperativa",
               "title": "Cooperativa Obrera",
               "subtitle": "Software Engineer",
-              "details": ["Dic 2024 – Dic 2025", "Bahía Blanca, Argentina · Presencial"],
+              "details": [
+                "Dic 2024 – Dic 2025",
+                "Bahía Blanca, Argentina · Presencial"
+              ],
               "href": "https://www.cooperativaobrera.coop/",
               "keywords": [],
               "blocks": [
@@ -766,7 +788,10 @@
               "id": "independent",
               "title": "Independiente",
               "subtitle": "AI Engineer & Full-Stack Developer",
-              "details": ["Ene 2024 – Actualidad", "Argentina · Remoto · Por proyecto"],
+              "details": [
+                "Ene 2024 – Actualidad",
+                "Argentina · Remoto · Por proyecto"
+              ],
               "href": "",
               "keywords": [],
               "blocks": [
@@ -864,7 +889,6 @@
                 "OpenTelemetry",
                 "Claude API",
                 "OpenAI API",
-                "Vertex AI",
                 "MCP",
                 "Neo4j",
                 "pgvector"
@@ -935,13 +959,11 @@
               "details": [],
               "href": "",
               "keywords": [
-                "Hyperliquid",
-                "LI.FI",
-                "Morpho",
-                "Aave",
-                "Compound",
-                "Privy",
-                "Non-Custodial Wallets"
+                "Non-Custodial Wallets",
+                "Perpetual Markets",
+                "Swap Aggregation",
+                "Yield Vaults",
+                "Cross-Chain"
               ],
               "blocks": []
             }
@@ -955,7 +977,9 @@
               "id": "portfolio-assistant",
               "title": "Portfolio Assistant · Asistente RAG bilingüe con evaluación",
               "subtitle": "",
-              "details": ["Sep 2026 – Actualidad"],
+              "details": [
+                "Sep 2026 – Actualidad"
+              ],
               "href": "https://github.com/gonzalomartinperez/portfolio-assistant-api",
               "keywords": [],
               "blocks": [
@@ -997,7 +1021,9 @@
               "id": "filomena",
               "title": "Filomena · Plataforma de exámenes en producción para ciencias de la salud",
               "subtitle": "",
-              "details": ["Ene 2025 – Dic 2025"],
+              "details": [
+                "Ene 2025 – Dic 2025"
+              ],
               "href": "https://gonzalomartinperez.com/es/work/filomena",
               "keywords": [],
               "blocks": [
@@ -1044,7 +1070,11 @@
               "id": "uns",
               "title": "Universidad Nacional del Sur",
               "subtitle": "Ingeniero en Sistemas de Información",
-              "details": ["Ene 2020 – Oct 2025", "Bahía Blanca, Argentina", "Promedio: 8,67 / 10"],
+              "details": [
+                "Ene 2020 – Oct 2025",
+                "Bahía Blanca, Argentina",
+                "Promedio: 8,67 / 10"
+              ],
               "href": "https://www.uns.edu.ar/",
               "keywords": [],
               "blocks": []
@@ -1055,11 +1085,11 @@
     }
   },
   "provenance": {
-    "sourceSha256": "9c5fe865f69eae2c4261c1e5d1d63a211e4d417bdb3248fb1af60c453f627dcc",
-    "factsSha256": "df58fa4b67d6182e0e3fca609f46d350d26c790d705bde78da342220e37b6b44",
+    "sourceSha256": "717dc12ffe1d93266d051d958a129b33f52de53961d0d6336f2b9d5cb1c50b7e",
+    "factsSha256": "c1761ce4821b5b8edb2a2fd55246ed2b1452a2c780b1a724e298ac66db1cd6d1",
     "pdfSha256": {
-      "en": "0d22399d0536ea4e2602be9443bd56043e50f23ebb575bb5bf44e27e2546ada2",
-      "es": "12dec1890c87ce76523e5acb96c208eaac6232388a2f8be37bc1f21b7b7b7d13"
+      "en": "dbef99d53dc5af787e603e45e4837ef45ebb2d6f52b0b4628f3b5deadfb0521a",
+      "es": "22caaaeb62715ecc449456be8ef65a1bedbfb3ef3d6c4d91440974848e6e730e"
     }
   }
 }
