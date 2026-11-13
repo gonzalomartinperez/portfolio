@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { architectureDiagramsEnabled } from "../../src/features/architecture-diagrams/domain/architecture-visibility";
+import { isArchitectureDiagramEnabled } from "../../src/features/architecture-diagrams/domain/architecture-visibility";
 
 for (const prefix of ["", "/es"]) {
   test(`${prefix || "en"} production experience retains qualified outcomes and public marks`, async ({
@@ -28,7 +28,7 @@ for (const prefix of ["", "/es"]) {
     }
     const outcomes = await rampy.locator(".metric-grid").boundingBox();
     expect(outcomes).not.toBeNull();
-    if (architectureDiagramsEnabled) {
+    if (isArchitectureDiagramEnabled("rampy")) {
       const architecture = await rampy.locator("figure").boundingBox();
       expect(architecture).not.toBeNull();
       if (outcomes && architecture) {

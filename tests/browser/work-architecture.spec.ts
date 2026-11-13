@@ -1,9 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { architectureDiagramsEnabled } from "../../src/features/architecture-diagrams/domain/architecture-visibility";
+import { isArchitectureDiagramEnabled } from "../../src/features/architecture-diagrams/domain/architecture-visibility";
 
-test.skip(
-  !architectureDiagramsEnabled,
-  "Architecture diagrams are hidden until the owner enables them.",
+const workDiagramsEnabled = (["rampy", "teamcubation", "cooperativa-obrera"] as const).every(
+  isArchitectureDiagramEnabled,
 );
 
 for (const locale of ["", "/es"]) {
@@ -11,6 +10,7 @@ for (const locale of ["", "/es"]) {
     test(`${locale || "en"} ${theme} work diagrams preserve distinct service paths`, async ({
       page,
     }, info) => {
+      test.skip(!workDiagramsEnabled, "Work diagrams are hidden until the owner enables them.");
       await page.addInitScript((theme) => localStorage.setItem("theme", theme), theme);
       await page.emulateMedia({ reducedMotion: "reduce" });
       await page.goto(`${locale}/work`);
@@ -327,11 +327,15 @@ for (const locale of ["", "/es"]) {
 }
 
 for (const locale of ["", "/es"]) {
-  for (const kind of ["rampy", "teamcubation", "cooperativa-obrera", "filomena"]) {
+  for (const kind of ["rampy", "teamcubation", "cooperativa-obrera", "filomena"] as const) {
     test(`${locale || "en"} ${kind} diagram preserves page scrolling and supports zoom and node details`, async ({
       page,
       isMobile,
     }) => {
+      test.skip(
+        !isArchitectureDiagramEnabled(kind),
+        `${kind} diagram is hidden until the owner enables it.`,
+      );
       test.setTimeout(90_000);
       const client = isMobile ? await page.context().newCDPSession(page) : null;
       const settleScroll = () =>
