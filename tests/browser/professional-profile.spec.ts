@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { architectureDiagramsEnabled } from "../../src/features/architecture-diagrams/domain/architecture-visibility";
 
 for (const prefix of ["", "/es"]) {
   test(`${prefix || "en"} production experience retains qualified outcomes and public marks`, async ({
@@ -13,7 +14,7 @@ for (const prefix of ["", "/es"]) {
     );
     await expect(rampy).toContainText("~1 h → 10 min");
     await expect(rampy).toContainText("90%+");
-    await expect(rampy).toContainText(prefix ? "3.000" : "3,000+");
+    await expect(rampy).toContainText(prefix ? "4.500" : "4,500+");
     await expect(rampy).toContainText("40%");
     await expect(rampy).not.toContainText("7–8");
     await expect(page.locator("#teamcubation")).toContainText("95%+");
@@ -26,17 +27,22 @@ for (const prefix of ["", "/es"]) {
       }
     }
     const outcomes = await rampy.locator(".metric-grid").boundingBox();
-    const architecture = await rampy.locator("figure").boundingBox();
     expect(outcomes).not.toBeNull();
-    expect(architecture).not.toBeNull();
-    if (outcomes && architecture) {
-      expect(outcomes.y + outcomes.height).toBeLessThan(architecture.y);
+    if (architectureDiagramsEnabled) {
+      const architecture = await rampy.locator("figure").boundingBox();
+      expect(architecture).not.toBeNull();
+      if (outcomes && architecture) {
+        expect(outcomes.y + outcomes.height).toBeLessThan(architecture.y);
+      }
+    } else {
+      await expect(rampy.locator("figure")).toHaveCount(0);
     }
     await rampy.locator("summary").click();
-    await expect(rampy).toContainText("Singular SDK");
-    for (const protocol of ["Morpho", "Aave", "Compound"]) {
-      await expect(rampy.locator(".marked-list").last()).toContainText(protocol);
-    }
+    await expect(rampy).toContainText("LangGraph");
+    // Owner decision (2026-11-13): blockchain providers are not named on the public site.
+    await expect(rampy).not.toContainText(
+      /Morpho|Aave|Compound|Hyperliquid|LI\.FI|1inch|Privy|Alchemy|Stripe|Infisical|iOS/,
+    );
     await expect(page.locator("#teamcubation")).not.toContainText(/90[,.]000/);
     await expect(page.locator("#cooperativa-obrera")).not.toContainText(/\bSGA\b/);
     await expect(page.locator('a[href="https://pequeverso.com/"]')).toBeVisible();

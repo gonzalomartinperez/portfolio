@@ -1,0 +1,12 @@
+route | initial scripts | JS gzip KiB (all <script src> in prerendered HTML) | raw KiB
+/ | 13 | 234.9 | 733.3 | html gz 64.6 KiB
+/es | 13 | 234.9 | 733.3 | html gz 66.0 KiB
+/work | 13 | 229.0 | 719.4 | html gz 30.5 KiB
+/work/filomena | 15 | 234.2 | 733.6 | html gz 23.1 KiB
+/work/pequeverso | 14 | 232.5 | 728.3 | html gz 18.5 KiB
+/about | 12 | 227.4 | 714.4 | html gz 16.9 KiB
+/cv | 14 | 235.3 | 734.0 | html gz 17.1 KiB
+/contact | 12 | 226.4 | 712.2 | html gz 10.9 KiB
+/stack | 15 | 239.9 | 746.1 | html gz 23.7 KiB
+/education | 12 | 226.2 | 712.2 | html gz 21.3 KiB
+all client JS gzip KiB: 699 files: 61

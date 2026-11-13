@@ -26,7 +26,7 @@ export const profile = {
     "I’m Gonzalo, an AI engineer who builds LLM agents and their evals, plus the backend, web and mobile app around them.",
 
   summary:
-    "At Rampy, an early-stage fintech and blockchain startup, I lead engineering. I built a multilingual AI assistant that passes 90%+ of a 3,000+ case eval suite and answers with native UI that links straight into swap, vault and perps flows.",
+    "At Rampy, an early-stage fintech and blockchain startup, I lead engineering. I built a multilingual AI assistant that passes 90%+ of a 4,500+ case eval suite and answers with native UI that links straight into swap, vault and perps flows.",
 
   /**
    * Retained because structured forms elsewhere ask for it, and deliberately not published:
