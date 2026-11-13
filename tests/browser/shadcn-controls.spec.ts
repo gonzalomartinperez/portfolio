@@ -20,8 +20,8 @@ test("owned filters preserve native semantics and localized footer labels", asyn
     await expect(control).toHaveCSS("font-family", bodyFont);
   }
   await category.selectOption("fintech");
-  await search.fill("Privy");
-  await expect(page.locator("#technology-results h3")).toHaveText(["Privy"]);
+  await search.fill("Viem");
+  await expect(page.locator("#technology-results h3")).toHaveText(["Viem"]);
   await expect(
     page.getByRole("contentinfo").getByRole("link", {
       name: "LinkedIn (se abre en una pestaña nueva)",
