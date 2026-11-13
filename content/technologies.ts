@@ -2582,6 +2582,45 @@ export const technologyCatalog: Technology[] = [
 ];
 
 export const publicTechnologyExclusions: Record<string, string> = {
+  lifi: "Owner decision OD-76 (2026-11-13): swap aggregator not named publicly; kept in the source inventory.",
+  relay:
+    "Owner decision OD-76 (2026-11-13): cross-chain provider not named publicly; kept in the source inventory.",
+  alchemy:
+    "Owner decision OD-76 (2026-11-13): RPC provider not named publicly; kept in the source inventory.",
+  hyperliquid:
+    "Owner decision OD-76 (2026-11-13): perpetuals venue not named publicly; kept in the source inventory.",
+  moonpay:
+    "Owner decision OD-76 (2026-11-13): fiat ramp provider not named publicly; kept in the source inventory.",
+  morpho:
+    "Owner decision OD-76 (2026-11-13): vault protocol not named publicly; kept in the source inventory.",
+  aave: "Owner decision OD-76 (2026-11-13): vault protocol not named publicly; kept in the source inventory.",
+  compound:
+    "Owner decision OD-76 (2026-11-13): vault protocol not named publicly; kept in the source inventory.",
+  privy:
+    "Owner decision OD-76 (2026-11-13): wallet provider not named publicly; kept in the source inventory.",
+  zerodev:
+    "Owner decision OD-76 (2026-11-13): smart-account provider not named publicly; kept in the source inventory.",
+  stripe:
+    "Owner decision OD-76 (2026-11-13): payments provider not named publicly; kept in the source inventory.",
+  deepinfra:
+    "Owner decision OD-76 (2026-11-13): fallback model vendor not named publicly; kept in the source inventory.",
+  "google-vertex-ai":
+    "Owner decision OD-76 (2026-11-13): fallback model vendor not named publicly; kept in the source inventory.",
+  "google-gemini":
+    "Owner decision OD-76 (2026-11-13): fallback model vendor not named publicly; kept in the source inventory.",
+  agno: "Owner decision OD-76 (2026-11-13): former agent framework not named publicly; kept in the source inventory.",
+  infisical:
+    "Owner decision OD-76 (2026-11-13): secrets vendor not named publicly; kept in the source inventory.",
+  "singular-sdk":
+    "Owner decision OD-76 (2026-11-13): mobile attribution vendor not named publicly; kept in the source inventory.",
+  "meta-app-events":
+    "Owner decision OD-76 (2026-11-13): mobile tracking detail not named publicly; kept in the source inventory.",
+  "microsoft-clarity":
+    "Owner decision OD-76 (2026-11-13): mobile tracking detail not named publicly; kept in the source inventory.",
+  "firebase-analytics":
+    "Owner decision OD-76 (2026-11-13): mobile tracking detail not named publicly; kept in the source inventory.",
+  "android-studio":
+    "Owner decision OD-76 (2026-11-13): low-value tooling detail not named publicly; kept in the source inventory.",
   slack: "Communication tool rather than a differentiating engineering capability.",
   discord: "Communication tool rather than a differentiating engineering capability.",
   "microsoft-teams": "Communication tool rather than a differentiating engineering capability.",

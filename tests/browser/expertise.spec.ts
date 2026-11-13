@@ -71,7 +71,7 @@ for (const [route, label] of [
       await toolkit.scrollIntoViewIfNeeded();
       await page.screenshot({ path: info.outputPath(`expertise-${theme}.png`) });
       for (const name of [
-        "Privy",
+        "Viem",
         "Token swaps",
         "Vaults",
         "Non-custodial wallets",
