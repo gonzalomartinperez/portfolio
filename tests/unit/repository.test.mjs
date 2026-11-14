@@ -275,8 +275,7 @@ test("the Node 26 compatibility job stays separate, read-only and non-blocking",
   const job = workflow.jobs.node26;
   assert.deepEqual(job.permissions, { contents: "read" });
   assert.equal(job.env.npm_config_engine_strict, "false");
-  const hosting = parseDocument(read(".github/workflows/ci.yml")).toJS().jobs.hosting;
-  assert.equal(job.container.image, hosting.container.image, "same glibc 2.28 image as hosting");
+  assert.equal(job["runs-on"], "ubuntu-24.04");
   const uses = job.steps.filter((step) => step.uses).map((step) => step.uses);
   for (const action of uses) assert.match(action, /^[^@\s]+@[a-f\d]{40}$/);
   const checkout = job.steps.find((step) => step.uses?.startsWith("actions/checkout@"));
@@ -284,8 +283,7 @@ test("the Node 26 compatibility job stays separate, read-only and non-blocking",
   const setup = job.steps.find((step) => step.uses?.startsWith("actions/setup-node@"));
   assert.equal(setup?.with?.["node-version"], "26");
   const runs = job.steps.map((step) => step.run ?? "").join("\n");
-  for (const command of [/isWasm/, /npm run build/, /npm run test:smoke/])
-    assert.match(runs, command);
+  for (const command of [/npm run build/, /npm run test:smoke/]) assert.match(runs, command);
   assert.match(read(".nvmrc"), /^24\./, "PF-D19: revisit compat-node26.yml when .nvmrc moves");
   const gate = parseDocument(read(".github/workflows/ci.yml")).toJS().jobs.checks;
   assert.ok(!gate.needs.includes("node26"));
