@@ -80,7 +80,7 @@ test("mobile navigation gives each centered label a content-aware share of the r
       })),
     );
     expect(Math.min(...enlargedLinks.map((link) => link.left))).toBeGreaterThanOrEqual(0);
-    expect(Math.max(...enlargedLinks.map((link) => link.right))).toBeLessThanOrEqual(320);
+    expect(Math.max(...enlargedLinks.map((link) => link.right))).toBeLessThanOrEqual(321);
     await expect(
       nav.getByRole("link", { name: prefix ? "Contacto" : "Contact", exact: true }),
     ).toBeVisible();

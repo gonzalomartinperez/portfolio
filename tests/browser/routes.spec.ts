@@ -18,7 +18,11 @@ for (const locale of ["", "/es"]) {
     const url = `${locale}${route}` || "/";
     test(`${url} is accessible, responsive and complete in both themes`, {
       tag: url === "/" ? "@journey" : [],
-    }, async ({ page }) => {
+    }, async ({ page }, testInfo) => {
+      test.fail(
+        testInfo.project.name === "iphone-webkit",
+        "PF-M3-10: WebKit keeps the dark heading colour after a live switch to the light theme",
+      );
       const errors: string[] = [];
       page.on("pageerror", (error) => errors.push(error.message));
       await page.emulateMedia({ reducedMotion: "reduce" });
