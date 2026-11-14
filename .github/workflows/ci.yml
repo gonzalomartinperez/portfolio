@@ -255,6 +255,8 @@ jobs:
       - name: Build the synthetic-enabled candidate once
         run: npm run build
       - name: Prove complete duration-balanced browser coverage
+        env:
+          BROWSER_LANE: ${{ github.event_name == 'pull_request' && github.base_ref == 'develop' && 'pr' || 'full' }}
         run: node tools/browser-ci-planner.mjs
       - name: Normalize ephemeral framework material for transfer
         run: node tools/ci-build-artifact.mjs prepare
@@ -331,7 +333,7 @@ jobs:
         run: git diff --exit-code
 
   browser:
-    name: Browser tests (${{ matrix.shard }}/8)
+    name: Browser tests (${{ matrix.shard }}/${{ strategy.job-total }})
     needs: [classify, build]
     if: contains(fromJSON(needs.classify.outputs.jobs), 'browser')
     permissions:
@@ -345,10 +347,12 @@ jobs:
       fail-fast: false
       max-parallel: 8
       matrix:
-        shard: [1, 2, 3, 4, 5, 6, 7, 8]
+        # Pull requests into develop run the four-shard journey lane; every other event runs the full matrix.
+        shard: ${{ fromJSON(github.event_name == 'pull_request' && github.base_ref == 'develop' && '[1,2,3,4]' || '[1,2,3,4,5,6,7,8]') }}
     env:
       CI_ARTIFACT_SHA256: ${{ needs.build.outputs.archive_sha256 }}
       PLAYWRIGHT_SKIP_BROWSER_GC: "1"
+      BROWSER_LANE: ${{ github.event_name == 'pull_request' && github.base_ref == 'develop' && 'pr' || 'full' }}
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

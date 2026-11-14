@@ -78,9 +78,9 @@ for (const { prefix, theme } of [
 }
 
 for (const prefix of ["", "/es"]) {
-  test(`${prefix || "en"} mobile hero actions use available width and reflow safely`, async ({
-    page,
-  }) => {
+  test(`${prefix || "en"} mobile hero actions use available width and reflow safely`, {
+    tag: prefix ? [] : "@journey",
+  }, async ({ page }) => {
     await page.setViewportSize({ width: 393, height: 844 });
     await page.goto(`${prefix || "/"}?sceneProgress=0&sceneTime=0`);
     const actions = page.locator("[data-scene-hero] .actions a");

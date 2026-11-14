@@ -3,6 +3,11 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+// BROWSER_LANE=pr plans only the @journey lane (see playwright.config.ts) in four shards;
+// any other value plans the full matrix in eight.
+export const PR_LANE_SHARDS = 4;
+export const FULL_LANE_SHARDS = 8;
+
 const separator = " › ";
 const compare = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 
@@ -202,7 +207,11 @@ function main() {
   if (process.argv.slice(2).some((argument) => argument !== "--nightly"))
     throw new Error("Unknown browser planner option");
   const partitions = nightly ? partitionNightly(discovered) : { browser: discovered, visual: [] };
-  const shards = planShards(partitions.browser, timings);
+  const shards = planShards(
+    partitions.browser,
+    timings,
+    process.env.BROWSER_LANE === "pr" && !nightly ? PR_LANE_SHARDS : FULL_LANE_SHARDS,
+  );
   const destination = path.join(
     repository,
     nightly ? ".artifacts/ci/nightly" : ".artifacts/ci/shards",

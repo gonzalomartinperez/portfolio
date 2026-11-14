@@ -24,7 +24,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "check": "npm run check:quality && npm run build && npm run test:budget",
     "setup": "node tools/setup.ts && npm ci --no-audit --no-fund && npm run check",
-    "test:repository": "node --test tests/unit/repository.test.mjs tests/unit/scene-budget.test.mjs tests/unit/cloud-layout.test.mjs tests/unit/browser-ci-planner.test.mjs tests/unit/architecture-diagrams.test.ts tests/unit/technology-models.test.ts tests/unit/ci-build-artifact.test.mjs tests/unit/devcontainer.test.ts tests/unit/harness-hooks.test.ts tests/unit/harness-config.test.ts tests/unit/release.test.ts",
+    "test:repository": "node --test tests/unit/repository.test.mjs tests/unit/scene-budget.test.mjs tests/unit/cloud-layout.test.mjs tests/unit/browser-ci-planner.test.mjs tests/unit/browser-lane.test.ts tests/unit/architecture-diagrams.test.ts tests/unit/technology-models.test.ts tests/unit/ci-build-artifact.test.mjs tests/unit/devcontainer.test.ts tests/unit/harness-hooks.test.ts tests/unit/harness-config.test.ts tests/unit/release.test.ts",
     "test:content": "node --test tests/unit/content.test.mjs tests/unit/catalogue.test.mjs tests/unit/academic.test.mjs tests/unit/content-migration.test.mjs tests/unit/cv-export.test.mjs",
     "test:budget": "node --test tests/integration/budget.test.mjs",
     "test:rendered": "node --test tests/integration/rendered.test.mjs",

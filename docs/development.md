@@ -94,6 +94,14 @@ audit mode; CodeQL runs through GitHub's default setup (JavaScript/TypeScript an
 `ratchets/ossf-scorecard.json` (the three-lens project scorecard skeleton is `ratchets/scorecard.json`); `.npmrc` keeps `ignore-scripts=true`, with an empty allow-list
 enforced by a repository test. No workflow uses `pull_request_target`.
 
+Browser lanes: pull requests into `develop` run the journey lane (`BROWSER_LANE=pr`):
+tests tagged `@journey` (`{ tag: "@journey" }`) on Chromium (`desktop`) and
+`iphone-webkit`, planned into four shards. Push, merge group, dispatch, release PRs into
+`main` and the nightly run the full matrix in eight shards, with `iphone-webkit` still
+limited to journeys. Tag a new test `@journey` only when it covers a core user journey
+(keep the total between 10 and 20 tagged declarations); `BROWSER_LANE=pr npx playwright
+test --list` previews the lane. Journey gap: contact copy-to-clipboard has no browser test yet.
+
 `ci-gate` is the single aggregate: it needs every job, fails on any failure or
 cancellation, and fails when a job that classify selected was skipped. Jobs the
 profile does not select pass as not applicable. It is the only required check: the

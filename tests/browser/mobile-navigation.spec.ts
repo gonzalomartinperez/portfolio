@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-test("mobile navigation gives each centered label a content-aware share of the row", async ({
-  page,
-}) => {
+test("mobile navigation gives each centered label a content-aware share of the row", {
+  tag: "@journey",
+}, async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   for (const prefix of ["", "/es"]) {
     await page.goto(`${prefix}/contact`);
