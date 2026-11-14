@@ -6,12 +6,12 @@ Milestone log for the master refactor of `portfolio`. The milestone table and cu
 
 | Field | Value |
 |---|---|
-| Milestone | **M0** Plans merged (`checkpoint/M0` on `a8d70a5`); **M1** Foundation in progress |
-| Date | 2026-11-14 (M1 started) |
+| Milestone | **M0** Plans merged (`checkpoint/M0` on `a8d70a5`); **M1** Foundation: every task merged or parked, awaiting orchestrator verification and `checkpoint/M1` |
+| Date | 2026-11-14 |
 | `develop` SHA at M0 | `a8d70a5b2c18e71867710809572cb7835b7cd8fc` (plan merge, PR #224; baseline was `0a1ff56`) |
 | `main` SHA | `19954ee3ead969b69421dd912a20210d2f363094` (untouched until M7; same content as `develop` at baseline) |
-| Next item | **PF-M1-1** `standards.lock` and shared templates (see [roadmap.md](roadmap.md)); in parallel PF-M1-3 (Dependabot sandbox proof, cross-repo), PF-M1-7 (devcontainer and `check`), PF-M2-1 (runner spike, can start before M1 closes because it has no dependency) |
-| Known issues | Mobile Lighthouse 35 (home), LCP 6.2 s lab; JS 395-465 KiB per route; solar textures on every route; WebGL contexts on reading routes; no pause UI; lightbox ignores filter; header not sticky below 26 rem; `/es` 404 English; 11 unoptimised images (9 convert + 2 masters moved); light-mode parity; 39 `.mjs`; 2 unit tests need git; Biome 3 warnings |
+| Next item | Finish PF-M1-2's duration budgets (tagged Chromium + iPhone WebKit PR browser set, then 10-run p50/p95 evidence); owner input for PF-M1-6; then M2 from PF-M2-1 (see [roadmap.md](roadmap.md)) |
+| Known issues | M1: code PR still runs 8 full browser shards (full-profile PR runs 8.7-12.2 min; code p50 <= 5 min not met); devcontainer image build not run locally (Windows C: below the 102 GB floor); Dependabot config and scheduled workflows (guard, vuln-daily, drift, Scorecard) only go live from `main` at M7; Node 26.13.1 binary does not start on glibc 2.28 (PF-D19). Baseline: Mobile Lighthouse 35 (home), LCP 6.2 s lab; JS 395-465 KiB per route; solar textures on every route; WebGL contexts on reading routes; no pause UI; lightbox ignores filter; header not sticky below 26 rem; `/es` 404 English; 11 unoptimised images (9 convert + 2 masters moved); light-mode parity; 39 `.mjs`; 2 unit tests need git; Biome 3 warnings |
 | Pending owner decisions | Owner inputs only (identical in README and RESUME): 1. PF-D26 and PF-D29, the approved list of publishable measured results and case-study details (before M5) and approval of the final copy at PF-M6-5; 2. MV, VPS purchase and activation authorization (after M6). All other decisions resolved by delegation (README) |
 
 ## In-flight tasks
@@ -22,10 +22,20 @@ Updated by each task PR on merge (task ID, branch, PR, merge SHA, state). Roadma
 |---|---|---|---|---|
 | PF-M0-1 | `docs/master-plan-2026-11` | #224 | `a8d70a5` | done |
 | PF-M0-2 | `docs/master-plan-2026-11` | #224 | `a8d70a5` | done (resolutions recorded in the README with the plan) |
+| M1 carry-over | `fix/m1-dependabot-grouped-branches` | #235 | `acf5e83` | done (grouped Dependabot branch accepted by the route checks) |
+| M1 carry-over | `docs/m1-plan-sync` | #236 | `81b74a0` | done (M0 rows, README template resync; OD-75 wording verified) |
+| PF-M1-8 | `ci/m1-node-26` | #237 | `c8afecd` | done; PF-D19 result: Node 26.13.1 exits 127 at startup on the glibc 2.28 hosting image (run 43549138744), code compatibility job green on ubuntu-24.04 |
+| PF-M1-7 | `build/m1-devcontainer` | #238 | `5a6135e` | done; fresh-container build not run locally (disk floor), `npm run setup` and the AGENTS/README command test verified |
+| PF-M1-1 | `chore/m1-standards-lock` | #239 | `eebdce6` | done (engineering-standards v1.0.0, `standards.lock`, private vulnerability reporting enabled) |
+| PF-M1-3 | `ci/m1-dependabot-weekly` | #240 | `9fabaac` | done (standard weekly group, guard, vuln-daily, drift; ADR `docs/adr/dependabot-weekly-group.md`; Monday observation 2026-11-16) |
+| PF-M1-2 | `ci/m1-classify-ci-gate`, `ci/m1-drop-required-alias` | #241, #242 | `fcb7ba7`, `d3e287f` | in-progress: classify, profiles, `ci-gate` and rulesets (`ci-gate` the only required check) done; duration budgets pending |
+| PF-M1-5 | `chore/m1-agent-harness` | #243 | `0518de5` | done (`check-skills` green, hook denial tests); `agent-review.yml` parked (needs paid model API keys, owner) |
+| PF-M1-4 | `ci/m1-hardening` | #244 | `8a673ee` | done (security set, harden-runner audit, CodeQL default setup, Scorecard baseline 6.4 in `ratchets/ossf-scorecard.json`) |
+| PF-M1-6 | - | - | - | parked: release-please needs an owner-provided GitHub App token (or the Actions PR-creation setting) and the E5 sandbox validation (standards ADR 0003) |
 
 Baselines are provisional until PF-M2-11 (`tools/scorecard.ts`) replaces them; PF-M2-16 (mobile-GPU proxy run per release) feeds the hero frame baselines afterwards.
 
-Next task by the RESUME rule: first `todo` row whose Depends are done; M1 independent tasks (PF-M1-7, PF-M1-8) run while PF-M1-1 waits for the `engineering-standards` v1 tag (E1) or falls back to in-repo templates.
+Next task by the RESUME rule: PF-M1-2 (in-progress, no open PR): reduce the code-profile browser set to the tagged Chromium + iPhone WebKit journeys and record 10 docs and 10 code PR runs; PF-M1-6 waits for the owner. The M1 lead report is `reports/master-plans-2026-11/runs/M1-portfolio.md` in the workspace.
 
 ## Scorecard snapshot (baseline, rubrics v2; prov. = planner estimate until the M2 evaluator run)
 
