@@ -24,8 +24,8 @@ Rules: the next task is the first `in-progress` row if its PR is open (finish it
 
 | ID | Task | Acceptance | Effort | Depends | Status |
 |---|---|---|---|---|---|
-| PF-M0-1 | Docs-only PR to `develop` replacing `docs/master-plan/` with this plan; create `archive-v1/` (`git mv` of the v1 research and rubrics per [file-moves.md](file-moves.md)) in the same PR | `docs` profile green; links resolve; `archive-v1/` exists and is linked from the README; `progress.md` row M0; tag `checkpoint/M0` | S, 2 h | - | in-progress |
-| PF-M0-2 | Record the delegated resolutions (PF-D4, PF-D15, PF-D20, PF-D25, PF-D27) and the two genuine owner inputs (PF-D26 and the final-copy approval, MV) in the README decisions table | Decisions table shows every row as resolved except the two owner inputs, listed identically in README, RESUME and `progress.md` | S, 1 h | PF-M0-1 | todo |
+| PF-M0-1 | Docs-only PR to `develop` replacing `docs/master-plan/` with this plan; create `archive-v1/` (`git mv` of the v1 research and rubrics per [file-moves.md](file-moves.md)) in the same PR | `docs` profile green; links resolve; `archive-v1/` exists and is linked from the README; `progress.md` row M0; tag `checkpoint/M0` | S, 2 h | - | done (PR #224, a8d70a5) |
+| PF-M0-2 | Record the delegated resolutions (PF-D4, PF-D15, PF-D20, PF-D25, PF-D27) and the two genuine owner inputs (PF-D26 and the final-copy approval, MV) in the README decisions table | Decisions table shows every row as resolved except the two owner inputs, listed identically in README, RESUME and `progress.md` | S, 1 h | PF-M0-1 | done (PR #224, a8d70a5) |
 
 Risks: none technical. Cross-repo: the same M0 for all repos.
 
