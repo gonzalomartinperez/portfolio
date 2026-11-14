@@ -13,7 +13,7 @@ const CORE_NAMES = {
   quality: "Quality checks",
   build: "Build",
   hosting: "Hosting contract",
-  browser: `Browser tests (\${{ matrix.shard }}/8)`,
+  browser: `Browser tests (\${{ matrix.shard }}/\${{ strategy.job-total }})`,
   performance: "Performance checks",
 };
 const NIGHTLY_NAMES = {
@@ -365,6 +365,13 @@ reject(
   "browser coverage cannot exclude a shard",
   (w) => {
     w.jobs.browser.strategy.matrix.exclude = [{ shard: 3 }];
+  },
+  /exactly eight shards/,
+);
+reject(
+  "browser lane expression cannot be altered",
+  (w) => {
+    w.jobs.browser.strategy.matrix.shard = "${{ fromJSON('[1,2]') }}";
   },
   /exactly eight shards/,
 );

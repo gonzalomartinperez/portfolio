@@ -13,7 +13,7 @@ const CORE_NAMES = {
   secrets: "Secret scan",
   build: "Build",
   hosting: "Hosting contract",
-  browser: `Browser tests (\${{ matrix.shard }}/8)`,
+  browser: `Browser tests (\${{ matrix.shard }}/\${{ strategy.job-total }})`,
   performance: "Performance checks",
 };
 const NIGHTLY_NAMES = {
@@ -25,6 +25,9 @@ const NIGHTLY_NAMES = {
   bundle: "Nightly bundle checks",
   checks: "Nightly required checks",
 };
+// Core runs the four-shard journey lane for pull requests into develop and eight shards otherwise.
+const CORE_SHARD_EXPRESSION =
+  "${{ fromJSON(github.event_name == 'pull_request' && github.base_ref == 'develop' && '[1,2,3,4]' || '[1,2,3,4,5,6,7,8]') }}";
 const isRecord = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
 const sameSet = (actual, expected) =>
   actual.length === expected.length && expected.every((value) => actual.includes(value));
@@ -382,8 +385,11 @@ export function validateWorkflowPolicy(source, { profile } = {}) {
     !isRecord(strategy) ||
     strategy["fail-fast"] !== false ||
     strategy["max-parallel"] !== 8 ||
-    !Array.isArray(strategy.matrix?.shard) ||
-    !sameSet(strategy.matrix.shard, [1, 2, 3, 4, 5, 6, 7, 8]) ||
+    (!(profile === "core" && strategy.matrix?.shard === CORE_SHARD_EXPRESSION) &&
+      !(
+        Array.isArray(strategy.matrix?.shard) &&
+        sameSet(strategy.matrix.shard, [1, 2, 3, 4, 5, 6, 7, 8])
+      )) ||
     strategy.matrix.include ||
     strategy.matrix.exclude ||
     Object.keys(strategy.matrix).length !== 1
