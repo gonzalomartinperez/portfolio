@@ -362,7 +362,8 @@ reviewed `.dockerignore`; never carry secrets via build ARG/ENV or image layers.
 Use BuildKit secret mounts only if an authorized build actually needs a credential.
 Do not introduce a secret manager, create keys, dump resolved configuration or
 inspect live containers as part of an ordinary source check. Follow
-[SECURITY.md](../SECURITY.md) for suspected exposure and private escalation.
+[SECURITY.md](../SECURITY.md) and [security handling](security-handling.md) for suspected
+exposure and private escalation.
 
 
 ### Ephemeral Next runtime material in CI transfers

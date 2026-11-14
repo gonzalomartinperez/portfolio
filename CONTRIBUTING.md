@@ -90,7 +90,7 @@ is still in scope.
 
 Use Conventional Commits in English and open task PRs against `develop`. Describe
 the final problem and behavior, changed boundaries, verification and remaining
-limits in the [PR template](.github/pull_request_template.md). Review the exact
+limits in the [PR template](.github/PULL_REQUEST_TEMPLATE.md). Review the exact
 source revision whose checks pass; preserve concurrent work and fix conflicts on
 a task branch.
 

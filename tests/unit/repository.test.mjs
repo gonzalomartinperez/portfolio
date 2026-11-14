@@ -312,3 +312,23 @@ test("branch policy accepts only bot-native and weekly grouped Dependabot branch
   ])
     assert.doesNotMatch(branch, pattern);
 });
+
+test("security.txt follows RFC 9116 and stays valid for at least 30 more days", () => {
+  const fields = new Map(
+    read("public/.well-known/security.txt")
+      .trim()
+      .split("\n")
+      .map((line) => line.split(/: (.*)/s).slice(0, 2)),
+  );
+  assert.equal(
+    fields.get("Contact"),
+    "https://github.com/gonzalomartinperez/portfolio/security/advisories/new",
+  );
+  assert.equal(fields.get("Canonical"), "https://gonzalomartinperez.com/.well-known/security.txt");
+  assert.match(fields.get("Policy") ?? "", /\/SECURITY\.md$/);
+  assert.match(fields.get("Expires") ?? "", /^\d{4}-\d{2}-\d{2}T00:00:00\.000Z$/);
+  const expires = Date.parse(fields.get("Expires") ?? "");
+  // Renew yearly (next: 2027-10-14); an expired file is invalid under RFC 9116.
+  assert.ok(expires > Date.now(), "security.txt has expired: renew Expires");
+  assert.ok(expires - Date.now() < 366 * 24 * 60 * 60 * 1000, "Expires must be within a year");
+});
