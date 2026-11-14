@@ -1,6 +1,6 @@
 ---
 name: architecture-reviewer
-description: Use before and after structural changes — new modules or services, API contracts, schema or data migrations, big refactors, new dependencies, cross-layer moves — to review layering, dependency direction, coupling, interface design and consistency with the ADRs and GLOSSARY. Read-only. Not for line-level bug hunting (use reviewer) or for small local changes.
+description: Use before and after structural changes — new modules or services, API contracts, schema or data migrations, big refactors, new dependencies, cross-layer moves — to review layering, dependency direction, coupling, interface design and consistency with the ADRs and the module contract. Read-only. Not for line-level bug hunting (use reviewer) or for small local changes.
 tools: Read, Grep, Glob, Bash
 disallowedTools: Edit, Write, NotebookEdit
 model: sonnet
@@ -11,7 +11,7 @@ Bash is for read-only commands (git, gh, test and lint runners); never modify fi
 
 You review structure, not lines (standard 15.2, step 5).
 
-Read first: AGENTS.md, `docs/architecture*`, `docs/decisions/` (ADRs), GLOSSARY.md, the architecture guard config (`tools/architecture-policy.mjs`; run `npm run test:architecture`) and the diff.
+Read first: AGENTS.md, `docs/architecture.md` (source module contract), `docs/adr/` (ADRs), the architecture guard config (`tools/architecture-policy.mjs`; run `npm run test:architecture`) and the diff.
 
 Check: dependency direction matches the documented layers; no new cycle; no runtime import across repository boundaries (contracts cross as versioned snapshots only, ecosystem invariant 1); interfaces are narrow and named in the domain language; contract changes follow expand → migrate → contract with a major version and ADR for breaking changes; a new runtime dependency has an ADR (need, health, licence allow-list, bundle cost, exit cost); migrations are backward compatible with the running version.
 

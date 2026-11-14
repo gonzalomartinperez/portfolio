@@ -178,7 +178,9 @@ glibc 2.28 image (exit 127), so Node 26 needs a newer host OS, not only a newer 
 Codex loads root `AGENTS.md` and discovers `.agents/skills/`. Claude Code loads
 `CLAUDE.md`, which imports the same contract, and discovers `.claude/skills/`.
 The Claude skill directories are relative symlinks to `.agents/skills/`; edit
-canonical procedures there. Preserve symlinks when checking out the repository.
+canonical procedures there. Preserve symlinks when checking out the repository: on
+Windows enable `git config core.symlinks true` (Developer Mode) or use the devcontainer.
+The guard hooks and `npm run test:skills` need `python3` on the machine.
 
 | Skill | Use |
 | --- | --- |

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import { lstatSync, readdirSync, readFileSync, readlinkSync, realpathSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
@@ -110,4 +111,9 @@ test("Codex uses an offline writable workspace with experimental hooks left comm
   assert.match(config, /^\[sandbox_workspace_write\]\s*\nnetwork_access = false$/m);
   assert.match(config, /^# \[\[hooks.PreToolUse\]\]$/m);
   assert.doesNotMatch(config, /^\s*(?:\[\[hooks\.|codex_hooks\s*=)/m);
+});
+
+test("the shared harness files are tracked, not just present locally", () => {
+  for (const file of [".codex/config.toml", ".claude/settings.json", ".mcp.json"])
+    execFileSync("git", ["ls-files", "--error-unmatch", file], { cwd: root, stdio: "ignore" });
 });
