@@ -68,6 +68,20 @@ function inspectAction(value, label, errors) {
   }
 }
 
+function inspectRunnerHardening(job, label, errors) {
+  const first = Array.isArray(job.steps) ? job.steps[0] : undefined;
+  if (
+    !isRecord(first) ||
+    typeof first.uses !== "string" ||
+    !/^step-security\/harden-runner@[a-f\d]{40}$/i.test(first.uses) ||
+    !["audit", "block"].includes(first.with?.["egress-policy"])
+  ) {
+    errors.push(
+      `${label}: first step must use SHA-pinned step-security/harden-runner with egress-policy audit or block`,
+    );
+  }
+}
+
 function inspectGate(workflow, job, prerequisites, label, errors) {
   if (expression(job.if) !== "always()")
     errors.push(`${label}: aggregate must run with literal always()`);
@@ -75,6 +89,8 @@ function inspectGate(workflow, job, prerequisites, label, errors) {
   if (!Array.isArray(needs) || !sameSet(needs, prerequisites)) {
     errors.push(`${label}: aggregate must need exactly ${prerequisites.join(", ")}`);
   }
+  if (!Array.isArray(job.steps) || job.steps.length !== 1)
+    errors.push(`${label}: aggregate must contain exactly one result-gate run step`);
   const expected = new Map(
     prerequisites.map((id) => [`${id.toUpperCase().replaceAll("-", "_")}_RESULT`, id]),
   );
@@ -120,12 +136,37 @@ function inspectCoreGate(jobs, errors) {
   )?.[1];
   if (!classifySha)
     errors.push("classify: must use the SHA-pinned engineering-standards classify workflow");
+  const security = jobs.security;
+  if (isRecord(security)) {
+    const securitySha = (typeof security.uses === "string" ? security.uses : "").match(
+      /^gonzalomartinperez\/engineering-standards\/\.github\/workflows\/security\.yml@([a-f\d]{40})$/i,
+    )?.[1];
+    if (!securitySha || securitySha !== classifySha)
+      errors.push(
+        "security: must use the pinned engineering-standards security workflow with the same SHA as classify",
+      );
+    if (
+      !isRecord(security.permissions) ||
+      !sameSet(Object.keys(security.permissions), ["contents", "pull-requests"]) ||
+      security.permissions.contents !== "read" ||
+      security.permissions["pull-requests"] !== "read"
+    )
+      errors.push("security: permissions must be exactly contents: read and pull-requests: read");
+    if (
+      !isRecord(security.with) ||
+      !sameSet(Object.keys(security.with), ["dependency-review"]) ||
+      security.with["dependency-review"] !== true
+    )
+      errors.push("security: inputs must be exactly dependency-review: true");
+  }
   const gate = jobs["ci-gate"];
   if (!isRecord(gate)) return;
   if (gate.if !== "always()") errors.push("ci-gate: aggregate must run with literal always()");
   const needs = typeof gate.needs === "string" ? [gate.needs] : gate.needs;
-  if (!Array.isArray(needs) || !sameSet(needs, ["classify", "policy", ...CORE]))
-    errors.push("ci-gate: aggregate must need exactly classify, policy and every prerequisite");
+  if (!Array.isArray(needs) || !sameSet(needs, ["classify", "policy", "security", ...CORE]))
+    errors.push(
+      "ci-gate: aggregate must need exactly classify, policy, security and every prerequisite",
+    );
   if (!isRecord(gate.permissions) || Object.keys(gate.permissions).length !== 0)
     errors.push("ci-gate: permissions must be an empty mapping");
   if (!Array.isArray(gate.steps) || gate.steps.length !== 1 || !isRecord(gate.steps[0])) {
@@ -168,16 +209,16 @@ export function validateWorkflowPolicy(source, { profile } = {}) {
     return ["Workflow must define a jobs mapping"];
   const prerequisites = profile === "core" ? CORE : NIGHTLY;
   const expectedIds =
-    profile === "core" ? ["classify", "policy", ...CORE, "ci-gate"] : [...NIGHTLY, "checks"];
+    profile === "core"
+      ? ["classify", "policy", "security", ...CORE, "ci-gate"]
+      : [...NIGHTLY, "checks"];
   if (!sameSet(Object.keys(workflow.jobs), expectedIds))
     errors.push(`${profile}: expected job IDs ${expectedIds.join(", ")}`);
   if (profile === "core" ? workflow.name !== "CI" : workflow.name !== "Nightly") {
     errors.push(`${profile}: workflow name must identify its CI profile`);
   }
-  if (profile === "core") {
-    if (!isRecord(workflow.permissions) || Object.keys(workflow.permissions).length !== 0)
-      errors.push("core: permissions must be an empty mapping");
-  } else inspectPermissions(workflow.permissions, profile, errors, true);
+  if (!isRecord(workflow.permissions) || Object.keys(workflow.permissions).length !== 0)
+    errors.push(`${profile}: permissions must be an empty mapping`);
   if (
     isRecord(workflow.on) &&
     ["pull_request_target", "workflow_run"].some((event) => Object.hasOwn(workflow.on, event))
@@ -238,6 +279,11 @@ export function validateWorkflowPolicy(source, { profile } = {}) {
     if (profile === "core" && id === "classify") {
       if (!sameSet(Object.keys(job), ["uses", "permissions"]))
         errors.push("classify: reusable call must declare only uses and permissions");
+    } else if (profile === "core" && id === "security") {
+      if (!sameSet(Object.keys(job), ["needs", "if", "uses", "permissions", "with"]))
+        errors.push(
+          "security: reusable call must declare exactly needs, if, uses, permissions and with",
+        );
     } else if (typeof job.name !== "string" || !job.name.trim())
       errors.push(`${id}: job requires a literal check name`);
     else {
@@ -248,14 +294,16 @@ export function validateWorkflowPolicy(source, { profile } = {}) {
     }
     if (profile === "nightly" && "if" in job && id !== "checks")
       errors.push(`${id}: prerequisite job must not have an if condition`);
-    if (profile === "core" || "permissions" in job)
-      inspectPermissions(
-        job.permissions,
-        id,
-        errors,
-        false,
-        profile === "core" && id === "classify",
-      );
+    inspectPermissions(
+      job.permissions,
+      id,
+      errors,
+      false,
+      profile === "core" && ["classify", "security"].includes(id),
+    );
+    const aggregate = profile === "core" ? "ci-gate" : "checks";
+    if ("runs-on" in job && !("container" in job) && id !== aggregate)
+      inspectRunnerHardening(job, id, errors);
     if ("continue-on-error" in job) errors.push(`${id}: continue-on-error is forbidden`);
     if ("uses" in job) inspectAction(job.uses, id, errors);
     if ("needs" in job) {
@@ -311,7 +359,7 @@ export function validateWorkflowPolicy(source, { profile } = {}) {
           links: ["quality"],
           bundle: ["quality"],
         };
-  for (const id of profile === "core" ? ["policy", ...CORE] : prerequisites) {
+  for (const id of profile === "core" ? ["policy", "security", ...CORE] : prerequisites) {
     const required = [...(profile === "core" ? ["classify"] : []), ...(dependencies[id] ?? [])];
     if (
       profile === "core" &&
