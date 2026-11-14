@@ -260,3 +260,25 @@ test("source and build scans retain verified tooling and normalized transfers", 
   );
   assert.equal(commands["test:secrets:artifacts"], "node tools/secret-scan.mjs --artifacts");
 });
+
+test("branch policy accepts only bot-native and weekly grouped Dependabot branch names", () => {
+  const source = read(".github/workflows/branch-policy.yml").match(
+    /PR_AUTHOR === 'dependabot\[bot\]'[^\n]*\n\s*&& (\/\^dependabot[^\n]+\$\/)\.test/,
+  );
+  assert.ok(source);
+  const pattern = new RegExp(source[1].slice(1, -1));
+  for (const branch of [
+    "dependabot/npm_and_yarn/next-16.4.6",
+    "dependabot/github_actions/actions/checkout-7",
+    "dependabot/develop/weekly_all-92543d3f2a",
+  ])
+    assert.match(branch, pattern);
+  for (const branch of [
+    "dependabot/develop/weekly_all-",
+    "dependabot/develop/other-92543d3f2a",
+    "dependabot/develop/weekly_all-92543d3f2a/extra",
+    "xdependabot/develop/weekly_all-92543d3f2a",
+    "dependabot/pip/requests",
+  ])
+    assert.doesNotMatch(branch, pattern);
+});
