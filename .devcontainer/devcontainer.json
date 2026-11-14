@@ -1,0 +1,15 @@
+{
+  "name": "portfolio",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": ["--init", "--ipc=host"],
+  "remoteUser": "pwuser",
+  "postCreateCommand": "npm run setup",
+  "forwardPorts": [3000],
+  "customizations": {
+    "vscode": {
+      "extensions": ["biomejs.biome"]
+    }
+  }
+}

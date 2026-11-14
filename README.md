@@ -329,6 +329,7 @@ On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm`.
 | --- | --- |
 | `npm run build` | Compile Next.js with Webpack for hosting compatibility; no Biome invocation |
 | `npm run check` | Repository checks, formatting, lint, and one production build with type validation |
+| `npm run setup` | Verify Node matches `.nvmrc`, install locked dependencies and run `npm run check` (the devcontainer runs it on create) |
 | `npm run typecheck` | Fast standalone type validation without a production build |
 | `npm run test:secrets` | Scan tracked files/history with verified Gitleaks and synthetic regression probes |
 | `npm run test:secrets:artifacts` | Scan the sanitized CI transfer; see the development guide |
