@@ -1,0 +1,18 @@
+{
+  "name": "portfolio",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": ["--init", "--ipc=host"],
+  "remoteUser": "pwuser",
+  "workspaceFolder": "/workspaces/portfolio",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/portfolio,type=bind",
+  "mounts": ["source=portfolio-node-modules,target=/workspaces/portfolio/node_modules,type=volume"],
+  "postCreateCommand": "git config --global --add safe.directory /workspaces/portfolio && npm run setup",
+  "forwardPorts": [3000],
+  "customizations": {
+    "vscode": {
+      "extensions": ["biomejs.biome"]
+    }
+  }
+}

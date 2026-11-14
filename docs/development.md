@@ -19,6 +19,16 @@ wrote it. Mark it `done` only after acceptance criteria have verification eviden
 Keep unfinished checks explicit. Specifications describe requirements; they do not
 grant permission to publish, spend money, access accounts, or change infrastructure.
 
+## Setup
+
+### Devcontainer
+
+Open the repository in the devcontainer to use the same Playwright image and Node.js
+version as CI. `npm run setup` runs on create to verify Node matches `.nvmrc`,
+install locked dependencies and run `npm run check`, so the first create takes a few
+minutes. `node_modules` lives in a named Docker volume, so the container never replaces a
+host install.
+
 ## Design and implementation
 
 Use [Readable code and useful documentation](code-quality.md) for design,
