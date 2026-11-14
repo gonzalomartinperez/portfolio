@@ -107,7 +107,7 @@ export function identityReason(pr, commits, files, currentBase) {
     pr.base?.repo?.full_name !== repository ||
     pr.head?.repo?.full_name !== repository ||
     pr.head?.repo?.id !== pr.base?.repo?.id ||
-    !/^dependabot\/(?:npm_and_yarn\/[A-Za-z0-9._/-]+|develop\/weekly_all-[a-f0-9]+)$/.test(
+    !/^dependabot\/(?:npm_and_yarn\/[A-Za-z0-9._/-]+|develop\/weekly(?:_all)?-[a-f0-9]+)$/.test(
       pr.head?.ref ?? "",
     ) ||
     !shaPattern.test(pr.head?.sha ?? "") ||

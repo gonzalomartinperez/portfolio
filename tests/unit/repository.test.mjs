@@ -299,11 +299,13 @@ test("branch policy accepts only bot-native and weekly grouped Dependabot branch
     "dependabot/npm_and_yarn/next-16.4.6",
     "dependabot/github_actions/actions/checkout-7",
     "dependabot/develop/weekly_all-92543d3f2a",
+    "dependabot/develop/weekly-16552b0e40",
   ])
     assert.match(branch, pattern);
   for (const branch of [
     "dependabot/develop/weekly_all-",
     "dependabot/develop/other-92543d3f2a",
+    "dependabot/develop/weekly-",
     "dependabot/develop/weekly_all-92543d3f2a/extra",
     "xdependabot/develop/weekly_all-92543d3f2a",
     "dependabot/pip/requests",
@@ -329,4 +331,28 @@ test("security.txt follows RFC 9116 and stays valid for at least 30 more days", 
   // Renew yearly (next: 2027-10-14); an expired file is invalid under RFC 9116.
   assert.ok(expires > Date.now(), "security.txt has expired: renew Expires");
   assert.ok(expires - Date.now() < 366 * 24 * 60 * 60 * 1000, "Expires must be within a year");
+});
+
+test("standards caller workflows stay pinned, least-privilege and gate-aware", () => {
+  const lock = JSON.parse(read("standards.lock")).standards;
+  for (const file of ["deps-weekly-guard.yml", "vuln-daily.yml", "drift.yml"]) {
+    const source = read(`.github/workflows/${file}`);
+    const workflow = parseDocument(source).toJS();
+    assert.deepEqual(workflow.permissions, {}, file);
+    assert.equal(Object.hasOwn(workflow.on, "pull_request_target"), false, file);
+    for (const [id, job] of Object.entries(workflow.jobs)) {
+      assert.match(
+        job.uses,
+        new RegExp(
+          `^gonzalomartinperez/engineering-standards/\\.github/workflows/${file}@${lock.commit}$`,
+        ),
+        `${file}:${id} must pin the standards.lock commit`,
+      );
+      assert.equal(job.permissions["id-token"], undefined, `${file}:${id}`);
+    }
+  }
+  const guard = parseDocument(read(".github/workflows/deps-weekly-guard.yml")).toJS();
+  assert.equal(Object.hasOwn(guard.on, "pull_request"), false, "Dependabot runs are read-only");
+  const gate = parseDocument(read(".github/workflows/ci.yml")).toJS().jobs.checks.name;
+  assert.equal(guard.jobs.guard.with["gate-check-name"], gate);
 });

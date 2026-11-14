@@ -1,6 +1,9 @@
+# Weekly single dependency PR (ecosystem standard section 5), from the engineering-standards
+# release-flow template (v1.0.0). Group-level limit, commit-message and labels; semver cooldowns
+# only on npm. Checked by standards-drift (dependabot-policy) and the dependency-policy test.
 version: 2
 multi-ecosystem-groups:
-  weekly-all:
+  weekly:
     schedule:
       interval: weekly
       day: monday
@@ -8,12 +11,14 @@ multi-ecosystem-groups:
       timezone: America/Argentina/Buenos_Aires
     target-branch: develop
     open-pull-requests-limit: 1
+    commit-message:
+      prefix: "chore(deps)"
+    labels: ["dependencies"]
 updates:
   - package-ecosystem: npm
     directory: /
-    multi-ecosystem-group: weekly-all
+    multi-ecosystem-group: weekly
     patterns: ["*"]
-    labels: ["dependencies"]
     cooldown:
       default-days: 7
       semver-major-days: 14
@@ -24,9 +29,8 @@ updates:
         update-types: ["version-update:semver-major"]
   - package-ecosystem: npm
     directory: /tools/api-contract
-    multi-ecosystem-group: weekly-all
+    multi-ecosystem-group: weekly
     patterns: ["*"]
-    labels: ["dependencies"]
     cooldown:
       default-days: 7
       semver-major-days: 14
@@ -37,8 +41,7 @@ updates:
         update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
-    multi-ecosystem-group: weekly-all
+    multi-ecosystem-group: weekly
     patterns: ["*"]
-    labels: ["dependencies"]
     cooldown:
       default-days: 7

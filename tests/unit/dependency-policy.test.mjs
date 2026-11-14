@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
+import { parseDocument } from "yaml";
 import {
   classifyUpdate,
   createMetadataReader,
@@ -157,9 +158,14 @@ test("frameworks, unknown tools, installed code and new or removed direct packag
 test("identity requires exact same-repository bot, base and complete verified commit/file scope", () => {
   const valid = metadata();
   assert.equal(identityReason(valid.pr, valid.commits, valid.files, revision("b")), null);
-  const grouped = metadata();
-  grouped.pr.head.ref = "dependabot/develop/weekly_all-92543d3f2a";
-  assert.equal(identityReason(grouped.pr, grouped.commits, grouped.files, revision("b")), null);
+  for (const ref of [
+    "dependabot/develop/weekly-16552b0e40",
+    "dependabot/develop/weekly_all-92543d3f2a",
+  ]) {
+    const grouped = metadata();
+    grouped.pr.head.ref = ref;
+    assert.equal(identityReason(grouped.pr, grouped.commits, grouped.files, revision("b")), null);
+  }
   for (const mutate of [
     (input) => {
       input.pr.user = { ...bot, id: 2 };
@@ -418,25 +424,53 @@ test("metadata transport rejects every arbitrary GraphQL body and off-repository
     await assert.rejects(reader(path, body), /Unsupported metadata read/);
 });
 
-test("published workflow remains read-only and executes only trusted policy source", () => {
-  const workflow = readFileSync(
-    new URL("../../.github/workflows/dependency-policy.yml", import.meta.url),
-    "utf8",
+test("the weekly group config follows the standard and the assessment stays local", () => {
+  assert.equal(
+    existsSync(new URL("../../.github/workflows/dependency-policy.yml", import.meta.url)),
+    false,
   );
-  assert.doesNotMatch(workflow, /:\s*write\b|pull_request\.head|npm (?:ci|install)|gh pr merge/);
-  assert.match(workflow, /ref: \$\{\{ github\.event\.repository\.default_branch \}\}/);
-  assert.match(workflow, /persist-credentials: false/);
-  assert.match(workflow, /node-version-file: \.nvmrc/);
-  assert.match(workflow, /package-manager-cache: false/);
-  assert.doesNotMatch(workflow, /actions: read|checks: read/);
   const manifest = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8"));
-  assert.match(manifest.scripts.check, /npm run check:quality/);
   assert.match(manifest.scripts["check:quality"], /npm run test:dependency-policy/);
-  const config = readFileSync(new URL("../../.github/dependabot.yml", import.meta.url), "utf8");
-  assert.equal((config.match(/labels: \["dependencies"\]/g) ?? []).length, 3);
-  assert.equal((config.match(/multi-ecosystem-group: weekly-all/g) ?? []).length, 3);
-  assert.equal((config.match(/open-pull-requests-limit: 1/g) ?? []).length, 1);
-  assert.match(config, /directory: \/tools\/api-contract/);
+  const config = parseDocument(
+    readFileSync(new URL("../../.github/dependabot.yml", import.meta.url), "utf8"),
+  ).toJS();
+  assert.deepEqual(Object.keys(config["multi-ecosystem-groups"]), ["weekly"]);
+  const group = config["multi-ecosystem-groups"].weekly;
+  assert.deepEqual(group.schedule, {
+    interval: "weekly",
+    day: "monday",
+    time: "09:00",
+    timezone: "America/Argentina/Buenos_Aires",
+  });
+  assert.equal(group["target-branch"], "develop");
+  assert.equal(group["open-pull-requests-limit"], 1);
+  assert.deepEqual(group["commit-message"], { prefix: "chore(deps)" });
+  assert.deepEqual(group.labels, ["dependencies"]);
+  assert.deepEqual(
+    config.updates.map((entry) => [entry["package-ecosystem"], entry.directory]),
+    [
+      ["npm", "/"],
+      ["npm", "/tools/api-contract"],
+      ["github-actions", "/"],
+    ],
+  );
+  assert.deepEqual(config.updates[0].ignore, [
+    { "dependency-name": "@types/node", "update-types": ["version-update:semver-major"] },
+  ]);
+  assert.deepEqual(config.updates[1].ignore, [
+    { "dependency-name": "typescript", "update-types": ["version-update:semver-major"] },
+  ]);
+  for (const entry of config.updates) {
+    assert.equal(entry["multi-ecosystem-group"], "weekly");
+    assert.deepEqual(entry.patterns, ["*"]);
+    for (const key of ["open-pull-requests-limit", "commit-message", "labels"])
+      assert.equal(Object.hasOwn(entry, key), false, `${key} belongs on the group`);
+    const semver = Object.keys(entry.cooldown).filter((key) => key.startsWith("semver-"));
+    assert.deepEqual(
+      semver,
+      entry["package-ecosystem"] === "npm" ? ["semver-major-days", "semver-patch-days"] : [],
+    );
+  }
 });
 
 test("a legacy-named check cannot replace the canonical full aggregate", async () => {
