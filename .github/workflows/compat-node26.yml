@@ -12,6 +12,7 @@ on:
       - package.json
       - package-lock.json
       - .nvmrc
+      - .npmrc
       - next.config.mjs
       - .github/workflows/compat-node26.yml
   schedule:
@@ -34,6 +35,9 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: read
+    # Same image as the Hosting contract job: glibc 2.28 forces the SWC WebAssembly fallback.
+    container:
+      image: rockylinux:8@sha256:2d05a9266523bbf24f33ebc3a9832e4d5fd74b973c220f2204ca802286aa275d
     env:
       NEXT_TELEMETRY_DISABLED: "1"
       ASSISTANT_ENABLED: "false"
@@ -41,6 +45,8 @@ jobs:
       # package.json engines pin Node 24 for Hostinger; relax only here to observe Node 26.
       npm_config_engine_strict: "false"
     steps:
+      - name: Install container prerequisites
+        run: dnf --setopt=timeout=20 --setopt=minrate=500000 --setopt=retries=3 install -y git tar gzip xz
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -52,12 +58,19 @@ jobs:
           node-version: "26"
           cache: npm
           cache-dependency-path: package-lock.json
+      - name: Validate the container checkout
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git rev-parse --show-toplevel
       - name: Record the runtime
         run: |
+          test "$(getconf GNU_LIBC_VERSION)" = "glibc 2.28"
           node --version
           npm --version
       - name: Install locked dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
+      - name: Require automatic SWC WebAssembly fallback
+        run: node -e 'require("next/dist/build/swc").loadBindings().then(b => { if (!b.isWasm) throw new Error("Expected SWC WASM on GLIBC 2.28"); })'
       - name: Run repository and content unit tests
         run: |
           npm run test:repository

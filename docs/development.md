@@ -149,8 +149,8 @@ the full aggregate and protected branch checks; deployment evidence
 remains separate from CI, as described in [deployment](deployment.md).
 
 `compat-node26.yml` is a separate, non-blocking forward-compatibility signal: it runs the
-repository and content tests, the build and the smoke check on Node 26 (engines relaxed
-only there) on dependency PRs, pushes to `develop`, weekly and on demand. It is never a
+repository and content tests, the WebAssembly SWC build and the smoke check on Node 26
+in the same Rocky 8 / glibc 2.28 image as the Hostinger job (engines relaxed only there) on dependency PRs, pushes to `develop`, weekly and on demand. It is never a
 required check; `.nvmrc` and Hostinger stay on Node 24 until the host offers 26 (PF-D19).
 
 ## Agent entrypoints and skills
