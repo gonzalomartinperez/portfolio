@@ -1,6 +1,10 @@
 ---
 name: implement-feature
-description: Implement a requested portfolio feature or refactor with focused Next.js code and proportionate tests; not for planning-only or review-only requests.
+description: Use when implementing a requested portfolio feature or refactor with focused Next.js code and proportionate tests. Not for planning-only or review-only requests.
+metadata:
+  owner: gonzalomartinperez
+  last-reviewed: 2026-11-14
+  version: 1.0.0
 ---
 
 # Implement Feature

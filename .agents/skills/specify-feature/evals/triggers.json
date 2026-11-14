@@ -1,0 +1,64 @@
+{
+  "queries": [
+    {
+      "query": "Plan a bilingual project comparison section; define acceptance criteria without implementing it.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Scope a keyboard-accessible technology filter and write a delivery plan only.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Write a specification for a theme-aware CV download card; no code changes.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Define observable requirements for the portfolio mobile navigation redesign.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Break the proposed case-study gallery into a small vertical slice before implementation.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Help decide the interaction states and acceptance criteria for a new education timeline.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Implement the approved bilingual project comparison section using existing cards.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Build the technology filter from the accepted spec and run checks.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Review the proposed CV card diff for correctness only.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Diagnose why mobile navigation throws during hydration; do not fix it.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Apply the approved stable Playwright patch upgrade.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Prepare the completed gallery change for handoff without committing.",
+      "should_trigger": false,
+      "split": "validation"
+    }
+  ]
+}

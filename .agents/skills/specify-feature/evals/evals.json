@@ -1,0 +1,28 @@
+{
+  "evals": [
+    {
+      "prompt": "Plan a bilingual project comparison section. Do not implement it.",
+      "assertions": [
+        "Defines observable acceptance criteria for both locales.",
+        "Plans a focused vertical slice and relevant checks.",
+        "Does not change application code or publish anything."
+      ]
+    },
+    {
+      "prompt": "Specify a keyboard-accessible technology filter before coding.",
+      "assertions": [
+        "Defines keyboard behavior and loading, empty and error states where relevant.",
+        "Identifies material product questions without inventing public claims.",
+        "Records a delivery plan without implementing the filter."
+      ]
+    },
+    {
+      "prompt": "Scope an education timeline redesign with both themes supported; planning only.",
+      "assertions": [
+        "Records responsive and theme acceptance criteria.",
+        "Preserves reviewed education facts and public-content boundaries.",
+        "Keeps implementation and publishing outside the planning task."
+      ]
+    }
+  ]
+}

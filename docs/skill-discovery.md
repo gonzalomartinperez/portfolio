@@ -4,10 +4,9 @@
 
 The six existing skills support ordinary task wording. Their canonical `name` and
 `description` frontmatter lives in `.agents/skills/`; `.claude/skills/` contains
-adapters that refer to those procedures. No skill is explicit-only. Codex's
+relative symlinks to those canonical directories. No skill is explicit-only. Codex's
 implicit invocation policy is enabled by default; there is no local override that
-turns it off. The descriptions already distinguish the workflows and remain
-unchanged by this discovery clarification.
+turns it off. The descriptions distinguish the workflows and their near-miss exclusions.
 
 | Example request without a skill command | Relevant procedure | Scope preserved |
 | --- | --- | --- |
@@ -30,8 +29,8 @@ Reading a checkout does not prove that the host indexed its skills or refreshed
 an already-running session. The local fallback in `AGENTS.md` therefore applies
 after the agent identifies this repository: inspect the six frontmatter summaries,
 select the matching procedure, and read that procedure before acting. Claude's
-entrypoint imports the same agent contract and its adapters resolve canonical
-paths relative to their own files.
+entrypoint imports the same agent contract and its skill symlinks resolve to
+`../../.agents/skills/<name>`.
 
 This fallback needs no global installation, copied skill, parent-workspace edit,
 restart, environment change or manual `$` invocation. It supplies repository
@@ -40,9 +39,9 @@ or guarantee that a skill appears in the host UI.
 
 ## Validation boundaries
 
-Validate canonical frontmatter with the installed skill-creator validator, check
-that all six adapter descriptions and relative canonical links agree, and ensure
-no explicit-only invocation flag was introduced. Review the examples above for
+Run `npm run test:skills` to validate canonical frontmatter, trigger/output eval
+fixtures and all six relative symlinks. Repository tests also check that no
+explicit-only invocation flag was introduced. Review the examples above for
 routing and authority boundaries. Those checks validate repository configuration
 and local instructions. They are not an independent live-host selection test or
 proof of a native catalog refresh.

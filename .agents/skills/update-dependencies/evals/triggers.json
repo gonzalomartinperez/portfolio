@@ -1,0 +1,64 @@
+{
+  "queries": [
+    {
+      "query": "Evaluate whether the next stable Next.js patch is compatible; do not upgrade yet.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Upgrade Biome to the approved stable version and update its lockfile.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Assess the proposed Playwright dependency bump against the portfolio browser setup.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Apply the approved React patch upgrade and verify Next.js compatibility.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Review the requested TypeScript stable upgrade for the repository toolchain.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Update the requested Next.js patch and its matching SWC WASM package together.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Implement a theme-aware CV card using the already installed packages.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Build the approved gallery filter without adding or upgrading dependencies.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Refactor the navigation components using existing owned primitives.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Plan a new project comparison section; no package changes.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Diagnose the hydration failure after switching themes; do not upgrade packages.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Prepare the completed dependency change for handoff; do not commit.",
+      "should_trigger": false,
+      "split": "validation"
+    }
+  ]
+}
