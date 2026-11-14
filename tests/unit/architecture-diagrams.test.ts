@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { routeConnection } from "../../src/features/architecture-diagrams/domain/architecture-edge-routing.ts";
 import type { EnterpriseKind } from "../../src/features/architecture-diagrams/domain/architecture-types.ts";
 import {

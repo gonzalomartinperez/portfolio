@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
-import test from "node:test";
+import { test } from "vitest";
 import { parseDocument } from "yaml";
 import {
   classifyUpdate,
@@ -11,16 +11,25 @@ import {
   reviewDependency,
 } from "../../tools/dependency-policy.mjs";
 
-const revision = (letter) => letter.repeat(40);
+// Negative cases deliberately mutate unvalidated JSON into invalid shapes.
+// biome-ignore lint/suspicious/noExplicitAny: validator fixtures must permit malformed fields.
+type MutableFixture = Record<string, any>;
+
+const revision = (letter: string) => letter.repeat(40);
 const bot = { login: "dependabot[bot]", id: 49699333 };
-function snapshots(names = ["@types/react"]) {
+function snapshots(names = ["@types/react"]): {
+  before: MutableFixture;
+  after: MutableFixture;
+  beforeLock: MutableFixture;
+  afterLock: MutableFixture;
+} {
   const before = {
     name: "portfolio",
     dependencies: { react: "19.3.1" },
     devDependencies: Object.fromEntries(names.map((name) => [name, "19.3.0"])),
   };
   const after = structuredClone(before);
-  const beforeLock = {
+  const beforeLock: MutableFixture = {
     name: "portfolio",
     lockfileVersion: 3,
     packages: {
@@ -49,7 +58,7 @@ function snapshots(names = ["@types/react"]) {
   }
   return { before, after, beforeLock, afterLock };
 }
-function metadata() {
+function metadata(): MutableFixture {
   const repo = { full_name: "gonzalomartinperez/portfolio", id: 1 };
   return {
     pr: {
@@ -111,41 +120,41 @@ test("frameworks, unknown tools, installed code and new or removed direct packag
     assert.equal(classifyUpdate(snapshots([name])), "manual-package-scope");
   }
   for (const mutate of [
-    (input) => {
+    (input: MutableFixture) => {
       delete input.before.devDependencies["@types/react"];
     },
-    (input) => {
+    (input: MutableFixture) => {
       delete input.after.devDependencies["@types/react"];
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.after.scripts = { postinstall: "synthetic-untrusted-command" };
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.after.dependencies.react = "19.3.2";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.afterLock.packages["node_modules/react"].version = "19.3.2";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.afterLock.packages["node_modules/new-transitive"] = { version: "1.0.0" };
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.afterLock.packages["node_modules/@types/react"].hasInstallScript = true;
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.afterLock.packages["node_modules/@types/react"].resolved =
         "https://untrusted.invalid/tool.tgz";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.afterLock.packages["node_modules/@types/react"].integrity = "not-integrity";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.afterLock.packages[""].devDependencies["@types/react"] = "19.3.9";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.afterLock.packages["node_modules/@types/react"].dependencies = { unexpected: "*" };
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.afterLock.lockfileVersion = 2;
     },
   ]) {
@@ -167,56 +176,56 @@ test("identity requires exact same-repository bot, base and complete verified co
     assert.equal(identityReason(grouped.pr, grouped.commits, grouped.files, revision("b")), null);
   }
   for (const mutate of [
-    (input) => {
+    (input: MutableFixture) => {
       input.pr.user = { ...bot, id: 2 };
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.pr.head.repo = { full_name: "outsider/portfolio", id: 2 };
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.pr.base.ref = "main";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.pr.head.ref = "dependabot/github_actions/group";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.pr.head.ref = "dependabot/develop/weekly_all-";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.pr.head.ref = "dependabot/develop/other-group-abc123";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.pr.head.ref = "xdependabot/develop/weekly_all-abc123";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.pr.draft = true;
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.pr.commits = 2;
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.commits.push(structuredClone(input.commits[0]));
       input.pr.commits = 2;
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.commits[0].author = { login: "human", id: 3 };
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.commits[0].commit.verification.verified = false;
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.commits[0].sha = revision("d");
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.pr.changed_files = 3;
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.files[0].filename = ".github/workflows/ci.yml";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.files[0].status = "added";
     },
-    (input) => {
+    (input: MutableFixture) => {
       input.files[0].previous_filename = "other.json";
     },
   ]) {
@@ -231,7 +240,7 @@ function fakeApi(changeFinal = false) {
   const data = metadata();
   const input = snapshots();
   let reads = 0;
-  const blob = (payload) => {
+  const blob = (payload: unknown) => {
     const bytes = Buffer.from(JSON.stringify(payload));
     return {
       type: "file",
@@ -241,7 +250,7 @@ function fakeApi(changeFinal = false) {
       content: bytes.toString("base64"),
     };
   };
-  const values = {
+  const values: Record<string, Record<string, ReturnType<typeof blob>>> = {
     [revision("a")]: {
       "package.json": blob(input.after),
       "package-lock.json": blob(input.afterLock),
@@ -252,8 +261,8 @@ function fakeApi(changeFinal = false) {
     },
   };
   for (const file of data.files) file.sha = values[revision("a")][file.filename].sha;
-  const paths = [];
-  const api = async (path) => {
+  const paths: string[] = [];
+  const api = async (path: string): Promise<MutableFixture> => {
     paths.push(path);
     if (path.endsWith("/pulls/1")) {
       reads++;
@@ -300,22 +309,22 @@ test("head race and unavailable GitHub metadata never become candidates", async 
 
 test("symlink/truncated trees, forged blob contents and stale base snapshots are rejected", async () => {
   for (const mutate of [
-    (path, value) => {
+    (path: string, value: MutableFixture) => {
       if (path.includes("/git/trees/")) value.tree[0].mode = "120000";
     },
-    (path, value) => {
+    (path: string, value: MutableFixture) => {
       if (path.includes("/git/trees/")) value.truncated = true;
     },
-    (path, value) => {
+    (path: string, value: MutableFixture) => {
       if (path.includes("/contents/")) value.content = Buffer.from("{}").toString("base64");
     },
-    (path, value) => {
+    (path: string, value: MutableFixture) => {
       if (path.includes("/contents/")) value.sha = revision("d");
     },
   ]) {
     const fixture = fakeApi();
     await assert.rejects(
-      reviewDependency(async (path) => {
+      reviewDependency(async (path: string) => {
         const value = structuredClone(await fixture.api(path));
         mutate(path, value);
         return value;
@@ -325,7 +334,7 @@ test("symlink/truncated trees, forged blob contents and stale base snapshots are
   const fixture = fakeApi();
   assert.equal(
     await reviewDependency(
-      async (path) =>
+      async (path: string) =>
         path.endsWith("/git/ref/heads/develop")
           ? { object: { sha: revision("d") } }
           : fixture.api(path),
@@ -361,9 +370,9 @@ function visibleProtection() {
 }
 
 test("workflow-token visibility probe reports manual state without any mutation or existing PR", async () => {
-  const calls = [];
+  const calls: { url: string; init: RequestInit }[] = [];
   const reader = createMetadataReader("synthetic-workflow-token", async (url, init) => {
-    calls.push({ url, init });
+    calls.push({ url: String(url), init: init ?? {} });
     return Response.json(
       String(url).endsWith("/graphql")
         ? visibleProtection()
@@ -381,10 +390,13 @@ test("workflow-token visibility probe reports manual state without any mutation 
   });
   assert.equal(calls.length, 2);
   const graphql = calls.find((call) => call.url.endsWith("/graphql"));
+  assert.ok(graphql);
   assert.equal(graphql.init.method, "POST");
   assert.equal(new Headers(graphql.init.headers).get("Content-Type"), "application/json");
-  assert.match(JSON.parse(graphql.init.body).query, /^query\s/);
-  assert.equal(calls.find((call) => !call.url.endsWith("/graphql")).init.method, "GET");
+  assert.match(JSON.parse(graphql.init.body as string).query, /^query\s/);
+  const repositoryCall = calls.find((call) => !call.url.endsWith("/graphql"));
+  assert.ok(repositoryCall);
+  assert.equal(repositoryCall.init.method, "GET");
 });
 
 test("denied or incomplete protection metadata is blocked, never a permission escalation", async () => {
@@ -393,7 +405,7 @@ test("denied or incomplete protection metadata is blocked, never a permission es
       throw Error("synthetic denied body must not escape");
     },
     async () => ({}),
-    async (path) =>
+    async (path: string) =>
       path === "/graphql"
         ? visibleProtection()
         : { full_name: "wrong/repo", allow_auto_merge: false },
@@ -447,7 +459,10 @@ test("the weekly group config follows the standard and the assessment stays loca
   assert.deepEqual(group["commit-message"], { prefix: "chore(deps)" });
   assert.deepEqual(group.labels, ["dependencies"]);
   assert.deepEqual(
-    config.updates.map((entry) => [entry["package-ecosystem"], entry.directory]),
+    config.updates.map((entry: Record<string, string>) => [
+      entry["package-ecosystem"],
+      entry.directory,
+    ]),
     [
       ["npm", "/"],
       ["npm", "/tools/api-contract"],
@@ -477,7 +492,7 @@ test("a legacy-named check cannot replace the canonical full aggregate", async (
   const metadata = visibleProtection();
   metadata.data.repository.ref.branchProtectionRule.requiredStatusChecks[0].context =
     "Quality checks";
-  const result = await inspectReadiness(async (path) =>
+  const result = await inspectReadiness(async (path: string) =>
     path === "/graphql"
       ? metadata
       : {

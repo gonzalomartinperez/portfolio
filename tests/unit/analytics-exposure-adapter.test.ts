@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test, { type TestContext } from "node:test";
+import { type TestContext, test } from "vitest";
 import { listenForExposures } from "../../src/features/analytics/adapters/exposure.ts";
 import { createExposureSession } from "../../src/features/analytics/application/exposure-session.ts";
 import type { ExposureIntent } from "../../src/features/analytics/domain/interactions.ts";
@@ -36,7 +36,7 @@ function fixture(t: TestContext) {
   }
   const original = globalThis.IntersectionObserver;
   globalThis.IntersectionObserver = FakeObserver as unknown as typeof IntersectionObserver;
-  t.after(() => {
+  t.onTestFinished(() => {
     globalThis.IntersectionObserver = original;
   });
   const target = {
@@ -95,7 +95,7 @@ function fixture(t: TestContext) {
     stop = listenForExposures(document as unknown as Document, () => pathname, session);
   };
   connect();
-  t.after(() => stop());
+  t.onTestFinished(() => stop());
   return {
     events,
     observers,
@@ -335,7 +335,7 @@ function dynamicFixture(t: TestContext) {
   }
   const previous = globalThis.IntersectionObserver;
   globalThis.IntersectionObserver = FakeIntersection as unknown as typeof IntersectionObserver;
-  t.after(() => {
+  t.onTestFinished(() => {
     globalThis.IntersectionObserver = previous;
   });
   let now = 0,
@@ -377,7 +377,7 @@ function dynamicFixture(t: TestContext) {
     stop = listenForExposures(document as unknown as Document, () => pathname, session);
   }
   connect();
-  t.after(() => stop());
+  t.onTestFinished(() => stop());
   return {
     events,
     observers,

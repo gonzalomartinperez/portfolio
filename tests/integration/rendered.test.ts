@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test, { after, before } from "node:test";
+import { afterAll, beforeAll, test } from "vitest";
 import { localTestOrigin, startTestServer } from "../../tools/test-server.mjs";
 
 /**
@@ -31,27 +31,33 @@ const routes = [
   "/es/cv",
 ];
 
-let server;
-const pages = new Map();
+let server: Awaited<ReturnType<typeof startTestServer>> | undefined;
+const pages = new Map<string, Awaited<ReturnType<typeof get>>>();
 
-const get = async (path) => {
+const get = async (path: string) => {
   const response = await fetch(origin + path, { signal: AbortSignal.timeout(15_000) });
   return { status: response.status, headers: response.headers, body: await response.text() };
 };
 
-before(async () => {
+function pageFor(route: string) {
+  const page = pages.get(route);
+  assert.ok(page, route);
+  return page;
+}
+
+beforeAll(async () => {
   if (!process.env.SITE_TEST_ORIGIN) server = await startTestServer(port);
   for (const route of routes) pages.set(route, await get(route));
 });
 
-after(async () => {
+afterAll(async () => {
   await server?.stop();
 });
 
 test("every route returns HTML", () => {
   for (const [route, page] of pages) {
     assert.equal(page.status, 200, `${route} returned ${page.status}`);
-    assert.match(page.headers.get("content-type"), /text\/html/, route);
+    assert.match(page.headers.get("content-type") ?? "", /text\/html/, route);
   }
 });
 
@@ -116,25 +122,25 @@ test("each page exposes landmarks and a skip link", () => {
 });
 
 test("the decorative hero still is hidden from assistive technology", () => {
-  const home = pages.get("/").body;
+  const home = pageFor("/").body;
   assert.match(home, /<svg[^>]*aria-hidden="true"/, "the still must be aria-hidden");
   assert.ok(!/<svg[^>]*tabindex/.test(home), "the still must not be focusable");
 });
 
 test("content renders without JavaScript", () => {
   // The server HTML alone must carry the positioning, the actions and the evidence links.
-  const home = pages.get("/").body;
+  const home = pageFor("/").body;
   assert.match(home, /Gonzalo Martin Perez/);
   assert.match(home, /AI Engineer \| Software Engineer \| Product Engineer/);
   assert.match(home, /href="\/work"/);
   assert.match(home, /href="\/contact"/);
-  assert.match(pages.get("/work/filomena").body, /github\.com\/gonzalomartinperez\/filomena/);
+  assert.match(pageFor("/work/filomena").body, /github\.com\/gonzalomartinperez\/filomena/);
 });
 
 test("structured data is valid and describes the right person", () => {
-  const match = pages
-    .get("/")
-    .body.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  const match = pageFor("/").body.match(
+    /<script type="application\/ld\+json">([\s\S]*?)<\/script>/,
+  );
   assert.ok(match, "no JSON-LD found");
   const data = JSON.parse(match[1]);
   assert.equal(data["@type"], "ProfilePage");
@@ -200,15 +206,15 @@ test("published documents and assets are reachable", async () => {
 });
 
 test("CV links and PDF responses use the approved bilingual filenames", async () => {
-  for (const locale of ["en", "es"]) {
+  for (const locale of ["en", "es"] as const) {
     const filename = {
       en: "Gonzalo-Martin-Perez-AI-Engineer-Resume.pdf",
       es: "Gonzalo-Martin-Perez-AI-Engineer-CV.pdf",
     }[locale];
     const prefix = locale === "es" ? "/es" : "";
-    assert.ok(pages.get(`${prefix}/cv`).body.includes(`download="${filename}"`));
+    assert.ok(pageFor(`${prefix}/cv`).body.includes(`download="${filename}"`));
     for (const contactPrefix of ["", "/es"]) {
-      assert.ok(pages.get(`${contactPrefix}/contact`).body.includes(`download="${filename}"`));
+      assert.ok(pageFor(`${contactPrefix}/contact`).body.includes(`download="${filename}"`));
     }
     const response = await fetch(`${origin}/gonzalo-martin-perez-ai-engineer-${locale}.pdf`);
     assert.equal(response.headers.get("content-disposition"), `inline; filename="${filename}"`);
@@ -236,10 +242,10 @@ test("security headers are present on every route", () => {
 });
 
 test("content-addressed solar maps are immutable; other hashes revalidate", async () => {
-  const head = async (path) =>
+  const head = async (path: string) =>
     (await fetch(origin + path, { method: "HEAD", signal: AbortSignal.timeout(15_000) })).headers;
-  const urls = new Set(
-    pages.get("/").body.match(/\/images\/solar-system\/[a-z0-9-]+\.webp\?v=[0-9a-f]{16}\b/g),
+  const urls = new Set<string>(
+    pageFor("/").body.match(/\/images\/solar-system\/[a-z0-9-]+\.webp\?v=[0-9a-f]{16}\b/g) ?? [],
   );
   assert.ok(urls.size > 0, "the static solar scene references no hashed maps");
   for (const url of urls) {
@@ -273,8 +279,8 @@ test("the server does not advertise its framework", () => {
 
 test("switching language keeps you on the same page", () => {
   // The Spanish work page must link back to the English one and vice versa.
-  assert.match(pages.get("/work").body, /href="\/es\/work"/);
-  assert.match(pages.get("/es/work").body, /href="\/work"/);
+  assert.match(pageFor("/work").body, /href="\/es\/work"/);
+  assert.match(pageFor("/es/work").body, /href="\/work"/);
 });
 
 test("internal context links resolve to rendered anchors", () => {

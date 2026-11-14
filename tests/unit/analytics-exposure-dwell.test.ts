@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { createExposureDwell } from "../../src/features/analytics/application/exposure-dwell.ts";
 
 function fixture() {

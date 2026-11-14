@@ -18,9 +18,18 @@ async function run(args, environment) {
   });
 }
 
-await run(["--test", "tests/integration/rendered.test.mjs"], {
-  RENDERED_TEST_PORT: process.env.RENDERED_TEST_PORT ?? String(port),
-});
+await run(
+  [
+    "node_modules/vitest/vitest.mjs",
+    "run",
+    "--config",
+    "vitest.integration.config.ts",
+    "tests/integration/rendered.test.ts",
+  ],
+  {
+    RENDERED_TEST_PORT: process.env.RENDERED_TEST_PORT ?? String(port),
+  },
+);
 await run(["node_modules/@playwright/test/cli.js", "test", ...process.argv.slice(2)], {
   BROWSER_TEST_PORT: process.env.BROWSER_TEST_PORT ?? String(port),
   BROWSER_TEST_UPSTREAM_PORT: process.env.BROWSER_TEST_UPSTREAM_PORT ?? String(port + 1),

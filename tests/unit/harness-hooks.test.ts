@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { test } from "vitest";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
 

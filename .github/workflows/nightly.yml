@@ -117,7 +117,7 @@ jobs:
       - name: Reject secrets in tracked files and complete history
         run: npm run test:secrets
       - name: Verify candidate selection fixtures
-        run: node --test tests/unit/nightly-candidate.test.mjs
+        run: npx vitest run tests/unit/nightly-candidate.test.ts
       - name: Install locked dependencies
         run: npm ci --prefer-offline --no-audit --no-fund
       - name: Regenerate the public contract with its frozen tooling

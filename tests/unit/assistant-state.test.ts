@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { createAssistant } from "../../src/features/assistant/application/assistant.ts";
 import type { AssistantTransport } from "../../src/features/assistant/application/ports.ts";
 import { AssistantError } from "../../src/features/assistant/application/ports.ts";

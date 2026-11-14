@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
-import test from "node:test";
+import { test } from "vitest";
 import {
   academicAreas,
   academicCatalogue,
@@ -34,7 +34,7 @@ test("featured courses and academic areas resolve only to documented curriculum 
   assert.equal(academicEntry("uns-7552").year, 3);
   assert.equal(academicEntry("uns-5949").grade, 5);
   assert.equal(academicEntry("uns-7886").grade, "AP");
-  for (const locale of ["es", "en"]) {
+  for (const locale of ["es", "en"] as const) {
     assert.equal(localizedCurriculum(locale).flatMap((year) => year.subjects).length, 34);
   }
 });

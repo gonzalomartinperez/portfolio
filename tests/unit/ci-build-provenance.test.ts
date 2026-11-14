@@ -11,14 +11,33 @@ import {
 } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import test from "node:test";
 import { gzipSync } from "node:zlib";
+import { type TestContext, test } from "vitest";
 import {
-  createProvenance,
-  readContext,
+  createProvenance as createProvenanceJs,
+  readContext as readContextJs,
   validateContext,
-  verifyProvenance,
+  verifyProvenance as verifyProvenanceJs,
 } from "../../tools/ci-build-provenance.mjs";
+
+// Negative cases deliberately mutate unvalidated JSON into invalid shapes.
+// biome-ignore lint/suspicious/noExplicitAny: validator fixtures must permit malformed fields.
+type MutableFixture = Record<string, any>;
+
+const createProvenance = createProvenanceJs as unknown as (
+  directory: string,
+  options: { context: MutableFixture; output?: string },
+) => MutableFixture;
+const readContext = readContextJs as unknown as (options: {
+  root: string;
+  env: Record<string, string>;
+  runtime: { version: string; platform: string; arch: string };
+}) => MutableFixture;
+
+const verifyProvenance = verifyProvenanceJs as unknown as (
+  directory: string,
+  options: { context: MutableFixture; expectedHash: unknown },
+) => MutableFixture;
 
 const sha = "a".repeat(40);
 const configFiles = [
@@ -28,7 +47,7 @@ const configFiles = [
   "next.config.mjs",
   "playwright.config.ts",
 ];
-const context = () => ({
+const context = (): MutableFixture => ({
   source: { sha, tree: "b".repeat(40), headSha: "c".repeat(40), baseSha: "d".repeat(40) },
   workflow: {
     repository: "gonzalomartinperez/portfolio",
@@ -47,16 +66,19 @@ const context = () => ({
   runtime: { node: "v24.22.0", platform: "linux", arch: "x64" },
   configuration: { files: configFiles.map((name) => ({ path: name, sha256: "f".repeat(64) })) },
 });
-function fixture(t) {
+function fixture(t: TestContext) {
   const directory = mkdtempSync(path.join(tmpdir(), "portfolio-provenance-test-"));
-  t.after(() => rmSync(directory, { recursive: true, force: true }));
+  t.onTestFinished(() => rmSync(directory, { recursive: true, force: true }));
   const archive = path.join(directory, "portfolio-production-build.tar.gz");
   const receipt = path.join(directory, "portfolio-build-provenance.json");
   writeFileSync(archive, gzipSync("synthetic owned archive bytes; no extraction"));
   return { directory, archive, receipt, context: context() };
 }
-const options = (f, hash) => ({ context: f.context, expectedHash: hash });
-function created(f) {
+const options = (f: ReturnType<typeof fixture>, hash: unknown) => ({
+  context: f.context,
+  expectedHash: hash,
+});
+function created(f: ReturnType<typeof fixture>) {
   return createProvenance(f.directory, { context: f.context });
 }
 
@@ -108,7 +130,7 @@ for (const [group, field, value] of [
   ["workflow", "runAttempt", "2"],
   ["workflow", "sha", "1".repeat(40)],
   ["workflow", "ref", "gonzalomartinperez/portfolio/.github/workflows/ci.yml@refs/heads/main"],
-])
+] as const)
   test(`consumer rejects mismatched ${group}.${field}`, (t) => {
     const f = fixture(t);
     const receipt = created(f);
@@ -138,7 +160,7 @@ for (const [group, field, value] of [
   ["runtime", "node", "v24.21.0"],
   ["runtime", "platform", "win32"],
   ["runtime", "arch", "arm64"],
-])
+] as const)
   test(`producer rejects invalid ${group}.${field} context`, (t) => {
     const f = fixture(t);
     f.context[group][field] = value;
@@ -150,28 +172,28 @@ test("receipt closed fields, bounds and unsafe types fail before acceptance", (t
   const receipt = created(f);
   const original = JSON.stringify(receipt);
   const mutations = [
-    (x) => {
+    (x: MutableFixture) => {
       x.unknown = "unreviewed";
     },
-    (x) => {
+    (x: MutableFixture) => {
       x.source.unknown = true;
     },
-    (x) => {
+    (x: MutableFixture) => {
       delete x.workflow;
     },
-    (x) => {
+    (x: MutableFixture) => {
       x.schemaVersion = "1";
     },
-    (x) => {
+    (x: MutableFixture) => {
       x.archive.bytes = true;
     },
-    (x) => {
+    (x: MutableFixture) => {
       x.archive.bytes += 1;
     },
-    (x) => {
+    (x: MutableFixture) => {
       x.archive.file = "../other.tar.gz";
     },
-    (x) => {
+    (x: MutableFixture) => {
       x.configuration.files.push({ path: "extra", sha256: "0".repeat(64) });
     },
   ];
@@ -295,22 +317,22 @@ test("CLI failures are generic and never echo arguments or subprocess diagnostic
 
 test("public provenance hashes and run identity reject trailing line breaks", () => {
   for (const mutate of [
-    (c) => {
+    (c: MutableFixture) => {
       c.source.sha += "\n";
     },
-    (c) => {
+    (c: MutableFixture) => {
       c.source.baseSha += "\n";
     },
-    (c) => {
+    (c: MutableFixture) => {
       c.workflow.sha += "\n";
     },
-    (c) => {
+    (c: MutableFixture) => {
       c.workflow.runId += "\n";
     },
-    (c) => {
+    (c: MutableFixture) => {
       c.workflow.ref += "\n";
     },
-    (c) => {
+    (c: MutableFixture) => {
       c.configuration.files[0].sha256 += "\n";
     },
   ]) {

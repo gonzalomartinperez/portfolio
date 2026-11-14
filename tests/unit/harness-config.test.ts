@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
 import { lstatSync, readdirSync, readFileSync, readlinkSync, realpathSync } from "node:fs";
 import path from "node:path";
-import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { test } from "vitest";
+import { repositoryFiles } from "../helpers/repository-fixture.ts";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const read = (file: string) => readFileSync(path.join(root, file), "utf8");
@@ -114,6 +114,7 @@ test("Codex uses an offline writable workspace with experimental hooks left comm
 });
 
 test("the shared harness files are tracked, not just present locally", () => {
+  const files = repositoryFiles(root);
   for (const file of [".codex/config.toml", ".claude/settings.json", ".mcp.json"])
-    execFileSync("git", ["ls-files", "--error-unmatch", file], { cwd: root, stdio: "ignore" });
+    assert.ok(files.includes(file), file);
 });

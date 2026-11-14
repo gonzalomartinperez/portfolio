@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { createExposureSession } from "../../src/features/analytics/application/exposure-session.ts";
 import type { ExposureIntent } from "../../src/features/analytics/domain/interactions.ts";
 

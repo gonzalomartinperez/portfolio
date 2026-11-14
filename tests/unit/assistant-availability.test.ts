@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { isAssistantEnabled } from "../../src/features/assistant/application/availability.ts";
 
 test("assistant rollout defaults to disabled and requires explicit activation", () => {

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { readSse, type StreamEvent } from "../../src/features/assistant/adapters/sse.ts";
 import { parseMessage } from "../../src/features/assistant/adapters/validate.ts";
 
