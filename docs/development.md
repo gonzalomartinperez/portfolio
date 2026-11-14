@@ -148,6 +148,11 @@ Biome to the hosting build or duplicate the full browser suite there. Preserve
 the full aggregate and protected branch checks; deployment evidence
 remains separate from CI, as described in [deployment](deployment.md).
 
+`compat-node26.yml` is a separate, non-blocking forward-compatibility signal: it runs the
+repository and content tests, the build and the smoke check on Node 26 (engines relaxed
+only there) on dependency PRs, pushes to `develop`, weekly and on demand. It is never a
+required check; `.nvmrc` and Hostinger stay on Node 24 until the host offers 26 (PF-D19).
+
 ## Agent entrypoints and skills
 
 Codex loads root `AGENTS.md` and discovers `.agents/skills/`. Claude Code loads

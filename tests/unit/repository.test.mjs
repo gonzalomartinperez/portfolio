@@ -260,3 +260,16 @@ test("source and build scans retain verified tooling and normalized transfers", 
   );
   assert.equal(commands["test:secrets:artifacts"], "node tools/secret-scan.mjs --artifacts");
 });
+
+test("the Node 26 compatibility job stays separate, read-only and non-blocking", () => {
+  const workflow = parseDocument(read(".github/workflows/compat-node26.yml")).toJS();
+  assert.deepEqual(workflow.permissions, {});
+  assert.deepEqual(Object.keys(workflow.jobs), ["node26"]);
+  const job = workflow.jobs.node26;
+  assert.deepEqual(job.permissions, { contents: "read" });
+  const setup = job.steps.find((step) => step.uses?.startsWith("actions/setup-node@"));
+  assert.equal(setup.with["node-version"], "26");
+  assert.match(read(".nvmrc"), /^24\./);
+  for (const file of ["ci.yml", "nightly.yml"])
+    assert.doesNotMatch(read(`.github/workflows/${file}`), /node26|Node 26/);
+});
