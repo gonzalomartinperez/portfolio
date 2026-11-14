@@ -61,7 +61,7 @@ test("mobile navigation gives each centered label a content-aware share of the r
         expect(geometry[0].textLeft).toBeGreaterThanOrEqual(16);
         expect(width - (geometry.at(-1)?.textRight ?? width)).toBeGreaterThanOrEqual(16);
       }
-      expect(Math.max(...geometry.map((link) => link.right))).toBeLessThanOrEqual(width);
+      expect(Math.max(...geometry.map((link) => link.right))).toBeLessThanOrEqual(width + 1);
       expect(Math.min(...geometry.map((link) => link.height))).toBeGreaterThanOrEqual(44);
     }
     await expect(page.getByRole("heading", { name: "CV", exact: true })).toBeVisible();

@@ -79,6 +79,11 @@ for (const locale of ["", "/es"]) {
             id,
             targets: nodes.map((node) => node.target),
           })),
+          `${url} in ${theme}: ${JSON.stringify(
+            result.violations.flatMap(({ nodes }) =>
+              nodes.slice(0, 3).map((node) => node.any.map((check) => check.data)),
+            ),
+          )}`,
         ).toEqual([]);
         const overflow = await page.evaluate(
           () => document.documentElement.scrollWidth > innerWidth + 1,
