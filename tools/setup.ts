@@ -9,7 +9,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const expected = readFileSync(new URL("../.nvmrc", import.meta.url), "utf8").trim();
   const actual = process.versions.node;
   if (!nodeMatchesNvmrc(actual, expected)) {
-    console.error(`Node.js ${actual} does not match .nvmrc (${expected}). Run nvm use first.`);
+    console.error(
+      `Node.js ${actual} does not match .nvmrc (${expected}). Use that version (nvm use, or the devcontainer).`,
+    );
     process.exitCode = 1;
   } else {
     console.log(`Node.js ${actual} matches .nvmrc (${expected}).`);

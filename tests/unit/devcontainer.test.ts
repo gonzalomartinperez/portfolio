@@ -19,7 +19,7 @@ test("devcontainer uses the CI browser image", () => {
 test("devcontainer Node tarball versions match .nvmrc for both architectures", () => {
   const urls = [
     ...read(".devcontainer/Dockerfile").matchAll(
-      /https:\/\/nodejs\.org\/dist\/v([\d.]+)\/node-v([\d.]+)-linux-(x64|arm64)\.tar\.xz/g,
+      /https:\/\/nodejs\.org\/dist\/v([\d.]+)\/node-v([\d.]+)-linux-(x64|arm64)\.tar\.gz/g,
     ),
   ];
   assert.deepEqual(urls.map((match) => match[3]).sort(), ["arm64", "x64"]);
@@ -31,7 +31,14 @@ test("devcontainer Node tarball versions match .nvmrc for both architectures", (
 
 test("devcontainer runs the registered setup command on creation", () => {
   const devcontainer = JSON.parse(read(".devcontainer/devcontainer.json"));
-  assert.equal(devcontainer.postCreateCommand, "npm run setup");
+  assert.match(devcontainer.postCreateCommand, /&& npm run setup$/);
+  assert.equal(devcontainer.remoteUser, "pwuser");
+  // node_modules lives in a named volume so npm ci never replaces a host install.
+  assert.ok(
+    devcontainer.mounts.some((mount: string) =>
+      /target=\/workspaces\/portfolio\/node_modules,type=volume/.test(mount),
+    ),
+  );
   assert.equal(
     manifest.scripts.setup,
     "node tools/setup.ts && npm ci --no-audit --no-fund && npm run check",

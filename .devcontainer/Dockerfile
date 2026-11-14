@@ -2,19 +2,23 @@ FROM mcr.microsoft.com/playwright:v1.64.1-noble@sha256:7852dc5a7d72f5fe458a597d6
 
 ARG TARGETARCH
 RUN set -eu; \
-    case "$TARGETARCH" in \
-      amd64) url=https://nodejs.org/dist/v24.22.0/node-v24.22.0-linux-x64.tar.xz; \
-        checksum=cc2f601cee82d9a5a233302fe307abc600727035fd7d2c3a3571755989e95008 ;; \
-      arm64) url=https://nodejs.org/dist/v24.22.0/node-v24.22.0-linux-arm64.tar.xz; \
-        checksum=fef00bb4d36e1c50104a9775a10359beee98f162b4104dd12472c75065c6a143 ;; \
-      *) echo "Unsupported TARGETARCH: $TARGETARCH" >&2; exit 1 ;; \
+    arch="${TARGETARCH:-$(dpkg --print-architecture)}"; \
+    case "$arch" in \
+      amd64) url=https://nodejs.org/dist/v24.22.0/node-v24.22.0-linux-x64.tar.gz; \
+        checksum=28ea0a438de9a13bd7891fd758eee6c7819ee8af5442dfd8d45bd65e56d4228c ;; \
+      arm64) url=https://nodejs.org/dist/v24.22.0/node-v24.22.0-linux-arm64.tar.gz; \
+        checksum=b7e7991d5407815adfa74a2a9cd4db683552c8ce32ff4a295c22e972849c3f5d ;; \
+      *) echo "Unsupported architecture: $arch" >&2; exit 1 ;; \
     esac; \
-    curl --fail --show-error --location "$url" --output /tmp/node.tar.xz; \
-    echo "$checksum  /tmp/node.tar.xz" | sha256sum --check; \
+    curl --fail --show-error --location "$url" --output /tmp/node.tar.gz; \
+    echo "$checksum  /tmp/node.tar.gz" | sha256sum --check; \
     mkdir -p /usr/local/node; \
-    tar -xJf /tmp/node.tar.xz -C /usr/local/node --strip-components=1; \
-    rm /tmp/node.tar.xz
+    tar -xzf /tmp/node.tar.gz -C /usr/local/node --strip-components=1; \
+    rm /tmp/node.tar.gz; \
+    # /usr/local/bin precedes the image's /usr/bin Node in every PATH, including login shells.
+    ln -sf /usr/local/node/bin/node /usr/local/node/bin/npm /usr/local/node/bin/npx /usr/local/bin/; \
+    # Pre-own the node_modules volume target so the named volume starts writable by pwuser.
+    mkdir -p /workspaces/portfolio/node_modules; \
+    chown -R pwuser:pwuser /workspaces
 
-# Override the Node runtime bundled in the Playwright image.
-ENV PATH="/usr/local/node/bin:${PATH}" \
-    NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=1

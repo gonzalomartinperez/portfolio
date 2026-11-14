@@ -25,7 +25,9 @@ grant permission to publish, spend money, access accounts, or change infrastruct
 
 Open the repository in the devcontainer to use the same Playwright image and Node.js
 version as CI. `npm run setup` runs on create to verify Node matches `.nvmrc`,
-install locked dependencies and run `npm run check`.
+install locked dependencies and run `npm run check`, so the first create takes a few
+minutes. `node_modules` lives in a named Docker volume, so the container never replaces a
+host install.
 
 ## Design and implementation
 
