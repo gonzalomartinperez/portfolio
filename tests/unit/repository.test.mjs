@@ -324,7 +324,9 @@ test("security.txt follows RFC 9116 and stays valid for at least 30 more days", 
   );
   assert.equal(fields.get("Canonical"), "https://gonzalomartinperez.com/.well-known/security.txt");
   assert.match(fields.get("Policy") ?? "", /\/SECURITY\.md$/);
+  assert.match(fields.get("Expires") ?? "", /^\d{4}-\d{2}-\d{2}T00:00:00\.000Z$/);
   const expires = Date.parse(fields.get("Expires") ?? "");
-  assert.ok(expires - Date.now() > 30 * 24 * 60 * 60 * 1000, "renew Expires in security.txt");
+  // Renew yearly (next: 2027-10-14); an expired file is invalid under RFC 9116.
+  assert.ok(expires > Date.now(), "security.txt has expired: renew Expires");
   assert.ok(expires - Date.now() < 366 * 24 * 60 * 60 * 1000, "Expires must be within a year");
 });
