@@ -5,6 +5,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readdirSync,
+  readlinkSync,
   realpathSync,
   rmSync,
   writeFileSync,
@@ -58,6 +59,18 @@ function git(root, args) {
   return result.stdout;
 }
 
+/**
+ * Claude skill entries are relative links to tracked canonical skills, whose files are scanned
+ * as regular tracked files; any other link still fails closed.
+ */
+export function isCanonicalSkillLink(relative, target) {
+  const name = relative
+    .split(path.sep)
+    .join("/")
+    .match(/^\.claude\/skills\/([a-z0-9-]+)$/)?.[1];
+  return Boolean(name) && target === `../../.agents/skills/${name}`;
+}
+
 function snapshotTrackedFiles(root, snapshot) {
   const files = git(root, ["ls-files", "--cached", "-z"]).split("\0").filter(Boolean);
   for (const file of new Set(files)) {
@@ -74,6 +87,7 @@ function snapshotTrackedFiles(root, snapshot) {
       if (error.code === "ENOENT") continue;
       throw new Error("Secret scan could not inspect a tracked file.");
     }
+    if (info.isSymbolicLink() && isCanonicalSkillLink(relative, readlinkSync(source))) continue;
     if (!info.isFile()) {
       throw new Error("Secret scan requires regular tracked files, not links or submodules.");
     }
