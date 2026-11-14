@@ -261,6 +261,34 @@ test("source and build scans retain verified tooling and normalized transfers", 
   assert.equal(commands["test:secrets:artifacts"], "node tools/secret-scan.mjs --artifacts");
 });
 
+test("the Node 26 compatibility job stays separate, read-only and non-blocking", () => {
+  const source = read(".github/workflows/compat-node26.yml");
+  const workflow = parseDocument(source).toJS();
+  assert.deepEqual(workflow.permissions, {});
+  assert.deepEqual(Object.keys(workflow.on).sort(), [
+    "pull_request",
+    "push",
+    "schedule",
+    "workflow_dispatch",
+  ]);
+  assert.deepEqual(Object.keys(workflow.jobs), ["node26"]);
+  const job = workflow.jobs.node26;
+  assert.deepEqual(job.permissions, { contents: "read" });
+  assert.equal(job.env.npm_config_engine_strict, "false");
+  assert.equal(job["runs-on"], "ubuntu-24.04");
+  const uses = job.steps.filter((step) => step.uses).map((step) => step.uses);
+  for (const action of uses) assert.match(action, /^[^@\s]+@[a-f\d]{40}$/);
+  const checkout = job.steps.find((step) => step.uses?.startsWith("actions/checkout@"));
+  assert.equal(checkout?.with?.["persist-credentials"], false);
+  const setup = job.steps.find((step) => step.uses?.startsWith("actions/setup-node@"));
+  assert.equal(setup?.with?.["node-version"], "26");
+  const runs = job.steps.map((step) => step.run ?? "").join("\n");
+  for (const command of [/npm run build/, /npm run test:smoke/]) assert.match(runs, command);
+  assert.match(read(".nvmrc"), /^24\./, "PF-D19: revisit compat-node26.yml when .nvmrc moves");
+  const gate = parseDocument(read(".github/workflows/ci.yml")).toJS().jobs.checks;
+  assert.ok(!gate.needs.includes("node26"));
+});
+
 test("branch policy accepts only bot-native and weekly grouped Dependabot branch names", () => {
   const source = read(".github/workflows/branch-policy.yml").match(
     /PR_AUTHOR === 'dependabot\[bot\]'[^\n]*\n\s*&& (\/\^dependabot[^\n]+\$\/)\.test/,
