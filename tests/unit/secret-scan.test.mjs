@@ -5,7 +5,11 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { historicalProvenanceExceptions, scanSecrets } from "../../tools/secret-scan.mjs";
+import {
+  historicalProvenanceExceptions,
+  isCanonicalSkillLink,
+  scanSecrets,
+} from "../../tools/secret-scan.mjs";
 
 const binary = process.env.GITLEAKS_BIN || "gitleaks";
 // Deliberately not a provider key. A test-only rule proves detection without credentials.
@@ -170,6 +174,21 @@ test("rejects a tracked symlink without scanning its untracked target", (t) => {
   symlinkSync(".env.local", path.join(root, "link.txt"));
   git(root, "add", "link.txt");
   assert.throws(() => scan(root), /regular tracked files/);
+});
+
+test("only exact canonical Claude skill links are exempt from the regular-file rule", () => {
+  assert.equal(
+    isCanonicalSkillLink(".claude/skills/review-change", "../../.agents/skills/review-change"),
+    true,
+  );
+  for (const [relative, target] of [
+    [".claude/skills/review-change", "../../.agents/skills/other"],
+    [".claude/skills/review-change", "/etc/passwd"],
+    [".claude/skills/review-change", "../../.env.local"],
+    [".claude/other/review-change", "../../.agents/skills/review-change"],
+    ["link.txt", ".env.local"],
+  ])
+    assert.equal(isCanonicalSkillLink(relative, target), false, `${relative} -> ${target}`);
 });
 
 test("a missing or wrong-version scanner cannot pass", (t) => {

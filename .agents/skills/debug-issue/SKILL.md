@@ -1,6 +1,10 @@
 ---
 name: debug-issue
-description: Reproduce and diagnose a portfolio defect, then fix it only when requested; use for failures, regressions, hydration errors, or build issues.
+description: Use when reproducing and diagnosing portfolio failures, regressions, hydration errors, or build issues; fix a defect only when requested. Not for general diff reviews or unsolicited fixes.
+metadata:
+  owner: gonzalomartinperez
+  last-reviewed: 2026-11-14
+  version: 1.0.0
 ---
 
 # Debug Issue

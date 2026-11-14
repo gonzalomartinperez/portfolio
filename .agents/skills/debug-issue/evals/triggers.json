@@ -1,0 +1,64 @@
+{
+  "queries": [
+    {
+      "query": "Diagnose why the Spanish homepage flashes on locale changes; do not fix it yet.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Reproduce the hydration error when toggling the portfolio theme.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Find the root cause of the broken CV download link in the local build.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Debug the regression where the gallery traps keyboard focus.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Diagnose the failing production build and apply the smallest requested fix.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Reproduce and fix the reduced-motion regression in the hero fallback.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Review the locale switcher diff for possible correctness issues; no reported failure.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Review the theme toggle changes for accessibility without editing files.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Inspect the CV card PR for security and maintainability findings.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Plan keyboard behavior for a gallery that has not been built yet.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Implement the approved hero fallback feature from its specification.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Verify the completed build fix and prepare a handoff summary.",
+      "should_trigger": false,
+      "split": "validation"
+    }
+  ]
+}

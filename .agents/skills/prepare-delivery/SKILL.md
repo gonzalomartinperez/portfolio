@@ -1,6 +1,10 @@
 ---
 name: prepare-delivery
-description: Verify a portfolio change for handoff and prepare a Conventional Commit; commit or push only when the user explicitly authorizes those actions.
+description: Use when verifying a portfolio change for handoff and preparing a Conventional Commit; commit or push only with explicit user authorization. Not for standalone diff reviews or unauthorized publishing.
+metadata:
+  owner: gonzalomartinperez
+  last-reviewed: 2026-11-14
+  version: 1.0.0
 ---
 
 # Prepare Delivery

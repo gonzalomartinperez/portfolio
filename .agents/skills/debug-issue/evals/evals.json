@@ -1,0 +1,28 @@
+{
+  "evals": [
+    {
+      "prompt": "Diagnose why the Spanish homepage flashes after locale changes; diagnosis only.",
+      "assertions": [
+        "Attempts a reproducible case and records observed evidence.",
+        "Separates verified root cause from hypotheses.",
+        "Does not apply an unsolicited fix."
+      ]
+    },
+    {
+      "prompt": "Reproduce and fix the gallery keyboard focus regression.",
+      "assertions": [
+        "Establishes the failing keyboard interaction before changing behavior.",
+        "Makes a focused correction within the authorized scope.",
+        "Runs relevant regression and repository checks and reports limitations."
+      ]
+    },
+    {
+      "prompt": "The local production build fails after the theme refactor. Diagnose only; network is off.",
+      "assertions": [
+        "Inspects available local evidence without installing dependencies.",
+        "Reports the failing condition and supported cause or remaining uncertainty.",
+        "Preserves diagnosis-only authority and does not claim blocked checks passed."
+      ]
+    }
+  ]
+}

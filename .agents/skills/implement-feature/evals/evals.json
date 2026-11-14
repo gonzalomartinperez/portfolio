@@ -1,0 +1,28 @@
+{
+  "evals": [
+    {
+      "prompt": "Implement the approved bilingual comparison section; use existing reviewed project content.",
+      "assertions": [
+        "Implements the requested vertical slice using existing public content.",
+        "Preserves English and Spanish behavior and keyboard access.",
+        "Reports relevant verification without committing or pushing."
+      ]
+    },
+    {
+      "prompt": "Refactor the theme-aware CV card per the accepted spec without adding dependencies.",
+      "assertions": [
+        "Keeps the refactor within the specified card scope.",
+        "Uses existing UI primitives and preserves download links.",
+        "Runs relevant checks and reports any blocked verification."
+      ]
+    },
+    {
+      "prompt": "Implement the approved gallery filter in the existing module layout.",
+      "assertions": [
+        "Chooses ownership according to the module contract.",
+        "Keeps client state limited to the interactive filter.",
+        "Verifies relevant behavior and architecture without changing unrelated modules."
+      ]
+    }
+  ]
+}
