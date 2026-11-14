@@ -17,7 +17,7 @@ path,layer,kind,lines,target_path,target_layer,action,reason
 .env.example,root,config,5,.env.example,root,keep,Unchanged
 .gitattributes,root,config,2,.gitattributes,root,keep,Unchanged
 .github/dependabot.yml,ci,config,40,.github/dependabot.yml,ci,rewrite,"multi-ecosystem-groups, one weekly PR, Monday 09:00 ART (ecosystem 5.2); today 3+2+3 PR slots"
-.github/pull_request_template.md,ci,template,32,.github/pull_request_template.md,ci,modify,"Ecosystem PR template (summary, issue, evidence, docs touched, agent-docs, risk, rollback, screenshots)"
+.github/PULL_REQUEST_TEMPLATE.md,ci,template,32,.github/PULL_REQUEST_TEMPLATE.md,ci,modify,"Ecosystem PR template (summary, issue, evidence, docs touched, agent-docs, risk, rollback, screenshots)"
 .github/workflows/branch-policy.yml,ci,workflow,38,(classify job in ci.yml),ci,merge,Route and title check moves into the pull_request classify job; removes the pull_request_target trigger (zizmor); see PF-D20
 .github/workflows/ci.yml,ci,workflow,366,.github/workflows/ci.yml,ci,rewrite,"classify job plus profiles, shared reusable workflows, ci-gate (ecosystem 6.0); existing job logic ported"
 .github/workflows/dependency-policy.yml,ci,workflow,53,.github/workflows/ci.yml (deps-weekly profile),ci,merge,Becomes the deps-weekly profile plus deps-weekly-guard

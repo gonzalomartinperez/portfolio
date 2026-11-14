@@ -376,7 +376,7 @@ updated without giving the public build access to private sources.
 | [Initial release spec](docs/specs/portfolio-initial-release.md) | Scope, acceptance criteria, and decisions |
 | [Research note](docs/research/portfolio-2026-09-12.md) | Sources behind those decisions, including the weak ones |
 | [Contributing](CONTRIBUTING.md) | Reproducible setup, focused checks, review and coordination |
-| [Security policy](SECURITY.md) | Private vulnerability reporting and safe evidence handling |
+| [Security policy](SECURITY.md) | Private vulnerability reporting through GitHub; [repository handling](docs/security-handling.md) covers safe evidence and exposure |
 | [Development guide](docs/development.md) | Code conventions, SDD, branches, agents, and review |
 | [Code-quality standard](docs/code-quality.md) | Readable code, necessary comments, useful API documentation |
 | [Editorial guidelines](docs/editorial-guidelines.md) | Natural bilingual copy, evidence-aware claims, technology and brand presentation |

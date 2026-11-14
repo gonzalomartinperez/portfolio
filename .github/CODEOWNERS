@@ -1,0 +1,19 @@
+# Ownership map from the engineering-standards CODEOWNERS pattern (single maintainer).
+# Later rules win; keep the catch-all first.
+
+*                         @gonzalomartinperez
+
+# Supply chain and automation
+/.github/                 @gonzalomartinperez
+/.github/workflows/       @gonzalomartinperez
+/.github/dependabot.yml   @gonzalomartinperez
+/standards.lock           @gonzalomartinperez
+
+# Agent harness
+/AGENTS.md                @gonzalomartinperez
+/CLAUDE.md                @gonzalomartinperez
+/.claude/                 @gonzalomartinperez
+/.agents/                 @gonzalomartinperez
+
+# Contracts
+/contracts/               @gonzalomartinperez
