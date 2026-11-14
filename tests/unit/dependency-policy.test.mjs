@@ -349,7 +349,7 @@ function visibleProtection() {
             requiresConversationResolution: true,
             requiresApprovingReviews: true,
             requiredApprovingReviewCount: 0,
-            requiredStatusChecks: ["Required checks", "Branch policy"].map((context) => ({
+            requiredStatusChecks: ["ci-gate"].map((context) => ({
               context,
               app: { databaseId: 15368 },
             })),

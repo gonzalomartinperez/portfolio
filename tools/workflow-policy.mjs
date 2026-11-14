@@ -15,7 +15,6 @@ const CORE_NAMES = {
   hosting: "Hosting contract",
   browser: `Browser tests (\${{ matrix.shard }}/8)`,
   performance: "Performance checks",
-  checks: "Required checks",
 };
 const NIGHTLY_NAMES = {
   prepare: "Nightly prepare candidate",
@@ -169,9 +168,7 @@ export function validateWorkflowPolicy(source, { profile } = {}) {
     return ["Workflow must define a jobs mapping"];
   const prerequisites = profile === "core" ? CORE : NIGHTLY;
   const expectedIds =
-    profile === "core"
-      ? ["classify", "policy", ...CORE, "ci-gate", "checks"]
-      : [...NIGHTLY, "checks"];
+    profile === "core" ? ["classify", "policy", ...CORE, "ci-gate"] : [...NIGHTLY, "checks"];
   if (!sameSet(Object.keys(workflow.jobs), expectedIds))
     errors.push(`${profile}: expected job IDs ${expectedIds.join(", ")}`);
   if (profile === "core" ? workflow.name !== "CI" : workflow.name !== "Nightly") {
@@ -341,17 +338,8 @@ export function validateWorkflowPolicy(source, { profile } = {}) {
       `${profile}: browser must run exactly eight shards, max-parallel 8, fail-fast false`,
     );
   }
-  if (isRecord(workflow.jobs.checks)) {
-    inspectGate(
-      workflow,
-      workflow.jobs.checks,
-      profile === "core" ? ["ci-gate"] : prerequisites,
-      `${profile}.checks`,
-      errors,
-    );
-    if (profile === "core" && workflow.jobs.checks.steps?.length !== 1)
-      errors.push("core.checks: alias must contain exactly one result gate step");
-  }
+  if (profile === "nightly" && isRecord(workflow.jobs.checks))
+    inspectGate(workflow, workflow.jobs.checks, prerequisites, "nightly.checks", errors);
   if (profile === "core") inspectCoreGate(workflow.jobs, errors);
   return errors;
 }
