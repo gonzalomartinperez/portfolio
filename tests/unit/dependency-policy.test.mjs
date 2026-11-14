@@ -157,6 +157,9 @@ test("frameworks, unknown tools, installed code and new or removed direct packag
 test("identity requires exact same-repository bot, base and complete verified commit/file scope", () => {
   const valid = metadata();
   assert.equal(identityReason(valid.pr, valid.commits, valid.files, revision("b")), null);
+  const grouped = metadata();
+  grouped.pr.head.ref = "dependabot/develop/weekly_all-92543d3f2a";
+  assert.equal(identityReason(grouped.pr, grouped.commits, grouped.files, revision("b")), null);
   for (const mutate of [
     (input) => {
       input.pr.user = { ...bot, id: 2 };
@@ -169,6 +172,15 @@ test("identity requires exact same-repository bot, base and complete verified co
     },
     (input) => {
       input.pr.head.ref = "dependabot/github_actions/group";
+    },
+    (input) => {
+      input.pr.head.ref = "dependabot/develop/weekly_all-";
+    },
+    (input) => {
+      input.pr.head.ref = "dependabot/develop/other-group-abc123";
+    },
+    (input) => {
+      input.pr.head.ref = "xdependabot/develop/weekly_all-abc123";
     },
     (input) => {
       input.pr.draft = true;
