@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { clickCell } from "../../src/features/analytics/domain/click-grid.ts";
 
 test("coarse public cells are invariant under translation and proportional layout changes", () => {

@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
-import test from "node:test";
+import { test } from "vitest";
 import {
   appliedIntegrationEvidenceLabel,
   catalogueOnlyTechnologies,
   compareTechnologyNames,
   getStackGroups,
-  getTechnology,
+  getTechnology as getTechnologyById,
   highlightedTechnologyCatalog,
   publicTechnologyCatalog,
   publicTechnologyExclusions,
@@ -15,7 +15,10 @@ import {
 } from "../../content/technologies.ts";
 import { getSceneMarkIdentity } from "../../src/features/hero/domain/scene-technologies.ts";
 
-const read = (file) => readFileSync(new URL(`../../${file}`, import.meta.url), "utf8");
+const getTechnology = (id: string) =>
+  getTechnologyById(id) as NonNullable<ReturnType<typeof getTechnologyById>>;
+
+const read = (file: string) => readFileSync(new URL(`../../${file}`, import.meta.url), "utf8");
 
 test("confirmed AI concepts retain general evidence without inventing an employer", () => {
   for (const id of [
@@ -49,7 +52,7 @@ test("MongoDB has confirmed Teamcubation evidence in both experience translation
     getTechnology("mongodb")?.evidence.map(({ href }) => href),
     ["/work#teamcubation"],
   );
-  for (const locale of ["en", "es"]) {
+  for (const locale of ["en", "es"] as const) {
     const experience = read(`content/${locale}/experience.ts`);
     const teamcubation = experience.split('slug: "teamcubation"')[1]?.split("slug:")[0];
     assert.ok(teamcubation?.includes('"MongoDB"'), locale);
@@ -297,7 +300,7 @@ test("owner-confirmed Rampy technologies are restored with their inventory scope
   const fineTuning = getTechnology("fine-tuning");
   assert.ok(publicTechnologyCatalog.includes(fineTuning));
   assert.ok(!fineTuning.evidence.some(({ href }) => href?.includes("rampy")));
-  for (const locale of ["en", "es"]) {
+  for (const locale of ["en", "es"] as const) {
     const rampy = read(`content/${locale}/experience.ts`).split('slug: "teamcubation"')[0];
     for (const name of ["PyTorch", "TensorFlow", "NumPy", "pandas", "Fine-tuning"])
       assert.ok(!rampy.includes(name), `${locale}: ${name} is not Rampy headline tech`);
@@ -307,7 +310,7 @@ test("owner-confirmed Rampy technologies are restored with their inventory scope
 
 test("catalogue preserves category priority and sorts technology names alphabetically", () => {
   const original = technologyCatalog.map(({ id }) => id);
-  for (const locale of ["en", "es"]) {
+  for (const locale of ["en", "es"] as const) {
     const groups = getStackGroups(locale);
     assert.deepEqual(
       groups.map(({ id }) => id),
@@ -363,12 +366,12 @@ test("technology identifiers, categories and evidence remain complete", () => {
       assert.match(href, /^\/(?:work(?:#[a-z0-9-]+|\/filomena|\/pequeverso)?|about)$/);
       if (href.includes("#")) {
         const slug = href.split("#")[1];
-        for (const locale of ["en", "es"])
+        for (const locale of ["en", "es"] as const)
           assert.ok(read(`content/${locale}/experience.ts`).includes(`slug: "${slug}"`));
       }
     }
   }
-  for (const locale of ["en", "es"])
+  for (const locale of ["en", "es"] as const)
     assert.deepEqual(
       getStackGroups(locale)
         .flatMap(({ items }) => items)

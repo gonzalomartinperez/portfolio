@@ -2,13 +2,13 @@ import assert from "node:assert/strict";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import test from "node:test";
+import { test } from "vitest";
 import { AssistantBudgetPlugin } from "../../tools/assistant-budget-plugin.ts";
 
 test("assistant budget follows owned chunks and distinguishes deferred from initial assets", (context) => {
   const directory = mkdtempSync(path.join(tmpdir(), "portfolio-assistant-budget-"));
   mkdirSync(path.join(directory, ".next"));
-  context.after(() => rmSync(directory, { recursive: true, force: true }));
+  context.onTestFinished(() => rmSync(directory, { recursive: true, force: true }));
   for (const initial of [false, true]) {
     const chunk = {
       files: ["static/chunks/assistant.js", "static/css/assistant.css"],

@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import test from "node:test";
+import { test } from "vitest";
 import { freezeCandidate, writeCandidateOutput } from "../../tools/nightly-candidate.mjs";
 
 const source = "a".repeat(40);
@@ -16,9 +16,9 @@ const manual = {
   candidateSha: source,
   candidateRef: "develop",
 };
-function fixture(overrides = {}) {
-  const calls = [];
-  const git = (args) => {
+function fixture(overrides: Record<string, string | Error | undefined> = {}) {
+  const calls: string[][] = [];
+  const git = (args: string[]) => {
     calls.push(args);
     const command = args.join(" ");
     if (Object.hasOwn(overrides, command)) {
@@ -130,8 +130,8 @@ test("Git failures do not disclose arbitrary child-process output", () => {
   assert.throws(
     () => freezeCandidate(manual, git),
     (error) => {
-      assert.match(error.message, /Nightly candidate/);
-      assert.ok(!error.message.includes("SYNTHETIC_PRIVATE_ERROR"));
+      assert.match((error as Error).message, /Nightly candidate/);
+      assert.ok(!(error as Error).message.includes("SYNTHETIC_PRIVATE_ERROR"));
       return true;
     },
   );
@@ -159,7 +159,7 @@ test("GitHub outputs contain only validated immutable public hashes", () => {
 
 test("actual Git history accepts an ancestor and rejects an unrelated candidate", () => {
   const directory = mkdtempSync(path.join(os.tmpdir(), "portfolio-candidate-git-"));
-  const git = (args) =>
+  const git = (args: string[]) =>
     execFileSync("git", ["-c", "core.hooksPath=/dev/null", ...args], {
       cwd: directory,
       encoding: "utf8",

@@ -18,3 +18,5 @@ Thumbs.db
 .codex/*
 !.codex/config.toml
 CLAUDE.local.md
+.stryker-tmp/
+reports/mutation/

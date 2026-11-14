@@ -59,6 +59,14 @@ and the relevant section of the [public-content contract](public-content.md).
 ## Verification
 
 Run `npm ci` after dependency changes, then `npm run check` and `git diff --check`.
+
+Unit tests use Vitest 5 in Node with explicit imports and a 60-second timeout.
+Run `npm run test:unit` (or `npx vitest run`) for all unit tests; the existing
+`test:*` scripts retain their focused file groups. Production integration tests
+are separate: after `npm run build`, run `npm run test:budget` and
+`npm run test:rendered` with `vitest.integration.config.ts`. The default Vitest
+configuration discovers only unit tests. Playwright keeps browser and rollout tests.
+
 `check` starts with `test:architecture`: negative fixtures and a complete parsed
 source dependency audit. It also covers repository invariants, lint, formatting of Biome-supported files,
 and one build with mandatory TypeScript validation;

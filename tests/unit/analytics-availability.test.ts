@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { isAnalyticsEnabled } from "../../src/features/analytics/application/availability.ts";
 
 test("product analytics requires its own explicit activation", () => {

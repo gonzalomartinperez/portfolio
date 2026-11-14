@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
   existsSync,
@@ -10,32 +9,24 @@ import {
   realpathSync,
 } from "node:fs";
 import path from "node:path";
-import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { test } from "vitest";
 import { parseDocument } from "yaml";
+import { repositoryFiles } from "../helpers/repository-fixture.ts";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
-const read = (file) => readFileSync(path.join(root, file), "utf8");
-const files = execFileSync(
-  "git",
-  ["ls-files", "-z", "--cached", "--others", "--exclude-standard"],
-  {
-    cwd: root,
-    encoding: "utf8",
-  },
-)
-  .split("\0")
-  .filter((file) => file && existsSync(path.join(root, file)));
+const read = (file: string) => readFileSync(path.join(root, file), "utf8");
+const files = () => repositoryFiles(root);
 
 test("source text is valid UTF-8", () => {
   const decoder = new TextDecoder("utf-8", { fatal: true });
-  for (const file of files.filter((name) => /\.(md|json|yml|yaml|mjs|ts|tsx|css)$/.test(name))) {
+  for (const file of files().filter((name) => /\.(md|json|yml|yaml|mjs|ts|tsx|css)$/.test(name))) {
     assert.doesNotThrow(() => decoder.decode(readFileSync(path.join(root, file))), file);
   }
 });
 
 test("inline Markdown file links resolve", () => {
-  for (const file of files.filter((name) => name.endsWith(".md"))) {
+  for (const file of files().filter((name) => name.endsWith(".md"))) {
     for (const match of read(file).matchAll(/\]\(([^\s)]+)\)/g)) {
       const target = match[1].split("#")[0];
       if (!target || /^[a-z][a-z\d+.-]*:/i.test(target)) continue;
@@ -86,7 +77,7 @@ test("software licensing preserves the MIT text, metadata and separate content s
 });
 
 test("Claude skill symlinks preserve canonical metadata and targets", () => {
-  const directories = (base) =>
+  const directories = (base: string) =>
     readdirSync(path.join(root, base), { withFileTypes: true })
       .filter((entry) => entry.isDirectory() || entry.isSymbolicLink())
       .map((entry) => entry.name)
@@ -96,7 +87,7 @@ test("Claude skill symlinks preserve canonical metadata and targets", () => {
   for (const name of names) {
     const canonical = `.agents/skills/${name}/SKILL.md`;
     const adapter = `.claude/skills/${name}/SKILL.md`;
-    const metadata = (file) => {
+    const metadata = (file: string) => {
       const content = read(file).replaceAll("\r\n", "\n");
       const frontmatter = content.match(/^---\n([\s\S]*?)\n---/);
       assert.ok(frontmatter, `${file}: missing frontmatter`);
@@ -144,6 +135,8 @@ test("paired CI preserves enabled QA, disabled hosting and immutable browser run
   );
   const browser = jobs.get("browser");
   const hosting = jobs.get("hosting");
+  assert.ok(browser);
+  assert.ok(hosting);
   assert.match(workflow, /ASSISTANT_ENABLED: "true"/);
   assert.match(workflow, /ANALYTICS_ENABLED: "true"/);
   assert.match(hosting, /ASSISTANT_ENABLED: "false"/);
@@ -198,7 +191,7 @@ test("architecture enforcement remains in the mandatory development check", () =
   );
   assert.equal(
     manifest.scripts["test:architecture"],
-    "node --test tests/unit/architecture.test.mjs && node tools/architecture.mjs",
+    "vitest run tests/unit/architecture.test.ts && node tools/architecture.mjs",
   );
   assert.match(read(".github/workflows/ci.yml"), /run: npm run check/);
 });
@@ -208,7 +201,7 @@ test("direct toolchain versions are reproducible and aligned with the lockfile",
   const lock = JSON.parse(read("package-lock.json"));
   for (const group of ["dependencies", "devDependencies"]) {
     assert.deepEqual(manifest[group], lock.packages[""][group]);
-    for (const [name, version] of Object.entries(manifest[group])) {
+    for (const [name, version] of Object.entries(manifest[group] as Record<string, string>)) {
       assert.match(version, /^\d+\.\d+\.\d+$/, `Pin a stable exact version: ${name}`);
       assert.equal(lock.packages[`node_modules/${name}`].version, version, name);
     }
@@ -260,7 +253,7 @@ test("source and build scans retain verified tooling and normalized transfers", 
   const commands = JSON.parse(read("package.json")).scripts;
   assert.equal(
     commands["test:secrets"],
-    "node --test tests/unit/secret-scan.test.mjs && node tools/secret-scan.mjs",
+    "vitest run tests/unit/secret-scan.test.ts && node tools/secret-scan.mjs",
   );
   assert.equal(commands["test:secrets:artifacts"], "node tools/secret-scan.mjs --artifacts");
 });
@@ -280,13 +273,19 @@ test("the Node 26 compatibility job stays separate, read-only and non-blocking",
   assert.deepEqual(job.permissions, { contents: "read" });
   assert.equal(job.env.npm_config_engine_strict, "false");
   assert.equal(job["runs-on"], "ubuntu-24.04");
-  const uses = job.steps.filter((step) => step.uses).map((step) => step.uses);
+  const uses = job.steps
+    .filter((step: { uses?: string }) => step.uses)
+    .map((step: { uses: string }) => step.uses);
   for (const action of uses) assert.match(action, /^[^@\s]+@[a-f\d]{40}$/);
-  const checkout = job.steps.find((step) => step.uses?.startsWith("actions/checkout@"));
+  const checkout = job.steps.find((step: { uses?: string }) =>
+    step.uses?.startsWith("actions/checkout@"),
+  );
   assert.equal(checkout?.with?.["persist-credentials"], false);
-  const setup = job.steps.find((step) => step.uses?.startsWith("actions/setup-node@"));
+  const setup = job.steps.find((step: { uses?: string }) =>
+    step.uses?.startsWith("actions/setup-node@"),
+  );
   assert.equal(setup?.with?.["node-version"], "26");
-  const runs = job.steps.map((step) => step.run ?? "").join("\n");
+  const runs = job.steps.map((step: { run?: string }) => step.run ?? "").join("\n");
   for (const command of [/npm run build/, /npm run test:smoke/]) assert.match(runs, command);
   assert.match(read(".nvmrc"), /^24\./, "PF-D19: revisit compat-node26.yml when .nvmrc moves");
   const gate = parseDocument(read(".github/workflows/ci.yml")).toJS().jobs["ci-gate"];
@@ -322,7 +321,7 @@ test("security.txt follows RFC 9116 and stays valid for at least 30 more days", 
     read("public/.well-known/security.txt")
       .trim()
       .split("\n")
-      .map((line) => line.split(/: (.*)/s).slice(0, 2)),
+      .map((line) => line.split(/: ([\s\S]*)/).slice(0, 2) as [string, string]),
   );
   assert.equal(
     fields.get("Contact"),
@@ -344,7 +343,9 @@ test("standards caller workflows stay pinned, least-privilege and gate-aware", (
     const workflow = parseDocument(source).toJS();
     assert.deepEqual(workflow.permissions, {}, file);
     assert.equal(Object.hasOwn(workflow.on, "pull_request_target"), false, file);
-    for (const [id, job] of Object.entries(workflow.jobs)) {
+    for (const [id, job] of Object.entries(
+      workflow.jobs as Record<string, { uses: string; permissions: Record<string, string> }>,
+    )) {
       assert.match(
         job.uses,
         new RegExp(
@@ -367,10 +368,15 @@ test("installs never run dependency lifecycle scripts and engines stay strict", 
     .map((line) => line.trim());
   for (const setting of ["ignore-scripts=true", "engine-strict=true", "save-exact=true"])
     assert.ok(npmrc.includes(setting), setting);
-  // Allow-list of packages that genuinely need an install script (run explicitly): empty today.
-  const allowed = new Set([]);
+  // Allow-list of packages that declare an install script. `ignore-scripts=true` still blocks
+  // them; fsevents is a macOS-only optional dependency of Vitest's bundler and is never built here.
+  const allowed = new Set<string>(["fsevents"]);
   const scripted = ["package-lock.json", "tools/api-contract/package-lock.json"]
-    .flatMap((file) => Object.entries(JSON.parse(read(file)).packages))
+    .flatMap((file) =>
+      Object.entries(
+        JSON.parse(read(file)).packages as Record<string, { hasInstallScript?: boolean }>,
+      ),
+    )
     .filter(([, entry]) => entry.hasInstallScript)
     .map(([name]) => name.replace(/^.*node_modules\//, ""));
   assert.deepEqual(

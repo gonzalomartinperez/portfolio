@@ -2,11 +2,13 @@ import assert from "node:assert/strict";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import test from "node:test";
+import { test } from "vitest";
 import { auditArchitecture, readArchitectureSources } from "../../tools/architecture.mjs";
 
-const audit = (sources) => auditArchitecture(new Map(Object.entries(sources)));
-const rejects = (sources, reason) => assert.match(audit(sources).join("\n"), reason);
+const audit = (sources: Record<string, string | null>) =>
+  auditArchitecture(new Map(Object.entries(sources)));
+const rejects = (sources: Record<string, string | null>, reason: RegExp) =>
+  assert.match(audit(sources).join("\n"), reason);
 
 test("flat feature code cannot escape the ownership and entrypoint contract", () => {
   for (const file of ["hidden.ts", "hidden.tsx", "hidden.mjs", "hidden.d.ts"]) {

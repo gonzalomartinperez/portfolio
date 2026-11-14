@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { createMeasurementBudget } from "../../src/features/analytics/application/measurement-budget.ts";
 
 test("optional measurements are capped in a sliding minute with an exclusive expiry edge", () => {

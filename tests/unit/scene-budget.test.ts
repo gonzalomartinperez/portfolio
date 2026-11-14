@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import test from "node:test";
+import { test } from "vitest";
 import {
   buildConstellation,
   buildStaticLayers,
@@ -24,16 +24,19 @@ test("static scene batches every deterministic square without changing its posit
   assert.ok(layers.every((layer, index) => index === 0 || layer.depth > layers[index - 1].depth));
 });
 
+type Chunk = { files: string[]; groupsIterable?: Group[]; canBeInitial: () => boolean };
+type Group = { chunks: Chunk[]; childrenIterable: Group[] };
+
 test("scene budget counts shared vendors once across both deferred scenes", () => {
   const directory = mkdtempSync(path.join(tmpdir(), "portfolio-budget-"));
   mkdirSync(path.join(directory, ".next"));
   try {
-    const scene = {
+    const scene: Chunk & { groupsIterable: Group[] } = {
       files: ["static/chunks/scene.js"],
       groupsIterable: [],
       canBeInitial: () => false,
     };
-    const solar = {
+    const solar: Chunk & { groupsIterable: Group[] } = {
       files: ["static/chunks/solar.js"],
       groupsIterable: [],
       canBeInitial: () => false,
@@ -45,22 +48,23 @@ test("scene budget counts shared vendors once across both deferred scenes", () =
       childrenIterable: [{ chunks: [nested], childrenIterable: [] }],
     });
     solar.groupsIterable.push({ chunks: [solar, vendor], childrenIterable: [] });
-    let callback;
+    let callback: ((stats: unknown) => void) | undefined;
     new SceneBudgetPlugin().apply({
       context: directory,
       hooks: {
         done: {
-          tap: (_name, value) => {
+          tap: (_name: string, value: (stats: unknown) => void) => {
             callback = value;
           },
         },
       },
     });
+    assert.ok(callback);
     callback({
       compilation: {
         chunks: [scene, solar, vendor],
         chunkGraph: {
-          getChunkModulesIterable: (chunk) => {
+          getChunkModulesIterable: (chunk: Chunk) => {
             if (chunk === scene)
               return [
                 {

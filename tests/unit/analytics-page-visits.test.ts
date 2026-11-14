@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { createPageVisits } from "../../src/features/analytics/application/page-visits.ts";
 import type { PageContext } from "../../src/features/analytics/domain/events.ts";
 

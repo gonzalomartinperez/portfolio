@@ -2,12 +2,17 @@ import assert from "node:assert/strict";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import test from "node:test";
-import { transferBuild } from "../../tools/ci-build-artifact.mjs";
+import { type TestContext, test } from "vitest";
+import { transferBuild as transferBuildJs } from "../../tools/ci-build-artifact.mjs";
 
-function fixture(t) {
+const transferBuild = transferBuildJs as (options: {
+  root: string;
+  mode: "prepare" | "restore";
+}) => void;
+
+function fixture(t: TestContext) {
   const root = mkdtempSync(path.join(tmpdir(), "portfolio-ci-transfer-test-"));
-  t.after(() => rmSync(root, { recursive: true, force: true }));
+  t.onTestFinished(() => rmSync(root, { recursive: true, force: true }));
   const directory = path.join(root, ".next");
   mkdirSync(path.join(directory, "server"), { recursive: true });
   mkdirSync(path.join(directory, "static"));
@@ -17,8 +22,9 @@ function fixture(t) {
     previewModeEncryptionKey: "c".repeat(64),
   };
   const actions = { node: {}, edge: {}, encryptionKey: Buffer.alloc(32, 7).toString("base64") };
-  const write = (name, value) => writeFileSync(path.join(directory, name), JSON.stringify(value));
-  const read = (name) => JSON.parse(readFileSync(path.join(directory, name), "utf8"));
+  const write = (name: string, value: unknown) =>
+    writeFileSync(path.join(directory, name), JSON.stringify(value));
+  const read = (name: string) => JSON.parse(readFileSync(path.join(directory, name), "utf8"));
   write("prerender-manifest.json", { version: 4, routes: { "/": {} }, preview });
   write("server/preview-props.json", preview);
   write("server/server-reference-manifest.json", actions);
