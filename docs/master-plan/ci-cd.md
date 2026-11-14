@@ -96,7 +96,7 @@ Repo specifics: the `@types/node` major ignore and the `typescript` major ignore
 
 | Step | Standard here |
 |---|---|
-| Versioning | Conventional Commits, SemVer, `CHANGELOG.md` by release-please (manifest mode) against `develop`; `docs/release-history.md` content seeded into the changelog once (PF-M1-6; E5 sandbox first) |
+| Versioning | Conventional Commits, SemVer, `VERSION` plus `CHANGELOG.md` (Keep a Changelog); a version-bump PR on `develop` and `release.yml` on `main` that tags `vX.Y.Z` and creates the GitHub Release (OD-78, no release-please; [ADR](../adr/release-automation.md)); `docs/release-history.md` seeded into the changelog once (PF-M1-6) |
 | Promotion | `develop` to `main` PR only at M7 (no hotfix before M7; OD-11, DR-01); `release` profile green; merge commit; tag `vX.Y.Z` and an immutable GitHub Release created by workflow on `main` (assets: SBOM) |
 | Deploy | Hostinger autodeploys `main`; one deploy per release; the post-deploy workflow reads `/build-info.json` (merge SHA, build time) and fails if it does not equal the release SHA; a merged PR and green CI do not prove deployment |
 | Rollback | Revert PR to `main` (hotfix rule: only with explicit owner authorization) or redeploy the previous tag in hPanel; no image digests |

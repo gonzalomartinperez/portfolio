@@ -289,6 +289,8 @@ Both branches require PRs, an up-to-date green `ci-gate` (which includes the
 and branch deletion are blocked, including for administrators. Do not push locally created merge commits
 to either branch. Use GitHub PR merge commits; squash and rebase merging are disabled
 to preserve the ancestry of repeated develop-to-main releases. Retain both branches.
+Versions follow `VERSION` and `CHANGELOG.md`; a version-bump PR on `develop` prepares a release and
+`.github/workflows/release.yml` tags it on `main` ([ADR](adr/release-automation.md)).
 Merge the latest target into the task branch to resolve conflicts; never reset a
 shared branch. If develop needs main's latest merge commit, integrate it through a
 sync task branch and PR into develop.
