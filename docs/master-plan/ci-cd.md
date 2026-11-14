@@ -1,6 +1,6 @@
 # CI/CD
 
-Part of the [master plan](README.md). Applies [ecosystem.md](ecosystem.md) sections 3, 5, 6, 7 and 8 to this repository. Draft path map: [ci-profile.json](ci-profile.json). Sources: research [05](research/05-cicd-supply-chain.md), [11](research/11-containers-dynamic-ci.md), [04](research/04-testing.md).
+Part of the [master plan](README.md). Applies [ecosystem.md](ecosystem.md) sections 3, 5, 6, 7 and 8 to this repository. Draft path map: [ci-profile.json](../../.github/ci-profile.json). Sources: research [05](research/05-cicd-supply-chain.md), [11](research/11-containers-dynamic-ci.md), [04](research/04-testing.md).
 
 ## 1. Today
 
@@ -18,7 +18,7 @@ classify (<= 30 s: changed files, branch, labels -> profile) -> ci-gate (always,
   mutation-incremental (changed files, parallel, <= 8 min, PF-D30)
 ```
 
-Profiles (ecosystem 6.0) map to [ci-profile.json](ci-profile.json): `docs` (markdownlint, lychee, Vale EN, skills validator, README heading check, secret scan; p50 <= 2 min), `deps-weekly`, `code` (default; p50 <= 5 min, p95 <= 10 min), `contract`, `workflow`, `release` (p50 <= 30 min), `hotfix`. `assistant-quality` does not exist in this repo (no prompts, retrieval or graders). Rules: job-level `if:` driven by `classify` outputs, never workflow-level `paths:` on workflows that supply required checks; the plan script is the 15-line `engineering-standards` script (no third-party action), outputs ALL on any error or on a file outside every group; `ci-gate` is `if: always()`, `needs` every job, passes only on `success` or `skipped` where the profile says not applicable. A unit test (`tests/unit/ci-profile.test.ts`) asserts every tracked path matches a group and every job maps to a profile.
+Profiles (ecosystem 6.0) map to [ci-profile.json](../../.github/ci-profile.json): `docs` (markdownlint, lychee, Vale EN, skills validator, README heading check, secret scan; p50 <= 2 min), `deps-weekly`, `code` (default; p50 <= 5 min, p95 <= 10 min), `contract`, `workflow`, `release` (p50 <= 30 min), `hotfix`. `assistant-quality` does not exist in this repo (no prompts, retrieval or graders). Rules: job-level `if:` driven by `classify` outputs, never workflow-level `paths:` on workflows that supply required checks; the plan script is the 15-line `engineering-standards` script (no third-party action), outputs ALL on any error or on a file outside every group; `ci-gate` is `if: always()`, `needs` every job, passes only on `success` or `skipped` where the profile says not applicable. A unit test (`tests/unit/ci-profile.test.ts`) asserts every tracked path matches a group and every job maps to a profile.
 
 PR checks that today run in full become conditional: browser shards drop from 8 full to the tagged PR set (Chromium + iPhone WebKit; sharded by measured time only if over budget); Firefox, WebKit desktop, Pixel, visual-all, Lighthouse-all, full mutation, flake detection and ZAP move to nightly and release. The branch-route and PR-title checks move into `classify` on the `pull_request` event (PF-D20), removing the `pull_request_target` workflow.
 

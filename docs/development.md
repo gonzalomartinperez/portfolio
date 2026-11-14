@@ -74,14 +74,22 @@ per runner, all six actual projects, unchanged test deadlines and fail-on-flaky
 behavior. New tests enter discovery automatically; the planner verifies each list
 and their exact disjoint union rather than enforcing a fixed count.
 
-`Required checks` requires all seven Core responsibilities to succeed, including
-the whole browser matrix. It is the protected aggregate; `Quality checks` is the
-source-quality prerequisite. The aggregate was added alongside the old full gate
-on both branches after phase A passed. Phase B removed the forwarding job; the
-old required context was retired after that phase passed with the new full
-aggregate still enforced. Both branches now require Required checks and Branch
-policy under strict mode; Quality checks remains a source-quality prerequisite. See the [paired CI specification](specs/paired-ci-profiles.md).
-Skipped, failed or cancelled constituents fail the aggregate.
+CI runs by profile. The first job calls the pinned engineering-standards `classify`
+workflow, which reads the PR's changed files, branch and labels and applies
+[`.github/ci-profile.json`](../.github/ci-profile.json): every PR runs the branch policy,
+secret scan and source-quality job; code and contract changes add the build, Rocky 8
+hosting, browser and performance jobs; hosting-only files add the Rocky 8 job; workflow
+changes run everything.
+Pushes, merge groups, manual runs, Dependabot and release PRs, a change to the profile map,
+a diff error or a file outside every profile run everything (fail closed).
+`tests/unit/ci-profile.test.ts` keeps every tracked file inside a profile and every job
+mapped to one.
+
+`ci-gate` is the single aggregate: it needs every job, fails on any failure or
+cancellation, and fails when a job that classify selected was skipped. Jobs the
+profile does not select pass as not applicable. `Required checks` (an alias that needs
+`ci-gate`) and the in-workflow `Branch policy` job keep the classic protection contexts
+green until the standard ruleset requires `ci-gate` only.
 
 Nightly freezes an exact existing commit reachable from main or develop before
 execution. An empty manual SHA uses the workflow event SHA; the selected ref
@@ -264,10 +272,14 @@ GitHub automatically deletes task branches after merging. Protected `main` and
 integrated and its worktree is clean, then use non-forced branch deletion. Never
 delete another contributor's unmerged work or remove an active worktree.
 
-The branch-policy workflow runs from the trusted base via `pull_request_target`,
-reads PR metadata only, and has no checkout, dependency installation, or secrets.
-Do not add PR code execution to it. An invalid PR can still be opened, but its check
-fails and blocks merging. CI separately tests PR code with read-only permissions.
+The `Branch policy` job in CI reads PR metadata only and has no checkout, dependency
+installation, secrets or token permissions; the former `pull_request_target` workflow
+is gone (PF-D20). An invalid PR can still be opened, but its check fails and blocks
+merging. CI separately tests PR code with read-only permissions. Accepted trade-off: like
+every `pull_request` workflow, a PR can edit its own `ci.yml` or profile map, so the route
+check and job selection are no longer evaluated from the trusted base. CODEOWNERS on
+`.github/`, the required review chain and `tests/unit/ci-profile.test.ts` (which pins the
+job inventory and runs on every PR) cover it.
 
 No second-person approval is required for this solo repository, but the PR and
 required checks remain mandatory. Hosting configuration and branch protection are

@@ -19,5 +19,4 @@ jobs:
       issues: write
       checks: read
     with:
-      # Until PF-M1-2 renames the aggregate to ci-gate.
-      gate-check-name: Required checks
+      gate-check-name: ci-gate

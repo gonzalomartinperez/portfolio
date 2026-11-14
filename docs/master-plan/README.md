@@ -143,7 +143,7 @@ The owner delegated every repo decision on 2026-11-09 ("resolve them yourself"),
 | [assistant-widget.md](assistant-widget.md) | Assistant widget: launcher, panel, streaming, accessibility, tokens, events, tests (shared standard, per-site identity) |
 | [assistant-experience.md](assistant-experience.md) | Assistant experience v2: performance, grounding, rich blocks contract, web access policy, opt-in memory, harness, evals, rollout |
 | [testing.md](testing.md) | Test catalog mapped to this repo, thresholds, cadence, flake policy |
-| [ci-cd.md](ci-cd.md), [ci-profile.json](ci-profile.json) | CI profiles, budgets, security, Dependabot, release, containers |
+| [ci-cd.md](ci-cd.md), [ci-profile.json](../../.github/ci-profile.json) | CI profiles, budgets, security, Dependabot, release, containers |
 | [file-index.csv](file-index.csv), [file-moves.md](file-moves.md) | Every tracked file and its destination; every move with motive |
 | [standards.md](standards.md) | Style guide choice and enforcement |
 | [docs-and-community.md](docs-and-community.md) | README outline, community files, Diataxis, C4 |

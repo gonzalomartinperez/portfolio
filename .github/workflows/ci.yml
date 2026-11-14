@@ -6,17 +6,19 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
+    types: [opened, synchronize, reopened, labeled, unlabeled, edited]
+  merge_group:
 
-permissions:
-  contents: read
+permissions: {}
 
 defaults:
   run:
     shell: bash
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # PRs: one run per ref, newer pushes cancel older runs. Other events: one group per commit.
+  group: ci-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   NEXT_TELEMETRY_DISABLED: "1"
@@ -30,8 +32,54 @@ env:
   CI_BASE_SHA: ${{ github.event.pull_request.base.sha || '' }}
 
 jobs:
+  classify:
+    uses: gonzalomartinperez/engineering-standards/.github/workflows/classify.yml@1f33be46bcb95f42f550f74608bc679cae5575ad # v1.0.0
+    permissions:
+      contents: read
+      pull-requests: read
+
+  policy:
+    name: Branch policy
+    needs: classify
+    if: contains(fromJSON(needs.classify.outputs.jobs), 'policy')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    permissions: {}
+    steps:
+      # Event metadata only; no checkout. Replaces the former pull_request_target workflow (PF-D20).
+      - name: Validate pull request route
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
+          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          node <<'NODE'
+          const { EVENT_NAME, BASE_BRANCH, HEAD_BRANCH, HEAD_REPOSITORY, REPOSITORY, PR_AUTHOR } = process.env;
+          if (EVENT_NAME !== 'pull_request') {
+            console.log(`No pull request route to check on ${EVENT_NAME}.`);
+            process.exit(0);
+          }
+          const release = BASE_BRANCH === 'main' && HEAD_BRANCH === 'develop'
+            && HEAD_REPOSITORY === REPOSITORY;
+          const standard = /^(feat|fix|chore|docs|refactor|perf|test|ci|build|revert)\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(HEAD_BRANCH ?? '');
+          const dependabot = PR_AUTHOR === 'dependabot[bot]' && HEAD_REPOSITORY === REPOSITORY
+            && /^dependabot\/(?:(?:npm_and_yarn|github_actions)\/[a-zA-Z0-9._/-]+|develop\/weekly(?:_all)?-[a-f0-9]+)$/.test(HEAD_BRANCH ?? '');
+          const task = BASE_BRANCH === 'develop' && (standard || dependabot);
+          if (!release && !task) {
+            throw new Error('Use a standard type/kebab-case task PR into develop, then same-repository develop into main.');
+          }
+          console.log('Pull request route accepted.');
+          NODE
+
   workflows:
     name: Workflow validation
+    needs: [classify]
+    if: contains(fromJSON(needs.classify.outputs.jobs), 'workflows')
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -62,6 +110,10 @@ jobs:
 
   secrets:
     name: Secret scan
+    needs: [classify]
+    if: contains(fromJSON(needs.classify.outputs.jobs), 'secrets')
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -93,6 +145,10 @@ jobs:
 
   quality:
     name: Quality checks
+    needs: [classify]
+    if: contains(fromJSON(needs.classify.outputs.jobs), 'quality')
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -126,7 +182,10 @@ jobs:
 
   build:
     name: Build
-    needs: quality
+    needs: [classify, quality]
+    if: contains(fromJSON(needs.classify.outputs.jobs), 'build')
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     outputs:
@@ -187,7 +246,10 @@ jobs:
 
   hosting:
     name: Hosting contract
-    needs: quality
+    needs: [classify, quality]
+    if: contains(fromJSON(needs.classify.outputs.jobs), 'hosting')
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     container:
@@ -234,7 +296,10 @@ jobs:
 
   browser:
     name: Browser tests (${{ matrix.shard }}/8)
-    needs: build
+    needs: [classify, build]
+    if: contains(fromJSON(needs.classify.outputs.jobs), 'browser')
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     container:
@@ -301,7 +366,10 @@ jobs:
 
   performance:
     name: Performance checks
-    needs: build
+    needs: [classify, build]
+    if: contains(fromJSON(needs.classify.outputs.jobs), 'performance')
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
@@ -340,27 +408,30 @@ jobs:
       - name: Verify tracked sources remain unchanged
         run: git diff --exit-code
 
+  ci-gate:
+    name: ci-gate
+    if: always()
+    needs: [classify, policy, workflows, secrets, quality, build, hosting, browser, performance]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    permissions: {}
+    steps:
+      - name: Aggregate every job result (fail closed)
+        uses: gonzalomartinperez/engineering-standards/actions/ci-gate@1f33be46bcb95f42f550f74608bc679cae5575ad # v1.0.0
+        with:
+          needs: ${{ toJSON(needs) }}
+          expected: ${{ needs.classify.outputs.jobs }}
+
+  # Transitional alias for the classic protection context; removed once the ruleset requires ci-gate.
   checks:
     name: Required checks
     if: always()
-    needs: [workflows, secrets, quality, build, hosting, browser, performance]
+    needs: [ci-gate]
     runs-on: ubuntu-24.04
     timeout-minutes: 2
+    permissions: {}
     steps:
-      - name: Require every prerequisite to succeed
+      - name: Require the aggregate gate to succeed
         env:
-          WORKFLOWS_RESULT: ${{ needs.workflows.result }}
-          SECRETS_RESULT: ${{ needs.secrets.result }}
-          QUALITY_RESULT: ${{ needs.quality.result }}
-          BUILD_RESULT: ${{ needs.build.result }}
-          HOSTING_RESULT: ${{ needs.hosting.result }}
-          BROWSER_RESULT: ${{ needs.browser.result }}
-          PERFORMANCE_RESULT: ${{ needs.performance.result }}
-        run: |
-          test "$WORKFLOWS_RESULT" = success &&
-          test "$SECRETS_RESULT" = success &&
-          test "$QUALITY_RESULT" = success &&
-          test "$BUILD_RESULT" = success &&
-          test "$HOSTING_RESULT" = success &&
-          test "$BROWSER_RESULT" = success &&
-          test "$PERFORMANCE_RESULT" = success
+          CI_GATE_RESULT: ${{ needs.ci-gate.result }}
+        run: test "$CI_GATE_RESULT" = success
