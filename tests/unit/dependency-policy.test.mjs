@@ -454,6 +454,12 @@ test("the weekly group config follows the standard and the assessment stays loca
       ["github-actions", "/"],
     ],
   );
+  assert.deepEqual(config.updates[0].ignore, [
+    { "dependency-name": "@types/node", "update-types": ["version-update:semver-major"] },
+  ]);
+  assert.deepEqual(config.updates[1].ignore, [
+    { "dependency-name": "typescript", "update-types": ["version-update:semver-major"] },
+  ]);
   for (const entry of config.updates) {
     assert.equal(entry["multi-ecosystem-group"], "weekly");
     assert.deepEqual(entry.patterns, ["*"]);

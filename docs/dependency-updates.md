@@ -23,16 +23,20 @@ dependency, never a second Dependabot PR.
 
 | Workflow | Purpose |
 |---|---|
-| `deps-weekly-guard.yml` | Monday 10:30 ART and on Dependabot PR events: keeps only the newest weekly group PR, keeps it current with `develop`, and flags a red one in the tracking issue (no mentions) |
+| `deps-weekly-guard.yml` | Monday 10:30 ART and on demand: keeps only the newest weekly group PR, records whether it is behind `develop` (the rebase comment stays off), and labels a red one `needs-fix` in the tracking issue (no mentions) |
 | `vuln-daily.yml` | Daily osv scan: edits one pinned `vuln` tracking issue silently; only the Monday run posts the weekly summary (OD-75) |
 | `drift.yml` | Fails when a byte-matched standard file or the Dependabot shape drifts from `standards.lock` |
 
 All three call reusable workflows from `engineering-standards`, pinned by commit SHA with the
-release tag as a comment. Dependabot bumps those pins with the weekly group.
+release tag as a comment. Dependabot bumps those pins with the weekly group. Dependabot settings
+and scheduled runs take effect from the default branch (`main`), so they go live with the M7
+release; until then run the workflows manually on `develop` (see the ADR).
 
 ## Local assessment
 
-`tools/dependency-policy.mjs` is a read-only classifier that never installs or executes PR code.
+`tools/dependency-policy.mjs` is a read-only classifier that never installs or executes PR code;
+no workflow runs it, so an operator runs `GITHUB_TOKEN=<read token> node tools/dependency-policy.mjs`
+locally when wanted.
 It flags only exact stable patch bumps of the development-only `@types/react` and
 `@types/react-dom` as a narrow review candidate; everything else, including any added, removed
 or transitive change, stays manual. A candidate still needs the same review and exact-head CI.

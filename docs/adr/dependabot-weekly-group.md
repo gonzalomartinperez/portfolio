@@ -39,7 +39,13 @@ live; semver cooldown keys are rejected outside package ecosystems.
 
 ## Consequences
 
-Renaming the group from `weekly-all` to `weekly` means the next run may open a `weekly-<hex>`
-PR while the older `weekly_all-<hex>` PR is open; the guard closes the older one. The branch
-policy accepts both names until no `weekly_all` PR remains. Until the in-place refresh is
-observed, the owner closes a stale weekly PR to get a fresh complete one.
+- Dependabot reads its configuration, and GitHub runs scheduled workflows, only from the default
+  branch. `main` changes only at the M7 release (OD-11), so until then the live configuration
+  stays the older `weekly-all` group and the guard, daily and drift schedules do not fire; run
+  them manually on `develop` (`workflow_dispatch`) when needed. Drift also runs on every PR.
+- When the M7 release reaches `main`, the renamed group opens a `weekly-<hex>` PR. The pinned
+  guard matches only `weekly-<hex>`, so it does not close an open `weekly_all-<hex>` PR: close it
+  as part of the M7 release checklist. The branch policy accepts both names until then.
+- Dependabot-triggered runs get a read-only token, so the guard has no `pull_request` trigger;
+  it runs on the Monday schedule and on demand. Until the in-place refresh is observed, the owner
+  closes a stale weekly PR to get a fresh complete one.
