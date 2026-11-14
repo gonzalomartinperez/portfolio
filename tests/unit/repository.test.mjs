@@ -285,7 +285,7 @@ test("the Node 26 compatibility job stays separate, read-only and non-blocking",
   const runs = job.steps.map((step) => step.run ?? "").join("\n");
   for (const command of [/npm run build/, /npm run test:smoke/]) assert.match(runs, command);
   assert.match(read(".nvmrc"), /^24\./, "PF-D19: revisit compat-node26.yml when .nvmrc moves");
-  const gate = parseDocument(read(".github/workflows/ci.yml")).toJS().jobs.checks;
+  const gate = parseDocument(read(".github/workflows/ci.yml")).toJS().jobs["ci-gate"];
   assert.ok(!gate.needs.includes("node26"));
 });
 

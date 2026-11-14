@@ -70,7 +70,7 @@ function fixture(profile = "core") {
     "max-parallel": 8,
     matrix: { shard: [1, 2, 3, 4, 5, 6, 7, 8] },
   };
-  jobs.checks = gate(profile === "core" ? "Required checks" : NIGHTLY_NAMES.checks, prerequisites);
+  if (profile === "nightly") jobs.checks = gate(NIGHTLY_NAMES.checks, prerequisites);
   if (profile === "core") {
     jobs.classify = {
       uses: `gonzalomartinperez/engineering-standards/.github/workflows/classify.yml@${SHA}`,
@@ -99,7 +99,6 @@ function fixture(profile = "core") {
         },
       ],
     };
-    jobs.checks = { ...gate("Required checks", ["ci-gate"]), permissions: {} };
   }
   return {
     name: profile === "core" ? "CI" : "Nightly",
@@ -138,6 +137,9 @@ for (const profile of ["core", "nightly"]) {
   test(`${profile} accepts the complete declared dependency and result contract`, () => {
     assert.deepEqual(validate(fixture(profile), profile), []);
   });
+}
+// The run-step result gate grammar now applies to the nightly aggregate only.
+for (const profile of ["nightly"]) {
   reject(
     `${profile} rejects an omitted aggregate prerequisite`,
     (w) => w.jobs.checks.needs.pop(),
@@ -179,7 +181,7 @@ for (const profile of ["core", "nightly"]) {
   reject(
     `${profile} rejects a literal result replacing the real job outcome`,
     (w) => {
-      const variable = profile === "core" ? "CI_GATE_RESULT" : "QUALITY_RESULT";
+      const variable = "QUALITY_RESULT";
       w.jobs.checks.steps[0].env[variable] = "success";
     },
     /must read needs\.(quality|ci-gate)\.result/,
@@ -365,6 +367,7 @@ reject(
     w.jobs.checks.steps[0].shell = "bash {0} || true";
   },
   /plain bash or sh/,
+  "nightly",
 );
 reject(
   "OR and exit-zero suffixes cannot bypass a gate",
@@ -372,20 +375,23 @@ reject(
     w.jobs.checks.steps[0].run += " || true";
   },
   /only literal success tests/,
+  "nightly",
 );
 reject(
   "a repeated result test cannot stand in for an omitted result",
   (w) => {
-    w.jobs.checks.steps[0].run += ' && test "$CI_GATE_RESULT" = success';
+    w.jobs.checks.steps[0].run += ' && test "$QUALITY_RESULT" = success';
   },
   /every prerequisite must be tested/,
+  "nightly",
 );
 reject(
   "result variable expressions must point to their own job",
   (w) => {
-    w.jobs.checks.steps[0].env.CI_GATE_RESULT = `\${{ needs.quality.result }}`;
+    w.jobs.checks.steps[0].env.QUALITY_RESULT = `\${{ needs.browser.result }}`;
   },
-  /must read needs.ci-gate.result/,
+  /must read needs.quality.result/,
+  "nightly",
 );
 reject(
   "dependency cycles are rejected before GitHub evaluates the workflow",
@@ -407,6 +413,7 @@ reject(
     w.jobs.checks.steps = [null];
   },
   /step must be a mapping/,
+  "nightly",
 );
 
 test("duplicate YAML job keys cannot overwrite a required job", () => {
@@ -417,9 +424,10 @@ test("duplicate YAML job keys cannot overwrite a required job", () => {
 });
 test("duplicate YAML keys inside the gate cannot hide its actual condition", () => {
   const source = stringify(fixture()).replace(
-    /( {4}name: Required checks\n) {4}if: [^\n]+/,
+    /( {4}name: ci-gate\n) {4}if: [^\n]+/,
     `$1    if: false\n    if: "\${{ always() }}"`,
   );
+  assert.notEqual(source, stringify(fixture()), "the fixture must contain the gate condition");
   assert.ok(
     validateWorkflowPolicy(source, { profile: "core" }).some((error) => /Invalid YAML/.test(error)),
   );
@@ -535,9 +543,10 @@ reject(
 reject(
   "plain result reference text cannot replace an evaluated expression",
   (w) => {
-    w.jobs.checks.steps[0].env.CI_GATE_RESULT = "needs.ci-gate.result";
+    w.jobs.checks.steps[0].env.QUALITY_RESULT = "needs.quality.result";
   },
-  /must read needs.ci-gate.result/,
+  /must read needs.quality.result/,
+  "nightly",
 );
 test("YAML aliases cannot hide shared job definitions", () => {
   const source = `${stringify(fixture()).replace("contents: read", "contents: &mode read")}\nignored: *mode\n`;
@@ -696,7 +705,7 @@ reject(
   },
   /unconditionally/,
 );
-for (const id of ["ci-gate", "checks"]) {
+for (const id of ["ci-gate"]) {
   reject(
     `${id} cannot contain extra steps`,
     (w) => {
@@ -724,7 +733,7 @@ reject(
 reject(
   "core preserves the required check identity",
   (w) => {
-    w.jobs.checks.name = "Renamed checks";
+    w.jobs["ci-gate"].name = "Renamed gate";
   },
   /expected check name/,
 );

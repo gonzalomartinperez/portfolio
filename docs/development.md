@@ -87,9 +87,10 @@ mapped to one.
 
 `ci-gate` is the single aggregate: it needs every job, fails on any failure or
 cancellation, and fails when a job that classify selected was skipped. Jobs the
-profile does not select pass as not applicable. `Required checks` (an alias that needs
-`ci-gate`) and the in-workflow `Branch policy` job keep the classic protection contexts
-green until the standard ruleset requires `ci-gate` only.
+profile does not select pass as not applicable. It is the only required check: the
+`standard-develop` and `standard-main` rulesets (applied by the engineering-standards
+script) require PRs, `ci-gate` on an up-to-date head, resolved conversations and merge
+commits, and block deletion and force pushes for everyone.
 
 Nightly freezes an exact existing commit reachable from main or develop before
 execution. An empty manual SHA uses the workflow event SHA; the selected ref
@@ -258,9 +259,9 @@ retired `weekly_all-<hash>` name while an older group PR stays open).
 branch connected to Hostinger. Only same-repository `develop` is a valid PR source
 for `main`. Dependabot targets `develop` as well.
 
-Both branches require PRs, up-to-date quality checks, the `Branch policy` check,
-and resolved review conversations. Direct pushes, force-pushes, and branch deletion
-are blocked, including for administrators. Do not push locally created merge commits
+Both branches require PRs, an up-to-date green `ci-gate` (which includes the
+`Branch policy` job) and resolved review conversations. Direct pushes, force-pushes,
+and branch deletion are blocked, including for administrators. Do not push locally created merge commits
 to either branch. Use GitHub PR merge commits; squash and rebase merging are disabled
 to preserve the ancestry of repeated develop-to-main releases. Retain both branches.
 Merge the latest target into the task branch to resolve conflicts; never reset a
