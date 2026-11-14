@@ -1,0 +1,22 @@
+# Weekly dependency PR guard (ecosystem 5.3, OD-75), from the engineering-standards template.
+# No pull_request trigger: Dependabot-triggered runs get a read-only token, so the close and
+# comment calls would fail; the scheduled and manual runs have the write token.
+name: deps-weekly-guard
+
+on:
+  schedule:
+    - cron: "30 13 * * 1" # Monday 10:30 America/Argentina/Buenos_Aires (UTC-3, no DST)
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  guard:
+    uses: gonzalomartinperez/engineering-standards/.github/workflows/deps-weekly-guard.yml@1f33be46bcb95f42f550f74608bc679cae5575ad # v1.0.0
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      checks: read
+    with:
+      gate-check-name: ci-gate

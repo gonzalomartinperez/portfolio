@@ -99,3 +99,37 @@ test("full profiles stay built in", () => {
   for (const name of ["deps-weekly", "release", "hotfix"])
     assert.deepEqual(config.profiles[name]?.adds, ["all-profiles"]);
 });
+
+test("the job inventory per profile is pinned, so a PR cannot quietly empty it", () => {
+  const full = ["quality", "build", "hosting", "browser", "performance"];
+  assert.deepEqual(config.base, ["policy", "secrets", "quality"]);
+  assert.deepEqual(
+    Object.fromEntries(
+      Object.entries(config.profiles)
+        .filter(([, profile]) => profile.paths)
+        .map(([name, profile]) => [name, profile.adds]),
+    ),
+    {
+      docs: ["quality"],
+      code: full,
+      hosting: ["quality", "hosting"],
+      contract: full,
+      workflow: ["workflows", ...full],
+      harness: ["quality"],
+    },
+  );
+});
+
+test("every selection is closed under the ci.yml needs graph", () => {
+  const needsOf = (id: string) => {
+    const needs = jobs[id]?.needs ?? [];
+    return (typeof needs === "string" ? [needs] : needs).filter((need) => need !== "classify");
+  };
+  for (const [name, profile] of Object.entries(config.profiles)) {
+    const selected = new Set([...config.base, ...(profile.adds ?? [])]);
+    if (selected.has("all-profiles")) continue;
+    for (const id of selected)
+      for (const need of needsOf(id))
+        assert.ok(selected.has(need), `${name}: ${id} needs ${need}, which is not selected`);
+  }
+});

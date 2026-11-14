@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/gonzalomartinperez/engineering-standards/v1.0.0/schemas/ci-profile.schema.json",
   "$comment": "Read by the engineering-standards classify workflow. Every tracked file must match a profile (tests/unit/ci-profile.test.ts); a file outside every profile, a diff error or a change to this file runs everything. push, schedule, workflow_dispatch and merge_group always run everything.",
   "version": 1,
-  "base": ["policy", "secrets"],
+  "base": ["policy", "secrets", "quality"],
   "profiles": {
     "docs": {
       "paths": [
@@ -43,7 +43,7 @@
         ".devcontainer/**",
         "standards.lock"
       ],
-      "adds": ["quality", "build", "browser", "performance"],
+      "adds": ["quality", "build", "hosting", "browser", "performance"],
       "budgetP50Minutes": 5,
       "budgetP95Minutes": 10
     },
@@ -65,7 +65,7 @@
     },
     "contract": {
       "paths": ["contracts/**", "tools/api-contract/**", "tools/check-assistant-contract.mjs"],
-      "adds": ["quality", "build", "browser", "performance"],
+      "adds": ["quality", "build", "hosting", "browser", "performance"],
       "budgetP50Minutes": 7,
       "budgetP95Minutes": 12
     },

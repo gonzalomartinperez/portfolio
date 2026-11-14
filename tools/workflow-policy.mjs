@@ -239,8 +239,8 @@ export function validateWorkflowPolicy(source, { profile } = {}) {
       continue;
     }
     if (profile === "core" && id === "classify") {
-      if ("name" in job || "steps" in job || "if" in job || "needs" in job)
-        errors.push("classify: reusable call must not declare name, steps, if or needs");
+      if (!sameSet(Object.keys(job), ["uses", "permissions"]))
+        errors.push("classify: reusable call must declare only uses and permissions");
     } else if (typeof job.name !== "string" || !job.name.trim())
       errors.push(`${id}: job requires a literal check name`);
     else {
@@ -358,8 +358,8 @@ export function validateWorkflowPolicy(source, { profile } = {}) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const args = process.argv.slice(2);
-  if (args.some((arg) => arg !== "--phase=B")) {
-    console.error("Usage: node tools/workflow-policy.mjs [--phase=B]");
+  if (args.length) {
+    console.error("Usage: node tools/workflow-policy.mjs");
     process.exitCode = 1;
   } else {
     for (const [profile, file] of [

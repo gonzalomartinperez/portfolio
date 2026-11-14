@@ -76,9 +76,10 @@ and their exact disjoint union rather than enforcing a fixed count.
 
 CI runs by profile. The first job calls the pinned engineering-standards `classify`
 workflow, which reads the PR's changed files, branch and labels and applies
-[`.github/ci-profile.json`](../.github/ci-profile.json): docs-only changes run the branch
-policy, secret scan and source-quality job; code changes add the build, browser and
-performance jobs; hosting files add the Rocky 8 job; workflow changes run everything.
+[`.github/ci-profile.json`](../.github/ci-profile.json): every PR runs the branch policy,
+secret scan and source-quality job; code and contract changes add the build, Rocky 8
+hosting, browser and performance jobs; hosting-only files add the Rocky 8 job; workflow
+changes run everything.
 Pushes, merge groups, manual runs, Dependabot and release PRs, a change to the profile map,
 a diff error or a file outside every profile run everything (fail closed).
 `tests/unit/ci-profile.test.ts` keeps every tracked file inside a profile and every job
@@ -251,7 +252,8 @@ Start task branches from updated `develop`; use `feat/`, `fix/`, `chore/`, `docs
 kebab-case description, for example `feat/project-gallery`. The policy checks this
 pattern for task PRs. Only same-repository Dependabot-authored PRs may use the bot's
 native `dependabot/npm_and_yarn/` or `dependabot/github_actions/` naming format, or the
-`dependabot/develop/weekly_all-<hash>` name of the weekly multi-ecosystem group PR.
+`dependabot/develop/weekly-<hash>` name of the weekly multi-ecosystem group PR (and the
+retired `weekly_all-<hash>` name while an older group PR stays open).
 `develop` is the integration branch, while `main` is the production
 branch connected to Hostinger. Only same-repository `develop` is a valid PR source
 for `main`. Dependabot targets `develop` as well.
@@ -273,7 +275,11 @@ delete another contributor's unmerged work or remove an active worktree.
 The `Branch policy` job in CI reads PR metadata only and has no checkout, dependency
 installation, secrets or token permissions; the former `pull_request_target` workflow
 is gone (PF-D20). An invalid PR can still be opened, but its check fails and blocks
-merging. CI separately tests PR code with read-only permissions.
+merging. CI separately tests PR code with read-only permissions. Accepted trade-off: like
+every `pull_request` workflow, a PR can edit its own `ci.yml` or profile map, so the route
+check and job selection are no longer evaluated from the trusted base. CODEOWNERS on
+`.github/`, the required review chain and `tests/unit/ci-profile.test.ts` (which pins the
+job inventory and runs on every PR) cover it.
 
 No second-person approval is required for this solo repository, but the PR and
 required checks remain mandatory. Hosting configuration and branch protection are

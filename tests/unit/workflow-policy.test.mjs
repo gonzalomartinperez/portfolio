@@ -187,6 +187,16 @@ for (const profile of ["core", "nightly"]) {
   );
 }
 
+test("the classify call cannot take inputs that redirect its profile map", () => {
+  const workflow = fixture();
+  workflow.jobs.classify.with = { "config-path": "docs/other.json" };
+  assert.ok(
+    validate(workflow).some((error) =>
+      /classify: reusable call must declare only uses/.test(error),
+    ),
+  );
+});
+
 test("core ignores the retired migration phase option", () => {
   for (const phase of ["A", "B"]) assert.deepEqual(validate(fixture(), "core", phase), []);
 });
@@ -695,13 +705,13 @@ for (const id of ["ci-gate", "checks"]) {
     /exactly one/,
   );
 }
-for (const key of ["name", "steps", "if", "needs"]) {
+for (const key of ["name", "steps", "if", "needs", "with", "secrets"]) {
   reject(
     `classify cannot declare ${key}`,
     (w) => {
       w.jobs.classify[key] = key === "steps" ? [] : "unexpected";
     },
-    /reusable call must not declare/,
+    /reusable call must declare only uses and permissions/,
   );
 }
 reject(
