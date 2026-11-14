@@ -421,17 +421,3 @@ jobs:
         with:
           needs: ${{ toJSON(needs) }}
           expected: ${{ needs.classify.outputs.jobs }}
-
-  # Transitional alias for the classic protection context; removed once the ruleset requires ci-gate.
-  checks:
-    name: Required checks
-    if: always()
-    needs: [ci-gate]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 2
-    permissions: {}
-    steps:
-      - name: Require the aggregate gate to succeed
-        env:
-          CI_GATE_RESULT: ${{ needs.ci-gate.result }}
-        run: test "$CI_GATE_RESULT" = success

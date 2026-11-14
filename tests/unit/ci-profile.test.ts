@@ -12,7 +12,7 @@ const root = new URL("../../", import.meta.url);
 const read = (file: string) => readFileSync(new URL(file, root), "utf8");
 const config: ProfileMap = JSON.parse(read(".github/ci-profile.json"));
 const jobs: Record<string, Job> = parseDocument(read(".github/workflows/ci.yml")).toJS().jobs;
-const gateOnly = new Set(["classify", "ci-gate", "checks"]);
+const gateOnly = new Set(["classify", "ci-gate"]);
 
 /** Same glob semantics as the engineering-standards classify workflow (v1.0.0). */
 function globToRegExp(pattern: string): RegExp {
@@ -84,7 +84,7 @@ test("every profiled job gates on classify and the gate needs every job", () => 
   }
   const gate = jobs["ci-gate"];
   assert.equal(gate?.if, "always()");
-  const expected = Object.keys(jobs).filter((id) => id !== "ci-gate" && id !== "checks");
+  const expected = Object.keys(jobs).filter((id) => id !== "ci-gate");
   assert.deepEqual([...(gate?.needs ?? [])].sort(), expected.sort());
 });
 

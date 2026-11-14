@@ -104,9 +104,8 @@ stored selection. Clearing a CDN cache does not fix package installation.
 
 The hPanel connection, auto-deployment and domain are now active. For each new
 release, verify its source commit and result in hPanel, then check the live URL.
-HTTP success alone cannot prove which commit is deployed. Require a green `ci-gate` (and, until the ruleset switch, the `Required checks` and
-`Branch policy` contexts) on the exact PR head before merging into `main`; a release PR
-always runs every job. This repository does not bypass those protections.
+HTTP success alone cannot prove which commit is deployed. Require a green `ci-gate` (the only required check of the `standard-main` ruleset) on the
+exact PR head before merging into `main`; a release PR always runs every job. This repository does not bypass those protections.
 The required flow is task branch -> PR into `develop` -> release PR into `main`.
 Direct pushes and merges outside PRs are prohibited on both long-lived branches.
 Only same-repository `develop` may target `main`; see the development workflow
