@@ -16,86 +16,92 @@ const routes = [
 for (const locale of ["", "/es"]) {
   for (const route of routes) {
     const url = `${locale}${route}` || "/";
-    test(`${url} is accessible, responsive and complete in both themes`, {
-      tag: url === "/" ? "@journey" : [],
-    }, async ({ page }, testInfo) => {
-      test.fail(
-        testInfo.project.name === "iphone-webkit",
-        "PF-M3-10: WebKit keeps the dark heading colour after a live switch to the light theme",
-      );
-      const errors: string[] = [];
-      page.on("pageerror", (error) => errors.push(error.message));
-      await page.emulateMedia({ reducedMotion: "reduce" });
-      await page.goto(url);
-      await expect(page.getByRole("main")).toBeVisible();
-      await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
-      if (route === "/education") {
-        await expect(page.locator('ul[aria-labelledby="evidence"] [data-slot="card"]')).toHaveCount(
-          2,
+    test(
+      `${url} is accessible, responsive and complete in both themes`,
+      {
+        tag: url === "/" ? "@journey" : [],
+      },
+      async ({ page }, testInfo) => {
+        test.fail(
+          testInfo.project.name === "iphone-webkit",
+          "PF-M3-10: WebKit keeps the dark heading colour after a live switch to the light theme",
         );
-      }
-      for (const theme of ["dark", "light"]) {
-        await page.evaluate(
-          (value) => document.documentElement.setAttribute("data-theme", value),
-          theme,
-        );
-        await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
-        // Transparent actions inherit their backdrop from the body or a card, including offscreen.
-        await expect
-          .poll(() =>
-            page.evaluate(() => {
-              const tokens = getComputedStyle(document.documentElement);
-              const color = (name: string) => {
-                const probe = document.createElement("span");
-                probe.style.color = tokens.getPropertyValue(name);
-                return probe.style.color;
-              };
-              const primary = color("--text-primary");
-              const body = getComputedStyle(document.body);
-              const cards = document.querySelectorAll('[data-slot="card"].bg-card');
-              const actions = document.querySelectorAll("main .ui-action.text-foreground");
-              return [
-                body.backgroundColor === color("--surface-void"),
-                body.color === primary,
-                ...Array.from(cards).flatMap((card) => {
-                  const style = getComputedStyle(card);
-                  return [
-                    style.backgroundColor === color("--surface-raised"),
-                    style.color === primary,
-                  ];
-                }),
-                ...Array.from(actions).map((action) => getComputedStyle(action).color === primary),
-              ].filter((matches) => !matches);
-            }),
-          )
-          .toEqual([]);
-        await page.evaluate(
-          () =>
-            new Promise<void>((resolve) => {
-              requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
-            }),
-        );
-        const result = await new AxeBuilder({ page })
-          .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
-          .analyze();
-        expect(
-          result.violations.map(({ id, nodes }) => ({
-            id,
-            targets: nodes.map((node) => node.target),
-          })),
-          `${url} in ${theme}: ${JSON.stringify(
-            result.violations.flatMap(({ nodes }) =>
-              nodes.slice(0, 3).map((node) => node.any.map((check) => check.data)),
-            ),
-          )}`,
-        ).toEqual([]);
-        const overflow = await page.evaluate(
-          () => document.documentElement.scrollWidth > innerWidth + 1,
-        );
-        expect(overflow, `${url} overflows in ${theme}`).toBe(false);
-      }
-      expect(errors).toEqual([]);
-    });
+        const errors: string[] = [];
+        page.on("pageerror", (error) => errors.push(error.message));
+        await page.emulateMedia({ reducedMotion: "reduce" });
+        await page.goto(url);
+        await expect(page.getByRole("main")).toBeVisible();
+        await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+        if (route === "/education") {
+          await expect(
+            page.locator('ul[aria-labelledby="evidence"] [data-slot="card"]'),
+          ).toHaveCount(2);
+        }
+        for (const theme of ["dark", "light"]) {
+          await page.evaluate(
+            (value) => document.documentElement.setAttribute("data-theme", value),
+            theme,
+          );
+          await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+          // Transparent actions inherit their backdrop from the body or a card, including offscreen.
+          await expect
+            .poll(() =>
+              page.evaluate(() => {
+                const tokens = getComputedStyle(document.documentElement);
+                const color = (name: string) => {
+                  const probe = document.createElement("span");
+                  probe.style.color = tokens.getPropertyValue(name);
+                  return probe.style.color;
+                };
+                const primary = color("--text-primary");
+                const body = getComputedStyle(document.body);
+                const cards = document.querySelectorAll('[data-slot="card"].bg-card');
+                const actions = document.querySelectorAll("main .ui-action.text-foreground");
+                return [
+                  body.backgroundColor === color("--surface-void"),
+                  body.color === primary,
+                  ...Array.from(cards).flatMap((card) => {
+                    const style = getComputedStyle(card);
+                    return [
+                      style.backgroundColor === color("--surface-raised"),
+                      style.color === primary,
+                    ];
+                  }),
+                  ...Array.from(actions).map(
+                    (action) => getComputedStyle(action).color === primary,
+                  ),
+                ].filter((matches) => !matches);
+              }),
+            )
+            .toEqual([]);
+          await page.evaluate(
+            () =>
+              new Promise<void>((resolve) => {
+                requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+              }),
+          );
+          const result = await new AxeBuilder({ page })
+            .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+            .analyze();
+          expect(
+            result.violations.map(({ id, nodes }) => ({
+              id,
+              targets: nodes.map((node) => node.target),
+            })),
+            `${url} in ${theme}: ${JSON.stringify(
+              result.violations.flatMap(({ nodes }) =>
+                nodes.slice(0, 3).map((node) => node.any.map((check) => check.data)),
+              ),
+            )}`,
+          ).toEqual([]);
+          const overflow = await page.evaluate(
+            () => document.documentElement.scrollWidth > innerWidth + 1,
+          );
+          expect(overflow, `${url} overflows in ${theme}`).toBe(false);
+        }
+        expect(errors).toEqual([]);
+      },
+    );
   }
 }
 
