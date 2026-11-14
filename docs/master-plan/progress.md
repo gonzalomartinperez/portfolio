@@ -6,9 +6,9 @@ Milestone log for the master refactor of `portfolio`. The milestone table and cu
 
 | Field | Value |
 |---|---|
-| Milestone | **M0** Plans merged (this file starts the log) |
-| Date | 2026-11-09 |
-| `develop` SHA at baseline | `0a1ff564f66475a1d9a360a9c927ac804accbf83` (update to the plan merge commit when M0 closes) |
+| Milestone | **M0** Plans merged (`checkpoint/M0` on `a8d70a5`); **M1** Foundation in progress |
+| Date | 2026-11-14 (M1 started) |
+| `develop` SHA at M0 | `a8d70a5b2c18e71867710809572cb7835b7cd8fc` (plan merge, PR #224; baseline was `0a1ff56`) |
 | `main` SHA | `19954ee3ead969b69421dd912a20210d2f363094` (untouched until M7; same content as `develop` at baseline) |
 | Next item | **PF-M1-1** `standards.lock` and shared templates (see [roadmap.md](roadmap.md)); in parallel PF-M1-3 (Dependabot sandbox proof, cross-repo), PF-M1-7 (devcontainer and `check`), PF-M2-1 (runner spike, can start before M1 closes because it has no dependency) |
 | Known issues | Mobile Lighthouse 35 (home), LCP 6.2 s lab; JS 395-465 KiB per route; solar textures on every route; WebGL contexts on reading routes; no pause UI; lightbox ignores filter; header not sticky below 26 rem; `/es` 404 English; 11 unoptimised images (9 convert + 2 masters moved); light-mode parity; 39 `.mjs`; 2 unit tests need git; Biome 3 warnings |
@@ -20,11 +20,12 @@ Updated by each task PR on merge (task ID, branch, PR, merge SHA, state). Roadma
 
 | Task ID | Branch | PR | Merge SHA | State |
 |---|---|---|---|---|
-| PF-M0-1 | `docs/m0-master-plan` | pending | - | in-progress |
+| PF-M0-1 | `docs/master-plan-2026-11` | #224 | `a8d70a5` | done |
+| PF-M0-2 | `docs/master-plan-2026-11` | #224 | `a8d70a5` | done (resolutions recorded in the README with the plan) |
 
 Baselines are provisional until PF-M2-11 (`tools/scorecard.ts`) replaces them; PF-M2-16 (mobile-GPU proxy run per release) feeds the hero frame baselines afterwards.
 
-Next task by the RESUME rule: first `todo` row whose Depends are done, after PF-M0-1 that is PF-M1-1.
+Next task by the RESUME rule: first `todo` row whose Depends are done; M1 independent tasks (PF-M1-7, PF-M1-8) run while PF-M1-1 waits for the `engineering-standards` v1 tag (E1) or falls back to in-repo templates.
 
 ## Scorecard snapshot (baseline, rubrics v2; prov. = planner estimate until the M2 evaluator run)
 
