@@ -299,11 +299,13 @@ test("branch policy accepts only bot-native and weekly grouped Dependabot branch
     "dependabot/npm_and_yarn/next-16.4.6",
     "dependabot/github_actions/actions/checkout-7",
     "dependabot/develop/weekly_all-92543d3f2a",
+    "dependabot/develop/weekly-16552b0e40",
   ])
     assert.match(branch, pattern);
   for (const branch of [
     "dependabot/develop/weekly_all-",
     "dependabot/develop/other-92543d3f2a",
+    "dependabot/develop/weekly-",
     "dependabot/develop/weekly_all-92543d3f2a/extra",
     "xdependabot/develop/weekly_all-92543d3f2a",
     "dependabot/pip/requests",

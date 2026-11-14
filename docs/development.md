@@ -244,7 +244,8 @@ Start task branches from updated `develop`; use `feat/`, `fix/`, `chore/`, `docs
 kebab-case description, for example `feat/project-gallery`. The policy checks this
 pattern for task PRs. Only same-repository Dependabot-authored PRs may use the bot's
 native `dependabot/npm_and_yarn/` or `dependabot/github_actions/` naming format, or the
-`dependabot/develop/weekly_all-<hash>` name of the weekly multi-ecosystem group PR.
+`dependabot/develop/weekly-<hash>` name of the weekly multi-ecosystem group PR (and the
+retired `weekly_all-<hash>` name while an older group PR stays open).
 `develop` is the integration branch, while `main` is the production
 branch connected to Hostinger. Only same-repository `develop` is a valid PR source
 for `main`. Dependabot targets `develop` as well.

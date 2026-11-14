@@ -29,7 +29,7 @@ jobs:
             && HEAD_REPOSITORY === REPOSITORY;
           const standard = /^(feat|fix|chore|docs|refactor|perf|test|ci|build|revert)\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(HEAD_BRANCH ?? '');
           const dependabot = PR_AUTHOR === 'dependabot[bot]' && HEAD_REPOSITORY === REPOSITORY
-            && /^dependabot\/(?:(?:npm_and_yarn|github_actions)\/[a-zA-Z0-9._/-]+|develop\/weekly_all-[a-f0-9]+)$/.test(HEAD_BRANCH ?? '');
+            && /^dependabot\/(?:(?:npm_and_yarn|github_actions)\/[a-zA-Z0-9._/-]+|develop\/weekly(?:_all)?-[a-f0-9]+)$/.test(HEAD_BRANCH ?? '');
           const task = BASE_BRANCH === 'develop' && (standard || dependabot);
           if (!release && !task) {
             throw new Error('Use a standard type/kebab-case task PR into develop, then same-repository develop into main.');
