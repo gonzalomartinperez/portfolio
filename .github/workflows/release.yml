@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
       contents: write
@@ -68,6 +68,14 @@ jobs:
           if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             echo "release $tag already exists; nothing to do"
             exit 0
+          fi
+          # A tag that already exists (v1.0.0 predates this workflow) must point at this commit;
+          # otherwise the release would attach to an older commit, so fail and ask for a VERSION bump.
+          if tagged=$(gh api "repos/${GITHUB_REPOSITORY}/commits/${tag}" --jq .sha 2>/dev/null); then
+            if [ "$tagged" != "$SHA" ]; then
+              echo "::error title=release::tag $tag exists on $tagged, not $SHA; bump VERSION"
+              exit 1
+            fi
           fi
           gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$SHA" --title "$tag" \
             --notes-file "$RUNNER_TEMP/notes.md" --latest

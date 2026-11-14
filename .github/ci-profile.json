@@ -42,7 +42,8 @@
         ".gitattributes",
         ".gitignore",
         ".devcontainer/**",
-        "standards.lock"
+        "standards.lock",
+        "VERSION"
       ],
       "adds": ["quality", "build", "hosting", "browser", "performance"],
       "budgetP50Minutes": 5,

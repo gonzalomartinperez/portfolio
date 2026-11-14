@@ -19,4 +19,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Releases 
   occupied tag names and publishing `v1.2.0`. Source commits and historical verification are not
   rewritten.
 - Earlier labels `v1.0.0`, `v1.1.0` and `v1.2.0` are recorded as historical source anchors in
-  [the release history](docs/release-history.md).
+  [the release history](https://github.com/gonzalomartinperez/portfolio/blob/develop/docs/release-history.md).
+- The `v1.0.0` tag already exists (tagged 2026-10-19 UTC), so the next release must bump `VERSION`.

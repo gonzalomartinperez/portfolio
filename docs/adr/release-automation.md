@@ -31,8 +31,8 @@ no App and no PAT.
 ## Consequences
 
 - `main` changes only at the M7 release (OD-11), so the workflow is inert until then. The first
-  tag on `main` will be created from `VERSION` `1.0.0` when that release lands.
+  tag created by the workflow will come from the version-bump PR that precedes the M7 release.
 - The `v1.0.0` label transition described in [release history](../release-history.md) remains
-  governed by that document; this workflow only skips tags and releases that already exist.
+  governed by that document; this workflow skips a release that already exists and fails when the tag exists on a different commit, so the M7 release must bump `VERSION` past `1.0.0` (the `v1.0.0` tag already exists on `954b78d`).
 - `docs/release-history.md` stays as the historical record of tag anchors; new entries go to
   `CHANGELOG.md`.

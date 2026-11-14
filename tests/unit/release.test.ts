@@ -9,6 +9,9 @@ const version = read("VERSION").trim();
 test("VERSION is a plain X.Y.Z that matches the package manifest", () => {
   assert.match(version, /^\d+\.\d+\.\d+$/);
   assert.equal(JSON.parse(read("package.json")).version, version);
+  const lock = JSON.parse(read("package-lock.json"));
+  assert.equal(lock.version, version);
+  assert.equal(lock.packages[""].version, version);
 });
 
 test("CHANGELOG has an Unreleased section and a non-empty section for VERSION", () => {
