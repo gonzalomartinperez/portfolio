@@ -46,6 +46,10 @@ jobs:
     timeout-minutes: 2
     permissions: {}
     steps:
+      - name: Harden the runner (egress audit)
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
       # Event metadata only; no checkout. Replaces the former pull_request_target workflow (PF-D20).
       - name: Validate pull request route
         env:
@@ -74,6 +78,22 @@ jobs:
           console.log('Pull request route accepted.');
           NODE
 
+  security:
+    needs: classify
+    if: contains(fromJSON(needs.classify.outputs.jobs), 'security')
+    uses: gonzalomartinperez/engineering-standards/.github/workflows/security.yml@1f33be46bcb95f42f550f74608bc679cae5575ad # v1.0.0
+    permissions:
+      contents: read
+      pull-requests: read
+    with:
+      dependency-review: true
+      # GSAP ships a custom (non-SPDX) licence and sharp's libvips binaries are LGPL-3.0-or-later;
+      # licences are reviewed per new dependency (docs/master-plan/dependencies.md), so only the
+      # vulnerability part of dependency-review gates here.
+      allow-licenses: ""
+      # The repository's own `secrets` job is stricter (history exceptions by commit, artifact scan).
+      gitleaks: false
+
   workflows:
     name: Workflow validation
     needs: [classify]
@@ -83,6 +103,10 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
+      - name: Harden the runner (egress audit)
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -117,6 +141,10 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
+      - name: Harden the runner (egress audit)
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -152,6 +180,10 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
+      - name: Harden the runner (egress audit)
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -191,6 +223,10 @@ jobs:
     outputs:
       archive_sha256: ${{ steps.manifest.outputs.archive_sha256 }}
     steps:
+      - name: Harden the runner (egress audit)
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -375,6 +411,10 @@ jobs:
     env:
       CI_ARTIFACT_SHA256: ${{ needs.build.outputs.archive_sha256 }}
     steps:
+      - name: Harden the runner (egress audit)
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -411,7 +451,19 @@ jobs:
   ci-gate:
     name: ci-gate
     if: always()
-    needs: [classify, policy, workflows, secrets, quality, build, hosting, browser, performance]
+    needs:
+      [
+        classify,
+        policy,
+        security,
+        workflows,
+        secrets,
+        quality,
+        build,
+        hosting,
+        browser,
+        performance,
+      ]
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     permissions: {}

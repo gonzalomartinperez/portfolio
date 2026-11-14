@@ -1,0 +1,161 @@
+{
+  "$comment": "Project scorecard skeleton (M1 exit; rubrics v2, docs/master-plan/scorecard.md). Baselines are the planner's provisional estimates from 2026-11-09; PF-M2-11 (tools/scorecard.ts) fills `measured` from CI artifacts nightly and fails on regression, and PF-M2-15 replaces the provisional scores with the first independent evaluator run.",
+  "version": 1,
+  "rubrics": "v2",
+  "repository": "gonzalomartinperez/portfolio",
+  "target": 95,
+  "baseline": {
+    "date": "2026-11-09",
+    "develop": "0a1ff56",
+    "provisional": true
+  },
+  "axes": {
+    "D1": {
+      "name": "Architecture",
+      "baseline": 82,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "D2": {
+      "name": "Code quality",
+      "baseline": 78,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "D3": {
+      "name": "Tests",
+      "baseline": 74,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "D4": {
+      "name": "CI/CD",
+      "baseline": 76,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "D5": {
+      "name": "Security and supply chain",
+      "baseline": 80,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "D6": {
+      "name": "Performance",
+      "baseline": 42,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "D7": {
+      "name": "Observability",
+      "baseline": 50,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "D8": {
+      "name": "Docs and DX",
+      "baseline": 70,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "P1": {
+      "name": "Visual design and system",
+      "baseline": 70,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "P2": {
+      "name": "Interaction and motion",
+      "baseline": 66,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "P3": {
+      "name": "Accessibility",
+      "baseline": 88,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "P4": {
+      "name": "Responsive and cross-browser",
+      "baseline": 80,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "P5": {
+      "name": "Theme parity",
+      "baseline": 55,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "P6": {
+      "name": "Consistency and identity",
+      "baseline": 78,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "R1": {
+      "name": "First screen clarity",
+      "baseline": 78,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "R2": {
+      "name": "Proof",
+      "baseline": 80,
+      "target": 90,
+      "measured": null,
+      "inputs": {}
+    },
+    "R3": {
+      "name": "Writing quality",
+      "baseline": 80,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "R4": {
+      "name": "Credibility and consistency",
+      "baseline": 84,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "R5": {
+      "name": "Calls to action and navigation",
+      "baseline": 76,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "R6": {
+      "name": "Visual and responsive polish",
+      "baseline": 70,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    },
+    "R7": {
+      "name": "Differentiation",
+      "baseline": 82,
+      "target": 95,
+      "measured": null,
+      "inputs": {}
+    }
+  }
+}

@@ -42,6 +42,12 @@ function gate(name, prerequisites) {
     ],
   };
 }
+function hardenRunner() {
+  return {
+    uses: `step-security/harden-runner@${SHA}`,
+    with: { "egress-policy": "audit" },
+  };
+}
 function fixture(profile = "core") {
   const prerequisites = profile === "core" ? CORE : NIGHTLY;
   const jobs = Object.fromEntries(
@@ -49,8 +55,9 @@ function fixture(profile = "core") {
       id,
       {
         name: profile === "core" ? CORE_NAMES[id] : NIGHTLY_NAMES[id],
+        permissions: { contents: "read" },
         "runs-on": "ubuntu-24.04",
-        steps: [{ uses: `actions/checkout@${SHA}` }, { run: "echo verified" }],
+        steps: [hardenRunner(), { uses: `actions/checkout@${SHA}` }, { run: "echo verified" }],
       },
     ]),
   );
@@ -65,12 +72,19 @@ function fixture(profile = "core") {
           bundle: "quality",
         };
   for (const [id, prerequisite] of Object.entries(dependencies)) jobs[id].needs = prerequisite;
+  for (const id of profile === "core" ? ["hosting", "browser"] : ["browser", "visual"]) {
+    jobs[id].container = { image: "reviewed-container" };
+    jobs[id].steps.shift();
+  }
   jobs.browser.strategy = {
     "fail-fast": false,
     "max-parallel": 8,
     matrix: { shard: [1, 2, 3, 4, 5, 6, 7, 8] },
   };
-  if (profile === "nightly") jobs.checks = gate(NIGHTLY_NAMES.checks, prerequisites);
+  if (profile === "nightly") {
+    jobs.checks = gate(NIGHTLY_NAMES.checks, prerequisites);
+    jobs.checks.permissions = { contents: "read" };
+  }
   if (profile === "core") {
     jobs.classify = {
       uses: `gonzalomartinperez/engineering-standards/.github/workflows/classify.yml@${SHA}`,
@@ -79,17 +93,24 @@ function fixture(profile = "core") {
     jobs.policy = {
       name: "Branch policy",
       "runs-on": "ubuntu-24.04",
-      steps: [{ run: "echo policy" }],
+      steps: [hardenRunner(), { run: "echo policy" }],
     };
     for (const id of ["policy", ...CORE]) {
       jobs[id].needs = ["classify", ...(jobs[id].needs ? [jobs[id].needs] : [])];
       jobs[id].if = `contains(fromJSON(needs.classify.outputs.jobs), '${id}')`;
       jobs[id].permissions = id === "policy" ? {} : { contents: "read" };
     }
+    jobs.security = {
+      needs: "classify",
+      if: "contains(fromJSON(needs.classify.outputs.jobs), 'security')",
+      uses: `gonzalomartinperez/engineering-standards/.github/workflows/security.yml@${SHA}`,
+      permissions: { contents: "read", "pull-requests": "read" },
+      with: { "dependency-review": true, "allow-licenses": "", gitleaks: false },
+    };
     jobs["ci-gate"] = {
       name: "ci-gate",
       if: "always()",
-      needs: ["classify", "policy", ...CORE],
+      needs: ["classify", "policy", "security", ...CORE],
       "runs-on": "ubuntu-24.04",
       permissions: {},
       steps: [
@@ -114,7 +135,7 @@ function fixture(profile = "core") {
             workflow_dispatch: null,
           }
         : { schedule: [{ cron: "35 3 * * *" }], workflow_dispatch: null },
-    permissions: profile === "core" ? {} : { contents: "read" },
+    permissions: {},
     defaults: { run: { shell: "bash" } },
     jobs,
   };
@@ -601,7 +622,7 @@ test("core dependency ordering does not affect the contract", () => {
   assert.deepEqual(validate(workflow), []);
 });
 
-for (const id of ["policy", ...CORE]) {
+for (const id of ["policy", "security", ...CORE]) {
   reject(
     `${id} requires its classifier condition`,
     (w) => {
@@ -619,7 +640,8 @@ for (const id of ["policy", ...CORE]) {
   reject(
     `${id} must depend on classify`,
     (w) => {
-      w.jobs[id].needs = w.jobs[id].needs.filter((need) => need !== "classify");
+      const needs = w.jobs[id].needs;
+      w.jobs[id].needs = Array.isArray(needs) ? needs.filter((need) => need !== "classify") : [];
     },
     /must need exactly classify/,
   );
@@ -632,7 +654,7 @@ reject(
   },
   /literal always/,
 );
-for (const id of ["classify", "policy", ...CORE]) {
+for (const id of ["classify", "policy", "security", ...CORE]) {
   reject(
     `core gate cannot omit ${id}`,
     (w) => {
@@ -641,12 +663,12 @@ for (const id of ["classify", "policy", ...CORE]) {
     /aggregate must need exactly/,
   );
 }
-for (const target of ["classify", "ci-gate"]) {
+for (const target of ["classify", "security", "ci-gate"]) {
   for (const ref of ["main", "a".repeat(39), "g".repeat(40)]) {
     reject(
       `${target} rejects a non-SHA standards ref ${ref}`,
       (w) => {
-        const call = target === "classify" ? w.jobs.classify : w.jobs["ci-gate"].steps[0];
+        const call = target === "ci-gate" ? w.jobs["ci-gate"].steps[0] : w.jobs[target];
         call.uses = call.uses.replace(SHA, ref);
       },
       /SHA/,
@@ -655,7 +677,7 @@ for (const target of ["classify", "ci-gate"]) {
   reject(
     `${target} rejects a different pinned standards repository`,
     (w) => {
-      const call = target === "classify" ? w.jobs.classify : w.jobs["ci-gate"].steps[0];
+      const call = target === "ci-gate" ? w.jobs["ci-gate"].steps[0] : w.jobs[target];
       call.uses = call.uses.replace("gonzalomartinperez/engineering-standards", "other/standards");
     },
     /engineering-standards/,
@@ -773,7 +795,7 @@ reject(
   /permissions must/,
 );
 reject(
-  "pull request read access is reserved for classify",
+  "pull request read access is reserved for classify and security",
   (w) => {
     w.jobs.build.permissions["pull-requests"] = "read";
   },
@@ -807,9 +829,9 @@ reject(
   "nightly",
 );
 reject(
-  "Nightly still requires root contents read access",
+  "Nightly root permissions must be empty even for contents read access",
   (w) => {
-    w.permissions = {};
+    w.permissions = { contents: "read" };
   },
   /permissions must/,
   "nightly",
@@ -820,5 +842,176 @@ reject(
     w.jobs.quality.permissions = { "pull-requests": "read" };
   },
   /permissions must/,
+  "nightly",
+);
+
+reject(
+  "security must use the same SHA as classify and ci-gate",
+  (w) => {
+    w.jobs.security.uses = w.jobs.security.uses.replace(SHA, "b".repeat(40));
+  },
+  /security:.*same SHA/,
+);
+reject(
+  "security cannot be omitted from the core inventory",
+  (w) => {
+    delete w.jobs.security;
+  },
+  /expected job IDs/,
+);
+for (const key of ["needs", "if", "uses", "permissions", "with"]) {
+  reject(
+    `security must declare ${key}`,
+    (w) => {
+      delete w.jobs.security[key];
+    },
+    /security: reusable call must declare exactly/,
+  );
+}
+for (const key of ["name", "secrets", "steps", "runs-on"]) {
+  reject(
+    `security cannot declare ${key}`,
+    (w) => {
+      w.jobs.security[key] = "unexpected";
+    },
+    /security: reusable call must declare exactly/,
+  );
+}
+reject(
+  "security keeps the licence allow-list explicitly empty",
+  (w) => {
+    w.jobs.security.with["allow-licenses"] = "MIT";
+  },
+  /security: inputs must be exactly/,
+);
+reject(
+  "security cannot accept extra inputs",
+  (w) => {
+    w.jobs.security.with.extra = true;
+  },
+  /security: inputs must be exactly/,
+);
+for (const value of [false, "true", null]) {
+  reject(
+    `security dependency review must be literal true rather than ${JSON.stringify(value)}`,
+    (w) => {
+      w.jobs.security.with["dependency-review"] = value;
+    },
+    /security: inputs must be exactly/,
+  );
+}
+for (const scope of ["contents", "pull-requests"]) {
+  reject(
+    `security must grant ${scope} read access`,
+    (w) => {
+      w.jobs.security.permissions[scope] = "none";
+    },
+    /security: permissions must be exactly/,
+  );
+}
+reject(
+  "security cannot declare extra disabled permission scopes",
+  (w) => {
+    w.jobs.security.permissions.issues = "none";
+  },
+  /security: permissions must be exactly/,
+);
+reject(
+  "security cannot need an additional job",
+  (w) => {
+    w.jobs.security.needs = ["classify", "policy"];
+  },
+  /security: must need exactly classify/,
+);
+test("security accepts classify as a single-item needs array", () => {
+  const workflow = fixture();
+  workflow.jobs.security.needs = ["classify"];
+  assert.deepEqual(validate(workflow), []);
+});
+
+for (const profile of ["core", "nightly"]) {
+  const runnerJobs =
+    profile === "core"
+      ? ["policy", "workflows", "secrets", "quality", "build", "performance"]
+      : ["prepare", "quality", "links", "bundle"];
+  for (const id of runnerJobs) {
+    reject(
+      `${profile} ${id} requires harden-runner`,
+      (w) => {
+        w.jobs[id].steps.shift();
+      },
+      /first step must use SHA-pinned step-security\/harden-runner/,
+      profile,
+    );
+  }
+  for (const ref of ["v2", "a".repeat(39), "g".repeat(40)]) {
+    reject(
+      `${profile} rejects an unpinned harden-runner ref ${ref}`,
+      (w) => {
+        w.jobs.quality.steps[0].uses = `step-security/harden-runner@${ref}`;
+      },
+      /first step must use SHA-pinned step-security\/harden-runner/,
+      profile,
+    );
+  }
+  for (const [key, value] of [
+    ["if", `\${{ false }}`],
+    ["continue-on-error", true],
+  ]) {
+    reject(
+      `${profile} harden-runner cannot be skipped through ${key}`,
+      (w) => {
+        w.jobs.quality.steps[0][key] = value;
+      },
+      /first step must use SHA-pinned step-security\/harden-runner/,
+      profile,
+    );
+  }
+  reject(
+    `${profile} harden-runner must precede checkout`,
+    (w) => {
+      const steps = w.jobs.quality.steps;
+      [steps[0], steps[1]] = [steps[1], steps[0]];
+    },
+    /first step must use SHA-pinned step-security\/harden-runner/,
+    profile,
+  );
+  for (const value of [undefined, "disabled"]) {
+    reject(
+      `${profile} harden-runner rejects egress-policy ${value}`,
+      (w) => {
+        w.jobs.quality.steps[0].with = value ? { "egress-policy": value } : {};
+      },
+      /egress-policy audit or block/,
+      profile,
+    );
+  }
+  test(`${profile} accepts harden-runner with blocked egress`, () => {
+    const workflow = fixture(profile);
+    workflow.jobs.quality.steps[0].with["egress-policy"] = "block";
+    assert.deepEqual(validate(workflow, profile), []);
+  });
+}
+for (const id of [...NIGHTLY, "checks"]) {
+  reject(
+    `Nightly ${id} must declare permissions`,
+    (w) => {
+      delete w.jobs[id].permissions;
+    },
+    /permissions must/,
+    "nightly",
+  );
+}
+test("Nightly permits explicitly disabled permission scopes", () => {
+  const workflow = fixture("nightly");
+  workflow.jobs.quality.permissions = { contents: "none", issues: "none" };
+  assert.deepEqual(validate(workflow, "nightly"), []);
+});
+reject(
+  "Nightly aggregate must keep exactly one result-gate run step",
+  (w) => {
+    w.jobs.checks.steps.unshift(hardenRunner());
+  },
+  /exactly one result-gate run step/,
   "nightly",
 );

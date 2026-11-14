@@ -102,7 +102,7 @@ test("full profiles stay built in", () => {
 
 test("the job inventory per profile is pinned, so a PR cannot quietly empty it", () => {
   const full = ["quality", "build", "hosting", "browser", "performance"];
-  assert.deepEqual(config.base, ["policy", "secrets", "quality"]);
+  assert.deepEqual(config.base, ["policy", "security", "secrets", "quality"]);
   assert.deepEqual(
     Object.fromEntries(
       Object.entries(config.profiles)

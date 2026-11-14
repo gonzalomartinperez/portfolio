@@ -360,3 +360,21 @@ test("standards caller workflows stay pinned, least-privilege and gate-aware", (
   const gate = parseDocument(read(".github/workflows/ci.yml")).toJS().jobs["ci-gate"].name;
   assert.equal(guard.jobs.guard.with["gate-check-name"], gate);
 });
+
+test("installs never run dependency lifecycle scripts and engines stay strict", () => {
+  const npmrc = read(".npmrc")
+    .split("\n")
+    .map((line) => line.trim());
+  for (const setting of ["ignore-scripts=true", "engine-strict=true", "save-exact=true"])
+    assert.ok(npmrc.includes(setting), setting);
+  // Allow-list of packages that genuinely need an install script (run explicitly): empty today.
+  const allowed = new Set([]);
+  const scripted = ["package-lock.json", "tools/api-contract/package-lock.json"]
+    .flatMap((file) => Object.entries(JSON.parse(read(file)).packages))
+    .filter(([, entry]) => entry.hasInstallScript)
+    .map(([name]) => name.replace(/^.*node_modules\//, ""));
+  assert.deepEqual(
+    scripted.filter((name) => !allowed.has(name)),
+    [],
+  );
+});

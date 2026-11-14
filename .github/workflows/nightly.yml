@@ -16,8 +16,7 @@ on:
         options: [main, develop]
         default: main
 
-permissions:
-  contents: read
+permissions: {}
 
 defaults:
   run:
@@ -40,6 +39,8 @@ env:
 jobs:
   prepare:
     name: Nightly prepare candidate
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     outputs:
@@ -47,6 +48,10 @@ jobs:
       source_tree: ${{ steps.candidate.outputs.source_tree }}
       ref_sha: ${{ steps.candidate.outputs.ref_sha }}
     steps:
+      - name: Harden the runner (egress audit)
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
       - name: Check out the immutable workflow event source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -67,6 +72,8 @@ jobs:
 
   quality:
     name: Nightly quality checks
+    permissions:
+      contents: read
     needs: prepare
     runs-on: ubuntu-24.04
     timeout-minutes: 20
@@ -79,6 +86,10 @@ jobs:
       CI_SOURCE_SHA: ${{ needs.prepare.outputs.source_sha }}
       CI_HEAD_SHA: ${{ needs.prepare.outputs.source_sha }}
     steps:
+      - name: Harden the runner (egress audit)
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
       - name: Check out the frozen candidate
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -149,6 +160,8 @@ jobs:
 
   browser:
     name: Nightly browser tests (${{ matrix.shard }}/8)
+    permissions:
+      contents: read
     needs: quality
     runs-on: ubuntu-24.04
     container:
@@ -218,6 +231,8 @@ jobs:
 
   visual:
     name: Nightly visual checks
+    permissions:
+      contents: read
     needs: quality
     runs-on: ubuntu-24.04
     container:
@@ -282,6 +297,8 @@ jobs:
 
   links:
     name: Nightly link checks
+    permissions:
+      contents: read
     needs: quality
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -290,6 +307,10 @@ jobs:
       CI_HEAD_SHA: ${{ needs.quality.outputs.source_sha }}
       CI_ARTIFACT_SHA256: ${{ needs.quality.outputs.archive_sha256 }}
     steps:
+      - name: Harden the runner (egress audit)
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
       - name: Check out the frozen candidate
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -323,6 +344,8 @@ jobs:
 
   bundle:
     name: Nightly bundle checks
+    permissions:
+      contents: read
     needs: quality
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -331,6 +354,10 @@ jobs:
       CI_HEAD_SHA: ${{ needs.quality.outputs.source_sha }}
       CI_ARTIFACT_SHA256: ${{ needs.quality.outputs.archive_sha256 }}
     steps:
+      - name: Harden the runner (egress audit)
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
       - name: Check out the frozen candidate
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -364,6 +391,7 @@ jobs:
 
   checks:
     name: Nightly required checks
+    permissions: {}
     if: always()
     needs: [prepare, quality, browser, visual, links, bundle]
     runs-on: ubuntu-24.04
