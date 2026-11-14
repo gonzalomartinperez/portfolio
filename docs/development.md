@@ -91,7 +91,7 @@ and dependency-review for vulnerabilities; licences are reviewed per new depende
 repository's stricter `secrets` job keeps the gitleaks scan); non-container jobs start with `harden-runner` in egress
 audit mode; CodeQL runs through GitHub's default setup (JavaScript/TypeScript and Actions);
 `scorecard.yml` publishes OpenSSF Scorecard from `main` weekly, against the baseline in
-`ratchets/scorecard.json`; `.npmrc` keeps `ignore-scripts=true`, with an empty allow-list
+`ratchets/ossf-scorecard.json` (the three-lens project scorecard skeleton is `ratchets/scorecard.json`); `.npmrc` keeps `ignore-scripts=true`, with an empty allow-list
 enforced by a repository test. No workflow uses `pull_request_target`.
 
 `ci-gate` is the single aggregate: it needs every job, fails on any failure or
