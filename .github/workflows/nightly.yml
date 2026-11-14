@@ -391,8 +391,7 @@ jobs:
 
   checks:
     name: Nightly required checks
-    permissions:
-      contents: read
+    permissions: {}
     if: always()
     needs: [prepare, quality, browser, visual, links, bundle]
     runs-on: ubuntu-24.04

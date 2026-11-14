@@ -86,8 +86,9 @@ a diff error or a file outside every profile run everything (fail closed).
 mapped to one.
 
 Supply-chain hardening (PF-M1-4): workflows start with `permissions: {}` and grant per
-job; every PR runs the pinned engineering-standards `security` workflow (zizmor, actionlint,
-gitleaks and dependency-review); non-container jobs start with `harden-runner` in egress
+job; every PR runs the pinned engineering-standards `security` workflow (zizmor, actionlint
+and dependency-review for vulnerabilities; licences are reviewed per new dependency, and the
+repository's stricter `secrets` job keeps the gitleaks scan); non-container jobs start with `harden-runner` in egress
 audit mode; CodeQL runs through GitHub's default setup (JavaScript/TypeScript and Actions);
 `scorecard.yml` publishes OpenSSF Scorecard from `main` weekly, against the baseline in
 `ratchets/scorecard.json`; `.npmrc` keeps `ignore-scripts=true`, with an empty allow-list

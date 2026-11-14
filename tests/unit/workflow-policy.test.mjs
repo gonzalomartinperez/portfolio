@@ -105,7 +105,7 @@ function fixture(profile = "core") {
       if: "contains(fromJSON(needs.classify.outputs.jobs), 'security')",
       uses: `gonzalomartinperez/engineering-standards/.github/workflows/security.yml@${SHA}`,
       permissions: { contents: "read", "pull-requests": "read" },
-      with: { "dependency-review": true, "allow-licenses": "" },
+      with: { "dependency-review": true, "allow-licenses": "", gitleaks: false },
     };
     jobs["ci-gate"] = {
       name: "ci-gate",

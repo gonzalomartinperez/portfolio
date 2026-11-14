@@ -91,6 +91,8 @@ jobs:
       # licences are reviewed per new dependency (docs/master-plan/dependencies.md), so only the
       # vulnerability part of dependency-review gates here.
       allow-licenses: ""
+      # The repository's own `secrets` job is stricter (history exceptions by commit, artifact scan).
+      gitleaks: false
 
   workflows:
     name: Workflow validation

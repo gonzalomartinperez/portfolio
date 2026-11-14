@@ -156,12 +156,13 @@ function inspectCoreGate(jobs, errors) {
       errors.push("security: permissions must be exactly contents: read and pull-requests: read");
     if (
       !isRecord(security.with) ||
-      !sameSet(Object.keys(security.with), ["dependency-review", "allow-licenses"]) ||
+      !sameSet(Object.keys(security.with), ["dependency-review", "allow-licenses", "gitleaks"]) ||
       security.with["dependency-review"] !== true ||
-      security.with["allow-licenses"] !== ""
+      security.with["allow-licenses"] !== "" ||
+      security.with.gitleaks !== false
     )
       errors.push(
-        'security: inputs must be exactly dependency-review: true and allow-licenses: ""',
+        'security: inputs must be exactly dependency-review: true, allow-licenses: "" and gitleaks: false',
       );
   }
   const gate = jobs["ci-gate"];
