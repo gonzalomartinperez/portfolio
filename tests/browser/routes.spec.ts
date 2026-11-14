@@ -16,7 +16,9 @@ const routes = [
 for (const locale of ["", "/es"]) {
   for (const route of routes) {
     const url = `${locale}${route}` || "/";
-    test(`${url} is accessible, responsive and complete in both themes`, async ({ page }) => {
+    test(`${url} is accessible, responsive and complete in both themes`, {
+      tag: url === "/" ? "@journey" : [],
+    }, async ({ page }) => {
       const errors: string[] = [];
       page.on("pageerror", (error) => errors.push(error.message));
       await page.emulateMedia({ reducedMotion: "reduce" });
@@ -88,7 +90,7 @@ for (const locale of ["", "/es"]) {
   }
 }
 
-test("keyboard users can skip navigation", async ({ page }) => {
+test("keyboard users can skip navigation", { tag: "@journey" }, async ({ page }) => {
   await page.goto("/about");
   await page.keyboard.press("Tab");
   await expect(page.locator(".skip-link")).toBeFocused();
@@ -104,7 +106,10 @@ test("the portrait identity and icon endpoints are available", async ({ request 
   expect((await request.get("/favicon.ico")).ok()).toBe(true);
 });
 
-test("content and the full catalogue work without JavaScript", async ({ browser, baseURL }) => {
+test("content and the full catalogue work without JavaScript", { tag: "@journey" }, async ({
+  browser,
+  baseURL,
+}) => {
   const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
   try {
     const page = await context.newPage();

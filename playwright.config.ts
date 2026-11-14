@@ -8,6 +8,44 @@ if (externalOrigin && !/^https?:\/\/(?:127\.0\.0\.1|localhost):\d{4,5}$/.test(ex
   throw new Error("Browser tests require a loopback production server");
 }
 
+// BROWSER_LANE=pr selects the pull-request lane: only tests tagged @journey, on
+// Chromium and iPhone WebKit. Any other value keeps the full matrix.
+const journeys = /@journey/;
+const pullRequestLane = process.env.BROWSER_LANE === "pr";
+
+const journeyProjects = [
+  {
+    name: "desktop",
+    ...(pullRequestLane ? { grep: journeys } : {}),
+    use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 1000 } },
+  },
+  { name: "iphone-webkit", grep: journeys, use: { ...devices["iPhone 15"] } },
+];
+
+const fullMatrixProjects = [
+  { name: "mobile", use: { ...devices["Pixel 7"] } },
+  {
+    name: "assistant-firefox",
+    testMatch: "assistant.spec.ts",
+    use: { ...devices["Desktop Firefox"], viewport: { width: 1440, height: 1000 } },
+  },
+  {
+    name: "assistant-webkit",
+    testMatch: "assistant.spec.ts",
+    use: { ...devices["Desktop Safari"], viewport: { width: 1440, height: 1000 } },
+  },
+  {
+    name: "analytics-firefox",
+    testMatch: "analytics-interactions.spec.ts",
+    use: { ...devices["Desktop Firefox"], viewport: { width: 1440, height: 1000 } },
+  },
+  {
+    name: "analytics-webkit",
+    testMatch: "analytics-interactions.spec.ts",
+    use: { ...devices["Desktop Safari"], viewport: { width: 1440, height: 1000 } },
+  },
+];
+
 export default defineConfig({
   testDir: "./tests/browser",
   outputDir: ".artifacts/playwright/results",
@@ -31,33 +69,9 @@ export default defineConfig({
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },
-  projects: [
-    {
-      name: "desktop",
-      use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 1000 } },
-    },
-    { name: "mobile", use: { ...devices["Pixel 7"] } },
-    {
-      name: "assistant-firefox",
-      testMatch: "assistant.spec.ts",
-      use: { ...devices["Desktop Firefox"], viewport: { width: 1440, height: 1000 } },
-    },
-    {
-      name: "assistant-webkit",
-      testMatch: "assistant.spec.ts",
-      use: { ...devices["Desktop Safari"], viewport: { width: 1440, height: 1000 } },
-    },
-    {
-      name: "analytics-firefox",
-      testMatch: "analytics-interactions.spec.ts",
-      use: { ...devices["Desktop Firefox"], viewport: { width: 1440, height: 1000 } },
-    },
-    {
-      name: "analytics-webkit",
-      testMatch: "analytics-interactions.spec.ts",
-      use: { ...devices["Desktop Safari"], viewport: { width: 1440, height: 1000 } },
-    },
-  ],
+  projects: pullRequestLane
+    ? journeyProjects
+    : [journeyProjects[0], ...fullMatrixProjects, journeyProjects[1]],
   webServer: externalOrigin
     ? undefined
     : {
