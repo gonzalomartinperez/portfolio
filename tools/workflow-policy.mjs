@@ -73,6 +73,8 @@ function inspectRunnerHardening(job, label, errors) {
   if (
     !isRecord(first) ||
     typeof first.uses !== "string" ||
+    "if" in first ||
+    "continue-on-error" in first ||
     !/^step-security\/harden-runner@[a-f\d]{40}$/i.test(first.uses) ||
     !["audit", "block"].includes(first.with?.["egress-policy"])
   ) {
@@ -154,10 +156,13 @@ function inspectCoreGate(jobs, errors) {
       errors.push("security: permissions must be exactly contents: read and pull-requests: read");
     if (
       !isRecord(security.with) ||
-      !sameSet(Object.keys(security.with), ["dependency-review"]) ||
-      security.with["dependency-review"] !== true
+      !sameSet(Object.keys(security.with), ["dependency-review", "allow-licenses"]) ||
+      security.with["dependency-review"] !== true ||
+      security.with["allow-licenses"] !== ""
     )
-      errors.push("security: inputs must be exactly dependency-review: true");
+      errors.push(
+        'security: inputs must be exactly dependency-review: true and allow-licenses: ""',
+      );
   }
   const gate = jobs["ci-gate"];
   if (!isRecord(gate)) return;

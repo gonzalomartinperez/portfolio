@@ -87,6 +87,10 @@ jobs:
       pull-requests: read
     with:
       dependency-review: true
+      # GSAP ships a custom (non-SPDX) licence and sharp's libvips binaries are LGPL-3.0-or-later;
+      # licences are reviewed per new dependency (docs/master-plan/dependencies.md), so only the
+      # vulnerability part of dependency-review gates here.
+      allow-licenses: ""
 
   workflows:
     name: Workflow validation

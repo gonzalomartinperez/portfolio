@@ -105,7 +105,7 @@ function fixture(profile = "core") {
       if: "contains(fromJSON(needs.classify.outputs.jobs), 'security')",
       uses: `gonzalomartinperez/engineering-standards/.github/workflows/security.yml@${SHA}`,
       permissions: { contents: "read", "pull-requests": "read" },
-      with: { "dependency-review": true },
+      with: { "dependency-review": true, "allow-licenses": "" },
     };
     jobs["ci-gate"] = {
       name: "ci-gate",
@@ -878,6 +878,13 @@ for (const key of ["name", "secrets", "steps", "runs-on"]) {
   );
 }
 reject(
+  "security keeps the licence allow-list explicitly empty",
+  (w) => {
+    w.jobs.security.with["allow-licenses"] = "MIT";
+  },
+  /security: inputs must be exactly/,
+);
+reject(
   "security cannot accept extra inputs",
   (w) => {
     w.jobs.security.with.extra = true;
@@ -942,6 +949,19 @@ for (const profile of ["core", "nightly"]) {
       `${profile} rejects an unpinned harden-runner ref ${ref}`,
       (w) => {
         w.jobs.quality.steps[0].uses = `step-security/harden-runner@${ref}`;
+      },
+      /first step must use SHA-pinned step-security\/harden-runner/,
+      profile,
+    );
+  }
+  for (const [key, value] of [
+    ["if", `\${{ false }}`],
+    ["continue-on-error", true],
+  ]) {
+    reject(
+      `${profile} harden-runner cannot be skipped through ${key}`,
+      (w) => {
+        w.jobs.quality.steps[0][key] = value;
       },
       /first step must use SHA-pinned step-security\/harden-runner/,
       profile,
