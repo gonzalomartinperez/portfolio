@@ -21,4 +21,9 @@ RUN set -eu; \
     mkdir -p /workspaces/portfolio/node_modules; \
     chown -R pwuser:pwuser /workspaces
 
+# python3 runs the Claude guard hooks and `npm run test:skills` (no-op if already present).
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3 \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV NEXT_TELEMETRY_DISABLED=1

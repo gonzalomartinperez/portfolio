@@ -15,5 +15,6 @@ Thumbs.db
 *.key
 .claude/settings.local.json
 .claude/worktrees/
-.codex/
+.codex/*
+!.codex/config.toml
 CLAUDE.local.md

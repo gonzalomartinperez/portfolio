@@ -119,7 +119,7 @@ Use `npm run typecheck` for a quick standalone type check during development;
 for an unchanged source state, dependencies and runtime; rerun affected checks
 after changes rather than repeating the full suite at each agent handoff.
 `test:repository` checks tracked/unignored source text, simple inline Markdown file links,
-skill adapter metadata/targets, and exact Next.js/SWC lockfile alignment. It does
+canonical skill metadata and symlink targets, and exact Next.js/SWC lockfile alignment. It does
 not validate external URLs, Markdown anchors, or the behavior of an agent host.
 
 Resolve warning causes through supported settings. Do not filter stderr, patch
@@ -178,9 +178,10 @@ glibc 2.28 image (exit 127), so Node 26 needs a newer host OS, not only a newer 
 
 Codex loads root `AGENTS.md` and discovers `.agents/skills/`. Claude Code loads
 `CLAUDE.md`, which imports the same contract, and discovers `.claude/skills/`.
-The Claude skill files are thin adapters; edit procedures only in `.agents/skills/`.
-Keep each adapter's name and description aligned with its canonical skill.
-This avoids symlink requirements on Windows and keeps procedures in one place.
+The Claude skill directories are relative symlinks to `.agents/skills/`; edit
+canonical procedures there. Preserve symlinks when checking out the repository: on
+Windows enable `git config core.symlinks true` (Developer Mode) or use the devcontainer.
+The guard hooks and `npm run test:skills` need `python3` on the machine.
 
 | Skill | Use |
 | --- | --- |
@@ -196,7 +197,22 @@ are optional. For parent-started sessions, use the local discovery fallback in
 [AGENTS.md](../AGENTS.md) and [skill discovery](skill-discovery.md). Verify native
 host discovery separately; file validation alone cannot demonstrate host loading.
 These are instruction workflows, not sandbox controls. No permissions are relaxed,
-no MCP servers are installed, and no publish hooks run automatically.
+MCP server configuration does not install or start servers during checks, and no
+publish hooks run automatically.
+
+## Agent harness
+
+- `.claude/settings.json` retains deny rules and wires the unchanged Python guards
+  in `.claude/hooks/`; `.claude/agents/` contains five scoped agent definitions.
+- `.codex/config.toml` uses a writable workspace with network access disabled;
+  its hook examples stay commented until the installed Codex schema is verified.
+- `.mcp.json` pins isolated headless Playwright Chromium and Next.js devtools.
+- `.worktreeinclude` copies no local files into new worktrees, including secrets.
+- `.agents/skills/` owns procedures, metadata and trigger/output eval fixtures;
+  `.claude/skills/` links to them. Run `npm run test:skills` to validate the catalog
+  with `tools/check-skills.py`; it also runs in `check:quality`.
+- `tests/unit/harness-hooks.test.ts` and `tests/unit/harness-config.test.ts` run in
+  `test:repository` and verify guard behavior, permissions, server pins and links.
 
 ## Parallel agents and worktrees
 

@@ -1,7 +1,14 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { existsSync, readdirSync, readFileSync, realpathSync } from "node:fs";
+import {
+  existsSync,
+  lstatSync,
+  readdirSync,
+  readFileSync,
+  readlinkSync,
+  realpathSync,
+} from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
@@ -78,10 +85,10 @@ test("software licensing preserves the MIT text, metadata and separate content s
     assert.ok(notice.includes(location), location);
 });
 
-test("Claude skill adapters match canonical metadata and targets", () => {
+test("Claude skill symlinks preserve canonical metadata and targets", () => {
   const directories = (base) =>
     readdirSync(path.join(root, base), { withFileTypes: true })
-      .filter((entry) => entry.isDirectory())
+      .filter((entry) => entry.isDirectory() || entry.isSymbolicLink())
       .map((entry) => entry.name)
       .sort();
   const names = directories(".agents/skills");
@@ -109,13 +116,10 @@ test("Claude skill adapters match canonical metadata and targets", () => {
       });
     };
     assert.deepEqual(metadata(adapter), metadata(canonical), name);
-    const target = read(adapter).match(/\]\(([^)]+\/SKILL\.md)\)/)?.[1];
-    assert.ok(target, `${adapter}: missing canonical link`);
-    assert.equal(
-      realpathSync(path.resolve(root, path.dirname(adapter), target)),
-      realpathSync(path.join(root, canonical)),
-      name,
-    );
+    const link = path.join(root, ".claude/skills", name);
+    assert.ok(lstatSync(link).isSymbolicLink(), name);
+    assert.equal(readlinkSync(link), `../../.agents/skills/${name}`, name);
+    assert.equal(realpathSync(link), realpathSync(path.dirname(path.join(root, canonical))), name);
   }
 });
 

@@ -1,0 +1,28 @@
+{
+  "evals": [
+    {
+      "prompt": "Evaluate the proposed stable Next.js patch upgrade; do not apply it.",
+      "assertions": [
+        "Checks supported stable compatibility and the matching SWC version.",
+        "Reports evidence and gaps without making package or lockfile edits.",
+        "Does not expand the request to unrelated dependencies."
+      ]
+    },
+    {
+      "prompt": "Apply the approved Biome patch upgrade and verify the portfolio.",
+      "assertions": [
+        "Limits updates to the approved package and necessary lockfile changes through the package manager.",
+        "Runs relevant repository checks and reports any regression.",
+        "Does not commit, push or merge without authorization."
+      ]
+    },
+    {
+      "prompt": "Assess a requested Playwright bump while network is off; evaluation only.",
+      "assertions": [
+        "Uses available local evidence and names missing upstream verification.",
+        "Checks browser configuration and runtime compatibility concerns.",
+        "Does not install packages or claim unavailable checks passed."
+      ]
+    }
+  ]
+}

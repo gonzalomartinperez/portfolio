@@ -1,6 +1,10 @@
 ---
 name: review-change
-description: Review a portfolio diff for concrete correctness, security, accessibility, and maintainability issues; read-only unless fixes are explicitly requested.
+description: Use when reviewing a portfolio diff for concrete correctness, security, accessibility, and maintainability issues; stay read-only unless fixes are explicitly requested. Not for defect diagnosis or delivery preparation.
+metadata:
+  owner: gonzalomartinperez
+  last-reviewed: 2026-11-14
+  version: 1.0.0
 ---
 
 # Review Change

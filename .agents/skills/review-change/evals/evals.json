@@ -1,0 +1,28 @@
+{
+  "evals": [
+    {
+      "prompt": "Review the locale switcher diff for correctness and accessibility; no edits.",
+      "assertions": [
+        "Reports concrete reproducible findings with file and line references.",
+        "Separates blocking defects from optional suggestions.",
+        "Leaves code unchanged."
+      ]
+    },
+    {
+      "prompt": "Review the assistant client diff for accidental server-only data exposure.",
+      "assertions": [
+        "Traces relevant data across the server/client boundary.",
+        "Explains the concrete exposure scenario for any finding.",
+        "Reports verification limits without inventing vulnerabilities or modifying code."
+      ]
+    },
+    {
+      "prompt": "Review the gallery change against its approved keyboard acceptance criteria.",
+      "assertions": [
+        "Compares behavior with the actual acceptance criteria.",
+        "Supports defects with reproducible evidence.",
+        "Does not turn review into delivery preparation or an unsolicited fix."
+      ]
+    }
+  ]
+}

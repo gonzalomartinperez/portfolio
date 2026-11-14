@@ -23,7 +23,7 @@ Small fixes can keep their spec in the issue or task instead of creating a docum
 
 Select relevant repository skills automatically from the task and their descriptions;
 the user does not need to type `$skill-name`. `.agents/skills/` contains the canonical
-procedures. Claude adapters in `.claude/skills/` must point to them, not fork them.
+procedures. Claude skills in `.claude/skills/` are relative symlinks to `.agents/skills/`.
 
 When a session starts from the workspace parent, its native skill catalog may not
 include this repository. After identifying the repository and reading this file,

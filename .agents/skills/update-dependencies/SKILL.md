@@ -1,6 +1,10 @@
 ---
 name: update-dependencies
-description: Evaluate or apply requested dependency upgrades using supported stable versions and verified compatibility; not an instruction to update all packages during ordinary work.
+description: Use when evaluating or applying requested dependency upgrades with supported stable versions and verified compatibility. Not for updating all packages during ordinary feature work.
+metadata:
+  owner: gonzalomartinperez
+  last-reviewed: 2026-11-14
+  version: 1.0.0
 ---
 
 # Update Dependencies

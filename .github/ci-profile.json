@@ -76,7 +76,15 @@
       "budgetP95Minutes": 20
     },
     "harness": {
-      "paths": [".agents/**", ".claude/**", ".codex/**", "AGENTS.md", "CLAUDE.md", ".mcp.json"],
+      "paths": [
+        ".agents/**",
+        ".claude/**",
+        ".codex/**",
+        "AGENTS.md",
+        "CLAUDE.md",
+        ".mcp.json",
+        ".worktreeinclude"
+      ],
       "adds": ["quality"],
       "budgetP50Minutes": 3,
       "budgetP95Minutes": 6

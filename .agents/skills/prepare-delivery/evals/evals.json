@@ -1,0 +1,28 @@
+{
+  "evals": [
+    {
+      "prompt": "Prepare the finished bilingual navigation change for handoff; do not commit or push.",
+      "assertions": [
+        "Runs appropriate repository checks and inspects the diff.",
+        "Summarizes changed behavior, verification and remaining risks.",
+        "Does not commit or push."
+      ]
+    },
+    {
+      "prompt": "Verify this gallery change and draft a Conventional Commit message only.",
+      "assertions": [
+        "Uses the repository verification commands and reports failures honestly.",
+        "Drafts an English Conventional Commit matching the final scope.",
+        "Preserves concurrent changes and leaves the commit uncreated."
+      ]
+    },
+    {
+      "prompt": "Prepare the theme refactor for delivery. Network is off; do not commit.",
+      "assertions": [
+        "Checks locally available evidence and relevant acceptance criteria.",
+        "Distinguishes passed checks from checks blocked by unavailable services.",
+        "Does not publish, push or claim production verification."
+      ]
+    }
+  ]
+}

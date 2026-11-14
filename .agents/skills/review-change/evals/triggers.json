@@ -1,0 +1,64 @@
+{
+  "queries": [
+    {
+      "query": "Review the locale switcher diff for correctness and accessibility; do not edit.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Inspect this theme toggle PR for keyboard regressions with file and line findings.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Review the CV card changes for security and maintainability issues.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Check the gallery diff for concrete focus-management bugs; read-only review.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Review the assistant client diff for server-only data exposed to the browser.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Assess whether this navigation diff violates its accepted specification.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Diagnose why the Spanish homepage flashes on locale changes; reproduce the failure.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Reproduce and fix the hydration error in the theme toggle.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Verify the completed CV card change and prepare a delivery summary.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Run final checks and draft a Conventional Commit for the gallery change; no commit.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Plan the assistant client error states before implementation.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Apply the approved stable Next.js patch upgrade.",
+      "should_trigger": false,
+      "split": "validation"
+    }
+  ]
+}

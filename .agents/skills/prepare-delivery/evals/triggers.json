@@ -1,0 +1,64 @@
+{
+  "queries": [
+    {
+      "query": "Verify the completed CV card change and prepare a delivery summary; do not commit.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Run final checks and draft a Conventional Commit for the gallery change; no commit.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Prepare the bilingual navigation change for handoff with verification evidence.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Check the finished theme refactor and summarize remaining delivery risks.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Prepare a commit message and handoff for the completed technology filter without pushing.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Verify this finished portfolio task for delivery, keeping uncommitted changes intact.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Review the CV card diff for correctness only; no delivery preparation.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Inspect the gallery PR for concrete accessibility defects; read-only review.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Diagnose why navigation fails during hydration.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Plan the theme refactor and acceptance criteria; no implementation.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Implement the approved technology filter.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Evaluate a stable Next.js upgrade without applying it.",
+      "should_trigger": false,
+      "split": "validation"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "queries": [
+    {
+      "query": "Implement the approved bilingual project comparison section using the existing card primitives.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Build the specified keyboard-accessible technology filter on the portfolio stack page.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Refactor the approved contact page layout while preserving English and Spanish content.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Add the approved reduced-motion fallback to the hero interaction and verify it.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Implement the accepted spec for a theme-aware CV download card.",
+      "should_trigger": true,
+      "split": "validation"
+    },
+    {
+      "query": "Wire the approved project gallery pagination into the existing Server Component page.",
+      "should_trigger": true,
+      "split": "train"
+    },
+    {
+      "query": "Plan a bilingual project comparison section; define acceptance criteria without implementing it.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Scope a keyboard-accessible technology filter and write a delivery plan only.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Review the contact page diff for regressions without editing it.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Evaluate whether the next stable Next.js patch is compatible; do not upgrade yet.",
+      "should_trigger": false,
+      "split": "validation"
+    },
+    {
+      "query": "Upgrade Biome to the approved stable version and update its lockfile.",
+      "should_trigger": false,
+      "split": "train"
+    },
+    {
+      "query": "Prepare a delivery summary for the completed gallery change; do not commit.",
+      "should_trigger": false,
+      "split": "validation"
+    }
+  ]
+}

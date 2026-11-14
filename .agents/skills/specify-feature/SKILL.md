@@ -1,6 +1,10 @@
 ---
 name: specify-feature
-description: Define a portfolio feature specification and delivery plan when the user asks to scope or plan behavior; do not implement or publish from a planning-only request.
+description: Use when scoping or planning portfolio behavior to define a feature specification and delivery plan. Not for implementing or publishing from a planning-only request.
+metadata:
+  owner: gonzalomartinperez
+  last-reviewed: 2026-11-14
+  version: 1.0.0
 ---
 
 # Specify Feature
