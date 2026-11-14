@@ -6,6 +6,9 @@ import { parseDocument } from "yaml";
 const CORE = ["workflows", "secrets", "quality", "build", "hosting", "browser", "performance"];
 const NIGHTLY = ["prepare", "quality", "browser", "visual", "links", "bundle"];
 const CORE_NAMES = {
+  policy: "Branch policy",
+  quality: "Quality checks",
+  "ci-gate": "ci-gate",
   workflows: "Workflow validation",
   secrets: "Secret scan",
   build: "Build",
@@ -13,7 +16,6 @@ const CORE_NAMES = {
   browser: `Browser tests (\${{ matrix.shard }}/8)`,
   performance: "Performance checks",
   checks: "Required checks",
-  "legacy-checks": "Quality checks",
 };
 const NIGHTLY_NAMES = {
   prepare: "Nightly prepare candidate",
@@ -35,13 +37,21 @@ const expression = (value) =>
         .trim()
     : "";
 
-function inspectPermissions(value, label, errors, requireContents = false) {
+function inspectPermissions(
+  value,
+  label,
+  errors,
+  requireContents = false,
+  allowPullRequests = false,
+) {
   if (
     !isRecord(value) ||
     (requireContents && value.contents !== "read") ||
     Object.entries(value).some(
       ([scope, permission]) =>
-        permission !== "none" && !(scope === "contents" && permission === "read"),
+        permission !== "none" &&
+        !(scope === "contents" && permission === "read") &&
+        !(allowPullRequests && scope === "pull-requests" && permission === "read"),
     )
   ) {
     errors.push(
@@ -105,11 +115,46 @@ function inspectGate(workflow, job, prerequisites, label, errors) {
   }
 }
 
+function inspectCoreGate(jobs, errors) {
+  const classifySha = (typeof jobs.classify?.uses === "string" ? jobs.classify.uses : "").match(
+    /^gonzalomartinperez\/engineering-standards\/\.github\/workflows\/classify\.yml@([a-f\d]{40})$/i,
+  )?.[1];
+  if (!classifySha)
+    errors.push("classify: must use the SHA-pinned engineering-standards classify workflow");
+  const gate = jobs["ci-gate"];
+  if (!isRecord(gate)) return;
+  if (gate.if !== "always()") errors.push("ci-gate: aggregate must run with literal always()");
+  const needs = typeof gate.needs === "string" ? [gate.needs] : gate.needs;
+  if (!Array.isArray(needs) || !sameSet(needs, ["classify", "policy", ...CORE]))
+    errors.push("ci-gate: aggregate must need exactly classify, policy and every prerequisite");
+  if (!isRecord(gate.permissions) || Object.keys(gate.permissions).length !== 0)
+    errors.push("ci-gate: permissions must be an empty mapping");
+  if (!Array.isArray(gate.steps) || gate.steps.length !== 1 || !isRecord(gate.steps[0])) {
+    errors.push("ci-gate: must contain exactly one pinned action step");
+    return;
+  }
+  const step = gate.steps[0];
+  const gateSha = (typeof step.uses === "string" ? step.uses : "").match(
+    /^gonzalomartinperez\/engineering-standards\/actions\/ci-gate@([a-f\d]{40})$/i,
+  )?.[1];
+  if (!gateSha || gateSha !== classifySha)
+    errors.push(
+      "ci-gate: must use the pinned engineering-standards action with the same SHA as classify",
+    );
+  if ("if" in step || "run" in step) errors.push("ci-gate: action step must run unconditionally");
+  if (
+    !isRecord(step.with) ||
+    !sameSet(Object.keys(step.with), ["needs", "expected"]) ||
+    step.with.needs !== `\${{ toJSON(needs) }}` ||
+    step.with.expected !== `\${{ needs.classify.outputs.jobs }}`
+  )
+    errors.push("ci-gate: action inputs must pass exactly toJSON(needs) and classify outputs.jobs");
+}
+
 /** Checks declarative workflow structure and a fixed aggregate grammar; it does not sandbox shell. */
-export function validateWorkflowPolicy(source, { profile, phase = "A" } = {}) {
+export function validateWorkflowPolicy(source, { profile } = {}) {
   const errors = [];
-  if (!["core", "nightly"].includes(profile) || !["A", "B"].includes(phase))
-    return ["Unknown workflow profile or migration phase"];
+  if (!["core", "nightly"].includes(profile)) return ["Unknown workflow profile"];
   let workflow;
   try {
     const document = parseDocument(source, { uniqueKeys: true, version: "1.2" });
@@ -123,17 +168,19 @@ export function validateWorkflowPolicy(source, { profile, phase = "A" } = {}) {
   if (!isRecord(workflow) || !isRecord(workflow.jobs))
     return ["Workflow must define a jobs mapping"];
   const prerequisites = profile === "core" ? CORE : NIGHTLY;
-  const expectedIds = [
-    ...prerequisites,
-    "checks",
-    ...(profile === "core" && phase === "A" ? ["legacy-checks"] : []),
-  ];
+  const expectedIds =
+    profile === "core"
+      ? ["classify", "policy", ...CORE, "ci-gate", "checks"]
+      : [...NIGHTLY, "checks"];
   if (!sameSet(Object.keys(workflow.jobs), expectedIds))
     errors.push(`${profile}: expected job IDs ${expectedIds.join(", ")}`);
   if (profile === "core" ? workflow.name !== "CI" : workflow.name !== "Nightly") {
     errors.push(`${profile}: workflow name must identify its CI profile`);
   }
-  inspectPermissions(workflow.permissions, profile, errors, true);
+  if (profile === "core") {
+    if (!isRecord(workflow.permissions) || Object.keys(workflow.permissions).length !== 0)
+      errors.push("core: permissions must be an empty mapping");
+  } else inspectPermissions(workflow.permissions, profile, errors, true);
   if (
     isRecord(workflow.on) &&
     ["pull_request_target", "workflow_run"].some((event) => Object.hasOwn(workflow.on, event))
@@ -145,9 +192,16 @@ export function validateWorkflowPolicy(source, { profile, phase = "A" } = {}) {
   if (profile === "core") {
     if (
       !isRecord(workflow.on) ||
-      !sameSet(Object.keys(workflow.on), ["pull_request", "push", "workflow_dispatch"])
+      !sameSet(Object.keys(workflow.on), [
+        "pull_request",
+        "push",
+        "workflow_dispatch",
+        "merge_group",
+      ])
     ) {
-      errors.push("core: require pull_request, push and workflow_dispatch triggers only");
+      errors.push(
+        "core: require pull_request, push, workflow_dispatch and merge_group triggers only",
+      );
     }
     for (const event of ["pull_request", "push"]) {
       const trigger = workflow.on?.[event];
@@ -159,6 +213,8 @@ export function validateWorkflowPolicy(source, { profile, phase = "A" } = {}) {
       ) {
         errors.push(`core: ${event} must cover exactly main and develop`);
       }
+    }
+    for (const [event, trigger] of Object.entries(workflow.on ?? {})) {
       if (isRecord(trigger) && ("paths" in trigger || "paths-ignore" in trigger))
         errors.push(`core: ${event} must not filter paths`);
     }
@@ -182,24 +238,27 @@ export function validateWorkflowPolicy(source, { profile, phase = "A" } = {}) {
       errors.push(`${id}: job must be a mapping`);
       continue;
     }
-    if (typeof job.name !== "string" || !job.name.trim())
+    if (profile === "core" && id === "classify") {
+      if ("name" in job || "steps" in job || "if" in job || "needs" in job)
+        errors.push("classify: reusable call must not declare name, steps, if or needs");
+    } else if (typeof job.name !== "string" || !job.name.trim())
       errors.push(`${id}: job requires a literal check name`);
     else {
       if (names.has(job.name.trim())) errors.push(`${id}: duplicate check identity ${job.name}`);
       names.add(job.name.trim());
-      const expectedName =
-        profile === "nightly"
-          ? NIGHTLY_NAMES[id]
-          : id === "quality"
-            ? phase === "A"
-              ? "Quality (development)"
-              : "Quality checks"
-            : CORE_NAMES[id];
+      const expectedName = profile === "nightly" ? NIGHTLY_NAMES[id] : CORE_NAMES[id];
       if (job.name !== expectedName) errors.push(`${id}: expected check name ${expectedName}`);
     }
-    if ("if" in job && !["checks", "legacy-checks"].includes(id))
+    if (profile === "nightly" && "if" in job && id !== "checks")
       errors.push(`${id}: prerequisite job must not have an if condition`);
-    if ("permissions" in job) inspectPermissions(job.permissions, id, errors);
+    if (profile === "core" || "permissions" in job)
+      inspectPermissions(
+        job.permissions,
+        id,
+        errors,
+        false,
+        profile === "core" && id === "classify",
+      );
     if ("continue-on-error" in job) errors.push(`${id}: continue-on-error is forbidden`);
     if ("uses" in job) inspectAction(job.uses, id, errors);
     if ("needs" in job) {
@@ -255,8 +314,13 @@ export function validateWorkflowPolicy(source, { profile, phase = "A" } = {}) {
           links: ["quality"],
           bundle: ["quality"],
         };
-  for (const id of prerequisites) {
-    const required = dependencies[id] ?? [];
+  for (const id of profile === "core" ? ["policy", ...CORE] : prerequisites) {
+    const required = [...(profile === "core" ? ["classify"] : []), ...(dependencies[id] ?? [])];
+    if (
+      profile === "core" &&
+      workflow.jobs[id]?.if !== `contains(fromJSON(needs.classify.outputs.jobs), '${id}')`
+    )
+      errors.push(`${id}: must use the exact classify output condition for its own ID`);
     const needs = workflow.jobs[id]?.needs;
     const actual = needs === undefined ? [] : Array.isArray(needs) ? needs : [needs];
     if (!sameSet(actual, required))
@@ -277,11 +341,18 @@ export function validateWorkflowPolicy(source, { profile, phase = "A" } = {}) {
       `${profile}: browser must run exactly eight shards, max-parallel 8, fail-fast false`,
     );
   }
-  if (isRecord(workflow.jobs.checks))
-    inspectGate(workflow, workflow.jobs.checks, prerequisites, `${profile}.checks`, errors);
-  if (profile === "core" && phase === "A" && isRecord(workflow.jobs["legacy-checks"])) {
-    inspectGate(workflow, workflow.jobs["legacy-checks"], ["checks"], "core.legacy-checks", errors);
+  if (isRecord(workflow.jobs.checks)) {
+    inspectGate(
+      workflow,
+      workflow.jobs.checks,
+      profile === "core" ? ["ci-gate"] : prerequisites,
+      `${profile}.checks`,
+      errors,
+    );
+    if (profile === "core" && workflow.jobs.checks.steps?.length !== 1)
+      errors.push("core.checks: alias must contain exactly one result gate step");
   }
+  if (profile === "core") inspectCoreGate(workflow.jobs, errors);
   return errors;
 }
 
@@ -298,7 +369,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
       try {
         const errors = validateWorkflowPolicy(readFileSync(file, "utf8"), {
           profile,
-          phase: args.includes("--phase=B") ? "B" : "A",
         });
         for (const error of errors) console.error(`${file}: ${error}`);
         if (errors.length) process.exitCode = 1;

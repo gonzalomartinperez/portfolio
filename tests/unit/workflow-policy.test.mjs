@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import { stringify } from "yaml";
 import { validateWorkflowPolicy } from "../../tools/workflow-policy.mjs";
@@ -9,7 +10,7 @@ const NIGHTLY = ["prepare", "quality", "browser", "visual", "links", "bundle"];
 const CORE_NAMES = {
   workflows: "Workflow validation",
   secrets: "Secret scan",
-  quality: "Quality (development)",
+  quality: "Quality checks",
   build: "Build",
   hosting: "Hosting contract",
   browser: `Browser tests (\${{ matrix.shard }}/8)`,
@@ -41,7 +42,7 @@ function gate(name, prerequisites) {
     ],
   };
 }
-function fixture(profile = "core", phase = "A") {
+function fixture(profile = "core") {
   const prerequisites = profile === "core" ? CORE : NIGHTLY;
   const jobs = Object.fromEntries(
     prerequisites.map((id) => [
@@ -71,20 +72,50 @@ function fixture(profile = "core", phase = "A") {
   };
   jobs.checks = gate(profile === "core" ? "Required checks" : NIGHTLY_NAMES.checks, prerequisites);
   if (profile === "core") {
-    if (phase === "A") jobs["legacy-checks"] = gate("Quality checks", ["checks"]);
-    else jobs.quality.name = "Quality checks";
+    jobs.classify = {
+      uses: `gonzalomartinperez/engineering-standards/.github/workflows/classify.yml@${SHA}`,
+      permissions: { contents: "read", "pull-requests": "read" },
+    };
+    jobs.policy = {
+      name: "Branch policy",
+      "runs-on": "ubuntu-24.04",
+      steps: [{ run: "echo policy" }],
+    };
+    for (const id of ["policy", ...CORE]) {
+      jobs[id].needs = ["classify", ...(jobs[id].needs ? [jobs[id].needs] : [])];
+      jobs[id].if = `contains(fromJSON(needs.classify.outputs.jobs), '${id}')`;
+      jobs[id].permissions = id === "policy" ? {} : { contents: "read" };
+    }
+    jobs["ci-gate"] = {
+      name: "ci-gate",
+      if: "always()",
+      needs: ["classify", "policy", ...CORE],
+      "runs-on": "ubuntu-24.04",
+      permissions: {},
+      steps: [
+        {
+          uses: `gonzalomartinperez/engineering-standards/actions/ci-gate@${SHA}`,
+          with: { needs: `\${{ toJSON(needs) }}`, expected: `\${{ needs.classify.outputs.jobs }}` },
+        },
+      ],
+    };
+    jobs.checks = { ...gate("Required checks", ["ci-gate"]), permissions: {} };
   }
   return {
     name: profile === "core" ? "CI" : "Nightly",
     on:
       profile === "core"
         ? {
-            pull_request: { branches: ["develop", "main"] },
+            pull_request: {
+              branches: ["develop", "main"],
+              types: ["opened", "synchronize", "reopened", "labeled", "unlabeled", "edited"],
+            },
+            merge_group: null,
             push: { branches: ["main", "develop"] },
             workflow_dispatch: null,
           }
         : { schedule: [{ cron: "35 3 * * *" }], workflow_dispatch: null },
-    permissions: { contents: "read" },
+    permissions: profile === "core" ? {} : { contents: "read" },
     defaults: { run: { shell: "bash" } },
     jobs,
   };
@@ -148,40 +179,17 @@ for (const profile of ["core", "nightly"]) {
   reject(
     `${profile} rejects a literal result replacing the real job outcome`,
     (w) => {
-      w.jobs.checks.steps[0].env.QUALITY_RESULT = "success";
+      const variable = profile === "core" ? "CI_GATE_RESULT" : "QUALITY_RESULT";
+      w.jobs.checks.steps[0].env[variable] = "success";
     },
-    /must read needs.quality.result/,
+    /must read needs\.(quality|ci-gate)\.result/,
     profile,
   );
 }
 
-test("phase B requires explicit migration and retires the phase A bridge", () => {
-  const migrated = fixture("core", "B");
-  assert.deepEqual(validate(migrated, "core", "B"), []);
-  assert.ok(validate(migrated).length);
-  assert.ok(validate(fixture(), "core", "B").length);
+test("core ignores the retired migration phase option", () => {
+  for (const phase of ["A", "B"]) assert.deepEqual(validate(fixture(), "core", phase), []);
 });
-reject(
-  "phase A cannot remove the protected legacy check",
-  (w) => {
-    delete w.jobs["legacy-checks"];
-  },
-  /expected job IDs/,
-);
-reject(
-  "legacy bridge cannot stop checking the canonical aggregate",
-  (w) => {
-    w.jobs["legacy-checks"].steps[0].run = "exit 0";
-  },
-  /only literal success tests/,
-);
-reject(
-  "temporary development quality identity is preserved until migration",
-  (w) => {
-    w.jobs.quality.name = "Quality checks";
-  },
-  /expected check name/,
-);
 reject(
   "workflow rejects duplicate check identities",
   (w) => {
@@ -257,28 +265,28 @@ reject(
   (w) => {
     w.jobs.build.needs = "secrets";
   },
-  /build: must need exactly quality/,
+  /build: must need exactly classify, quality/,
 );
 reject(
   "Core requires hosting to wait for quality",
   (w) => {
     w.jobs.hosting.needs = [];
   },
-  /hosting: must need exactly quality/,
+  /hosting: must need exactly classify, quality/,
 );
 reject(
   "Core requires browser to consume the reviewed build",
   (w) => {
     w.jobs.browser.needs = "quality";
   },
-  /browser: must need exactly build/,
+  /browser: must need exactly classify, build/,
 );
 reject(
   "Core requires performance to consume the reviewed build",
   (w) => {
     w.jobs.performance.needs = "quality";
   },
-  /performance: must need exactly build/,
+  /performance: must need exactly classify, build/,
 );
 reject(
   "Nightly quality requires prepare",
@@ -358,19 +366,16 @@ reject(
 reject(
   "a repeated result test cannot stand in for an omitted result",
   (w) => {
-    w.jobs.checks.steps[0].run = w.jobs.checks.steps[0].run.replace(
-      "$BUILD_RESULT",
-      "$QUALITY_RESULT",
-    );
+    w.jobs.checks.steps[0].run += ' && test "$CI_GATE_RESULT" = success';
   },
   /every prerequisite must be tested/,
 );
 reject(
   "result variable expressions must point to their own job",
   (w) => {
-    w.jobs.checks.steps[0].env.BUILD_RESULT = `\${{ needs.quality.result }}`;
+    w.jobs.checks.steps[0].env.CI_GATE_RESULT = `\${{ needs.quality.result }}`;
   },
-  /must read needs.build.result/,
+  /must read needs.ci-gate.result/,
 );
 reject(
   "dependency cycles are rejected before GitHub evaluates the workflow",
@@ -402,8 +407,8 @@ test("duplicate YAML job keys cannot overwrite a required job", () => {
 });
 test("duplicate YAML keys inside the gate cannot hide its actual condition", () => {
   const source = stringify(fixture()).replace(
-    / {4}if: [^\n]+/,
-    `    if: false\n    if: "\${{ always() }}"`,
+    /( {4}name: Required checks\n) {4}if: [^\n]+/,
+    `$1    if: false\n    if: "\${{ always() }}"`,
   );
   assert.ok(
     validateWorkflowPolicy(source, { profile: "core" }).some((error) => /Invalid YAML/.test(error)),
@@ -419,14 +424,14 @@ reject(
   (w) => {
     w.jobs.build.needs = ["quality", "secrets"];
   },
-  /build: must need exactly quality/,
+  /build: must need exactly classify, quality/,
 );
 reject(
   "independent Core jobs cannot gain undeclared dependencies",
   (w) => {
     w.jobs.secrets.needs = "workflows";
   },
-  /secrets: must need exactly no jobs/,
+  /secrets: must need exactly classify/,
 );
 reject(
   "Nightly prepare remains independent",
@@ -441,7 +446,7 @@ reject(
   (w) => {
     w.jobs.quality.if = "false";
   },
-  /prerequisite job must not have an if/,
+  /exact classify output condition/,
 );
 reject(
   "read-all is broader than the least-privilege contract",
@@ -520,9 +525,9 @@ reject(
 reject(
   "plain result reference text cannot replace an evaluated expression",
   (w) => {
-    w.jobs.checks.steps[0].env.BUILD_RESULT = "needs.build.result";
+    w.jobs.checks.steps[0].env.CI_GATE_RESULT = "needs.ci-gate.result";
   },
-  /must read needs.build.result/,
+  /must read needs.ci-gate.result/,
 );
 test("YAML aliases cannot hide shared job definitions", () => {
   const source = `${stringify(fixture()).replace("contents: read", "contents: &mode read")}\nignored: *mode\n`;
@@ -553,5 +558,248 @@ reject(
     w.on.push = { branches: ["main"] };
   },
   /triggers only/,
+  "nightly",
+);
+
+test("the committed core and nightly workflows satisfy their profiles", () => {
+  for (const [profile, file] of [
+    ["core", "ci"],
+    ["nightly", "nightly"],
+  ]) {
+    const source = readFileSync(
+      new URL(`../../.github/workflows/${file}.yml`, import.meta.url),
+      "utf8",
+    );
+    assert.deepEqual(validateWorkflowPolicy(source, { profile }), [], file);
+  }
+});
+
+test("core dependency ordering does not affect the contract", () => {
+  const workflow = fixture();
+  for (const job of Object.values(workflow.jobs)) {
+    if (Array.isArray(job.needs)) job.needs.reverse();
+  }
+  assert.deepEqual(validate(workflow), []);
+});
+
+for (const id of ["policy", ...CORE]) {
+  reject(
+    `${id} requires its classifier condition`,
+    (w) => {
+      delete w.jobs[id].if;
+    },
+    /exact classify output condition/,
+  );
+  reject(
+    `${id} cannot use another job's classifier condition`,
+    (w) => {
+      w.jobs[id].if = "contains(fromJSON(needs.classify.outputs.jobs), 'other')";
+    },
+    /exact classify output condition/,
+  );
+  reject(
+    `${id} must depend on classify`,
+    (w) => {
+      w.jobs[id].needs = w.jobs[id].needs.filter((need) => need !== "classify");
+    },
+    /must need exactly classify/,
+  );
+}
+
+reject(
+  "core gate must always run",
+  (w) => {
+    w.jobs["ci-gate"].if = "success()";
+  },
+  /literal always/,
+);
+for (const id of ["classify", "policy", ...CORE]) {
+  reject(
+    `core gate cannot omit ${id}`,
+    (w) => {
+      w.jobs["ci-gate"].needs = w.jobs["ci-gate"].needs.filter((need) => need !== id);
+    },
+    /aggregate must need exactly/,
+  );
+}
+for (const target of ["classify", "ci-gate"]) {
+  for (const ref of ["main", "a".repeat(39), "g".repeat(40)]) {
+    reject(
+      `${target} rejects a non-SHA standards ref ${ref}`,
+      (w) => {
+        const call = target === "classify" ? w.jobs.classify : w.jobs["ci-gate"].steps[0];
+        call.uses = call.uses.replace(SHA, ref);
+      },
+      /SHA/,
+    );
+  }
+  reject(
+    `${target} rejects a different pinned standards repository`,
+    (w) => {
+      const call = target === "classify" ? w.jobs.classify : w.jobs["ci-gate"].steps[0];
+      call.uses = call.uses.replace("gonzalomartinperez/engineering-standards", "other/standards");
+    },
+    /engineering-standards/,
+  );
+}
+reject(
+  "standards workflow and gate must use the same SHA",
+  (w) => {
+    w.jobs["ci-gate"].steps[0].uses = w.jobs["ci-gate"].steps[0].uses.replace(SHA, "b".repeat(40));
+  },
+  /same SHA/,
+);
+for (const input of ["needs", "expected"]) {
+  reject(
+    `core gate rejects a missing ${input} input`,
+    (w) => {
+      delete w.jobs["ci-gate"].steps[0].with[input];
+    },
+    /action inputs/,
+  );
+  reject(
+    `core gate rejects a replaced ${input} input`,
+    (w) => {
+      w.jobs["ci-gate"].steps[0].with[input] = "success";
+    },
+    /action inputs/,
+  );
+}
+reject(
+  "core gate rejects extra inputs",
+  (w) => {
+    w.jobs["ci-gate"].steps[0].with.extra = "true";
+  },
+  /action inputs/,
+);
+reject(
+  "core gate cannot skip its action step",
+  (w) => {
+    w.jobs["ci-gate"].steps[0].if = "false";
+  },
+  /unconditionally/,
+);
+reject(
+  "core gate cannot add a run command",
+  (w) => {
+    w.jobs["ci-gate"].steps[0].run = "exit 0";
+  },
+  /unconditionally/,
+);
+for (const id of ["ci-gate", "checks"]) {
+  reject(
+    `${id} cannot contain extra steps`,
+    (w) => {
+      w.jobs[id].steps.push({ run: "echo extra" });
+    },
+    /exactly one/,
+  );
+}
+for (const key of ["name", "steps", "if", "needs"]) {
+  reject(
+    `classify cannot declare ${key}`,
+    (w) => {
+      w.jobs.classify[key] = key === "steps" ? [] : "unexpected";
+    },
+    /reusable call must not declare/,
+  );
+}
+reject(
+  "core cannot add undeclared jobs",
+  (w) => {
+    w.jobs.extra = { name: "Extra", permissions: {}, steps: [{ run: "true" }] };
+  },
+  /expected job IDs/,
+);
+reject(
+  "core preserves the required check identity",
+  (w) => {
+    w.jobs.checks.name = "Renamed checks";
+  },
+  /expected check name/,
+);
+reject(
+  "core preserves its workflow identity",
+  (w) => {
+    w.name = "Renamed CI";
+  },
+  /workflow name/,
+);
+reject(
+  "core cannot add an extra trigger",
+  (w) => {
+    w.on.schedule = [{ cron: "0 0 * * *" }];
+  },
+  /triggers only/,
+);
+reject(
+  "core requires merge queue validation",
+  (w) => {
+    delete w.on.merge_group;
+  },
+  /merge_group/,
+);
+reject(
+  "core root permissions must be empty even for read access",
+  (w) => {
+    w.permissions.contents = "read";
+  },
+  /permissions must be an empty mapping/,
+);
+reject(
+  "each core job must declare permissions",
+  (w) => {
+    delete w.jobs.quality.permissions;
+  },
+  /permissions must/,
+);
+reject(
+  "pull request read access is reserved for classify",
+  (w) => {
+    w.jobs.build.permissions["pull-requests"] = "read";
+  },
+  /permissions must/,
+);
+reject(
+  "classify cannot escalate contents permissions",
+  (w) => {
+    w.jobs.classify.permissions.contents = "write";
+  },
+  /permissions must/,
+);
+reject(
+  "ci-gate must have empty permissions",
+  (w) => {
+    w.jobs["ci-gate"].permissions.contents = "read";
+  },
+  /permissions must be an empty mapping/,
+);
+test("core permits explicit disabled permission scopes", () => {
+  const workflow = fixture();
+  workflow.jobs.build.permissions.issues = "none";
+  assert.deepEqual(validate(workflow), []);
+});
+reject(
+  "Nightly prerequisites still cannot have conditions",
+  (w) => {
+    w.jobs.quality.if = "false";
+  },
+  /prerequisite job must not have an if/,
+  "nightly",
+);
+reject(
+  "Nightly still requires root contents read access",
+  (w) => {
+    w.permissions = {};
+  },
+  /permissions must/,
+  "nightly",
+);
+reject(
+  "Nightly cannot gain classify's pull request permissions",
+  (w) => {
+    w.jobs.quality.permissions = { "pull-requests": "read" };
+  },
+  /permissions must/,
   "nightly",
 );

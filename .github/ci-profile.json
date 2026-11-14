@@ -1,0 +1,104 @@
+{
+  "$schema": "https://raw.githubusercontent.com/gonzalomartinperez/engineering-standards/v1.0.0/schemas/ci-profile.schema.json",
+  "$comment": "Read by the engineering-standards classify workflow. Every tracked file must match a profile (tests/unit/ci-profile.test.ts); a file outside every profile, a diff error or a change to this file runs everything. push, schedule, workflow_dispatch and merge_group always run everything.",
+  "version": 1,
+  "base": ["policy", "secrets"],
+  "profiles": {
+    "docs": {
+      "paths": [
+        "**/*.md",
+        "docs/**",
+        "LICENSE",
+        ".github/ISSUE_TEMPLATE/**",
+        ".github/CODEOWNERS",
+        "public/.well-known/**"
+      ],
+      "adds": ["quality"],
+      "budgetP50Minutes": 2,
+      "budgetP95Minutes": 4
+    },
+    "code": {
+      "paths": [
+        "src/**",
+        "content/**",
+        "config/**",
+        "tests/**",
+        "tools/**",
+        "public/**",
+        "media/**",
+        "package.json",
+        "package-lock.json",
+        "tsconfig*.json",
+        "biome.json",
+        "components.json",
+        "next.config.mjs",
+        "postcss.config.mjs",
+        "playwright*.ts",
+        ".nvmrc",
+        ".npmrc",
+        ".env.example",
+        ".editorconfig",
+        ".gitattributes",
+        ".gitignore",
+        ".devcontainer/**",
+        "standards.lock"
+      ],
+      "adds": ["quality", "build", "browser", "performance"],
+      "budgetP50Minutes": 5,
+      "budgetP95Minutes": 10
+    },
+    "hosting": {
+      "paths": [
+        "next.config.mjs",
+        "package.json",
+        "package-lock.json",
+        ".nvmrc",
+        ".npmrc",
+        "tools/ci-build-*.mjs",
+        "tools/smoke-test.mjs",
+        "tools/test-server.mjs",
+        "tools/test-site.mjs"
+      ],
+      "adds": ["quality", "hosting"],
+      "budgetP50Minutes": 6,
+      "budgetP95Minutes": 10
+    },
+    "contract": {
+      "paths": ["contracts/**", "tools/api-contract/**", "tools/check-assistant-contract.mjs"],
+      "adds": ["quality", "build", "browser", "performance"],
+      "budgetP50Minutes": 7,
+      "budgetP95Minutes": 12
+    },
+    "workflow": {
+      "paths": [".github/workflows/**", ".github/dependabot.yml", ".github/ci-profile.json"],
+      "adds": ["workflows", "quality", "build", "hosting", "browser", "performance"],
+      "budgetP50Minutes": 10,
+      "budgetP95Minutes": 20
+    },
+    "harness": {
+      "paths": [".agents/**", ".claude/**", ".codex/**", "AGENTS.md", "CLAUDE.md", ".mcp.json"],
+      "adds": ["quality"],
+      "budgetP50Minutes": 3,
+      "budgetP95Minutes": 6
+    },
+    "deps-weekly": {
+      "trigger": "branch dependabot/** or label deps-weekly (built-in)",
+      "adds": ["all-profiles"],
+      "budgetP50Minutes": 15,
+      "budgetP95Minutes": 25
+    },
+    "release": {
+      "trigger": "develop -> main or label release (built-in)",
+      "adds": ["all-profiles"],
+      "budgetP50Minutes": 30,
+      "budgetP95Minutes": 40
+    },
+    "hotfix": {
+      "trigger": "hotfix/** -> main (built-in)",
+      "adds": ["all-profiles"],
+      "budgetP50Minutes": 15,
+      "budgetP95Minutes": 25
+    }
+  },
+  "required": "ci-gate"
+}

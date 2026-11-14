@@ -148,7 +148,7 @@ test("paired CI preserves enabled QA, disabled hosting and immutable browser run
   assert.match(hosting, /glibc 2\.28/);
   assert.match(hosting, /if \(!b\.isWasm\)/);
   assert.match(hosting, /npm run test:smoke/);
-  assert.match(read(".github/workflows/branch-policy.yml"), /name: Branch policy/);
+  assert.match(read(".github/workflows/ci.yml"), /name: Branch policy/);
   assert.match(read("playwright.config.ts"), /workers: 1,/);
   assert.match(read("playwright.config.ts"), /failOnFlakyTests: Boolean\(process\.env\.CI\)/);
   const version = JSON.parse(read("package.json")).devDependencies["@playwright/test"];
@@ -290,7 +290,7 @@ test("the Node 26 compatibility job stays separate, read-only and non-blocking",
 });
 
 test("branch policy accepts only bot-native and weekly grouped Dependabot branch names", () => {
-  const source = read(".github/workflows/branch-policy.yml").match(
+  const source = read(".github/workflows/ci.yml").match(
     /PR_AUTHOR === 'dependabot\[bot\]'[^\n]*\n\s*&& (\/\^dependabot[^\n]+\$\/)\.test/,
   );
   assert.ok(source);
