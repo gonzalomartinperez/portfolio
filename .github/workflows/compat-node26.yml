@@ -1,0 +1,73 @@
+name: Node 26 compatibility
+
+# Non-blocking forward-compatibility signal (PF-D19): Hostinger and `.nvmrc` stay on Node 24
+# until the host offers 26 and the glibc 2.28 hosting job passes. Never a required check.
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+    paths:
+      - package.json
+      - package-lock.json
+      - .nvmrc
+      - .npmrc
+      - next.config.mjs
+      - .github/workflows/compat-node26.yml
+  schedule:
+    - cron: "17 6 * * 1"
+
+permissions: {}
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: compat-node26-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  node26:
+    name: Node 26 compatibility (non-blocking)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    # Code compatibility only. The official Node 26.13.1 binary does not start on the
+    # Hostinger glibc 2.28 image (exit 127, run 43549138744), so 26 cannot be adopted there yet.
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      ASSISTANT_ENABLED: "false"
+      ANALYTICS_ENABLED: "false"
+      # package.json engines pin Node 24 for Hostinger; relax only here to observe Node 26.
+      npm_config_engine_strict: "false"
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Set up Node.js 26
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "26"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Record the runtime
+        run: |
+          node --version
+          npm --version
+      - name: Install locked dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+      - name: Run repository and content unit tests
+        run: |
+          npm run test:repository
+          npm run test:content
+      - name: Build the production site
+        run: npm run build
+      - name: Smoke-test the production server
+        run: npm run test:smoke
+      - name: Verify tracked sources remain unchanged
+        run: git diff --exit-code
