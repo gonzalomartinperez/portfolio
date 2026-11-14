@@ -168,6 +168,8 @@ jobs:
           echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  $scanner_dir/archive.tar.gz" | sha256sum --check --status
           tar -xzf "$scanner_dir/archive.tar.gz" -C "$scanner_dir" gitleaks
           echo "$scanner_dir" >> "$GITHUB_PATH"
+      - name: Install locked dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
       - name: Reject secrets in tracked files and complete history
         run: npm run test:secrets
 

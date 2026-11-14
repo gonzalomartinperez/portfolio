@@ -15,6 +15,14 @@ export function repositoryFiles(root: string | URL): string[] {
     execFileSync("git", args, {
       cwd: directory,
       encoding: "utf8",
+      // Ignore hook-provided GIT_* variables and machine-level Git config.
+      env: {
+        ...Object.fromEntries(
+          Object.entries(process.env).filter(([name]) => !name.startsWith("GIT_")),
+        ),
+        GIT_CONFIG_GLOBAL: "/dev/null",
+        GIT_CONFIG_SYSTEM: "/dev/null",
+      },
     });
   git(["init", "--quiet", "--initial-branch=main"]);
   const files = git([

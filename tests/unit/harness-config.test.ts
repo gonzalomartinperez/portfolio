@@ -38,7 +38,7 @@ test("Claude permissions retain destructive-command and secret-read denials", ()
     "Bash(npm run typecheck:*)",
     "Bash(npm run test:*)",
     "Bash(npm run build:*)",
-    "Bash(node --test:*)",
+    "Bash(npx vitest:*)",
     "Bash(npx biome check:*)",
     "Bash(git status:*)",
     "Bash(git diff:*)",
@@ -113,7 +113,7 @@ test("Codex uses an offline writable workspace with experimental hooks left comm
   assert.doesNotMatch(config, /^\s*(?:\[\[hooks\.|codex_hooks\s*=)/m);
 });
 
-test("the shared harness files are tracked, not just present locally", () => {
+test("the shared harness files are present and not ignored", () => {
   const files = repositoryFiles(root);
   for (const file of [".codex/config.toml", ".claude/settings.json", ".mcp.json"])
     assert.ok(files.includes(file), file);
