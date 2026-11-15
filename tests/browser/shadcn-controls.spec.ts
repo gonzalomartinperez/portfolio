@@ -1,42 +1,44 @@
 import { expect, test } from "@playwright/test";
 import { captureSettledPage } from "./capture";
 
-test("owned filters preserve native semantics and localized footer labels", async ({
-  page,
-}, info) => {
-  await page.goto("/es/stack");
-  const search = page.getByRole("searchbox", { name: "Buscar tecnologías" });
-  const category = page.getByRole("combobox", { name: "Categoría", exact: true });
-  await expect(search).toHaveAttribute("data-slot", "input");
-  await expect(category).toHaveAttribute("data-slot", "native-select");
-  const bodyFont = await page
-    .locator("body")
-    .evaluate((element) => getComputedStyle(element).fontFamily);
-  for (const control of [
-    search,
-    category,
-    page.getByRole("button", { name: "Limpiar filtros", exact: true }).first(),
-  ]) {
-    await expect(control).toHaveCSS("font-family", bodyFont);
-  }
-  await category.selectOption("fintech");
-  await search.fill("Viem");
-  await expect(page.locator("#technology-results h3")).toHaveText(["Viem"]);
-  await expect(
-    page.getByRole("contentinfo").getByRole("link", {
-      name: "LinkedIn (se abre en una pestaña nueva)",
-      exact: true,
-    }),
-  ).toBeAttached();
-  for (const theme of ["dark", "light"]) {
-    await page.evaluate((value) => {
-      document.documentElement.dataset.theme = value;
-    }, theme);
-    await category.focus();
-    await expect(category).toHaveCSS("outline-style", "solid");
-    await captureSettledPage(page, { path: info.outputPath(`filters-${theme}.png`) });
-  }
-});
+test(
+  "owned filters preserve native semantics and localized footer labels",
+  { tag: "@journey" },
+  async ({ page }, info) => {
+    await page.goto("/es/stack");
+    const search = page.getByRole("searchbox", { name: "Buscar tecnologías" });
+    const category = page.getByRole("combobox", { name: "Categoría", exact: true });
+    await expect(search).toHaveAttribute("data-slot", "input");
+    await expect(category).toHaveAttribute("data-slot", "native-select");
+    const bodyFont = await page
+      .locator("body")
+      .evaluate((element) => getComputedStyle(element).fontFamily);
+    for (const control of [
+      search,
+      category,
+      page.getByRole("button", { name: "Limpiar filtros", exact: true }).first(),
+    ]) {
+      await expect(control).toHaveCSS("font-family", bodyFont);
+    }
+    await category.selectOption("fintech");
+    await search.fill("Viem");
+    await expect(page.locator("#technology-results h3")).toHaveText(["Viem"]);
+    await expect(
+      page.getByRole("contentinfo").getByRole("link", {
+        name: "LinkedIn (se abre en una pestaña nueva)",
+        exact: true,
+      }),
+    ).toBeAttached();
+    for (const theme of ["dark", "light"]) {
+      await page.evaluate((value) => {
+        document.documentElement.dataset.theme = value;
+      }, theme);
+      await category.focus();
+      await expect(category).toHaveCSS("outline-style", "solid");
+      await captureSettledPage(page, { path: info.outputPath(`filters-${theme}.png`) });
+    }
+  },
+);
 
 test("gallery skeleton reflects a pending image and disappears on load", async ({ page }) => {
   await page.goto("/work/filomena");

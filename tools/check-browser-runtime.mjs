@@ -7,7 +7,13 @@ const runtimes = [
   ["WebKit", webkit, {}],
 ];
 
-for (const [name, engine, options] of runtimes) {
+// The pull-request lane only needs Chromium and WebKit.
+const required =
+  process.env.BROWSER_LANE === "pr"
+    ? runtimes.filter(([name]) => !name.startsWith("Firefox"))
+    : runtimes;
+
+for (const [name, engine, options] of required) {
   const browser = await engine.launch({ ...options, headless: true, timeout: 30_000 });
   try {
     const page = await browser.newPage();

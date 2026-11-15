@@ -13,7 +13,7 @@ const CORE_NAMES = {
   quality: "Quality checks",
   build: "Build",
   hosting: "Hosting contract",
-  browser: `Browser tests (\${{ matrix.shard }}/8)`,
+  browser: `Browser tests (\${{ matrix.shard }}/\${{ strategy.job-total }})`,
   performance: "Performance checks",
 };
 const NIGHTLY_NAMES = {
@@ -75,6 +75,14 @@ function fixture(profile = "core") {
   for (const id of profile === "core" ? ["hosting", "browser"] : ["browser", "visual"]) {
     jobs[id].container = { image: "reviewed-container" };
     jobs[id].steps.shift();
+  }
+  if (profile === "core") {
+    const lane = `\${{ github.event_name == 'pull_request' && github.base_ref == 'develop' && 'pr' || 'full' }}`;
+    jobs.build.steps.push({
+      run: "node tools/browser-ci-planner.mjs",
+      env: { BROWSER_LANE: lane },
+    });
+    jobs.browser.env = { BROWSER_LANE: lane };
   }
   jobs.browser.strategy = {
     "fail-fast": false,
@@ -367,6 +375,28 @@ reject(
     w.jobs.browser.strategy.matrix.exclude = [{ shard: 3 }];
   },
   /exactly eight shards/,
+);
+reject(
+  "browser lane expression cannot be altered",
+  (w) => {
+    w.jobs.browser.strategy.matrix.shard = "${{ fromJSON('[1,2]') }}";
+  },
+  /exactly eight shards/,
+);
+reject(
+  "the browser job lane cannot drift from the shard matrix",
+  (w) => {
+    w.jobs.browser.env.BROWSER_LANE = "pr";
+  },
+  /browser job must use the exact BROWSER_LANE/,
+);
+reject(
+  "the planner lane cannot drift from the shard matrix",
+  (w) => {
+    w.jobs.build.steps.at(-1).env.BROWSER_LANE =
+      "${{ github.base_ref == 'main' && 'full' || 'pr' }}";
+  },
+  /planner step must use the exact BROWSER_LANE/,
 );
 reject(
   "browser concurrency stays capped at eight",

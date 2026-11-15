@@ -4,10 +4,9 @@ import { resumeFilenames } from "../../config/site";
 import documents from "../../content/public-documents.json" with { type: "json" };
 import { captureSettledPage } from "./capture";
 
-test("CV and contact downloads use reviewed content hashes as cache keys", async ({
-  page,
-  request,
-}) => {
+test("CV and contact downloads use reviewed content hashes as cache keys", {
+  tag: "@journey",
+}, async ({ page, request }) => {
   for (const route of ["/cv", "/es/cv", "/contact", "/es/contact"]) {
     await page.goto(route);
     const links = page.locator('main a[href*="ai-engineer-"][href*=".pdf"]');

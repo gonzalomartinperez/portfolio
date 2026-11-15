@@ -3,9 +3,9 @@ import { expect, test } from "@playwright/test";
 
 for (const locale of ["en", "es"]) {
   const prefix = locale === "es" ? "/es" : "";
-  test(`${locale} missing pages provide usable recovery routes and retain a real 404`, async ({
-    page,
-  }) => {
+  test(`${locale} missing pages provide usable recovery routes and retain a real 404`, {
+    tag: "@journey",
+  }, async ({ page }) => {
     const hydrationErrors: string[] = [];
     page.on("pageerror", (error) => hydrationErrors.push(error.message));
     page.on("console", (message) => {

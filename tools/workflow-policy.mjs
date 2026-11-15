@@ -13,7 +13,7 @@ const CORE_NAMES = {
   secrets: "Secret scan",
   build: "Build",
   hosting: "Hosting contract",
-  browser: `Browser tests (\${{ matrix.shard }}/8)`,
+  browser: `Browser tests (\${{ matrix.shard }}/\${{ strategy.job-total }})`,
   performance: "Performance checks",
 };
 const NIGHTLY_NAMES = {
@@ -25,6 +25,12 @@ const NIGHTLY_NAMES = {
   bundle: "Nightly bundle checks",
   checks: "Nightly required checks",
 };
+// Core runs the four-shard journey lane for pull requests into develop and eight shards otherwise.
+const CORE_SHARD_EXPRESSION =
+  "${{ fromJSON(github.event_name == 'pull_request' && github.base_ref == 'develop' && '[1,2,3,4]' || '[1,2,3,4,5,6,7,8]') }}";
+// Planner and browser job must select the lane with the same condition as the shard matrix.
+const CORE_LANE_EXPRESSION =
+  "${{ github.event_name == 'pull_request' && github.base_ref == 'develop' && 'pr' || 'full' }}";
 const isRecord = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
 const sameSet = (actual, expected) =>
   actual.length === expected.length && expected.every((value) => actual.includes(value));
@@ -382,8 +388,11 @@ export function validateWorkflowPolicy(source, { profile } = {}) {
     !isRecord(strategy) ||
     strategy["fail-fast"] !== false ||
     strategy["max-parallel"] !== 8 ||
-    !Array.isArray(strategy.matrix?.shard) ||
-    !sameSet(strategy.matrix.shard, [1, 2, 3, 4, 5, 6, 7, 8]) ||
+    (!(profile === "core" && strategy.matrix?.shard === CORE_SHARD_EXPRESSION) &&
+      !(
+        Array.isArray(strategy.matrix?.shard) &&
+        sameSet(strategy.matrix.shard, [1, 2, 3, 4, 5, 6, 7, 8])
+      )) ||
     strategy.matrix.include ||
     strategy.matrix.exclude ||
     Object.keys(strategy.matrix).length !== 1
@@ -391,6 +400,15 @@ export function validateWorkflowPolicy(source, { profile } = {}) {
     errors.push(
       `${profile}: browser must run exactly eight shards, max-parallel 8, fail-fast false`,
     );
+  }
+  if (profile === "core") {
+    const planner = workflow.jobs.build?.steps?.find(
+      (step) => step?.run === "node tools/browser-ci-planner.mjs",
+    );
+    if (planner?.env?.BROWSER_LANE !== CORE_LANE_EXPRESSION)
+      errors.push("core: the browser planner step must use the exact BROWSER_LANE expression");
+    if (workflow.jobs.browser?.env?.BROWSER_LANE !== CORE_LANE_EXPRESSION)
+      errors.push("core: the browser job must use the exact BROWSER_LANE expression");
   }
   if (profile === "nightly" && isRecord(workflow.jobs.checks))
     inspectGate(workflow, workflow.jobs.checks, prerequisites, "nightly.checks", errors);

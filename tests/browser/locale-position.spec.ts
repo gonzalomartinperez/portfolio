@@ -6,9 +6,9 @@ for (const { route, progress } of [
   { route: "/", progress: 1 },
   { route: "/work", progress: null },
 ]) {
-  test(`${route} at ${progress ?? "content"} preserves position when changing theme and language`, async ({
-    page,
-  }) => {
+  test(`${route} at ${progress ?? "content"} preserves position when changing theme and language`, {
+    tag: progress === 0.5 || progress === null ? "@journey" : [],
+  }, async ({ page }) => {
     await page.goto(route);
     await page.evaluate(() => document.fonts.ready);
     if (progress !== null) {

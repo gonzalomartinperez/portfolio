@@ -74,7 +74,9 @@ test("native scrolling reverses the scene without replacing the canvas", async (
   expect(await canvas?.evaluate((element) => element.isConnected)).toBe(true);
 });
 
-test("catalogue search and categories preserve a recoverable empty state", async ({ page }) => {
+test("catalogue search and categories preserve a recoverable empty state", {
+  tag: "@journey",
+}, async ({ page }) => {
   await page.goto("/stack");
   const results = page.locator("#technology-results");
   const search = page.getByRole("searchbox", { name: "Search technologies", exact: true });
@@ -109,7 +111,9 @@ test("WebGL unavailability preserves the static scene and technology links", asy
   await expect(page.getByRole("link", { name: "LangGraph", exact: true }).first()).toBeVisible();
 });
 
-test("gallery enlargement supports Escape and restores focus", async ({ page }) => {
+test("gallery enlargement supports Escape and restores focus", { tag: "@journey" }, async ({
+  page,
+}) => {
   await page.goto("/work/filomena");
   const trigger = page.getByRole("link", { name: /^Enlarge:/ }).first();
   await trigger.click();
@@ -143,9 +147,9 @@ test("real WebGL context loss preserves content and recovers", async ({ page }) 
   await extension.dispose();
 });
 
-test("client navigation mounts only one scene and releases the previous canvas", async ({
-  page,
-}) => {
+test("client navigation mounts only one scene and releases the previous canvas", {
+  tag: "@journey",
+}, async ({ page }) => {
   await page.goto("/");
   for (let visit = 0; visit < 3; visit += 1) {
     const scene = page.locator("[data-scene]");
