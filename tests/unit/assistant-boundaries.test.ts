@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { parseSuggestions } from "../../src/features/assistant/adapters/suggestions.ts";
 
 test("source-backed catalog validates all entries and provenance", () => {

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
-import test from "node:test";
+import { test, vi } from "vitest";
 
 type Project = { name: string; grep?: RegExp };
 
@@ -9,8 +9,9 @@ async function projectsFor(lane?: string): Promise<Project[]> {
   if (lane === undefined) delete process.env.BROWSER_LANE;
   else process.env.BROWSER_LANE = lane;
   try {
-    const config = await import(`../../playwright.config.ts?lane=${lane ?? "none"}`);
-    return config.default.projects;
+    vi.resetModules();
+    const config = await import("../../playwright.config.ts");
+    return config.default.projects as Project[];
   } finally {
     if (previous === undefined) delete process.env.BROWSER_LANE;
     else process.env.BROWSER_LANE = previous;

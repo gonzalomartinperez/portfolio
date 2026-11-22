@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import test from "node:test";
+import { test } from "vitest";
 import { portfolioPath } from "../../src/features/assistant/domain/visitor-context.ts";
 import { list, record, text } from "../../tools/assistant-fixture-json.ts";
 

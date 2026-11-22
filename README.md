@@ -152,7 +152,7 @@ The [module contract](docs/architecture.md#source-module-contract) is the source
   re-exports, dynamic imports and type-only edges. Every source module has a declared
   placement, including importless code. It rejects reversed dependencies, private
   feature imports, cycles, ambient inner-layer clock reads and client paths to server-only code. The
-  [negative fixtures](tests/unit/architecture.test.mjs) must reject representative
+  [negative fixtures](tests/unit/architecture.test.ts) must reject representative
   violations while valid composition passes; this runs inside `npm run check`.
 - **Deliberate adaptations:** small features do not need empty layers. Named public
   entries and the narrow server-only analytics configuration facade are documented

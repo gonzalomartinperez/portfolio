@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { once } from "node:events";
 import { createServer } from "node:http";
-import test from "node:test";
+import { test } from "vitest";
 import { createHttpTransport } from "../../src/features/assistant/adapters/api.ts";
 import type { Progress } from "../../src/features/assistant/domain/models.ts";
 
@@ -33,7 +33,7 @@ test("real loopback HTTP transports split UTF-8 SSE without dropping durable com
   });
   server.listen(0, "127.0.0.1");
   await once(server, "listening");
-  context.after(
+  context.onTestFinished(
     () =>
       new Promise<void>((resolve) => {
         server.closeAllConnections();
@@ -79,7 +79,7 @@ test("real loopback disconnect aborts the reader and does not retry generation",
   });
   server.listen(0, "127.0.0.1");
   await once(server, "listening");
-  context.after(
+  context.onTestFinished(
     () =>
       new Promise<void>((resolve) => {
         server.closeAllConnections();

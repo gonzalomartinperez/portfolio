@@ -3,8 +3,8 @@ import { spawnSync } from "node:child_process";
 import { chmodSync, mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import test from "node:test";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { type TestContext, test } from "vitest";
 import {
   historicalProvenanceExceptions,
   isCanonicalSkillLink,
@@ -21,7 +21,7 @@ description = "Inert test marker"
 regex = '''${marker}'''
 `;
 
-function git(root, ...args) {
+function git(root: string, ...args: string[]) {
   const result = spawnSync("git", ["-C", root, ...args], {
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],
@@ -30,9 +30,9 @@ function git(root, ...args) {
   return result.stdout;
 }
 
-function fixture(t) {
+function fixture(t: TestContext) {
   const root = mkdtempSync(path.join(tmpdir(), "portfolio-secret-test-"));
-  t.after(() => rmSync(root, { recursive: true, force: true }));
+  t.onTestFinished(() => rmSync(root, { recursive: true, force: true }));
   git(root, "init", "--initial-branch=main");
   git(root, "config", "user.name", "Synthetic Test");
   git(root, "config", "user.email", "test@example.invalid");
@@ -42,7 +42,7 @@ function fixture(t) {
   return root;
 }
 
-function scan(root, options = {}) {
+function scan(root: string, options = {}) {
   return scanSecrets({ root, binary, additionalTestRules, ...options });
 }
 

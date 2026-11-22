@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import test from "node:test";
+import { test } from "vitest";
 import { parseDocument } from "yaml";
+import { repositoryFiles } from "../helpers/repository-fixture.ts";
 
 type Profile = { paths?: string[]; adds?: string[] };
 type ProfileMap = { base: string[]; profiles: Record<string, Profile>; required: string };
@@ -45,9 +45,7 @@ const profilesFor = (file: string) =>
     .map(([name]) => name);
 
 test("every tracked file falls in at least one path profile", () => {
-  const files = execFileSync("git", ["ls-files"], { cwd: root, encoding: "utf8" })
-    .split("\n")
-    .filter(Boolean);
+  const files = repositoryFiles(root);
   assert.ok(files.length > 100);
   const uncovered = files.filter((file) => profilesFor(file).length === 0);
   assert.deepEqual(uncovered, [], "add these paths to .github/ci-profile.json");

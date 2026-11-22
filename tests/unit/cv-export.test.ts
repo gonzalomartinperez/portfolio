@@ -1,16 +1,16 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
-import test from "node:test";
+import { test } from "vitest";
 import { resumeDownloads, resumeFiles } from "../../config/site.ts";
 import { exportCv, inlineRuns, safeLink } from "../../tools/export-cv.mjs";
 
-const cv = JSON.parse(
+const cv: typeof import("../../content/cv-public.json") = JSON.parse(
   readFileSync(new URL("../../content/cv-public.json", import.meta.url), "utf8"),
 );
 
 test("CV download cache keys track reviewed PDF bytes while file paths stay stable", () => {
-  for (const locale of ["en", "es"]) {
+  for (const locale of ["en", "es"] as const) {
     const download = new URL(resumeDownloads[locale], "https://gonzalomartinperez.com");
     assert.equal(download.pathname, resumeFiles[locale]);
     assert.equal(download.searchParams.get("sha256"), cv.provenance.pdfSha256[locale]);
@@ -18,7 +18,7 @@ test("CV download cache keys track reviewed PDF bytes while file paths stay stab
 });
 
 test("public CV retains bilingual sections, stable IDs, metrics and B2", () => {
-  for (const locale of ["es", "en"]) {
+  for (const locale of ["es", "en"] as const) {
     const copy = cv.locales[locale];
     assert.equal(copy.name, "Gonzalo Martin Perez");
     assert.deepEqual(
@@ -38,7 +38,7 @@ test("public CV retains bilingual sections, stable IDs, metrics and B2", () => {
   }
   assert.match(cv.provenance.sourceSha256, /^[a-f0-9]{64}$/);
   assert.match(cv.provenance.factsSha256, /^[a-f0-9]{64}$/);
-  for (const locale of ["en", "es"]) {
+  for (const locale of ["en", "es"] as const) {
     const pdf = readFileSync(
       new URL(`../../public/gonzalo-martin-perez-ai-engineer-${locale}.pdf`, import.meta.url),
     );

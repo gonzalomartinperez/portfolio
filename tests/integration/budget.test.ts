@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
-import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { gzipSync } from "node:zlib";
+import { test } from "vitest";
 import { solarTextureFiles, solarTextureVersion } from "../../config/solar-textures.ts";
 
 /**
@@ -17,7 +17,7 @@ import { solarTextureFiles, solarTextureVersion } from "../../config/solar-textu
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const staticDir = path.join(root, ".next", "static");
 
-function walk(directory, extension, found = []) {
+function walk(directory: string, extension: string, found: string[] = []) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
     const full = path.join(directory, entry.name);
     if (entry.isDirectory()) walk(full, extension, found);
@@ -26,8 +26,8 @@ function walk(directory, extension, found = []) {
   return found;
 }
 
-const gzippedKb = (file) => gzipSync(readFileSync(file)).length / 1024;
-const totalGzippedKb = (files) => files.reduce((sum, file) => sum + gzippedKb(file), 0);
+const gzippedKb = (file: string) => gzipSync(readFileSync(file)).length / 1024;
+const totalGzippedKb = (files: string[]) => files.reduce((sum, file) => sum + gzippedKb(file), 0);
 
 test("the build output exists", () => {
   assert.ok(
@@ -43,19 +43,28 @@ test("the deferred hero and solar scenes share a 250 KiB gzip dependency budget"
   assert.ok(report.files.length > 0);
   assert.ok(report.heroEntryFiles.length > 0, "the hero renderer entry is missing");
   assert.ok(report.solarEntryFiles.length > 0, "the solar renderer entry is missing");
-  const size = totalGzippedKb(report.files.map((file) => path.join(root, ".next", file)));
+  const size = totalGzippedKb(report.files.map((file: string) => path.join(root, ".next", file)));
   assert.ok(size <= 250, `scene dependency closure is ${size.toFixed(1)} KiB gzip (budget 250)`);
 });
 
 const solarDirectory = path.join(root, "public", "images", "solar-system");
-const solarManifest = () =>
+type Texture = {
+  file: string;
+  bytes: number;
+  sha256: string;
+  width: number;
+  height: number;
+  encoding: string;
+  variants?: Texture[];
+};
+const solarManifest = (): { assets: Texture[]; totalBytes: number; variantBytes: number } =>
   JSON.parse(readFileSync(path.join(solarDirectory, "manifest.json"), "utf8"));
 
 test("local solar texture maps stay under 8 MiB and match their reviewed manifest", async () => {
   const { createHash } = await import("node:crypto");
   const manifest = solarManifest();
   assert.equal(manifest.assets.length, 16);
-  const verify = (entry) => {
+  const verify = (entry: { file: string; bytes: number; sha256: string }) => {
     const content = readFileSync(path.join(solarDirectory, entry.file));
     assert.equal(content.length, entry.bytes, entry.file);
     assert.equal(createHash("sha256").update(content).digest("hex"), entry.sha256, entry.file);
@@ -120,7 +129,7 @@ test("existing portfolio styles retain their 25 KiB gzip budget", () => {
   );
   assert.ok(assistant.roots > 0, "assistant entry must be present in the compilation graph");
   assert.equal(assistant.initial, false, "assistant rendering libraries must be deferred");
-  const deferred = new Set(assistant.css.map((file) => path.join(root, ".next", file)));
+  const deferred = new Set(assistant.css.map((file: string) => path.join(root, ".next", file)));
   const files = walk(staticDir, ".css");
   assert.ok(deferred.size > 0, "the lazy feature must have separately measurable CSS");
   const size = totalGzippedKb(files.filter((file) => !deferred.has(file)));
@@ -131,7 +140,7 @@ test("new deferred assistant styles have an explicit 4 KiB gzip allowance", () =
   const assistant = JSON.parse(
     readFileSync(path.join(root, ".next/assistant-budget.json"), "utf8"),
   );
-  const size = totalGzippedKb(assistant.css.map((file) => path.join(root, ".next", file)));
+  const size = totalGzippedKb(assistant.css.map((file: string) => path.join(root, ".next", file)));
   assert.ok(size <= 4, `Deferred assistant CSS is ${size.toFixed(1)} KiB gzip, budget is 4 KiB`);
 });
 
@@ -143,7 +152,7 @@ test("the portrait stays under 80 KB", () => {
 
 test("non-scene client chunks stay under 80 KiB gzip", () => {
   const report = JSON.parse(readFileSync(path.join(root, ".next/scene-budget.json"), "utf8"));
-  const sceneFiles = new Set(report.files.map((file) => path.resolve(root, ".next", file)));
+  const sceneFiles = new Set(report.files.map((file: string) => path.resolve(root, ".next", file)));
   for (const file of walk(staticDir, ".js")) {
     if (sceneFiles.has(file)) continue;
     const size = gzippedKb(file);

@@ -43,7 +43,7 @@ or transitive change, stays manual. A candidate still needs the same review and 
 Identity checks require the official Dependabot bot, a same-repository `develop` PR from a
 native or weekly group branch, one verified bot commit and exactly the two root manifests.
 
-`node --test tests/unit/dependency-policy.test.mjs` (part of `npm run check`) covers the
+`npx vitest run tests/unit/dependency-policy.test.ts` (part of `npm run check`) covers the
 classifier, identity spoofing, transport mutation rejection and the shape of
 `.github/dependabot.yml`.
 

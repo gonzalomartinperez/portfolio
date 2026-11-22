@@ -1,14 +1,35 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import {
-  parseDiscovery,
+  parseDiscovery as parseDiscoveryJs,
   partitionNightly,
-  planShards,
+  planShards as planShardsJs,
   rejectSerialSource,
   verifySelection,
 } from "../../tools/browser-ci-planner.mjs";
 
-function report(titles, project = "chromium", file = "tests/browser/example.spec.ts") {
+type Discovered = { identity: string; project: string; file: string; selector: string };
+type Scheduled = Discovered & { seconds: number; estimated: boolean };
+type Suite = {
+  title: string;
+  file: string;
+  suites?: Suite[];
+  specs: { title: string; file: string; line: number; tests: { projectName: string }[] }[];
+  parallelMode?: string;
+};
+type Report = { suites: (Suite & { suites: Suite[] })[]; config?: { rootDir: string } };
+const parseDiscovery = parseDiscoveryJs as (report: unknown) => Discovered[];
+const planShards = planShardsJs as (
+  discovered: Discovered[],
+  timings: Record<string, unknown>,
+  count?: number,
+) => { seconds: number; tests: Scheduled[] }[];
+
+function report(
+  titles: string[],
+  project = "chromium",
+  file = "tests/browser/example.spec.ts",
+): Report {
   return {
     suites: [
       {
@@ -70,8 +91,8 @@ test("new tests are included and removed timing entries never create tests", () 
   const added = plan
     .flatMap((shard) => shard.tests)
     .find((item) => item.identity.endsWith(" › new"));
-  assert.equal(added.estimated, true);
-  assert.equal(added.seconds, 25);
+  assert.equal(added?.estimated, true);
+  assert.equal(added?.seconds, 25);
 });
 
 test("unknown durations use conservative file/project medians and a 15-second floor", () => {
@@ -170,7 +191,7 @@ test("nightly separates visual cases without dropping new files or projects", ()
   const partition = partitionNightly(input);
   assert.deepEqual(partition.visual, visual);
   verifySelection(input, [...partition.browser, ...partition.visual]);
-  assert.ok(partition.browser.some((item) => item.project === "future-project"));
+  assert.ok(partition.browser.some((item: Discovered) => item.project === "future-project"));
   assert.throws(() => partitionNightly(visual), /nonempty/);
   assert.throws(() => partitionNightly(discovered), /nonempty/);
   assert.throws(() => partitionNightly([...input, visual[0]]), /unique/);

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { createHttpTransport } from "../../src/features/assistant/adapters/api.ts";
 import { AssistantError } from "../../src/features/assistant/application/ports.ts";
 import type { Progress } from "../../src/features/assistant/domain/models.ts";

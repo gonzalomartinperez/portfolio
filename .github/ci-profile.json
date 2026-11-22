@@ -35,6 +35,7 @@
         "next.config.mjs",
         "postcss.config.mjs",
         "playwright*.ts",
+        "vitest*.config.ts",
         ".nvmrc",
         ".npmrc",
         ".env.example",

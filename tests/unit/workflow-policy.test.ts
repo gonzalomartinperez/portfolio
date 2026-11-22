@@ -1,13 +1,17 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import test from "node:test";
+import { test } from "vitest";
 import { stringify } from "yaml";
 import { validateWorkflowPolicy } from "../../tools/workflow-policy.mjs";
+
+// Negative cases deliberately mutate unvalidated JSON into invalid shapes.
+// biome-ignore lint/suspicious/noExplicitAny: validator fixtures must permit malformed fields.
+type MutableFixture = Record<string, any>;
 
 const SHA = "a".repeat(40);
 const CORE = ["workflows", "secrets", "quality", "build", "hosting", "browser", "performance"];
 const NIGHTLY = ["prepare", "quality", "browser", "visual", "links", "bundle"];
-const CORE_NAMES = {
+const CORE_NAMES: Record<string, string> = {
   workflows: "Workflow validation",
   secrets: "Secret scan",
   quality: "Quality checks",
@@ -16,7 +20,7 @@ const CORE_NAMES = {
   browser: `Browser tests (\${{ matrix.shard }}/\${{ strategy.job-total }})`,
   performance: "Performance checks",
 };
-const NIGHTLY_NAMES = {
+const NIGHTLY_NAMES: Record<string, string> = {
   prepare: "Nightly prepare candidate",
   quality: "Nightly quality checks",
   browser: `Nightly browser tests (\${{ matrix.shard }}/8)`,
@@ -25,7 +29,7 @@ const NIGHTLY_NAMES = {
   bundle: "Nightly bundle checks",
   checks: "Nightly required checks",
 };
-function gate(name, prerequisites) {
+function gate(name: string, prerequisites: string[]) {
   const variables = prerequisites.map((id) => `${id.toUpperCase().replaceAll("-", "_")}_RESULT`);
   return {
     name,
@@ -48,9 +52,9 @@ function hardenRunner() {
     with: { "egress-policy": "audit" },
   };
 }
-function fixture(profile = "core") {
+function fixture(profile = "core"): MutableFixture {
   const prerequisites = profile === "core" ? CORE : NIGHTLY;
-  const jobs = Object.fromEntries(
+  const jobs: Record<string, MutableFixture> = Object.fromEntries(
     prerequisites.map((id) => [
       id,
       {
@@ -148,9 +152,14 @@ function fixture(profile = "core") {
     jobs,
   };
 }
-const validate = (workflow, profile = "core", phase = "A") =>
+const validate = (workflow: unknown, profile = "core", phase = "A") =>
   validateWorkflowPolicy(stringify(workflow), { profile, phase });
-function reject(name, mutate, pattern, profile = "core") {
+function reject(
+  name: string,
+  mutate: (workflow: MutableFixture) => void,
+  pattern: RegExp,
+  profile = "core",
+) {
   test(name, () => {
     const workflow = fixture(profile);
     mutate(workflow);
@@ -646,7 +655,7 @@ test("the committed core and nightly workflows satisfy their profiles", () => {
 
 test("core dependency ordering does not affect the contract", () => {
   const workflow = fixture();
-  for (const job of Object.values(workflow.jobs)) {
+  for (const job of Object.values(workflow.jobs as Record<string, MutableFixture>)) {
     if (Array.isArray(job.needs)) job.needs.reverse();
   }
   assert.deepEqual(validate(workflow), []);
@@ -671,7 +680,9 @@ for (const id of ["policy", "security", ...CORE]) {
     `${id} must depend on classify`,
     (w) => {
       const needs = w.jobs[id].needs;
-      w.jobs[id].needs = Array.isArray(needs) ? needs.filter((need) => need !== "classify") : [];
+      w.jobs[id].needs = Array.isArray(needs)
+        ? needs.filter((need: string) => need !== "classify")
+        : [];
     },
     /must need exactly classify/,
   );
@@ -688,7 +699,7 @@ for (const id of ["classify", "policy", "security", ...CORE]) {
   reject(
     `core gate cannot omit ${id}`,
     (w) => {
-      w.jobs["ci-gate"].needs = w.jobs["ci-gate"].needs.filter((need) => need !== id);
+      w.jobs["ci-gate"].needs = w.jobs["ci-gate"].needs.filter((need: string) => need !== id);
     },
     /aggregate must need exactly/,
   );
@@ -987,7 +998,7 @@ for (const profile of ["core", "nightly"]) {
   for (const [key, value] of [
     ["if", `\${{ false }}`],
     ["continue-on-error", true],
-  ]) {
+  ] as const) {
     reject(
       `${profile} harden-runner cannot be skipped through ${key}`,
       (w) => {

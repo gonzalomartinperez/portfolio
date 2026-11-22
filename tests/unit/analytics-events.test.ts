@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { test } from "vitest";
 import { pageContext, sections } from "../../src/features/analytics/domain/events.ts";
 
 test("only the sixteen reviewed localized routes produce coarse page dimensions", () => {
