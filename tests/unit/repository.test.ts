@@ -157,7 +157,8 @@ test("paired CI preserves enabled QA, disabled hosting and immutable browser run
   assert.match(browser, /options: --init --ipc=host/);
   assert.match(browser, /node tools\/check-browser-runtime\.mjs/);
   assert.doesNotMatch(browser, /playwright install|--privileged|SYS_ADMIN|npm run (check|build)/);
-  assert.match(browser, /--test-list=\.artifacts\/ci\/shards\/\$\{\{ matrix\.shard \}\}\.txt/);
+  assert.match(browser, /SHARD: \$\{\{ matrix\.shard \}\}/);
+  assert.match(browser, /--test-list="\.artifacts\/ci\/shards\/\$\{SHARD\}\.txt"/);
 });
 
 test("consumers verify same-run archives before extraction and never rebuild", () => {

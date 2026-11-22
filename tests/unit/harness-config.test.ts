@@ -27,11 +27,8 @@ test("Claude permissions retain destructive-command and secret-read denials", ()
   ]) {
     assert.ok(permissions.deny.includes(rule), `Missing deny rule: ${rule}`);
   }
-  assert.deepEqual(permissions.ask, [
-    "Bash(git push:*)",
-    "Bash(gh pr merge:*)",
-    "Bash(gh release:*)",
-  ]);
+  // Headless agent sessions treat `ask` as a denial; push and merge are governed by the guard hook.
+  assert.deepEqual(permissions.ask, ["Bash(gh release:*)"]);
   assert.deepEqual(permissions.allow, [
     "Bash(npm run lint:*)",
     "Bash(npm run check:*)",
